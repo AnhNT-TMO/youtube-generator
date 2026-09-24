@@ -1,0 +1,42 @@
+# Audio / video — quá nặng cho git, chỉ lưu text
+*.wav
+*.mp3
+*.flac
+*.m4a
+*.mp4
+*.mov
+
+# Nội dung riêng của kênh (album, idea, single: lời, plan, youtube.md, thumbnail, audio, video) — không push,
+# chỉ giữ .keep để còn thư mục
+channel/*/albums/*
+!channel/*/albums/.keep
+channel/*/ideas/*
+!channel/*/ideas/.keep
+channel/*/singles/*
+!channel/*/singles/.keep
+# catalog sinh bởi album_plan.py catalog; kết quả thử voice (voices/README.md vẫn vào git)
+channel/*/library/*
+!channel/*/library/.keep
+channel/*/voices/notes/
+channel/*/voices/audio/
+
+# Research (youtube-music-analyzer): kết quả phân tích + hàng đợi link
+research/*
+!research/.keep
+
+# Cấu hình máy riêng: địa chỉ GPU server, đường dẫn SSH key, S3 bucket/profile (mẫu: remote.env.example)
+.claude/skills/*/remote.env
+.claude/settings.local.json
+.env
+.env.*
+
+.DS_Store
+
+# Tooling: venv, cache phân tích (stems, features), dữ liệu test sinh ra
+.claude/skills/*/.venv/
+.claude/skills/*/.cache/
+__pycache__/
+node_modules/
+*.webm
+*.npy
+*.opus

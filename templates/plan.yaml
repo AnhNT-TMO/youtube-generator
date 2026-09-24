@@ -1,0 +1,170 @@
+# Kế hoạch album (BLUEPRINT, CLAUDE.md bước 3). Skill `album-plan` tạo và sở hữu file này: <album>/plan.yaml.
+# Nguồn chính của album trước khi generate. Các file cho skill sau được SINH TỪ ĐÂY bằng `album_plan.py build`:
+#   generation.yaml (suno-generate) · selection.yaml (verification-audio) · tracks/NN-*.md (front matter + brief) · album.md
+# Đừng sửa tay các file sinh ra khi còn ở giai đoạn plan: sửa ở đây rồi build lại.
+# Hợp đồng từng trường (lấy từ đâu → đi đâu): .claude/skills/album-plan/references/bridge.md
+#
+# Text đi vào Suno (style, title, hook, lyrics) viết tiếng Anh. Ghi chú có thể viết tiếng Việt.
+# Mọi giá trị đưa vào Suno là MỘT con số chính xác, không phải dải.
+
+schema_version: 1
+status: draft                # draft → approved (người dùng duyệt, `approve`) · generate bắt đầu thì plan coi như đóng băng
+status_log: []               # [{date, status, by, note}]
+
+album:
+  number: 2                  # NNN của thư mục album
+  slug: album-slug
+  title_working: "Working Title"
+  channel: lamplight_gospel
+  id_prefix: abc             # id bài = <id_prefix>-NN (ổn định, không trùng album khác của kênh)
+
+sources:
+  idea: null                 # idea gốc (init chép snapshot vào <album>/idea.yaml)
+  research: []               # research/<slug>/analysis.md đã dùng
+
+concept: >-
+  Một đoạn: album là "buổi biểu diễn 60 phút" về điều gì, hành trình cảm xúc từ đầu đến cuối.
+
+highlight: null              # BẮT BUỘC (rules.md §1b): bài điểm nhấn, đăng thêm thành single sau album
+                             # {slot: 4|7, axis: register|energy|a_cappella|tempo|choir|key_lift…, what: "khác thế nào",
+                             #  why: "đặc điểm video tham khảo / giả thuyết", single: true}. Cùng nghệ sĩ + cùng Voice; được miễn
+                             #  luật bước energy/tempo/intro với bài kề và không tính vào dải tempo album.
+experiment: null             # null = house sound của channel (channel/<ch>/rules.md). Album cố ý khác mặc định để thử phản ứng người nghe:
+                             # {axes: [voice|tempo|energy|style|band|density|structure], what: "khác thế nào",
+                             #  why: "đặc điểm nào của video tham khảo / giả thuyết", measure: "xem gì: retention 0:15/0:30/1:00, CTR"}
+                             # Không khai báo mà Style/Exclude khác house_style → validate báo lỗi house_style
+
+differentiation:
+  keep: []                   # học từ tham khảo (cảm hứng)
+  change: []                 # làm khác đi / làm tốt hơn
+  copy_guard:
+    titles: []               # title/bài của kênh khác: không dùng làm title hay hook
+    hooks: []                # câu hook cần tránh (của tham khảo hoặc album cũ)
+    branding: []
+    source_avoid: []         # vd. "Psalm 91": nguồn tham khảo đã dùng → slot không được lấy (so với slot.source_ref)
+    lyric_rule: "Tự viết lời; không chép hay bắt chước lời/caption của bài có sẵn."
+
+identity:                    # CLAUDE.md §4: khóa nghệ sĩ cho cả album
+  vocal_persona: warm-baritone-v1
+  band_profile: small-church-band-v1
+  voice:                     # Suno Voice (Pro). null = chưa có (vd. persona mới: tạo Voice từ Anchor rồi điền trước slot 2)
+    name: "Midnight Gospel Soul - Male 01"
+    id: 7ebd54d4-454a-4c15-a2e4-973196ae6170
+  vocal_gender: male         # male | female | null
+
+sound:
+  genre_family: gospel blues
+  subgenre: southern gospel soul
+  tempo:
+    bpm: 60                  # = tempo cảm nhận của video tham khảo (rules.md §1b, lệch ≤ 5 %). Prompt ghi đúng số này, không bù trừ
+    meter: "6/8"
+    unit: felt               # felt = nhịp cảm nhận: nốt đen chấm với 6/8, 12/8; nốt đen với 4/4
+                             # (cùng đơn vị cột "felt BPM" của analyzer và tempo mà verification-audio đo)
+    why: ""                  # vì sao chọn số này (vd. tham khảo đo 53, Album 001 đo 63 → chọn 58)
+  style:
+    version: abc-v1
+    text: >-
+      (English, <= 1000 ký tự sau khi thay {bpm}.) = house_style của channel/<ch>/rules.md: "<genre_lead>, <cụm mood của album>.
+      <vocal_line của Voice> <band_block> Slow <meter> groove, {bpm} BPM." (init dựng sẵn). Khác mặc định chỉ khi khai báo experiment.
+    exclude: "female vocals, falsetto, autotune, rap, trap, EDM, modern pop, pop worship, country, blues rock, cinematic orchestra"
+
+target:
+  duration_min: [50, 90]     # tổng thời lượng album (phút): 50–90 đều chấp nhận, Suno không ra đúng độ dài (chủ kênh 2026-09-23)
+  track_count: 10
+  track_duration: ["4:30", "6:00"]
+  energy_adjacent_max: 2     # CLAUDE.md §7.2
+  bpm_adjacent_max_pct: 8
+  reuse_per_album_max: 2     # mỗi album cũ góp tối đa 2 bài library (CLAUDE.md §6: album không lặp nhau)
+  reuse_total_max: 4         # cả album lấy tối đa 4 bài từ library, còn lại tạo mới (CLAUDE.md §6)
+  peak_slots: [6, 7]         # emotional arc: lên dần tới đây rồi hạ, kết bình yên
+  tempo_range: null          # [lo, hi] felt BPM chấp nhận cho mọi bài (idea: felt_bpm_qc_range); bpm ngoài dải = lỗi
+                             # (dung sai cho check tempo của verify). Luật "một album = một dải": bpm các bài trải ≤ 20 % (validate tempo_band)
+  words_per_min: [70, 100]   # mật độ lời mục tiêu (ước lượng từ lyrics để cảnh báo, không phải luật cứng)
+  vocal:
+    vocal_at_s: null         # giây của VIDEO mà giọng đầu của bài 1 rơi vào (album-assembly cắt intro theo số này; verify tính gate
+                             # Track 01 theo nó). null = min(8, first_voice_max_s.track01)
+    first_voice_max_s: {track01: 4, others: 15}    # giọng người (ngân/ad-lib) xuất hiện trước giây này
+    first_lyric_max_s: {track01: 10, others: 20}   # câu lời đầu tiên
+    first_hook_max_s: null   # vd. {track01: 75}: hook/chorus đầu tiên trước giây này
+    f0_median_hz: null       # [lo, hi] cao độ giọng (giữ trong dải của persona)
+    singer_similarity_min: null   # vd. 0.78: độ giống giọng (ECAPA) so với bài tham chiếu của persona
+    singer_similarity_ref: null   # tên bài tham chiếu (vd. wtnl01)
+  drums_in_s_max: null
+  loudness: null             # {master_lufs, true_peak_max_dbtp, song_lufs_spread_max_lu, first15s_max_below_body_db}
+                             # master_lufs → album-assembly (--target-lufs); first15s_max_below_body_db → gate Track 01 của verify
+  transition: null           # {silence_s, styles_mix, vocal_to_vocal_crossfades_max…} → album-assembly
+  key_policy: null           # {camelot_step_max, note}
+
+lyrics_rules:                # đọc khi viết lời (references/lyrics.md); validate dùng language, max_chars
+  language: English
+  max_chars: 3000            # Suno cho 5000; để chỗ cho tag
+  structure_default: "[Intro] - [Verse 1] - [Pre-Chorus] - [Chorus] - [Verse 2] - [Pre-Chorus] - [Chorus] - [Bridge] - [Chorus] - [Outro]"
+  point_of_view: ""
+  hook_rule: "hook_phrase là duy nhất trong album và so với title/hook của album cũ; chỉ slot 1 được trùng title"
+  outro: "[Instrumental Outro: <nhạc cụ còn lại>, instrumental only, long sustained final chord] rồi [End]"   # chỉ dẫn nằm TRONG tag (channel/<ch>/rules.md §6)
+  banned: ""
+
+generation:                  # → generation.yaml (suno-generate). Chỉ ghi số chính xác
+  model: v6
+  max_mode: false            # CLAUDE.md §4: chỉ bài 1 chạy Max (slots[0].generation_overrides.max_mode: true), các bài khác lượt thường
+  duration: custom           # custom = dùng target_duration từng slot (Suno: 10–360 s) | auto
+  variety: 0
+  weirdness: 25
+  style_influence: {track01: 50, others: 50}
+  audio_influence: 65        # chỉ dùng khi có Voice
+  personalize: off
+  rounds: {track01: 2, others: 1}   # CLAUDE.md §4: bài 1 = 2 lượt Max (4 clip, đủ min_candidates_anchor), bài khác = 1 lượt thường
+  budget_max_credits: 250    # trần cả album, tối đa 250 (CLAUDE.md §4). Dự kiến = 40 + 10 × (số bài mới − 1): 10 bài ≈ 130, 15 bài ≈ 180
+  credits_per_generation: {max: 20, normal: 10}
+  anchor_first: true
+
+qc:                          # → selection.yaml (verification-audio)
+  references: []             # glob, tương đối so với thư mục album. Album mới cùng persona: trỏ sang album chị em
+  style:                     # mô tả cho CLAP (English)
+    positive: []
+    negative: {}             # {nhãn: mô tả} = danh sách "Loại ngay nếu" (CLAUDE.md §8)
+  rules:
+    outro_no_vocals: true
+    max_intro_seconds: 45
+    max_intro_seconds_anchor: 15
+    min_candidates_anchor: 4
+    min_candidates: 2
+  thresholds: {}
+  intro_types: {}            # {intro_type: mô tả CLAP}: từ vựng intro_type dùng chung với verification
+  extra_checks: []           # kiểm tra mong muốn chưa có trong verify (ghi để không mất)
+
+library_check:               # CLAUDE.md §7.2: kiểm tra library TRƯỚC khi quyết định tạo mới
+  done: false
+  result: ""
+
+slots:
+  - n: 1
+    title: "Song Title"
+    source: new              # new | library (title track luôn new)
+    library_id: null         # khi source = library: id bài trong catalog
+    arc_role: anchor         # anchor | opener | build | peak | release | closer | interlude
+    emotion: ""
+    theme: ""
+    source_ref: null         # vd. đoạn Kinh Thánh bài diễn giải (so với copy_guard.source_avoid)
+    energy: 5                # 1–10
+    valence: 5               # 1–10 (buồn → vui)
+    bpm: null                # null = sound.tempo.bpm; đổi thì lệch với bài kề <= bpm_adjacent_max_pct
+    intro_type: vocal_hum    # thứ nghe thấy đầu tiên: vocal | vocal_hum | piano | hammond | acoustic_guitar | slide_guitar | full_band ...
+    intro_length: cold_open  # cold_open (<3 s) | short (<10 s) | medium (<25 s) | long
+    target_duration: "5:30"
+    hook_phrase: ""          # câu hook thật của chorus (không mặc định = title, trừ slot 1)
+    imagery: []              # hình ảnh chính; phần tử đầu = hình ảnh chủ đạo
+    lyric_keywords: []
+    echo_tracks: []          # slot n / id của bài có title/hook được nhắc lại trong lời bài này (không được đặt liền nhau)
+    arrangement: ""          # bài này khác các bài khác ở đâu: nhạc cụ mở, drums vào lúc nào, solo, choir, outro
+    opening_spec: []         # slot 1: timeline 15 s đầu của VIDEO [{t: "0-1 s", event: ...}]
+    gate: []                 # slot 1: điều kiện phải đạt (CLAUDE.md §3), đi vào selection.yaml plan_targets.slot_checks
+    reference_recipe: []     # slot 1: bài mở của tham khảo được dựng thế nào (học cách, không chép)
+    title_check: null        # tra WebSearch title + hook trước khi build: "2026-09-23 clear" | "2026-09-23 hit: <bài>, đã đổi" (rules.md §3)
+    rounds: null             # null = generation.rounds
+    generation_overrides: {max_mode: true}   # ghi đè thiết lập Suno cho riêng slot này (số chính xác). Slot 1: max_mode true; slot khác: {}
+    variants: []             # [{name, rounds, lyrics_file?, overrides?}] thử nhiều biến thể (thường cho slot 1)
+    notes: ""
+
+open_questions: []           # [{id, q, blocking: true|false, answer: null}]; approve cần mọi câu blocking đã có answer
+waivers: []                  # [{rule, slots: [n], why}]: chấp nhận vi phạm có chủ đích một luật cứng

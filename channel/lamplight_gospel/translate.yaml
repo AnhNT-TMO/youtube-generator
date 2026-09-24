@@ -1,0 +1,45 @@
+# Dịch title video (skill youtube-translate). Chỉ title; description/tags giữ tiếng Anh.
+# Title dịch hiện cho người xem đặt giao diện YouTube bằng ngôn ngữ đó, không theo quốc gia. Nên chỉ dịch cho
+# ngôn ngữ vừa có nhiều người nghe gospel VỪA dùng YouTube bằng ngôn ngữ khác tiếng Anh.
+# Nguồn: research 2026-09-24 (Pew 2020/2025, thị trường gospel, tỉ lệ đọc web tiếng Anh; chi tiết ở `why`).
+# Có ~2–3 tuần số liệu thật → Analytics → Audience (Geography, ngôn ngữ người xem) quyết định thêm/bớt; ghi ngày + số vào `why`.
+
+channel_id: UCzLzi-pXe9KI4iZFE8hQ44g   # Lamplight Gospel
+source_language: en
+keep_song_title: true  # tên bài giữ tiếng Anh: là thứ người nghe nghe hát, và trùng chapters
+keep_verbatim: [Lamplight Gospel]
+
+languages:             # thứ tự = ưu tiên
+  - code: pt-BR
+    also: [pt]         # chưa chắc giao diện Brazil là pt hay pt-BR → ghi cùng bản dịch dưới cả hai
+    name: Portuguese (Brazil)
+    why: Brazil có 168M người Cơ Đốc (thứ 2 thế giới), 76 % cầu nguyện hằng ngày; gospel ≈ 20 % thị trường nhạc Brazil, có cả dòng "black music gospel". pewresearch.org 2025-06-25; christiancentury.org/brazil-s-explosion-m-sica-gospel
+  - code: es-419
+    also: [es]         # es = Tây Ban Nha / mặc định; một bản dịch Mỹ Latinh dùng cho cả hai
+    name: Spanish (Latin America)
+    why: Mexico 113M người Cơ Đốc, Colombia 71 % cầu nguyện hằng ngày; một bản dịch phủ cả khối nói tiếng Tây Ban Nha (có "música cristiana" riêng). Pew 2020 + 2025
+  - code: fr
+    name: French
+    why: CHDC Congo có 92M người Cơ Đốc (96 %), gospel Congo rất lớn trên YouTube (Moïse Mbiye ~406M view) + Tây Phi nói tiếng Pháp; YouTube không có giao diện Lingala. leregard.info
+  - code: ko
+    name: Korean
+    why: 31 % dân Hàn theo Cơ Đốc (24 % Tin Lành), nhạc thờ phượng Hàn lớn lên từ gospel/CCM Mỹ; người Hàn dùng giao diện tiếng Hàn. namu.wiki CCM
+  - code: de
+    name: German
+    why: Đức có ~3.000 dàn hợp xướng gospel (EKD 2008); đây là khán giả yêu nhạc gospel/blues hơn là vì đức tin (chỉ 16 % cầu nguyện hằng ngày). gospelflava.com
+  - code: ja
+    name: Japanese
+    why: chỉ ~1 % theo Cơ Đốc nhưng có phong trào hợp xướng gospel da màu (từ Sister Act, >7.000 người hát, 80 % không theo đạo) + khán giả blues; thị trường nhạc lớn thứ 2 thế giới, gần như chỉ đọc tiếng Nhật. sightmagazine.com.au; orphiq.com
+  # Chưa bật, chờ Analytics:
+  # - id (Indonesia): ~10 % Cơ Đốc trên 275M dân, rất sùng đạo, giao diện tiếng Indonesia (chưa kiểm số Pew)
+  # - it / pl: nhiều người Cơ Đốc nhưng không thấy bằng chứng có khán giả gospel blues
+  # Không dịch (khán giả đã dùng tiếng Anh, title gốc đủ): Philippines (fil), Nigeria, Ghana, Kenya (sw), Nam Phi, Ấn Độ (hi), Singapore.
+  # Không dịch: ru (ít thực hành + YouTube bị hạn chế), zh (YouTube bị chặn ở Trung Quốc), am (Ethiopia, nhạc đạo khác hẳn).
+
+glossary:              # thuật ngữ đã chọn (2026-09-24, 4 video đầu); video sau dùng lại y như vậy
+  pt-BR: {Slow Gospel Blues: Gospel Blues lento, Soulful Gospel Blues: Gospel Blues com alma, Prayer: Oração, Song: canção, Full Album: Álbum completo}
+  es-419: {Slow Gospel Blues: Gospel Blues lento, Soulful Gospel Blues: Gospel Blues con alma, Prayer: Oración, Song: canción, Full Album: Álbum completo}
+  fr: {Slow Gospel Blues: gospel blues lent, Soulful Gospel Blues: gospel blues plein d'âme, Prayer: Prière, Song: chant, Full Album: Album complet}
+  ko: {Slow Gospel Blues: 느린 가스펠 블루스, Soulful Gospel Blues: 소울풀 가스펠 블루스, Prayer: 기도, Full Album: 앨범 전곡}
+  de: {Slow Gospel Blues: Langsamer Gospel Blues, Gospel Blues + noun: Gospel-Blues-<Nomen>, Soulful: Gefühlvoll, Prayer: Gebet, Song: Lied, Full Album: Komplettes Album}
+  ja: {Slow Gospel Blues: スロー・ゴスペルブルース, Soulful Gospel Blues: ソウルフルなゴスペルブルース, Prayer: 祈り, Full Album: フルアルバム}

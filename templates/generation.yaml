@@ -1,0 +1,72 @@
+# Kế hoạch sinh nhạc Suno cho một album (input của skill `suno-generate`, đọc bởi .claude/skills/suno-generate/scripts/suno_gen.py).
+# Bình thường file này do skill `album-plan` SINH từ <album>/plan.yaml (build) — không viết tay.
+# Chỉ copy tay khi thử nghiệm ngoài quy trình. Đường dẫn tương đối so với thư mục album.
+#
+# Nguồn các giá trị mặc định: .claude/skills/suno-generate/references/suno-research.md (§4 thiết lập đề xuất, §7 spike 23/09/2026) và
+# generation/slots/style_prompt/identity trong ideas/*/idea.yaml. Khi promote idea → album, chép các khối đó sang đây.
+#
+# Quy tắc: mọi giá trị là MỘT con số/chuỗi chính xác (không để dải [20, 30]) vì skill sẽ gõ đúng giá trị này vào Suno
+# rồi đối chiếu lại. Muốn thử nhiều giá trị thì khai báo `variants` cho slot.
+
+schema_version: 1
+album: NNN-album-slug
+status: draft                  # draft → approved. Skill KHÔNG tốn credit khi status chưa phải approved.
+source:                        # để truy vết: plan này tổng hợp từ đâu
+  idea: null                   # vd. channel/lamplight_gospel/ideas/NNN-slug/idea.yaml
+  research: []                 # vd. [research/<slug>/analysis.md]
+
+budget:
+  max_credits: 250             # trần credits cho cả album, tối đa 250 (CLAUDE.md §4; Pro: 2.500/tháng). Vượt trần thì skill dừng và hỏi.
+  credits_per_generation: {max: 20, normal: 10}   # đo thực tế 23/09: Max = 20, thường = 10; mỗi lượt ra 2 clip
+
+gates:
+  anchor_first: true           # chưa chốt slot 1 (verification-audio accept) thì không generate slot khác
+  confirm_each_generation: false   # true = hỏi người dùng trước MỖI lượt; false = hỏi 1 lần cho cả đợt (số lượt + credits)
+
+# Style prompt dùng chung cho mọi bài (CLAUDE.md mục 4: Style = ai đang chơi; tag trong lyrics = arrangement)
+style:
+  version: xxx-v1              # ghi vào track md (style_prompt_version)
+  text: >-
+    (tiếng Anh, <= 1000 ký tự sau khi thay {bpm}; vd. "slow 6/8 groove around {bpm} BPM")
+  exclude: "female vocals, falsetto, autotune, rap, trap, EDM, modern pop, pop worship, country, blues rock, cinematic orchestra"
+
+# Thiết lập mặc định cho mọi lượt generate (Create → Advanced, v6)
+defaults:
+  model: v6                    # v6 | v6-wild. Không dùng v6-mini, không dùng "Create Custom Model" (100 credits)
+  voice:                       # Voice (Pro) = persona. null = không dùng Voice.
+    name: "Midnight Gospel Soul - Male 01"
+    id: 7ebd54d4-454a-4c15-a2e4-973196ae6170
+  vocal_gender: male           # male | female | null (để Suno tự chọn)
+  max_mode: false              # CLAUDE.md §4: lượt thường (10 credits); chỉ slot 1 bật Max qua overrides.max_mode
+  duration: auto               # auto | số giây 10–360 (vd. 315 = 5:15). Custom giúp bài đủ dài 5–6 phút
+  variety: 0                   # 0–4. >= 1 làm Suno VIẾT LẠI Style prompt (spike 23/09) → giữ 0
+  weirdness: 25                # 0–100
+  style_influence: 50          # 0–100. Anchor không Voice: 70–80; bài có Voice: 45–55 (để Voice dẫn)
+  audio_influence: 65          # 0–100, chỉ hiện khi đã chọn Voice. > 80 bắt đầu dính giai điệu bài gốc
+  personalize: off             # off (luôn tắt "My Taste")
+  bpm: 60                      # tempo mục tiêu (felt) = số điền vào {bpm} trong style.text; slot có thể ghi đè overrides.bpm
+
+# Thứ tự generate. Slot 1 (title track) luôn đi trước và dồn nhiều lượt nhất (CLAUDE.md mục 3).
+order: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+slots:
+  - n: 1
+    title: "Song Title"        # title nhập vào Suno (tiếng Anh). Tên file = slug của title + 8 ký tự id clip
+    track: tracks/01-song-title.md   # lyrics = khối ``` đầu tiên sau "## Lyrics" (cùng chỗ verify.py đọc)
+    rounds: 2                  # CLAUDE.md §4: slot 1 = 2 lượt Max (4 clip = đủ cho verify); slot khác = 1 lượt thường
+    instrumental: false        # true = để trống lyrics
+    overrides: {max_mode: true}   # ghi đè defaults cho slot này (slot 1 luôn Max)
+    variants: []               # tuỳ chọn: thử nhiều biến thể trong các lượt, vd.
+    #  - {name: hum-intro, lyrics_file: tracks/01-song-title.hum.md, rounds: 1}
+    #  - {name: cold-open, overrides: {weirdness: 20}, rounds: 1}
+    notes: "Mở bằng giọng trong <= 10 s; không [Instrumental Intro] dài"
+  - n: 2
+    title: "Second Song"
+    track: tracks/02-second-song.md
+    rounds: 1
+    overrides: {}
+    notes: ""
+
+# Nhật ký thay đổi plan giữa các lượt (vd. sau khi verification-audio trả REGENERATE kèm hints).
+# Mỗi lượt generate đã chụp lại toàn bộ settings trong notes/suno/<gen>.spec.json nên không mất dấu.
+changes: []                    # [{date, slot, change, why}]

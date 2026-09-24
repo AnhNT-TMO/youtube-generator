@@ -1,0 +1,14 @@
+# Python 3.12. Cài (từ gốc repo): SK=.claude/skills/verification-audio; python3.12 -m venv $SK/.venv && $SK/.venv/bin/pip install -r $SK/requirements.txt
+# Server GPU: $SK/scripts/remote.sh setup (tự cài torch bản cu128)
+numpy
+scipy
+librosa
+soundfile
+pyyaml
+torch
+torchaudio
+demucs
+transformers
+beat-this @ git+https://github.com/CPJKU/beat_this.git
+mlx-whisper; sys_platform == "darwin"
+openai-whisper; sys_platform == "linux"

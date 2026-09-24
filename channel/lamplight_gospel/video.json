@@ -1,0 +1,11 @@
+{
+  "_comment": "Lamplight Gospel look: warm lamp-lit dust rising, warm light shaft, gold bars. Image-specific settings (light shapes, lamp position, dust lanes) go in each idea/album's own video.json.",
+  "logo": {"path": "channel/lamplight_gospel/image_source/logo.png"},
+  "light": {"color": [255, 231, 178], "amount": 0.10},
+  "particles": [
+    {"from": "bottom", "count": 260, "shape": "dot", "color": [255, 237, 204], "intensity": 157}
+  ],
+  "bars": {"color_tip": [255, 238, 198], "color_base": [251, 184, 120],
+           "glow_color": [255, 209, 120], "scrim": 0.16},
+  "intro": {"halo_color": [255, 209, 140]}
+}
