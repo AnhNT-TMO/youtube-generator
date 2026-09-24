@@ -40,3 +40,9 @@ node_modules/
 *.webm
 *.npy
 *.opus
+
+# Hàng đợi link research của từng kênh
+channel/*/research-queue.txt
+
+# Ledger của production-manager
+production/

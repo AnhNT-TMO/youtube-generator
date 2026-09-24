@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-# Mở Chrome riêng cho ChatGPT (profile tách biệt, bật remote debugging) để agent-browser gắn vào bằng --cdp.
-# Chrome này là Chrome thường (không cờ automation) nên ChatGPT/Cloudflare không chặn như Chrome do agent-browser tự mở.
-# Cùng cách với suno-generate/scripts/suno-chrome.sh (cổng 9222). Chạy lại nhiều lần cũng được: đã chạy thì chỉ mở thêm tab.
 set -euo pipefail
 
 PORT="${CHATGPT_CHROME_PORT:-9223}"

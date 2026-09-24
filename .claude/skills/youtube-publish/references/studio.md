@@ -11,7 +11,7 @@ giữ đúng tới 2026-09. Chính sách có thể đổi: với câu hỏi về
 | Title | khối Title trong `youtube.md` | format ở SKILL.md |
 | Description | khối Description (đã có TRACKLIST) | chapters chỉ được tạo từ description |
 | Thumbnail → Upload file | `thumbnail.png` (≤ 2 MB) | không dùng ảnh tự trích từ video |
-| Playlists | `Lamplight Gospel · Full Albums` (tạo lần đầu) | gom album, có trang playlist để trỏ end screen/cards sau này |
+| Playlists | `<Channel Name> · Full Albums` (tạo lần đầu; tên ở `publish.md`) | gom album, có trang playlist để trỏ end screen/cards sau này |
 | Audience | **No, it's not made for kids** | "made for kids" tắt comments, end screen, cards, thông báo |
 | Age restriction | No | |
 | **AI use** ("Was AI used to generate or edit your content…?") | **Yes** | YouTube liệt kê "AI generated music" trong *Examples of content creators need to disclose*. Ba gạch đầu dòng trên form chỉ là ví dụ; dòng dưới ghi rõ *realistic sounds made or edited with AI*. Nhãn chỉ nằm trong phần mô tả mở rộng với chủ đề thường; không khai báo có thể bị YouTube tự gắn nhãn, gỡ video hoặc ảnh hưởng YPP. Nguồn: https://support.google.com/youtube/answer/14328491 |
@@ -53,7 +53,7 @@ giữ đúng tới 2026-09. Chính sách có thể đổi: với câu hỏi về
 1. Chọn **Unlisted** trước → Save.
 2. Mở video bằng link Unlisted:
    - bấm thử các chapter, nhất là dòng "ước lượng" của `publish.py chapters`, xem có rơi đúng đầu bài không;
-   - nghe 15 giây đầu như người lạ (Gate Track 01, CLAUDE.md §3);
+   - nghe 15 giây đầu như người lạ (Gate Track 01, CLAUDE.md);
    - kiểm tra nhãn AI đã hiện trong mô tả mở rộng.
 3. Sửa nếu cần (sửa description ngay trong Studio, không phải upload lại), rồi chuyển **Public** (hoặc **Schedule**).
    Premiere: không cần cho kênh mới chưa có người đăng ký.
@@ -62,7 +62,7 @@ giữ đúng tới 2026-09. Chính sách có thể đổi: với câu hỏi về
 
 - Đăng **comment đầu tiên** bằng chính tài khoản channel (khối Pinned comment trong `youtube.md`), rồi bấm
   ⋮ → **Pin**, và bấm ❤️ (heart). Comment của chủ kênh có badge tên kênh, ghim lên đầu; timestamps trong đó bấm được.
-- Điền Video URL, ngày upload vào `youtube.md`; cập nhật trạng thái `album.md` và dòng album ở CLAUDE.md §6.
+- Điền Video URL, ngày upload vào `youtube.md`; cập nhật trạng thái `album.md` và dòng album ở CLAUDE.md.
 - Sau 48 giờ và 7 ngày: ghi CTR, retention 0:15 / 0:30 / 1:00, avg view duration vào bảng Analytics
   (Studio → video → Analytics → Engagement → Audience retention).
 
@@ -74,7 +74,7 @@ Giống mục 1–5, chỉ khác những dòng dưới. Mục đích chính củ
 |---|---|---|
 | Description | không có TRACKLIST; có FULL ALBUM (link album) + LYRICS | một bài thì không có chapters; lời bài giúp tìm kiếm theo câu hát |
 | Thumbnail | `thumbnail.jpg` nếu `thumbnail.png` > 2 MB (`thumb.py fit` tự tạo) | PNG 1920×1080 thường 3–4 MB |
-| Playlists | `Lamplight Gospel · Songs` (tạo lần đầu) | tách khỏi Full Albums, người xem playlist album không gặp bài lẻ lặp lại |
+| Playlists | `<Channel Name> · Songs` (tạo lần đầu; tên ở `publish.md`) | tách khỏi Full Albums, người xem playlist album không gặp bài lẻ lặp lại |
 | Automatic chapters | Bỏ tick | |
 | End screen | **Video → chọn video album** + **Subscribe**, 20 s cuối | điểm đến của bài lẻ là album. Album chưa lên: chỉ Subscribe, quay lại thêm sau |
 | Cards | 1 card **Video → video album**, sau điệp khúc đầu (xem `vocal_start` + cấu trúc bài, thường ~1:30–2:00) | người đang thích bài thì thấy lời mời nghe cả album. Album chưa lên: bỏ qua |

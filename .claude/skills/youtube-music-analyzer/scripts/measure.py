@@ -1,16 +1,4 @@
 #!/usr/bin/env python3
-"""The audio numbers of the analyzer's criteria, measured with verification-audio's QC stack (so tempo is in
-the same unit verify.py uses). Needs that skill's .venv (torch, demucs, beat_this, whisper, transformers).
-
-  measure.py RUN_DIR [--no-lyrics] [--qc-tools PATH]
-
-RUN_DIR holds raw/audio.* and audio/analysis.json (song split). Writes audio/qc.json:
-  songs[]  felt tempo + meter (criterion 3), singer pitch f0 + male/female call (criterion 4)
-  album    medians / counts of the above
-  track01  first sung sound (Demucs) + first lyric and words per sung minute (Whisper on the vocal stem, text
-           discarded) (criteria 5, 6)
-Per-song WAVs go to raw/songs/ (media: never committed / never pulled from the server).
-"""
 import argparse
 import glob
 import json
@@ -25,7 +13,6 @@ import numpy as np
 warnings.filterwarnings("ignore")
 HERE = os.path.dirname(os.path.abspath(__file__))
 
-# AudioSet classes used for the male/female call (on the Demucs vocal stem)
 AST_KEEP = {"Male singing", "Female singing", "Singing", "Humming", "Speech"}
 
 
@@ -47,7 +34,7 @@ def cut_songs(run, tracks, audio):
     os.makedirs(d, exist_ok=True)
     idx = os.path.join(d, "index.json")
     bounds = {"video": os.path.basename(audio) + ":" + str(os.path.getsize(audio)), "starts": [t["start_s"] for t in tracks]}
-    if not os.path.exists(idx) or json.load(open(idx)) != bounds:   # split changed -> re-cut everything
+    if not os.path.exists(idx) or json.load(open(idx)) != bounds:
         for f in glob.glob(os.path.join(d, "*.wav")):
             os.remove(f)
         json.dump(bounds, open(idx, "w"))
@@ -68,7 +55,6 @@ _ast = None
 
 
 def ast_tags(y16, starts, win=10):
-    """Mean AudioSet probabilities over `win` s windows starting at `starts` (s). y16 = 16 kHz mono."""
     global _ast
     import torch
     from transformers import ASTFeatureExtractor, ASTForAudioClassification
@@ -92,13 +78,11 @@ def ast_tags(y16, starts, win=10):
 
 
 def lyric_numbers(path):
-    """Whisper on the vocal stem, in memory: first lyric word (s) and words per sung minute. The text is discarded."""
     from qc import lyrics, stems
     v, sr = stems.load_stem(path, "vocals", sr=16000)
     res = lyrics._transcribe(v.astype(np.float32), language="en", word_timestamps=True,
                              condition_on_previous_text=False, hallucination_silence_threshold=2.0, verbose=None)
 
-    # Whisper hallucinates lines on instrumental stretches: keep a word only where the vocal stem has sound
     def rms_db(a, b):
         x = v[int(max(0, a) * sr): max(int(max(0, a) * sr) + 1, int(b * sr))]
         return 10 * np.log10(float(np.mean(x.astype(np.float64) ** 2)) + 1e-12)
@@ -141,8 +125,6 @@ def main():
     feats = pipeline.analyze_many(paths, ("rhythm", "stems", "tempo", "vocal"), verbose=True)
 
     def felt(p, rhythm):
-        """Felt tempo with no target: eighth pulse x beat_this bar (qc.tempo.structural_felt) - 12/8 -> eighth/3,
-        4/4 -> eighth/2. Structure unclear -> strongest peak 45-100 BPM, flagged uncertain."""
         ac = load_array(p, "tempo_ac")
         if ac is None:
             return None, {}
@@ -153,7 +135,7 @@ def main():
         else:
             b, _ = tempo.pulse(ac, 45, 100)
             st, info = {"bpm": b}, {"meter": None, "uncertain": True}
-        if info["meter"] != "compound":   # 4/4: an uptempo song can read at half time -> give the fast level too
+        if info["meter"] != "compound":
             f, cf = tempo.pulse(ac, 100, 180)
             _, cs = tempo.pulse(ac, 45, 100)
             if f and cf is not None and cs is not None and cf >= 0.9 * cs:
@@ -167,7 +149,6 @@ def main():
         v = f["vocal"]
         y16, _ = load_audio(p, sr=16000)
         dur = len(y16) / 16000
-        # male/female: AudioSet on the Demucs vocal stem (on the full mix these tags stay too weak to call)
         from qc import stems
         vst, _ = stems.load_stem(p, "vocals", sr=16000)
         vt = ast_tags(vst, [x for x in (20, 60, 100, 140) if x + 10 < dur] or [0])
@@ -182,13 +163,12 @@ def main():
         s = songs[-1]
         log(f"  song {i + 1}: felt {fb} {s['meter']} · f0 {s['f0_median_hz']} Hz · {s['voice']}")
 
-    # ---- song 1: the opening of the video (CLAUDE.md §3) + lyric density
     v1 = feats[paths[0]]["vocal"].get("vocal_start")
     track01 = {"vocal_start_s": None if v1 is None else round(v1, 1)}
     if not a.no_lyrics:
         try:
             track01["lyrics"] = lyric_numbers(paths[0])
-        except Exception as e:   # whisper missing / OOM: keep going
+        except Exception as e:
             track01["lyrics"] = {"error": str(e)[:120]}
 
     def med(key):

@@ -1,15 +1,4 @@
 #!/usr/bin/env python3
-"""Per-track vocal statistics from YouTube (auto) captions.
-
-  captions.py captions.en.vtt analysis.json
-
-Adds to each track in analysis.json:  vocals = {first_line_s, words_per_min_sung, caption_lines}
-and prints a small table. Deliberately does NOT store the lyric text itself: only "where does the first lyric
-come / how wordy", never a copy of someone else's lyrics. Auto-captions on sung music are approximate (+-2 s).
-
-Also importable: parse_vtt() and lexical_recurrence() are used by analyze_audio.py as evidence
-for song boundaries (the words change completely when a new song starts).
-"""
 import bisect
 import collections
 import json
@@ -27,12 +16,11 @@ know said say see come came go going gone make made take""".split())
 
 
 def _clean(text):
-    text = re.sub(r"\[[^\]]*\]|\([^)]*\)", " ", text)          # inline [singing], (music)
+    text = re.sub(r"\[[^\]]*\]|\([^)]*\)", " ", text)
     return re.sub(r"\s+", " ", text).strip()
 
 
 def parse_vtt(path):
-    """Return [(start, end, text)] with YouTube's rolling-caption duplication removed."""
     cues, seen = [], set()
     block = open(path, encoding="utf-8").read().split("\n\n")
     ts = re.compile(r"(\d+):(\d+):(\d+\.\d+) --> (\d+):(\d+):(\d+\.\d+)")
@@ -55,7 +43,6 @@ def parse_vtt(path):
 
 
 def tokens(text):
-    """Lower-case content words; contractions folded ("he's" -> dropped, "everything's" -> "everything")."""
     out = []
     for w in re.findall(r"[a-z']+", text.lower().replace("’", "'")):
         w = re.sub(r"'(s|re|ve|ll|d|m|t)$", "", w).replace("'", "")
@@ -68,7 +55,6 @@ _IDX = {}
 
 
 def _window(cues, a, b):
-    """Cues starting in [a, b), via bisect on a cached start index (cues are in time order)."""
     k = id(cues)
     if k not in _IDX:
         _IDX[k] = [c[0] for c in cues]
@@ -77,9 +63,6 @@ def _window(cues, a, b):
 
 
 def lexical_recurrence(cues, t, q=60.0, back=240.0):
-    """How much the words right after t already occurred in the 4 min before it (and vice versa):
-    max of the two TF cosines. Inside one song the chorus comes back (vintagegospel mix: 0.18-0.59);
-    across a real join the new song's words are new (0.01-0.22). None = too few words."""
     def tf(a, b):
         return collections.Counter(w for s, e, x in _window(cues, a, b) for w in tokens(x))
 
@@ -103,9 +86,8 @@ def main():
     for t, end in zip(tracks, ends):
         cs = [c for c in cues if t["start_s"] <= c[0] < end]
         words = [w for c in cs for w in re.findall(r"[a-z']+", c[2].lower())]
-        # first caption with >= 3 words = first real lyric line (a lone "Oh" is an ad-lib)
         line = next((c for c in cs if len(c[2].split()) >= 3), None)
-        sung = (min(cs[-1][1], end) - line[0]) if line else 0      # first lyric line -> last caption = sung span
+        sung = (min(cs[-1][1], end) - line[0]) if line else 0
         t["vocals"] = {
             "first_line_s": round(line[0] - t["start_s"], 1) if line else None,
             "words_per_min_sung": round(len(words) / sung * 60, 1) if sung > 30 else None,

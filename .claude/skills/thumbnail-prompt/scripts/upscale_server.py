@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phía GPU server của `thumb.py fit`: upscale một ảnh lên 3840×2160 bằng SeedVR2 7B (diffusion, vẽ thêm chi tiết thật).
+USAGE = """Phía GPU server của `thumb.py fit`: upscale một ảnh lên 3840×2160 bằng SeedVR2 7B (diffusion, vẽ thêm chi tiết thật).
 
   python3 upscale_server.py setup              một lần / sửa khi hỏng: repo SeedVR2 (commit cố định), .venv (torch cu128), model
   .venv/bin/python upscale_server.py run IN OUT [--w 3840 --h 2160]
@@ -19,11 +19,10 @@ from concurrent.futures import ThreadPoolExecutor
 
 ROOT = os.path.expanduser("~/thumbnail-prompt")
 REPO_URL = "https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler"
-REPO_COMMIT = "4490bd1f482e026674543386bb2a4d176da245b9"   # bản đã thử 2026-09-24
+REPO_COMMIT = "4490bd1f482e026674543386bb2a4d176da245b9"
 HF = "https://huggingface.co/numz/SeedVR2_comfyUI/resolve/main/"
-DIT = "seedvr2_ema_7b_fp16.safetensors"    # fp8 của 7B bị lỗi chất lượng (README repo); 3B / 7B-sharp để lại vân da
+DIT = "seedvr2_ema_7b_fp16.safetensors"
 MODELS = [DIT, "ema_vae_fp16.safetensors"]
-# Driver server chỉ hỗ trợ CUDA 12.8: torch mặc định trên PyPI (CUDA 13) không chạy
 TORCH = ["torch==2.11.0+cu128", "torchvision==0.26.0+cu128"]
 DEPS = ["safetensors", "numpy", "tqdm", "psutil", "einops", "omegaconf>=2.3.0", "diffusers>=0.33.1", "peft>=0.17.0",
         "rotary_embedding_torch>=0.5.3", "opencv-python-headless", "gguf", "matplotlib", "pillow"]
@@ -35,10 +34,7 @@ def sh(cmd, **kw):
     subprocess.run(cmd, check=True, **kw)
 
 
-# ---------------------------------------------------------------- setup
 def download(url, out, conn=16):
-    """Tải song song theo Range, mỗi đoạn có timeout + thử lại, tải tiếp được (<out>.part + .part.done).
-    Một kết nối tới Hugging Face từ server chỉ ~1 MB/s và hay treo (2026-09-24), nên không dùng wget."""
     def req(rng, timeout):
         r = urllib.request.Request(url, headers={"Range": rng, "User-Agent": "thumbnail-prompt"})
         return urllib.request.urlopen(r, timeout=timeout)
@@ -112,7 +108,6 @@ def cmd_setup(_):
     print("setup xong", flush=True)
 
 
-# ---------------------------------------------------------------- run
 def cmd_run(a):
     from PIL import Image
     if a.w % 2 or a.h % 2:
@@ -124,7 +119,6 @@ def cmd_run(a):
     job = os.path.dirname(os.path.abspath(a.out))
     im = Image.open(a.inp).convert("RGB")
     src = im.size
-    # Đưa vào đúng kích thước đích (Lanczos) để SeedVR2 không tự làm tròn cạnh (1672×941 → 3836×2160 nếu để nó tự tính)
     pre = os.path.join(job, "pre.png")
     im.resize((a.w, a.h), Image.LANCZOS).save(pre)
     raw = os.path.join(job, "raw.png")
@@ -146,7 +140,7 @@ def cmd_run(a):
 
 def main():
     import argparse
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(description=USAGE, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("setup").set_defaults(fn=cmd_setup)
     r = sub.add_parser("run")

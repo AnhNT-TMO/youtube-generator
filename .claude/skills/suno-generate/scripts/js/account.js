@@ -1,4 +1,3 @@
-// Credits còn lại + quota download chính thức (không được tăng: skill chỉ tải qua usesuno). Chỉ đọc.
 async () => {
   const tok = document.cookie.split(';').map(c => c.trim()).find(c => c.startsWith('__session=')).slice(10);
   const r = await fetch('https://studio-api-prod.suno.com/api/billing/info/', { headers: { authorization: 'Bearer ' + tok } });

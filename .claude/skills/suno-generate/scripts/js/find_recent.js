@@ -1,5 +1,3 @@
-// Dự phòng khi không bắt được response của POST /api/generate/v2-web/: tìm clip mới nhất theo title, tạo sau `since`.
-// P = {"title": "...", "since": "2026-09-23T02:50:00Z"}. Chỉ đọc.
 async () => {
   const P = /*PARAMS*/null;
   const tok = document.cookie.split(';').map(c => c.trim()).find(c => c.startsWith('__session=')).slice(10);

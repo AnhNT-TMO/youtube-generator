@@ -1,7 +1,3 @@
-"""Nhóm B — nhận dạng lời trên stem vocal bằng Whisper (mlx), và so với lời đã nhập vào Suno.
-
-Không đưa lời mong đợi vào `initial_prompt`: như vậy Whisper sẽ "đoán theo" lời đúng và che mất lỗi.
-"""
 from __future__ import annotations
 
 import re
@@ -13,8 +9,8 @@ import numpy as np
 from . import stems
 from .common import load_cached, save_cached
 
-MODEL = "mlx-community/whisper-large-v3-turbo"   # Mac (Apple Silicon): mlx-whisper
-MODEL_TORCH = "turbo"                             # Linux/CUDA: openai-whisper (cùng API, cùng model large-v3-turbo)
+MODEL = "mlx-community/whisper-large-v3-turbo"
+MODEL_TORCH = "turbo"
 _torch_model = None
 
 
@@ -54,7 +50,6 @@ def analyze(path, force=False) -> dict:
 
 
 def read_lyrics(track_md: Path) -> str | None:
-    """Khối ``` đầu tiên sau heading '## Lyrics' của track md. Trả None nếu chưa có lời."""
     if not track_md.exists():
         return None
     text = track_md.read_text()
@@ -67,14 +62,10 @@ def read_lyrics(track_md: Path) -> str | None:
     return b.group(1)
 
 
-# ---------- so khớp lời ----------
-
 _TAG = re.compile(r"^\s*\[.*\]\s*$")
 
 
 def expected_lines(lyrics_block: str) -> list[str]:
-    """Lấy các dòng được HÁT: bỏ tag [..] và các dòng chỉ dẫn arrangement ngay dưới tag
-    (vd. "Warm Hammond organ and sparse clean blues guitar.")."""
     lines, in_instr = [], False
     for raw in lyrics_block.splitlines():
         line = raw.strip()
@@ -83,7 +74,6 @@ def expected_lines(lyrics_block: str) -> list[str]:
         if _TAG.match(line):
             tag = line.lower()
             in_instr = any(k in tag for k in ("instrumental", "intro", "outro", "break", "solo", "interlude"))
-            # Trong [Final Chorus] vẫn có dòng chỉ dẫn → đánh dấu để lọc bằng heuristic bên dưới
             continue
         if in_instr:
             continue
@@ -109,16 +99,13 @@ def norm_tokens(text: str) -> list[str]:
 
 
 def compare(expected_block: str, transcript_words: list[str]) -> dict:
-    """coverage: tỉ lệ dòng lời mong đợi tìm thấy trong transcript (khớp mờ ≥ 0.6).
-    precision: tỉ lệ từ trong transcript có mặt trong từ vựng của lời mong đợi (thấp = hát lời bịa/lè nhè).
-    """
     lines = expected_lines(expected_block)
     hyp = norm_tokens(" ".join(transcript_words))
     if not lines:
         return {"n_lines": 0}
     vocab = set(t for l in lines for t in norm_tokens(l))
     found, per_line = 0, []
-    uniq = list(dict.fromkeys(lines))  # chorus lặp lại chỉ tính một lần
+    uniq = list(dict.fromkeys(lines))
     for line in uniq:
         toks = norm_tokens(line)
         n = len(toks)

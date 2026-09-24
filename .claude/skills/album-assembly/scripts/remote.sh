@@ -1,14 +1,4 @@
 #!/usr/bin/env bash
-# Server GPU cho album-assembly: assemble.py tự gọi cho plan / set / render / single (Demucs + beat_this, ghép ~1 giờ audio).
-# Dùng chung bản sao repo ~/$QC_DIR trên server với verification-audio (cùng bố cục thư mục).
-#
-#   $SK/scripts/remote.sh setup                   # lần đầu: đẩy code + tạo venv + cài thư viện trên server
-#   $SK/scripts/remote.sh push                    # đẩy code skill + thư mục album/single (text + audio bài) lên server
-#   $SK/scripts/remote.sh exec "<lệnh>"           # chạy lệnh trong ~/$QC_DIR trên server
-#   $SK/scripts/remote.sh pull <dir-rel> [master] # kéo về assembly.yaml/.md (+ audio/master/ khi có `master`)
-#
-# Cấu hình: $SK/remote.env (mẫu: remote.env.example) với QC_REMOTE=user@host, QC_KEY (ssh key), QC_DIR.
-# Server hiện tại: driver NVIDIA hỗ trợ tối đa CUDA 12.8 → setup cài torch bản cu128.
 set -euo pipefail
 
 SK="$(cd "$(dirname "$0")/.." && pwd)"
@@ -17,17 +7,13 @@ REPO="$(cd "$SK/../../.." && pwd)"
 : "${QC_REMOTE:?set QC_REMOTE=user@host in $SK/remote.env (mẫu: remote.env.example)}"
 HOST="$QC_REMOTE"
 KEY="${QC_KEY:-$HOME/.ssh/id_rsa}"
-RDIR="${QC_DIR:-youtube-qc}"                   # bản sao repo trên server (cùng bố cục thư mục)
-SKR=".claude/skills/album-assembly"             # đường dẫn skill, tương đối gốc repo
+RDIR="${QC_DIR:-youtube-qc}"
+SKR=".claude/skills/album-assembly"
 SSH=(ssh -i "$KEY" -o BatchMode=yes -o ConnectTimeout=10 "$HOST")
 RSH="ssh -i $KEY -o BatchMode=yes -o ConnectTimeout=10"
-# Lệnh nặng chạy trong systemd user slice `youtube.slice`, dùng chung cho MỌI skill của project: tổng cộng tối đa
-# ~60 % CPU, RAM 60 % (MemoryHigh, bắt đầu thu hồi) / 70 % (MemoryMax, kill trong slice) của server dùng chung
-# (chủ kênh 2026-09-24, CLAUDE.md §4). Slice tự tạo ở lần đầu. Giữ khối này giống hệt trong mọi runner.
-LIMIT='S=~/.config/systemd/user/youtube.slice; [ -f $S ] || { mkdir -p ${S%/*} && printf "[Unit]\nDescription=youtube project: every skill shares this cap (CLAUDE.md 4)\n[Slice]\nCPUQuota=%s%%\nMemoryHigh=60%%\nMemoryMax=70%%\n" $(( $(nproc) * 60 )) > $S && systemctl --user daemon-reload; }; systemd-run --user --scope --quiet --collect --slice=youtube.slice -- bash -c'
+LIMIT='S=~/.config/systemd/user/youtube.slice; [ -f $S ] || { mkdir -p ${S%/*} && printf "[Unit]\nDescription=youtube project: every skill shares this cap (CLAUDE.md)\n[Slice]\nCPUQuota=%s%%\nMemoryHigh=60%%\nMemoryMax=70%%\n" $(( $(nproc) * 60 )) > $S && systemctl --user daemon-reload; }; systemd-run --user --scope --quiet --collect --slice=youtube.slice -- bash -c'
 
 push() {
-  # -W: không tính delta (đỡ CPU máy Mac); audio/master và video không đẩy (master được tạo trên server).
   rsync -aW --delete -e "$RSH" \
     --exclude '.venv/' --exclude '.cache/' --exclude '__pycache__/' --exclude 'remote.env' --exclude 'audio/master/' \
     --exclude 'video/' --exclude '*.mp4' --exclude '*.png' --exclude '*.jpg' --exclude '.DS_Store' \

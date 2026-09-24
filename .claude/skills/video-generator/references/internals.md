@@ -26,7 +26,7 @@ loop + intro + nhạc ──extend.py──▶ video full: intro → nhân bản
 (`SK=.claude/skills/video-generator`, `PY=$SK/.venv/bin/python`, các `--preset` xếp lớp theo thứ tự, lớp sau thắng):
 
 ```
-P="--preset channel/lamplight_gospel/video.json --preset <thư mục>/video.json"
+P="--preset channel/<ch>/video.json --preset <thư mục>/video.json"
 $PY $SK/scripts/make_loop.py ANH.png frame.png $P --frame 30
 $PY $SK/scripts/make_loop.py ANH.png loop.mp4 $P --seam-check --jobs 4     # + loop_intro.mp4
 $PY $SK/scripts/make_loop.py ANH.png loop.mp4 $P --intro-only
@@ -35,9 +35,9 @@ $PY $SK/scripts/extend.py loop.mp4 ALBUM.wav OUT.mp4 $P                   # cả
 $PY $SK/scripts/extend.py loop.mp4 ALBUM.wav OUT.mp4 $P --no-bars         # không sóng nhạc
 ```
 
-- **Logo:** mỗi channel có `image_source/logo.png` (vuông, nền trong suốt). Logo Lamplight
-  được vẽ bằng code: `$PY $SK/scripts/make_logo.py --channel lamplight_gospel`
-  (thêm `--title/--sub` khi cần).
+- **Logo:** mỗi channel có `image_source/logo.png` (vuông, nền trong suốt). Logo tròn có
+  thể vẽ bằng code: `$PY $SK/scripts/make_logo.py --title <TRÊN> --sub <DƯỚI> --out channel/<ch>/image_source/logo.png`
+  (lệnh cụ thể của kênh ghi trong `channel.md` → *Tài nguyên*).
 - **`--no-bars`:** nếu định ghép không có sóng nhạc, render loop với `make_loop.py ... --no-bars`,
   vì lớp bóng tối mờ dưới sóng nhạc được nung sẵn vào loop.
 
@@ -65,7 +65,7 @@ Bộ nén (`--encoder`, hoặc `encode.encoder` trong preset):
   nhân (`encode.share_threads`), vì x264 tự mở ~120 luồng cho một encode 4K.
 - Khung hình vẫn ghép trên CPU: `effects_gpu.py` (torch CUDA, cho ra đúng từng pixel) chậm hơn khi 16 tiến trình chia một
   GPU (103–110 s so với 52 s); bật thử bằng `VG_GPU=1`.
-- Mọi lệnh render/đóng gói trên server chạy trong systemd user slice `youtube.slice` (CLAUDE.md §4): tổng mọi skill
+- Mọi lệnh render/đóng gói trên server chạy trong systemd user slice `youtube.slice` (CLAUDE.md): tổng mọi skill
   ≤ 60 % CPU, RAM 60 % (MemoryHigh) / 70 % (MemoryMax).
 - `videotoolbox`: chip nén của Mac, ít tốn CPU nhưng không nhanh hơn x264 đáng kể.
 

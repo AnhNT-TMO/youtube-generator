@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tạo ảnh thumbnail bằng ChatGPT (Chrome riêng, agent-browser --cdp) rồi tải về thumbnail-drafts/.
+USAGE = """Tạo ảnh thumbnail bằng ChatGPT (Chrome riêng, agent-browser --cdp) rồi tải về thumbnail-drafts/.
 
   chatgpt_images.py gen    <dir> [--n 3] [--timeout 600]   chat mới → đính kèm ảnh model → dán prompt → chờ N ảnh → tải về
   chatgpt_images.py fetch  <dir>                          tải ảnh đã tạo trong thread đang mở (khi gen dừng giữa chừng)
@@ -25,7 +25,6 @@ PORT = "9223"
 
 
 def _find_ab():
-    """AGENT_BROWSER, rồi PATH, rồi mọi bản cài qua nvm (symlink có thể trỏ vào node_modules đã bị xóa)."""
     cands = [os.environ.get("AGENT_BROWSER"), shutil.which("agent-browser"),
              *sorted(glob.glob(os.path.expanduser("~/.nvm/versions/node/*/bin/agent-browser")), reverse=True)]
     for c in cands:
@@ -66,7 +65,6 @@ def prompt_parts(d):
     return m.group(1), [str(Path(f).resolve()) for f in files]
 
 
-# alt đổi theo thời gian ("Generated image", "Generated image: <chú thích>"); dự phòng: ảnh lớn không phải ảnh đính kèm
 GEN_IDS = r"""(() => { const fid = i => ((i.currentSrc || i.src).match(/id=(file_[0-9a-f]+)/) || [])[1];
   const all = Array.from(document.querySelectorAll('main img, [role=dialog] img, img'));
   const refs = new Set(all.filter(i => /\.(png|jpe?g|webp)$/i.test(i.alt || '')).map(fid));
@@ -76,8 +74,6 @@ GEN_IDS = r"""(() => { const fid = i => ((i.currentSrc || i.src).match(/id=(file
     busy: !!document.querySelector('[data-testid="stop-button"], button[aria-label*="Stop"]')}); })()"""
 
 
-# ChatGPT giữ bản nháp của ô chat qua lần mở trang: lượt gen trước gửi hỏng thì prompt của nó còn nằm đó và lượt sau
-# dán nối vào, gửi thành MỘT tin gộp hai prompt (2026-09-24). Phím giả (Backspace, Meta+a) không xóa được ô ProseMirror.
 CLEAR = """(() => { const e = document.querySelector('#prompt-textarea'); if (!e) return -1;
   document.querySelectorAll('[aria-label^="Remove file"]').forEach(b => b.click());
   e.focus(); document.execCommand('selectAll'); document.execCommand('delete');
@@ -103,7 +99,7 @@ def cmd_gen(a):
         sys.exit("ChatGPT chưa đăng nhập trong chatgpt-chrome: đăng nhập tay một lần rồi chạy lại")
     clear_composer()
     ab("upload", "#upload-photos", *files)
-    for _ in range(30):   # chờ ảnh đính kèm lên xong
+    for _ in range(30):
         if js("document.querySelectorAll('[aria-label^=\"Remove file\"]').length") >= len(files):
             break
         time.sleep(1)
@@ -112,8 +108,6 @@ def cmd_gen(a):
     got = js("document.querySelector('#prompt-textarea').innerText.length")
     if not isinstance(got, int) or got < len(prompt) * 0.95:
         sys.exit(f"prompt chưa vào ô chat đủ ({got}/{len(prompt)} ký tự)")
-    # nút Send bật sau khi upload xong; bấm sớm thì "✓ Done" mà không gửi (2026-09-23) → bấm lại tới khi ô chat trống
-    # 2026-09-24: bấm theo tên "Send prompt" 15 lần không gửi → bấm theo id, từ lần thứ 8 thêm Enter trong ô chat
     for i in range(15):
         time.sleep(2)
         ab("click", "#composer-submit-button", check=False)
@@ -174,11 +168,9 @@ def cmd_delete(a):
     if not hrefs:
         sys.exit(f"không thấy thread {cid} trong sidebar (đã xóa?)")
     title = hrefs[0][1]
-    # bấm nút ⋯ nằm TRONG link của đúng id này (không tìm theo tên: tài khoản dùng chung có thể có thread trùng tên).
-    # Phải là click thật (CDP) — menu không mở với sự kiện JS giả lập.
     link = f'nav a[href*="/c/{cid}"]'
     btn = f'{link} button[aria-label^="Open conversation options"]'
-    for _ in range(3):   # nút ⋯ chỉ hiện khi hover: lần bấm đầu có khi chỉ làm nó hiện ra
+    for _ in range(3):
         ab("scrollintoview", link, check=False)
         ab("hover", link, check=False)
         ab("click", btn, check=False)
@@ -200,7 +192,7 @@ def cmd_delete(a):
 
 
 def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(description=USAGE, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     g = sub.add_parser("gen")
     g.add_argument("dir")

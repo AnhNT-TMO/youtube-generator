@@ -1,4 +1,3 @@
-"""Nhóm B — beat/downbeat bằng beat_this, BPM, số phách/ô nhịp, độ ổn định tempo."""
 from __future__ import annotations
 
 import numpy as np
@@ -34,12 +33,10 @@ def analyze(path, force=False) -> dict:
         med = np.median(ibi)
         good = ibi[(ibi > 0.6 * med) & (ibi < 1.6 * med)]
         out["ibi_cv"] = float(np.std(good) / np.mean(good))
-        # BPM phút đầu vs phút cuối (trong vùng có beat)
         first = beats[beats < beats[0] + 60]
         last = beats[beats > beats[-1] - 60]
         out["bpm_first_min"] = _bpm(first)
         out["bpm_last_min"] = _bpm(last)
-        # BPM cục bộ mỗi 20s để thấy tempo có trôi không
         local = []
         for t0 in np.arange(beats[0], beats[-1] - 20, 20):
             seg = beats[(beats >= t0) & (beats < t0 + 20)]

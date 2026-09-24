@@ -1,10 +1,3 @@
-"""Audio spectrum row, rendered as a small transparent strip per frame.
-
-extend.py overlays the strip on the looped background with ffmpeg (the still
-shade under the row is burned into the loop by make_loop.py), so only the ~850x150 px strip is drawn in Python for
-the full length of the album, not whole 1920x1080 frames.
-Ported from lamblight_channel/tools/make_music_video.py (Bars, spectrum_track).
-"""
 import subprocess
 
 import numpy as np
@@ -26,11 +19,10 @@ def load_audio(path, start, dur):
 
 
 def spectrum_track(samples, nframes, fps, c):
-    """(nframes, bands) in 0..1, fast attack / slow release."""
     nb = c["bands"]
     edges = np.round(np.geomspace(c["fmin"], c["fmax"], nb + 1) / (SR / WIN))
     edges = edges.astype(int).clip(1, WIN // 2 - 1)
-    for b in range(nb):                          # keep every band non-empty
+    for b in range(nb):
         if edges[b + 1] <= edges[b]:
             edges[b + 1] = edges[b] + 1
     widths = np.diff(edges).astype(np.float32)
@@ -48,13 +40,10 @@ def spectrum_track(samples, nframes, fps, c):
         db = 20 * np.log10(mag + 1e-7)
         out[s:e] = np.add.reduceat(db, edges[:-1], axis=1)[:, :nb] / widths
 
-    # Per-band auto-gain: this music carries almost no energy above a few kHz,
-    # so a fixed scale leaves the right-hand bars dead. Normalise each band
-    # against its own range across the whole track instead.
     lo = np.percentile(out, 12, axis=0)
     hi = np.percentile(out, 97, axis=0)
     out = np.clip((out - lo) / np.maximum(hi - lo, 4.0), 0, 1) ** 1.05
-    out *= np.linspace(1.0, 0.80, nb, dtype=np.float32)       # keep bass taller
+    out *= np.linspace(1.0, 0.80, nb, dtype=np.float32)
 
     sm = np.empty_like(out)
     prev = out[0].copy()
@@ -67,12 +56,6 @@ def spectrum_track(samples, nframes, fps, c):
 
 
 class BarStrip:
-    """Geometry of the bar row plus what ffmpeg needs to draw it.
-
-    Per frame, Python only produces a grey coverage mask of the bar bodies
-    (one vectorised comparison over the strip). ffmpeg colours it with a still
-    gradient, blurs a copy for the glow and composites both over the video.
-    """
 
     def __init__(self, c):
         self.c = c
@@ -82,17 +65,14 @@ class BarStrip:
         bw = max(2, int(round(slot * c["bar_width"])))
         x0 = center - span / 2 + (slot - bw) / 2
         self.yb = H - c["baseline_px"]
-        m = 3 * gr + 2                          # room for the glow to fade out
+        m = 3 * gr + 2
 
-        # strip bounds on the frame (even sizes/offsets suit yuv420 overlay)
         self.X = (int(x0) - m) // 2 * 2
         self.Y = (self.yb - max_h - m) // 2 * 2
         self.w = (int(x0 + (n - 1) * slot) + bw + m - self.X + 1) // 2 * 2
         self.h = (min(H, self.yb + m) - self.Y) // 2 * 2
         self.max_h = max_h
 
-        # which bar each strip column belongs to, and how far its rounded
-        # caps cut into the top and bottom of that column
         self.col_bar = np.full(self.w, -1, np.int32)
         self.cap = np.zeros(self.w, np.float32)
         r = bw / 2
@@ -106,7 +86,6 @@ class BarStrip:
         self.rows = (np.arange(self.h, dtype=np.float32) + self.Y)[:, None]
 
     def mask(self, vals):
-        """uint8 (h, w) coverage of the bar bodies for one frame."""
         hts = 6 + (self.max_h - 6) * np.clip(vals, 0, 1)
         top = (self.yb - hts[self.col_bar]) + self.cap
         bot = self.yb - self.cap
@@ -115,7 +94,6 @@ class BarStrip:
         return (cov * (255 * self.c["opacity"]) + 0.5).astype(np.uint8)
 
     def gradient(self):
-        """Still RGB strip: bar colour by frame row, cream tip to gold base."""
         tip = np.array(self.c["color_tip"], np.float32)
         base = np.array(self.c["color_base"], np.float32)
         f = np.clip((self.rows[:, 0] - (self.yb - self.max_h)) / max(1, self.max_h - 1), 0, 1)
@@ -124,7 +102,6 @@ class BarStrip:
         return Image.fromarray((img + 0.5).astype(np.uint8), "RGB")
 
     def scrim(self):
-        """Still black shade (RGBA) under the row and where it goes."""
         c = self.c
         max_h, span, center = c["height_px"], c["span"] * W, c["center"] * W
         x0 = int(max(0, center - span * 0.78)) // 2 * 2
@@ -139,7 +116,6 @@ class BarStrip:
         return Image.fromarray(a, "RGBA"), (x0, y0)
 
     def filters(self, fps, bg, grad, mask, out):
-        """ffmpeg filter_complex that lays glow and bars over `bg`."""
         c = self.c
         k = c["glow_strength"] / max(1e-3, c["opacity"])
         gc = "0x%02x%02x%02x" % tuple(c["glow_color"])

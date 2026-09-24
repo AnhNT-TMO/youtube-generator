@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""youtube-publish helper.
+USAGE = """youtube-publish helper.
 
   chapters <album> --audio <video.mp4|master.wav>   dò timestamps từng bài trong đúng file sẽ upload
   check    <album> [--video <video.mp4>]            kiểm tra youtube.md trước khi dán vào YouTube Studio
@@ -13,12 +13,11 @@ import subprocess
 import sys
 from pathlib import Path
 
-SR = 2000          # đủ để khớp waveform, nhẹ cho file 50–60 phút
-PROBE = 10.0       # giây audio của bài dùng để dò vị trí
-MATCH_R = 0.4      # tương quan tối thiểu để coi là "bài đã nghe rõ"
+SR = 2000
+PROBE = 10.0
+MATCH_R = 0.4
 
 
-# ---------------------------------------------------------------- helpers
 def fmt(t):
     t = int(t)
     h, m, s = t // 3600, t % 3600 // 60, t % 60
@@ -51,7 +50,6 @@ def is_single(folder):
 
 
 def album_tracks(album):
-    """[(no, title, audio_path, vocal_start, vocal_end)] theo track_no. Ưu tiên số đo trong assembly.yaml."""
     import yaml
     rows = {}
     for md in sorted((album / "tracks").glob("*.md")):
@@ -68,7 +66,6 @@ def album_tracks(album):
     return [(n, *rows[n]) for n in sorted(rows)]
 
 
-# ---------------------------------------------------------------- chapters
 def load(path):
     import numpy as np
     b = subprocess.run(["ffmpeg", "-v", "error", "-i", str(path), "-vn", "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"],
@@ -98,7 +95,7 @@ def cmd_chapters(a):
         c = fftconvolve(seg, q[::-1], mode="valid")
         p = int(np.argmax(np.abs(c)))
         r_probe = float(np.corrcoef(seg[p:p + len(q)], q)[0, 1])
-        off = (lo + p) / SR - probe_at            # giờ trong video = giờ trong file + off
+        off = (lo + p) / SR - probe_at
         v_in = (vs + off) if vs is not None else None
         v_out = (ve + off) if ve is not None else None
         note = ""
@@ -116,7 +113,7 @@ def cmd_chapters(a):
                     start = s
                     break
                 s += 0.5
-            if start is None:   # bài sau vào dưới outro to của bài trước
+            if start is None:
                 start = max(floor_t, ceil_t - 3)
                 note = "ước lượng (chồng lên outro bài trước)"
         if r_probe < 0.8:
@@ -134,9 +131,7 @@ def cmd_chapters(a):
         print(f"| {n:02d} | {fmt(start)} ({start:.1f}s) | {'' if v_in is None else f'{v_in:.1f}s'} | {r:.2f} | {note} |")
 
 
-# ---------------------------------------------------------------- check
 def code_block(text, heading):
-    """Khối ``` đầu tiên sau dòng heading (## hoặc ###)."""
     i = text.find(heading)
     if i < 0:
         return None
@@ -153,7 +148,6 @@ def section(text, heading):
 
 
 def tags_len(tags):
-    # YouTube đếm cả dấu phẩy và thêm 2 dấu ngoặc kép cho tag có dấu cách
     return sum(len(t) + (2 if " " in t else 0) for t in tags) + max(0, len(tags) - 1)
 
 
@@ -161,9 +155,9 @@ def cmd_check(a):
     album = Path(a.album)
     single = is_single(album)
     sfm = front_matter(album / "single.md") if single else {}
-    channel_md = album.parent.parent / "channel.md"
+    ch_dir = album.parent.parent
     y = (album / "youtube.md").read_text()
-    ch = channel_md.read_text() if channel_md.exists() else ""
+    ch = "\n".join(f.read_text() for f in (ch_dir / "publish.md", ch_dir / "channel.md") if f.exists())
     err, warn = [], []
 
     title = code_block(y, "## Title")
@@ -195,7 +189,7 @@ def cmd_check(a):
         tpl = code_block(ch, "## Description YouTube mặc định")
         if tpl:
             for line in tpl.splitlines():
-                if single and line.strip() == "TRACKLIST":   # single: không có tracklist
+                if single and line.strip() == "TRACKLIST":
                     continue
                 if line.strip() and not line.startswith("[") and line not in desc:
                     err.append(f"description thiếu dòng của mẫu channel: {line[:60]}")
@@ -203,7 +197,6 @@ def cmd_check(a):
         if len(hashtags) > 15:
             err.append(f"{len(hashtags)} hashtag > 15: YouTube bỏ qua toàn bộ")
 
-    # chapters: các dòng bắt đầu bằng timestamp trong description
     ch_lines = [l for l in desc.splitlines() if re.match(r"^\d{1,2}:\d{2}(:\d{2})?\s", l)]
     ts, names = [], []
     if single:
@@ -247,7 +240,6 @@ def cmd_check(a):
     else:
         err.append("description chưa có chapters (dòng dạng `0:00 Title`)")
 
-    # comment đầu của chủ kênh: mọi timestamp phải trỏ đúng chapter trong description
     comment = code_block(y, "## Pinned comment")
     if not comment:
         err.append("thiếu khối comment trong ## Pinned comment")
@@ -295,7 +287,7 @@ def cmd_check(a):
     thumb = album / "thumbnail.png"
     jpg = album / "thumbnail.jpg"
     if not thumb.exists() or (thumb.stat().st_size > 2 * 1024 * 1024 and jpg.exists()):
-        thumb = jpg          # PNG > 2 MB giữ cho video-generator, upload bản JPG
+        thumb = jpg
     if thumb.exists():
         size = thumb.stat().st_size
         if size > 2 * 1024 * 1024:
@@ -318,7 +310,7 @@ def cmd_check(a):
 
 
 def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(description=USAGE, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("chapters")
     c.add_argument("album")

@@ -1,4 +1,3 @@
-"""Tách stem vocals/drums/bass/other bằng Demucs htdemucs. Kết quả cache dạng FLAC mono 44.1k."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -33,7 +32,6 @@ def ensure(path, force=False) -> dict:
     try:
         _, stems = sep.separate_tensor(torch.from_numpy(y), sr)
     except Exception:
-        # Một số op chưa chạy được trên MPS → fallback CPU
         sep.update_parameter(device="cpu")
         _, stems = sep.separate_tensor(torch.from_numpy(y), sr)
     out = {}

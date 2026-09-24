@@ -1,18 +1,4 @@
 #!/usr/bin/env python3
-"""Split a long music video (album / playlist mix) into songs: video length, song count, song lengths, and the
-level of the first 15 s of the video (criteria 1, 2, 5 of SKILL.md).
-
-Outputs into --out:
-  analysis.json   song split + per-song length + level of the first 15 s of the video
-  report.md       the same as a table
-  overview.png    whole-video loudness + song boundaries + YouTube most-replayed (to check the split)
-
-Song boundaries come from (in priority order): --segments (reviewed segments.yaml/json with titles),
---boundaries, YouTube chapters, timestamps in the description, or automatic detection: level dips +
-timbre change, the caption words changing (--captions), dips whose two sides share the same harmonic
-material rejected (an internal break), then the set of joins chosen with a song-length prior.
-Tempo, meter and voice are measured by measure.py (verification-audio's QC units), not here.
-"""
 import argparse
 import json
 import os
@@ -29,7 +15,7 @@ warnings.filterwarnings("ignore")
 
 SR = 22050
 HOP = 512
-FPS = SR / HOP  # feature frames per second (~43)
+FPS = SR / HOP
 
 def log(*a):
     print(*a, file=sys.stderr, flush=True)
@@ -58,16 +44,10 @@ def decode(path):
     return y
 
 
-# ---------------------------------------------------------------- boundaries
-
 TS = r"[\[(]?(\d{1,2}(?::\d{2}){1,2})[\])]?"
 
 
 def boundaries_from_description(desc, duration):
-    """Tracklist lines '00:00 Song Title' / '1. 3:45 Title' (timestamp at the START of the line) or
-    'Song Title - 03:45' (timestamp at the END) -> [(start, title)]. Timestamps inside text (scripture
-    such as 'Isaiah 41:10', 'John 3:16') are ignored. Keeps the longest increasing chain that starts
-    near 0, so one stray timestamp does not throw the whole tracklist away."""
     head = re.compile(r"^\s*(?:[-*•▶►]\s*)?(?:\d{1,2}[.)]\s+)?" + TS + r"(?![\d:])\s*[-–—|:.)]*\s*(.*)$")
     tail = re.compile(r"^\s*(?:\d{1,2}[.)]\s+)?(.+?)\s*[-–—|]\s*" + TS + r"\s*$")
     cand = []
@@ -83,7 +63,6 @@ def boundaries_from_description(desc, duration):
         title = (title or "").strip(" -–—|:.)([]\t") or None
         if t < duration:
             cand.append((t, title))
-    # longest strictly increasing subsequence that starts within 5 s of 0 (DP; a stray timestamp is skipped, not fatal)
     n = len(cand)
     L, prev = [1] * n, [-1] * n
     for i in range(n):
@@ -106,8 +85,6 @@ def boundaries_from_description(desc, duration):
 
 
 def load_segments(path):
-    """segments.yaml / .json: a list of {start: "m:ss" or seconds, title, source, confidence}
-    (or {"segments": [...]}). Written by Claude after reviewing the evidence (SKILL.md step 2)."""
     txt = open(path).read()
     if path.endswith((".yaml", ".yml")):
         import yaml
@@ -128,11 +105,10 @@ def load_segments(path):
 
 
 def block_level_db(y, sec):
-    """Power-mean level in dB over blocks of `sec` seconds."""
     n = int(SR * sec)
     k = len(y) // n
     out = np.empty(k)
-    step = max(1, int(600 / sec))   # 10 min of blocks at a time: no full-length float64 copy
+    step = max(1, int(600 / sec))
     for i in range(0, k, step):
         j = min(k, i + step)
         out[i:j] = (y[i * n: j * n].reshape(j - i, n).astype(np.float32) ** 2).mean(1)
@@ -140,7 +116,6 @@ def block_level_db(y, sec):
 
 
 def chunked_features(y, chunk_s=120):
-    """MFCC + chroma per 1-second block, computed in chunks to bound memory."""
     import librosa
     per = int(FPS)
     out = []
@@ -159,8 +134,6 @@ def chunked_features(y, chunk_s=120):
 
 
 def snap_to_joins(y, starts, window=40.0):
-    """Chapters / description timestamps are often a few seconds (sometimes 30+ s) off.
-    Move each start to the deepest dip within +-window s if that dip is clearly a join."""
     from scipy.ndimage import median_filter
     Q = 0.25
     L = block_level_db(y, Q)
@@ -182,7 +155,6 @@ def snap_to_joins(y, starts, window=40.0):
 
 
 def otsu(vals, floor=1.2):
-    """Threshold splitting scores into two groups with max between-class variance."""
     v = np.sort(np.asarray(vals, dtype=float))
     if len(v) < 3:
         return floor
@@ -196,10 +168,6 @@ def otsu(vals, floor=1.2):
 
 
 def recurrence(C, t, q=30, back=240, gap=3):
-    """How strongly the harmonic material right after t already occurred in the 4 min before it
-    (and vice versa): max mean cosine of 1 s chroma blocks over all lags. An internal break of one
-    song scores high (~0.93 on the vintagegospel mix) because the chorus comes back; a real join
-    scores like any two songs of the album (~0.78-0.87)."""
     t = int(t)
     if t - gap - q < 0 or t + gap + q > C.shape[1]:
         return None
@@ -217,7 +185,6 @@ def recurrence(C, t, q=30, back=240, gap=3):
 
 
 def length_prior(L):
-    """Log-prior for a song of L seconds (AI/Suno album songs: mostly 2.5-8 min)."""
     if L < 150:
         return -((150 - L) / 25.0) ** 2
     if L > 480:
@@ -226,20 +193,12 @@ def length_prior(L):
 
 
 def auto_boundaries(y, min_len, expected=None, cues=None):
-    """Find song joins in a continuous mix.
-
-    Songs in AI/playlist albums are usually joined by a fade-out -> fade-in, which shows up as a short,
-    deep dip below the surrounding level. Candidates = dips; each is scored by dip depth + timbre/harmony
-    change between the 20 s before and after + caption word change, minus a penalty when both sides share
-    the same harmonic (or lyric) material - an internal break where the chorus comes back. The final set
-    maximises score + song-length prior (dynamic programming), optionally with an exact song count.
-    """
     from scipy.ndimage import median_filter, minimum_filter1d
     from scipy.signal import find_peaks
 
     cues = cues or []
     dur = len(y) / SR
-    Q = 0.25  # level resolution (s)
+    Q = 0.25
     L = block_level_db(y, Q)
     base = median_filter(L, size=int(30 / Q) | 1, mode="nearest")
     depth = np.clip(base - minimum_filter1d(L, size=int(1 / Q), mode="nearest"), 0, None)
@@ -260,14 +219,12 @@ def auto_boundaries(y, min_len, expected=None, cues=None):
         lo, hi = max(0, i - int(win / Q)), min(len(L), i + int(win / Q))
         return (lo + int(np.argmin(L[lo:hi]))) * Q
 
-    # candidates: dips at least 20 s apart
     pk, _ = find_peaks(depth, distance=int(20 / Q), height=6)
     cand = sorted(round(c * Q, 2) for c in pk if min_len / 2 < c * Q < dur - min_len / 2)
 
     if cues:
         from captions import lexical_recurrence
     recs = {t: recurrence(chroma, t) for t in cand}
-    # "same material on both sides" is judged against joins we are sure of (deep dips)
     sure = [recs[t] for t in cand if recs[t] is not None and depth[int(t / Q)] >= 40]
     rvals = [v for v in recs.values() if v is not None]
     rbase = float(np.median(sure)) if len(sure) >= 3 else (float(np.percentile(rvals, 25)) if rvals else 0.0)
@@ -277,8 +234,6 @@ def auto_boundaries(y, min_len, expected=None, cues=None):
         j = int(t)
         n_here = float(nov[max(0, j - 5): j + 6].max()) if j < k else 0.0
         d = float(depth[int(t / Q)])
-        # depth counts up to 60 dB: joins through digital silence (~90 dB dips) must win
-        # over nearby in-song dips that merely have a larger timbre change
         s_base = min(d, 60.0) / 30.0 + n_here
         lx = lexical_recurrence(cues, t) if cues else None
         s_lex = 0.5 if lx is not None and lx < 0.12 else 0.0
@@ -305,7 +260,7 @@ def auto_boundaries(y, min_len, expected=None, cues=None):
         for i in range(j - 1, -1, -1):
             Lseg = tj - nodes[i]["at_s"]
             if Lseg > 1500 and j != n - 1:
-                break  # no song is 25 min: keeps long (3-12 h) mixes tractable
+                break
             if Lseg < min_len * (0.5 if j == n - 1 else 1.0):
                 continue
             add = nodes[j]["gain"] + length_prior(Lseg)
@@ -316,7 +271,7 @@ def auto_boundaries(y, min_len, expected=None, cues=None):
             elif best[i] > NEG and best[i] + add > best[j]:
                 best[j] = best[i] + add; back[j] = i
     j = n - 1
-    if K and best[j, K] <= NEG:  # impossible count -> fall back to unconstrained
+    if K and best[j, K] <= NEG:
         return auto_boundaries(y, min_len, None, cues)
     path, c = [], K
     while j > 0:
@@ -359,8 +314,6 @@ def plot_overview(path, rms_db, tracks, heatmap, duration, title):
     fig.savefig(path, dpi=100)
     plt.close(fig)
 
-
-# ---------------------------------------------------------------- main
 
 def main():
     ap = argparse.ArgumentParser()
@@ -419,17 +372,16 @@ def main():
             starts, snaps = snap_to_joins(y, starts)
             if any(abs(x["offset_s"]) >= 3 for x in snaps):
                 log(f"snapped {sum(abs(x['offset_s']) >= 3 for x in snaps)} timestamps that were >=3 s off the real join")
-        # a 10-60 s "Intro"/"Outro" chapter must not become Track 01 (or a song): merge it into its neighbour
         starts = [0.0] + list(starts[1:])
         tl = list(titles) if titles else [None] * len(starts)
         i = 0
         while len(starts) > 1 and i < len(starts):
             end = starts[i + 1] if i + 1 < len(starts) else duration
-            if end - starts[i] < args.min_track:   # < 90 s: an intro/outro sting, not a song
+            if end - starts[i] < args.min_track:
                 merged_short.append({"start_s": starts[i], "len_s": round(end - starts[i], 1), "title": tl[i]})
-                if i + 1 < len(starts):          # join with the next song (it keeps its own title)
+                if i + 1 < len(starts):
                     del starts[i + 1]; tl[i] = tl[i + 1]; del tl[i + 1]
-                else:                             # last one: join with the previous song
+                else:
                     del starts[i]; del tl[i]
                 continue
             i += 1
@@ -448,15 +400,14 @@ def main():
             f["segment_evidence"] = seg_meta[i].get("source")
         tracks.append(f)
 
-    # first 10-15 s of the VIDEO (CLAUDE.md §3): level per 5 s window vs the body of song 1
     L1 = block_level_db(y[: int(ends[0] * SR)], 1.0)
     body = float(np.median(L1))
 
-    def pm(x):  # power mean of 1 s block levels (dB)
+    def pm(x):
         return float(10 * np.log10(np.mean(10 ** (np.asarray(x) / 10)) + 1e-12))
     opening = {
-        "rel_db_0_15s": round(pm(L1[0:15]) - body, 1),                              # 0-15 s level vs the body of song 1
-        "quiet_start_s": next((i for i, v in enumerate(L1) if v > body - 20), None),   # seconds of near-silence at 0:00
+        "rel_db_0_15s": round(pm(L1[0:15]) - body, 1),
+        "quiet_start_s": next((i for i, v in enumerate(L1) if v > body - 20), None),
         "_unit": "dB vs median 1 s block level of song 1, power mean",
     }
 
@@ -474,7 +425,7 @@ def main():
         result["merged_short_chapters"] = merged_short
     if curves is not None:
         result["auto_segmentation"] = curves
-        if info.get("chapters"):  # calibration: compare with the real chapters
+        if info.get("chapters"):
             truth = [c["start_time"] for c in info["chapters"]][1:]
             hits = [min(abs(t - s) for s in starts) for t in truth]
             curves["vs_chapters"] = {"chapters": len(truth) + 1, "detected": len(starts),

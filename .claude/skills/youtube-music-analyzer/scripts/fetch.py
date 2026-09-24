@@ -1,12 +1,4 @@
 #!/usr/bin/env python3
-"""Download everything needed to analyze one YouTube music video into a work dir.
-
-  fetch.py URL WORKDIR [--no-audio] [--comments N]
-
-Writes: video.info.json, thumbnail.jpg, audio.<ext>, captions.<lang>.vtt (if any),
-fetch_summary.json (printed to stdout).
-Uses yt-dlp from the skill venv; YouTube needs a JS runtime, node is used.
-"""
 import argparse
 import glob
 import json
@@ -40,7 +32,6 @@ def main():
     wd = os.path.abspath(args.workdir)
     os.makedirs(wd, exist_ok=True)
 
-    # 1. metadata + thumbnail + comments + captions (no media)
     meta = BASE + ["--skip-download", "--write-info-json", "--write-thumbnail", "--convert-thumbnails", "jpg",
                    "--write-auto-subs", "--write-subs", "--sub-langs", "en.*,en-orig", "--sub-format", "vtt",
                    "-o", os.path.join(wd, "video.%(ext)s")]
@@ -57,11 +48,9 @@ def main():
         os.replace(f, os.path.join(wd, "captions." + f.split("video.", 1)[1]))
     info = json.load(open(info_path))
 
-    # 2. audio (bestaudio, no re-encode; analysis decodes with ffmpeg)
     audio = None
     if not args.no_audio:
         def complete():
-            # a cached audio.* only counts if it is not a partial download and matches this video's length
             out = []
             for f in glob.glob(os.path.join(wd, "audio.*")):
                 if f.endswith(".video_id"):
@@ -81,7 +70,7 @@ def main():
         idf = os.path.join(wd, "audio.video_id")
         if os.path.exists(idf) and open(idf).read().strip() != info.get("id"):
             for f in glob.glob(os.path.join(wd, "audio.*")):
-                os.remove(f)      # audio of another video left in this slug
+                os.remove(f)
         existing = complete()
         if not existing:
             run(BASE + ["-f", "bestaudio/best", "--retries", "20", "-o", os.path.join(wd, "audio.%(ext)s"), args.url])

@@ -1,12 +1,3 @@
-"""Chọn kiểu nối cho từng điểm chuyển bài và tính điểm cắt cụ thể (giây trong file gốc).
-
-Thứ tự bài KHÔNG đổi. Chỉ quyết định: bài trước kết thế nào, bài sau vào từ đâu, chồng hay ngắt bao lâu.
-
-Mỗi kiểu nối là một công thức (RECIPES) nghe khác hẳn nhau ở chỗ người nghe cảm nhận "bài mới":
-kiểu nào để lại bao nhiêu intro của bài sau, bài trước tan dần hay kết trọn, có khoảng lặng hay chồng lên nhau.
-Việc chọn là một bài toán tối ưu nhỏ (DP) trên cả album: mỗi điểm nối có điểm "hợp" riêng,
-cộng thêm luật toàn album (không 2 kiểu giống nhau liền nhau, giới hạn số lần mỗi kiểu, đủ các độ dài intro).
-"""
 from __future__ import annotations
 
 import math
@@ -17,9 +8,6 @@ import numpy as np
 
 from .features import Track
 
-# Tham số mặc định (giây). a_tail = nhạc cụ giữ lại sau câu hát cuối của bài trước trước khi bắt đầu fade;
-# a_fade = độ dài fade của bài trước; b_keep = intro của bài sau giữ lại trước câu hát đầu;
-# overlap = bài sau bắt đầu trước khi bài trước tắt hẳn bao lâu (âm = khoảng lặng giữa hai bài).
 RECIPES = {
     "crossfade": dict(a_tail=8.0, a_fade=8.0, b_keep=10.0, overlap=6.0, b_fade=3.0,
                       label="Crossfade nhạc cụ", sound="outro bài trước tan vào intro bài sau"),
@@ -36,11 +24,10 @@ RECIPES = {
 }
 TYPES = tuple(RECIPES)
 
-# Nhóm độ dài intro bài sau mà người nghe cảm nhận (dùng để ép đa dạng).
 BUCKET = {"cold_open": "ngay", "quick": "ngắn", "natural": "ngắn", "crossfade": "vừa", "breath": "dài", "build": "dài"}
 
-MIN_A_TAIL = 0.6       # không bao giờ fade đè lên câu hát cuối
-VOCAL_CLEAR = 1.5      # bài trước phải tắt hẳn ít nhất 1.5 s trước khi bài sau hát
+MIN_A_TAIL = 0.6
+VOCAL_CLEAR = 1.5
 NATURAL_MAX_OUTRO = 22.0
 
 
@@ -57,7 +44,6 @@ class Cut:
 
 
 def _lines(t: Track) -> np.ndarray:
-    """Vạch ô nhịp. beat_this với 6/8 chậm hay trả downbeat mỗi 2 ô (~3.6 s) → chèn vạch ở giữa."""
     d = t.downbeats
     if len(d) > 2 and np.median(np.diff(d)) > 3.0:
         d = np.sort(np.concatenate([d, (d[:-1] + d[1:]) / 2]))
@@ -80,12 +66,11 @@ def _nearest(times: np.ndarray, t: float, lo: float, hi: float) -> float | None:
 
 
 def b_start(B: Track, keep: float) -> float:
-    """Điểm vào bài sau: vạch ô nhịp gần (vocal_start − keep) nhất (giữ ≥ keep − 0.5 s intro)."""
     target = B.vocal_start - keep
     floor = max(B.lead_silence, 0.0)
     if target <= floor + 0.3:
         return round(floor, 2)
-    if keep < 2.5:  # cold open: vào ngay trước câu hát, theo beat (downbeat có thể cách tới 2 ô nhịp)
+    if keep < 2.5:
         t = _last_before(B.beats, target, max(floor, target - 1.2))
     else:
         t = _nearest(_lines(B), target, max(floor, target - 1.1 * _bar(B)), min(target + 0.5, B.vocal_start - 0.5))
@@ -93,8 +78,7 @@ def b_start(B: Track, keep: float) -> float:
 
 
 def a_end(A: Track, tail: float | None, fade: float) -> tuple[float, float]:
-    """(a_out, a_fade). Fade bắt đầu ở đầu ô nhịp gần (vocal_end + tail), không sớm hơn câu hát cuối."""
-    if tail is None:  # kết trọn: chơi đến hết tiếng
+    if tail is None:
         return round(A.content_end, 2), fade
     lo = A.vocal_end + MIN_A_TAIL
     target = max(lo, A.vocal_end + tail)
@@ -117,7 +101,6 @@ def cut_for(kind: str, A: Track, B: Track, **over) -> Cut:
 
 
 def _phase_align(A: Track, a_out: float, a_fade: float, overlap: float, max_overlap: float) -> float:
-    """Chỉnh overlap để đầu ô nhịp của bài sau rơi đúng một downbeat của bài trước (hai lớp trống không lệch phách)."""
     half = _bar(A) / 2
     lo, hi = max(a_out - a_fade, a_out - max_overlap), a_out - 0.3
     d = _nearest(_lines(A), a_out - overlap, max(lo, a_out - overlap - half), min(hi, a_out - overlap + half))
@@ -129,7 +112,6 @@ def tempo_gap(A: Track, B: Track) -> float:
 
 
 def describe(A: Track, B: Track, c: Cut) -> dict:
-    """Các con số người nghe cảm nhận được ở điểm nối."""
     a_tail = c.a_fade_start() - A.vocal_end
     b_keep = B.vocal_start - c.b_in
     gap = (c.a_out - A.vocal_end) - c.overlap + b_keep
@@ -138,19 +120,16 @@ def describe(A: Track, B: Track, c: Cut) -> dict:
             "b_entry_drums": B.drums_level(c.b_in, c.b_in + 3) > -8}
 
 
-# ---------------------------------------------------------------- chọn kiểu nối
-
 def suitability(kind: str, A: Track, B: Track, idx: int, n: int) -> tuple[float, list[str]]:
-    """Điểm hợp của một kiểu cho một điểm nối + lý do (tiếng Việt). −inf = không làm được."""
     s, why = 0.0, []
     dE = (B.energy or 0) - (A.energy or 0) if A.energy is not None and B.energy is not None else 0
     role = B.arc_role or ""
     outro, intro = A.outro_len, B.intro_len
-    early = idx < 2  # hai điểm nối đầu: người nghe còn đang quyết định ở lại, đừng để chờ lâu
+    early = idx < 2
     c = cut_for(kind, A, B)
     d = describe(A, B, c)
     tg = tempo_gap(A, B)
-    if tg > 0.05:  # hai nhịp khác tempo chồng lên nhau nghe như đá nhau → ưu tiên có ngắt
+    if tg > 0.05:
         pen = {"crossfade": -1.5, "build": -0.5, "quick": -0.3, "natural": 0.5, "cold_open": 0.5, "breath": 0.5}[kind]
         s += pen
         if pen > 0:
@@ -241,7 +220,6 @@ def caps(n_joins: int) -> dict[str, int]:
 
 
 def choose(tracks: list[Track], fixed: dict[int, str] | None = None) -> list[tuple[str, float, list[str]]]:
-    """Chọn kiểu cho mọi điểm nối (DP). `fixed` = {chỉ số điểm nối: kiểu} giữ nguyên (join đã khóa)."""
     fixed = fixed or {}
     joins = list(zip(tracks[:-1], tracks[1:]))
     n = len(joins)
@@ -276,13 +254,7 @@ def choose(tracks: list[Track], fixed: dict[int, str] | None = None) -> list[tup
     return [(k, table[i][k][0], table[i][k][1]) for i, k in enumerate(seq)]
 
 
-# ---------------------------------------------------------------- mở / kết album
-
 def opening(T1: Track, vocal_at: float) -> tuple[float, float]:
-    """(in, fade_in) của bài 1 để giọng hát vào ở giây `vocal_at` của video (CLAUDE.md §3).
-
-    Điểm vào là đầu ô nhịp; nếu chỗ đó nhỏ hơn thân bài quá 8 dB thì lùi sang ô nhịp sau (vocal vào sớm hơn),
-    vì 10–15 giây đầu không được mờ nhạt."""
     t_in = b_start(T1, vocal_at)
     for _ in range(4):
         if T1.level(t_in, t_in + 3) >= -8 or T1.vocal_start - t_in < 5:
@@ -296,7 +268,6 @@ def opening(T1: Track, vocal_at: float) -> tuple[float, float]:
 
 
 def ending(TN: Track) -> tuple[float, float]:
-    """(out, fade_out) của bài cuối: giữ ending tự nhiên, chỉ bỏ khoảng lặng thừa, fade nhẹ để không bị cụt."""
     out = min(TN.duration, TN.content_end + 0.3)
     fade = 3.0 if TN.end_type == "hard_end" else 1.5
     return round(out, 2), fade

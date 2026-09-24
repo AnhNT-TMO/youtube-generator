@@ -1,6 +1,3 @@
-"""Tiện ích chung: đường dẫn, cache theo hash file, load audio, gọi ffmpeg.
-
-Các module trong measure/ là bản gọn của verification-audio/scripts/qc (chỉ phần album-assembly cần)."""
 from __future__ import annotations
 
 import hashlib
@@ -11,14 +8,11 @@ from pathlib import Path
 
 import numpy as np
 
-# <repo>/.claude/skills/album-assembly/scripts/measure/common.py
 SCRIPTS_DIR = Path(__file__).resolve().parent.parent
 SKILL_DIR = SCRIPTS_DIR.parent
 REPO_DIR = SKILL_DIR.parents[2]
 CACHE_DIR = SKILL_DIR / ".cache"
 
-# Tăng khi thay đổi cách tính của một module để cache cũ tự bị bỏ qua.
-# Cùng định dạng + version với verification-audio (bản gốc của các module này) nên cache hai bên đổi cho nhau được.
 MODULE_VERSIONS = {
     "basic": 2,
     "stems": 1,
@@ -29,7 +23,6 @@ MODULE_VERSIONS = {
 
 
 def find_album(name: str) -> Path:
-    """Tìm thư mục album theo tên (vd. '001-when-the-night-is-long') ở bất kỳ đâu trong repo (albums/ hoặc channel/*/albums/)."""
     hits = sorted(p for p in REPO_DIR.glob(f"**/albums/{name}") if ".cache" not in p.parts)
     if not hits:
         raise FileNotFoundError(f"không tìm thấy album {name} trong {REPO_DIR}")
@@ -37,7 +30,6 @@ def find_album(name: str) -> Path:
 
 
 def file_key(path: str | Path) -> str:
-    """Hash nhanh: kích thước + 1MB đầu + 1MB cuối. Đổi tên file không làm mất cache."""
     p = Path(path)
     size = p.stat().st_size
     h = hashlib.sha1(str(size).encode())
@@ -88,7 +80,6 @@ def _json_default(o):
 
 
 def load_audio(path, sr: int | None = 22050, mono: bool = True) -> tuple[np.ndarray, int]:
-    """Decode bằng ffmpeg để hỗ trợ mọi định dạng Suno tải về (wav/mp3/m4a). Trả về float32."""
     cmd = ["ffmpeg", "-v", "error", "-i", str(path), "-f", "f32le"]
     if mono:
         cmd += ["-ac", "1"]

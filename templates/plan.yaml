@@ -15,7 +15,7 @@ album:
   number: 2                  # NNN của thư mục album
   slug: album-slug
   title_working: "Working Title"
-  channel: lamplight_gospel
+  channel: <channel>
   id_prefix: abc             # id bài = <id_prefix>-NN (ổn định, không trùng album khác của kênh)
 
 sources:
@@ -41,20 +41,18 @@ differentiation:
     titles: []               # title/bài của kênh khác: không dùng làm title hay hook
     hooks: []                # câu hook cần tránh (của tham khảo hoặc album cũ)
     branding: []
-    source_avoid: []         # vd. "Psalm 91": nguồn tham khảo đã dùng → slot không được lấy (so với slot.source_ref)
+    source_avoid: []         # vd. "<Book> 91": nguồn tham khảo đã dùng (rules.md sources) → slot không được lấy (so với slot.source_ref)
     lyric_rule: "Tự viết lời; không chép hay bắt chước lời/caption của bài có sẵn."
 
 identity:                    # CLAUDE.md §4: khóa nghệ sĩ cho cả album
-  vocal_persona: warm-baritone-v1
-  band_profile: small-church-band-v1
-  voice:                     # Suno Voice (Pro). null = chưa có (vd. persona mới: tạo Voice từ Anchor rồi điền trước slot 2)
-    name: "Midnight Gospel Soul - Male 01"
-    id: 7ebd54d4-454a-4c15-a2e4-973196ae6170
-  vocal_gender: male         # male | female | null
+  vocal_persona: null       # persona của Voice trong channel/<ch>/rules.md voices[]
+  band_profile: null
+  voice: null                # Suno Voice (Pro) {name, id} trong channel/<ch>/rules.md voices[]; null = chưa có (vd. persona mới: tạo Voice từ Anchor rồi điền trước slot 2)
+  vocal_gender: null         # male | female | null
 
 sound:
-  genre_family: gospel blues
-  subgenre: southern gospel soul
+  genre_family: null         # theo channel/<ch>/channel.md
+  subgenre: null
   tempo:
     bpm: 60                  # = tempo cảm nhận của video tham khảo (rules.md §1b, lệch ≤ 5 %). Prompt ghi đúng số này, không bù trừ
     meter: "6/8"
@@ -66,7 +64,7 @@ sound:
     text: >-
       (English, <= 1000 ký tự sau khi thay {bpm}.) = house_style của channel/<ch>/rules.md: "<genre_lead>, <cụm mood của album>.
       <vocal_line của Voice> <band_block> Slow <meter> groove, {bpm} BPM." (init dựng sẵn). Khác mặc định chỉ khi khai báo experiment.
-    exclude: "female vocals, falsetto, autotune, rap, trap, EDM, modern pop, pop worship, country, blues rock, cinematic orchestra"
+    exclude: ""                 # house Exclude của channel (rules.md house_style.exclude)
 
 target:
   duration_min: [50, 90]     # tổng thời lượng album (phút): 50–90 đều chấp nhận, Suno không ra đúng độ dài (chủ kênh 2026-09-23)
@@ -145,11 +143,11 @@ slots:
     arc_role: anchor         # anchor | opener | build | peak | release | closer | interlude
     emotion: ""
     theme: ""
-    source_ref: null         # vd. đoạn Kinh Thánh bài diễn giải (so với copy_guard.source_avoid)
+    source_ref: null         # nguồn lời bài diễn giải (rules.md sources) (so với copy_guard.source_avoid)
     energy: 5                # 1–10
     valence: 5               # 1–10 (buồn → vui)
     bpm: null                # null = sound.tempo.bpm; đổi thì lệch với bài kề <= bpm_adjacent_max_pct
-    intro_type: vocal_hum    # thứ nghe thấy đầu tiên: vocal | vocal_hum | piano | hammond | acoustic_guitar | slide_guitar | full_band ...
+    intro_type: null         # thứ nghe thấy đầu tiên, từ channel/<ch>/rules.md research.intro_vocab
     intro_length: cold_open  # cold_open (<3 s) | short (<10 s) | medium (<25 s) | long
     target_duration: "5:30"
     hook_phrase: ""          # câu hook thật của chorus (không mặc định = title, trừ slot 1)

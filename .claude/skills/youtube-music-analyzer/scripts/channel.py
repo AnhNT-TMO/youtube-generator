@@ -1,12 +1,4 @@
 #!/usr/bin/env python3
-"""Channel-level research: what does this channel upload, what works, how are titles built.
-
-  channel.py <channel_url | video.info.json> OUT_DIR [--limit 300]
-
-Writes OUT_DIR/channel.json (+ channel.md summary). Uses yt-dlp flat listings only (fast, no media).
-The channel's About page (join date, links, AI disclosure) is not available to yt-dlp; read it with
-agent-browser if needed (SKILL.md) and add it to channel.json["about_manual"].
-"""
 import argparse
 import collections
 import json
@@ -104,7 +96,6 @@ def main():
         by_kind[k] = {"n": len(vs), "views_total": sum(vv), "views_median": statistics.median(vv) if vv else None,
                       "views_max": max(vv) if vv else None}
     top = sorted(long_, key=lambda v: -(v["views"] or 0))[:15]
-    # oldest uploads (the channel's launch strategy): each tab is listed newest-first, so use the videos tab only
     vids_tab = [v for v in long_ if v["tab"] == "videos"] or long_
     oldest = sorted(vids_tab, key=lambda v: -v["order_newest_first"])[:12]
     truncated = any(len(d.get("entries") or []) >= a.limit for d in tabs.values())

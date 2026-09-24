@@ -1,0 +1,6 @@
+channel_id:
+source_language: en
+keep_song_title: true
+keep_verbatim: [<Channel Name>]
+languages: []
+glossary: {}

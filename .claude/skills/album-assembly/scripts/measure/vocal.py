@@ -1,4 +1,3 @@
-"""Vùng có hát theo frame, từ stem vocals (Demucs). Bản gọn của verification-audio qc/vocal.py (không ECAPA/pitch)."""
 from __future__ import annotations
 
 import numpy as np
@@ -9,11 +8,9 @@ HOP = 0.05
 
 
 def vocal_activity(v: np.ndarray, sr: int) -> np.ndarray:
-    """Mặt nạ có-hát theo frame 50ms. Ngưỡng tương đối so với mức hát to của chính stem để bỏ qua tiếng lọt (bleed)."""
     rms, _ = frame_rms_db(v, sr, hop_s=HOP, win_s=0.1)
     loud = np.percentile(rms, 95)
     act = (rms > loud - 22) & (rms > -50)
-    # Làm mượt: lấp lỗ < 0.4s (ngắt hơi), bỏ đoạn < 0.4s (bleed lẻ tẻ)
     act = _close(act, int(0.4 / HOP))
     act = _open(act, int(0.4 / HOP))
     return act

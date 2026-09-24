@@ -1,8 +1,3 @@
-"""Chạy các module đo, trả về dict features (có cache).
-
-`analyze_many` chạy THEO MODULE (một model cho mọi file rồi giải phóng) thay vì theo file,
-để máy 16GB không phải giữ cùng lúc Demucs + Whisper + beat_this trong RAM. Dùng bởi youtube-music-analyzer (measure.py).
-"""
 from __future__ import annotations
 
 import gc
@@ -12,7 +7,6 @@ from concurrent.futures import ProcessPoolExecutor
 
 from . import basic, lyrics, rhythm, stems, tempo, vocal
 
-# Module chỉ dùng CPU (librosa/ffmpeg) → chạy song song nhiều file bằng process pool
 CPU_MODULES = {"basic", "tempo"}
 ORDER = ("basic", "rhythm", "stems", "tempo", "vocal", "lyrics")
 
@@ -69,7 +63,7 @@ def analyze_many(paths, modules=ORDER, force=False, verbose=False) -> dict[str, 
         if m in CPU_MODULES and workers > 1:
             with ProcessPoolExecutor(workers) as ex:
                 list(ex.map(_run, [m] * len(todo), todo, [force] * len(todo)))
-            force_m = False  # đã tính xong, lượt dưới chỉ đọc cache
+            force_m = False
         else:
             force_m = force
         for p in paths:
@@ -85,7 +79,6 @@ def analyze_many(paths, modules=ORDER, force=False, verbose=False) -> dict[str, 
     return out
 
 
-# Module cần file stem FLAC. Khi tất cả đã có cache (vd. features kéo từ server về, không kèm FLAC) thì bỏ qua Demucs.
 STEM_DEPENDENTS = ("tempo", "vocal", "lyrics")
 
 

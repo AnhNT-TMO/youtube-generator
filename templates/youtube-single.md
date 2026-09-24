@@ -13,7 +13,7 @@
 Đề xuất (<n> ký tự):
 
 ```
-<Song Title> <emoji> <Genre phrase> for <Use-case> | Lamplight Gospel
+<công thức title single trong channel/<ch>/publish.md>
 ```
 
 Phương án khác:
@@ -79,9 +79,9 @@ Comment đầu tiên của chủ kênh: đăng bằng tài khoản channel ngay 
 Không ghi timestamp trần (nó nhảy trong video này); muốn trỏ tới đúng bài trong album thì dùng link `?t=<giây>`.
 
 ```
-🕯️ Thank you for spending these minutes with "<Song Title>". 🕯️
+<emoji kênh> Thank you for spending these minutes with "<Song Title>". <emoji kênh>
 
-🙏 <câu hỏi mời bình luận, gắn với hook của bài>
+<emoji> <câu hỏi mời bình luận, gắn với hook của bài>
 
 💬 "<câu hook, đúng lời hát>"
 
@@ -90,7 +90,7 @@ Không ghi timestamp trần (nó nhảy trong video này); muốn trỏ tới đ
 💛 If this song brought you peace:
 👍 Like · 🔔 Subscribe · 🔁 Share it with someone <…>
 
-✝️ <câu kết>
+<emoji> <câu kết>
 ```
 
 ## Kiểm tra trước khi bấm Publish

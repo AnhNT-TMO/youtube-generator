@@ -1,15 +1,4 @@
 #!/usr/bin/env python3
-"""Merge the measurements of one analysed video into research/<slug>/reference.yaml - the machine-readable
-handoff (only what the next steps use, each tagged with where it came from) - and optionally seed an idea
-(channel/<name>/ideas/NNN-slug/idea.yaml from templates/idea.yaml) with everything that can be derived
-without creative judgement. Creative fields are listed in `todo`; validate_idea.py refuses an idea while it is not empty.
-
-  build_reference.py research/<slug> [--idea-dir channel/<name>/ideas/NNN-slug] [--channel-dir channel/<name>] [--seed-only]
-
-Reads (all optional except analysis.json): raw/video.info.json, audio/analysis.json, audio/qc.json, channel.json.
-reference.yaml `criteria` = the 6 criteria of SKILL.md (nothing else is measured); `packaging` / `channel` /
-`copy_guard_seed` = background from metadata. Provenance: measured, model (AudioSet/Whisper), inferred.
-"""
 import argparse
 import datetime
 import glob
@@ -23,7 +12,21 @@ import yaml
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, "..", "..", "..", ".."))
 METER = {"compound": "6/8·12/8", "simple": "4/4"}
-INTRO_VOCAB = ["vocal_hum", "vocal", "choir", "hammond", "piano", "acoustic_guitar", "slide_guitar", "electric_guitar", "full_band", "strings"]
+
+
+def channel_rules(channel_dir):
+    f = os.path.join(channel_dir or "", "rules.md")
+    m = re.search(r"```yaml\n(.*?)```", open(f).read(), re.S) if channel_dir and os.path.isfile(f) else None
+    return (yaml.safe_load(m.group(1)) or {}) if m else {}
+
+
+def intro_vocab(rules):
+    return list((rules.get("research") or {}).get("intro_vocab") or [])
+
+
+def numbered_source(rules):
+    nb = (rules.get("sources") or {}).get("numbered") or {}
+    return (re.compile(nb["pattern"], re.I), nb.get("format") or "{n}") if nb.get("pattern") else (None, None)
 
 
 def load(path, kind="json"):
@@ -39,26 +42,26 @@ def med(vals, n=1):
 
 
 def first_lyric(whisper, captions):
-    """Whisper (vocal stem) and YouTube captions (full mix) usually agree within ~2 s; when they disagree by
-    more than 3 s the caption line (>= 3 words) is the safer, later call."""
     if whisper is None or captions is None:
         return whisper if captions is None else captions
     return round(min(whisper, captions), 1) if abs(whisper - captions) <= 3 else captions
 
 
-GENRE_WORDS = set("""gospel blues soul vintage christian worship music playlist songs song prayer prayers psalm psalms
-praise hymn hymns hour hours nonstop collection best new delta southern deep dark oldies faith spiritual relaxing
-sleep healing peace peaceful r&b rnb the a of for to your you and with in on my me i is it at by from 2024 2025 2026
-video official lyric lyrics music video""".split())
+GENERIC_WORDS = set("""music playlist songs song hour hours nonstop collection best new video official lyric lyrics
+the a of for to your you and with in on my me i is it at by from 2024 2025 2026""".split())
+
+
+def genre_words(rules):
+    return GENERIC_WORDS | {str(x).lower() for x in (rules.get("research") or {}).get("genre_words") or []}
 
 
 def words(s):
     return re.findall(r"[a-z0-9']+", (s or "").lower())
 
 
-def title_phrases(titles):
-    """Their titles as guardable phrases: split on | – — : • ( ) [ ], drop emoji, keep phrases of >= 2 words that
-    are not made only of genre words (so 'Gospel Blues Soul' does not ban our own genre)."""
+def title_phrases(titles, rules=None):
+    rules = rules or {}
+    gw, (num_re, _) = genre_words(rules), numbered_source(rules)
     out = set()
     for t in titles:
         t = re.sub(r"[^\w\s'&|:–—\-(),\[\]•]", " ", t or "")
@@ -67,19 +70,19 @@ def title_phrases(titles):
             w = words(p)
             if re.match(r"^\d+\s*(hours?|hrs?|minutes?|mins?)\b", p.lower()) or p.lower() in ("second song", "part 2"):
                 continue
-            if len(w) >= 2 and not all(x in GENRE_WORDS for x in w):
+            if len(w) >= 2 and not all(x in gw for x in w):
                 out.add(p)
-            elif len(w) == 2 and w[0] in ("psalm", "psalms") and w[1].isdigit():
+            elif len(w) == 2 and num_re and num_re.fullmatch(p):
                 out.add(p)
     return sorted(out)
 
 
-def psalm_numbers(texts):
-    return sorted({int(m.group(1)) for t in texts for m in re.finditer(r"psalms?\s*(\d{1,3})", t or "", re.I)})
+def source_numbers(texts, rules):
+    num_re, _ = numbered_source(rules)
+    return sorted({int(m.group(1)) for t in texts for m in num_re.finditer(t or "")}) if num_re else []
 
 
 def channel_single(title, videos):
-    """The channel's own single (a 1-10 min upload) whose title contains this song's title -> (title, views)."""
     w = [x for x in words(re.sub(r"\([^)]*\)", "", title or "")) if x not in ("the", "a", "of")]
     if len(w) < 2:
         return None
@@ -91,18 +94,14 @@ def channel_single(title, videos):
 
 
 def single_candidates(duration_s, videos, tol=2.0):
-    """Without a song title: the channel's singles with the same length (+-tol s). A hint, not a proof."""
     return [{"title": v.get("title"), "views": v.get("views"), "duration_s": v.get("duration_s")}
             for v in sorted(videos or [], key=lambda v: -(v.get("views") or 0))
             if v.get("kind") == "single" and v.get("duration_s") and abs(v["duration_s"] - duration_s) <= tol][:3]
 
 
 def our_baseline(channel_dir):
-    """Our latest album that has selected tracks (else the latest planned one): prompt tempo (selection.yaml) and the
-    felt tempo verify.py measured on its selected clips (raw_tracks/manifest.json). No audio is read here; a legacy
-    album has no measured value."""
     albums = sorted(glob.glob(os.path.join(channel_dir or "", "albums", "*")))
-    albums.sort(key=lambda a: bool(glob.glob(os.path.join(a, "audio", "tracks", "*.wav"))))   # produced albums last
+    albums.sort(key=lambda a: bool(glob.glob(os.path.join(a, "audio", "tracks", "*.wav"))))
     for alb in reversed(albums):
         sel = load(os.path.join(alb, "selection.yaml"), "yaml") or {}
         man = load(os.path.join(alb, "audio", "raw_tracks", "manifest.json")) or {}
@@ -122,7 +121,6 @@ def our_baseline(channel_dir):
 
 
 def register(gender, f0):
-    """Singer register from the f0 median: male low < 200 Hz < mid < 270 Hz < high; female 280 / 400 Hz."""
     if not f0:
         return None
     lo, hi = (280, 400) if gender == "female" else (200, 270)
@@ -130,7 +128,6 @@ def register(gender, f0):
 
 
 def density(wpm):
-    """Words per sung minute -> sparse (< 50) / medium / dense (> 90)."""
     return None if wpm is None else "sparse" if wpm < 50 else "dense" if wpm > 90 else "medium"
 
 
@@ -164,7 +161,6 @@ def build(run, channel_dir=None):
                      "first_lyric_s": v.get("first_line_s"), "words_per_min_sung": v.get("words_per_min_sung")})
     lens = [t["duration_s"] for t in tracks]
 
-    # ---- the criteria (SKILL.md table); nothing else is measured
     calls = qa.get("voice_calls") or {}
     gender = max(("male", "female"), key=lambda g: calls.get(g, 0)) if calls.get("male") or calls.get("female") else None
     op = A.get("video_opening") or {}
@@ -186,7 +182,7 @@ def build(run, channel_dir=None):
                     "quiet_start_s": op.get("quiet_start_s"),
                     "gate": {"voice_within_10s": voice_s is not None and voice_s <= 10,
                              "lyric_within_15s": fl is not None and fl <= 15,
-                             "level_ok": op.get("rel_db_0_15s") is not None and op["rel_db_0_15s"] >= -4},   # same 4 dB rule as our ideas
+                             "level_ok": op.get("rel_db_0_15s") is not None and op["rel_db_0_15s"] >= -4},
                     "_prov": "voice = first sung run on the Demucs vocal stem (hums included); first lyric = Whisper + captions; "
                              "level = 0-15 s vs the body of song 1"},
         "lyric_density": {"words_per_min_sung": wpm, "label": density(wpm),
@@ -196,7 +192,6 @@ def build(run, channel_dir=None):
         criteria["opening"]["note"] = ("sound on the vocal stem before the first lyric: a hum/ad-lib, or an instrument "
                                        "(slide guitar) leaking into the stem - not certain")
 
-    # ---- background (not criteria): who made it, how it is packaged, what we must not copy
     desc = info.get("description") or ""
     chan = None
     if CH:
@@ -218,10 +213,11 @@ def build(run, channel_dir=None):
            "timestamps_snapped": len(A.get("timestamp_corrections") or [])}
     ch_titles = [v["title"] for v in (CH.get("top") or [])] + [v["title"] for v in (CH.get("oldest") or [])]
     song_titles = [re.sub(r"\s*\([^)]*\)", "", r["title"]).strip() for r in rows if r["title"]]
-    guard = {"titles": title_phrases([title] + song_titles + ch_titles), "song_titles": sorted(set(song_titles)),
+    rules = channel_rules(channel_dir)
+    guard = {"titles": title_phrases([title] + song_titles + ch_titles, rules), "song_titles": sorted(set(song_titles)),
              "branding": sorted({x for x in (info.get("channel"), info.get("uploader_id")) if x}),
-             "psalms_used": psalm_numbers([title] + song_titles + ch_titles),
-             "psalms_in_this_video": psalm_numbers([title] + song_titles)}
+             "sources_used": source_numbers([title] + song_titles + ch_titles, rules),
+             "sources_in_this_video": source_numbers([title] + song_titles, rules)}
 
     return {
         "schema": "reference/v3", "generated_at": datetime.date.today().isoformat(),
@@ -236,15 +232,13 @@ def build(run, channel_dir=None):
 
 
 def fill_from_channel(tpl, channel_dir):
-    """Channel-level defaults for a new idea: persona/band of the latest album, the Suno Voice already in
-    use, the latest album's tracks as QC references and its selection.yaml style/rules as a start."""
     if not channel_dir:
         return
     albums = sorted(glob.glob(os.path.join(channel_dir, "albums", "*")))
     latest = albums[-1] if albums else None
     ident = tpl.setdefault("identity", {})
     if latest:
-        t1 = sorted(f for f in glob.glob(os.path.join(latest, "tracks", "01-*.md")) if "." not in os.path.basename(f)[:-3])   # not lyric variants
+        t1 = sorted(f for f in glob.glob(os.path.join(latest, "tracks", "01-*.md")) if "." not in os.path.basename(f)[:-3])
         if t1:
             m = re.match(r"^---\s*\n(.*?)\n---\s*\n", open(t1[0]).read(), re.S)
             meta = (yaml.safe_load(m.group(1)) if m else None) or {}
@@ -252,7 +246,7 @@ def fill_from_channel(tpl, channel_dir):
             ident["band_profile"] = meta.get("band_profile")
         q = tpl.setdefault("qc", {})
         produced = [a for a in albums if glob.glob(os.path.join(a, "audio", "tracks", "*.wav"))]
-        if produced:   # QC references = the latest album that has selected tracks (a planned album has none yet)
+        if produced:
             q["references"] = f"{os.path.relpath(produced[-1], REPO)}/audio/tracks/*.wav"
         sel = load(os.path.join(latest, "selection.yaml"), "yaml")
         if sel:
@@ -260,7 +254,6 @@ def fill_from_channel(tpl, channel_dir):
                           "negative": (sel.get("style") or {}).get("negative") or {}}
             q["intro_types"] = sel.get("intro_types") or q.get("intro_types")
             q["rules"] = {**(q.get("rules") or {}), **(sel.get("rules") or {})}
-    # the Suno Voice in use: newest generation.yaml defaults.voice, else newest idea identity.suno_voice
     cands = []
     for g in glob.glob(os.path.join(channel_dir, "albums", "*", "generation.yaml")):
         v = ((load(g, "yaml") or {}).get("defaults") or {}).get("voice") or {}
@@ -272,7 +265,6 @@ def fill_from_channel(tpl, channel_dir):
             cands.append((os.path.getmtime(g), v))
     if cands:
         ident["suno_voice"] = {k: v for k, v in sorted(cands, key=lambda c: c[0])[-1][1].items() if k in ("name", "id", "origin_clip")}
-    # AI is declared with YouTube Studio's altered-content toggle; the description gets no AI line (youtube-publish rule).
     tpl.setdefault("packaging", {}).setdefault("ai_disclosure", {"youtube_altered_content_label": True})
 
 
@@ -281,10 +273,11 @@ def fmt_s(x):
 
 
 def seed_idea(ref, run, idea_dir, channel_dir):
-    """Seed an idea from reference.yaml. Everything derivable is filled; creative fields are null / empty
-    and listed in `todo` (validate_idea.py fails while `todo` is not empty)."""
     tpl = yaml.safe_load(open(os.path.join(REPO, "templates", "idea.yaml")))
     todo = []
+    rules = channel_rules(channel_dir)
+    vocab = intro_vocab(rules)
+    _, num_fmt = numbered_source(rules)
 
     def need(path, what):
         todo.append(f"{path}: {what}")
@@ -332,10 +325,12 @@ def seed_idea(ref, run, idea_dir, channel_dir):
         {"claim": "6. Lyric density", "value": f"{lyr.get('words_per_min_sung')} words per sung minute ({lyr.get('label')})", "source": "measured"}]}
     todo.append("hypothesis.risks: 2-4 risks")
     g = ref["copy_guard_seed"]
+    used = g.get("sources_used", g.get("psalms_used")) or []
+    src_avoid = [num_fmt.format(n=x) if num_fmt and isinstance(x, int) else str(x) for x in used]
     tpl["differentiation"] = {"keep": [], "change": [],
                               "copy_guard": {"titles": g["titles"] + [x for x in g.get("song_titles", []) if x not in g["titles"]],
                                              "hooks": [], "branding": g["branding"], "visual": [],
-                                             "scripture_avoid": g["psalms_used"],
+                                             "source_avoid": src_avoid,
                                              "lyric_rule": "Paraphrase in our own words; never transcribe the reference captions or any existing song."}}
     todo += ["differentiation.keep: the spirit we keep", "differentiation.change: what we do differently",
              "differentiation.copy_guard.branding: add their thumbnail/video wordmarks (look at thumbnail.jpg)",
@@ -350,11 +345,11 @@ def seed_idea(ref, run, idea_dir, channel_dir):
                    "felt_bpm_qc_range": [], "reference_measured": tempo.get("felt_bpm_median"),
                    "ours_prompt_bpm": ob.get("prompt_bpm"), "ours_measured": ob.get("measured_felt_bpm_median"), "baseline_album": ob.get("album")}
     tg["loudness"] = {"master_lufs": -14, "true_peak_max_dbtp": -1.0, "song_lufs_spread_max_lu": 2, "first15s_max_below_body_db": 4,
-                      "_unit": "channel rules (CLAUDE.md §3), not measured on the reference"}
+                      "_unit": "channel rules (CLAUDE.md), not measured on the reference"}
     tg["vocal"] = {"presence_max_s": {"track01": 4, "others": 15}, "first_lyric_max_s": {"track01": 10, "others": 20},
                    "first_hook_max_s": {"track01": 75, "others": None},
                    "words_per_min": [], "reference_words_per_min": lyr.get("words_per_min_sung"),
-                   "_defaults": "presence/lyric limits = CLAUDE.md §3 channel rule; words_per_min = per sung minute (album-plan's unit)"}
+                   "_defaults": "presence/lyric limits = CLAUDE.md channel rule; words_per_min = per sung minute (album-plan's unit)"}
     todo.append("target.vocal.words_per_min: [lo, hi]")
     tg["energy_curve"] = []
     todo.append("target.energy_curve: list of ints, one per slot, adjacent delta <= 2, peak around 60-70 % of the album")
@@ -369,15 +364,16 @@ def seed_idea(ref, run, idea_dir, channel_dir):
                            "reference": op})
     todo += ["track01.title", "track01.concept", "track01.hook_phrase", "track01.opening_spec: 0-15 s timeline",
              "track01.gate", "track01.variants: 2-3 generation variants"]
-    tpl["slots"] = [{"n": i + 1, "title": None, "scripture": None, "theme": None, "emotion": None, "energy": None, "valence": None,
+    tpl["slots"] = [{"n": i + 1, "title": None, "source_ref": None, "theme": None, "emotion": None, "energy": None, "valence": None,
                      "arc_role": "anchor" if i == 0 else None, "intro_type": None, "intro_length": None, "target_duration": None,
                      "bpm": None, "hook_phrase": None, "imagery": [], "arrangement_note": None,
                      "source": "new" if i == 0 else None, "library_id": None, "lyrics_file": None} for i in range(10)]
-    todo.append(f"slots: fill every slot (count = target.track_count; intro_type from {INTRO_VOCAB}); slots[0] is authoritative for the title track")
+    vocab_txt = vocab if vocab else "channel rules.md research.intro_vocab (not set)"
+    todo.append(f"slots: fill every slot (count = target.track_count; intro_type from {vocab_txt}); slots[0] is authoritative for the title track")
     tpl["lyrics_rules"] = {**(tpl.get("lyrics_rules") or {}),
                            "reference": {"words_per_min_sung": lyr.get("words_per_min_sung"), "density": lyr.get("label"), "source": lyr.get("source")}}
     tpl["style_prompt"] = {"version": None, "text": None, "chars": None,
-                           "exclude_styles": "female vocals, falsetto, autotune, rap, trap, EDM, modern pop, pop worship, country, blues rock, cinematic orchestra",
+                           "exclude_styles": (rules.get("house_style") or {}).get("exclude"),
                            "reference_voice": f"{voice.get('gender')}, {voice.get('register')}", "reference_tempo": tempo.get("felt_bpm_median")}
     todo.append("style_prompt: version + text (English, <= 1000 chars, BPM = target.tempo.felt_bpm_qc; genre/instruments from our channel)")
     tpl["open_questions"] = [{"id": "q1", "q": "Persona: keep ours or new? (see identity.persona_decision.evidence)", "owner": "user", "blocking": True},
@@ -392,8 +388,6 @@ def seed_idea(ref, run, idea_dir, channel_dir):
     if isinstance(q.get("style"), dict) and q["style"].get("positive"):
         todo.append("qc.style.positive: adapt the first line to this idea's sound")
     tpl["next_steps"] = [
-        # Two lanes that don't wait for each other (any order, any session): music (plan -> Suno -> verify -> join)
-        # and picture (thumbnail -> loop). They meet at the full video, then publish. `album_plan.py board` shows both.
         {"step": "User answers blocking open_questions -> status approved", "consumer": "user", "reads": ["open_questions"]},
         {"step": "[music] Plan the album (tracklist, lyrics, plan.yaml -> generation.yaml / selection.yaml / tracks)", "consumer": "album-plan (init from this idea)",
          "reads": ["slots", "track01", "style_prompt", "identity", "target", "generation", "qc", "lyrics_rules", "differentiation"]},
@@ -412,10 +406,11 @@ def seed_idea(ref, run, idea_dir, channel_dir):
     os.makedirs(idea_dir, exist_ok=True)
     out = os.path.join(idea_dir, "idea.yaml")
     if os.path.exists(out):
-        out = os.path.join(idea_dir, "idea.seed.yaml")  # never overwrite a worked idea
+        out = os.path.join(idea_dir, "idea.seed.yaml")
     with open(out, "w") as f:
         f.write("# Seeded by youtube-music-analyzer/build_reference.py from reference.yaml. Fill every item of `todo`, delete it,\n"
-                "# then run validate_idea.py. Intro vocabulary: " + ", ".join(INTRO_VOCAB) + "\n")
+                "# then run validate_idea.py. Intro vocabulary: "
+                + (", ".join(vocab) if vocab else "channel rules.md research.intro_vocab (not set)") + "\n")
         yaml.safe_dump(tpl, f, sort_keys=False, allow_unicode=True, width=120)
     return out
 

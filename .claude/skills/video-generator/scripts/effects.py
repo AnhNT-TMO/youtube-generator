@@ -1,10 +1,3 @@
-"""Loop-safe effects over a still photo.
-
-Every effect is a pure function of the loop phase p = (t mod loop) / loop,
-and everything that moves does a whole number of cycles per loop. The frame at
-t = loop is therefore identical to the frame at t = 0, so copies of the loop
-play back to back without a visible seam.
-"""
 import math
 import random
 
@@ -15,14 +8,12 @@ import brand
 from config import DIRECTIONS, H, PX_SCALE, W, cycles, wave
 
 
-# ----------------------------------------------------------------- helpers --
 def to_layers(sprite):
     a = np.asarray(sprite, np.float32) / 255.0
     return a[:, :, :3] * 255.0, a[:, :, 3]
 
 
 def blit(frame, rgb, alpha, x, y, opacity=1.0):
-    """Alpha-composite a precomputed sprite onto the uint8 frame in place."""
     h, w = alpha.shape
     sx, sy = max(0, -x), max(0, -y)
     x0, y0 = max(0, x), max(0, y)
@@ -37,7 +28,6 @@ def blit(frame, rgb, alpha, x, y, opacity=1.0):
 
 
 def add_glow(frame, glow, x0, y0):
-    """Add a (h, w, 3) float sprite onto the frame at (x0, y0), clipped."""
     h, w = glow.shape[:2]
     sx, sy = max(0, -x0), max(0, -y0)
     cx0, cy0 = max(0, x0), max(0, y0)
@@ -56,7 +46,6 @@ def corner_xy(corner, w, h, margin):
     return x, y
 
 
-# ------------------------------------------------------------------- light --
 def light_mask(cfg):
     m = Image.new("L", (W, H), 0)
     d = ImageDraw.Draw(m)
@@ -70,8 +59,6 @@ def light_mask(cfg):
 
 
 class Plates:
-    """The photo with the light shaft at `levels` brightness steps, plus the
-    logo burned in, so each frame starts from a plain array copy."""
 
     def __init__(self, base, cfg, loop):
         self.cfg, self.loop = cfg["light"], loop
@@ -85,7 +72,7 @@ class Plates:
                 base, mask)) for k in range(n)]
         else:
             self.plates = [np.asarray(base)]
-        self.plates = [p.copy() for p in self.plates]   # writable
+        self.plates = [p.copy() for p in self.plates]
 
     def burn(self, rgb, alpha, x, y, opacity=1.0):
         for p in self.plates:
@@ -101,8 +88,6 @@ class Plates:
 
 
 def add_scrim(plates, cfg):
-    """The soft shade under the spectrum row is still, so it lives in the loop
-    and extend.py only has to draw the moving bars."""
     from bars import BarStrip
     img, (x, y) = BarStrip(cfg["bars"]).scrim()
     rgb, al = to_layers(img)
@@ -126,7 +111,6 @@ def add_logo(plates, cfg):
     plates.burn(rgb, al, x - pad, y - pad, lc["opacity"])
 
 
-# ----------------------------------------------------------------- lantern --
 class Lantern:
     def __init__(self, cfg, loop):
         self.c, self.loop = cfg, loop
@@ -142,7 +126,6 @@ class Lantern:
         add_glow(frame, self.glow * (self.c["strength"] * max(0.0, f)), *self.xy)
 
 
-# --------------------------------------------------------------- particles --
 def _dot(r, power=2.4):
     s = r * 2 + 1
     y, x = np.mgrid[0:s, 0:s].astype(np.float32)
@@ -151,7 +134,6 @@ def _dot(r, power=2.4):
 
 
 def _flake(r):
-    """Six thin arms with a soft core; tiny radii fall back to a dot."""
     if r < 4:
         return _dot(r)
     S = 4
@@ -164,7 +146,7 @@ def _flake(r):
         a = math.pi / 3 * k + math.pi / 2
         ex, ey = c + math.cos(a) * r * S * 0.95, c + math.sin(a) * r * S * 0.95
         d.line([(c, c), (ex, ey)], fill=255, width=lw)
-        for f in (0.55,):                         # one pair of side branches
+        for f in (0.55,):
             bx, by = c + math.cos(a) * r * S * f, c + math.sin(a) * r * S * f
             for side in (-1, 1):
                 b = a + side * math.pi / 4
@@ -177,12 +159,6 @@ def _flake(r):
 
 
 class Particles:
-    """One layer of drifting points coming from one of 8 sides/corners.
-
-    Each particle moves on a wrap-around field slightly larger than the frame
-    and crosses it a whole number of times per loop, so its position at the
-    end of the loop is exactly where it started.
-    """
 
     def __init__(self, c, loop):
         self.c, self.loop = c, loop
@@ -190,13 +166,12 @@ class Particles:
         self.dx, self.dy = DIRECTIONS[c["from"]]
         rmin, rmax = c["size_px"]
         swmin, swmax = c["sway_px"]
-        self.m = int(rmax + swmax + 8)               # off-screen margin, px
+        self.m = int(rmax + swmax + 8)
         self.FW, self.FH = W + 2 * self.m, H + 2 * self.m
         make = _flake if c["shape"] == "flake" else _dot
         self.spr = {r: make(r) for r in range(max(1, int(rmin)), int(rmax) + 1)}
         self.tint = np.array(c["color"], np.float32) / 255.0
 
-        # one crossing of the screen along the motion, in crossings of the field
         screen, field = (H, self.FH) if self.dy else (W, self.FW)
         k0 = loop / c["cross_seconds"] * screen / field
         straight = self.dx == 0 or self.dy == 0
@@ -213,7 +188,7 @@ class Particles:
                 * (1 - c["parallax"] + 2 * c["parallax"] * depth)
             a["k"][i] = max(1, round(k0 * f))
             a["x0"][i], a["y0"][i] = rnd.random(), rnd.random()
-            if straight:                              # across-the-motion position
+            if straight:
                 lanes = c["lanes"]
                 lo, hi = (lanes if lanes and rnd.random() < c["lane_share"]
                           else (-0.02, 1.02))
@@ -228,7 +203,6 @@ class Particles:
             a["tn"][i] = cycles(rnd.uniform(*c["twinkle_seconds"]), loop)
             a["tph"][i] = rnd.random()
         self.a = a
-        # sway runs perpendicular to the motion
         L = math.hypot(self.dx, self.dy)
         self.px, self.py = -self.dy / L, self.dx / L
 
@@ -265,14 +239,7 @@ class Particles:
             frame[y0c:y1c, x0c:x1c] = np.clip(reg, 0, 255).astype(np.uint8)
 
 
-# --------------------------------------------------------------- subscribe --
 def subscribe_times(c, loop):
-    """Start times of the like/subscribe group inside one loop.
-
-    The gaps (including the one that wraps from the last appearance round to
-    the first) add up to exactly one loop, so the rhythm carries on unbroken
-    across copies of the loop.
-    """
     if c.get("at_seconds"):
         return sorted(t % loop for t in c["at_seconds"])
     ev = c["every_seconds"]
@@ -293,11 +260,9 @@ def subscribe_times(c, loop):
 
 
 class Subscribe:
-    """Slides in at each scheduled time of the loop, plays the clicks, slides
-    out. A window that runs past the loop end wraps to the start."""
 
     def __init__(self, c, loop, move=50):
-        self.c, self.loop, self.move = c, loop, move * PX_SCALE   # cursor travel, px at 1080p
+        self.c, self.loop, self.move = c, loop, move * PX_SCALE
         self.times = subscribe_times(c, loop)
         self.w = brand.SubscribeWidget(c["height_px"], c["label"], c["label_done"])
         self.x, self.y = corner_xy(c["corner"], self.w.W, self.w.h, c["margin_px"])
@@ -331,7 +296,6 @@ class Subscribe:
         blit(frame, rgb, al, self.x, y, o)
 
 
-# ------------------------------------------------------------------- scene --
 class Scene:
     def __init__(self, image_path, cfg, bars=True):
         loop = cfg["loop_seconds"]

@@ -1,4 +1,3 @@
-"""Kiểm tra luật ghép + sinh assembly.md (bản đọc cho người) từ assembly.yaml."""
 from __future__ import annotations
 
 from collections import Counter
@@ -25,7 +24,6 @@ def camelot_dist(a: str | None, b: str | None) -> int | None:
 
 
 def checks(plan: dict) -> list[tuple[str, int | None, str]]:
-    """[(mức: 'fail'|'warn', số điểm nối hoặc None, nội dung)]."""
     out = []
     tr, joins = plan["tracks"], plan["joins"]
     for a, b in zip(joins, joins[1:]):
@@ -50,7 +48,7 @@ def checks(plan: dict) -> list[tuple[str, int | None, str]]:
             out.append(("warn", j["no"], f"key {ma.get('ending_camelot')}→{mb.get('camelot')} lệch {d} bước Camelot"))
     va = tr[0]["measured"]["vocal_start"] - tr[0]["in"]
     if va > 15:
-        out.append(("fail", None, f"giọng hát vào ở giây {va:.0f} của video (> 15s, CLAUDE.md §3)"))
+        out.append(("fail", None, f"giọng hát vào ở giây {va:.0f} của video (> 15s, CLAUDE.md)"))
     elif va > 12:
         out.append(("warn", None, f"giọng hát vào ở giây {va:.0f} của video (lý tưởng ≤ 10–12s)"))
 
@@ -66,8 +64,6 @@ def checks(plan: dict) -> list[tuple[str, int | None, str]]:
         types = {j["no"]: j["type"] for j in joins}
         for r in res["joins"]:
             k = types[r["no"]]
-            # Cuối bài trước thường là điệp khúc to, đầu bài sau là verse: nhỏ đi vài LU là tự nhiên.
-            # To vọt lên thì gắt; nhỏ đi quá nhiều thì điểm vào mất ấn tượng.
             if r["jump_lu"] > 3 or r["jump_lu"] < -7:
                 out.append(("fail", r["no"], f"chênh loudness ở chỗ nối {r['jump_lu']:+.1f} LU"))
             elif r["jump_lu"] > 1.5 or r["jump_lu"] < -5:
@@ -75,7 +71,7 @@ def checks(plan: dict) -> list[tuple[str, int | None, str]]:
             gap = max(0.0, -next(j["overlap"] for j in joins if j["no"] == r["no"]))
             if r["silence"] > gap + 1.5 or (gap == 0 and r["silence"] > 0.3):
                 out.append(("warn", r["no"], f"lặng {r['silence']:.1f}s ở chỗ nối kiểu `{k}` (dự kiến {gap:.1f}s)"))
-            if gap == 0 and r["dip_lu"] > (25 if k == "natural" else 12):  # natural: tiếng ngân cuối tắt dần là chủ ý
+            if gap == 0 and r["dip_lu"] > (25 if k == "natural" else 12):
                 out.append(("warn", r["no"], f"hụt tiếng {r['dip_lu']:.0f} LU ở chỗ nối (không có khoảng lặng dự kiến)"))
     return out
 
@@ -172,11 +168,11 @@ def write_md(plan: dict, album: Path, path: Path) -> None:
 
     L += ["", "## Nghe thử", ""]
     if res and res.get("previews"):
-        L.append("30 giây đầu (nghe như người lạ lướt YouTube, CLAUDE.md §3):" if single else
+        L.append("30 giây đầu (nghe như người lạ lướt YouTube, CLAUDE.md):" if single else
                  "Preview ngắn quanh từng điểm nối (từ ~6s trước câu cuối bài trước đến ~12s sau câu đầu bài sau):")
         L.append("")
         L += [f"- `{p}`" for p in res["previews"]]
-        L += ["", "Với mỗi preview, nghe như người lạ (CLAUDE.md §8): nhảy volume? lặng quá lâu? intro quá dài? "
+        L += ["", "Với mỗi preview, nghe như người lạ (CLAUDE.md): nhảy volume? lặng quá lâu? intro quá dài? "
               "lặp công thức? drums vào đột ngột? room/reverb reset? giọng khác? tempo nhảy? "
               "Và: điểm vào bài mới có rõ, có ấn tượng không?"]
     else:

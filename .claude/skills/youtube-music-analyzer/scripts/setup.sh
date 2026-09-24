@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# One-time setup: private venv with yt-dlp + audio analysis libs. Needs python3, ffmpeg, node.
 set -euo pipefail
 SK="$(cd "$(dirname "$0")/.." && pwd)"
 for bin in python3 ffmpeg node; do command -v $bin >/dev/null || { echo "missing: $bin"; exit 1; }; done

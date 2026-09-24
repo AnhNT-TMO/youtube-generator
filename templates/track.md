@@ -43,7 +43,7 @@ echo_tracks: []   # id các bài có title/hook xuất hiện trong lyrics bài 
 # --- kế hoạch (album-plan: mục tiêu, khác với số đo thật ở trên/dưới) ---
 target_bpm:   # tempo mục tiêu trong plan (felt), cũng là số ghi trong Style prompt; `bpm` là số đo thật sau khi chọn
 target_duration:
-source_ref:   # nguồn bài diễn giải (vd. đoạn Kinh Thánh), nếu có
+source_ref:   # nguồn bài diễn giải (rules.md sources), nếu có
 # --- kỹ thuật ---
 duration:
 lufs_integrated:

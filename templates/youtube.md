@@ -78,9 +78,9 @@ Chi tiết + lý do: `.claude/skills/youtube-publish/references/studio.md`.
 Comment đầu tiên của chủ kênh: đăng bằng tài khoản channel ngay sau khi publish → ⋮ → **Pin** → bấm ❤️.
 
 ```
-🕯️ Welcome to <Channel>. Thank you for spending this night with us. 🕯️
+<emoji kênh> Welcome to <Channel>. <câu cảm ơn theo publish.md> <emoji kênh>
 
-🙏 <câu hỏi mời bình luận>
+<emoji> <câu hỏi mời bình luận>
 
 🎶 TRACKLIST 🎶
 1️⃣ 0:00 <Track 01>
@@ -94,7 +94,7 @@ Comment đầu tiên của chủ kênh: đăng bằng tài khoản channel ngay 
 💛 If this music brought you peace:
 👍 Like · 🔔 Subscribe · 🔁 Share it with someone <…>
 
-✝️ <câu kết>
+<emoji> <câu kết>
 ```
 
 ## Kiểm tra trước khi bấm Publish

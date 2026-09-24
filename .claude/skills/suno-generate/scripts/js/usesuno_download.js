@@ -1,7 +1,3 @@
-// Tải 1 clip qua usesuno.com/tools/downloader/ (KHÔNG bao giờ dùng Download của Suno). Chạy trên tab usesuno
-// ngay sau khi navigate/reload trang (modal "Download complete" của lần trước sẽ chặn nếu không reload).
-// P = {"url": "https://suno.com/song/<id>", "expect": ["3:16", "3:17"]}  (thời lượng m:ss của đúng clip này)
-// Chỉ bấm tải khi trang hiện đúng thời lượng → tránh tải nhầm clip. File về ~/Downloads/<slug> [usesuno.com].wav
 async () => {
   const P = /*PARAMS*/null;
   const sleep = ms => new Promise(r => setTimeout(r, ms));

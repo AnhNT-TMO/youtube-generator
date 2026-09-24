@@ -47,7 +47,7 @@ the track md lyrics.
 | prompt tempo | **= planned tempo** | No correction for how Suno might render. A measured offset is verification-audio's finding during generation (REGENERATE hints) and gets fixed then, in `generation.yaml` with a `changes` entry |
 | duration | `m:ss` in plan/track md; seconds in `generation.yaml` (`overrides.duration`) | Suno custom duration 10–360 s |
 | energy, valence | 1–10, relative within our album | reference energy is relative within *their* video, a shape to learn from, not a number to copy |
-| intro_type | the vocabulary of `qc.intro_types` / `selection.yaml` (vocal, vocal_hum, hammond, piano, acoustic_guitar, slide_guitar, full_band…) | `intro_length`: cold_open (<3 s) · short (<10 s) · medium (<25 s) · long |
+| intro_type | the channel's `rules.md` → `research.intro_vocab` | `intro_length`: cold_open (<3 s) · short (<10 s) · medium (<25 s) · long |
 
 ## 3. idea.yaml → plan.yaml (`init`, mechanical)
 
@@ -58,7 +58,7 @@ the track md lyrics.
 | `concept` | `hypothesis.statement` | usually rewrite into an album journey |
 | `differentiation.keep/change` | same | |
 | `copy_guard.titles/branding/hooks/lyric_rule` | `differentiation.copy_guard.*` | |
-| `copy_guard.source_avoid` | `copy_guard.scripture_avoid` | ints become `"Psalm N"`; matched against `slot.source_ref` (`Psalm 3` ≠ `Psalm 34`; `Psalm 23:4` hits `Psalm 23`) |
+| `copy_guard.source_avoid` | `copy_guard.source_avoid` (older ideas: `scripture_avoid`) | ints become strings with rules.md `sources.numbered.format` (e.g. `"<Book> {n}"`); matched against `slot.source_ref` (`Psalm 3` ≠ `Psalm 34`; `Psalm 23:4` hits `Psalm 23`). `--from-research`: `copy_guard_seed.sources_used` (older: `psalms_used`), same format |
 | `identity.vocal_persona/band_profile` | `identity.*` | an unanswered `persona_decision` stays an open question |
 | `identity.voice` | `identity.suno_voice {name, id}` | |
 | `identity.vocal_gender` | `generation.settings.vocal_gender` | `null`/missing → template default, and init says so |
@@ -75,7 +75,7 @@ the track md lyrics.
 | `generation.*` | `generation.model/max_mode/settings.*`, `budget` | ranges become the middle value rounded to 5 (init lists them); `rounds.track01` = max(`budget.gens.track01`, ceil(`track01.candidates_min`/2)) |
 | `qc.references/style/rules/thresholds/intro_types/extra_checks` | `qc.*` | repo paths become album-relative; `null` rule values dropped; `qc.anchor` is NOT copied (verification fills it on slot-1 accept); `qc.tempo` is not copied (tempo comes from `sound.tempo`, init warns if they differ) |
 | `library_check` | `library_check` | |
-| `slots[]` | `slots[]` (slots[0] is authoritative for the title track) | `scripture`→`source_ref`, `arrangement_note`→`arrangement`, `note`→`notes`, `bpm`/`valence` as is; missing `target_duration` ← `generation.settings.duration.seconds`. Slot 1 also gets `track01.opening_spec`, `gate`, `reference_recipe`, `variants` (list only), `lyric_tags_hint` (→`arrangement`), `concept` + `listener` (→`notes`) |
+| `slots[]` | `slots[]` (slots[0] is authoritative for the title track) | `source_ref` as is (older ideas: `scripture`→`source_ref`), `arrangement_note`→`arrangement`, `note`→`notes`, `bpm`/`valence` as is; missing `target_duration` ← `generation.settings.duration.seconds`. Slot 1 also gets `track01.opening_spec`, `gate`, `reference_recipe`, `variants` (list only), `lyric_tags_hint` (→`arrangement`), `concept` + `listener` (→`notes`) |
 | `open_questions` | `open_questions` | `answer: null` until the user answers; blocking ones stop `approve` |
 | — | `packaging`, `metrics`, `hypothesis.evidence/risks` | stay in `<album>/idea.yaml` (the snapshot) for the publish step |
 
@@ -130,7 +130,7 @@ read by verify; build still writes them (album-assembly and later analysis may u
 
 ### tracks/NN-slug.md
 
-Front matter keys written by build (CLAUDE.md §7.1 + plan keys): `id` (`<id_prefix>-NN`), `title`, `origin_album`,
+Front matter keys written by build (CLAUDE.md + plan keys): `id` (`<id_prefix>-NN`), `title`, `origin_album`,
 `track_no`, `genre_family`, `subgenre`, `time_signature`, `vocal_persona`, `band_profile`, `style_prompt_version`,
 `energy`, `valence`, `emotion`, `theme`, `arc_role`, `intro_type`, `hook_phrase`, `lyric_keywords`, `imagery`,
 `echo_tracks`, `target_bpm`, `target_duration`, `source_ref`. The measured keys (`audio`, `suno_url`, `duration`,
@@ -146,5 +146,5 @@ Front matter keys written by build (CLAUDE.md §7.1 + plan keys): `id` (`<id_pre
 | suno-generate | exact numbers, ≤ 1000-char Style after `{bpm}`, English text, lyrics ≤ 5000 chars in the track md, duration 10–360 s | yes |
 | verification-audio | `rules.duration_range`, slot → track path, lyrics present (lyrics check), ≥ 4 slot-1 clips | yes |
 | album-assembly | `track_no` 1..N in final order, `energy`, `arc_role` | yes (order is fixed at plan time; assembly never reorders) |
-| CLAUDE.md §7.2 | energy step ≤ 2, tempo step ≤ 8 %, no back-to-back `intro_type`, unique hooks (vs titles, other hooks and library titles/hooks), echo tracks not adjacent, title track new, library checked, ≤ 4 library songs in the album (`reuse_total`), ≤ 2 library songs from any one earlier album (`album_overlap`) | yes; conscious exceptions go in `waivers` with a reason |
+| CLAUDE.md | energy step ≤ 2, tempo step ≤ 8 %, no back-to-back `intro_type`, unique hooks (vs titles, other hooks and library titles/hooks), echo tracks not adjacent, title track new, library checked, ≤ 4 library songs in the album (`reuse_total`), ≤ 2 library songs from any one earlier album (`album_overlap`) | yes; conscious exceptions go in `waivers` with a reason |
 | other plans of the channel | a new slot's title must not repeat a new slot of another album that has a `plan.yaml` (plans made ahead, not yet in the catalog); same hook → warning | yes (`cross_plan`) |

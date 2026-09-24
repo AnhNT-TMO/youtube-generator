@@ -52,9 +52,9 @@ SK=.claude/skills/album-plan; P() { $SK/.venv/bin/python $SK/scripts/album_plan.
 - **Our job, not Suno's.** Plan what the album should be, in measurable targets. Never bake in guesses about how
   Suno will behave (e.g. "it renders slower, so write a higher BPM"). The prompt tempo is the planned tempo. What Suno
   actually delivers is measured by verification-audio during generation and corrected there, with data.
-- **Album-first** (CLAUDE.md §4): one continuous performance (50–90 min, Suno's real lengths vary) by one artist. Lock the artist (persona, Voice, band,
+- **Album-first** (CLAUDE.md): one continuous performance (50–90 min, Suno's real lengths vary) by one artist. Lock the artist (persona, Voice, band,
   Style), vary the arrangement, and make every transition deliberate.
-- **Track 01 decides most of it** (CLAUDE.md §3): new song, strongest concept, voice/hook in the first seconds,
+- **Track 01 decides most of it** (CLAUDE.md): new song, strongest concept, voice/hook in the first seconds,
   most rounds.
 - **Inspired, not copied:** keep the reference's spirit (genre, tempo family, opening strategy, lyric source). Change
   the identity (titles, hooks, imagery, arc, look). Everything of theirs goes into `copy_guard`.
@@ -84,7 +84,7 @@ the previous album's `album.md`/`selection.yaml`, and `.claude/skills/suno-gener
 the Suno UI accepts. Field meanings are in `templates/plan.yaml`. Work in this order:
 
 0. **Read the channel:** `channel/<ch>/rules.md` and `P themes --channel <ch>` (concept, tempo, title track, closer,
-   scripture, imagery, opening, thumbnail of every album). Pick a concept, tempo and opening the channel doesn't have yet.
+   lyric sources, imagery, opening, thumbnail of every album). Pick a concept, tempo and opening the channel doesn't have yet.
 1. **Open questions first.** Blocking ones (persona, tempo, count, budget…) go to the user with AskUserQuestion, with
    your recommendation first and the measured reason. Record each answer in `open_questions[].answer` and apply it.
 2. **Tempo and voice follow the reference (~50 % of the album is the reference, rules.md §1b).** Tempo (`sound.tempo`):
@@ -95,7 +95,7 @@ the Suno UI accepts. Field meanings are in `templates/plan.yaml`. Work in this o
    one tempo band:** a slot may differ (`slot.bpm`, e.g. slightly faster peaks) within `bpm_adjacent_max_pct` of its
    neighbours, and the fastest / slowest slot of the album (library songs by their measured BPM) stay within 20 %
    (validate `tempo_band`). **Across albums the band is free and should vary** — the channel wants albums at different
-   tempos, not one channel tempo: don't pull an album toward Album 001 or the other albums' tempo. Library reuse
+   tempos, not one channel tempo: don't pull an album toward the first album's or the other albums' tempo. Library reuse
    follows from this: only songs whose tempo fits this album's band can be reused.
 3. **Style** (`sound.style.text`, ≤ 1000 chars, same text for every song): init builds it from the channel's
    `house_style` (rules.md): `<genre_lead>, <album mood phrase>. <artist_block> Slow <meter> groove, {bpm} BPM.` +
@@ -117,13 +117,13 @@ the Suno UI accepts. Field meanings are in `templates/plan.yaml`. Work in this o
    title and hook** (WebSearch `"<phrase>" song`) and write the result in `title_check`; a hit → change it and add
    the song to `known_titles` in rules.md. Slot 1 also gets `opening_spec`
    (0–15 s of the video), more `rounds`, and optionally `variants`.
-7. **Library** (CLAUDE.md §7.2): look at `library/catalog.md`. A slot can be `source: library` + `library_id` when an
+7. **Library** (CLAUDE.md): look at `library/catalog.md`. A slot can be `source: library` + `library_id` when an
    existing song fits: same persona/band, fits the energy/tempo curve, freshness OK, never slot 1, at most
    `target.reuse_total_max` (4) library songs in the whole album (every other slot is new), and at most
    `target.reuse_per_album_max` (2) songs from any one earlier album — counted over every album the song appeared in
    (catalog `Albums`), so mix reused songs from several albums or write new ones. Record what you
    checked in `library_check.result` and set `done`.
-8. **Generation settings** (`generation`): exact numbers only. Credits (CLAUDE.md §4): `max_mode: false`, slot 1
+8. **Generation settings** (`generation`): exact numbers only. Credits (CLAUDE.md): `max_mode: false`, slot 1
    `generation_overrides: {max_mode: true}`, `rounds: {track01: 2, others: 1}` (Max = 20 credits, normal = 10 per round
    of 2 clips) → planned ≈ 40 + 10 × (new songs − 1). `budget_max_credits` ≤ 250 (a 14–15-song album still fits).
    init sets all of this; anything more needs the owner's OK (validate warns `credits_policy`).
@@ -139,7 +139,7 @@ silently. Then `P build <album>` → track md skeletons with a Brief, `generatio
 ## 3. Write the lyrics
 
 Follow the channel's `rules.md` (§5–§9: Style, tags, opening, line shape, fixes), then `references/lyrics.md`. Length is capped by
-rules.md §2 (words per beat measured on Album 001: max words ≈ words_per_beat_max × bpm/60 × (duration − 55 s));
+rules.md §2 (words per beat measured on the channel's own albums: max words ≈ words_per_beat_max × bpm/60 × (duration − 55 s));
 validate prints the cap per slot — write to it instead of trimming afterwards. Each new slot's lyrics go into `tracks/NN-*.md` → `## Lyrics` ``` block. Start with slot 1.
 Re-run `P validate <album>` after each slot (hook present, echo declared and not adjacent, words/min, length,
 English, copy guard). Build never overwrites lyrics.
@@ -168,8 +168,8 @@ duration within 0:10–6:00 (Suno custom) and the target range, rounds (slot 1 �
 `experiment` declares otherwise (`house_style`); Voice is a channel Voice close to the reference's f0 (`voice`,
 `reference_follow`); tempo ≤ 5 % from the reference, lyric density ±20 % (warning); a `highlight` at slot 4/7 (final); experiment
 complete, title/hook near a real song title or any reference's title in the channel (`known_title`, line = warning),
-avoid words / heteronyms (warning), words per beat over the cap (`density`), `title_check` present (final), scripture
-chapter or title-track/closer image used by another album (`cross_plan` warning).
+avoid words / heteronyms (warning), words per beat over the cap (`density`), `title_check` present (final), lyric source
+(`sources` in rules.md) chapter or title-track/closer image used by another album (`cross_plan` warning).
 Credits: `budget_max_credits` ≤ 250 (error), lean rounds / Max only on slot 1 (warning). Between slots: energy step,
 tempo step, one tempo band for the whole album (fastest/slowest ≤ 1.20), same intro type, 3 equal
 intro lengths in a row, repeated main image, repeated hook / hook = another title, undeclared or adjacent echoes,

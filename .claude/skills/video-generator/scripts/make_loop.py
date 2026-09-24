@@ -1,20 +1,3 @@
-"""Render the seamless video loop for one image: light, particles, logo,
-like/subscribe. Video only; extend.py adds the audio and the spectrum bars.
-
-    python make_loop.py IMAGE.png OUT.mp4 --preset channel/<name>/video.json [--preset DIR/video.json]
-    python make_loop.py IMAGE.png test.mp4 --preset ... --seconds 20     # quick look
-    python make_loop.py IMAGE.png frame.png --preset ... --frame 30      # one still
-    python make_loop.py IMAGE.png OUT.mp4 --preset ... --seam-check      # + OUT_seam.mp4
-    python make_loop.py IMAGE.png OUT.mp4 --preset ... --jobs 8 --encoder nvenc
-    python make_loop.py IMAGE.png OUT.mp4 --preset ... --intro-only      # just OUT_intro.mp4
-
-When the preset's intro is enabled, the logo intro is rendered too, as
-OUT_intro.mp4; extend.py picks it up from there.
-
-With --jobs N the loop is cut at keyframes into N parts rendered by separate
-processes, then joined without re-encoding. Every frame is a pure function of
-its time, so the parts line up exactly.
-"""
 import argparse
 import multiprocessing as mp
 import os
@@ -37,20 +20,16 @@ def encode_cmd(out, fps, enc, encoder, pix_fmt="rgb24"):
 
 
 def render_part(job):
-    """Render [start, start+dur) of the loop to `out`. Runs in a worker process."""
     image, preset, bars, encoder, start, dur, out, report = job
     cfg = config.load(preset)
     fps = cfg["fps"]
     scene = None
-    # Opt-in (VG_GPU=1): the frame loop on the GPU (effects_gpu.py). Measured 2026-09-24, 5-min 4K loop, 16 parts:
-    # CPU frames + NVENC 52 s; GPU frames + NV12 + NVENC 103-110 s: many processes time-slice one GPU, while the
-    # CPU loop is cheap (~245 frames/s per core). NVENC/NVDEC already take the heavy part off the CPU.
     if os.environ.get("VG_GPU", "0") == "1":
         try:
             import effects_gpu
             if effects_gpu.available():
                 scene = effects_gpu.GpuScene(image, cfg, bars=bars)
-        except ImportError:                             # no torch (e.g. the Mac venv): CPU path below
+        except ImportError:
             pass
     if scene is None:
         from effects import Scene
@@ -74,7 +53,6 @@ def render_part(job):
 
 
 def seam_check(loop_path, loop_seconds, around=4.0):
-    """Two copies back to back, cut around the join: watch it for a jump."""
     out = os.path.splitext(loop_path)[0] + "_seam.mp4"
     lst = out + ".txt"
     with open(lst, "w") as fh:
@@ -121,7 +99,7 @@ def main():
     if cfg["intro"]["enabled"] and not a.seconds:
         import intro
         ctx = mp.get_context("spawn")
-        ipool = ctx.Pool(1)                     # renders alongside the loop parts
+        ipool = ctx.Pool(1)
         ijob = ipool.apply_async(intro.render, (a.image, a.preset, bars, a.encoder, intro_out))
     else:
         ipool = None

@@ -1,4 +1,3 @@
-"""Tiện ích chung: đường dẫn, cache theo hash file, load audio, gọi ffmpeg."""
 from __future__ import annotations
 
 import hashlib
@@ -9,13 +8,11 @@ from pathlib import Path
 
 import numpy as np
 
-# <repo>/.claude/skills/verification-audio/scripts/qc/common.py
 SCRIPTS_DIR = Path(__file__).resolve().parent.parent
 SKILL_DIR = SCRIPTS_DIR.parent
 REPO_DIR = SKILL_DIR.parents[2]
 CACHE_DIR = SKILL_DIR / ".cache"
 
-# Tăng khi thay đổi cách tính của một module để cache cũ tự bị bỏ qua.
 MODULE_VERSIONS = {
     "basic": 2,
     "rhythm": 1,
@@ -23,12 +20,11 @@ MODULE_VERSIONS = {
     "vocal": 3,
     "lyrics": 1,
     "tempo": 1,
-    "lyrics_mix": 1,   # verify.py: Whisper trên bản mix (không tách stem)
+    "lyrics_mix": 1,
 }
 
 
 def file_key(path: str | Path) -> str:
-    """Hash nhanh: kích thước + 1MB đầu + 1MB cuối. Đổi tên file không làm mất cache."""
     p = Path(path)
     size = p.stat().st_size
     h = hashlib.sha1(str(size).encode())
@@ -79,7 +75,6 @@ def _json_default(o):
 
 
 def load_audio(path, sr: int | None = 22050, mono: bool = True) -> tuple[np.ndarray, int]:
-    """Decode bằng ffmpeg để hỗ trợ mọi định dạng Suno tải về (wav/mp3/m4a). Trả về float32."""
     cmd = ["ffmpeg", "-v", "error", "-i", str(path), "-f", "f32le"]
     if mono:
         cmd += ["-ac", "1"]

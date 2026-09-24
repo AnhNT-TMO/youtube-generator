@@ -21,7 +21,7 @@ drop or swap tracks here; if the order looks wrong, say so and stop.
 
 Claude cannot hear. Every claim about how a join sounds comes from measurements (vocal stem,
 loudness curve, beat grid); say so, and list the previews worth a listen, but do not wait for anyone to listen
-(CLAUDE.md §4 Cổng duyệt): the album is done when `render`'s checks pass.
+(CLAUDE.md): the album is done when `render`'s checks pass.
 
 ## Commands
 
@@ -32,10 +32,10 @@ modules: loudness, Demucs stems, vocal activity, key, tempo, beat_this grid), it
 
 **Runs on the GPU server.** `plan`, `set`, `render` and `single` push the skill + album/single folders to the server
 (`scripts/remote.sh`, mirror `~/youtube-qc`), run the same command there and pull back `assembly.yaml`, `assembly.md`
-(+ `audio/master/` for `render` / `single`). The feature cache lives on the server. Album 001 (10 tracks): `plan` 2 min
+(+ `audio/master/` for `render` / `single`). The feature cache lives on the server. A 10-track album: `plan` 2 min
 the first time (Demucs + beat_this), `render` ~3.5 min including the ~850 MB master download. `unlock` / `report` run
 here (no measuring). `--local` runs everything on this Mac (Demucs ~1 min per track, heats the Mac): only when the server
-is unreachable **and the user said yes** (CLAUDE.md §4).
+is unreachable **and the user said yes** (CLAUDE.md).
 
 Setup once: local venv (only light imports are used here) `python3.12 -m venv $SK/.venv && $SK/.venv/bin/pip install -r $SK/requirements.txt`;
 server: `cp $SK/remote.env.example $SK/remote.env` and fill `QC_REMOTE` (host, key, mirror dir), then venv
@@ -51,7 +51,7 @@ $PY $A report <album>                     # regenerate assembly.md from the yaml
 $PY $A single <single>                    # one song released on its own: measure + trim intro + −14 LUFS + render (~5 s cached)
 ```
 
-`<album>` is a folder path or just its name (`001-when-the-night-is-long`). `plan --vocal-at S` sets the second
+`<album>` is a folder path or just its name (`<NNN-slug>`). `plan --vocal-at S` sets the second
 of the video where the first vocal of track 01 lands, `--target-lufs` the master loudness. Without them, `plan` reads the
 album's `plan.yaml` (skill album-plan): `target.vocal.vocal_at_s`, else min(8, `first_voice_max_s.track01`), and
 `target.loudness.master_lufs`; no plan → 8 s and −14 LUFS (YouTube's reference). It prints which source it used.
@@ -81,13 +81,13 @@ bucket (ngay / ngắn / vừa / dài). The first two joins avoid long intros bec
 Cut points: A's fade never starts before its last sung line (vocal stem from Demucs); B never loses its first line;
 A is silent at least 1.5 s before B sings; B's start is snapped to a downbeat (to a beat for `cold_open`).
 Track 01 starts on a downbeat so its vocal lands at `--vocal-at` seconds, moved later if that spot is > 8 dB under the
-song body (CLAUDE.md §3). The last track keeps its natural ending, trailing silence trimmed, plus 2 s.
+song body (CLAUDE.md). The last track keeps its natural ending, trailing silence trimmed, plus 2 s.
 
 ## Workflow
 
 1. **Check inputs.** All `tracks/*.md` have `track_no` 1..N and an existing `audio` file. `energy`/`arc_role` missing
    → joins are chosen on audio alone; say so.
-2. **`plan`**, then read `assembly.md`. Review it as a producer, against CLAUDE.md §3, §4 and §8:
+2. **`plan`**, then read `assembly.md`. Review it as a producer, against CLAUDE.md:
    - Opening: vocal at ≤ 10–12 s of the video, first seconds not much quieter than the body.
    - Variety: the sequence of types and intro lengths should not be predictable; no near vocal-to-vocal run.
    - Each entry makes an impression: B does not enter much quieter than the body (`b_entry_level_db`), and a long
@@ -116,7 +116,7 @@ body, same rule as an album's track 01), keeps the natural ending, sets gain to 
 `<single>/audio/master/<NNN-slug>.wav` + `previews/00-opening.mp3`, with `assembly.yaml` (`kind: single`, no joins) and
 `assembly.md` in the single folder. Hand edits: change `in`/`fade_in`/`gain_db` in the yaml, set `opening.locked: true` /
 `gain_locked: true` so the next `single` keeps them, then `render`. Report the vocal entry + opening loudness and ask the user
-to listen to the opening preview (CLAUDE.md §3 matters even more when the whole video is one song). The video is then made by
+to listen to the opening preview (CLAUDE.md matters even more when the whole video is one song). The video is then made by
 video-generator step 2 from that WAV.
 
 ## Notes
@@ -125,5 +125,5 @@ video-generator step 2 from that WAV.
   same content. Replacing a track's audio needs a new `plan` for its two joins (`unlock` them first).
 - Vocal detection is Demucs + an energy threshold: humming or ad-libs in an outro count as vocals (fades start after
   them), and a very quiet first line can be missed. If the preview shows a clipped line, move the cut with `set`.
-- beat_this sometimes returns a downbeat every 2 bars in slow 6/8; snapping is then coarser but still on a bar line.
+- beat_this sometimes returns a downbeat every 2 bars in slow compound meters (6/8); snapping is then coarser but still on a bar line.
 - The old hand-written plan, if any, was saved to `notes/assembly-v0.md` on the first run.

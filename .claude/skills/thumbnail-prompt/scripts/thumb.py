@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""thumbnail-prompt helper (trên Mac chỉ cần python3 + ffmpeg/ffprobe + ssh, không venv).
+USAGE = """thumbnail-prompt helper (trên Mac chỉ cần python3 + ffmpeg/ffprobe + ssh, không venv).
 
   list  <channel dir>                 mọi ảnh của channel (album / idea / single): cảnh, tư thế, bố cục → tránh lặp
   fit   <dir> <ảnh ChatGPT> [--x 0.5 --y 0.5] [--no-upscale]
@@ -22,22 +22,20 @@ import time
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-W, H = 1920, 1080          # khung `--no-upscale`; vùng phủ tính theo tỉ lệ nên đúng cho mọi cỡ (video render 3840×2160)
-UW, UH = 3840, 2160        # thumbnail.png sau upscale (bản gốc 4K cho gói S3 của video-generator)
-# Vùng bị phủ trong video (video-generator config.py, khung 1920×1080), (x0, y0, x1, y1) theo tỉ lệ khung
+W, H = 1920, 1080
+UW, UH = 3840, 2160
 ZONES = {
-    "logo (trên phải)": (0.84, 0.00, 1.00, 0.27),       # logo 232px, margin 40
-    "subscribe (dưới phải)": (0.72, 0.86, 1.00, 1.00),  # nhóm like/subscribe 448×80, margin 44, + con trỏ
-    "sóng nhạc (dưới giữa)": (0.28, 0.84, 0.72, 1.00),  # 72 cột, span 0.41, cao 106px trên baseline 58px
+    "logo (trên phải)": (0.84, 0.00, 1.00, 0.27),
+    "subscribe (dưới phải)": (0.72, 0.86, 1.00, 1.00),
+    "sóng nhạc (dưới giữa)": (0.28, 0.84, 0.72, 1.00),
 }
-BUSY_WARN = 1.3     # độ chi tiết của vùng / cả ảnh; Album 001: logo 0.72, subscribe 0.82, sóng nhạc 1.08
-GW, GH = 192, 108   # lưới đo độ chi tiết
-CW, CH = 64, 36     # lưới tìm điểm sáng
+BUSY_WARN = 1.3
+GW, GH = 192, 108
+CW, CH = 64, 36
 FILE_MAX = 2 * 1024 * 1024
 HOUSE = "## Prompt ảnh mặc định (ChatGPT)"
 
 
-# ---------------------------------------------------------------- helpers
 def dims(path):
     out = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height",
                           "-of", "csv=p=0:s=x", str(path)], capture_output=True, text=True).stdout.strip()
@@ -57,7 +55,7 @@ def front_matter(md):
     if not m:
         return {}
     fm = {}
-    for line in m.group(1).splitlines():   # key: value phẳng, không cần yaml
+    for line in m.group(1).splitlines():
         k, sep, v = line.partition(":")
         if sep and not line.startswith((" ", "#")):
             v = re.sub(r"\s+#.*$", "", v).strip().strip('"')
@@ -81,7 +79,6 @@ def channel_of(d):
     sys.exit(f"không tìm thấy channel.md phía trên {d}")
 
 
-# ---------------------------------------------------------------- list
 def cmd_list(a):
     ch = Path(a.channel)
     rows = []
@@ -102,7 +99,6 @@ def cmd_list(a):
         print("| " + " | ".join(r) + " |")
 
 
-# ---------------------------------------------------------------- remote (GPU server)
 def renv():
     env = {}
     for line in (HERE.parent / "remote.env").read_text().splitlines():
@@ -112,11 +108,8 @@ def renv():
     return env
 
 
-# Lệnh nặng chạy trong systemd user slice `youtube.slice`, dùng chung cho MỌI skill của project: tổng cộng tối đa
-# ~60 % CPU, RAM 60 % (MemoryHigh) / 70 % (MemoryMax, kill trong slice) của server dùng chung (chủ kênh 2026-09-24,
-# CLAUDE.md §4). Slice tự tạo ở lần đầu. Giữ chuỗi này giống hệt khối LIMIT trong các remote.sh.
 LIMIT = ("S=~/.config/systemd/user/youtube.slice; [ -f $S ] || { mkdir -p ${S%/*} && printf \"[Unit]\\nDescription="
-         "youtube project: every skill shares this cap (CLAUDE.md 4)\\n[Slice]\\nCPUQuota=%s%%\\nMemoryHigh=60%%\\n"
+         "youtube project: every skill shares this cap (CLAUDE.md)\\n[Slice]\\nCPUQuota=%s%%\\nMemoryHigh=60%%\\n"
          "MemoryMax=70%%\\n\" $(( $(nproc) * 60 )) > $S && systemctl --user daemon-reload; }; "
          "systemd-run --user --scope --quiet --collect --slice=youtube.slice -- bash -c ")
 
@@ -145,7 +138,6 @@ def reach(env):
 
 
 def upscale(src, dst):
-    """src (đã cắt 16:9, cỡ gốc) → SeedVR2 7B trên server → dst UW×UH. Server chỉ giữ file trong lúc chạy."""
     env = renv()
     R = reach(env)
     if ssh(env, f"test -x {R}/.venv/bin/python && test -f {R}/models/seedvr2/seedvr2_ema_7b_fp16.safetensors").returncode:
@@ -172,9 +164,7 @@ def cmd_upscale_setup(_):
     sys.exit(ssh(env, f"python3 {R}/scripts/upscale_server.py setup").returncode)
 
 
-# ---------------------------------------------------------------- fit
 def youtube_jpg(png, jpg):
-    """JPEG lớn nhất YouTube nhận (≤ 2 MB): hạ chất lượng trước, rồi mới thu nhỏ (cùng cách video-generator package)."""
     w, _ = dims(png)
     for width in (w, 2560, 1920, 1280):
         if width > w:
@@ -203,7 +193,7 @@ def cmd_fit(a):
         bk = drafts / f"prev-{time.strftime('%Y%m%d-%H%M%S')}.png"
         shutil.copy(out, bk)
         print(f"thumbnail.png cũ → {bk}")
-        if src.resolve() == out.resolve():   # fit lại từ chính thumbnail.png: đọc từ bản sao
+        if src.resolve() == out.resolve():
             src = bk
     lost = (1 - cw * chh / (w * h)) * 100
     crop = f"crop={cw}:{chh}:{x}:{y}"
@@ -233,7 +223,6 @@ def cmd_fit(a):
         jpg.unlink()
 
 
-# ---------------------------------------------------------------- check
 def grad_map(path):
     g = pixels(path, GW, GH, "gray")
     m = [[0.0] * GW for _ in range(GH)]
@@ -254,7 +243,6 @@ def zone_mean(m, z):
 
 
 def bright_spots(path, n=3):
-    """Điểm sáng + ấm nhất (đèn dầu, nến, lửa) — ứng viên cho lantern.center trong video.json."""
     raw = pixels(path, CW, CH, "rgb24")
     score = []
     for i in range(CW * CH):
@@ -309,12 +297,13 @@ def cmd_check(a):
         text = pm.read_text()
         fm = front_matter(pm)
         prompt = code_block(text, "## Prompt")
-        house = code_block((channel_of(d) / "channel.md").read_text(), HOUSE)
-        existing = fm.get("status") == "existing"   # ảnh làm trước khi có skill: chỉ ghi mô tả để `list` tránh lặp
+        ch = channel_of(d)
+        vis = next((f for f in (ch / "visual.md", ch / "channel.md") if f.exists() and HOUSE in f.read_text()), None)
+        house = code_block(vis.read_text(), HOUSE) if vis else None
+        existing = fm.get("status") == "existing"
         if not prompt and not existing:
             err.append("thumbnail-prompt.md thiếu khối ``` trong ## Prompt")
         elif prompt:
-            # ảnh đã chọn = bản ghi lịch sử: khối CORE có thể đã đổi sau đó (2026-09-24 tách CORE / biến thể), không bắt lại
             if house and fm.get("status") == "chosen":
                 pass
             elif house:
@@ -322,7 +311,7 @@ def cmd_check(a):
                     if line.strip() and line not in prompt:
                         err.append(f"prompt thiếu dòng của mẫu channel ({HOUSE[3:]}): {line[:60]}…")
             else:
-                warn.append(f"channel.md chưa có mục `{HOUSE}`")
+                warn.append(f"visual.md của channel chưa có mục `{HOUSE}`")
             t = fm.get("title_text")
             if t and f'"{t}"' not in prompt:
                 err.append(f'prompt không có chữ title nguyên văn trong ngoặc kép: "{t}"')
@@ -346,7 +335,7 @@ def cmd_check(a):
 
 
 def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(description=USAGE, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("list")
     s.add_argument("channel")

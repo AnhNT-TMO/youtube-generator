@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-"""Ghép các bài của một album thành một bản liên tục (thứ tự bài giữ nguyên theo track_no).
+from __future__ import annotations
+USAGE = """Ghép các bài của một album thành một bản liên tục (thứ tự bài giữ nguyên theo track_no).
 
     assemble.py plan   <album>            # đo bài, chọn kiểu nối → assembly.yaml + assembly.md
     assemble.py set    <album> <nối> --type breath [--b-keep 14 ...]   # chỉnh một điểm nối (tự khóa)
@@ -15,7 +16,6 @@ và chủ kênh đồng ý). unlock / report luôn chạy local (không đo gì)
 <album> = đường dẫn thư mục album hoặc tên (vd. 001-when-the-night-is-long).
 <single> = thư mục channel/<channel>/singles/NNN-slug (có single.md, field `track` trỏ tới tracks/NN-*.md của album gốc).
 """
-from __future__ import annotations
 
 import argparse
 import shlex
@@ -38,7 +38,7 @@ from assembly.report import MARK, checks, write_md  # noqa: E402
 from measure.common import REPO_DIR, SKILL_DIR, find_album  # noqa: E402
 
 REMOTE_SH = SKILL_DIR / "scripts" / "remote.sh"
-HEAVY = ("plan", "set", "render", "single")   # đo (Demucs, beat_this) hoặc ghép audio → server
+HEAVY = ("plan", "set", "render", "single")
 
 HEADER = """\
 # Kế hoạch ghép album — sinh bởi skill album-assembly (scripts/assemble.py). Thứ tự bài = track_no, không đổi.
@@ -120,9 +120,6 @@ def print_summary(plan: dict) -> None:
 
 
 def plan_targets(album: Path, vocal_at: float | None, lufs: float | None) -> tuple[float, float, str]:
-    """Số mở bài + loudness: tham số dòng lệnh > plan.yaml (skill album-plan) > mặc định 8 s / −14 LUFS.
-    Cùng quy tắc vocal_at với verification-audio (qc/opening.py), để gate Track 01 đo đúng giây mà video sẽ có:
-    target.vocal.vocal_at_s, nếu không có thì min(8, first_voice_max_s của track01)."""
     import yaml
     f = album / "plan.yaml"
     tgt = ((yaml.safe_load(f.read_text()) or {}).get("target") or {}) if f.exists() else {}
@@ -146,7 +143,6 @@ def plan_targets(album: Path, vocal_at: float | None, lufs: float | None) -> tup
 
 
 def run_remote(album: Path, cmd: str, argv: list[str], album_arg: str) -> None:
-    """Chạy đúng lệnh này trên server (thêm --local ở đó), rồi kéo kết quả về."""
     rel = album.relative_to(REPO_DIR)
     i = argv.index(album_arg, argv.index(cmd) + 1)
     args = argv[:i] + [str(rel)] + argv[i + 1:] + ["--local"]
@@ -167,7 +163,7 @@ def run_remote(album: Path, cmd: str, argv: list[str], album_arg: str) -> None:
 
 
 def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(description=USAGE, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("plan")
     p.add_argument("album")

@@ -23,10 +23,10 @@ V="python3 $SK/scripts/video.py"      # run from the repo root; creates $SK/.ven
 ```
 
 Needs python3 and ffmpeg/ffprobe. `loop` / `batch` / `album` render on the GPU server in `$SK/remote.env` by default
-(3840×2160, encoded with NVENC on the server GPU, inside the capped `youtube.slice` (CLAUDE.md §4); a 5-min loop ~1 min,
+(3840×2160, encoded with NVENC on the server GPU, inside the capped `youtube.slice` (CLAUDE.md); a 5-min loop ~1 min,
 a single ~2.5 min, a 50-min album ~10 min including transfers). `--local` renders on this Mac
 (~2 min / ~12 min, heats the Mac and stalls other work): only when the server is unreachable **and the user said yes**
-(CLAUDE.md §4). `frame` (one still) always runs here.
+(CLAUDE.md). `frame` (one still) always runs here.
 
 ## Where the settings live
 
@@ -105,11 +105,12 @@ the video's audio is the master itself, starting at 0:00).
 ## Notes
 
 - The intro delays the first view of the photo by ~3 s; the music starts at 0 regardless.
-  CLAUDE.md §3 treats the first 10–15 s as critical, so point it out when retention is reviewed.
+  CLAUDE.md treats the first 10–15 s as critical, so point it out when retention is reviewed.
   Turn it off with `"intro": {"enabled": false}`.
 - The bars exist only in step 2. Without bars, run `scripts/extend.py ... --no-bars`, which
   joins the copies without re-encoding (see internals.md).
 - Outputs in `<dir>/video/` are gitignored. The loop can be reused with any audio.
 - `--local` renders keep the full video on this Mac (`<dir>/video/<dir name>.mp4`); `package` only packs a
   server-rendered video.
-- The logo PNG of Lamplight Gospel is drawn by code: `$SK/.venv/bin/python $SK/scripts/make_logo.py --channel lamplight_gospel`.
+- A round badge logo can be drawn by code: `$SK/.venv/bin/python $SK/scripts/make_logo.py --title <TOP> --sub <BOTTOM> --out channel/<ch>/image_source/logo.png`
+  (the exact command a channel used goes in its `channel.md` → *Tài nguyên*).

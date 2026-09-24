@@ -1,11 +1,4 @@
 #!/usr/bin/env bash
-# Run the whole pipeline (download + analysis + QC measurements) on the remote GPU box, then copy the
-# results back. Heavy media (audio, per-song WAVs) stays on the server in ~/yt-analyzer/runs/<slug>/raw.
-#   remote.sh URL OUT_DIR [--channel-dir channel/<name>] [--idea channel/<name>/ideas/NNN-slug]
-#             [run.sh args: --no-qc --no-lyrics] [-- analyze_audio args, e.g. --segments research/<slug>/segments.yaml]
-# Config: $SK/remote.env with YTA_REMOTE=user@host, optional YTA_KEY (ssh key).
-# The QC stack (verification-audio's scripts/qc + .venv) lives in ~/youtube-qc on the server; its code is
-# pushed first (verification-audio/scripts/remote.sh push) so the tempo unit matches verify.py.
 set -euo pipefail
 SK="$(cd "$(dirname "$0")/.." && pwd)"
 REPO="$(cd "$SK/../../.." && pwd)"
@@ -13,18 +6,15 @@ REPO="$(cd "$SK/../../.." && pwd)"
 : "${YTA_REMOTE:?set YTA_REMOTE=user@host in $SK/remote.env}"
 KEY="${YTA_KEY:-$HOME/.ssh/id_rsa}"; QCDIR="${QC_DIR:-youtube-qc}"
 RSH="ssh -i $KEY -o BatchMode=yes -o ConnectTimeout=10"
-# Lệnh nặng chạy trong systemd user slice `youtube.slice`, dùng chung cho MỌI skill của project: tổng cộng tối đa
-# ~60 % CPU, RAM 60 % (MemoryHigh, bắt đầu thu hồi) / 70 % (MemoryMax, kill trong slice) của server dùng chung
-# (chủ kênh 2026-09-24, CLAUDE.md §4). Slice tự tạo ở lần đầu. Giữ khối này giống hệt trong mọi runner.
-LIMIT='S=~/.config/systemd/user/youtube.slice; [ -f $S ] || { mkdir -p ${S%/*} && printf "[Unit]\nDescription=youtube project: every skill shares this cap (CLAUDE.md 4)\n[Slice]\nCPUQuota=%s%%\nMemoryHigh=60%%\nMemoryMax=70%%\n" $(( $(nproc) * 60 )) > $S && systemctl --user daemon-reload; }; systemd-run --user --scope --quiet --collect --slice=youtube.slice -- bash -c'
+LIMIT='S=~/.config/systemd/user/youtube.slice; [ -f $S ] || { mkdir -p ${S%/*} && printf "[Unit]\nDescription=youtube project: every skill shares this cap (CLAUDE.md)\n[Slice]\nCPUQuota=%s%%\nMemoryHigh=60%%\nMemoryMax=70%%\n" $(( $(nproc) * 60 )) > $S && systemctl --user daemon-reload; }; systemd-run --user --scope --quiet --collect --slice=youtube.slice -- bash -c'
 URL="$1"; OUT="$2"; shift 2
 SLUG="$(basename "$OUT")"
 CHDIR=""; IDEA=""; ARGS=""; SEGS=""
 while [ $# -gt 0 ]; do
   case "$1" in
-    --channel-dir) CHDIR="$2"; shift 2 ;;   # used locally by build_reference (seed + our baseline)
+    --channel-dir) CHDIR="$2"; shift 2 ;;
     --idea) IDEA="$2"; shift 2 ;;
-    --segments) SEGS="$2"; ARGS+=" --segments runs/$SLUG/segments.${2##*.}"; shift 2 ;;   # local file -> uploaded below
+    --segments) SEGS="$2"; ARGS+=" --segments runs/$SLUG/segments.${2##*.}"; shift 2 ;;
     *) ARGS+=" $(printf %q "$1")"; shift ;;
   esac
 done
@@ -42,16 +32,13 @@ $RSH "$YTA_REMOTE" "$LIMIT $(printf %q "cd ~/yt-analyzer && skill/.venv/bin/pip 
   QP=\$QCS/.venv/bin/python; QT=\$QCS/scripts; [ -x \$QP ] || { echo 'no QC venv on the server: run .claude/skills/verification-audio/scripts/remote.sh setup'; exit 1; }; \
   YTA_ON_SERVER=1 QC_PY=\$QP QC_TOOLS=\$QT bash skill/scripts/run.sh $(printf %q "$URL") runs/$SLUG$ARGS")"
 mkdir -p "$OUT"
-# outputs a stage may not have produced this time must not survive from an earlier run
 rm -f "$OUT/audio/qc.json" "$OUT/reference.yaml"
-# results only (allowlist of small text/image outputs; never media)
 rsync -a -e "$RSH" --prune-empty-dirs \
   --exclude 'raw/songs/' --exclude '*.vtt' \
   --include '*/' --include '*.md' --include '*.json' --include '*.yaml' --include '*.png' --include '*.jpg' --include '*.log' \
   --exclude '*' \
   "$YTA_REMOTE:yt-analyzer/runs/$SLUG/" "$OUT/"
 echo "== results copied to $OUT (media kept on $YTA_REMOTE:~/yt-analyzer/runs/$SLUG/raw)"
-# reference.yaml is rebuilt here: our baseline (latest album) and the idea seed read the local channel dir
 CH=(); [ -n "$CHDIR" ] && CH=(--channel-dir "$CHDIR")
 ID=(); [ -n "$IDEA" ] && ID=(--idea-dir "$IDEA")
 "$SK/.venv/bin/python" "$SK/scripts/build_reference.py" "$OUT" ${CH[@]+"${CH[@]}"} ${ID[@]+"${ID[@]}"}

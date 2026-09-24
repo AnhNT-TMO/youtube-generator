@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-# Mở Chrome riêng cho Suno (profile tách biệt, bật remote debugging) để MCP "suno-chrome" gắn vào.
-# Chrome này do người dùng/khởi động thường mở (không có cờ automation) nên đăng nhập Google không bị chặn.
-# Chạy lại nhiều lần cũng được: nếu Chrome đã chạy thì chỉ mở thêm tab.
 set -euo pipefail
 
 PORT="${SUNO_CHROME_PORT:-9222}"

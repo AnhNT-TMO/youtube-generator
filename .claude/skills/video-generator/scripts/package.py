@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Mac side of `video.py package` (runs in the skill venv: Pillow + boto3).
+USAGE = """Mac side of `video.py package` (runs in the skill venv: Pillow + boto3).
 
     package.py stage PKGDIR --youtube-md F --thumbnail IMG --jpg OUT.jpg --channel CH [--source-audio NAME]
         PKGDIR/youtube.md, upload/{title,description,tags,pinned_comment}.txt, thumbnail.jpg (YouTube: <= 2 MB),
@@ -20,12 +20,11 @@ import shutil
 import sys
 import time
 
-PART = 256 * 1024 ** 2            # multipart part size (S3: 5 MiB..5 GiB, <= 10000 parts -> zips up to 2.5 TB)
-YT_THUMB_MAX = 2 * 1024 * 1024    # YouTube thumbnail upload limit
+PART = 256 * 1024 ** 2
+YT_THUMB_MAX = 2 * 1024 * 1024
 
 
 def code_block(text, heading):
-    """First ``` block after the heading line (same rule as youtube-publish/scripts/publish.py)."""
     i = text.find(heading)
     if i < 0:
         return None
@@ -34,7 +33,6 @@ def code_block(text, heading):
 
 
 def youtube_jpg(src, out):
-    """Largest JPEG of src that YouTube accepts (<= 2 MB): lower quality first, then size."""
     from PIL import Image
     im = Image.open(src).convert("RGB")
     w, h = im.size
@@ -66,7 +64,7 @@ def cmd_stage(a):
     w, h = Image.open(a.thumbnail).size
     if (os.path.exists(a.jpg) and os.path.getmtime(a.jpg) >= os.path.getmtime(a.thumbnail)
             and os.path.getsize(a.jpg) <= YT_THUMB_MAX):
-        (jw, jh), q = Image.open(a.jpg).size, None          # an up-to-date JPG already exists: keep it
+        (jw, jh), q = Image.open(a.jpg).size, None
     else:
         (jw, jh), q = youtube_jpg(a.thumbnail, a.jpg)
     shutil.copy2(a.jpg, os.path.join(a.pkgdir, "thumbnail.jpg"))
@@ -130,7 +128,7 @@ def cmd_head(a):
 
 
 def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(description=USAGE, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     st = sub.add_parser("stage")
     st.add_argument("pkgdir")

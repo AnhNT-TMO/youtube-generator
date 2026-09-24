@@ -28,7 +28,7 @@ selector breaks.
 2. **Never press Create unless `check-form` printed `FORM KHỚP SPEC`** for this exact gen id, read after your last edit.
    A wrong option costs credits and produces clips that look valid in the index.
 3. Spend credits only when `generation.yaml` has `status: approved` and the user OKed this batch (standing OK for every
-   planned round of an approved album, owner 2026-09-24: CLAUDE.md §4 Cổng duyệt)
+   planned round of an approved album, owner 2026-09-24: CLAUDE.md)
    (number of rounds × credits). Every extra round (REGENERATE, or more at the user's request) needs its own OK — the one verification-audio
    asks ("tạo lại 1 lượt (N credits)?") counts; don't ask the same thing twice.
 4. One generation at a time **up to `complete`**: poll + `complete` (it checks what Suno stored) before the next `next`
@@ -39,7 +39,7 @@ selector breaks.
    made; a double click is a double charge.
 6. Keep the Suno tab in the foreground while working (background tabs ignore clicks).
 7. Never edit `manifest.json` by hand and never delete drafts. Rejected clips are data for tuning verify thresholds.
-8. Text going into Suno is English (CLAUDE.md §5). The plan is the only source: don't "improve" the Style or lyrics
+8. Text going into Suno is English (CLAUDE.md). The plan is the only source: don't "improve" the Style or lyrics
    while typing. If the plan looks wrong, stop and say so.
 
 ## 0. Input: `<album>/generation.yaml` (built by album-plan)
@@ -178,7 +178,7 @@ Running `next` again on a `prepared` round reuses the same gen id (nothing was s
 - `generations[]`: every round, including ones whose clips aren't downloaded yet: spec path, status, clip ids,
   credits before/after, form/request/feed check results.
 - `quota_log[]`: account readings; an `alert` means the official download count went up.
-- Older entries (Album 001 spike) have no `generation` field; leave them as they are.
+- Older entries (the first spike album) have no `generation` field; leave them as they are.
 
 ## Files
 

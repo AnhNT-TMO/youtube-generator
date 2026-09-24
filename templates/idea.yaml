@@ -32,7 +32,7 @@ differentiation:
     branding: []
     visual: []
     hooks: []                  # their hook lines we must not reuse (short phrases, never whole lyrics)
-    scripture_avoid: []
+    source_avoid: []           # numbered source refs of theirs (rules.md sources.numbered.format) + free refs
     lyric_rule:
 
 target:
@@ -59,7 +59,7 @@ style_prompt: {version: , text: , chars: , exclude_styles: , reference_voice: , 
 track01:
   slot: 1
   title:
-  scripture:
+  source_ref:
   concept:
   hook_phrase:
   opening_spec: []           # [{t: "0-1 s", event: ...}] timeline of the first 15 s of the VIDEO
@@ -75,14 +75,14 @@ track01:
   hook_plan: {}              # optional {line, sung_times, point_of_view}
 
 # slots[0] is authoritative for the title track (album-plan reads slots); track01 adds the brief.
-# intro_type vocabulary: vocal_hum, vocal, choir, hammond, piano, acoustic_guitar, slide_guitar, electric_guitar, full_band, strings
+# intro_type vocabulary: channel rules.md research.intro_vocab
 # intro_length: cold_open (<3 s) | short (<10 s) | medium (<25 s) | long
 experiment: null             # đặc điểm của video tham khảo đáng thử khác house sound (giọng cao, tempo lạ, energy đột biến…):
                              # {axes: [...], what, why, measure}; album-plan chép sang plan.yaml (channel/<ch>/rules.md §1)
-slots: []                    # [{n, title, scripture, theme, emotion, energy (int), valence (int), arc_role, intro_type, intro_length, target_duration "m:ss" (<= 6:00), bpm, hook_phrase, imagery: [], arrangement_note, source: new|library, library_id, lyrics_file}]
+slots: []                    # [{n, title, source_ref, theme, emotion, energy (int), valence (int), arc_role, intro_type, intro_length, target_duration "m:ss" (<= 6:00), bpm, hook_phrase, imagery: [], arrangement_note, source: new|library, library_id, lyrics_file}]
 library_check: {done: , result: , fallback: }
 
-lyrics_rules: {language: English, structure_default: , forbid: , lines_per_section: {}, words_per_min_target: [], max_chars: 3000, point_of_view: , hook_rule: , scripture_rule: , outro: , banned: , file_format: }
+lyrics_rules: {language: English, structure_default: , forbid: , lines_per_section: {}, words_per_min_target: [], max_chars: 3000, point_of_view: , hook_rule: , source_rule: , outro: , banned: , file_format: }
 
 generation:
   model: v6
@@ -98,7 +98,7 @@ packaging:
   video_title_candidates: []
   title_rules:
   thumbnail_brief: {subject: , hero_object: , setting: , palette: , text: , layout: , avoid: [], file: thumbnail.png}
-  description_outline: []     # points for ABOUT THIS VIDEO only (channel template is fixed: no scripture/use-case/AI lines)
+  description_outline: []     # points for ABOUT THIS VIDEO only (channel template in publish.md is fixed)
   chapters: measured_on_video  # youtube-publish measures them on the uploaded file
   tags: []
   hashtags: []

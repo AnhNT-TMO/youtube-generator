@@ -5,9 +5,9 @@ từng tham số nằm trong `DEFAULTS` ở [scripts/config.py](../scripts/confi
 
 - **Mặc định của tool:** bố cục chung (logo trên phải, subscribe dưới phải, lịch hiện,
   sóng nhạc, intro, loop 5 phút). Muốn đổi cho mọi channel thì sửa ở đây.
-- **`channel/<tên>/video.json`:** phong cách channel, ví dụ [lamplight_gospel](../../../../channel/lamplight_gospel/video.json).
+- **`channel/<tên>/video.json`:** phong cách channel, ví dụ `channel/<tên>/video.json` của một kênh đang chạy.
   [`example_snow.json`](example_snow.json) là ví dụ phong cách khác (ánh sáng lạnh, tuyết trắng rơi chéo, sóng nhạc trắng).
-- **`<idea/album>/video.json`:** phần phụ thuộc ảnh, ví dụ [album 001](../../../../channel/lamplight_gospel/albums/001-when-the-night-is-long/video.json).
+- **`<idea/album>/video.json`:** phần phụ thuộc ảnh, ví dụ `channel/<tên>/albums/<NNN-slug>/video.json`.
 
 `particles` gộp theo vị trí: `"particles": [{"lanes": [0.3, 1.02]}]` chỉ chỉnh lớp
 hạt đầu tiên của channel. Thêm phần tử để thêm lớp; `"enabled": false` để bỏ một lớp.
@@ -61,7 +61,7 @@ Logo được nung sẵn vào ảnh nền nên không tốn thời gian render.
 hoặc `[30, 45]` (mặc định) để mỗi khoảng là một số ngẫu nhiên trong 30–45 giây, cố
 định theo `seed` để người xem không đoán được nhịp. Tổng các khoảng vừa khít 5 phút
 nên lịch vẫn liền mạch khi loop được nhân bản. `first_at` (mặc định 20) là lần hiện
-đầu tiên, để không che 10–15 giây mở đầu (CLAUDE.md mục 3). Muốn tự đặt mốc thì
+đầu tiên, để không che 10–15 giây mở đầu (CLAUDE.md). Muốn tự đặt mốc thì
 dùng `at_seconds`, vd. `[20, 170]`. `make_loop.py` in ra lịch thực tế khi chạy.
 Còn có `show_seconds` (mỗi lần hiện bao lâu, mặc định 11), `height_px`, `corner`,
 `margin_px`, `label`, `label_done`.
@@ -87,7 +87,7 @@ Tắt: `"intro": {"enabled": false}` hoặc `extend.py --no-intro`.
 | `halo_color`, `halo_strength` | Quầng sáng sau logo |
 | `shine_at` | Lúc vệt sáng bắt đầu quét qua logo (giây) |
 
-⚠️ Theo CLAUDE.md mục 3, 10–15 giây đầu quyết định người xem có ở lại không. Intro
+⚠️ Theo CLAUDE.md, 10–15 giây đầu quyết định người xem có ở lại không. Intro
 dời khoảnh khắc thấy ảnh thật đi khoảng 3 giây (nhạc thì không bị dời). Nên so
 retention tại 0:15 / 0:30 giữa video có và không có intro.
 

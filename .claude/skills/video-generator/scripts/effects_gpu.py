@@ -1,16 +1,3 @@
-"""GPU (torch CUDA) frame loop for effects.Scene: same layers, same maths, same pixels.
-
-effects.Scene still builds everything once (light plates with the logo and the bar scrim burned in, lantern glow,
-particle parameters, subscribe widget); only the per-frame work runs on the GPU: pick the plate, add the lantern,
-splat every particle in one index_add_ per sprite size (instead of a Python loop over hundreds of particles),
-alpha-blend the subscribe group. At 4K the CPU loop was the slowest step of a render (2026-09-24).
-
-Opt-in: make_loop.py uses it only with VG_GPU=1 (needs torch cu128 in the server venv). Pixel-identical to effects.py
-(compare() below: 0 differing pixels). One process: 256 frames/s vs 245 on the CPU, and NV12 on the GPU makes an encode
-+57 % faster; but 16 render processes time-slice one GPU, so a 5-min 4K loop took 103-110 s against 52 s for CPU frames
-+ NVENC (2026-09-24). Worth revisiting only with a single-process renderer (one CUDA context, streams).
-`python effects_gpu.py IMAGE --preset ...` compares both on sample frames.
-"""
 import numpy as np
 import torch
 
@@ -31,7 +18,7 @@ class GpuScene:
         self.dev = torch.device(device)
         pl = self.cpu.plates
         self.plate_cfg, self.loop = pl.cfg, pl.loop
-        self.plates = torch.from_numpy(np.stack(pl.plates)).to(self.dev)          # (n, H, W, 3) uint8
+        self.plates = torch.from_numpy(np.stack(pl.plates)).to(self.dev)
         self.lantern, self.particles, self.subscribe = None, [], None
         for layer in self.cpu.layers:
             if isinstance(layer, effects.Lantern):
@@ -43,7 +30,6 @@ class GpuScene:
                 self.subscribe = (layer, torch.from_numpy(sh_rgb).to(self.dev), torch.from_numpy(sh_a).to(self.dev))
 
     def _sprites(self, layer):
-        """Per sprite radius: pixel offsets and sprite values, flattened."""
         out = {}
         for r, spr in layer.spr.items():
             yy, xx = np.mgrid[0:2 * r + 1, 0:2 * r + 1]
@@ -77,7 +63,7 @@ class GpuScene:
             x = torch.from_numpy(x0s[sel]).to(self.dev)[:, None] + dx[None, :]
             v = torch.from_numpy(v_all[sel]).to(self.dev)[:, None] * spr[None, :]
             ok = (x >= 0) & (x < W) & (y >= 0) & (y < H)
-            add = torch.trunc(v[ok][:, None] * tint[None, :])                    # CPU: .astype(int16) per particle
+            add = torch.trunc(v[ok][:, None] * tint[None, :])
             flat.index_add_(0, (y[ok] * W + x[ok]), add)
 
     @staticmethod
@@ -124,13 +110,10 @@ class GpuScene:
     def frame(self, t):
         return self.frame_tensor(t).cpu().numpy()
 
-    # BT.601 limited range, the matrix swscale uses for rgb24 -> yuv420p (43 dB from the CPU path after NVENC)
     _M = torch.tensor([[65.481, 128.553, 24.966], [-37.797, -74.203, 112.0], [112.0, -93.786, -18.214]]) / 255
 
     @torch.inference_mode()
     def frame_nv12(self, t):
-        """The frame as NV12 bytes (Y plane + interleaved UV at half size), converted on the GPU: half the bytes of
-        rgb24 through the pipe and no swscale in ffmpeg (+57 % frames/s per encode, 2026-09-24)."""
         m = self._M.to(self.dev)
         x = self.frame_tensor(t).float() @ m.T
         y = (x[..., 0] + 16).round_().clamp_(0, 255).to(torch.uint8)

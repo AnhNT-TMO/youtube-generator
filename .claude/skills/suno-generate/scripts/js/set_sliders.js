@@ -1,5 +1,3 @@
-// Đặt slider bằng phím mũi tên (slider của Suno chỉ nhận phím, ~1 bước/lần), rồi đọc lại aria-valuenow.
-// P = {"Weirdness": 25, "Style Influence": 50, ...}. Không đạt → trả về giá trị thật để xử lý bằng press_key.
 async () => {
   const P = /*PARAMS*/null;
   const sleep = ms => new Promise(r => setTimeout(r, ms));

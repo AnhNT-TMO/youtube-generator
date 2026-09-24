@@ -1,12 +1,3 @@
-"""Việc ở cấp channel, để các bước chạy độc lập và không theo thứ tự (analyze 20 video → plan → thumbnail/loop cho
-nhiều idea → lúc khác mới Suno/verify/ghép/upload):
-
-  board    bảng trạng thái mọi idea / album / single của channel + bước tiếp theo của từng cái (chỉ đọc)
-  sync     album làm từ idea: chép sang album các file hình ảnh mà idea có bản mới hơn (thumbnail, video.json, loop)
-  catalog  dựng lại library/catalog.md từ front matter của mọi bài đã chọn (nguồn chính = tracks/*.md)
-
-Gọi qua album_plan.py: `P board --channel <ch>` · `P sync <album>` · `P catalog --channel <ch>`.
-"""
 from __future__ import annotations
 
 import os
@@ -18,7 +9,6 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[4]
-# Khi idea đã thành album, các file này có thể được làm (lại) ở thư mục idea sau lúc init → sync chép bản mới hơn.
 IDEA_ASSETS = ["thumbnail.png", "thumbnail.jpg", "thumbnail-prompt.md", "video.json", "idea.md",
                "video/loop.mp4", "video/loop_intro.mp4", "video/loop_seam.mp4"]
 
@@ -51,7 +41,6 @@ def load_yaml(f: Path) -> dict:
 
 
 def source_idea(album: Path) -> Path | None:
-    """Thư mục idea gốc của album (plan.yaml sources.idea), None nếu album không làm từ idea."""
     src = (load_yaml(album / "plan.yaml").get("sources") or {}).get("idea")
     if not src:
         return None
@@ -60,10 +49,7 @@ def source_idea(album: Path) -> Path | None:
     return d if d.is_dir() else None
 
 
-# ---------------------------------------------------------------- sync
-
 def sync_assets(album: Path, log: list, dry: bool = False) -> list[str]:
-    """Chép từ idea gốc những file album chưa có hoặc cũ hơn. Không bao giờ xoá; bản ở album mới hơn thì giữ."""
     idea = source_idea(album)
     if not idea:
         return []
@@ -94,15 +80,11 @@ def cmd_sync(a):
     print("\n".join(log) if log else f"✔ {rel(album)}: đã có bản mới nhất của mọi file hình ảnh từ idea")
 
 
-# ---------------------------------------------------------------- catalog
-
 CAT_COLS = ["id", "Title", "Hook", "Persona", "BPM", "Key", "Energy", "Emotion", "Role", "Intro", "Uses", "Albums",
             "Singles", "Override", "File"]
 
 
 def track_rows(channel: str) -> tuple[list[dict], dict[str, list[str]]]:
-    """(các bài gốc đã chọn, id → mọi album dùng bài đó). Bài gốc = track md có audio nằm trong chính album đó;
-    bản chép của library slot (audio trỏ sang album khác) chỉ tính là một lần dùng."""
     ch = ROOT / "channel" / channel
     rows, uses = [], {}
     for md in sorted(ch.glob("albums/*/tracks/*.md")):
@@ -112,7 +94,7 @@ def track_rows(channel: str) -> tuple[list[dict], dict[str, list[str]]]:
             continue
         album = md.parent.parent
         uses.setdefault(tid, []).append(album.name)
-        if str(audio).startswith(".."):   # library slot: audio ở album gốc
+        if str(audio).startswith(".."):
             continue
         rows.append({"fm": fm, "md": md, "album": album})
     return rows, uses
@@ -147,7 +129,7 @@ def cmd_catalog(a):
     cell = lambda v: "" if v is None else (", ".join(map(str, v)) if isinstance(v, list) else str(v)).replace("|", "/")  # noqa: E731
     L = ["# Song Library — Catalog", "",
          f"_Sinh tự động bởi `album_plan.py catalog --channel {a.channel}` ({date.today()}). Đừng sửa tay: nguồn chính là front matter "
-         "của `albums/*/tracks/*.md` (CLAUDE.md §7). Chỉ gồm bài đã chọn (có `audio`). Uses/Albums đếm cả album dùng lại bài "
+         "của `albums/*/tracks/*.md` (CLAUDE.md). Chỉ gồm bài đã chọn (có `audio`). Uses/Albums đếm cả album dùng lại bài "
          "qua library slot; Override = bài được duyệt dù verify không chọn (manifest `accept_override`)._", "",
          "| " + " | ".join(CAT_COLS) + " |", "|" + "---|" * len(CAT_COLS)]
     for r in sorted(rows, key=lambda r: (r["album"].name, r["fm"].get("track_no") or 0)):
@@ -163,7 +145,6 @@ def cmd_catalog(a):
     old = cat.read_text() if cat.exists() else ""
     cat.write_text("\n".join(L) + "\n")
     print(f"✔ {rel(cat)}: {len(rows)} bài" + (" (không đổi)" if old == "\n".join(L) + "\n" else ""))
-    # Front matter `used_in_albums`/`use_count` của bài gốc theo đúng số lần dùng
     from album_plan import set_fm  # noqa: WPS433
     for r in rows:
         tid, albums = r["fm"]["id"], uses.get(r["fm"]["id"], [])
@@ -173,21 +154,18 @@ def cmd_catalog(a):
             print(f"~ {rel(r['md'])}: use_count {len(albums)}")
 
 
-# ---------------------------------------------------------------- board
-
 def idea_state(d: Path) -> dict:
     y = load_yaml(d / "idea.yaml")
     todo = len(y.get("todo") or []) + len(re.findall(r"TODO\(claude\)", (d / "idea.yaml").read_text())) if y else 0
     st = y.get("status") or "?"
     thumb = any((d / f).exists() for f in ("thumbnail.png", "thumbnail.jpg"))
     loop = (d / "video" / "loop.mp4").exists()
-    # Hai nhánh độc lập: nhạc (idea hoàn chỉnh → plan) và hình (thumbnail → loop). Làm nhánh nào trước cũng được.
     todo_l = []
     if todo:
         todo_l.append(f"analyzer: {todo} TODO trong idea.yaml")
     elif st != "promoted":
         todo_l.append("album-plan init")
-    if st == "promoted":   # việc hình của idea đã thành album nằm ở dòng album (ảnh làm ở idea vẫn được album dùng)
+    if st == "promoted":
         todo_l.append(f"(đã thành album {Path(y.get('album') or '').name}: xem dòng album)")
     elif not thumb:
         todo_l.append("thumbnail-prompt")
@@ -198,8 +176,6 @@ def idea_state(d: Path) -> dict:
 
 
 def video_state(d: Path) -> tuple[bool, bool]:
-    """(có video, đã zip lên S3). video-generator bước 2 để video trên server: Mac chỉ có video/remote.json
-    (`video` = null sau khi `package` dọn server) và s3-package.json; bản render --local/--download là video/<tên>.mp4."""
     import json
     packaged = False
     if (d / "s3-package.json").exists():
@@ -217,7 +193,6 @@ def video_state(d: Path) -> tuple[bool, bool]:
 
 
 def publish_todo(d: Path, url, yt: str, packaged: bool) -> list[str]:
-    """Việc sau khi đã có video (album và single giống nhau)."""
     if url:
         return ([] if (d / "title-translations.yaml").exists() else ["youtube-translate"]) + ["LEARN: retention 0:15/0:30/1:00 vào youtube.md"]
     if packaged:
@@ -257,7 +232,6 @@ def album_state(d: Path) -> dict:
         status = "uploaded"
         todo += publish_todo(d, url, yt, packaged)
     else:
-        # nhánh nhạc: plan → Suno → verify → ghép
         if not master:
             if not plan and not tracks:
                 todo.append("album-plan init")
@@ -270,14 +244,12 @@ def album_state(d: Path) -> dict:
                             else "album-plan build/approve")
             else:
                 todo.append("album-assembly")
-        # nhánh hình: thumbnail → loop (ở album hoặc ở idea gốc)
         if not (thumb or idea_thumb):
             todo.append("thumbnail-prompt")
         elif not loop:
             todo.append("video-generator loop")
         if pending_sync:
             todo.append("album_plan.py sync")
-        # hợp hai nhánh
         if master and (thumb or idea_thumb) and not video:
             todo.append("video-generator album")
         if video:

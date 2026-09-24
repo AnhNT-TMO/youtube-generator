@@ -1,24 +1,3 @@
-"""Turn a seamless loop into the full-length video for one audio file.
-
-The loop is repeated as many times as the audio needs.
-
-- Without bars the copies are joined as-is: no re-encode, seconds for an
-  hour of video.
-- With bars the spectrum row is drawn from the real audio and composited over
-  the repeated loop, so the full length has to be encoded once. The album is
-  cut at keyframes of the loop into `--jobs` segments that encode in parallel
-  processes (nothing has to be decoded ahead of a cut), then joined as-is.
-  The soft shade under the bars is already in the loop (make_loop.py).
-
-    python extend.py LOOP.mp4 ALBUM.wav OUT.mp4 --preset channel/<name>/video.json [--preset DIR/video.json]
-    python extend.py LOOP.mp4 ALBUM.wav OUT.mp4 --no-bars           # fastest
-    python extend.py LOOP.mp4 ALBUM.wav test.mp4 --start 600 --seconds 30
-    python extend.py LOOP.mp4 ALBUM.wav OUT.mp4 --preset ... --jobs 12 --encoder nvenc
-
-If LOOP_intro.mp4 exists (make_loop.py writes it when the preset's intro is
-on) it goes first: logo intro, then the loop from its frame 0. The audio
-starts at 0 under the intro either way.
-"""
 import argparse
 import math
 import multiprocessing as mp
@@ -40,7 +19,7 @@ def probe(path, entry, stream=None):
     return subprocess.run(cmd, stdout=subprocess.PIPE, check=True, text=True).stdout.strip()
 
 
-_done = None                                   # frames finished, shared by workers
+_done = None
 
 
 def _init(counter):
@@ -49,8 +28,6 @@ def _init(counter):
 
 
 def render_segment(job):
-    """Encode one video-only segment: looped background + bars.
-    Runs in a worker process; `spec` holds just this segment's rows."""
     import numpy as np
     import bars
     from intro import bars_gain
@@ -59,16 +36,16 @@ def render_segment(job):
     fps, enc = cfg["fps"], cfg["encode"]
     strip = bars.BarStrip(cfg["bars"])
     lst = os.path.join(work, f"list{idx}.txt")
-    lt = seg_start - D                         # loop time at the segment start
+    lt = seg_start - D
     with open(lst, "w") as fh:
-        if lt < 0:                             # starts inside the intro
+        if lt < 0:
             fh.write(f"file '{os.path.abspath(intro)}'\n")
             off = key = 0.0
             copies = math.ceil((seg_dur + lt) / loop_len) + 1
             skip = seg_start
         else:
             off = lt % loop_len
-            key = math.floor(off / enc["gop_seconds"]) * enc["gop_seconds"]   # a keyframe
+            key = math.floor(off / enc["gop_seconds"]) * enc["gop_seconds"]
             copies = math.ceil((off + seg_dur) / loop_len) + 1
             skip = off - key
         for i in range(copies):
@@ -76,11 +53,10 @@ def render_segment(job):
             if i == 0 and key > 0:
                 fh.write(f"inpoint {key}\n")
 
-    # decode the 4K loop on the GPU (NVDEC) when encoding with NVENC: CPU decoding was most of this step
     hw = ["-hwaccel", "cuda"] if (encoder or enc["encoder"]) == "nvenc" else []
     inputs, vin, n_in = hw + ["-f", "concat", "-safe", "0", "-i", lst], "0:v", 1
     pre = []
-    if skip > 1e-6:                            # the rest of the way to seg_start
+    if skip > 1e-6:
         pre = [f"[0:v]trim=start={skip:.4f},setpts=PTS-STARTPTS[bg]"]
         vin = "bg"
     inputs += ["-i", os.path.join(work, "gradient.png")]
@@ -99,7 +75,7 @@ def render_segment(job):
         for i, row in enumerate(spec):
             m = strip.mask(row)
             t = seg_start + i / fps
-            if intro and t < D:                # bars rise with the photo
+            if intro and t < D:
                 m = (m * bars_gain(t, cfg)).astype(np.uint8)
             ff.stdin.write(m.tobytes())
             if i % 300 == 299:
@@ -107,7 +83,7 @@ def render_segment(job):
                     _done.value += 300
         ff.stdin.close()
     except BrokenPipeError:
-        pass                                   # ffmpeg stopped at -t; fine
+        pass
     if ff.wait():
         raise RuntimeError(f"segment {idx} failed")
     return out
@@ -154,8 +130,6 @@ def main():
     work = tempfile.mkdtemp(prefix="extend_")
     t0 = time.time()
 
-    # AAC encoding of an hour of WAV takes about a minute on one core, so it
-    # runs alongside the video work and the final join only copies streams.
     audio_in, aenc = a.audio, None
     if probe(a.audio, "stream=codec_name", "a:0") != "aac":
         audio_in = os.path.join(work, "audio.m4a")
@@ -171,7 +145,6 @@ def main():
             sys.exit("audio encode failed")
 
     if not bars_on:
-        # copies are joined as-is; a --start preview snaps to the nearest keyframe
         lst = os.path.join(work, "list.txt")
         with open(lst, "w") as fh:
             if intro:

@@ -8,17 +8,39 @@
 
 ## 1. Project
 
-"Xưởng" làm **album nhạc ~1 giờ (50–90 phút đều được) bằng Suno** rồi đăng lên **YouTube** cho kênh của chủ repo.
-Kênh đang chạy: **Lamplight Gospel** (`channel/lamplight_gospel/`). Thêm kênh mới: `channel/README.md`.
+"Xưởng" làm **album nhạc ~1 giờ (50–90 phút đều được) bằng Suno** rồi đăng lên **YouTube** cho các kênh của chủ repo.
+Mỗi kênh là một thư mục `channel/<ch>/` với hướng dẫn riêng; danh sách kênh và cách thêm kênh mới: `channel/README.md`.
 
 **Nguyên tắc cốt lõi:** *lấy cảm hứng, không sao chép.* Album mới có thể cùng vibe, dòng nhạc, tempo với video tham khảo,
 nhưng giai điệu, lời, tên bài, hình ảnh và danh tính kênh là của mình. Mục tiêu là **chất riêng của kênh**.
 
-## 2. Quy trình một album
+## 2. Skill và kênh
+
+- **Skill = quy trình, dùng chung cho mọi kênh.** `.claude/skills/<skill>/` chỉ nói *làm thế nào* (lệnh, thứ tự, kiểm tra,
+  luật chung của Suno/YouTube). Không ghi tên kênh, thể loại, giọng, nhân vật, màu, emoji, câu mẫu hay số đo của một kênh cụ thể.
+- **Kênh = nội dung.** Mọi chi tiết *làm gì cho kênh này* nằm trong `channel/<ch>/`:
+
+  | File | Nội dung | Skill đọc |
+  |---|---|---|
+  | `CLAUDE.md` | chỉ mục, âm thanh + hình ảnh tóm tắt, trạng thái kênh | mọi skill (đọc trước khi làm việc cho kênh) |
+  | `channel.md` | danh tính: thể loại, persona, thế giới hình, tài nguyên | mọi skill |
+  | `rules.md` | luật nhạc: house Style + Exclude, Voices, mật độ lời, tên bài cần tránh, từ vựng research, nguồn lời (khối YAML máy đọc) | youtube-music-analyzer, album-plan |
+  | `visual.md` | luật hình: hằng số, khối CORE ChatGPT, trục biến thể, điều phải kiểm trên ảnh | thumbnail-prompt |
+  | `publish.md` | mẫu description, tags mặc định, công thức title, emoji, pinned comment | youtube-publish |
+  | `translate.yaml` | ngôn ngữ dịch title, chữ giữ nguyên, glossary | youtube-translate |
+  | `video.json`, `image_source/`, `model/`, `voices/` | phong cách video, logo, ảnh nhân vật, Suno Voice | video-generator, thumbnail-prompt, album-plan |
+  | `research-queue.txt` | hàng đợi link YouTube chưa analyze | youtube-music-analyzer, production-manager |
+
+- Học được điều gì về một kênh (tên bài trùng bài có thật, lỗi ChatGPT hay gặp, tempo Suno lệch…): ghi vào file của kênh đó,
+  không vào skill. Skill chỉ đổi khi *quy trình* đổi.
+- Kiểm: `python3 .claude/skills/production-manager/scripts/lint_skills.py` báo mọi chỗ skill/template nhắc tới một kênh cụ thể.
+- Kênh mới: chép `channel/_template/`, điền từng file với chủ kênh trước khi làm album đầu tiên.
+
+## 3. Quy trình một album
 
 | # | Bước | Nói với Claude | Skill | Kết quả | Chủ kênh quyết định |
 |---|---|---|---|---|---|
-| 1 | Research | gửi link YouTube (hàng đợi: `research/list.txt`) | youtube-music-analyzer | `research/<slug>/` + `ideas/NNN-slug/idea.yaml` (6 tiêu chí) | giữ persona? tempo |
+| 1 | Research | gửi link YouTube (hàng đợi: `channel/<ch>/research-queue.txt`) | youtube-music-analyzer | `research/<slug>/` + `ideas/NNN-slug/idea.yaml` (6 tiêu chí) | giữ persona? tempo |
 | 2 | Plan | "lên plan album từ idea NNN" | album-plan | `albums/NNN-slug/`: plan, lời, generation.yaml, selection.yaml | duyệt tracklist + lời + credits (`approve`) |
 | 3 | Tạo nhạc | "tạo nhạc" | suno-generate | clip trong `audio/raw_tracks/` + `manifest.json` | — (tự chạy sau approve, §4 Cổng duyệt) |
 | 4 | Chọn bản | "verify slot N" | verification-audio | bài được chọn → `audio/tracks/` + front matter | — (tự accept, §4 Cổng duyệt) |
@@ -32,13 +54,13 @@ nhưng giai điệu, lời, tên bài, hình ảnh và danh tính kênh là củ
 
 - **Thứ tự linh hoạt:** skill chỉ giao tiếp qua file. Có hai nhánh không chờ nhau: **nhạc** (2 → 5) và **hình** (6, làm ở thư mục
   idea hay album đều được); gặp nhau ở bước 7. Có thể làm theo lô (analyze nhiều link, plan vài album, làm ảnh/loop hàng loạt).
-- **Chạy cả xưởng:** "tạo N albums" → `production-manager` (lane Suno/ChatGPT 1 luồng, server + plan song song, ledger `channel/<ch>/production/`).
+- **Chạy cả xưởng:** "tạo N albums" → `production-manager` (lane Suno/ChatGPT 1 luồng, server + plan song song, ledger `production/`, mọi kênh chung một hàng đợi).
 - **Xem việc còn lại:** `album_plan.py board --channel <ch>` (mọi idea/album/single và bước tiếp theo).
 - **Tiếp tục từ trạng thái hiện có** của album, không làm lại từ đầu.
 - **Single** (một bài đăng riêng): `channel/<ch>/singles/NNN-slug/` (`single.md` trỏ về track gốc), audio bằng `assemble.py single`,
   ảnh riêng bằng thumbnail-prompt, youtube-publish chế độ single (không chapters, có lời, link về album).
 
-## 3. Chuẩn bị môi trường (một lần; làm lại khi hỏng)
+## 4. Chuẩn bị môi trường (một lần; làm lại khi hỏng)
 
 - **Suno:** Chrome riêng `.claude/skills/suno-generate/scripts/suno-chrome.sh` (cổng 9222, profile `~/.suno-chrome/profile`), đăng nhập
   suno.com + mở tab usesuno.com/tools/downloader. Claude điều khiển qua MCP `suno-chrome` ở **scope local**
@@ -54,7 +76,7 @@ nhưng giai điệu, lời, tên bài, hình ảnh và danh tính kênh là củ
   `YTA_` (youtube-music-analyzer), `VG_` (video-generator, thêm S3 bucket/region/prefix/AWS profile), `TP_` (thumbnail-prompt).
 - Gói **Suno Pro**: 2.500 credits/tháng; Style ≤ 1000 ký tự; không có Suno Studio.
 
-## 4. Luật bắt buộc
+## 5. Luật bắt buộc
 
 - **Credits:** bài 1 = **2 lượt Max** (4 clip), mỗi bài khác = **1 lượt thường**; ≈ 130 credits/album 10 bài, trần **250** (đủ cho album 14–15 bài).
   Lượt thêm theo **Cổng duyệt** bên dưới. Làm được nhiều album quan trọng hơn vắt bản hay nhất cho từng bài.
@@ -84,11 +106,11 @@ nhưng giai điệu, lời, tên bài, hình ảnh và danh tính kênh là củ
   decode NVDEC). Tổng mọi tác vụ của project ≤ ~60 % CPU và 60–70 % RAM của server: mọi runner (`video.py`, `thumb.py`, các
   `remote.sh`) chạy lệnh nặng trong systemd user slice `youtube.slice` (khối `LIMIT`, giống hệt nhau ở mọi runner). Script
   mới chạy trên server phải đi qua slice này (chủ kênh 2026-09-24).
-- **Git chỉ giữ tooling:** skills, templates, `CLAUDE.md` và cấu hình kênh (`channel.md`, `rules.md`, `video.json`, `translate.yaml`,
-  `voices/README.md`, `image_source/`, `model/`). Mọi thứ sinh ra khi làm video (`albums/`, `ideas/`, `singles/`, `library/`,
-  `research/`, `voices/notes/`), media và `remote.env` chỉ nằm trên máy (`.gitignore`; thư mục trống giữ bằng `.keep`).
+- **Git chỉ giữ tooling:** skills, templates, `CLAUDE.md` và hướng dẫn kênh (`CLAUDE.md`, `channel.md`, `rules.md`, `visual.md`,
+  `publish.md`, `video.json`, `translate.yaml`, `voices/README.md`, `image_source/`, `model/`). Mọi thứ sinh ra khi làm video (`albums/`, `ideas/`, `singles/`, `library/`,
+  `research/`, `research-queue.txt`, `voices/notes/`), media và `remote.env` chỉ nằm trên máy (`.gitignore`; thư mục trống giữ bằng `.keep`).
 
-## 5. Nguyên tắc sáng tạo
+## 6. Nguyên tắc sáng tạo
 
 **Bài 1 và 15 giây đầu của video quyết định phần lớn việc người xem ở lại.**
 - Bài 1 (title track) luôn là **bài mới**, mạnh nhất, là **title của video**; không bao giờ dùng bài tái sử dụng để mở video.
@@ -98,8 +120,8 @@ nhưng giai điệu, lời, tên bài, hình ảnh và danh tính kênh là củ
 - Khi generate: tag intro ngắn / cold open để giọng vào sớm. Khi ghép: được cắt intro Suno để giọng vào ~giây 4–8.
 - Mọi bài ghi `vocal_entry_seconds`.
 
-**Luật riêng của kênh nằm ở `channel/<ch>/rules.md`** (nguồn chuẩn: Style + Exclude mặc định, mật độ lời, chữ và tên bài cần
-tránh, cách album được khác mặc định). House sound chỉ là **mặc định**: album được cố ý khác (giọng cao, tempo lạ, energy đột biến…)
+**Luật riêng của kênh nằm ở `channel/<ch>/`** (nhạc: `rules.md` = Style + Exclude mặc định, mật độ lời, chữ và tên bài cần
+tránh, cách album được khác mặc định; hình: `visual.md`; đăng: `publish.md`). House sound chỉ là **mặc định**: album được cố ý khác (giọng cao, tempo lạ, energy đột biến…)
 để thử phản ứng người nghe, miễn khai báo `experiment` trong plan. Mục tiêu là người nghe nhiều, không phải mình thấy hay.
 
 **Album như một buổi diễn liền mạch (50–90 phút), không phải 10 bài rời.**
@@ -116,7 +138,7 @@ tránh, cách album được khác mặc định). House sound chỉ là **mặc
   tag trong lời = *bài này sắp xếp thế nào* (intro, nhạc cụ vào trước, lúc drums vào, outro).
 - *Giữ NGHỆ SĨ nhất quán, thay đổi ARRANGEMENT, làm mỗi TRANSITION có chủ đích.*
 
-## 6. Thư viện & tái sử dụng bài
+## 7. Thư viện & tái sử dụng bài
 
 Album mới = **1 title track mới + tối đa 4 bài lấy từ library + còn lại tạo mới** (album 10 bài: ≥ 6 bài mới), để người nghe cũ
 không gặp lại quá nhiều bài quen. Library dùng để tiết kiệm credits trong giới hạn đó, không phải để trộn cả album.
@@ -128,13 +150,17 @@ không gặp lại quá nhiều bài quen. Library dùng để tiết kiệm cre
 - Liền kề: energy lệch ≤ 2, tempo lệch ≤ 8 %, không cùng `intro_type`; hook không trùng hook/title của bài khác; bài "echo" không đặt liền nhau.
 - Metadata bài: front matter `tracks/NN-slug.md` là **nguồn chính** (trường: `templates/track.md`); `library/catalog.md` chỉ là bảng tra, sinh lại bằng `catalog`.
 
-## 7. Cấu trúc thư mục
+## 8. Cấu trúc thư mục
 
 ```
 youtube/
-├── channel/<channel>/             # hiện có: lamplight_gospel
-│   ├── channel.md                 # danh tính, description/tags mặc định, khối prompt ảnh ChatGPT
-│   ├── rules.md                   # luật làm nhạc của kênh (nguồn chuẩn cho album-plan; validate đọc khối YAML)
+├── channel/_template/             # bộ hướng dẫn trống cho kênh mới
+├── channel/<channel>/             # danh sách: channel/README.md
+│   ├── CLAUDE.md                  # chỉ mục + trạng thái của kênh (đọc trước)
+│   ├── channel.md                 # danh tính, tài nguyên
+│   ├── rules.md                   # luật làm nhạc của kênh (nguồn chuẩn cho analyzer + album-plan; validate đọc khối YAML)
+│   ├── visual.md, publish.md      # luật hình (thumbnail-prompt), luật đăng YouTube (youtube-publish)
+│   ├── research-queue.txt         # hàng đợi link chưa analyze; chỉ trên máy
 │   ├── translate.yaml             # ngôn ngữ dịch title + chữ giữ nguyên + glossary (skill youtube-translate)
 │   ├── voices/README.md           # các Suno Voice của kênh + cao độ đo được (voices/audio/, voices/notes/: chỉ trên máy)
 │   ├── video.json, image_source/, model/   # phong cách video, logo, ảnh nhân vật 8 góc
@@ -145,28 +171,23 @@ youtube/
 │   │                              # video/ + audio/{raw_tracks,tracks,master}/
 │   ├── singles/NNN-slug/          # single.md, thumbnail, audio/master/, video/, youtube.md
 │   └── library/catalog.md         # sinh bởi album_plan.py catalog
-├── research/<slug>/               # analysis.md + reference.yaml (+ list.txt = hàng đợi link); chỉ trên máy
+├── research/<slug>/               # analysis.md + reference.yaml (dùng chung, một video tham khảo có thể phục vụ nhiều kênh); chỉ trên máy
 ├── templates/                     # mẫu idea, plan, generation, selection, album, track, youtube, single, thumbnail-prompt
 └── .claude/skills/<skill>/        # mỗi skill tự chứa code + venv + cache; remote.env (chỉ trên máy) + remote.env.example
 ```
 
 - Đánh số: idea và album tăng dần theo thứ tự tạo; id bài `<album-prefix>-NN`. Plan album xong thì idea chuyển `status: promoted`.
 - Bản nháp: `audio/raw_tracks/<slug> <clip-id-8>.wav` + `manifest.json` (clip ↔ slot ↔ lượt ↔ settings ↔ lý do); id8 phân biệt 2 clip cùng lượt.
-  Bài được chọn chép sang `audio/tracks/<slug>.wav`, liên kết qua field `audio` của track. File của album 001 vẫn giữ tên cũ `… [usesuno.com].wav`.
+  Bài được chọn chép sang `audio/tracks/<slug>.wav`, liên kết qua field `audio` của track.
 
-## 8. Trạng thái hiện tại (lamplight_gospel)
+## 9. Code
 
-- **Âm thanh kênh:** Christian Gospel Blues / Southern Gospel Soul, chậm 6/8–12/8, giọng nam baritone ấm, hơi khàn (Suno Voice
-  "Midnight Gospel Soul - Male 01", id `7ebd54d4…` trong `templates/plan.yaml`). Tránh: giọng trẻ hẳn đi, country, pop worship hiện đại, guitar blues-rock, production sáng/pop,
-  choir lớn/cinematic, drums hiện đại/punchy.
-- **Album 001 — When The Night Is Long:** đã đăng YouTube bằng bản ghép cũ (50:16, giọng vào ~giây 37), chủ kênh giữ nguyên.
-  Còn: điền Video URL + retention 0:15 / 0:30 / 1:00 vào `youtube.md` (mốc so sánh cho album sau).
-  Bản ghép mới `audio/master/001-when-the-night-is-long.wav` không dùng cho video đã đăng. Ghi chú gốc: `notes/suno_gospel_blues_workflow_context.txt`.
-- **Singles 001–003:** có video + `youtube.md`, chưa đăng.
-- **Album 002–006, singles 004–006:** đang làm dở ở nhiều bước. Trạng thái thật luôn lấy từ `album_plan.py board --channel lamplight_gospel`
-  (cột "Việc còn lại"), không từ mục này hay trường `status` viết tay trong `single.md`.
+- **Không tự thêm comment giải thích** (comment dòng, docstring, ghi chú đầu file) trong code: code là nguồn sự thật, comment
+  cũ đi nhanh hơn code và làm sai lệch. Tên hàm/biến và thông báo lỗi phải tự nói lên ý nghĩa; lý do, số đo, lịch sử thì ghi
+  vào SKILL.md / references của skill hoặc file của kênh. Chỉ giữ dòng bắt buộc về kỹ thuật (shebang, `# -*- coding`,
+  pragma/`noqa` cần thiết). Chuỗi `help=` của argparse và thông báo in ra không phải comment.
 
-## 9. Theo dõi sau vài album
+## 10. Theo dõi sau vài album
 
 - Đối chiếu retention với cách mở bài 1, 4 tiêu chí chọn clip và 6 tiêu chí analyzer; chỉ thêm tiêu chí khi số liệu cho thấy cần.
 - YouTube "reused content" khi nhiều album dùng lại bài từ library.

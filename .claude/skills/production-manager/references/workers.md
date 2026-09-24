@@ -4,22 +4,22 @@ Fill the `<…>` fields and paste the **common block** + the job block as the Ag
 (`subagent_type: general-purpose`, `model: opus`, `run_in_background: true`). Keep prompts self-contained: the worker
 has no memory of this conversation. Put the decisions you already made (§5 answers, numbers, budget) in the prompt.
 
-## 0. Ledger template (`channel/<ch>/production/run-<YYYY-MM-DD>.md`)
+## 0. Ledger template (`production/run-<YYYY-MM-DD>.md`)
 
 ```markdown
-# Production run <date> · goal: <N> albums · channel <ch>
+# Production run <date> · goal: <N> albums · channels: <ch>: <n>, <ch>: <n>
 
 ## Albums
-| # | Album | Start state | plan | suno | picture | assembly | finish | Credits | Note |
-|---|---|---|---|---|---|---|---|---|---|
+| # | Channel | Album | Start state | plan | suno | picture | assembly | finish | Credits | Note |
+|---|---|---|---|---|---|---|---|---|---|---|
 
 ## Lanes (now)
 | Lane | Worker (agent id) | Job | Since |
 |---|---|---|---|
 
 ## Analyzer queue
-| Idea no. | Video id | State |
-|---|---|---|
+| Channel | Idea no. | Video id | State |
+|---|---|---|---|
 
 ## Decisions (what · chosen · why)
 ## Credits log (time · reading · album)
@@ -30,9 +30,10 @@ has no memory of this conversation. Put the decisions you already made (§5 answ
 ## Common block (every worker)
 
 ```
-You are a worker in the Lamplight Gospel production run (repo /Users/tienanh/Desktop/youtube, channel
-channel/<ch>). Your job: <JOB NAME> for <TARGET DIR>. Read CLAUDE.md, then the SKILL.md files named below, and follow
-them exactly; they are the procedure.
+You are a worker in a production run (repo /Users/tienanh/Desktop/youtube, channel channel/<ch>). Your job:
+<JOB NAME> for <TARGET DIR>. Read CLAUDE.md, then channel/<ch>/CLAUDE.md (the channel's own guide: which of its files
+hold the rules for your step), then the SKILL.md files named below. The skills are the procedure; everything about
+what this channel's music, images and texts should be comes from channel/<ch>/.
 
 The channel owner is NOT available. Never use AskUserQuestion. Where a skill says "ask the user", apply the
 decision policy below; if it doesn't cover the case, stop and return STATUS: BLOCKED with the question, the options
@@ -40,8 +41,9 @@ and your recommendation (the manager answers and resumes you).
 Decision policy for this job: <paste the relevant rows of SKILL.md §5 + any decision already made>.
 
 Limits:
-- Write only inside <TARGET DIR> and the outputs your skills create for it. Never edit channel/<ch>/rules.md,
-  library/catalog.md, research/list.txt, other albums, or another skill's code; propose such changes in your report.
+- Write only inside <TARGET DIR> and the outputs your skills create for it. Never edit the files directly in
+  channel/<ch>/ (CLAUDE.md, rules.md, visual.md, publish.md, research-queue.txt…), library/catalog.md, other albums,
+  or any skill's code; propose such changes in your report.
 - Heavy work only on the GPU server (the skills do this by default). Never pass --local / run.sh.
 - Don't spawn agents. Run long commands in the background and wait for them; don't sleep-poll.
 - Media never goes into git. Suno downloads only through usesuno.com, never Suno's Download buttons.
@@ -61,13 +63,13 @@ NEXT: what the next job for this target needs
 Skill: `youtube-music-analyzer`. One worker, 1–2 links (the skill runs 2 at once on the GPU box).
 
 ```
-Job: analyze these links from research/list.txt, idea numbers already assigned (don't pick others):
+Job: analyze these links from channel/<ch>/research-queue.txt for channel <ch>, idea numbers already assigned (don't pick others):
   <idea NNN> ← <url>
   <idea NNN> ← <url>
 For each: remote.sh run (background) → check the song split (fix with segments.yaml if needed) → analysis.md →
 fill idea.yaml (empty todo) → validate_idea.py OK → idea.md → add a row to research/README.md.
 Open questions in the idea: write them with your recommendation (album-plan answers them), don't decide silently.
-A link that is not a gospel/blues/soul-type album our channel can follow (e.g. a single, off-genre, < 10 min):
+A link that is not an album in this channel's genre (channel/<ch>/channel.md) (e.g. a single, off-genre, < 10 min):
 analyze nothing, report it as SKIPPED with the reason.
 ```
 

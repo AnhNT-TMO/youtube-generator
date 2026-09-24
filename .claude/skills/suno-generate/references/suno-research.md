@@ -111,7 +111,7 @@ Anchor: chạy trước, chờ duyệt, tạo Voice từ Anchor, rồi mới ch�
 |---|---|---|
 | 1 | Đăng nhập Suno trong suno-chrome | ✅ Đã đăng nhập (`@nguyentienanhxxx`, Pro, kỳ 22/09 → 22/10). |
 | 2 | Map UI Create v6 | ✅ Xem 7.2. |
-| 3 | Voice (Pro) từ Anchor | ✅ Đã có sẵn Voice **"Midnight Gospel Soul - Male 01"** (`7ebd54d4-454a-4c15-a2e4-973196ae6170`), gốc là clip WTNL v6 `3ab17d0d`. Chọn được với v6, `persona_type: vox`. |
+| 3 | Voice (Pro) từ Anchor | ✅ Voice tạo từ một clip v6 của Anchor chọn được với v6, `persona_type: vox`. Voice của từng kênh: `channel/<ch>/voices/README.md`. |
 | 4 | Generate test + đo credit | ✅ Không cần tốn credit: suy ra từ lịch sử (7.1). |
 | 5 | ~~Tải thử WAV qua UI~~ | ❌ **Bỏ theo quyết định của chủ repo (chỉ dùng usesuno).** ⚠️ Trong spike đã lỡ bấm "Unlock & Download" cho WTNL (`3ab17d0d`) trước khi có quyết định này → **đã trừ 1/20 lượt tháng 9–10**. File vẫn tự tải về `~/Downloads` (`When The Night Is Long.wav` + `.m4a`), dùng để so chất lượng ở 7.4. |
 
@@ -159,7 +159,7 @@ Anchor: chạy trước, chờ duyệt, tạo Voice từ Anchor, rồi mới ch�
 - 2 clip cùng title thì cùng tên file → phải đổi tên (thêm id clip) ngay sau mỗi lần tải.
 - Nút trên trang usesuno render chậm; script phải chờ nút xuất hiện trước khi click.
 
-**Tạo bài qua suno-chrome (1 lượt thường):** Voice "Midnight Gospel Soul", Style Album 001, Max Off, Male, Duration Auto, Variety 1.
+**Tạo bài qua suno-chrome (1 lượt thường):** Voice của kênh, Style của album đầu tiên, Max Off, Male, Duration Auto, Variety 1.
 - Credits 2.220 → **2.210 (đúng 10)**. Ra 2 clip: `78999681…` (3:05) và `90ea9304…` (3:16), title "Leave The Light On".
 - Luồng mạng: `POST /api/c/check` → (Cloudflare challenge chạy ngầm, không cần làm gì) → `POST /api/generate/v2-web/ → 200` → poll `feed/v3` đến `status: complete` (~1–2 phút).
 - **Lyrics editor là Lexical (contenteditable):** synthetic paste và `execCommand('insertText')` đều không giữ xuống dòng.

@@ -1,4 +1,3 @@
-"""Giọng hát trên stem vocal: vùng có hát (vocal_start/end) và cao độ trung vị (pYIN). Dùng bởi youtube-music-analyzer."""
 from __future__ import annotations
 
 import librosa
@@ -11,11 +10,9 @@ HOP = 0.05
 
 
 def vocal_activity(v: np.ndarray, sr: int) -> np.ndarray:
-    """Mặt nạ có-hát theo frame 50ms. Ngưỡng tương đối so với mức hát to của chính stem để bỏ qua tiếng lọt (bleed)."""
     rms, _ = frame_rms_db(v, sr, hop_s=HOP, win_s=0.1)
     loud = np.percentile(rms, 95)
     act = (rms > loud - 22) & (rms > -50)
-    # Làm mượt: lấp lỗ < 0.4s (ngắt hơi), bỏ đoạn < 0.4s (bleed lẻ tẻ)
     act = _close(act, int(0.4 / HOP))
     act = _open(act, int(0.4 / HOP))
     return act
@@ -57,16 +54,13 @@ def analyze(path, force=False) -> dict:
     runs = [(a * HOP, b * HOP) for a, b in _runs(act)]
     dur = len(v) / sr
     out = {"vocal_ratio": float(act.mean()), "n_vocal_runs": len(runs)}
-    # Intro = đến khi bắt đầu đoạn hát "thật" (đoạn đầu tiên dài ≥ 1.5s)
     real = [r for r in runs if r[1] - r[0] >= 1.5]
     out["vocal_start"] = float(real[0][0]) if real else None
     out["vocal_end"] = float(real[-1][1]) if real else None
     out["vocal_tail_free"] = float(dur - real[-1][1]) if real else None
-    # Khoảng không hát dài nhất ở giữa (instrumental break)
     gaps = [b[0] - a[1] for a, b in zip(real[:-1], real[1:])]
     out["longest_vocal_gap"] = float(max(gaps)) if gaps else 0.0
 
-    # Cao độ: pYIN trên tối đa 30 cửa sổ 3 s nằm trọn trong vùng hát, lấy đều trên toàn bài
     win = int(3 * sr)
     starts = []
     for a, b in runs:

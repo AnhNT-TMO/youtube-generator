@@ -19,7 +19,7 @@ verification-audio's QC code - the same units that score our own Suno drafts), `
   3/6/12 → compound (felt = eighth/3), 2/4/8 → simple (felt = eighth/2).
 - `tempo_uncertain_songs`: bar structure unclear, the strongest 45-100 BPM peak was used. `felt_bpm_fast_candidate`
   (4/4 only): the 100-180 BPM level is as strong - an uptempo song may be read at half time.
-- Quote the median and the range; name the songs outside the family (vintagegospel: two 4/4 songs at 79 and 87).
+- Quote the median and the range; name the songs outside the family (e.g. two 4/4 songs at 79 and 87 in a 6/8 mix).
 - Our Album 001 (prompt "70 BPM") measured ~63 in this unit. Do not bake a Suno correction into the idea: the
   prompt uses the target tempo; verification-audio measures real offsets.
 
@@ -38,7 +38,7 @@ verification-audio's QC code - the same units that score our own Suno drafts), `
 - `note` (voice well before the first lyric): a hum/ad-lib, or an instrument (slide guitar is voice-like) leaking
   into the stem. Say it is uncertain; do not build Track 01 on it as if certain.
 - `level_0_15s_db` vs the body of song 1: around -3 dB = full; -6 to -10 dB = soft but present; below -12 dB or
-  `quiet_start_s` > 2 = silence / long fade (weak by CLAUDE.md §3). A soft start with a voice in the first seconds
+  `quiet_start_s` > 2 = silence / long fade (weak by CLAUDE.md). A soft start with a voice in the first seconds
   is a valid, different strategy - name which it is. `gate.level_ok` = within 4 dB (the rule our ideas use).
 
 ## 6. Lyric density

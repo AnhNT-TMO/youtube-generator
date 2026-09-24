@@ -1,9 +1,3 @@
-"""Channel branding: the circular lamp badge (saved once as a PNG by
-make_logo.py) and the animated like/subscribe group.
-
-Both are drawn from scratch here (no stock art), so the marks belong to the
-channel that renders them. Ported from lamblight_channel/tools/brand.py.
-"""
 import math
 import os
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
@@ -23,7 +17,6 @@ def _font(path, size):
 
 
 def tracked_text(d, xy, text, font, fill, tracking=0, anchor_center=True):
-    """Draw text with letter-spacing; returns the width used."""
     widths = [d.textlength(c, font=font) for c in text]
     total = sum(widths) + tracking * (len(text) - 1)
     x = xy[0] - total / 2 if anchor_center else xy[0]
@@ -34,14 +27,13 @@ def tracked_text(d, xy, text, font, fill, tracking=0, anchor_center=True):
 
 
 def flame(size, warm=GOLD_HI, core=(255, 251, 236), lean=0.0):
-    """A stylised oil-lamp flame, pointing up, on a transparent square."""
     img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
 
     def body(scale, colour, sway):
         pts_r, pts_l = [], []
         for i in range(61):
-            s = i / 60.0                                  # 0 = tip, 1 = base
+            s = i / 60.0
             w = (math.sin(math.pi * s) ** 0.85) * (0.30 + 0.70 * s) * 0.5
             w *= size * 0.46 * scale
             y = size * (0.10 + 0.80 * s)
@@ -55,10 +47,8 @@ def flame(size, warm=GOLD_HI, core=(255, 251, 236), lean=0.0):
     return img.filter(ImageFilter.GaussianBlur(size * 0.012))
 
 
-def badge(size=224, title="LAMPLIGHT", sub="GOSPEL", glow=0.5):
-    """Circular channel mark: dark disc, double gold rule, lamp flame, name.
-    `glow` (0..1) drives the halo around the flame so the mark can breathe."""
-    S = size * 3                                          # supersample
+def badge(size, title, sub, glow=0.5):
+    S = size * 3
     img = Image.new("RGBA", (S, S), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     c, R = S / 2, S / 2 - S * 0.012
@@ -113,14 +103,7 @@ def _thumb(size, colour):
     return img
 
 
-
 def drop_shadow(sprite, radius=16, spread=0.45, offset=(0, 5)):
-    """Soft shadow so a sprite stays legible over a bright photo.
-
-    The sprite is padded generously BEFORE the blur. Blurring inside a tight
-    canvas clips the shadow at the canvas edge, which shows up over a photo as
-    a faint rectangle around the mark.
-    """
     pad = int(radius * 3) + max(abs(offset[0]), abs(offset[1]))
     big = Image.new("RGBA", (sprite.width + pad * 2, sprite.height + pad * 2),
                     (0, 0, 0, 0))
@@ -134,14 +117,11 @@ def drop_shadow(sprite, radius=16, spread=0.45, offset=(0, 5)):
     out = Image.new("RGBA", big.size, (0, 0, 0, 0))
     out.alpha_composite(sh, (offset[0], offset[1]))
     out.alpha_composite(big)
-    out.info["pad"] = pad          # callers subtract this to keep their margin
+    out.info["pad"] = pad
     return out
 
 
-# --------------------------------------------------------- click animation --
 def arrow_cursor(height=46):
-    """The ordinary system mouse pointer: white fill, dark outline, soft
-    shadow. The tip sits at (0, 0) of the returned sprite."""
     S = 4
     h = height * S
     w = int(h * 0.579)
@@ -168,7 +148,6 @@ def arrow_cursor(height=46):
     return out
 
 
-
 def _ripple(size, strength):
     img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     if strength <= 0:
@@ -182,17 +161,13 @@ def _ripple(size, strength):
 
 
 class SubscribeWidget:
-    """like / SUBSCRIBE / bell, with a cursor that clicks each in turn.
-
-    `render(phase)` returns the group for `phase` seconds after it appeared.
-    """
 
     ACCENT = (176, 34, 38)
     DONE = (118, 106, 94)
     LIKED = (206, 150, 52)
 
-    T_LIKE, T_SUB, T_BELL = 1.55, 3.05, 4.55       # moment of each press
-    MOVE = 0.62                                    # travel time before a press
+    T_LIKE, T_SUB, T_BELL = 1.55, 3.05, 4.55
+    MOVE = 0.62
 
     def __init__(self, height=80, label="SUBSCRIBE", label_done="SUBSCRIBED"):
         self.h = h = height
@@ -243,7 +218,6 @@ class SubscribeWidget:
         self.margin = int(h * 0.55)
         self.size = (self.W + self.margin, h + self.margin)
 
-    # ---- helpers
     @staticmethod
     def _ease(u):
         u = max(0.0, min(1.0, u))
@@ -263,7 +237,6 @@ class SubscribeWidget:
             keys.append((k, t))
             keys.append((k + 0.55, t))
         keys.append((self.T_BELL + 1.5, rest))
-        # piecewise eased interpolation between key poses
         for (t0, p0), (t1, p1) in zip(keys, keys[1:]):
             if phase <= t1:
                 u = self._ease((phase - t0) / max(1e-6, t1 - t0)) if phase > t0 else 0.0
@@ -271,7 +244,6 @@ class SubscribeWidget:
         return keys[-1][1]
 
     def _press(self, phase, at):
-        """0..1 press depth right around moment `at`."""
         d = phase - at
         if -0.16 < d < 0.24:
             return math.cos(d / 0.20 * math.pi / 2) ** 2
@@ -285,7 +257,6 @@ class SubscribeWidget:
         subbed = phase >= self.T_SUB
         belled = phase >= self.T_BELL
 
-        # like
         p = self._press(phase, self.T_LIKE)
         th = self.thumb[liked]
         if p > 0.01:
@@ -294,7 +265,6 @@ class SubscribeWidget:
         img.alpha_composite(th, (self.thumb_xy[0] + (self.icon - th.width) // 2,
                                  self.thumb_xy[1] + (self.icon - th.height) // 2))
 
-        # subscribe pill
         p = self._press(phase, self.T_SUB)
         pill = self.pill[subbed]
         if p > 0.01:
@@ -303,7 +273,6 @@ class SubscribeWidget:
         img.alpha_composite(pill, (self.pill_x + (self.pill_w - pill.width) // 2,
                                    int((self.h - pill.height) / 2)))
 
-        # bell, ringing briefly after it is pressed
         ring = 0
         if belled and phase < self.T_BELL + 0.9:
             ring = int(round(3 * math.sin((phase - self.T_BELL) * 22)
@@ -311,7 +280,6 @@ class SubscribeWidget:
         bl = self.bell[belled][3 + max(-3, min(3, ring))]
         img.alpha_composite(bl, self.bell_xy)
 
-        # ripples on each press
         for at, (cx, cy) in zip((self.T_LIKE, self.T_SUB, self.T_BELL), self._targets()):
             d = phase - at
             if 0 <= d < 0.45:
@@ -319,12 +287,11 @@ class SubscribeWidget:
                 rp = _ripple(s, d / 0.45)
                 img.alpha_composite(rp, (int(cx - s / 2), int(cy - s / 2)))
 
-        # hand
         cx, cy = self._cursor_pos(phase)
         press = max(self._press(phase, self.T_LIKE), self._press(phase, self.T_SUB),
                     self._press(phase, self.T_BELL))
         cur, hx, hy = self.cursor, self.hot[0], self.hot[1]
-        if press > 0.01:                       # a small dip on the click
+        if press > 0.01:
             k = 1 - 0.10 * press
             cur = cur.resize((max(2, int(cur.width * k)),
                               max(2, int(cur.height * k))), Image.LANCZOS)

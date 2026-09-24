@@ -1,4 +1,3 @@
-"""Nhóm A — thông số file, loudness (EBU R128), khoảng lặng, clipping, kiểu kết bài."""
 from __future__ import annotations
 
 import re
@@ -44,7 +43,6 @@ def analyze(path, force=False) -> dict:
     info["tail_silence"] = float(info["duration"] - t[last] - 0.1)
     info["content_end"] = float(t[last] + 0.1)
 
-    # Khoảng lặng giữa bài (bỏ qua đầu/cuối)
     gaps, run = [], 0
     for i in range(first, last + 1):
         if not active[i]:
@@ -55,7 +53,6 @@ def analyze(path, force=False) -> dict:
             run = 0
     info["mid_silences"] = gaps
 
-    # Kiểu kết bài: mức to của đoạn ngay trước khi hết tiếng, so với mức trung vị của bài.
     body = rms[first:last + 1]
     median_db = float(np.median(body))
     n1 = int(1.0 / hop)
@@ -63,7 +60,6 @@ def analyze(path, force=False) -> dict:
     last1 = float(np.mean(rms[max(first, last - n1):last + 1]))
     tail = rms[max(first, last - n15):last + 1]
     slope = float(np.polyfit(np.arange(len(tail)) * hop, tail, 1)[0]) if len(tail) > 10 else 0.0
-    # Tốc độ sụt ở 0.3s cuối: bị cắt ngang thì sụt cả chục dB trong vài frame.
     n03 = max(2, int(0.3 / hop))
     drop = float(np.mean(rms[max(first, last - 2 * n03):last - n03 + 1]) - rms[last]) if last - 2 * n03 > first else 0.0
     info["end_level_rel_db"] = last1 - median_db

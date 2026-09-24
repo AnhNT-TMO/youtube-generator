@@ -132,6 +132,18 @@ house_style:
     choir only at emotional peaks. Warm analog production, dark intimate tone, rich low mids, natural small-church
     ambience. Spacious arrangement, guitar responses between vocal lines.
   exclude: "female vocals, youthful vocals, falsetto, autotune, rap, trap, EDM, modern pop, pop worship, country, blues rock, cinematic orchestra, cinematic choir, modern punchy drums"
+  meter_default: "6/8"         # khi plan chưa có sound.tempo.meter
+  groove_line: "Slow {meter} groove, {bpm} BPM."   # câu cuối của Style; {meter} từ plan, {bpm} điền lúc generate
+research:                      # youtube-music-analyzer: từ vựng của thể loại kênh này
+  intro_vocab: [vocal_hum, vocal, choir, hammond, piano, acoustic_guitar, slide_guitar, electric_guitar, full_band, strings]
+  genre_words: [gospel, blues, soul, vintage, christian, worship, prayer, prayers, psalm, psalms, praise, hymn, hymns,
+                delta, southern, deep, dark, oldies, faith, spiritual, relaxing, sleep, healing, peace, peaceful, "r&b", rnb]
+                               # chữ chỉ thể loại trong title video tham khảo: cụm chỉ gồm các chữ này không bị copy guard chặn
+sources:                       # nguồn mà lời bài diễn giải (idea slots[].source_ref, plan slot.source_ref)
+  kind: scripture              # tên gọi trong báo cáo
+  numbered:                    # tham chiếu có số trong title video tham khảo → copy_guard.source_avoid
+    pattern: '\b(?:psalms?|ps\.?)\s*(\d{1,3})'
+    format: "Psalm {n}"
 lyrics:
   words_per_beat_max: 1.35     # Album 001 cao nhất 1.34 (bài 02), vẫn được chọn
   words_per_beat_warn: 1.20    # Album 001 trung vị 1.19

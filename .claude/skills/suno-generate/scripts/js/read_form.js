@@ -1,5 +1,3 @@
-// Đọc trạng thái form Create (Advanced, v6) để đối chiếu với spec: suno_gen.py check-form.
-// Selector lấy từ spike 23/09/2026 (references/suno-research.md §7.2–7.3). Không thao tác gì, chỉ đọc.
 async () => {
   const vis = e => !!e && e.offsetParent !== null;
   const on = b => b.className.includes('variant-standard-legacy');
@@ -13,7 +11,6 @@ async () => {
   const ed = document.querySelector('[aria-label="Lyrics editor"]');
   const lyrics = ed ? [...ed.children].map(p => p.textContent).join('\n') : null;
   const lyricsCount = [...document.querySelectorAll('*')].map(e => e.childElementCount === 0 ? e.textContent : '').find(s => /of 5000 characters/.test(s)) || null;
-  // Ô Style: textarea hiển thị, không phải Cowriter; ưu tiên ô có bộ đếm "N/1000" gần nó
   const tas = [...document.querySelectorAll('textarea')].filter(t => vis(t) && t.getAttribute('aria-label') !== 'Cowriter prompt');
   const near1000 = t => { let r = t; for (let i = 0; i < 4 && r; i++) { r = r.parentElement; if (r && /\d+\s*\/\s*1000/.test(r.innerText)) return true; } return false; };
   const styleBox = tas.find(near1000) || (tas.length === 1 ? tas[0] : null);
@@ -25,14 +22,12 @@ async () => {
     url: location.href,
     mode_buttons: modeBtns,
     model: [...document.querySelectorAll('button')].find(b => vis(b) && /^v\d/.test(b.innerText.trim()))?.innerText.trim() || null,
-    // Voice đang chọn = chip cạnh nút "Remove selected Voice" (link /voice/ đầu trang có thể là của bài trong thư viện bên phải)
     voice: (() => { const rm = document.querySelector('button[aria-label="Remove selected Voice"]'); if (!rm) return null;
       let r = rm; for (let i = 0; i < 6 && r; i++) { r = r.parentElement; const t = (r?.innerText || '').trim(); if (t) return t.split('\n')[0].trim(); }
       return null; })(),
     lyrics, lyrics_count: lyricsCount,
     style: styleBox ? styleBox.value : null,
     style_candidates: tas.length,
-    // 2026-09-23: hai ô này chỉ có placeholder (không còn aria-label)
     exclude: input('[aria-label="Exclude styles"], input[placeholder="Exclude styles"]')?.value ?? null,
     title: input('[aria-label="Song Title (Optional)"], input[placeholder="Song Title (Optional)"]')?.value ?? null,
     style_counter: [...document.querySelectorAll('*')].map(e => e.childElementCount === 0 ? e.textContent.trim() : '').find(t => /^\d+\/1000$/.test(t)) || null,

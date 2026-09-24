@@ -1,8 +1,3 @@
-"""Đọc album và đo những gì cần để nối bài: vùng có hát, intro/outro, lưới nhịp, loudness, key, tempo.
-
-Module đo nằm ở scripts/measure/, cache theo hash nội dung file trong <skill>/.cache/features/.
-Lần đầu với file mới sẽ chạy Demucs + beat_this (~1 phút/bài trên Mac).
-"""
 from __future__ import annotations
 
 import os
@@ -17,7 +12,7 @@ import yaml
 from measure import basic, grid, key, stems, tempo, vocal
 from measure.common import frame_rms_db, load_array, load_audio, probe
 
-HOP = 0.1  # độ phân giải envelope (giây)
+HOP = 0.1
 
 
 @dataclass
@@ -42,8 +37,8 @@ class Track:
     vocal_runs: list[tuple[float, float]] = field(default_factory=list)
     downbeats: np.ndarray = field(default_factory=lambda: np.array([]))
     beats: np.ndarray = field(default_factory=lambda: np.array([]))
-    env_db: np.ndarray = field(default_factory=lambda: np.array([]))     # mix RMS, bước HOP
-    drums_db: np.ndarray = field(default_factory=lambda: np.array([]))   # stem drums RMS, bước HOP
+    env_db: np.ndarray = field(default_factory=lambda: np.array([]))
+    drums_db: np.ndarray = field(default_factory=lambda: np.array([]))
     body_db: float = 0.0
     drums_body_db: float = 0.0
     camelot: str | None = None
@@ -56,11 +51,9 @@ class Track:
 
     @property
     def outro_len(self) -> float:
-        """Nhạc cụ sau câu hát cuối (giây)."""
         return self.content_end - self.vocal_end
 
     def level(self, t0: float, t1: float) -> float:
-        """Mức mix trung bình trong [t0, t1] so với thân bài (dB)."""
         a, b = int(max(0, t0) / HOP), max(int(max(0, t0) / HOP) + 1, int(t1 / HOP))
         return float(np.mean(self.env_db[a:b]) - self.body_db)
 
@@ -79,10 +72,9 @@ def front_matter(md: Path) -> dict:
 
 
 def load_tracks(album: Path) -> list[Track]:
-    """Thứ tự bài = `track_no` trong front matter (đã chốt từ blueprint, skill không bao giờ đổi)."""
     tracks = []
     for md in sorted((album / "tracks").glob("*.md")):
-        if "." in md.stem:   # lyric variant of a slot (01-slug.cold.md), not a track
+        if "." in md.stem:
             continue
         fm = front_matter(md)
         if not fm.get("audio"):
@@ -102,8 +94,6 @@ def load_tracks(album: Path) -> list[Track]:
 
 
 def load_single(single: Path) -> tuple[Track, Path]:
-    """Bài đăng riêng: `single.md` có `track:` = đường dẫn tới tracks/NN-*.md của album gốc (tương đối từ thư mục single).
-    Trả về (Track, đường dẫn file audio tương đối từ thư mục single)."""
     fm = front_matter(single / "single.md")
     if not fm.get("track"):
         raise SystemExit(f"{single / 'single.md'}: thiếu field `track` (đường dẫn tới tracks/NN-*.md của album gốc)")
@@ -111,7 +101,7 @@ def load_single(single: Path) -> tuple[Track, Path]:
     if not md.exists():
         raise SystemExit(f"không thấy {md}")
     t = front_matter(md)
-    audio = md.parent.parent / t["audio"]      # `audio` trong track tính từ thư mục album
+    audio = md.parent.parent / t["audio"]
     if not audio.exists():
         raise SystemExit(f"{md.name}: không thấy file audio {audio}")
     track = Track(no=1, id=str(t.get("id") or md.stem), title=str(t.get("title") or md.stem), md=md, audio=audio,
@@ -160,11 +150,10 @@ def measure(tracks: list[Track], verbose=True) -> None:
         t.camelot, t.ending_camelot = k.get("camelot"), k.get("ending_camelot")
         ac = load_array(t.audio, "tempo_ac")
         if ac is not None and t.target_bpm:
-            t.bpm = tempo.felt(ac, t.target_bpm)["bpm"]    # cùng quy tắc chọn mức nhịp với verification-audio
+            t.bpm = tempo.felt(ac, t.target_bpm)["bpm"]
 
 
 def segment_lufs(path: Path, t0: float, t1: float) -> float | None:
-    """Integrated loudness (LUFS) của đoạn [t0, t1] trong file."""
     err = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-ss", f"{t0:.3f}", "-to", f"{t1:.3f}", "-i", str(path),
                           "-af", "ebur128", "-f", "null", "-"], capture_output=True, text=True).stderr
     m = re.search(r"I:\s+(-?[\d.]+) LUFS", err[err.rfind("Summary:"):])
@@ -172,7 +161,6 @@ def segment_lufs(path: Path, t0: float, t1: float) -> float | None:
 
 
 def loudness_curve(path: Path) -> tuple[np.ndarray, np.ndarray]:
-    """Momentary (400 ms) và short-term (3 s) loudness mỗi 100 ms của cả file, theo EBU R128."""
     out = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(path), "-af",
                           "ebur128=metadata=1,ametadata=mode=print:file=-", "-f", "null", "-"],
                          capture_output=True, text=True).stdout

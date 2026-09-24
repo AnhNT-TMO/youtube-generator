@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""youtube-translate: chỉ dịch TITLE của video YouTube (video localizations). Không đụng title gốc, description, tags, ảnh.
+USAGE = """youtube-translate: chỉ dịch TITLE của video YouTube (video localizations). Không đụng title gốc, description, tags, ảnh.
 
   auth   --channel <ch>             đăng nhập OAuth một lần cho kênh (token ở .cache/tokens/<ch>.json)
   list   --channel <ch>             mọi video của kênh: ngôn ngữ đã có / còn thiếu, thư mục trong repo
@@ -26,15 +26,14 @@ SECRET = SK / ".cache" / "client_secret.json"
 TOKENS = SK / ".cache" / "tokens"
 SCOPES = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 VID_RE = re.compile(r"(?:v=|youtu\.be/|/shorts/|/live/|/video/)([\w-]{11})")
-TITLE_MAX = 100    # giới hạn cứng của YouTube, áp cho cả title đã dịch
-TITLE_SEEN = 70    # kết quả tìm kiếm cắt quanh đây
+TITLE_MAX = 100
+TITLE_SEEN = 70
 
 
 def die(msg):
     sys.exit(f"❌ {msg}")
 
 
-# ---------------------------------------------------------------- config + files
 def cfg_path(ch):
     return ROOT / "channel" / ch / "translate.yaml"
 
@@ -46,7 +45,7 @@ def load_cfg(ch):
     cfg = yaml.safe_load(p.read_text()) or {}
     cfg.setdefault("source_language", "en")
     cfg["codes"] = [l["code"] for l in cfg.get("languages", [])]
-    cfg["also"] = {l["code"]: l.get("also", []) for l in cfg.get("languages", [])}   # cùng bản dịch ghi thêm dưới các mã này
+    cfg["also"] = {l["code"]: l.get("also", []) for l in cfg.get("languages", [])}
     if not cfg["codes"]:
         die(f"{p.relative_to(ROOT)}: languages trống")
     return cfg
@@ -58,7 +57,6 @@ def front_matter(md):
 
 
 def song_title(folder):
-    """Title bài chính của thư mục: single → bài gốc, album → track 01."""
     single = folder / "single.md"
     if single.exists():
         track = front_matter(single).get("track")
@@ -76,7 +74,6 @@ def video_id_in(text):
 
 
 def resolve(target, ch_arg):
-    """→ (channel, video_id, file dịch, thư mục hoặc None)."""
     p = Path(target)
     if p.is_dir():
         try:
@@ -98,7 +95,6 @@ def resolve(target, ch_arg):
 
 
 def repo_folders(ch):
-    """video id → thư mục album/single trong repo (theo dòng Video URL của youtube.md)."""
     out = {}
     for md in (ROOT / "channel" / ch).glob("*/*/youtube.md"):
         line = next((l for l in md.read_text().splitlines() if "Video URL" in l), "")
@@ -119,7 +115,6 @@ def write_yaml(path, data):
     path.write_text(head + yaml.safe_dump(data, allow_unicode=True, sort_keys=False, width=1000))
 
 
-# ---------------------------------------------------------------- YouTube API
 def api_error(e):
     try:
         import json
@@ -155,7 +150,6 @@ def my_channel(yt):
 
 
 def guard_channel(yt, ch, cfg):
-    """Không bao giờ ghi lên kênh khác kênh đã khai báo."""
     me = my_channel(yt)
     want = cfg.get("channel_id")
     if not want:
@@ -173,7 +167,6 @@ def get_video(yt, vid, hl=None):
     return items[0]
 
 
-# ---------------------------------------------------------------- auth
 def cmd_auth(a):
     from google_auth_oauthlib.flow import InstalledAppFlow
     from googleapiclient.discovery import build
@@ -196,9 +189,7 @@ def cmd_auth(a):
     print(f"✅ {a.channel} = {me['snippet']['title']} ({me['id']}), token {rel(TOKENS / (a.channel + '.json'))}")
 
 
-# ---------------------------------------------------------------- list
 def channel_videos(yt, me):
-    """Mọi video đã upload của kênh (cả unlisted/private), mới nhất trước."""
     uploads = me["contentDetails"]["relatedPlaylists"]["uploads"]
     ids, tok, out = [], None, []
     while True:
@@ -218,7 +209,6 @@ def missing_codes(v, cfg):
 
 
 def missing_targets(ch):
-    """Video còn thiếu ít nhất một ngôn ngữ → target (thư mục repo nếu có, không thì video id)."""
     cfg = load_cfg(ch)
     yt = service(ch)
     folders = repo_folders(ch)
@@ -241,7 +231,6 @@ def cmd_list(a):
         print(f"             {v['snippet']['title']}")
 
 
-# ---------------------------------------------------------------- pull
 def keep_list(cfg, folder, source_title):
     keep = [k for k in cfg.get("keep_verbatim", []) if k in source_title]
     if folder is not None and cfg.get("keep_song_title", True):
@@ -278,7 +267,7 @@ def cmd_pull(a):
             data["titles"] = {c: "" for c in cfg["codes"]}
             data["keep"] = keep_list(cfg, folder, s["title"])
             print(f"⚠️  {vid}: title gốc đã đổi trên YouTube, bản dịch cũ chuyển sang old_titles, cần dịch lại")
-        elif not old:   # lần pull đầu: bản chủ kênh đã tự nhập trong Studio làm điểm xuất phát
+        elif not old:
             for c in data["titles"]:
                 data["titles"][c] = data["on_youtube"].get(c, "")
         if data["default_language"] in data["titles"]:
@@ -290,7 +279,6 @@ def cmd_pull(a):
               f"cần dịch: {' '.join(todo) or 'không'}")
 
 
-# ---------------------------------------------------------------- apply
 def emojis(text):
     return [ch for ch in text if unicodedata.category(ch) == "So"]
 
@@ -362,7 +350,7 @@ def cmd_apply(a):
             errs += len(err)
             if old == t:
                 continue
-            new.setdefault(code, {})["title"] = t   # không gửi description: YouTube hiện description gốc cho người xem
+            new.setdefault(code, {})["title"] = t
             changes.append(code)
         if errs:
             print(f"   ❌ {errs} lỗi: sửa {rel(path)}, không ghi gì")
@@ -373,7 +361,6 @@ def cmd_apply(a):
             continue
         body, parts = {"id": vid, "localizations": new}, ["localizations"]
         if not s.get("defaultLanguage"):
-            # localizations cần defaultLanguage; update snippet phải gửi lại đủ các trường ghi được, nếu không YouTube xoá chúng
             body["snippet"] = {k: s[k] for k in ("title", "description", "tags", "categoryId", "defaultAudioLanguage") if k in s}
             body["snippet"]["defaultLanguage"] = dl
             parts.append("snippet")
@@ -397,11 +384,6 @@ def cmd_apply(a):
 
 
 def verify(yt, vid, before, want):
-    """Đọc lại: title đã dịch đúng từng ngôn ngữ, phần gốc không đổi.
-
-    Ngay sau update, videos.list có thể còn trả bản cũ vài giây: đọc lại tới khi khớp (tối đa ~30 s).
-    snippet.localized.description rỗng với hl=<code> là bình thường: trang xem video vẫn hiện description gốc
-    (đo 2026-09-24 trên trang watch hl=ko)."""
     ok = True
     for wait in (0, 2, 4, 8, 16):
         time.sleep(wait)
@@ -424,9 +406,8 @@ def verify(yt, vid, before, want):
     return ok
 
 
-# ---------------------------------------------------------------- main
 def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(description=USAGE, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("auth")
     p.add_argument("--channel", required=True)

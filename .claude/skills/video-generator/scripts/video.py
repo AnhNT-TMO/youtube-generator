@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""video-generator: still thumbnail -> 5-min loop video -> full-length music video.
+USAGE = """video-generator: still thumbnail -> 5-min loop video -> full-length music video.
 
     video.py frame DIR [--at 30]              # step 1 helper: one still, to tune DIR/video.json
     video.py loop  DIR [--local]              # step 1: thumbnail -> 5-min seamless loop + logo intro
@@ -58,7 +58,6 @@ RENV = _remote_env()
 
 
 def venv_python(extra=()):
-    """The skill's private venv (numpy + Pillow; `extra` modules, e.g. boto3 for package), created on first use."""
     py = os.path.join(SK, ".venv", "bin", "python")
     if not os.path.exists(py):
         print("creating the skill venv (first run)...", flush=True)
@@ -73,7 +72,6 @@ def venv_python(extra=()):
 
 
 class Job:
-    """Where things are for one idea/album folder."""
 
     def __init__(self, d):
         self.dir = os.path.abspath(d)
@@ -85,8 +83,6 @@ class Job:
         self.layers = [os.path.join(self.channel_dir, "video.json")]
         if not os.path.exists(self.layers[0]):
             sys.exit(f"missing {self.layers[0]}")
-        # Steps run in any order: the image/loop may have been made in the idea folder after the album was planned.
-        # Album's own file first, then the source idea's (read-only; album-plan `sync` copies them for good).
         self.idea = source_idea(self.dir)
         look = [self.dir] + ([self.idea] if self.idea else [])
         own = next((os.path.join(d, "video.json") for d in look if os.path.exists(os.path.join(d, "video.json"))), None)
@@ -115,7 +111,6 @@ class Job:
 
 
 def source_idea(d):
-    """Idea folder an album was planned from (plan.yaml `sources.idea`), or None. Regex, so no yaml needed."""
     f = os.path.join(d, "plan.yaml")
     if not os.path.exists(f):
         return None
@@ -137,7 +132,6 @@ def album_out(job, a):
     return a.out or os.path.join(job.out, os.path.basename(job.dir) + ".mp4")
 
 
-# ------------------------------------------------------------------ local --
 def local_loop(job, a):
     run([venv_python(), os.path.join(HERE, "make_loop.py"), job.image,
          os.path.join(job.out, "loop.mp4"), "--seam-check", "--jobs", str(a.jobs or 4)]
@@ -148,7 +142,7 @@ def local_album(job, a):
     loop = os.path.join(job.out, "loop.mp4")
     idea_loop = os.path.join(job.idea, "video", "loop.mp4") if job.idea else None
     if not os.path.exists(loop) and idea_loop and os.path.exists(idea_loop) and job.image.startswith(job.idea + os.sep):
-        loop = idea_loop           # loop made for the idea, same image: reuse it
+        loop = idea_loop
         print(f"using the idea's loop {os.path.relpath(loop, REPO)}", flush=True)
     if not os.path.exists(loop):
         local_loop(job, a)
@@ -157,12 +151,8 @@ def local_album(job, a):
         + (["--encoder", a.encoder] if a.encoder else []))
 
 
-# ----------------------------------------------------------------- remote --
-# Lệnh nặng chạy trong systemd user slice `youtube.slice`, dùng chung cho MỌI skill của project: tổng cộng tối đa
-# ~60 % CPU, RAM 60 % (MemoryHigh) / 70 % (MemoryMax, kill trong slice) của server dùng chung (chủ kênh 2026-09-24,
-# CLAUDE.md §4). Slice tự tạo ở lần đầu. Giữ chuỗi này giống hệt khối LIMIT trong các remote.sh.
 LIMIT = ("S=~/.config/systemd/user/youtube.slice; [ -f $S ] || { mkdir -p ${S%/*} && printf \"[Unit]\\nDescription="
-         "youtube project: every skill shares this cap (CLAUDE.md 4)\\n[Slice]\\nCPUQuota=%s%%\\nMemoryHigh=60%%\\n"
+         "youtube project: every skill shares this cap (CLAUDE.md)\\n[Slice]\\nCPUQuota=%s%%\\nMemoryHigh=60%%\\n"
          "MemoryMax=70%%\\n\" $(( $(nproc) * 60 )) > $S && systemctl --user daemon-reload; }; "
          "systemd-run --user --scope --quiet --collect --slice=youtube.slice -- bash -c ")
 
@@ -177,7 +167,6 @@ def _ssh(cmd):
 
 
 def _ssh_json(cmd):
-    """Run on the server, echo its stderr, return the JSON printed on the last stdout line."""
     print("$ ssh " + cmd, flush=True)
     r = subprocess.run(_ssh(cmd), stdout=subprocess.PIPE, text=True)
     if r.returncode:
@@ -201,10 +190,6 @@ def _scp_back(src, dst):
 
 
 def remote(job, a, audio=None):
-    """Sync, render on the server, bring the results back.
-
-    Server layout under ~/$VG_DIR: scripts/ (this skill's scripts), .venv/,
-    repo/channel/<name>/image_source/ (logo), in/<job>/, out/<job>/."""
     if not RENV["VG_REMOTE"]:
         sys.exit("no VG_REMOTE in remote.env")
     t0 = time.time()
@@ -220,7 +205,6 @@ def remote(job, a, audio=None):
     run(_ssh(f"test -x {R}/.venv/bin/python || (python3 -m venv {R}/.venv && "
              f"{R}/.venv/bin/pip install -q -r {R}/requirements.txt)"))
 
-    # one resolved config file, so the server needs no copy of the channel tree
     with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as fh:
         json.dump(config.merge_files(job.layers), fh, indent=1)
         cfg_file = fh.name
@@ -233,7 +217,7 @@ def remote(job, a, audio=None):
         _rsync(audio, f"{inp}/audio{aext}")
     print(f"[{time.time() - t0:.0f}s] inputs synced", flush=True)
 
-    enc = a.encoder or RENV["VG_ENCODER"]     # server: NVENC on the GPU (CPU/RAM stay free, owner 2026-09-24)
+    enc = a.encoder or RENV["VG_ENCODER"]
     jobs = a.jobs or int(RENV["VG_JOBS"])
     P = f"~/{R}/.venv/bin/python"
     cmd = (f"cd {R}/scripts && export VG_REPO=~/{R}/repo && "
@@ -242,7 +226,7 @@ def remote(job, a, audio=None):
     if audio:
         cmd += (f" && {P} extend.py ~/{out}/loop.mp4 ~/{inp}/audio{aext} ~/{out}/video.mp4 "
                 f"--preset ~/{inp}/preset.json --jobs {jobs} --encoder {enc}")
-    if audio:      # probe + two still frames of the full video, so it can be checked without downloading it
+    if audio:
         cmd += (f" && cd ~/{out} && rm -f video.mp4.json check_*.png"
                 f" && ffprobe -v error -print_format json -show_format -show_streams video.mp4 > video.mp4.json"
                 f" && D=$(ffprobe -v error -show_entries format=duration -of csv=p=0 video.mp4)"
@@ -268,11 +252,7 @@ def remote(job, a, audio=None):
     print(f"[{time.time() - t0:.0f}s] done -> {os.path.relpath(job.out, REPO)}/", flush=True)
 
 
-# ---------------------------------------------------------------- package --
 def package(job, a):
-    """Zip the server's full video + DIR/youtube.md + thumbnails on the server and upload the zip to S3.
-
-    Presigned requests are signed here with this Mac's AWS credentials; the server only sends the bytes."""
     t0 = time.time()
     R, inp, out = _paths(job)
     slug = os.path.basename(job.dir)
@@ -287,8 +267,6 @@ def package(job, a):
     py = venv_python(extra=("boto3",))
     pkg_py = os.path.join(HERE, "package.py")
 
-    # 1. package folder built here: youtube.md, paste-ready fields, YouTube JPG (also saved as DIR/thumbnail.jpg,
-    #    which youtube-publish uploads when the PNG is > 2 MB), full-resolution thumbnail, meta
     stage = tempfile.mkdtemp(prefix="vg-pkg-")
     pkg = os.path.join(stage, slug)
     src_audio = (json.load(open(os.path.join(job.out, "remote.json"))).get("audio")
@@ -297,7 +275,6 @@ def package(job, a):
          "--jpg", os.path.join(job.dir, "thumbnail.jpg"), "--channel", job.channel]
         + (["--source-audio", src_audio] if src_audio else []))
 
-    # 2. youtube.md must pass youtube-publish's check (chapters vs video are its own job: measured on the master)
     pub = os.path.join(REPO, ".claude", "skills", "youtube-publish")
     pub_py = os.path.join(pub, ".venv", "bin", "python")
     if os.path.exists(pub_py):
@@ -308,7 +285,6 @@ def package(job, a):
     else:
         print("⚠ youtube-publish venv not found: youtube.md not checked", flush=True)
 
-    # 3. zip on the server, next to the video (no multi-GB transfer through this Mac)
     run(_ssh(f"mkdir -p {R}/scripts && rm -rf {inp}/pkg && mkdir -p {inp}/pkg"))
     _rsync(HERE + "/", f"{R}/scripts/", "--exclude", "__pycache__")
     _rsync(pkg, f"{inp}/pkg/")
@@ -321,8 +297,7 @@ def package(job, a):
     size = built["size"]
     print(f"[{time.time() - t0:.0f}s] zip {size / 1e9:.2f} GB on the server", flush=True)
 
-    # 4. presign here, upload from the server
-    rel = os.path.relpath(job.dir, REPO).split(os.sep)[1:]          # <channel>/<albums|singles|ideas>/<slug>
+    rel = os.path.relpath(job.dir, REPO).split(os.sep)[1:]
     key = RENV["VG_S3_PREFIX"] + "/".join(rel) + "/" + zipname
     s3args = ["--bucket", RENV["VG_S3_BUCKET"], "--key", key, "--region", RENV["VG_S3_REGION"]] + (
         ["--profile", RENV["VG_AWS_PROFILE"]] if RENV["VG_AWS_PROFILE"] else [])
@@ -348,8 +323,6 @@ def package(job, a):
                                      check=True).stdout)
     if head["size"] != size:
         sys.exit(f"S3 có {head['size']} byte, zip {size} byte: upload chưa đủ, chạy lại `video.py package`")
-    # 5. clean the server: the upload is verified, so drop the zip, the full video and the pushed audio
-    #    (GBs each); loop / image / preset stay (small) so a re-render doesn't redo the loop
     cleaned = not a.keep_server
     if cleaned:
         run(_ssh(f"rm -rf {inp}/pkg {out}/{zipname} {out}/video.mp4 {out}/video.mp4.json {out}/check_*.png "
@@ -371,9 +344,8 @@ def package(job, a):
           + (" · đã dọn video/zip/audio trên server" if cleaned else ""), flush=True)
 
 
-# ------------------------------------------------------------------- main --
 def main():
-    ap = argparse.ArgumentParser(description=__doc__,
+    ap = argparse.ArgumentParser(description=USAGE,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     for name in ("frame", "loop", "album", "batch", "package"):
@@ -392,7 +364,7 @@ def main():
         if name == "frame":
             p.add_argument("--at", type=float, default=30.0, help="loop time, seconds")
         elif name != "package":
-            p.add_argument("--remote", action="store_true", help=argparse.SUPPRESS)   # old flag: remote is the default
+            p.add_argument("--remote", action="store_true", help=argparse.SUPPRESS)
             p.add_argument("--local", action="store_true", help="render on this Mac instead of the GPU server")
             p.add_argument("--jobs", type=int)
             p.add_argument("--encoder", choices=["x264", "nvenc", "videotoolbox"])
@@ -411,11 +383,11 @@ def main():
                 if not os.path.isdir(d) or os.path.exists(os.path.join(d, "video", "loop.mp4")):
                     continue
                 if os.path.exists(os.path.join(d, "video", os.path.basename(d) + ".mp4")):
-                    continue            # final video already made
+                    continue
                 idea = source_idea(d)
                 if idea and os.path.exists(os.path.join(idea, "video", "loop.mp4")) and not any(
                         os.path.exists(os.path.join(d, f)) for f in ("thumbnail.png", "thumbnail.jpg")):
-                    continue            # album uses its idea's loop
+                    continue
                 todo.append(d)
         skipped = [d for d in todo if not Job(d).image]
         todo = [d for d in todo if d not in skipped]

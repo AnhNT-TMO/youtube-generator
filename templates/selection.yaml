@@ -16,18 +16,8 @@ tempo:
 
 # Mô tả thể loại cho CLAP (tiếng Anh). positive = đúng chất album; negative = danh sách "Loại ngay nếu" (CLAUDE.md mục 7).
 style:
-  positive:
-    - "slow southern gospel blues ballad with warm male baritone vocal, hammond organ, piano and clean blues guitar"
-    - "intimate soulful gospel worship song, small church band, warm analog recording"
-  negative:
-    country: "country music with twangy vocals, acoustic guitar, banjo and pedal steel"
-    pop_worship: "modern pop worship song with bright synth pads and polished pop production"
-    blues_rock: "blues rock with loud distorted electric guitar"
-    cinematic_choir: "epic cinematic orchestra with a huge choir"
-    modern_pop: "modern pop music with punchy electronic drums"
-    edm: "electronic dance music with synthesizers and a heavy beat"
-    hiphop: "hip hop beat with rap vocals"
-    female_vocal: "song sung by a female singer"
+  positive: []
+  negative: {}
 
 # Luật arrangement chung của album
 rules:

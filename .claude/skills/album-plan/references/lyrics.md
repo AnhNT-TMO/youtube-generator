@@ -8,7 +8,7 @@ How Suno reads the Style, tags and lines for this genre (tag reliability, line s
 song titles to avoid, max words per song for the slot's tempo and length) is in the channel's `channel/<ch>/rules.md`.
 Read it before writing the Style or the first slot; validate prints each slot's word cap.
 
-## Division of labour (CLAUDE.md §4)
+## Division of labour (CLAUDE.md)
 
 - **Style** (shared, in `plan.yaml`) = who is playing: genre, voice, band, production, room, what to avoid.
 - **Tags in the lyrics** = how *this* song is arranged: how the intro starts and how long it is, which instrument
@@ -27,13 +27,13 @@ Read it before writing the Style or the first slot; validate prints each slot's 
   Describe arrangement in plain words inside the tag. Every line outside brackets is sung, so directions never go
   on their own line.
 
-## Opening (slot 1 above all; CLAUDE.md §3)
+## Opening (slot 1 above all; CLAUDE.md)
 
 - Translate `opening_spec` into the intro tag: a short tag that asks for it, then `[Verse 1]` right after. Don't
-  write an `[Instrumental Intro]` block. On Album 001 no intro tag (not even `[Cold Open: …]`) brought the voice in
-  before 16 s (channel rules.md §7), so the 0–15 s target is reached at assembly, which trims the intro. Earlier-voice
+  write an `[Instrumental Intro]` block. What intro tags really did for this channel (how early the voice came) is in
+  its `rules.md` §7; when no tag brings the voice in early enough, the 0–15 s target is reached at assembly, which trims the intro. Earlier-voice
   ideas are tried as slot-1 `variants`.
-- Other slots: follow `intro_type` / `intro_length` (a `hammond` + `short` slot opens on organ for a few seconds; a
+- Other slots: follow `intro_type` / `intro_length` (an instrument intro type + `short` opens on that instrument for a few seconds; a
   `vocal` + `cold_open` slot starts on a sung line).
 - These tags are our request. What Suno actually did is measured afterwards by verification-audio (vocal start, intro
   length). If a request is ignored repeatedly, the REGENERATE hints say so and the tags get adjusted then, with data.
@@ -45,15 +45,15 @@ Read it before writing the Style or the first slot; validate prints each slot's 
 - Quoting another slot's title or hook (3+ words) makes it an echo: list that slot in `echo_tracks`, and the two slots
   must not be adjacent (validate checks both).
 - Ending: follow `lyrics_rules.outro`, written inside the tag and phrased positively, then `[End]`:
-  `[Instrumental Outro: Hammond and piano, instrumental only, long sustained final chord]` + `[End]`.
+  `[Instrumental Outro: <the channel's lead instruments>, instrumental only, long sustained final chord]` + `[End]`.
   verification-audio flags vocals in the tail.
 
 ## Originality (hard rule)
 
 - Our own words. Never transcribe or imitate the reference's lyrics or captions (the analyzer stores none on purpose).
   No lines from existing songs. Nothing from `copy_guard` (titles, hooks, branding).
-- Scripture: paraphrase the slot's `source_ref`. Short public-domain phrases (e.g. KJV) are fine; passages in
-  `copy_guard.source_avoid` are not.
+- Lyric sources (`rules.md` → `sources`): paraphrase the slot's `source_ref`. Short public-domain phrases are fine
+  (the channel's rules.md says which texts); refs in `copy_guard.source_avoid` are not.
 - Avoid repeating the main image (`imagery[0]`) of the neighbouring slots.
 - English only.
 

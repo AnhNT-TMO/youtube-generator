@@ -1,4 +1,5 @@
-"""Cầu nối research/idea → plan album → các skill sau (suno-generate, verification-audio, album-assembly).
+from __future__ import annotations
+USAGE = """Cầu nối research/idea → plan album → các skill sau (suno-generate, verification-audio, album-assembly).
 
 <album>/plan.yaml là nguồn chính. Script này:
   init      tạo thư mục album + plan.yaml từ idea.yaml (hoặc chỉ từ research), ánh xạ máy móc, liệt kê chỗ cần quyết định
@@ -11,12 +12,11 @@
   catalog   dựng lại library/catalog.md + use_count từ front matter các bài đã chọn
 
     SK=.claude/skills/album-plan; P() { $SK/.venv/bin/python $SK/scripts/album_plan.py "$@"; }
-    P init --channel lamplight_gospel --from-idea channel/lamplight_gospel/ideas/NNN-slug
-    P init --channel lamplight_gospel --from-research <research-slug> --slug my-album --title "My Album"
+    P init --channel <ch> --from-idea channel/<ch>/ideas/NNN-slug
+    P init --channel <ch> --from-research <research-slug> --slug my-album --title "My Album"
     P validate <album> [--final] · P build <album> · P summary <album> · P approve <album> --by user
-    P board --channel lamplight_gospel · P sync <album> · P catalog --channel lamplight_gospel
+    P board --channel <ch> · P sync <album> · P catalog --channel <ch>
 """
-from __future__ import annotations
 
 import argparse
 import hashlib
@@ -31,10 +31,10 @@ from pathlib import Path
 
 import yaml
 
-ROOT = Path(__file__).resolve().parents[4]   # <repo>/.claude/skills/album-plan/scripts/album_plan.py
+ROOT = Path(__file__).resolve().parents[4]
 TEMPLATES = ROOT / "templates"
 VI = re.compile(r"[À-ỹđĐ]")
-INTRO_SECONDS = {"cold_open": 2, "short": 8, "medium": 20, "long": 35}   # ước lượng để tính mật độ lời
+INTRO_SECONDS = {"cold_open": 2, "short": 8, "medium": 20, "long": 35}
 ARC_ROLES = {"anchor", "opener", "build", "peak", "release", "closer", "interlude"}
 PLAN_KEYS_IN_TRACK = ["id", "title", "origin_album", "track_no", "genre_family", "subgenre", "time_signature",
                       "vocal_persona", "band_profile", "style_prompt_version", "energy", "valence", "emotion", "theme",
@@ -43,7 +43,6 @@ PLAN_KEYS_IN_TRACK = ["id", "title", "origin_album", "track_no", "genre_family",
 AUTO_BEGIN, AUTO_END = "<!-- album-plan:begin (sinh tự động từ plan.yaml, đừng sửa tay) -->", "<!-- album-plan:end -->"
 
 
-# ---------------------------------------------------------------- helpers
 def die(msg: str, code: int = 1):
     print(f"✖ {msg}", file=sys.stderr)
     sys.exit(code)
@@ -80,14 +79,12 @@ def rel(p: Path) -> str:
 
 
 def mid5(v):
-    """Dải [a, b] → một số (giữa, làm tròn 5). Số đơn giữ nguyên."""
     if isinstance(v, list) and len(v) == 2:
         return int(5 * round((v[0] + v[1]) / 2 / 5))
     return v
 
 
 def read_lyrics(md: Path) -> str | None:
-    """Khối ``` đầu tiên sau '## Lyrics' — cùng quy tắc verification-audio (qc/lyrics.read_lyrics) và suno-generate."""
     if not md.exists():
         return None
     m = re.search(r"^##\s+Lyrics.*?$(.*)", md.read_text(), re.M | re.S)
@@ -98,8 +95,8 @@ def read_lyrics(md: Path) -> str | None:
 
 
 def lyric_words(ly: str) -> list[str]:
-    body = re.sub(r"\[[^\]]*\]", " ", ly)          # bỏ tag [..]
-    body = re.sub(r"\([^)]*\)", " ", body)         # bỏ chỉ dẫn (..)
+    body = re.sub(r"\[[^\]]*\]", " ", ly)
+    body = re.sub(r"\([^)]*\)", " ", body)
     return re.findall(r"[A-Za-z']+", body)
 
 
@@ -121,9 +118,7 @@ def load_plan(album: Path) -> dict:
 
 
 def set_top_scalar(path: Path, key: str, value: str):
-    """Đổi một dòng `key: value` cấp ngoài cùng, giữ nguyên comment/định dạng phần còn lại."""
     txt = path.read_text()
-    # giá trị cũ + khoảng trắng trước comment bị thay; comment cuối dòng giữ lại, cách giá trị mới 2 dấu cách
     new, n = re.subn(rf"^{key}:[^\n#]*?[ \t]*(#[^\n]*)?$", lambda m: f"{key}: {value}" + (f"  {m.group(1)}" if m.group(1) else ""),
                      txt, count=1, flags=re.M)
     if not n:
@@ -132,7 +127,6 @@ def set_top_scalar(path: Path, key: str, value: str):
 
 
 def append_status_log(path: Path, entry: dict):
-    """Thêm 1 mục vào list `status_log` cấp ngoài cùng, đúng thụt lề của các mục đang có; giữ nguyên phần còn lại của file."""
     lines = path.read_text().splitlines(keepends=True)
     item = json.dumps(entry, ensure_ascii=False)
     i = next((k for k, ln in enumerate(lines) if re.match(r"status_log:", ln)), None)
@@ -173,8 +167,6 @@ def catalog_rows(channel: str) -> list[dict]:
 
 
 def channel_rules(channel: str) -> dict:
-    """channel/<ch>/rules.md: khối ```yaml đầu tiên = luật máy đọc của channel (house style, mật độ lời, tên bài có thật…).
-    {} khi channel chưa có rules.md (các check dựa trên rules được bỏ qua)."""
     f = ROOT / "channel" / channel / "rules.md"
     m = re.search(r"```yaml\n(.*?)```", f.read_text(), re.S) if f.is_file() else None
     try:
@@ -202,8 +194,6 @@ def content_tokens(text) -> set[str]:
 
 
 def title_like(new: str, known: str) -> bool:
-    """title/hook mới gần trùng một tên bài: chứa nguyên cụm (≥ 2 từ), hoặc mọi từ nội dung của bên ngắn nằm trong bên dài
-    (≥ 2 từ nội dung; bỏ từ đệm và số nhiều: 'You still call me son' ~ 'Still Calls Me Son')."""
     a, b = norm_text(new), norm_text(known)
     if not a or not b:
         return False
@@ -214,25 +204,21 @@ def title_like(new: str, known: str) -> bool:
     return len(short) >= 2 and short <= long_
 
 
-def scripture_chapters(ref) -> set[str]:
-    """'Luke 15:20; Psalm 42:5' → {'luke 15', 'psalm 42'} (so trùng Kinh Thánh giữa các album ở mức chương)."""
+def source_units(ref) -> set[str]:
     return {f"{b.lower()} {c}" for b, c in re.findall(r"((?:[1-3] )?[A-Z][a-z]+)\s+(\d+)", str(ref or ""))}
 
 
 def voice_entry(rules: dict, voice) -> dict | None:
-    """Voice của plan (identity.voice {name, id}) trong rules.md voices[]; None khi không có."""
     vid = (voice or {}).get("id") if isinstance(voice, dict) else None
     return next((v for v in rules.get("voices") or [] if v.get("id") == vid), None)
 
 
 def vocal_line(rules: dict, voice) -> str:
-    """Câu giọng của Style: voices[].vocal_line của Voice đã chọn, không có thì house_style.vocal_line."""
     v = voice_entry(rules, voice) or {}
     return ws(v.get("vocal_line") or (rules.get("house_style") or {}).get("vocal_line"))
 
 
 def reference_criteria(plan: dict) -> dict:
-    """criteria của video tham khảo (research/<slug>/reference.yaml) theo sources.research của plan; {} khi không có."""
     for r in (plan.get("sources") or {}).get("research") or []:
         f = ROOT / Path(str(r)).parent / "reference.yaml"
         if f.is_file():
@@ -256,8 +242,6 @@ def channel_plans(channel: str, exclude: Path | None = None) -> list[tuple[str, 
 
 
 def other_plans(channel: str, album: Path) -> list[tuple[str, dict]]:
-    """Slot mới của các album KHÁC trong channel đã có plan.yaml nhưng chưa phát hành: khi plan trước nhiều album cùng
-    lúc (vd. 20 idea), title/hook không được đụng nhau dù chưa bài nào vào catalog."""
     out = []
     for f in (ROOT / "channel" / channel / "albums").glob("*/plan.yaml"):
         if f.parent.resolve() == album.resolve():
@@ -281,7 +265,6 @@ def channel_track_ids(channel: str, exclude: Path | None = None) -> set[str]:
     return ids
 
 
-# ---------------------------------------------------------------- init
 def next_album_number(channel: str) -> int:
     nums = [int(p.name[:3]) for p in (ROOT / "channel" / channel / "albums").glob("[0-9][0-9][0-9]-*")]
     return max(nums, default=0) + 1
@@ -297,14 +280,12 @@ def make_prefix(slug: str, channel: str) -> str:
 
 
 def bpm_placeholder(text: str) -> tuple[str, list[str]]:
-    """'around 64 BPM' → 'around {bpm} BPM'. Trả text mới + các số đã thay."""
     found = re.findall(r"\b(\d{2,3})(\s*)(?=BPM\b)", text, flags=re.I)
     new = re.sub(r"\b\d{2,3}(\s*)(?=BPM\b)", r"{bpm}\1", text, flags=re.I)
     return new, [f[0] for f in found]
 
 
 def research_reference(slugs: list[str]) -> str:
-    """Bảng tham chiếu số đo của research (notes/plan-reference.md). Chỉ để lên plan, không phải quyết định."""
     out = ["# Số đo tham chiếu từ research (album-plan init)", "",
            "Chỉ để tham khảo khi lên plan. `felt BPM` (reference.yaml) = tempo cảm nhận đo bằng qc của verification-audio,",
            "cùng đơn vị verify.py. Research cũ không có reference.yaml: `analyzer` = BPM librosa, **có thể lệch mức nhịp**",
@@ -312,10 +293,10 @@ def research_reference(slugs: list[str]) -> str:
     for slug in slugs:
         d = ROOT / "research" / slug
         ry = d / "reference.yaml"
-        if ry.exists():   # analyzer mới: số đo đã quy về đơn vị QC (bpm = felt), nguồn ưu tiên
+        if ry.exists():
             r = yaml.safe_load(ry.read_text()) or {}
             src, alb_ = r.get("source") or {}, r.get("album") or {}
-            tm = (r.get("criteria") or {}).get("tempo") or alb_.get("tempo") or {}   # reference/v3, older
+            tm = (r.get("criteria") or {}).get("tempo") or alb_.get("tempo") or {}
             out += [f"## {slug} (reference.yaml)", "", f"{src.get('title')} · {src.get('channel')} · {mmss(src.get('duration_s') or 0)} · "
                     f"{src.get('views')} views · felt tempo median {tm.get('felt_bpm_median', tm.get('felt_bpm_qc_median'))}", ""]
             if r.get("criteria"):
@@ -354,9 +335,17 @@ def research_reference(slugs: list[str]) -> str:
     return "\n".join(out) + "\n"
 
 
-def plan_from_idea(idea: dict, idea_path: Path, album: Path) -> tuple[dict, list[str]]:
-    """Ánh xạ máy móc idea.yaml → plan.yaml. Trả plan + ghi chú những gì đã đổi/bỏ qua."""
+def source_label(rules: dict) -> str:
+    return str((rules.get("sources") or {}).get("kind") or "nguồn")
+
+
+def source_format(rules: dict) -> str:
+    return str(((rules.get("sources") or {}).get("numbered") or {}).get("format") or "{n}")
+
+
+def plan_from_idea(idea: dict, idea_path: Path, album: Path, rules: dict | None = None) -> tuple[dict, list[str]]:
     notes = []
+    fmt = source_format(rules or {})
     tmpl = yaml.safe_load((TEMPLATES / "plan.yaml").read_text())
     p = tmpl
     ident, tgt, gen, sp = idea.get("identity") or {}, idea.get("target") or {}, idea.get("generation") or {}, idea.get("style_prompt") or {}
@@ -365,14 +354,15 @@ def plan_from_idea(idea: dict, idea_path: Path, album: Path) -> tuple[dict, list
     p["concept"] = (idea.get("hypothesis") or {}).get("statement") or p["concept"]
     dif = idea.get("differentiation") or {}
     cg = dif.get("copy_guard") or {}
-    avoid = cg.get("scripture_avoid") or []
+    avoid = cg.get("source_avoid") or cg.get("scripture_avoid") or []
     p["differentiation"] = {"keep": dif.get("keep") or [], "change": dif.get("change") or [],
                             "copy_guard": {"titles": cg.get("titles") or [], "hooks": cg.get("hooks") or [],
                                            "branding": cg.get("branding") or [],
-                                           "source_avoid": [f"Psalm {x}" if isinstance(x, int) else str(x) for x in avoid],
+                                           "source_avoid": [fmt.format(n=x) if isinstance(x, int) else str(x) for x in avoid],
                                            "lyric_rule": cg.get("lyric_rule") or p["differentiation"]["copy_guard"]["lyric_rule"]}}
     if avoid and all(isinstance(x, int) for x in avoid):
-        notes.append(f"copy_guard.scripture_avoid {avoid} → source_avoid 'Psalm N' (so với slot.source_ref)")
+        notes.append(f"copy_guard.{'source_avoid' if cg.get('source_avoid') else 'scripture_avoid'} {avoid} → source_avoid "
+                     f"'{fmt.format(n='N')}' (so với slot.source_ref)")
     sv = ident.get("suno_voice") or {}
     p["identity"] = {"vocal_persona": ident.get("vocal_persona"), "band_profile": ident.get("band_profile"),
                      "voice": {"name": sv["name"], "id": sv["id"]} if sv.get("name") and sv.get("id") else None,
@@ -426,7 +416,7 @@ def plan_from_idea(idea: dict, idea_path: Path, album: Path) -> tuple[dict, list
     gens = budget.get("gens") or {}
     dur = settings.get("duration") or {}
     if gen.get("max_mode") or (gens.get("track01") or 2) > 2 or (gens.get("others_each") or 1) > 1:
-        notes.append(f"generation: idea xin max_mode={gen.get('max_mode')} / gens={gens or '-'} → áp luật credits CLAUDE.md §4 "
+        notes.append(f"generation: idea xin max_mode={gen.get('max_mode')} / gens={gens or '-'} → áp luật credits CLAUDE.md "
                      f"(bài 1 = {LEAN_ROUNDS['track01']} lượt Max, bài khác = {LEAN_ROUNDS['others']} lượt thường); muốn hơn thì hỏi chủ kênh")
     p["generation"] = {"model": gen.get("model", "v6"), "max_mode": False,
                        "duration": "custom" if dur.get("mode", "custom") == "custom" else "auto",
@@ -445,7 +435,7 @@ def plan_from_idea(idea: dict, idea_path: Path, album: Path) -> tuple[dict, list
         notes.append(f"generation: dải {ranged} → số giữa làm tròn 5 (xem lại nếu muốn số khác)")
     qc = idea.get("qc") or {}
 
-    def to_album_rel(g):   # idea ghi đường dẫn tính từ gốc repo; selection.yaml cần tương đối so với thư mục album
+    def to_album_rel(g):
         return Path(os.path.relpath(ROOT / g, album)).as_posix() if g and (ROOT / g.split("*")[0]).parent.exists() else g
     refs = qc.get("references")
     refs = [refs] if isinstance(refs, str) else (refs or [])
@@ -468,7 +458,7 @@ def plan_from_idea(idea: dict, idea_path: Path, album: Path) -> tuple[dict, list
         n = int(s["n"])
         slot = {"n": n, "title": s.get("title"), "source": s.get("source", "new"), "library_id": s.get("library_id"),
                 "arc_role": s.get("arc_role"), "emotion": s.get("emotion"), "theme": s.get("theme"),
-                "source_ref": s.get("scripture") or s.get("source_ref"), "energy": s.get("energy"), "valence": s.get("valence"),
+                "source_ref": s.get("source_ref") or s.get("scripture"), "energy": s.get("energy"), "valence": s.get("valence"),
                 "bpm": s.get("bpm"), "intro_type": s.get("intro_type"), "intro_length": s.get("intro_length"),
                 "target_duration": s.get("target_duration") or (mmss(dur["seconds"]) if dur.get("seconds") else None),
                 "hook_phrase": s.get("hook_phrase"),
@@ -525,14 +515,14 @@ def cmd_init(a):
     num = next_album_number(a.channel)
     album = Path(a.out).resolve() if a.out else ch_dir / "albums" / f"{num:03d}-{slug}"
     if a.out and re.match(r"\d{3}-", album.name):
-        num = int(album.name[:3])                 # --out quyết định số album (chạy nhiều init song song không tranh số)
+        num = int(album.name[:3])
     if (album / "plan.yaml").exists():
         die(f"{rel(album)}/plan.yaml đã có")
     (album / "tracks").mkdir(parents=True, exist_ok=True)
     (album / "notes").mkdir(exist_ok=True)
     notes = []
     if idea:
-        plan, notes = plan_from_idea(idea, idea_path, album)
+        plan, notes = plan_from_idea(idea, idea_path, album, channel_rules(a.channel))
         research = [Path(r.get("reference") or r["path"]).parent.name
                     for r in (idea.get("provenance") or {}).get("research") or [] if r.get("reference") or r.get("path")]
     else:
@@ -547,7 +537,9 @@ def cmd_init(a):
                 cgp = plan["differentiation"]["copy_guard"]
                 cgp["titles"] = sorted(set(cgp["titles"]) | set(g.get("titles") or []))
                 cgp["branding"] = sorted(set(cgp["branding"]) | set(g.get("branding") or []))
-                cgp["source_avoid"] = sorted(set(cgp["source_avoid"]) | {f"Psalm {x}" for x in g.get("psalms_used") or []})
+                used = g.get("sources_used", g.get("psalms_used")) or []
+                fmt = source_format(channel_rules(a.channel))
+                cgp["source_avoid"] = sorted(set(cgp["source_avoid"]) | {fmt.format(n=x) if isinstance(x, int) else str(x) for x in used})
                 notes.append(f"copy_guard lấy từ research/{rs}/reference.yaml (copy_guard_seed)")
         notes.append("Không có idea: plan chỉ có khung. Lấy số đo từ notes/plan-reference.md + analysis.md, tự quyết concept, "
                      "copy_guard, tempo, style, tracklist (xem SKILL.md mục 2)")
@@ -562,10 +554,11 @@ def cmd_init(a):
         st = plan["sound"]["style"]
         first = (st.get("text") or "").split(".")[0].split(",")
         mood = ",".join(first[2:]).strip() or "<album mood phrase>"
-        meter = (plan["sound"].get("tempo") or {}).get("meter") or "6/8"
+        meter = (plan["sound"].get("tempo") or {}).get("meter") or hs.get("meter_default") or "<meter>"
+        groove = (hs.get("groove_line") or "{meter} groove, {bpm} BPM.").replace("{meter}", str(meter))
         st.update({"version": st.get("version") or f"{plan['album']['id_prefix']}-v1",
                    "text": f"{hs['genre_lead']}, {mood}. {vocal_line(rules_, (plan.get('identity') or {}).get('voice'))} "
-                           f"{ws(hs['band_block'])} Slow {meter} groove, {{bpm}} BPM.",
+                           f"{ws(hs['band_block'])} {groove}",
                    "exclude": hs["exclude"]})
         notes.append(f"style: dựng từ house_style {hs.get('version')} của channel/{a.channel}/rules.md (cụm mood: '{mood}'); "
                      "album muốn khác mặc định → khai báo experiment")
@@ -596,7 +589,6 @@ def cmd_init(a):
     print(f"\nTiếp: sửa plan.yaml → P validate {rel(album)} → P build {rel(album)} → viết lyrics vào tracks/*.md")
 
 
-# ---------------------------------------------------------------- validate
 class Issues:
     def __init__(self, waivers):
         self.errors, self.warns, self.waived = [], [], []
@@ -607,13 +599,13 @@ class Issues:
         w = next((w for w in self.waivers if w.get("rule") == rule and set(slots) <= set(w.get("slots") or slots)), None)
         (self.waived if w else self.errors).append(f"[{rule}] {msg}" + (f" — waiver: {w.get('why')}" if w else ""))
 
-    def warn(self, rule, msg, slots=()):   # slots: cùng chữ ký với err để gọi (I.warn if … else I.err)(rule, msg, slots)
+    def warn(self, rule, msg, slots=()):
         self.warns.append(f"[{rule}] {msg}")
 
 
-CREDITS_CEILING = 250            # CLAUDE.md §4: trần credits một album (album 14–15 bài vẫn đủ)
-LEAN_ROUNDS = {"track01": 2, "others": 1}   # CLAUDE.md §4: bài 1 = 2 lượt Max, bài khác = 1 lượt thường
-TEMPO_BAND_MAX_RATIO = 1.20      # một album = một dải tempo: bpm bài nhanh nhất / chậm nhất ≤ 1.20; giữa các album dải được khác nhau
+CREDITS_CEILING = 250
+LEAN_ROUNDS = {"track01": 2, "others": 1}
+TEMPO_BAND_MAX_RATIO = 1.20
 
 
 def slot_bpm(plan, s):
@@ -621,12 +613,10 @@ def slot_bpm(plan, s):
 
 
 def main_track_files(album: Path, n: int) -> list[Path]:
-    """File track chính của slot n: `NN-<slug>.md`. File lời biến thể (`NN-<slug>.<variant>.md`) không tính."""
     return sorted(p for p in (album / "tracks").glob(f"{n:02d}-*.md") if "." not in p.name[:-3])
 
 
 def fm_value(text: str, key: str) -> str:
-    """Giá trị `key:` trong front matter (bỏ comment cuối dòng và dấu nháy); "" khi trống. Không đọc sang dòng sau."""
     head = text.partition("\n---\n")[0]
     m = re.search(rf"^{re.escape(key)}:[ \t]*([^\n]*)$", head, re.M)
     if not m:
@@ -649,7 +639,7 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
     tempo, style, tgt = sound.get("tempo") or {}, sound.get("style") or {}, plan.get("target") or {}
     gen, qc, cg = plan.get("generation") or {}, plan.get("qc") or {}, ((plan.get("differentiation") or {}).get("copy_guard") or {})
     slots = sorted(plan.get("slots") or [], key=lambda s: s.get("n", 0))
-    rules = channel_rules(alb.get("channel", ""))            # channel/<ch>/rules.md (nguồn chuẩn của channel)
+    rules = channel_rules(alb.get("channel", ""))
     exp = plan.get("experiment") or {}
     axes = {str(x).lower() for x in exp.get("axes") or []}
     if exp and not (axes and exp.get("what") and exp.get("why")):
@@ -709,9 +699,8 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
     for k in ("slug", "channel", "id_prefix"):
         if not alb.get(k):
             I.err("album", f"album.{k} trống")
-    # --- danh tính & âm thanh
     if not ident.get("vocal_persona") or not ident.get("band_profile"):
-        I.err("identity", "identity.vocal_persona / band_profile trống (CLAUDE.md §4: khóa nghệ sĩ cho cả album)")
+        I.err("identity", "identity.vocal_persona / band_profile trống (CLAUDE.md: khóa nghệ sĩ cho cả album)")
     v = ident.get("voice")
     if v is not None and not (isinstance(v, dict) and v.get("name") and v.get("id")):
         I.err("identity", "identity.voice phải là null hoặc {name, id}")
@@ -744,7 +733,6 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
         I.err("style", "sound.style.version trống")
     if not style.get("exclude"):
         I.warn("style", "sound.style.exclude trống")
-    # --- slots cơ bản
     if not slots:
         I.err("slots", "chưa có slot nào")
         return I
@@ -757,22 +745,22 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
     for t in {t for t in titles if titles.count(t) > 1 and t}:
         I.err("title", f"trùng title '{t}'")
     catalog = catalog_rows(alb.get("channel", ""))
-    own = f"/albums/{album.name}/"          # bài của chính album này (đã accept) không tính là "trùng library"
+    own = f"/albums/{album.name}/"
     cat_titles = {norm_text(r.get("title")): r.get("id") for r in catalog if own not in (r.get("file") or "")}
     cat_hooks = {norm_text(r.get("hook")): r.get("id") for r in catalog if r.get("hook") and own not in (r.get("file") or "")}
-    others = other_plans(alb.get("channel", ""), album)   # album khác đang plan (chưa có bài trong catalog)
+    others = other_plans(alb.get("channel", ""), album)
     oplans = channel_plans(alb.get("channel", ""), album)
     known = [(str(t), "rules.md known_titles") for t in rules.get("known_titles") or []]
-    for o_album, op in oplans:                 # tên bài của MỌI video tham khảo trong channel, không chỉ của album này
+    for o_album, op in oplans:
         ocg = (op.get("differentiation") or {}).get("copy_guard") or {}
         known += [(str(t), f"copy_guard {o_album}") for t in (ocg.get("titles") or []) + (ocg.get("hooks") or [])]
     bad_words = [str(x).lower() for x in (rules.get("avoid_words") or []) + (rules.get("heteronyms") or [])]
-    o_chap = {}                                # 'luke 15' → [(album, slot)]
-    o_edge_img = {}                            # hình ảnh chủ đạo của title track / bài kết của album khác
+    o_chap = {}
+    o_edge_img = {}
     for o_album, op in oplans:
         osl = sorted(op.get("slots") or [], key=lambda x: x.get("n", 0))
         for o in osl:
-            for c in scripture_chapters(o.get("source_ref")):
+            for c in source_units(o.get("source_ref")):
                 o_chap.setdefault(c, []).append((o_album, o.get("n")))
         for o in (osl[:1] + osl[-1:]) if osl else []:
             im = norm_text((o.get("imagery") or [None])[0])
@@ -783,7 +771,7 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
     avoid = cg.get("source_avoid") or []
     s1 = slots[0]
     if s1.get("source") != "new":
-        I.err("title_track", "slot 1 (title track) phải là bài mới (CLAUDE.md §3, §7.2)", [1])
+        I.err("title_track", "slot 1 (title track) phải là bài mới (CLAUDE.md)", [1])
     if s1.get("arc_role") != "anchor":
         I.err("title_track", "slot 1 phải có arc_role: anchor", [1])
     durations, lyrics_by = {}, {}
@@ -841,7 +829,7 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
                 I.err("copy_guard", f"{w}: title chứa branding của kênh khác '{g}'", [n])
         if s.get("source") == "new":
             for t, src in known:
-                loose = src.startswith("copy_guard") and len(norm_text(t).split()) < 3   # 'Praise Him', 'Yes Lord': chỉ bắt khi trùng hẳn
+                loose = src.startswith("copy_guard") and len(norm_text(t).split()) < 3
                 for what, val in (("title", title), ("hook", s.get("hook_phrase"))):
                     if val and (norm_text(val) == norm_text(t) if loose else title_like(val, t)):
                         I.err("known_title", f"{w}: {what} '{val}' gần trùng bài có sẵn '{t}' ({src})", [n])
@@ -850,9 +838,9 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
                 I.warn("avoid_words", f"{w}: title/hook có {hit} (từ Suno hay tự chèn / đọc hai cách, rules.md §3)")
             if rules and final and not s.get("title_check"):
                 I.err("title_check", f"{w}: chưa tra title + hook trên web (slot.title_check, rules.md §3)", [n])
-            for c in sorted(scripture_chapters(s.get("source_ref"))):
+            for c in sorted(source_units(s.get("source_ref"))):
                 if o_chap.get(c):
-                    I.warn("cross_plan", f"{w}: Kinh Thánh '{c}' đã dùng ở {', '.join(f'{a_} slot {m}' for a_, m in o_chap[c][:3])}")
+                    I.warn("cross_plan", f"{w}: {source_label(rules)} '{c}' đã dùng ở {', '.join(f'{a_} slot {m}' for a_, m in o_chap[c][:3])}")
             if n in (slots[0]["n"], slots[-1]["n"]):
                 im = norm_text((s.get("imagery") or [None])[0])
                 if im and o_edge_img.get(im):
@@ -863,7 +851,7 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
             if re.search(rf"\b{re.escape(str(av))}(?![\d:])", ref, re.I) or re.search(rf"\b{re.escape(str(av))}:", ref, re.I):
                 I.err("copy_guard", f"{w}: source_ref '{ref}' nằm trong source_avoid ({av})", [n])
         if n == 1 and not s.get("opening_spec"):
-            I.warn("title_track", "slot 1 chưa có opening_spec (timeline 15 s đầu của video, CLAUDE.md §3)")
+            I.warn("title_track", "slot 1 chưa có opening_spec (timeline 15 s đầu của video, CLAUDE.md)")
         r = s.get("rounds") or ((gen.get("rounds") or {}).get("track01" if n == 1 else "others"))
         if s.get("source") == "new" and (not isinstance(r, int) or r < 1):
             I.err("rounds", f"{w}: rounds phải là số nguyên >= 1", [n])
@@ -876,7 +864,6 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
                 (I.err if final else I.warn)("lyrics", f"{w}: chưa có lyrics trong {rel(lp)} (## Lyrics → khối ```)")
             else:
                 lyrics_by[n] = ly
-    # --- luật giữa các bài (CLAUDE.md §7.2)
     bpms = {s["n"]: slot_bpm(plan, s) for s in slots if isinstance(slot_bpm(plan, s), (int, float)) and s["n"] != hslot}
     if bpms and max(bpms.values()) / min(bpms.values()) > TEMPO_BAND_MAX_RATIO:
         lo_n, hi_n = min(bpms, key=bpms.get), max(bpms, key=bpms.get)
@@ -903,7 +890,7 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
             (I.warn if hslot in (na, nb) else I.err)("bpm_step", f"slot {na}→{nb}: tempo {ba}→{bb} lệch {abs(bb / ba - 1) * 100:.0f}% > {bmax}%"
                                                      + (" (bài điểm nhấn)" if hslot in (na, nb) else ""), [na, nb])
         if a_.get("intro_type") and a_.get("intro_type") == b_.get("intro_type"):
-            (I.warn if hslot in (na, nb) else I.err)("intro_repeat", f"slot {na}→{nb}: cùng intro_type '{a_['intro_type']}' (CLAUDE.md §4: transition phải đa dạng)", [na, nb])
+            (I.warn if hslot in (na, nb) else I.err)("intro_repeat", f"slot {na}→{nb}: cùng intro_type '{a_['intro_type']}' (CLAUDE.md: transition phải đa dạng)", [na, nb])
         ia, ib = (a_.get("imagery") or [None])[0], (b_.get("imagery") or [None])[0]
         if ia and ia == ib:
             I.warn("imagery", f"slot {na}→{nb}: cùng hình ảnh chủ đạo '{ia}'")
@@ -916,7 +903,7 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
     if tgt.get("peak_slots") and not set(peak) & set(tgt["peak_slots"]):
         I.warn("arc", f"energy cao nhất ở slot {peak}, ngoài peak_slots {tgt['peak_slots']}")
     if len(slots) > 2 and en[-1] > min(en[1:-1] or [en[-1]]):
-        I.warn("arc", f"bài cuối energy {en[-1]} chưa phải thấp nhất (CLAUDE.md §4: kết thúc bình yên)")
+        I.warn("arc", f"bài cuối energy {en[-1]} chưa phải thấp nhất (CLAUDE.md: kết thúc bình yên)")
     by_slot = {s["n"]: s for s in slots}
     hooks = {s["n"]: norm_text(s.get("hook_phrase")) for s in slots if s.get("hook_phrase")}
     for n, h in hooks.items():
@@ -928,7 +915,6 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
                 I.err("hook_repeat", f"hook slot {n} = title slot {m}", [n, m])
         if cat_titles.get(h) and n != 1 and cat_titles[h] != by_slot[n].get("library_id"):
             I.err("hook_repeat", f"hook slot {n} trùng title bài library {cat_titles[h]}", [n])
-    # mỗi album cũ góp tối đa N bài: đếm theo mọi album bài đã xuất hiện (cột Albums), không chỉ album gốc
     cat_by_id = {r.get("id"): r for r in catalog}
     from_album = {}
     for s in slots:
@@ -939,13 +925,11 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
     omax = tgt.get("reuse_per_album_max", 2)
     for a, ns in from_album.items():
         if len(ns) > omax:
-            I.err("album_overlap", f"slot {ns}: {len(ns)} bài đã có trong album {a} (> {omax}, CLAUDE.md §6: album mới không lặp album cũ)", ns)
-    # tổng số bài lấy từ library: tối đa N, còn lại tạo mới
+            I.err("album_overlap", f"slot {ns}: {len(ns)} bài đã có trong album {a} (> {omax}, CLAUDE.md: album mới không lặp album cũ)", ns)
     rmax = tgt.get("reuse_total_max", 4)
     lib = [s["n"] for s in slots if s.get("source") == "library"]
     if len(lib) > rmax:
-        I.err("reuse_total", f"slot {lib}: {len(lib)} bài library (> {rmax}, CLAUDE.md §6: tối đa {rmax} bài từ album cũ, còn lại tạo mới)", lib)
-    # --- lời
+        I.err("reuse_total", f"slot {lib}: {len(lib)} bài library (> {rmax}, CLAUDE.md: tối đa {rmax} bài từ album cũ, còn lại tạo mới)", lib)
     lr = plan.get("lyrics_rules") or {}
     wpm_lo, wpm_hi = (tgt.get("words_per_min") or [0, 0])[:2]
     by_n = {s["n"]: s for s in slots}
@@ -973,7 +957,7 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
                     if str(m) not in declared and oid not in declared:
                         I.err("echo", f"{w}: lời nhắc title/hook của slot {m} ('{what}') mà echo_tracks chưa khai báo", [n, m])
                     elif abs(m - n) == 1:
-                        I.err("echo", f"{w}: bài echo slot {m} đặt liền kề (CLAUDE.md §7.2)", [n, m])
+                        I.err("echo", f"{w}: bài echo slot {m} đặt liền kề (CLAUDE.md)", [n, m])
         for g in (cg.get("titles") or []):
             if len(norm_text(g).split()) >= 2 and norm_text(g) in body:
                 I.warn("copy_guard", f"{w}: lời chứa title của kênh khác '{g}'")
@@ -1015,7 +999,6 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
             if abs(dev) > rf["words_per_min_max_dev_pct"]:
                 I.warn("reference_follow", f"mật độ lời ~{med:.0f} từ/phút hát (trung vị, ước lượng) lệch {dev:+.0f}% so với video tham khảo "
                                            f"{ref_wpm} > ±{rf['words_per_min_max_dev_pct']}% (rules.md §1b)")
-    # --- tổng
     tot = sum(v for v in durations.values() if v)
     lo, hi = (tgt.get("duration_min") or [0, 10 ** 6])[:2]
     if tot and not lo * 60 <= tot <= hi * 60 * 1.08:
@@ -1029,16 +1012,16 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
     credits, cpg = 0, gen.get("credits_per_generation") or {}
     for s in slots:
         if s.get("source") == "new":
-            mx = (s.get("generation_overrides") or {}).get("max_mode", gen.get("max_mode", True))   # Max bật/tắt theo từng bài
+            mx = (s.get("generation_overrides") or {}).get("max_mode", gen.get("max_mode", True))
             per = int(cpg.get("max", 20)) if mx else int(cpg.get("normal", 10))
             credits += (s.get("rounds") or (gen.get("rounds") or {}).get("track01" if s["n"] == 1 else "others") or 0) * per
     if (gen.get("budget_max_credits") or 0) > CREDITS_CEILING:
-        I.err("budget", f"budget_max_credits {gen['budget_max_credits']} > {CREDITS_CEILING} (trần album, CLAUDE.md §4)")
+        I.err("budget", f"budget_max_credits {gen['budget_max_credits']} > {CREDITS_CEILING} (trần album, CLAUDE.md)")
     rd = gen.get("rounds") or {}
     s1 = next((s for s in slots if s["n"] == 1), {})
     if gen.get("max_mode") or (rd.get("others") or 0) > LEAN_ROUNDS["others"] or (rd.get("track01") or 0) > LEAN_ROUNDS["track01"] \
             or not (s1.get("generation_overrides") or {}).get("max_mode"):
-        I.warn("credits_policy", f"khác luật credits CLAUDE.md §4 (max_mode false, slot 1 generation_overrides.max_mode true, "
+        I.warn("credits_policy", f"khác luật credits CLAUDE.md (max_mode false, slot 1 generation_overrides.max_mode true, "
                                  f"rounds {LEAN_ROUNDS}); cần chủ kênh đồng ý")
     if gen.get("budget_max_credits") and credits > gen["budget_max_credits"]:
         I.warn("budget", f"credits dự kiến {credits} > budget_max_credits {gen['budget_max_credits']}")
@@ -1057,7 +1040,7 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
             I.warn("qc", f"qc.references '{r}' chưa khớp file nào")
     if final:
         if not (plan.get("library_check") or {}).get("done"):
-            I.err("library", "library_check.done chưa có (CLAUDE.md §7.2: kiểm tra library trước khi tạo mới)")
+            I.err("library", "library_check.done chưa có (CLAUDE.md: kiểm tra library trước khi tạo mới)")
         for q in plan.get("open_questions") or []:
             if q.get("blocking") and not q.get("answer"):
                 I.err("open_question", f"câu hỏi blocking chưa trả lời: {q.get('id')} {q.get('q')}")
@@ -1082,9 +1065,7 @@ def cmd_validate(a):
     print("✔ plan hợp lệ" + (" và đủ điều kiện duyệt" if a.final else ""))
 
 
-# ---------------------------------------------------------------- build
 def plan_fingerprint(plan: dict, album: Path) -> str:
-    """Dấu vân tay nội dung được duyệt: plan (trừ status) + lyrics các bài mới. Đổi sau khi duyệt → phải duyệt lại."""
     core = {k: v for k, v in plan.items() if k not in ("status", "status_log")}
     ly = {s["n"]: read_lyrics(track_path(album, s)) for s in plan.get("slots") or [] if s.get("source") == "new"}
     return hashlib.sha256(json.dumps([core, ly], sort_keys=True, default=str).encode()).hexdigest()[:12]
@@ -1116,7 +1097,6 @@ def yscalar(v) -> str:
 
 
 def set_fm(text: str, updates: dict) -> str:
-    """Đổi `key: value` trong front matter, giữ comment cuối dòng (cùng kiểu verify.py set_front_matter)."""
     head, sep, body = text.partition("\n---\n")
     for k, v in updates.items():
         val = yscalar(v)
@@ -1361,7 +1341,7 @@ def build_album_md(plan: dict, album: Path, I: Issues, log: list):
             return
     else:
         new = (f"# Album {plan['album']['number']:03d} — {plan['album']['title_working']}\n\n{AUTO_BEGIN}\n{auto}\n{AUTO_END}\n\n"
-               "## Title track & 10–15 giây đầu (CLAUDE.md mục 3)\n\n- [ ] Title track là bản tốt nhất trong nhiều candidate\n"
+               "## Title track & 10–15 giây đầu (CLAUDE.md)\n\n- [ ] Title track là bản tốt nhất trong nhiều candidate\n"
                "- [ ] 10–15 giây đầu của video có giọng/hook/motif đặc trưng, không trống, không nhỏ hơn thân bài quá nhiều\n"
                "- [ ] Cách mở khác các album trước của kênh\n\n## Ghi chú\n\n")
     f.write_text(new)
@@ -1369,8 +1349,8 @@ def build_album_md(plan: dict, album: Path, I: Issues, log: list):
 
 
 def cmd_themes(a):
-    """Bảng mọi album của channel để chọn concept/tempo/cách mở CHƯA CÓ (rules.md §1, §4): trước khi plan album mới."""
     base = ROOT / "channel" / a.channel / "albums"
+    rules = channel_rules(a.channel)
     print(f"# Themes — {a.channel} ({date.today()})\n")
     for d in sorted(x for x in base.iterdir() if x.is_dir()):
         pf = d / "plan.yaml"
@@ -1400,7 +1380,7 @@ def cmd_themes(a):
               f"biến thể {[v.get('name') for v in s1.get('variants') or []]} — hình ảnh {(s1.get('imagery') or [None])[0]}")
         print(f"- bài kết: \"{last.get('title')}\" — hook \"{last.get('hook_phrase')}\" — mở {last.get('intro_type')}/{last.get('intro_length')} — "
               f"hình ảnh {(last.get('imagery') or [None])[0]}")
-        print(f"- Kinh Thánh: {' · '.join(sorted({c for x in sl for c in scripture_chapters(x.get('source_ref'))})) or '—'}")
+        print(f"- {source_label(rules)}: {' · '.join(sorted({c for x in sl for c in source_units(x.get('source_ref'))})) or '—'}")
         print(f"- hình ảnh chủ đạo: {' · '.join(str((x.get('imagery') or ['-'])[0]) for x in sl)}")
         print(f"- library: {[x.get('library_id') for x in sl if x.get('source') == 'library'] or '—'}")
         hl_ = p.get("highlight") or {}
@@ -1459,8 +1439,6 @@ def cmd_approve(a):
         for m in I.errors:
             print(f"✖ {m}")
         die("chưa đủ điều kiện duyệt")
-    # build trước (đổi tên file track, front matter…) để dấu vân tay tính trên đúng các file sẽ gửi Suno;
-    # build tự dừng nếu plan đã đóng băng, nên không có gì được ghi khi suno-generate đã chạy
     a.force = False
     cmd_build(a)
     plan = load_plan(album)
@@ -1482,7 +1460,7 @@ def cmd_approve(a):
 
 
 def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(description=USAGE, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("init")
     p.add_argument("--channel", required=True)
@@ -1501,7 +1479,7 @@ def main():
     import channel_tools as ct
     p = sub.add_parser("board", help="trạng thái cả channel"); p.add_argument("--channel", required=True); p.set_defaults(fn=ct.cmd_board)
     p = sub.add_parser("sync", help="chép file hình ảnh mới hơn từ idea gốc"); p.add_argument("album"); p.set_defaults(fn=ct.cmd_sync)
-    p = sub.add_parser("themes", help="concept/tempo/mở bài/Kinh Thánh/hình ảnh của mọi album (tránh trùng ý)")
+    p = sub.add_parser("themes", help="concept/tempo/mở bài/nguồn lời/hình ảnh của mọi album (tránh trùng ý)")
     p.add_argument("--channel", required=True); p.set_defaults(fn=cmd_themes)
     p = sub.add_parser("catalog", help="dựng lại library/catalog.md"); p.add_argument("--channel", required=True); p.set_defaults(fn=ct.cmd_catalog)
     a = ap.parse_args()

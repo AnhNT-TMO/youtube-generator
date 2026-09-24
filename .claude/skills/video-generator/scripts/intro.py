@@ -1,15 +1,3 @@
-"""A few seconds of channel logo at the very start of the video.
-
-The logo fades and grows in over a blurred, dimmed copy of the photo (with the
-particles already drifting), a warm halo breathes behind it, the flame
-brightens and a sheen sweeps across; then the logo lifts away while the photo
-cross-fades in. The cross-fade target is the running loop itself, at loop time
-t - seconds (the loop is periodic, so negative times are fine), which makes
-the intro's last frame flow straight into loop frame 0.
-
-make_loop.py renders it next to the loop as <loop>_intro.mp4; extend.py puts
-it in front of the repeated loop. The audio starts at 0 under the intro.
-"""
 import math
 
 import numpy as np
@@ -43,14 +31,14 @@ class Intro:
         self.fps = cfg["fps"]
         base = Image.open(image_path).convert("RGB").resize((W, H), Image.LANCZOS)
         bg = np.asarray(base.filter(ImageFilter.GaussianBlur(c["bg_blur_px"])), np.float32)
-        vig = 0.55 + 0.45 * _radial(W, H, 0.6)[:, :, None]      # darker edges
+        vig = 0.55 + 0.45 * _radial(W, H, 0.6)[:, :, None]
         self.bg = bg * c["bg_dim"] * vig
 
         self.logo = Image.open(cfg["logo"]["path"]).convert("RGBA")
         self.lw = c["logo_width_px"]
-        hs = int(self.lw * 2.2)                                 # halo behind the logo
+        hs = int(self.lw * 2.2)
         self.halo = _radial(hs, hs, 2.2)[:, :, None] * (np.array(c["halo_color"], np.float32))
-        fs = int(self.lw * 0.42)                                # flame glow on the logo
+        fs = int(self.lw * 0.42)
         self.flame = _radial(fs, fs, 2.0)[:, :, None] * np.array([255, 224, 160], np.float32)
         self.particles = [l for l in scene.layers if isinstance(l, Particles)]
 
@@ -72,7 +60,7 @@ class Intro:
     def frame(self, t):
         c, D = self.c, self.D
         x0 = D - c["crossfade_seconds"]
-        xf = c["crossfade_seconds"] - 1 / self.fps   # fully faded on the last frame
+        xf = c["crossfade_seconds"] - 1 / self.fps
         u_in = _ease_out(t / c["fade_in_seconds"])
         u_out = _ease_in_out((t - x0) / xf)
         logo_op = u_in * (1 - _ease_in_out((t - x0) / (xf * 0.7)))
@@ -83,13 +71,12 @@ class Intro:
         pulse = 0.75 + 0.25 * math.sin(2 * math.pi * t / 2.2)
         self._add(f, self.halo, cx, cy, c["halo_strength"] / 255.0 * pulse * logo_op)
         f8 = np.clip(f, 0, 255).astype(np.uint8)
-        for p in self.particles:                                 # same drift as the loop
+        for p in self.particles:
             p.draw(f8, t - D)
         f = f8.astype(np.float32)
 
         if logo_op > 0.003:
             rgb, al, w = self._logo(scale)
-            # sheen: a soft diagonal band sweeping across, only on the logo
             s0, s1 = c["shine_at"], c["shine_at"] + 0.9
             if s0 < t < s1:
                 yy, xx = np.mgrid[0:w, 0:w].astype(np.float32) / w
@@ -99,7 +86,6 @@ class Intro:
             x, y = int(cx - w / 2), int(cy - w / 2)
             a = (al * logo_op)[:, :, None]
             f[y:y + w, x:x + w] = f[y:y + w, x:x + w] * (1 - a) + rgb * a
-            # the flame brightens after the logo lands, then settles
             ignite = _ease_out((t - 0.5) / 0.8) * (0.8 + 0.2 * math.sin(2 * math.pi * t / 1.3))
             self._add(f, self.flame, cx, cy - w * 0.21, 0.50 / 255.0 * ignite * logo_op)
 
@@ -109,8 +95,6 @@ class Intro:
 
 
 def bars_gain(t, cfg):
-    """How visible the spectrum row is at video time t: hidden under the
-    logo, rising with the photo during the cross-fade."""
     c = cfg["intro"]
     if not c["enabled"]:
         return 1.0
@@ -119,8 +103,6 @@ def bars_gain(t, cfg):
 
 
 def render(image, preset, bars, encoder, out):
-    """Encode the intro with the same settings as the loop, so the two can be
-    joined without re-encoding."""
     import subprocess
     import config
     from effects import Scene

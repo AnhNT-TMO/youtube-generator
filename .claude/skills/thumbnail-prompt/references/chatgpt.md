@@ -26,8 +26,8 @@ Mỗi lần chỉ sửa một thứ, và luôn nói rõ những gì phải giữ
 
 | Lỗi | Câu sửa |
 |---|---|
-| Chữ sai chính tả hoặc thêm chữ | `Edit this image. Keep everything else exactly the same. Only fix the lettering so the title reads exactly: "<title>" and the small line reads exactly: "Lamplight Gospel". No other text.` |
-| Mặt không giống nhân vật | `Edit this image. Keep the scene, pose, clothes and light exactly the same. Make his face match the attached reference exactly: bald head, full dark beard graying at the chin.` (đính kèm lại ảnh model) |
+| Chữ sai chính tả hoặc thêm chữ | `Edit this image. Keep everything else exactly the same. Only fix the lettering so the title reads exactly: "<title>" and the small line reads exactly: "<the fixed line in visual.md>". No other text.` |
+| Mặt không giống nhân vật | `Edit this image. Keep the scene, pose, clothes and light exactly the same. Make his face match the attached reference exactly: <the face traits listed in visual.md>.` (đính kèm lại ảnh model) |
 | Tay lỗi | `Edit this image. Keep everything else the same. Fix his hands so they look natural with five fingers each.` |
 | Góc logo/subscribe bị rối | `Edit this image. Keep everything else the same. Make the top-right corner and the bottom-right corner darker and emptier.` |
 | Chữ hoặc mặt quá sát mép dưới | `Edit this image. Keep everything else the same. Move the title higher, away from the bottom of the frame.` |

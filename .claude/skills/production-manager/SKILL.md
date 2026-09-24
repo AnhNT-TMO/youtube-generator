@@ -1,6 +1,6 @@
 ---
 name: production-manager
-description: Head of the video production department - takes one order from the channel owner ("tạo 5 albums", "làm tiếp N album", "chạy xưởng") and delivers that many finished albums (master audio + 4K thumbnail + full 4K video zipped on S3 + youtube.md) by coordinating Opus sub-agents over the existing skills - finds albums already analyzed/planned but not finished, keeps one analyzer working through research/list.txt, plans several albums in parallel, runs the single-thread lanes (Suno Chrome, ChatGPT Chrome) one job at a time, runs server jobs (assembly, video render) in parallel, answers every question the skills used to ask the owner with a written decision policy, and spends a little on fixing a skill only when that clearly makes the run cheaper or unblocks it. Use when the owner hands over a production goal ("tạo 5 albums", "làm 3 album nữa", "trưởng phòng", "chạy hết quy trình", "tự điều phối", "làm album không cần hỏi tôi"). Does NOT upload to YouTube (the owner does, from the S3 zip).
+description: Head of the video production department - takes one order from the channel owner ("tạo 5 albums", "làm tiếp N album", "chạy xưởng") and delivers that many finished albums (master audio + 4K thumbnail + full 4K video zipped on S3 + youtube.md) by coordinating Opus sub-agents over the existing skills - finds albums already analyzed/planned but not finished, works across every channel in channel/ (each with its own guide), keeps one analyzer working through the channels' research queues, plans several albums in parallel, runs the single-thread lanes (Suno Chrome, ChatGPT Chrome) one job at a time, runs server jobs (assembly, video render) in parallel, answers every question the skills used to ask the owner with a written decision policy, and spends a little on fixing a skill only when that clearly makes the run cheaper or unblocks it. Use when the owner hands over a production goal ("tạo 5 albums", "làm 3 album nữa", "trưởng phòng", "chạy hết quy trình", "tự điều phối", "làm album không cần hỏi tôi"). Does NOT upload to YouTube (the owner does, from the S3 zip).
 ---
 
 # Production manager (trưởng phòng sản xuất)
@@ -16,8 +16,8 @@ yours, under §5; the few things only the owner can do (§6) pause one lane, nev
 ```bash
 P() { .claude/skills/album-plan/.venv/bin/python .claude/skills/album-plan/scripts/album_plan.py "$@"; }
 I="python3 .claude/skills/production-manager/scripts/inventory.py"      # repo root
-P board --channel lamplight_gospel      # every idea/album: what exists, next job per lane (source of truth)
-$I                                      # list.txt links not analyzed + next idea/album numbers + credits + Chrome/server health
+P board --channel <ch>                  # every idea/album of one channel: what exists, next job per lane (source of truth)
+$I                                      # per channel: queue links not analyzed + next idea/album numbers; credits; Chrome/server health
 ```
 
 ## 1. Definition of done
@@ -32,12 +32,18 @@ An album counts as delivered when all of these exist (board shows `CHỦ KÊNH: 
 | `youtube.md` passing `publish.py check` | youtube-publish |
 | full video rendered on the server + `s3-package.json` (zip on S3) | video-generator steps 2–3 |
 
-"Tạo N albums" = N albums reaching this state in this run. Count, in this order: albums already started (closest to
+"Tạo N albums" = N albums reaching this state in this run. **Channels:** the order names them ("3 album cho kênh X") or,
+if it doesn't and several channels exist (`channel/*`, `_template` excluded), split N evenly across them, extra ones
+to the channel with the fewest delivered albums. Work for a channel always starts by reading `channel/<ch>/CLAUDE.md`.
+Within a channel, count in this order: albums already started (closest to
 done first: master > tracks > approved plan > draft plan), then finished ideas not yet promoted, then new ideas from
 the analyzer. Albums already delivered (board says upload / uploaded) don't count. Singles, translations and
 retention notes are out of scope unless the owner asked; list them as next jobs in the final report.
 
 ## 2. Lanes and resources
+
+Lanes are shared by **all channels**: one Suno Chrome, one ChatGPT Chrome, one GPU server. One queue per lane, jobs of
+every channel in it (priority: the album closest to done, then channels in the order of §1's split).
 
 Most steps only talk through files, so they can run in parallel. What cannot is a **physical resource**: one Chrome
 window that a worker drives with clicks, or the Suno credit pool. Each lane has a hard concurrency cap.
@@ -46,7 +52,7 @@ window that a worker drives with clicks, or the Suno credit pool. Each lane has 
 |---|---|---|---|---|
 | `suno` | Suno Chrome :9222 + credits | **1** | one album: all planned rounds → download (usesuno) → verify → auto-accept | 2–3 h / album |
 | `chatgpt` | ChatGPT Chrome :9223 | **1** | one album: thumbnail prompt → ChatGPT drafts → pick → `fit` (4K on server) → loop (server) | 15–30 min |
-| `analyze` | GPU server | **1** worker (it runs ≤ 2 analyses at once) | 1–2 links from list.txt → research + finished idea | 20–40 min |
+| `analyze` | GPU server | **1** worker (it runs ≤ 2 analyses at once) | 1–2 links from a channel's `research-queue.txt` → research + finished idea | 20–40 min |
 | `plan` | none (text + WebSearch) | 3 | one album: finish plan + lyrics to a clean `validate` (you approve) | 30–60 min |
 | `server` | GPU server + LAN (10–17 MB/s) | 2 | `assembly` (one album → master) or `finish` (youtube.md → full video → S3) | 5 min / 15–25 min |
 | `fix` | the skill being fixed | 1 | one skill problem (§7) | — |
@@ -56,15 +62,15 @@ window that a worker drives with clicks, or the Suno credit pool. Each lane has 
 - **One album, one writer per file set.** Music files (`audio/`, `tracks/`, manifest, `notes/suno`, `notes/verify-*`,
   `assembly.*`) and picture files (`thumbnail*`, `video.json`, `video/`) are disjoint, so the suno/assembly job and the
   chatgpt job may work on the same album at the same time. Two music jobs on one album: never.
-- **Shared files are yours only:** `channel/<ch>/rules.md`, `library/catalog.md`, `research/list.txt`,
-  the ledger. Workers propose a line, you write it. (Exception: the single analyzer updates `research/README.md`.)
+- **Shared files are yours only:** everything directly in `channel/<ch>/` (`CLAUDE.md`, `rules.md`, `visual.md`,
+  `publish.md`, `research-queue.txt`…), `library/catalog.md`, the ledger. Workers propose a line, you write it. (Exception: the single analyzer updates `research/README.md`.)
 - Never run heavy work on the Mac (`--local`, `run.sh`): the owner's yes is required and they are not here. Server
   down → that lane waits (§6).
 
 ## 3. Per-album flow (dependencies)
 
 ```
-list.txt link ─analyze─▶ idea (validate_idea OK)
+queue link ─analyze─▶ idea (validate_idea OK)
                            │ you: P init --from-idea … --out albums/NNN-slug   (numbers pre-assigned, sequential, by you)
                            ▼
                      plan job (worker) ─▶ you: review summary → P approve --by production-manager
@@ -89,7 +95,7 @@ list.txt link ─analyze─▶ idea (validate_idea OK)
 
 ## 4. The run
 
-1. **Open the ledger** `channel/<ch>/production/run-<YYYY-MM-DD>.md` (template in `references/workers.md` §0). It is
+1. **Open the ledger** `production/run-<YYYY-MM-DD>.md` (one per run, every channel in it; only on this machine) (template in `references/workers.md` §0). It is
    your memory across context compaction: goal, the albums chosen, lane table, every decision with its reason,
    credits, issues. Resuming a run = read the latest ledger + `P board`, then continue; never restart finished jobs.
 2. **Inventory:** `P board`, `$I`. Environment not OK → start what does not need it (plan, analyze) and see §6.
@@ -103,7 +109,7 @@ list.txt link ─analyze─▶ idea (validate_idea OK)
    are woken when a background worker ends. A worker that returns `BLOCKED` with a question: answer by §5 with
    SendMessage to that same worker (its context is kept), don't respawn.
 6. After each album's tracks are accepted: `P catalog --channel <ch>` (the library for later plans).
-7. **Stop the analyzer** when list.txt is empty; keep it running otherwise (analysis is cheap next to an album and
+7. **Stop the analyzer** when every channel's `research-queue.txt` is empty; keep it running otherwise (analysis is cheap next to an album and
    always gives the next run material).
 8. **End:** every chosen album delivered, or every remaining job blocked by §6. Write the final report (§8).
 
@@ -173,4 +179,4 @@ only officially downloaded Suno songs are licensed for commercial use (accepted 
 |---|---|
 | `references/workers.md` | ledger template + the prompt for every worker type (analyze, plan, suno, chatgpt, assembly, finish, fix) |
 | `scripts/inventory.py` | links not analyzed, next idea/album numbers, last credits reading, Chrome + server health |
-| `channel/<ch>/production/run-<date>.md` | the run ledger (text, in git) |
+| `production/run-<date>.md` | the run ledger (only on this machine, `.gitignore`) |

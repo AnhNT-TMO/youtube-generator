@@ -1,4 +1,5 @@
-"""Sổ sách + kiểm tra cho skill `suno-generate` (điều khiển suno.com qua Chrome DevTools MCP, tải qua usesuno).
+from __future__ import annotations
+USAGE = """Sổ sách + kiểm tra cho skill `suno-generate` (điều khiển suno.com qua Chrome DevTools MCP, tải qua usesuno).
 
 Claude thao tác trên browser; script này lo phần phải CHÍNH XÁC: settings của từng lượt, đối chiếu form/request/feed với
 settings đó, đặt tên + kiểm tra file tải về, và ghi `audio/raw_tracks/manifest.json` (index clip ↔ slot ↔ lượt).
@@ -17,7 +18,6 @@ settings đó, đặt tên + kiểm tra file tải về, và ghi `audio/raw_trac
 
 `<album>` là đường dẫn thư mục album hoặc chỉ tên (vd. `002-<slug>`). Mã lượt (gen) dạng `s01-r03`.
 """
-from __future__ import annotations
 
 import argparse
 import hashlib
@@ -33,7 +33,7 @@ from pathlib import Path
 
 import yaml
 
-ROOT = Path(__file__).resolve().parents[4]   # <repo>/.claude/skills/suno-generate/scripts/suno_gen.py
+ROOT = Path(__file__).resolve().parents[4]
 JS_DIR = Path(__file__).resolve().parent / "js"
 DOWNLOADS = Path.home() / "Downloads"
 
@@ -43,10 +43,9 @@ SLIDERS = {"weirdness": "Weirdness", "style_influence": "Style Influence",
 SUNO_DEFAULTS = {"weirdness": 50, "style_influence": 50, "audio_influence": 25, "variety": 1}
 REQ_SLIDER_KEYS = {"weirdness": ["weirdness_constraint"], "style_influence": ["style_weight"],
                    "audio_influence": ["audio_weight"], "variety": ["aug_creativity"]}
-OPEN_STATES = ("prepared", "submitted", "complete")   # lượt chưa xong việc
+OPEN_STATES = ("prepared", "submitted", "complete")
 
 
-# ---------------------------------------------------------------- helpers
 def die(msg: str, code: int = 1):
     print(f"✖ {msg}", file=sys.stderr)
     sys.exit(code)
@@ -56,7 +55,7 @@ def now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
-def slugify(s: str) -> str:   # giống verification-audio/scripts/verify.py
+def slugify(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 
 
@@ -78,7 +77,6 @@ def rel(p: Path) -> str:
 
 
 def arel(album: Path, p: Path | None) -> str | None:
-    """Đường dẫn tương đối so với thư mục album (như verify.py ghi track_file)."""
     if p is None:
         return None
     try:
@@ -88,7 +86,6 @@ def arel(album: Path, p: Path | None) -> str | None:
 
 
 def read_lyrics(md: Path) -> str | None:
-    """Khối ``` đầu tiên sau '## Lyrics' — cùng quy tắc với verification-audio/scripts/qc/lyrics.read_lyrics (verify.py đọc ở đó)."""
     if not md.exists():
         return None
     m = re.search(r"^##\s+Lyrics.*?$(.*)", md.read_text(), re.M | re.S)
@@ -99,7 +96,6 @@ def read_lyrics(md: Path) -> str | None:
 
 
 def lyric_lines(s: str | None) -> list[str]:
-    """So lyrics theo dòng có chữ: editor Lexical của Suno làm rơi 1 dòng trống khi gõ (spike 23/09)."""
     return [ln.strip() for ln in (s or "").splitlines() if ln.strip()]
 
 
@@ -108,7 +104,6 @@ def norm(s: str | None) -> str:
 
 
 def render_style(text: str, bpm) -> str:
-    """Style dùng chung cho album; `{bpm}` = tempo của bài (album-plan đặt theo từng slot)."""
     return text.replace("{bpm}", str(bpm)) if bpm is not None else text
 
 
@@ -117,7 +112,6 @@ def mmss(sec: float) -> str:
 
 
 def load_json_loose(path: Path):
-    """File do MCP lưu có thể là JSON thuần hoặc bọc trong ```json … ```."""
     txt = Path(path).read_text()
     try:
         return json.loads(txt)
@@ -148,7 +142,6 @@ def sha256(p: Path) -> str:
     return h.hexdigest()
 
 
-# ---------------------------------------------------------------- plan
 class Plan:
     def __init__(self, album: Path):
         self.album = album
@@ -241,7 +234,7 @@ def validate(plan: Plan, strict_status: bool = False) -> tuple[list, list]:
     if not st.get("version"):
         warns.append("style.version trống (ghi vào track md style_prompt_version)")
     if re.search(r"[À-ỹđĐ]", text + (st.get("exclude") or "")):
-        errs.append("style có ký tự tiếng Việt — text nhập vào Suno phải là tiếng Anh (CLAUDE.md mục 5)")
+        errs.append("style có ký tự tiếng Việt — text nhập vào Suno phải là tiếng Anh (CLAUDE.md)")
     check_settings(plan.defaults, "defaults", errs, warns)
     if not plan.slots:
         errs.append("slots trống")
@@ -252,7 +245,7 @@ def validate(plan: Plan, strict_status: bool = False) -> tuple[list, list]:
     if order and set(plan.slots) - set(order):
         warns.append(f"slot {sorted(set(plan.slots) - set(order))} không có trong order (sẽ không được generate tự động)")
     if plan.slots and 1 in plan.slots and order and order[0] != 1:
-        warns.append("order không bắt đầu bằng slot 1 (title track phải đi trước — CLAUDE.md mục 3)")
+        warns.append("order không bắt đầu bằng slot 1 (title track phải đi trước — CLAUDE.md)")
     planned_credits = 0
     for n, s in sorted(plan.slots.items()):
         w = f"slot {n}"
@@ -291,7 +284,7 @@ def validate(plan: Plan, strict_status: bool = False) -> tuple[list, list]:
         if n == 1 and rounds * 2 < 4:
             warns.append("slot 1: < 4 clip dự kiến (title track nên có >= 4 clip để chọn)")
         if n > 1 and not plan.settings(n).get("voice"):
-            warns.append(f"{w}: không dùng Voice → giọng dễ lệch khỏi Anchor (CLAUDE.md mục 4)")
+            warns.append(f"{w}: không dùng Voice → giọng dễ lệch khỏi Anchor (CLAUDE.md)")
         planned_credits += rounds * plan.credits_per_gen(plan.settings(n))
     cap = (r.get("budget") or {}).get("max_credits")
     if cap and planned_credits > cap:
@@ -303,7 +296,6 @@ def validate(plan: Plan, strict_status: bool = False) -> tuple[list, list]:
     return errs, warns
 
 
-# ---------------------------------------------------------------- manifest
 def manifest_path(album: Path) -> Path:
     return album / "audio" / "raw_tracks" / "manifest.json"
 
@@ -360,7 +352,6 @@ def load_spec(album: Path, gid: str) -> dict:
     return json.loads(f.read_text())
 
 
-# ---------------------------------------------------------------- commands
 def cmd_validate(a):
     plan = Plan(album_dir(a.album))
     errs, warns = validate(plan, strict_status=False)
@@ -421,14 +412,12 @@ def cmd_next(a):
     if errs:
         die("plan chưa hợp lệ:\n  " + "\n  ".join(errs) + f"\n(chạy: suno_gen.py validate {a.album})")
     man = load_manifest(album)
-    # Batch (chủ kênh 2026-09-23): tạo hết các lượt rồi mới tải; chỉ chặn lượt còn "submitted" (chưa poll + complete,
-    # tức chưa kiểm Suno đã nhận đúng Style/Voice/lời). Lượt "complete" chờ tải không chặn lượt mới.
     opn = [g for g in man["generations"] if g["status"] == "submitted"]
     if opn and not a.force:
         die(f"Còn lượt chưa xong: {', '.join(g['id'] + ' (' + g['status'] + ')' for g in opn)} — poll + complete trước (tải có thể để cuối đợt)")
     order = plan.raw.get("order") or sorted(plan.slots)
     n = a.slot
-    if n is None:   # slot đầu tiên theo order chưa đủ lượt dự kiến và chưa được chọn
+    if n is None:
         n = next((k for k in order if not slot_selected(man, k) and
                   len([g for g in slot_gens(man, k) if g["status"] != "prepared" and g.get("purpose") in ("planned", "variant")])
                   < int(plan.slot(k).get("rounds", 0))), None)
@@ -456,7 +445,7 @@ def cmd_next(a):
 
     variant = plan.variant(n, a.variant)
     if variant is None and s.get("variants") and purpose == "planned":
-        for v in s["variants"]:   # xoay vòng: variant đầu tiên chưa đủ số lượt của nó
+        for v in s["variants"]:
             if len([g for g in counted if g.get("variant") == v["name"]]) < int(v.get("rounds", 0)):
                 variant = v
                 break
@@ -464,7 +453,7 @@ def cmd_next(a):
     lp = plan.lyrics_path(n, variant)
     lyrics = "" if s.get("instrumental") else read_lyrics(lp)
     lyrics_changed = False
-    if s.get("lyrics_sha8") and not variant and lyrics:   # album-plan ghi hash lyrics lúc build/duyệt
+    if s.get("lyrics_sha8") and not variant and lyrics:
         cur = hashlib.sha256(lyrics.encode()).hexdigest()[:8]
         if cur != s["lyrics_sha8"]:
             if not a.accept_lyrics_change:
@@ -572,7 +561,6 @@ def find_clip_in_gens(man: dict, clip: str) -> dict:
 
 
 def compare_form(spec: dict, f: dict) -> list[tuple[str, bool, str]]:
-    """[(field, ok, detail)]"""
     s = spec["form"]
     rows = []
     add = lambda k, ok, d="": rows.append((k, bool(ok), d))
@@ -594,7 +582,7 @@ def compare_form(spec: dict, f: dict) -> list[tuple[str, bool, str]]:
     else:
         ok = norm(f.get("style")) == s["style"]
         add("style", ok, f"{len(norm(f.get('style')))} ký tự" + ("" if ok else " — khác spec (chọn Voice sẽ ghi đè Style: điền lại Style SAU khi chọn Voice)"))
-    if f.get("style_counter"):   # bộ đếm N/1000 = state React thật; ô textarea có thể hiện chữ mà React vẫn rỗng (2026-09-23)
+    if f.get("style_counter"):
         n_ = int(f["style_counter"].split("/")[0])
         add("style_counter", n_ == len(f.get("style") or ""), f"bộ đếm {f['style_counter']} · textarea {len(f.get('style') or '')} ký tự"
             + ("" if n_ == len(f.get("style") or "") else " — React chưa nhận Style: đặt lại bằng native setter + input event"))
@@ -631,7 +619,7 @@ def cmd_check_form(a):
     g = get_gen(man, a.gen)
     g["form_check"] = {"at": now(), "ok": not bad, "failed": [r[0] for r in bad]}
     if not bad:
-        g["form_ok_at"] = now()   # Create được bấm sau mốc này (find_recent dùng làm `since`)
+        g["form_ok_at"] = now()
     save_manifest(album, man)
     if bad:
         die(f"{len(bad)} field sai → sửa trên form rồi đọc lại (read_form) trước khi bấm Create", 1)
@@ -639,7 +627,6 @@ def cmd_check_form(a):
 
 
 def dig(obj, key):
-    """Tìm key ở mọi độ sâu (request body của Suno đổi cấu trúc được)."""
     if isinstance(obj, dict):
         if key in obj:
             return obj[key]
@@ -656,7 +643,6 @@ def dig(obj, key):
 
 
 def compare_request(spec: dict, req: dict) -> tuple[list, list]:
-    """So body của POST /api/generate/v2-web/ với spec. → (mismatch, unverified)"""
     s = spec["form"]
     bad, unk = [], []
     chk = lambda name, ok, d: None if ok else bad.append(f"{name}: {d}")
@@ -681,7 +667,7 @@ def compare_request(spec: dict, req: dict) -> tuple[list, list]:
             continue
         got = next((dig(req, kk) for kk in keys if dig(req, kk) is not None), None)
         if got is None:
-            if want != SUNO_DEFAULTS[k]:   # Suno có thể không gửi giá trị mặc định
+            if want != SUNO_DEFAULTS[k]:
                 unk.append(f"{k} không có trong request (spec {want})")
             continue
         ok = abs(got - want) < 0.01 or abs(got - want / 100) < 0.011
@@ -831,7 +817,7 @@ def cmd_ingest(a):
         die(f"clip {cid[:8]} đã có trong manifest")
     if a.file:
         src = Path(a.file).expanduser()
-    else:   # file usesuno mới nhất trong ~/Downloads có thời lượng khớp clip
+    else:
         deadline = time.time() + a.wait
         while True:
             partial = list(DOWNLOADS.glob("*.crdownload"))
@@ -850,7 +836,6 @@ def cmd_ingest(a):
     dur = audio_duration(src)
     if abs(dur - info["duration"]) > 0.6:
         die(f"{src.name} dài {dur:.2f}s nhưng clip {cid[:8]} dài {info['duration']:.2f}s → sai file, KHÔNG ghi")
-    # tên gọn: "<slug> <id8>.wav" (2 clip cùng lượt cùng title → id8 phân biệt); không giữ đuôi "[usesuno.com]" của usesuno
     dst = manifest_path(album).parent / f"{slugify(g['title'])} {cid[:8]}{src.suffix.lower()}"
     if dst.exists():
         die(f"{rel(dst)} đã tồn tại")
@@ -900,7 +885,7 @@ def cmd_quota(a):
 
 
 def main():
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(description=USAGE, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("validate"); p.add_argument("album"); p.set_defaults(fn=cmd_validate)
     p = sub.add_parser("status"); p.add_argument("album"); p.set_defaults(fn=cmd_status)

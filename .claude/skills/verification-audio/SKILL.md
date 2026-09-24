@@ -24,13 +24,13 @@ SK=.claude/skills/verification-audio; PY=$SK/.venv/bin/python   # run from the r
 
 **Decision:** drop broken clips → keep those within 10 points of the best lyric % → keep those whose tempo is within
 3 points of the closest to the prompt → the one whose lyrics start earliest wins. None left → `REGENERATE` with hints.
-Tempo only ranks, never rejects: Suno often renders slower than the prompt (Album 001: prompt 70 → 57–67), so a
+Tempo only ranks, never rejects: Suno often renders slower than the prompt (measured 2026-09: prompt 70 → 57–67), so a
 tempo gate would burn credits on re-rolls of the same prompt. Prompt BPM = manifest `settings.bpm`, else the track
 md `target_bpm`, else selection.yaml `tempo.target_bpm`.
 
 Two clips of one generation share Style, Voice and lyrics, so genre, singer and production rarely differ between
-them; what does differ is a cut or short take, skipped/garbled lyrics, the tempo (two clips of one Album 001
-generation: 63 vs 55 BPM) and the intro length. That is all this measures. Loudness and intro trimming are
+them; what does differ is a cut or short take, skipped/garbled lyrics, the tempo (two clips of one
+generation: 63 vs 55 BPM, 2026-09) and the intro length. That is all this measures. Loudness and intro trimming are
 album-assembly's job.
 
 ## Steps
@@ -41,11 +41,11 @@ album-assembly's job.
    ```
    It pushes the album to the server (`scripts/remote.sh`, mirror `~/youtube-qc`), measures all clips of all slots in
    parallel there (`--jobs`, default 4 at a time, one Whisper per process), pulls back `notes/verify-slot-NN.{md,json}`
-   and the measurement cache, then records each clip's result in the local manifest (status unchanged). Album 002,
+   and the measurement cache, then records each clip's result in the local manifest (status unchanged). An album of
    18 clips / 9 slots: 41 s, ~0 CPU on the Mac. One call, not one subagent per slot: parallel subagents would each
    push the same album and write `manifest.json` at the same time (lost updates), and only the main conversation can
    ask the user. Server unreachable → the command stops; ask the user before `--local` (Whisper on the Mac, ~30–80 s
-   per clip, heats the Mac; CLAUDE.md §4).
+   per clip, heats the Mac; CLAUDE.md).
 2. **SELECT** → ask the user to accept with AskUserQuestion, **several slots per call** (one question per slot, up to 4
    per call; or one question "accept all N picks" when every slot is a clean SELECT): the `reasons` in plain Vietnamese (e.g. "hát đúng 100 %
    lời, bản kia 72 %", "bản kia bị cắt ngang ở cuối", "tempo 57, sát prompt 58; bản kia 49", "vào lời ở giây 12, bản kia giây 31"). Options: accept /
@@ -70,7 +70,7 @@ album-assembly's job.
 ## Rules
 
 - Never copy into `tracks/` or change a clip's status without the user's explicit yes. **Standing yes (owner 2026-09-24,
-  CLAUDE.md §4 Cổng duyệt):** for an approved album, accept verify's SELECT without asking (`--why "auto-accept …"`), and on
+  CLAUDE.md):** for an approved album, accept verify's SELECT without asking (`--why "auto-accept …"`), and on
   REGENERATE use `best_available`; a new round only when every clip is truly broken and the budget allows.
 - Never delete drafts from `raw_tracks/`. Never trigger a generation without asking (credits). Never use Suno's own
   Download (monthly quota); downloads go through usesuno.

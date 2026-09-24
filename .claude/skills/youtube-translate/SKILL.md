@@ -60,7 +60,7 @@ understands it at a glance and that it contains the words they would search.
   the channel name, and every word listed in `translate.yaml keep_verbatim`. Emoji stay, in the same place.
 - **Translate** the rest: genre phrase, use-case, feeling, format ("Full Album", "Playlist"). Use the words native
   speakers really use for this music, not a word-for-word rendering: many languages use the English loanword
-  (gospel, blues, soul) or its transliteration; the glossary records the choice so every video says it the same way.
+  (the channel's genre words) or its transliteration; the glossary records the choice so every video says it the same way.
 - Keep the English separators and structure (`🕯️`, `|`, `&` may become the local "and"). No `<` `>`.
 - ≤ 100 characters (hard limit); the translated keywords that matter in the first ~70.
 - Never claim what the original does not (no "1 hour" if the original doesn't say it, no "lyrics" unless the original does).
@@ -74,17 +74,17 @@ understands it at a glance and that it contains the words they would search.
 channel_id:            # UC…; filled by `auth`; the script refuses to write to any other channel
 source_language: en    # set as the video's defaultLanguage when it has none (YouTube requires one for localizations)
 keep_song_title: true  # song title (Track 01 of an album, the track of a single) stays in the source language
-keep_verbatim: [Lamplight Gospel]
+keep_verbatim: [<Channel Name>]
 languages:             # order = priority; codes as YouTube Studio's translation language list uses them
   - code: pt-BR
     also: [pt]         # optional: the same translation also written under these codes
     name: Portuguese (Brazil)
     why: <one line + source>
 glossary:              # per language, the terms chosen once and reused
-  pt-BR: {Gospel Blues: Gospel Blues, Full Album: Álbum Completo}
+  pt-BR: {<Genre Phrase>: <translation>, Full Album: Álbum Completo}
 ```
 
-A new channel copies `channel/lamplight_gospel/translate.yaml` and chooses its own languages from where its music is
+A new channel copies `channel/_template/translate.yaml` and chooses its own languages from where its music is
 actually listened to. After a few weeks of real data, YouTube Analytics → Audience (top geographies, **viewer
 languages**) beats any research: add or drop languages there and note the date + numbers in `why`.
 
@@ -109,7 +109,7 @@ Quota: 10,000 units/day free. Per video ≈ 1 (read) + 50 (update) + 1 per langu
   read-back fails loudly if any of them moved. Other languages already on the video (e.g. entered by hand in Studio)
   are kept.
 - **The live video is the truth**: translate the title YouTube has now, not the draft in `youtube.md`.
-- **Inspired, not copied** (CLAUDE.md §1) applies to translations too: no phrasing lifted from reference channels'
+- **Inspired, not copied** (CLAUDE.md) applies to translations too: no phrasing lifted from reference channels'
   localized titles.
 - **Why not leave it to YouTube:** YouTube machine-translates some titles for some viewers (undocumented, tested since
   2021, often clumsy) and viewers can turn it off; a creator's localization is what YouTube serves for that UI language

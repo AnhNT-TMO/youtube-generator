@@ -1,24 +1,4 @@
 #!/usr/bin/env python
-"""Chọn 1 clip Suno cho một slot bằng 4 tiêu chí đơn giản. Sau khi người dùng đồng ý → đưa clip vào tracks/.
-
-    $PY $SK/scripts/verify.py check  --album <album> --slot N [M ...|all] [--local] [--jobs J] [clip...]
-    $PY $SK/scripts/verify.py accept --album <album> --slot N --clip <file trong raw_tracks> [--why "..."] [--replace]
-(SK=.claude/skills/verification-audio, PY=$SK/.venv/bin/python, chạy từ gốc repo)
-
-Tiêu chí (references/criteria.md):
-  1. Không hỏng  — độ dài trong `rules.duration_range` của selection.yaml, không bị cắt ngang ở cuối,
-                   không có khoảng lặng ≥ 2 s giữa bài
-  2. Hát đủ lời  — % dòng lời (track md `## Lyrics`) Whisper nghe ra trên bản mix; < 60 % tính là hỏng
-  3. Tempo sát prompt — BPM đo trên bản mix (autocorrelation, qc/tempo.felt) so với BPM đã ghi trong prompt của clip
-  4. Vào lời sớm — giây của dòng lời đầu tiên nghe ra
-Chọn: bỏ clip hỏng → giữ các clip đủ lời gần bằng bản tốt nhất (kém ≤ 10 điểm %) → giữ các clip có tempo lệch prompt
-gần bằng bản sát nhất (hơn ≤ 3 điểm %) → bản vào lời sớm nhất.
-Không clip nào qua → REGENERATE kèm gợi ý. Bài hay hay dở do người nghe quyết (retention sau khi đăng), tool không chấm.
-
-`check` ghi `notes/verify-slot-NN.{md,json}` (JSON: `decision` SELECT | REGENERATE, `selected`, `best_available`)
-và kết quả từng clip vào manifest (chưa đổi status). Mặc định phần đo chạy trên server GPU (scripts/remote.sh: đẩy album
-lên, đo song song `--jobs` clip một lúc, kéo notes + cache số đo về); manifest luôn ghi ở máy local. `--local` = đo trên Mac.
-"""
 from __future__ import annotations
 
 import argparse
@@ -44,13 +24,13 @@ from qc.common import REPO_DIR, SKILL_DIR, load_audio, load_cached, save_cached 
 
 AUDIO_EXT = {".wav", ".mp3", ".m4a", ".flac"}
 REMOTE_SH = SKILL_DIR / "scripts" / "remote.sh"
-SERVER_JOBS = 4         # số clip đo cùng lúc trên server (mỗi tiến trình một model Whisper, ~2 GB VRAM)
-MIN_COVERAGE = 0.60     # nghe ra ít hơn 60 % dòng lời → hát thiếu/sai lời → hỏng
-LYRIC_TIE = 0.10        # hai bản chênh ≤ 10 điểm % lời coi như ngang → xét tempo
-TEMPO_TIE = 3.0         # hai bản có độ lệch tempo so với prompt chênh ≤ 3 điểm % coi như ngang → xét giây vào lời
-CUT_END_DB = -6.0       # giây cuối còn to hơn mức này (so với trung vị bài) → bị cắt ngang (Album 001: −17 đến −26 dB)
-SILENCE_S = 2.0         # khoảng lặng giữa bài từ 2 s → hỏng
-LINE_MATCH = 0.6        # một dòng lời tính là "nghe ra" khi khớp mờ ≥ 0.6 với transcript
+SERVER_JOBS = 4
+MIN_COVERAGE = 0.60
+LYRIC_TIE = 0.10
+TEMPO_TIE = 3.0
+CUT_END_DB = -6.0
+SILENCE_S = 2.0
+LINE_MATCH = 0.6
 
 HINTS = {
     "duration": "Bài ngoài độ dài quy định → thêm section (verse/bridge) hoặc đặt duration dài hơn.",
@@ -65,12 +45,9 @@ def mmss(s: float) -> str:
 
 
 def short(name: str) -> str:
-    """Tên ngắn của clip để nói với người dùng: 8 ký tự id trong tên file, nếu có."""
-    m = re.search(r" ([0-9a-f]{8})(?: \[|\.[^.]+$)", name)   # "<slug> <id8>.wav" (hoặc tên cũ "<slug> <id8> [usesuno.com].wav")
+    m = re.search(r" ([0-9a-f]{8})(?: \[|\.[^.]+$)", name)
     return m.group(1) if m else Path(name).stem
 
-
-# ---------------------------------------------------------------- album / manifest
 
 class Album:
     def __init__(self, d: str | Path):
@@ -99,8 +76,6 @@ class Album:
         return None
 
     def prompt_bpm(self, slot: int, entry: dict | None) -> float | None:
-        """BPM đã ghi trong prompt của clip: manifest `settings.bpm` (suno-generate ghi) → `target_bpm` của track md
-        (album-plan ghi, cũng là số trong Style) → `tempo.target_bpm` của selection.yaml."""
         st = (entry or {}).get("settings")
         if isinstance(st, dict) and isinstance(st.get("bpm"), (int, float)):
             return float(st["bpm"])
@@ -128,7 +103,6 @@ def slugify(s: str) -> str:
 
 
 def clips_for_slot(al: Album, slot: int, man: dict) -> list[Path]:
-    """Clip của slot: manifest ghi `slot: N`, hoặc (nếu chưa ghi) title khớp title của track md. Bỏ clip đã selected/rejected."""
     title = al.title(slot)
     out = []
     for c in man.get("clips", []):
@@ -142,10 +116,7 @@ def clips_for_slot(al: Album, slot: int, man: dict) -> list[Path]:
     return out
 
 
-# ---------------------------------------------------------------- đo
-
 def transcribe(path: Path) -> list[dict]:
-    """Whisper trên bản mix (không tách stem): đủ để so 2 clip của cùng một bài. Cache theo nội dung file."""
     if c := load_cached(path, "lyrics_mix"):
         return c["words"]
     y, _ = load_audio(path, sr=16000)
@@ -157,8 +128,6 @@ def transcribe(path: Path) -> list[dict]:
 
 
 def lyric_match(lyrics_block: str, words: list[dict]) -> dict:
-    """coverage = tỉ lệ dòng lời (bỏ dòng lặp) tìm thấy trong transcript; first_lyric_s = giây sớm nhất một dòng lời
-    được nghe ra (chữ Whisper "nghe" nhầm trên đoạn intro không lời không khớp dòng nào nên không tính)."""
     ws = [(t, w["s"]) for w in words for t in lyr.norm_tokens(w["w"])]
     hyp = [t for t, _ in ws]
     lines = list(dict.fromkeys(lyr.expected_lines(lyrics_block)))
@@ -179,8 +148,6 @@ def lyric_match(lyrics_block: str, words: list[dict]) -> dict:
 
 
 def measure_bpm(path: Path, target: float) -> float | None:
-    """Tempo cảm nhận trên bản mix: autocorrelation của onset, lấy mức nhịp gần target nhất (qc/tempo.felt).
-    Album 001: khớp cách đo có tách stem drums trong 0.3 %, ~1 s/bài."""
     import librosa
     from qc import tempo as tmp
     y, _ = load_audio(path, sr=tmp.SR)
@@ -211,8 +178,6 @@ def measure(path: Path, lyrics_block: str | None, dur_range: tuple[float, float]
     return c
 
 
-# ---------------------------------------------------------------- quyết định
-
 def decide(cands: list[dict], has_lyrics: bool) -> dict:
     ok = [c for c in cands if not c["problems"]]
     if not ok:
@@ -222,7 +187,6 @@ def decide(cands: list[dict], has_lyrics: bool) -> dict:
             for p in {p["id"] for p in c["problems"]}:
                 count[p] = count.get(p, 0) + 1
         n = len(cands)
-        # Lỗi ở mọi clip → do prompt/lời (sửa trước khi tạo lại); lỗi ở một clip → ngẫu nhiên
         hints = [f"[{'cả ' + str(k) if k == n and n > 1 else f'{k}/{n}'} clip] {HINTS[p]}"
                  for p, k in sorted(count.items(), key=lambda kv: -kv[1])]
         return {"decision": "REGENERATE", "selected": None, "best_available": best["file"],
@@ -278,13 +242,11 @@ def report(dec: dict, cands: list[dict], album: str, slot: int, has_lyrics: bool
 
 
 def _measure_job(job: tuple) -> dict:
-    """Một clip, chạy trong tiến trình con (--jobs > 1)."""
     f, lyrics, dur_range, bpm = job
     return measure(Path(f), lyrics, dur_range, bpm)
 
 
 def measure_all(jobs: list[tuple], n_jobs: int) -> list[dict]:
-    """Đo mọi clip (của mọi slot), giữ thứ tự. n_jobs > 1: song song, mỗi tiến trình một model Whisper."""
     if n_jobs <= 1 or len(jobs) <= 1:
         out = []
         for j in jobs:
@@ -303,7 +265,6 @@ def measure_all(jobs: list[tuple], n_jobs: int) -> list[dict]:
 
 
 def parse_slots(al: Album, man: dict, arg: list[str]) -> list[int]:
-    """`--slot 3`, `--slot 6 7 8`, `--slot all` (mọi slot còn clip draft)."""
     if [x.lower() for x in arg] == ["all"]:
         slots = [n for n in sorted(al.slots) if clips_for_slot(al, n, man)]
         if not slots:
@@ -316,7 +277,6 @@ def parse_slots(al: Album, man: dict, arg: list[str]) -> list[int]:
 
 
 def record(man: dict, dec: dict) -> bool:
-    """Ghi kết quả đo từng clip vào manifest, chưa đổi status (chờ người dùng đồng ý)."""
     by_name = {c["file"]: c for c in man.get("clips", [])}
     hit = False
     for c in dec["candidates"]:
@@ -337,7 +297,6 @@ def summary_line(dec: dict) -> str:
 
 
 def check_remote(al: Album, slots: list[int], a) -> list[dict]:
-    """Đẩy album lên server, chạy `check --local --no-manifest` ở đó, kéo notes + cache số đo về."""
     rel = al.dir.relative_to(REPO_DIR)
     clips = [str(Path(p).absolute().relative_to(REPO_DIR)) for p in a.clips]
     fail = ("Server GPU không chạy được ({}). Kiểm tra mạng/server rồi chạy lại; hoặc thêm --local để đo trên Mac "
@@ -401,8 +360,6 @@ def cmd_check(a) -> None:
         print(f"SLOT={d['slot']} DECISION={d['decision']} SELECTED={d.get('selected') or ''}")
 
 
-# ---------------------------------------------------------------- accept
-
 def set_front_matter(text: str, updates: dict) -> str:
     head, sep, body = text.partition("\n---\n")
     for k, v in updates.items():
@@ -417,7 +374,6 @@ def set_front_matter(text: str, updates: dict) -> str:
 
 
 def verify_override(al: Album, slot: int, clip: str, entry: dict | None) -> dict | None:
-    """Người dùng chọn một clip verify không chọn: được phép, nhưng để lại dấu vết trong manifest."""
     f = al.dir / "notes" / f"verify-slot-{slot:02d}.json"
     if not f.exists():
         return {"decision": "UNVERIFIED", "verify_selected": None, "problems": []}
@@ -430,10 +386,9 @@ def verify_override(al: Album, slot: int, clip: str, entry: dict | None) -> dict
 
 def cmd_accept(a) -> None:
     al = Album(a.album)
-    src = Path(a.clip).absolute()  # không resolve: symlink phải giữ tên trong raw_tracks
+    src = Path(a.clip).absolute()
     if src.parent.resolve() != al.raw.resolve():
         sys.exit(f"Clip phải nằm trong {al.raw}")
-    # Chỉ giữ tên bài: "<slug> <id8>.wav" → "<slug>.wav" (quy ước CLAUDE.md); bản nháp cũ còn đuôi "[usesuno.com]" cũng bỏ
     name = re.sub(r" [0-9a-f]{8}(?=\.[^.]+$)", "", re.sub(r" \[usesuno\.com\]", "", src.name))
     dst = al.dir / "audio" / "tracks" / name
     if dst.exists() and not a.replace:
@@ -455,13 +410,13 @@ def cmd_accept(a) -> None:
             c.update(status="selected", slot=a.slot, accepted=str(date.today()), track_file=f"audio/tracks/{name}")
             if override:
                 c["accept_override"] = override
-        elif c.get("slot") == a.slot and c.get("status") in (None, "draft", "selected"):   # "selected": bản cũ khi --replace
+        elif c.get("slot") == a.slot and c.get("status") in (None, "draft", "selected"):
             c["status"] = "rejected"
     save_manifest(al, man)
 
     md = al.track_md(a.slot)
     if md and md.exists():
-        b = basic.analyze(dst)   # cache theo nội dung file → trùng với lúc check
+        b = basic.analyze(dst)
         up = {"audio": f"audio/tracks/{name}", "duration": f"\"{mmss(b['duration'])}\"",
               "lufs_integrated": b["lufs_i"], "true_peak": b["true_peak"], "outro_type": b["end_type"]}
         ver = (entry or {}).get("verify") or {}
@@ -476,7 +431,7 @@ def cmd_accept(a) -> None:
         print(f"✔ Cập nhật front matter: {md.relative_to(al.dir)}")
     else:
         print("⚠ Chưa có track md cho slot → chỉ copy audio, chưa ghi metadata.")
-    if a.slot == 1 and not al.anchor:   # ghi lại bài mở album (Anchor) trong selection.yaml
+    if a.slot == 1 and not al.anchor:
         txt = al.cfg_path.read_text()
         line = f'anchor: "audio/tracks/{name}"'
         txt = re.sub(r"^anchor:.*$", line, txt, count=1, flags=re.M) if re.search(r"^anchor:", txt, re.M) else line + "\n" + txt
@@ -493,8 +448,8 @@ def main():
     c.add_argument("--slot", nargs="+", required=True, help="một hoặc nhiều số slot, hoặc 'all' (mọi slot còn clip draft)")
     c.add_argument("--local", action="store_true", help="đo trên máy này thay vì server GPU")
     c.add_argument("--jobs", type=int, help=f"số clip đo cùng lúc (server: {SERVER_JOBS}, --local: 1)")
-    c.add_argument("--no-manifest", action="store_true", help=argparse.SUPPRESS)   # server: manifest chỉ ghi ở local
-    c.add_argument("--quiet", action="store_true", help=argparse.SUPPRESS)         # server: local in báo cáo
+    c.add_argument("--no-manifest", action="store_true", help=argparse.SUPPRESS)
+    c.add_argument("--quiet", action="store_true", help=argparse.SUPPRESS)
     c.add_argument("clips", nargs="*")
     c.set_defaults(fn=cmd_check)
     s = sub.add_parser("accept")

@@ -1,4 +1,3 @@
-"""Lưới nhịp (beat/downbeat) bằng beat_this, lưu nguyên mảng thời điểm để đặt điểm cắt đúng vạch ô nhịp."""
 from __future__ import annotations
 
 import numpy as np
@@ -17,7 +16,6 @@ def _get_model():
 
 
 def analyze(path, force=False) -> dict:
-    """Trả {"beats": ndarray, "downbeats": ndarray} (giây, trong file gốc)."""
     if not force and load_cached(path, "grid") and (b := load_array(path, "beats")) is not None:
         return {"beats": b.astype(float), "downbeats": load_array(path, "downbeats").astype(float)}
     y, sr = load_audio(path, sr=22050)

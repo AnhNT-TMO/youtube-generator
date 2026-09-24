@@ -15,15 +15,15 @@ which song is good, and the more criteria we measure the harder it is to decide 
 | 2 | Song length | median 5:18 (3:18-8:00) | `track_duration` → Suno duration |
 | 3 | Tempo + meter | 53.3 felt BPM (47-87), 6/8·12/8 | `target.tempo` → `{bpm}` in the Style prompt → verify.py |
 | 4 | Voice | male, high (f0 288 Hz) | voice words of the Style prompt, persona question |
-| 5 | First 15 s of the video | voice at 3.6 s, first lyric 20 s, 0-15 s level -6.2 dB vs body | `track01` opening (CLAUDE.md §3) |
+| 5 | First 15 s of the video | voice at 3.6 s, first lyric 20 s, 0-15 s level -6.2 dB vs body | `track01` opening (CLAUDE.md) |
 | 6 | Lyric density | 75 words per sung minute (medium) | `target.vocal.words_per_min`, lyric length |
 
 **Background** (metadata, not measured audio): views, channel scan (launch order, singles first? is the opener one
-of its singles?), title, tags, thumbnail, and `copy_guard` (their titles, channel name, scripture used). The plan
+of its singles?), title, tags, thumbnail, and `copy_guard` (their titles, channel name, numbered sources such as scripture chapters they used). The plan
 and publish steps need it.
 
 Genre, instruments, the emotional arc, the joins, the key and the mix are **not** taken from the reference: they
-come from our channel (`channel.md`, the latest album's Style prompt, CLAUDE.md §4 / §7.2).
+come from our channel (`channel/<ch>/rules.md`, `channel.md`, the latest album's Style prompt).
 
 ```
 URL ──▶ fetch (metadata, captions, audio) ──▶ channel scan
@@ -38,18 +38,20 @@ on the GPU box in `~/youtube-qc` (`.claude/skills/verification-audio/scripts/rem
 
 ## 1. Run
 
-Slug: `<channel>-<topic>` kebab-case. Our channel dir: `channel/lamplight_gospel` unless the user says otherwise.
+Slug: `<reference-channel>-<topic>` kebab-case. Our channel dir: `channel/<ch>` (the channel the idea is for; ask if unclear).
+The channel's vocabulary (intro types, genre words that are not branding, numbered lyric sources to guard) comes from
+`channel/<ch>/rules.md` → `research` and `sources`.
 Next idea number = highest in `ideas/` + 1.
 
 ```bash
 SK=.claude/skills/youtube-music-analyzer
-bash $SK/scripts/remote.sh "<URL>" research/<slug> --channel-dir channel/lamplight_gospel \
-     --idea channel/lamplight_gospel/ideas/NNN-<idea-slug>          # a few minutes for a 1 h mix
+bash $SK/scripts/remote.sh "<URL>" research/<slug> --channel-dir channel/<ch> \
+     --idea channel/<ch>/ideas/NNN-<idea-slug>          # a few minutes for a 1 h mix
 ```
 
 Run it in the background. Options: `--no-qc` (no GPU numbers), `--no-lyrics` (no Whisper); after `--` go
 analyze_audio args (`--segments FILE`, `--expected-tracks N`, `--force-auto`, `--single`). Server down (`ssh`
-timeout): stop and ask the user first (CLAUDE.md §4: heavy work on the Mac only with their yes); if yes,
+timeout): stop and ask the user first (CLAUDE.md: heavy work on the Mac only with their yes); if yes,
 `bash $SK/scripts/run.sh "<URL>" research/<slug>` runs everything locally (measure.py uses
 verification-audio's `.venv`, slower on the Mac), then
 `$SK/.venv/bin/python $SK/scripts/build_reference.py research/<slug> --channel-dir ... --idea-dir ...`.
@@ -74,20 +76,20 @@ needs a look. To fix: write `research/<slug>/segments.yaml` and re-run (audio an
 
 ```yaml
 segments:   # start = song start in the video; source = your evidence; confidence high|medium|low
-  - {start: "0:00", title: "Psalm 91", source: "chapter", confidence: high}
-  - {start: "6:30", title: "Psalm 23", source: "1.3 s gap + words change", confidence: high}
+  - {start: "0:00", title: "Song One", source: "chapter", confidence: high}
+  - {start: "6:30", title: "Song Two", source: "1.3 s gap + words change", confidence: high}
 ```
 `bash $SK/scripts/remote.sh "<URL>" research/<slug> ... -- --segments research/<slug>/segments.yaml`
 
 Medians (tempo, length, density) survive a wrong join or two; song 1's numbers do not depend on later joins.
-Tested on the vintagegospel mix (no chapters): 11 of 13 joins exactly on the reviewed split, two ~30 s early.
+Tested on a 13-song mix without chapters: 11 of 13 joins exactly on the reviewed split, two ~30 s early.
 
 ## 3. Read the numbers
 
 `references/interpretation.md`: felt tempo vs pulse, male/female + register, first sung sound (Demucs, hums
 included) vs first lyric (Whisper/captions), the 0-15 s level, words per sung minute.
 
-## 4. Song 1 and the first 15 s (criterion 5, CLAUDE.md §3)
+## 4. Song 1 and the first 15 s (criterion 5, CLAUDE.md)
 
 The first seconds decide most of whether a viewer stays. From `criteria.opening` say: when the voice comes, when
 the first lyric comes, how loud 0-15 s is vs the body, whether there is silence at 0:00 - and the gate for this
@@ -104,13 +106,13 @@ Template `references/analysis-template.md`: short, Vietnamese notes, Suno text i
 
 `--idea` seeds `idea.yaml` with every derivable field (provenance, evidence, copy guard, reference numbers, our
 latest album as baseline, Voice, open questions); creative fields are null and listed in `todo` - fill them and
-empty `todo`. `slots[0]` is authoritative for the title track (album-plan reads slots). Intro vocabulary: vocal_hum,
-vocal, choir, hammond, piano, acoustic_guitar, slide_guitar, electric_guitar, full_band, strings. Fill from
+empty `todo`. `slots[0]` is authoritative for the title track (album-plan reads slots). Intro vocabulary: the
+channel's `rules.md` → `research.intro_vocab`. Fill from
 analysis.md, `reference.yaml`, `channel/<name>/channel.md`, `library/catalog.md`, the latest album, and the Suno facts
 in `.claude/skills/suno-generate/references/suno-research.md` + memory. Schema: `templates/idea.yaml`.
 
 - Keep the spirit (tempo family, song length, opening strategy, lyric source), change the identity (our persona, titles,
-  imagery, arc); their titles/branding/look/scripture go in `copy_guard`.
+  imagery, arc); their titles/branding/look/numbered sources go in `copy_guard`.
 - The prompt BPM is the target tempo itself - no guessed compensation; verification-audio measures real offsets.
 - Persona and tempo decisions go to `open_questions` (blocking) with a recommendation, never decided silently.
 - **Follow the reference ~50 %** (`channel/<name>/rules.md` §1b): the idea's tempo = the reference's felt tempo (no nudging toward
@@ -122,7 +124,7 @@ in `.claude/skills/suno-generate/references/suno-research.md` + memory. Schema: 
   flattening it into the house sound. The goal is what listeners play, not what we like.
 
 Then `$SK/.venv/bin/python $SK/scripts/validate_idea.py <idea.yaml>` until OK (TODOs, Style ≤ 1000 chars, copy-guard
-hits, scripture avoided, energy steps ≤ 2, adjacent intro types, duplicate hooks, Track 01 rules, budget, no official
+hits, avoided sources, energy steps ≤ 2, adjacent intro types, duplicate hooks, Track 01 rules, budget, no official
 downloads). Write `idea.md` (human summary) and rename `idea.seed.yaml` → `idea.yaml` if the idea already existed.
 
 Downstream (keep these keys stable; contract in `.claude/skills/album-plan/references/bridge.md`):
@@ -143,7 +145,7 @@ lists every idea with what is still missing.
 Emotional/energy curve, genre and instruments, intro/outro per song, drums entry, hook timing and repeats, lyric
 structure (repeated lines, point of view), key/Camelot, chords, melody, bars, song form, stem levels, their joins,
 their loudness, speaker similarity (ECAPA), comments, title-card OCR, singles matching, spectrograms.
-Either they cannot be typed into Suno, or our own channel decides them (CLAUDE.md §4 / §7.2), or they were
+Either they cannot be typed into Suno, or our own channel decides them (`channel/<ch>/rules.md`), or they were
 unreliable. Our own drafts are checked by verification-audio. **Add a criterion only when a named consumer needs it
 and the user agrees** - the list stays at six.
 

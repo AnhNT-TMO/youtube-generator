@@ -1,4 +1,3 @@
-"""Ghép album theo assembly.yaml → WAV 24-bit (+ MP3), preview từng điểm nối, rồi đo lại bản ghép."""
 from __future__ import annotations
 
 import re
@@ -13,7 +12,6 @@ CH = 2
 
 
 def timeline(plan: dict) -> list[float]:
-    """Thời điểm bắt đầu của mỗi bài trong bản ghép (giây)."""
     starts, t = [], 0.0
     tracks, joins = plan["tracks"], plan["joins"]
     for i, tr in enumerate(tracks):
@@ -33,13 +31,12 @@ def _fade(n: int, kind: str, direction: str) -> np.ndarray:
     x = (np.arange(n) + 0.5) / max(n, 1)
     if kind == "equal_power":
         g = np.sin(x * np.pi / 2)
-    else:  # fade về/ra khỏi im lặng: cong như tai nghe (nhanh ở đoạn nhỏ)
+    else:
         g = x ** 2
     return (g if direction == "in" else g[::-1]).astype(np.float32)[:, None]
 
 
 def segments(plan: dict, album: Path, sr: int):
-    """Sinh (bắt đầu trên timeline theo sample, mảng audio đã gain + fade) cho từng bài."""
     tracks, joins = plan["tracks"], plan["joins"]
     for i, (tr, start) in enumerate(zip(tracks, timeline(plan))):
         y = _read(album / tr["audio"], tr["in"], tr["out"], sr) * np.float32(10 ** (tr["gain_db"] / 20))
@@ -72,7 +69,7 @@ def render(plan: dict, album: Path, out_wav: Path, mp3=True) -> None:
             buf, buf_start = y, start
             continue
         rel = start - buf_start
-        if rel >= len(buf):  # khoảng lặng giữa hai bài
+        if rel >= len(buf):
             write(buf)
             write(np.zeros((rel - len(buf), CH), np.float32))
             buf, buf_start = y, start
@@ -94,7 +91,6 @@ def render(plan: dict, album: Path, out_wav: Path, mp3=True) -> None:
 
 
 def previews(plan: dict, master: Path, out_dir: Path) -> list[str]:
-    """MP3 ngắn quanh mỗi điểm nối (từ ~6s trước câu hát cuối bài trước đến ~12s sau câu hát đầu bài sau)."""
     out_dir.mkdir(parents=True, exist_ok=True)
     for f in out_dir.glob("*.mp3"):
         f.unlink()
@@ -115,8 +111,6 @@ def previews(plan: dict, master: Path, out_dir: Path) -> list[str]:
         cut(f"{A['no']:02d}-{B['no']:02d}.mp3", a_voc - 6, b_voc + 12)
     return files
 
-
-# ---------------------------------------------------------------- đo lại bản ghép
 
 def _runs(mask: np.ndarray) -> list[tuple[int, int]]:
     d = np.diff(np.concatenate([[0], mask.astype(int), [0]]))
@@ -139,7 +133,6 @@ def verify(plan: dict, master: Path) -> dict:
     tracks, joins = plan["tracks"], plan["joins"]
     res = {"duration": round(len(M) * hop, 1), **_summary(master)}
 
-    # Mở video: giọng hát vào ở giây nào, 10–15 giây đầu có nhỏ quá không
     t1 = tracks[0]
     body = float(np.median(S[at(60):at(starts[1]) if len(starts) > 1 else at(240)]))
     first_full = next((i * hop for i in range(at(15)) if S[i] >= body - 6), None)
@@ -154,11 +147,10 @@ def verify(plan: dict, master: Path) -> dict:
     for j, (A, B) in enumerate(zip(tracks[:-1], tracks[1:])):
         a_voc = starts[j] + A["measured"]["vocal_end"] - A["in"]
         b_voc = starts[j + 1] + B["measured"]["vocal_start"] - B["in"]
-        # Cảm nhận ở chỗ nối: 20s cuối có hát của bài trước vs 20s đầu có hát của bài sau
         pre = float(np.median(S[at(a_voc - 20):at(a_voc)]))
         post = float(np.median(S[at(b_voc + 3):at(b_voc + 23)]))
         win = M[at(a_voc):at(b_voc)]
-        m_s = np.convolve(win, np.ones(10) / 10, mode="same") if len(win) > 10 else win  # làm mượt 1 s
+        m_s = np.convolve(win, np.ones(10) / 10, mode="same") if len(win) > 10 else win
         dip = float(min(pre, post) - m_s.min()) if len(m_s) else 0.0
         sil = max(((b - a) * hop for a, b in _runs(win < -50)), default=0.0)
         res["joins"].append({"no": joins[j]["no"], "at": round(starts[j + 1], 1), "jump_lu": round(post - pre, 1),

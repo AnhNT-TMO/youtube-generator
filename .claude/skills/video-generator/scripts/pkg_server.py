@@ -1,14 +1,4 @@
 #!/usr/bin/env python3
-"""Server side of `video.py package` (stdlib only, runs with the server's python3).
-
-    pkg_server.py build  PKGDIR VIDEO AUDIO_DIR ZIPOUT --video-name NAME.mp4
-        hard-link the rendered video into PKGDIR, probe it, write manifest.json + README.txt, zip PKGDIR (stored,
-        zip64) -> prints one JSON line {zip, size, sha256, video, warnings}
-    pkg_server.py upload ZIP SPEC.json
-        upload ZIP part by part with the presigned multipart PUT urls made on the Mac -> prints one JSON line {etags}
-
-PKGDIR comes from the Mac (`package.py stage`): youtube.md, upload/*.txt, thumbnail.jpg, thumbnail_full.*, meta.json.
-"""
 import glob
 import hashlib
 import http.client
@@ -79,7 +69,7 @@ def cmd_build(a):
     dst = os.path.join(pkg, name)
     if os.path.exists(dst):
         os.remove(dst)
-    os.link(video, dst)                    # same disk: no copy of a multi-GB file
+    os.link(video, dst)
     v = probe(dst)
     warnings = list(meta.get("warnings", []))
     if (v["width"], v["height"]) != (3840, 2160):
@@ -112,7 +102,7 @@ def cmd_build(a):
 
     top = os.path.basename(pkg)
     tmp = zip_out + ".part"
-    with zipfile.ZipFile(tmp, "w", zipfile.ZIP_STORED, allowZip64=True) as z:   # mp4/jpg don't compress
+    with zipfile.ZipFile(tmp, "w", zipfile.ZIP_STORED, allowZip64=True) as z:
         for root, _, names in os.walk(pkg):
             for n in sorted(names):
                 p = os.path.join(root, n)
@@ -123,7 +113,6 @@ def cmd_build(a):
 
 
 class _Slice:
-    """File-like view of bytes [start, start+n) of an open file, for streaming one multipart part."""
 
     def __init__(self, fh, start, n):
         self.fh, self.left = fh, n

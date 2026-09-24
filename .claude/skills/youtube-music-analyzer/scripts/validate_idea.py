@@ -1,13 +1,4 @@
 #!/usr/bin/env python3
-"""Check an idea.yaml before it is handed to the production skills (suno-generate, verification-audio,
-album-assembly, video-generator). Errors = the next skill would fail or the idea breaks a repo rule;
-warnings = worth a second look.
-
-  validate_idea.py channel/<name>/ideas/NNN-slug/idea.yaml [--draft]
-
---draft: TODO(claude) placeholders are warnings instead of errors (for a freshly seeded idea).
-Rules: CLAUDE.md §3 (Track 01), §4 (arc), §7.2 (joins), copy guard, suno-generate input mapping.
-"""
 import argparse
 import glob
 import os
@@ -16,9 +7,25 @@ import sys
 
 import yaml
 
-INTRO_VOCAB = {"vocal_hum", "vocal", "choir", "hammond", "piano", "acoustic_guitar", "slide_guitar", "electric_guitar", "full_band", "strings"}
-PSALM = re.compile(r"\b(?:psalms?|ps\.?)\s*(\d{1,3}(?:\s*[,;–-]\s*\d{1,3})*)", re.I)
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", ".."))
+LIST_TAIL = r"((?:\s*[,;–-]\s*\d{1,3})*)"
+
+
+def channel_rules(channel):
+    f = os.path.join(REPO, "channel", channel or "", "rules.md")
+    m = re.search(r"```yaml\n(.*?)```", open(f).read(), re.S) if channel and os.path.isfile(f) else None
+    return (yaml.safe_load(m.group(1)) or {}) if m else {}
+
+
+def source_numbers(ref, pat):
+    ref = str(ref or "")
+    if ":" in ref:
+        hits = [(m.start(1), int(m.group(1))) for m in pat.finditer(ref)]
+        if hits:
+            hits += [(m.start(1), int(m.group(1))) for m in re.finditer(r";\s*(\d{1,3})", ref)]
+        return [x for _, x in sorted(hits)]
+    lst = re.compile(f"(?:{pat.pattern}){LIST_TAIL}", re.I)
+    return [int(x) for m in lst.finditer(ref) for x in [m.group(1)] + re.findall(r"\d{1,3}", m.group(m.re.groups))]
 
 
 def secs(x):
@@ -27,8 +34,6 @@ def secs(x):
 
 
 def our_titles_and_hooks(idea_path, channel, own_album=None):
-    """Titles/hooks already used by our channel (album track front matter + other ideas) - reuse = a collision.
-    The album this idea was promoted to is skipped (its tracks ARE this idea's slots)."""
     used = {}
     if not channel:
         return used
@@ -73,7 +78,6 @@ def norm(s):
 
 
 def contains_phrase(text, phrase):
-    """Whole-word phrase match (so 'Psalm 23' does not match 'Psalm 230')."""
     t, p = " ".join(norm(text)), " ".join(norm(phrase))
     return bool(p) and re.search(rf"(^| ){re.escape(p)}( |$)", t) is not None
 
@@ -84,6 +88,11 @@ def main():
     ap.add_argument("--draft", action="store_true")
     a = ap.parse_args()
     d = yaml.safe_load(open(a.idea))
+    rules = channel_rules(d.get("channel"))
+    intro_vocab = set((rules.get("research") or {}).get("intro_vocab") or [])
+    numbered = (rules.get("sources") or {}).get("numbered") or {}
+    num_re = re.compile(numbered["pattern"], re.I) if numbered.get("pattern") else None
+    num_fmt = numbered.get("format") or "{n}"
     E, W = [], []
     err = E.append
     warn = W.append
@@ -120,16 +129,13 @@ def main():
             if contains_phrase(val, g) and len(" ".join(norm(g))) >= 5:
                 err(f"copy_guard hit: {where} contains '{g}'")
 
-    avoid = set(guard.get("scripture_avoid") or [])
-    for s in slots:
-        for m in PSALM.finditer(str(s.get("scripture") or "")):
-            nums = [int(x) for x in re.findall(r"\d{1,3}", m.group(1))]
-            # "Psalm 13, 23" / "Psalm 42-43" list chapters; "Psalm 18:28-29" -> only 18 is a chapter
-            if ":" in str(s.get("scripture")):
-                nums = [int(x) for x in re.findall(r"(?:psalms?|ps\.?|;)\s*(\d{1,3})", str(s.get("scripture")), re.I)]
-            for x in nums:
-                if x in avoid:
-                    err(f"slot {s.get('n')} uses Psalm {x}, listed in scripture_avoid")
+    avoid = {str(x).lower() for x in guard.get("source_avoid") or []}
+    avoid |= {(num_fmt.format(n=x) if isinstance(x, int) else str(x)).lower() for x in guard.get("scripture_avoid") or []}
+    for s in slots if num_re else []:
+        ref = s.get("source_ref") or s.get("scripture")
+        for x in source_numbers(ref, num_re):
+            if num_fmt.format(n=x).lower() in avoid:
+                err(f"slot {s.get('n')} uses {num_fmt.format(n=x)}, listed in source_avoid")
     their_hooks = [h for h in guard.get("hooks") or [] if h]
     for s in slots:
         for h in their_hooks:
@@ -156,7 +162,7 @@ def main():
         if slots[0].get("arc_role") != "anchor":
             err("slot 1 must have arc_role: anchor (title track)")
         if slots[0].get("source") != "new":
-            err("slot 1 must be source: new (CLAUDE.md §3: title track is never reused)")
+            err("slot 1 must be source: new (CLAUDE.md: title track is never reused)")
     en = [s.get("energy") for s in slots]
     bad_en = [s.get("n") for s in slots if not isinstance(s.get("energy"), (int, float)) or isinstance(s.get("energy"), bool)]
     if bad_en:
@@ -165,10 +171,10 @@ def main():
     if bad_va:
         err(f"valence must be a number (slots {bad_va})")
     if not any(s.get("arc_role") == "peak" for s in slots):
-        err("no slot has arc_role: peak (CLAUDE.md §4 arc)")
+        err("no slot has arc_role: peak (CLAUDE.md arc)")
     for s in slots:
-        if s.get("intro_type") and "TODO" not in str(s.get("intro_type")) and s["intro_type"] not in INTRO_VOCAB:
-            err(f"slot {s.get('n')} intro_type '{s['intro_type']}' not in the vocabulary {sorted(INTRO_VOCAB)}")
+        if intro_vocab and s.get("intro_type") and "TODO" not in str(s.get("intro_type")) and s["intro_type"] not in intro_vocab:
+            err(f"slot {s.get('n')} intro_type '{s['intro_type']}' not in the vocabulary {sorted(intro_vocab)} (rules.md research.intro_vocab)")
         sd = secs(s.get("target_duration"))
         if s.get("target_duration") and sd is None:
             err(f"slot {s.get('n')} target_duration must be m:ss")
@@ -187,7 +193,7 @@ def main():
             warn(f"target.energy_curve {curve} differs from slot energies {en}")
         peak = en.index(max(en)) + 1
         if not (len(en) * 0.4 <= peak <= len(en) * 0.8):
-            warn(f"energy peak at slot {peak}: CLAUDE.md §4 wants the climax around 60-70 % of the album")
+            warn(f"energy peak at slot {peak}: CLAUDE.md wants the climax around 60-70 % of the album")
     it = [s.get("intro_type") for s in slots]
     for i in range(1, len(it)):
         if it[i] and it[i] == it[i - 1] and "TODO" not in str(it[i]):
@@ -225,11 +231,10 @@ def main():
         err("track01.gate missing")
     vo = (tg.get("vocal") or {}).get("presence_max_s") or {}
     if isinstance(vo.get("track01"), (int, float)) and vo["track01"] > 15:
-        err("target.vocal.presence_max_s.track01 > 15 s violates CLAUDE.md §3")
+        err("target.vocal.presence_max_s.track01 > 15 s violates CLAUDE.md")
 
     gen = d.get("generation") or {}
     b = gen.get("budget") or {}
-    # CLAUDE.md §4: slot 1 = 2 Max rounds (20 credits each), every other new song = 1 normal round (10), album cap 250
     gens = b.get("gens") or {}
     n_new = sum(1 for s in d.get("slots") or [] if (s.get("source") or "new") == "new")
     if isinstance(b.get("total_credits"), (int, float)):
@@ -238,9 +243,9 @@ def main():
             if want != b["total_credits"]:
                 warn(f"budget: slot 1 {gens['track01']} Max + {n_new - 1} new x {gens['others_each']} normal = {want} != {b['total_credits']} credits")
         if gen.get("max_mode") or (gens.get("track01") or 2) > 2 or (gens.get("others_each") or 1) > 1:
-            warn("budget: CLAUDE.md §4 = slot 1 two Max rounds, others one normal round (max_mode false)")
+            warn("budget: CLAUDE.md = slot 1 two Max rounds, others one normal round (max_mode false)")
         if b["total_credits"] > 250:
-            err("budget: album over 250 credits (CLAUDE.md §4)")
+            err("budget: album over 250 credits (CLAUDE.md)")
         if b["total_credits"] > (b.get("credits_per_month") or 2500):
             err("budget exceeds the monthly credits")
     dl = gen.get("download") or {}
@@ -252,13 +257,12 @@ def main():
     pd = (d.get("identity") or {}).get("persona_decision") or {}
     if d.get("status") in ("approved", "promoted") and not pd.get("decided"):
         err("status approved but persona_decision.decided is false")
-    # cross-check with the reference facts
     for r in (d.get("provenance") or {}).get("research") or []:
         rp = r.get("reference") and os.path.join(REPO, r["reference"])
         if rp and os.path.exists(rp):
             ref = yaml.safe_load(open(rp)) or {}
             rtm = (ref.get("album") or {}).get("tempo") or {}
-            rt = rtm.get("felt_bpm_median", rtm.get("felt_bpm_qc_median"))   # reference/v2, v1
+            rt = rtm.get("felt_bpm_median", rtm.get("felt_bpm_qc_median"))
             it = (tg.get("tempo") or {}).get("reference_measured")
             if rt and it and abs(rt - it) > 1:
                 warn(f"target.tempo.reference_measured {it} != reference.yaml {rt}")
@@ -281,7 +285,7 @@ def main():
         if not (rng[0] - 3 <= total <= rng[1] + 3):
             warn(f"slot durations sum to {total:.1f} min vs target {rng} (crossfades trim a few minutes)")
 
-    if a.draft:   # a fresh seed: everything still missing is a to-do, not a failure
+    if a.draft:
         W += [f"(to do) {e}" for e in E]
         E = []
     for w in W:

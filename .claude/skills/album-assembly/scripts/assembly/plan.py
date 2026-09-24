@@ -1,4 +1,3 @@
-"""Dựng / cập nhật assembly.yaml: điểm cắt từng bài + kiểu nối từng điểm chuyển."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -6,7 +5,7 @@ from pathlib import Path
 from . import planner
 from .features import Track, segment_lufs
 
-GAIN_LIMIT = 4.0  # dB; lệch hơn thì bài đó có vấn đề, báo chứ không cố bù
+GAIN_LIMIT = 4.0
 
 
 def _measured(t: Track) -> dict:
@@ -77,8 +76,6 @@ def build(album: Path, tracks: list[Track], prev: dict | None, vocal_at: float, 
 
 
 def build_single(single: Path, t: Track, audio_rel: Path, prev: dict | None, vocal_at: float, target_lufs: float) -> dict:
-    """Bài đăng riêng: một bài, không điểm nối. Cắt intro để giọng vào ở giây `vocal_at` (như bài 01 của album),
-    giữ ending tự nhiên, cân loudness về target."""
     prev = prev or {}
     tr = {"no": 1, "id": t.id, "title": t.title, "audio": str(audio_rel), "in": 0.0, "out": 0.0,
           "fade_in": 0.0, "fade_out": 0.0, "gain_db": 0.0, "measured": _measured(t)}
@@ -103,7 +100,6 @@ def build_single(single: Path, t: Track, audio_rel: Path, prev: dict | None, voc
 
 
 def set_join(plan: dict, tracks: list[Track], no: int, kind: str, **over) -> None:
-    """Đổi kiểu / tham số một điểm nối, tính lại điểm cắt và khóa nó."""
     A, B = tracks[no - 1], tracks[no]
     c = planner.cut_for(kind, A, B, **over)
     tr_a, tr_b = plan["tracks"][no - 1], plan["tracks"][no]

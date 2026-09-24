@@ -1,44 +1,54 @@
 # Channels
 
-Mỗi channel là một thư mục `channel/<tên>/`. Skill dùng chung (`.claude/skills/video-generator/`) đọc
-cấu hình từ đây, nên thêm channel mới chỉ cần tạo thư mục theo mẫu dưới, không sửa code.
+Mỗi channel là một thư mục `channel/<tên>/` chứa **toàn bộ chi tiết riêng** của kênh. Các skill trong `.claude/skills/` chỉ là
+quy trình dùng chung: chúng đọc những file dưới đây và không biết gì về một kênh cụ thể (CLAUDE.md gốc §2).
 
 ```
 channel/<tên>/
-├── channel.md          # danh tính: thể loại, persona, hình ảnh, brand voice
-├── translate.yaml      # ngôn ngữ dịch title video (skill youtube-translate; mẫu: lamplight_gospel/translate.yaml)
-├── rules.md            # luật làm nhạc: house Style + Exclude, mật độ lời, chữ/tên bài cần tránh, experiment (mẫu: lamplight_gospel/rules.md)
-├── image_source/
-│   └── logo.png        # logo kênh, nền trong suốt (vuông, ≥ 512px)
-├── video.json          # phong cách video: loại/màu bụi, ánh sáng, màu sóng nhạc, logo
-├── ideas/NNN-slug/     # idea: idea.yaml (nguồn chính, schema: templates/idea.yaml) + idea.md (tóm tắt)
-│                       #   + thumbnail.png (+ video.json) → video/loop.mp4
-├── albums/NNN-slug/    # album: album.md, tracks/, ... + thumbnail.png (+ thumbnail-prompt.md, video.json)
-├── singles/NNN-slug/   # bài đăng riêng: single.md (trỏ tới tracks/NN-*.md của album gốc) + thumbnail + audio/master + video + youtube.md
-├── model/              # ảnh tham chiếu nhân vật cho ChatGPT (skill thumbnail-prompt)
-└── library/catalog.md  # thư viện bài hát của channel
+├── CLAUDE.md           # chỉ mục + âm thanh/hình ảnh tóm tắt + trạng thái (đọc trước)
+├── channel.md          # danh tính: thể loại, persona, thế giới hình, tài nguyên
+├── rules.md            # luật nhạc; khối YAML cuối file = luật máy đọc (validate, analyzer)
+├── visual.md           # luật hình: hằng số, khối CORE ChatGPT, trục biến thể, điều phải kiểm
+├── publish.md          # mẫu description, tags mặc định, title, emoji, pinned comment
+├── translate.yaml      # ngôn ngữ dịch title (youtube-translate)
+├── video.json          # phong cách video: bụi, ánh sáng, màu sóng nhạc, logo
+├── research-queue.txt  # link YouTube chờ analyze (chỉ trên máy)
+├── image_source/logo.png
+├── model/              # ảnh tham chiếu nhân vật cho ChatGPT + README.md
+├── voices/README.md    # Suno Voice + cao độ đo được
+├── ideas/ albums/ singles/ library/   # sinh ra khi làm video (chỉ trên máy)
 ```
+
+| Skill | Đọc gì của kênh |
+|---|---|
+| youtube-music-analyzer | `rules.md` (`research`, `sources`, `voices`), `channel.md`, album gần nhất |
+| album-plan | `rules.md` (toàn bộ khối YAML + §1–§9), `voices/README.md`, `library/catalog.md` |
+| suno-generate, verification-audio, album-assembly | chỉ file của album (`generation.yaml`, `selection.yaml`, `tracks/`) |
+| thumbnail-prompt | `visual.md`, `model/` |
+| video-generator | `video.json`, `image_source/logo.png` |
+| youtube-publish | `publish.md` |
+| youtube-translate | `translate.yaml` |
+| production-manager | `CLAUDE.md`, `research-queue.txt` |
 
 ## Ba lớp cấu hình video
 
 1. **Mặc định của tool** (`.claude/skills/video-generator/scripts/config.py`), giống nhau ở mọi channel:
-   logo góc trên phải, like/subscribe góc dưới phải khoảng 30–45 giây một lần, có sóng
-   nhạc, có intro logo 4 giây, loop 5 phút.
+   logo góc trên phải, like/subscribe góc dưới phải khoảng 30–45 giây một lần, có sóng nhạc, có intro logo 4 giây, loop 5 phút.
 2. **`channel/<tên>/video.json`**: phong cách riêng của channel, chỉ ghi phần khác mặc định.
 3. **`<idea hoặc album>/video.json`** (tuỳ chọn): phần phụ thuộc vào ảnh cụ thể
-   (chùm nắng rơi ở đâu, có cây đèn/nến nào để rung lửa, bụi dồn về phía nào).
-
-Chạy: skill `video-generator`, gồm 2 bước: `video.py loop <thư mục>` (ảnh → video 5 phút) và `video.py album <thư mục> <nhạc>`
-(loop → video dài bằng nhạc + sóng nhạc). Xem `.claude/skills/video-generator/SKILL.md`.
+   (chùm sáng rơi ở đâu, nguồn sáng nào để rung lửa, bụi dồn về phía nào).
 
 ## Thêm channel mới
 
-1. `mkdir -p channel/<tên>/{image_source,ideas,albums,singles,model,library}`
-2. Đặt `image_source/logo.png` (hoặc sinh bằng `.claude/skills/video-generator/scripts/make_logo.py --title ... --sub ... --out ...`)
-3. Copy `channel/lamplight_gospel/video.json`, đổi `logo.path` và phong cách
-   (xem `.claude/skills/video-generator/references/example_snow.json` để có ví dụ tuyết trắng / ánh sáng lạnh)
-4. Viết `channel.md`, gồm cả mục **Prompt ảnh mặc định (ChatGPT)** (khối style cố định cho mọi thumbnail, skill `thumbnail-prompt`)
+1. `cp -R channel/_template channel/<tên>`
+2. Điền với chủ kênh, theo thứ tự: `channel.md` → `rules.md` (house Style, Voices, khối YAML) → `visual.md` + `model/` →
+   `publish.md` → `video.json` + `image_source/logo.png` → `translate.yaml` → `CLAUDE.md`.
+3. Kiểm: `python3 .claude/skills/production-manager/scripts/lint_skills.py` (skill không được nhắc tới kênh),
+   `album_plan.py board --channel <tên>`.
+4. Thêm dòng vào bảng dưới.
 
 ## Channels hiện có
 
-- [lamplight_gospel](lamplight_gospel/channel.md): Christian Gospel Blues
+| Channel | Thể loại |
+|---|---|
+| [lamplight_gospel](lamplight_gospel/CLAUDE.md) | Christian Gospel Blues / Southern Gospel Soul |

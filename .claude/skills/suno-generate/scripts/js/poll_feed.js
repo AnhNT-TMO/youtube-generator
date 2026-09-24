@@ -1,5 +1,3 @@
-// Chờ các clip của một lượt generate xong (status complete/error), trả metadata để suno_gen.py complete đối chiếu.
-// P = {"ids": [...], "timeout_s": 240}. Hết giờ mà chưa xong → trả done:false, gọi lại.
 async () => {
   const P = /*PARAMS*/null;
   const tok = () => document.cookie.split(';').map(c => c.trim()).find(c => c.startsWith('__session=')).slice(10);
