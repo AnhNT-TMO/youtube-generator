@@ -28,10 +28,10 @@ import encode
 from config import H, W
 
 
-def encode_cmd(out, fps, enc, encoder):
+def encode_cmd(out, fps, enc, encoder, pix_fmt="rgb24"):
     vf = ["-vf", f"noise=alls={enc['grain']}:allf=t+u"] if enc["grain"] > 0 else []
     return (["ffmpeg", "-y", "-loglevel", "error",
-             "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(fps),
+             "-f", "rawvideo", "-pix_fmt", pix_fmt, "-s", f"{W}x{H}", "-r", str(fps),
              "-i", "-"] + vf + encode.codec_args(enc, fps, encoder)
             + ["-pix_fmt", "yuv420p", "-an", "-movflags", "+faststart", out])
 
@@ -39,15 +39,30 @@ def encode_cmd(out, fps, enc, encoder):
 def render_part(job):
     """Render [start, start+dur) of the loop to `out`. Runs in a worker process."""
     image, preset, bars, encoder, start, dur, out, report = job
-    from effects import Scene
     cfg = config.load(preset)
     fps = cfg["fps"]
-    scene = Scene(image, cfg, bars=bars)
-    ff = subprocess.Popen(encode_cmd(out, fps, cfg["encode"], encoder), stdin=subprocess.PIPE)
+    scene = None
+    # Opt-in (VG_GPU=1): the frame loop on the GPU (effects_gpu.py). Measured 2026-09-24, 5-min 4K loop, 16 parts:
+    # CPU frames + NVENC 52 s; GPU frames + NV12 + NVENC 103-110 s: many processes time-slice one GPU, while the
+    # CPU loop is cheap (~245 frames/s per core). NVENC/NVDEC already take the heavy part off the CPU.
+    if os.environ.get("VG_GPU", "0") == "1":
+        try:
+            import effects_gpu
+            if effects_gpu.available():
+                scene = effects_gpu.GpuScene(image, cfg, bars=bars)
+        except ImportError:                             # no torch (e.g. the Mac venv): CPU path below
+            pass
+    if scene is None:
+        from effects import Scene
+        scene = Scene(image, cfg, bars=bars)
+    gpu = hasattr(scene, "frame_nv12")
+    ff = subprocess.Popen(encode_cmd(out, fps, cfg["encode"], encoder, "nv12" if gpu else "rgb24"),
+                          stdin=subprocess.PIPE)
+    grab = scene.frame_nv12 if gpu else (lambda t: scene.frame(t).tobytes())
     n = int(round(dur * fps))
     t1 = time.time()
     for i in range(n):
-        ff.stdin.write(scene.frame(start + i / fps).tobytes())
+        ff.stdin.write(grab(start + i / fps))
         if report and i % (fps * 30) == 0 and i:
             el = time.time() - t1
             print(f"  {i / fps:5.0f}s / {dur:.0f}s   {i / el:5.1f} fps   "
@@ -125,6 +140,7 @@ def main():
               + f" of every {loop}s loop", flush=True)
     dur = a.seconds if a.seconds else loop
     parts = encode.plan_segments(a.start, dur, cfg["encode"]["gop_seconds"], a.jobs)
+    encode.share_threads(len(parts))
     if len(parts) == 1:
         render_part((a.image, a.preset, bars, a.encoder, a.start, dur, a.out, True))
     else:

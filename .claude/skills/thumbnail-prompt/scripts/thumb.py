@@ -14,6 +14,7 @@ Chạy từ gốc repo. <dir> = channel/<ch>/{albums,ideas,singles}/NNN-slug
 import argparse
 import os
 import re
+import shlex
 import shutil
 import subprocess
 import sys
@@ -21,7 +22,7 @@ import time
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-W, H = 1920, 1080          # khung video (video-generator config.py); vùng phủ tính theo tỉ lệ nên không phụ thuộc cỡ ảnh
+W, H = 1920, 1080          # khung `--no-upscale`; vùng phủ tính theo tỉ lệ nên đúng cho mọi cỡ (video render 3840×2160)
 UW, UH = 3840, 2160        # thumbnail.png sau upscale (bản gốc 4K cho gói S3 của video-generator)
 # Vùng bị phủ trong video (video-generator config.py, khung 1920×1080), (x0, y0, x1, y1) theo tỉ lệ khung
 ZONES = {
@@ -111,6 +112,19 @@ def renv():
     return env
 
 
+# Lệnh nặng chạy trong systemd user slice `youtube.slice`, dùng chung cho MỌI skill của project: tổng cộng tối đa
+# ~60 % CPU, RAM 60 % (MemoryHigh) / 70 % (MemoryMax, kill trong slice) của server dùng chung (chủ kênh 2026-09-24,
+# CLAUDE.md §4). Slice tự tạo ở lần đầu. Giữ chuỗi này giống hệt khối LIMIT trong các remote.sh.
+LIMIT = ("S=~/.config/systemd/user/youtube.slice; [ -f $S ] || { mkdir -p ${S%/*} && printf \"[Unit]\\nDescription="
+         "youtube project: every skill shares this cap (CLAUDE.md 4)\\n[Slice]\\nCPUQuota=%s%%\\nMemoryHigh=60%%\\n"
+         "MemoryMax=70%%\\n\" $(( $(nproc) * 60 )) > $S && systemctl --user daemon-reload; }; "
+         "systemd-run --user --scope --quiet --collect --slice=youtube.slice -- bash -c ")
+
+
+def limited(cmd):
+    return LIMIT + shlex.quote(cmd)
+
+
 def ssh(env, cmd, **kw):
     return subprocess.run(["ssh", "-i", env["TP_KEY"], "-o", "BatchMode=yes", "-o", "ConnectTimeout=8",
                            env["TP_REMOTE"], cmd], **kw)
@@ -141,8 +155,8 @@ def upscale(src, dst):
     ssh(env, f"mkdir -p {job}", check=True)
     try:
         scp(env, str(src), f"{env['TP_REMOTE']}:{job}/in.png")
-        p = ssh(env, f"cd {R} && .venv/bin/python scripts/upscale_server.py run ~/{job}/in.png ~/{job}/out.png "
-                     f"--w {UW} --h {UH}", capture_output=True, text=True)
+        p = ssh(env, limited(f"cd ~/{R} && .venv/bin/python scripts/upscale_server.py run ~/{job}/in.png ~/{job}/out.png "
+                             f"--w {UW} --h {UH}"), capture_output=True, text=True)
         if p.returncode:
             sys.exit(f"upscale lỗi trên server:\n{p.stdout}{p.stderr}")
         scp(env, f"{env['TP_REMOTE']}:{job}/out.png", str(dst))

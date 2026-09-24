@@ -12,7 +12,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 
 import brand
-from config import DIRECTIONS, H, W, cycles, wave
+from config import DIRECTIONS, H, PX_SCALE, W, cycles, wave
 
 
 # ----------------------------------------------------------------- helpers --
@@ -119,7 +119,7 @@ def add_logo(plates, cfg):
     sh = lc.get("shadow")
     pad = 0
     if sh:
-        img = brand.drop_shadow(img, radius=sh["radius"], spread=sh["spread"])
+        img = brand.drop_shadow(img, radius=sh["radius"], spread=sh["spread"], offset=(0, round(5 * PX_SCALE)))
         pad = img.info["pad"]
     x, y = corner_xy(lc["corner"], w, img.height - 2 * pad, lc["margin_px"])
     rgb, al = to_layers(img)
@@ -297,11 +297,11 @@ class Subscribe:
     out. A window that runs past the loop end wraps to the start."""
 
     def __init__(self, c, loop, move=50):
-        self.c, self.loop, self.move = c, loop, move
+        self.c, self.loop, self.move = c, loop, move * PX_SCALE   # cursor travel, px at 1080p
         self.times = subscribe_times(c, loop)
         self.w = brand.SubscribeWidget(c["height_px"], c["label"], c["label_done"])
         self.x, self.y = corner_xy(c["corner"], self.w.W, self.w.h, c["margin_px"])
-        sh = brand.drop_shadow(self.w.plate, radius=16, spread=0.42)
+        sh = brand.drop_shadow(self.w.plate, radius=round(16 * PX_SCALE), spread=0.42, offset=(0, round(5 * PX_SCALE)))
         self.sh = to_layers(sh)
         self.sh_off = sh.info["pad"]
 

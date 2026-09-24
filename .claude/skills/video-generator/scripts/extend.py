@@ -76,7 +76,9 @@ def render_segment(job):
             if i == 0 and key > 0:
                 fh.write(f"inpoint {key}\n")
 
-    inputs, vin, n_in = ["-f", "concat", "-safe", "0", "-i", lst], "0:v", 1
+    # decode the 4K loop on the GPU (NVDEC) when encoding with NVENC: CPU decoding was most of this step
+    hw = ["-hwaccel", "cuda"] if (encoder or enc["encoder"]) == "nvenc" else []
+    inputs, vin, n_in = hw + ["-f", "concat", "-safe", "0", "-i", lst], "0:v", 1
     pre = []
     if skip > 1e-6:                            # the rest of the way to seg_start
         pre = [f"[0:v]trim=start={skip:.4f},setpts=PTS-STARTPTS[bg]"]
@@ -192,6 +194,7 @@ def main():
         gop = cfg["encode"]["gop_seconds"]
         grid = gop if cfg["loop_seconds"] % gop == 0 else loop_len
         segs = encode.plan_segments(a.start, dur, grid, a.jobs, offset=D)
+        encode.share_threads(len(segs))
         print(f"{dur / 60:.1f} min, spectrum ready ({time.time() - t0:.0f}s), "
               f"{len(segs)} segment(s) of ~{dur / len(segs) / 60:.1f} min", flush=True)
         jobs = []

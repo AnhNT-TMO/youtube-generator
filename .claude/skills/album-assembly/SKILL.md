@@ -20,7 +20,8 @@ The ASSEMBLE step of CLAUDE.md (step 6) for audio. Input: an album folder
 drop or swap tracks here; if the order looks wrong, say so and stop.
 
 Claude cannot hear. Every claim about how a join sounds comes from measurements (vocal stem,
-loudness curve, beat grid); say so, and ask the user to listen to the previews before calling the album done.
+loudness curve, beat grid); say so, and list the previews worth a listen, but do not wait for anyone to listen
+(CLAUDE.md §4 Cổng duyệt): the album is done when `render`'s checks pass.
 
 ## Commands
 

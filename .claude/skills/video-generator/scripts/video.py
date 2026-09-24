@@ -24,6 +24,7 @@ import argparse
 import json
 import os
 import re
+import shlex
 import shutil
 import subprocess
 import sys
@@ -39,7 +40,7 @@ REPO = config.REPO
 
 
 def _remote_env():
-    env = {"VG_REMOTE": "", "VG_KEY": "~/.ssh/id_rsa", "VG_JOBS": "16", "VG_DIR": "video-generator",
+    env = {"VG_REMOTE": "", "VG_KEY": "~/.ssh/id_rsa", "VG_JOBS": "16", "VG_DIR": "video-generator", "VG_ENCODER": "nvenc",
            "VG_S3_BUCKET": "", "VG_S3_REGION": "ap-northeast-1", "VG_S3_PREFIX": "", "VG_AWS_PROFILE": ""}
     path = os.path.join(SK, "remote.env")
     if os.path.exists(path):
@@ -157,6 +158,19 @@ def local_album(job, a):
 
 
 # ----------------------------------------------------------------- remote --
+# Lệnh nặng chạy trong systemd user slice `youtube.slice`, dùng chung cho MỌI skill của project: tổng cộng tối đa
+# ~60 % CPU, RAM 60 % (MemoryHigh) / 70 % (MemoryMax, kill trong slice) của server dùng chung (chủ kênh 2026-09-24,
+# CLAUDE.md §4). Slice tự tạo ở lần đầu. Giữ chuỗi này giống hệt khối LIMIT trong các remote.sh.
+LIMIT = ("S=~/.config/systemd/user/youtube.slice; [ -f $S ] || { mkdir -p ${S%/*} && printf \"[Unit]\\nDescription="
+         "youtube project: every skill shares this cap (CLAUDE.md 4)\\n[Slice]\\nCPUQuota=%s%%\\nMemoryHigh=60%%\\n"
+         "MemoryMax=70%%\\n\" $(( $(nproc) * 60 )) > $S && systemctl --user daemon-reload; }; "
+         "systemd-run --user --scope --quiet --collect --slice=youtube.slice -- bash -c ")
+
+
+def limited(cmd):
+    return LIMIT + shlex.quote(cmd)
+
+
 def _ssh(cmd):
     return ["ssh", "-i", RENV["VG_KEY"], "-o", "BatchMode=yes", "-o", "ConnectTimeout=10",
             "-o", "ServerAliveInterval=30", RENV["VG_REMOTE"], cmd]
@@ -219,7 +233,7 @@ def remote(job, a, audio=None):
         _rsync(audio, f"{inp}/audio{aext}")
     print(f"[{time.time() - t0:.0f}s] inputs synced", flush=True)
 
-    enc = a.encoder or "x264"
+    enc = a.encoder or RENV["VG_ENCODER"]     # server: NVENC on the GPU (CPU/RAM stay free, owner 2026-09-24)
     jobs = a.jobs or int(RENV["VG_JOBS"])
     P = f"~/{R}/.venv/bin/python"
     cmd = (f"cd {R}/scripts && export VG_REPO=~/{R}/repo && "
@@ -234,7 +248,7 @@ def remote(job, a, audio=None):
                 f" && D=$(ffprobe -v error -show_entries format=duration -of csv=p=0 video.mp4)"
                 f" && ffmpeg -v error -y -ss 5 -i video.mp4 -frames:v 1 check_5s.png"
                 f" && ffmpeg -v error -y -ss $(python3 -c \"print($D/2)\") -i video.mp4 -frames:v 1 check_mid.png")
-    run(_ssh(cmd))
+    run(_ssh(limited(cmd)))
     print(f"[{time.time() - t0:.0f}s] rendered, downloading", flush=True)
 
     for name in ("loop.mp4", "loop_seam.mp4", "loop_intro.mp4"):
@@ -300,8 +314,8 @@ def package(job, a):
     _rsync(pkg, f"{inp}/pkg/")
     shutil.rmtree(stage)
     zipname = f"{slug}-{time.strftime('%Y%m%d-%H%M%S')}.zip"
-    built = _ssh_json(f"python3 {R}/scripts/pkg_server.py build ~/{inp}/pkg/{slug} ~/{out}/video.mp4 ~/{inp} "
-                      f"~/{out}/{zipname} --video-name {slug}.mp4")
+    built = _ssh_json(limited(f"python3 {R}/scripts/pkg_server.py build ~/{inp}/pkg/{slug} ~/{out}/video.mp4 ~/{inp} "
+                      f"~/{out}/{zipname} --video-name {slug}.mp4"))
     for w in built["warnings"]:
         print(f"⚠ {w}", flush=True)
     size = built["size"]
@@ -320,7 +334,7 @@ def package(job, a):
         spec_file = fh.name
     try:
         _rsync(spec_file, f"{inp}/s3spec.json")
-        res = _ssh_json(f"python3 {R}/scripts/pkg_server.py upload ~/{out}/{zipname} ~/{inp}/s3spec.json")
+        res = _ssh_json(limited(f"python3 {R}/scripts/pkg_server.py upload ~/{out}/{zipname} ~/{inp}/s3spec.json"))
         with open(spec_file, "w") as fh:
             json.dump(res, fh)
         run([py, pkg_py, "complete", "--upload-id", spec["upload_id"], "--etags", spec_file] + s3args)

@@ -13,15 +13,18 @@ position (`[{"count": 100}]` tweaks the first layer; extra entries add layers;
      image (where the light shaft falls, a lamp to flicker)
 
 Colours are [R, G, B] 0-255. Positions are fractions of the frame
-(0 = left/top, 1 = right/bottom) unless the key says `_px`. Relative paths in
-a config (logo) start at the repo root.
+(0 = left/top, 1 = right/bottom) unless the key says `_px`. `_px` values are
+written for a 1920×1080 frame and scaled to the output frame by load(), so
+every video.json keeps working whatever W, H is. Relative paths in a config
+(logo) start at the repo root.
 """
 import copy
 import json
 import math
 import os
 
-W, H = 1920, 1080
+W, H = 3840, 2160          # output frame: 4K UHD (YouTube gives 4K uploads a higher bitrate at every quality)
+PX_SCALE = W / 1920        # `_px` settings are authored for 1920×1080
 
 
 def _find_repo():
@@ -213,9 +216,30 @@ def merge_files(paths):
     return cfg
 
 
+def _scale(v):
+    return [_scale(x) for x in v] if isinstance(v, list) else round(v * PX_SCALE) if isinstance(v, int) else v * PX_SCALE
+
+
+def scale_px(node):
+    """Every `_px` value (written for 1920×1080) × PX_SCALE, in place. Only load() calls it, once per config:
+    merge_files() output (the preset.json sent to the server) stays in 1080p units."""
+    if isinstance(node, dict):
+        for k, v in node.items():
+            if k.endswith("_px") and v is not None:
+                node[k] = _scale(v)
+            else:
+                scale_px(v)
+    elif isinstance(node, list):
+        for v in node:
+            scale_px(v)
+
+
 def load(paths=None):
-    """merge_files() plus paths resolved against the repo root."""
+    """merge_files() plus `_px` values scaled to the output frame and paths resolved against the repo root."""
     cfg = merge_files(paths)
+    scale_px(cfg)
+    if cfg["logo"].get("shadow"):              # the one pixel size without the `_px` suffix
+        cfg["logo"]["shadow"]["radius"] = _scale(cfg["logo"]["shadow"]["radius"])
     logo = cfg["logo"]
     if logo["enabled"] or cfg["intro"]["enabled"]:
         if not logo["path"]:

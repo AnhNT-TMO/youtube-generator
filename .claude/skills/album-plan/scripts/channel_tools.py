@@ -187,14 +187,44 @@ def idea_state(d: Path) -> dict:
         todo_l.append(f"analyzer: {todo} TODO trong idea.yaml")
     elif st != "promoted":
         todo_l.append("album-plan init")
-    if not thumb:
+    if st == "promoted":   # việc hình của idea đã thành album nằm ở dòng album (ảnh làm ở idea vẫn được album dùng)
+        todo_l.append(f"(đã thành album {Path(y.get('album') or '').name}: xem dòng album)")
+    elif not thumb:
         todo_l.append("thumbnail-prompt")
     elif not loop:
         todo_l.append("video-generator loop")
-    if st == "promoted":
-        todo_l.append(f"(đã thành album {Path(y.get('album') or '').name})")
     return {"kind": "idea", "name": d.name, "status": st, "thumb": thumb, "loop": loop,
             "next": " · ".join(todo_l) or "xong phần idea"}
+
+
+def video_state(d: Path) -> tuple[bool, bool]:
+    """(có video, đã zip lên S3). video-generator bước 2 để video trên server: Mac chỉ có video/remote.json
+    (`video` = null sau khi `package` dọn server) và s3-package.json; bản render --local/--download là video/<tên>.mp4."""
+    import json
+    packaged = False
+    if (d / "s3-package.json").exists():
+        try:
+            packaged = bool(json.loads((d / "s3-package.json").read_text()))
+        except ValueError:
+            pass
+    remote = False
+    if (d / "video" / "remote.json").exists():
+        try:
+            remote = bool(json.loads((d / "video" / "remote.json").read_text()).get("video"))
+        except ValueError:
+            pass
+    return (d / "video" / f"{d.name}.mp4").exists() or remote or packaged, packaged
+
+
+def publish_todo(d: Path, url, yt: str, packaged: bool) -> list[str]:
+    """Việc sau khi đã có video (album và single giống nhau)."""
+    if url:
+        return ([] if (d / "title-translations.yaml").exists() else ["youtube-translate"]) + ["LEARN: retention 0:15/0:30/1:00 vào youtube.md"]
+    if packaged:
+        return ["CHỦ KÊNH: upload từ zip S3 (s3-package.json) rồi điền Video URL vào youtube.md"]
+    if not yt:
+        return ["youtube-publish (soạn youtube.md) → video.py package"]
+    return ["video.py package (youtube.md có rồi: publish.py check)"]
 
 
 def album_state(d: Path) -> dict:
@@ -217,7 +247,7 @@ def album_state(d: Path) -> dict:
     idea_thumb = bool(idea and any((idea / f).exists() for f in ("thumbnail.png", "thumbnail.jpg")))
     loop = (d / "video" / "loop.mp4").exists() or bool(idea and (idea / "video" / "loop.mp4").exists())
     master = (d / "audio" / "master" / f"{d.name}.wav").exists()
-    video = (d / "video" / f"{d.name}.mp4").exists()
+    video, packaged = video_state(d)
     yt = (d / "youtube.md").read_text() if (d / "youtube.md").exists() else ""
     url = re.search(r"\*\*Video URL:\*\*\s*(https?://\S+)", yt)
     pending_sync = sync_assets(d, [], dry=True) if idea else []
@@ -225,7 +255,7 @@ def album_state(d: Path) -> dict:
     todo = []
     if url:
         status = "uploaded"
-        todo.append("LEARN: retention 0:15/0:30/1:00 vào youtube.md")
+        todo += publish_todo(d, url, yt, packaged)
     else:
         # nhánh nhạc: plan → Suno → verify → ghép
         if not master:
@@ -251,7 +281,7 @@ def album_state(d: Path) -> dict:
         if master and (thumb or idea_thumb) and not video:
             todo.append("video-generator album")
         if video:
-            todo.append("youtube-publish → upload" + (" (youtube.md có rồi: publish.py check)" if yt else ""))
+            todo += publish_todo(d, url, yt, packaged)
     return {"kind": "album", "name": d.name, "status": status, "tracks": f"{chosen}/{n}", "drafts": drafts,
             "thumb": thumb or (f"ở idea{' (chưa sync)' if pending_sync else ''}" if idea_thumb else False),
             "loop": loop, "master": master, "video": video, "next": " · ".join(todo), "sync": pending_sync}
@@ -261,12 +291,12 @@ def single_state(d: Path) -> dict:
     fm = front_matter(d / "single.md") if (d / "single.md").exists() else {}
     thumb = any((d / f).exists() for f in ("thumbnail.png", "thumbnail.jpg"))
     master = (d / "audio" / "master" / f"{d.name}.wav").exists()
-    video = (d / "video" / f"{d.name}.mp4").exists()
+    video, packaged = video_state(d)
     yt = (d / "youtube.md").read_text() if (d / "youtube.md").exists() else ""
     url = re.search(r"\*\*Video URL:\*\*\s*(https?://\S+)", yt)
     todo = []
     if url:
-        todo.append("đã upload")
+        todo += publish_todo(d, url, yt, packaged)
     else:
         if not master:
             todo.append("album-assembly single")
@@ -277,7 +307,7 @@ def single_state(d: Path) -> dict:
         if master and thumb and not video:
             todo.append("video-generator album")
         if video:
-            todo.append("youtube-publish (single) → upload")
+            todo += publish_todo(d, url, yt, packaged)
     return {"kind": "single", "name": d.name, "status": fm.get("status") or "?", "thumb": thumb,
             "loop": (d / "video" / "loop.mp4").exists(), "master": master, "video": video, "next": " · ".join(todo)}
 

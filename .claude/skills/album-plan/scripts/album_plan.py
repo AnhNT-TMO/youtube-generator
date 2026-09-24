@@ -757,8 +757,9 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
     for t in {t for t in titles if titles.count(t) > 1 and t}:
         I.err("title", f"trùng title '{t}'")
     catalog = catalog_rows(alb.get("channel", ""))
-    cat_titles = {norm_text(r.get("title")): r.get("id") for r in catalog}
-    cat_hooks = {norm_text(r.get("hook")): r.get("id") for r in catalog if r.get("hook")}
+    own = f"/albums/{album.name}/"          # bài của chính album này (đã accept) không tính là "trùng library"
+    cat_titles = {norm_text(r.get("title")): r.get("id") for r in catalog if own not in (r.get("file") or "")}
+    cat_hooks = {norm_text(r.get("hook")): r.get("id") for r in catalog if r.get("hook") and own not in (r.get("file") or "")}
     others = other_plans(alb.get("channel", ""), album)   # album khác đang plan (chưa có bài trong catalog)
     oplans = channel_plans(alb.get("channel", ""), album)
     known = [(str(t), "rules.md known_titles") for t in rules.get("known_titles") or []]

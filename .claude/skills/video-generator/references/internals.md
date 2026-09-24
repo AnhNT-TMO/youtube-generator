@@ -58,9 +58,15 @@ mỗi 10s) thành `--jobs` đoạn nén song song trong các process riêng, r�
 không nén. Audio WAV được nén sang AAC song song với phần hình.
 
 Bộ nén (`--encoder`, hoặc `encode.encoder` trong preset):
-- `x264`: mặc định, file nhỏ nhất ở cùng chất lượng. x264 `veryfast` dùng khoảng
-  2.5 nhân mỗi đoạn: Mac dùng `--jobs 4`, server dùng `--jobs 16`.
-- `nvenc`: GPU NVIDIA, nhanh nhất trên server, nhưng file to hơn (`nvenc_cq` 19 → ~3.3 Mbps).
+- `nvenc`: **mặc định trên server** (`VG_ENCODER` trong `remote.env`). GPU NVIDIA; 16 phiên 4K song song chạy được.
+  Kèm NVDEC: `extend.py` giải mã loop bằng `-hwaccel cuda`. Đo 2026-09-24, loop 5 phút 4K: x264 247 s và ~100 GB RAM
+  (32 encode × ~120 luồng), NVENC 52 s, CPU/RAM gần như rảnh. File to hơn x264 một chút.
+- `x264`: file nhỏ nhất ở cùng chất lượng, mặc định khi render trên Mac (`--local`). Mỗi encode chỉ được một phần số
+  nhân (`encode.share_threads`), vì x264 tự mở ~120 luồng cho một encode 4K.
+- Khung hình vẫn ghép trên CPU: `effects_gpu.py` (torch CUDA, cho ra đúng từng pixel) chậm hơn khi 16 tiến trình chia một
+  GPU (103–110 s so với 52 s); bật thử bằng `VG_GPU=1`.
+- Mọi lệnh render/đóng gói trên server chạy trong systemd user slice `youtube.slice` (CLAUDE.md §4): tổng mọi skill
+  ≤ 60 % CPU, RAM 60 % (MemoryHigh) / 70 % (MemoryMax).
 - `videotoolbox`: chip nén của Mac, ít tốn CPU nhưng không nhanh hơn x264 đáng kể.
 
 ## Ghi chú

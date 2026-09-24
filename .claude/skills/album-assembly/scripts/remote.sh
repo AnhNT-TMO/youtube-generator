@@ -21,6 +21,10 @@ RDIR="${QC_DIR:-youtube-qc}"                   # bản sao repo trên server (c�
 SKR=".claude/skills/album-assembly"             # đường dẫn skill, tương đối gốc repo
 SSH=(ssh -i "$KEY" -o BatchMode=yes -o ConnectTimeout=10 "$HOST")
 RSH="ssh -i $KEY -o BatchMode=yes -o ConnectTimeout=10"
+# Lệnh nặng chạy trong systemd user slice `youtube.slice`, dùng chung cho MỌI skill của project: tổng cộng tối đa
+# ~60 % CPU, RAM 60 % (MemoryHigh, bắt đầu thu hồi) / 70 % (MemoryMax, kill trong slice) của server dùng chung
+# (chủ kênh 2026-09-24, CLAUDE.md §4). Slice tự tạo ở lần đầu. Giữ khối này giống hệt trong mọi runner.
+LIMIT='S=~/.config/systemd/user/youtube.slice; [ -f $S ] || { mkdir -p ${S%/*} && printf "[Unit]\nDescription=youtube project: every skill shares this cap (CLAUDE.md 4)\n[Slice]\nCPUQuota=%s%%\nMemoryHigh=60%%\nMemoryMax=70%%\n" $(( $(nproc) * 60 )) > $S && systemctl --user daemon-reload; }; systemd-run --user --scope --quiet --collect --slice=youtube.slice -- bash -c'
 
 push() {
   # -W: không tính delta (đỡ CPU máy Mac); audio/master và video không đẩy (master được tạo trên server).
@@ -41,7 +45,7 @@ case "${1:-}" in
       $SKR/.venv/bin/python -c 'import torch; print(\"torch\", torch.__version__, \"cuda\", torch.cuda.is_available(), torch.cuda.get_device_name(0))'"
     ;;
   push) push ;;
-  exec) "${SSH[@]}" "cd $RDIR && $2" ;;
+  exec) "${SSH[@]}" "$LIMIT $(printf %q "cd $RDIR && $2")" ;;
   pull)
     INC=(--include 'assembly.yaml' --include 'assembly.md' --include 'notes/' --include 'notes/assembly-v0.md')
     [ "${3:-}" = master ] && INC+=(--include 'audio/' --include 'audio/master/***')

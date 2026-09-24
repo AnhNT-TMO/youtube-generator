@@ -27,7 +27,8 @@ selector breaks.
    download (Pro: 20). Every download goes through usesuno.com. `suno_gen.py quota` stops the run if the official count rises.
 2. **Never press Create unless `check-form` printed `FORM KHỚP SPEC`** for this exact gen id, read after your last edit.
    A wrong option costs credits and produces clips that look valid in the index.
-3. Spend credits only when `generation.yaml` has `status: approved` and the user OKed this batch
+3. Spend credits only when `generation.yaml` has `status: approved` and the user OKed this batch (standing OK for every
+   planned round of an approved album, owner 2026-09-24: CLAUDE.md §4 Cổng duyệt)
    (number of rounds × credits). Every extra round (REGENERATE, or more at the user's request) needs its own OK — the one verification-audio
    asks ("tạo lại 1 lượt (N credits)?") counts; don't ask the same thing twice.
 4. One generation at a time **up to `complete`**: poll + `complete` (it checks what Suno stored) before the next `next`

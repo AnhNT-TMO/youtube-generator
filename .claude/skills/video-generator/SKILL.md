@@ -23,7 +23,8 @@ V="python3 $SK/scripts/video.py"      # run from the repo root; creates $SK/.ven
 ```
 
 Needs python3 and ffmpeg/ffprobe. `loop` / `batch` / `album` render on the GPU server in `$SK/remote.env` by default
-(step 1 ~1 min, step 2 ~3–4 min for an hour of audio, including transfers). `--local` renders on this Mac
+(3840×2160, encoded with NVENC on the server GPU, inside the capped `youtube.slice` (CLAUDE.md §4); a 5-min loop ~1 min,
+a single ~2.5 min, a 50-min album ~10 min including transfers). `--local` renders on this Mac
 (~2 min / ~12 min, heats the Mac and stalls other work): only when the server is unreachable **and the user said yes**
 (CLAUDE.md §4). `frame` (one still) always runs here.
 
@@ -73,7 +74,7 @@ low-level commands are in `$SK/references/internals.md`.
    to this Mac (`--download` fetches it anyway, e.g. to watch it locally). Then, if `<dir>/youtube.md` exists,
    step 3 runs by itself (`--no-package` to skip).
 3. **Verify.** Read `<dir>/video/video.mp4.json` (ffprobe of the server file): the duration matches the audio, with
-   video and audio streams present, and the resolution is the one wanted (4K = 3840×2160). Read
+   video and audio streams present, and the resolution is 3840×2160 (the renderer's frame, `config.py` `W, H`). Read
    `<dir>/video/check_5s.png` (bars fading in) and `check_mid.png` (mid-album).
 
 ## Step 3 — package for YouTube → S3

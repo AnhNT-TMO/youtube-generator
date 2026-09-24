@@ -13,7 +13,8 @@ từng tham số nằm trong `DEFAULTS` ở [scripts/config.py](../scripts/confi
 hạt đầu tiên của channel. Thêm phần tử để thêm lớp; `"enabled": false` để bỏ một lớp.
 
 Màu viết `[R, G, B]` 0–255. Vị trí là tỉ lệ khung hình (0 = trái/trên, 1 = phải/dưới);
-tham số có đuôi `_px` tính bằng pixel.
+tham số có đuôi `_px` tính bằng pixel **của khung 1920×1080**; video ra 3840×2160 (`config.py` `W, H`) và `config.load()`
+nhân mọi `_px` với `PX_SCALE` (= 2), nên các `video.json` cũ vẫn đúng tỉ lệ.
 
 ## `light`: ánh sáng thở
 

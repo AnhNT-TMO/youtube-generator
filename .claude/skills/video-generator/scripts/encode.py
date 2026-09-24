@@ -20,8 +20,16 @@ def codec_args(enc, fps, encoder=None):
     if encoder == "videotoolbox":
         return ["-c:v", "h264_videotoolbox", "-b:v", enc["vt_bitrate"],
                 "-profile:v", "high"] + keys
+    # parallel parts each get a share of the cores: x264 alone opens ~120 threads per 4K encode (2026-09-24,
+    # 32 encodes at once pushed the shared server's load to 600+)
+    threads = ["-threads", os.environ["VG_ENC_THREADS"]] if os.environ.get("VG_ENC_THREADS") else []
     return ["-c:v", "libx264", "-preset", enc["preset"], "-crf", str(enc["crf"]),
-            "-x264-params", enc["x264"] + ":open-gop=0:scenecut=0"] + keys
+            "-x264-params", enc["x264"] + ":open-gop=0:scenecut=0"] + threads + keys
+
+
+def share_threads(jobs):
+    """Cores per parallel encode, handed to the worker processes through the environment."""
+    os.environ["VG_ENC_THREADS"] = str(max(2, (os.cpu_count() or 8) // max(1, jobs)))
 
 
 def plan_segments(start, dur, grid, jobs, offset=0.0):

@@ -88,7 +88,8 @@ keeps the 4K `thumbnail.png`, which video-generator pushes back to the server fo
    the face matches `model/` (bald, beard graying at the chin, same age), five fingers, nothing important in the corners,
    the lamp is the brightest point, it still reads at phone size. Then `python3 $T check <dir> --image <draft>`: ratio, size,
    zone detail (> 1.3 × the image average = busy), warm bright spots. Give one concrete follow-up edit
-   (`references/chatgpt.md`) or say it is ready.
+   (`references/chatgpt.md`) or say it is ready. **Claude picks the draft itself** (owner 2026-09-24, CLAUDE.md §4 Cổng
+   duyệt; later the agent manager): the one passing every check above, and write why under *Các lượt thử*. Don't ask the owner.
 6. **Finish**: `python3 $T fit <dir> <chosen draft>` (move `--x/--y` when the crop cuts the title or the head; ~1 min,
    run it only on the chosen draft, never on every draft). Read `thumbnail.png` and compare it with the draft: the upscaler
    must not have changed the title letters, the face or the hands (it never did in the test, but look). Then

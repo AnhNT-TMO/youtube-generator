@@ -13,6 +13,10 @@ REPO="$(cd "$SK/../../.." && pwd)"
 : "${YTA_REMOTE:?set YTA_REMOTE=user@host in $SK/remote.env}"
 KEY="${YTA_KEY:-$HOME/.ssh/id_rsa}"; QCDIR="${QC_DIR:-youtube-qc}"
 RSH="ssh -i $KEY -o BatchMode=yes -o ConnectTimeout=10"
+# Lệnh nặng chạy trong systemd user slice `youtube.slice`, dùng chung cho MỌI skill của project: tổng cộng tối đa
+# ~60 % CPU, RAM 60 % (MemoryHigh, bắt đầu thu hồi) / 70 % (MemoryMax, kill trong slice) của server dùng chung
+# (chủ kênh 2026-09-24, CLAUDE.md §4). Slice tự tạo ở lần đầu. Giữ khối này giống hệt trong mọi runner.
+LIMIT='S=~/.config/systemd/user/youtube.slice; [ -f $S ] || { mkdir -p ${S%/*} && printf "[Unit]\nDescription=youtube project: every skill shares this cap (CLAUDE.md 4)\n[Slice]\nCPUQuota=%s%%\nMemoryHigh=60%%\nMemoryMax=70%%\n" $(( $(nproc) * 60 )) > $S && systemctl --user daemon-reload; }; systemd-run --user --scope --quiet --collect --slice=youtube.slice -- bash -c'
 URL="$1"; OUT="$2"; shift 2
 SLUG="$(basename "$OUT")"
 CHDIR=""; IDEA=""; ARGS=""; SEGS=""
@@ -33,10 +37,10 @@ if [ -n "$SEGS" ]; then
   $RSH "$YTA_REMOTE" "mkdir -p yt-analyzer/runs/$SLUG"
   rsync -a -e "$RSH" "$SEGS" "$YTA_REMOTE:yt-analyzer/runs/$SLUG/segments.${SEGS##*.}"
 fi
-$RSH "$YTA_REMOTE" "cd ~/yt-analyzer && skill/.venv/bin/pip install -q -r skill/requirements.txt >/dev/null 2>&1; \
+$RSH "$YTA_REMOTE" "$LIMIT $(printf %q "cd ~/yt-analyzer && skill/.venv/bin/pip install -q -r skill/requirements.txt >/dev/null 2>&1; \
   QCS=\$HOME/$QCDIR/.claude/skills/verification-audio; \
   QP=\$QCS/.venv/bin/python; QT=\$QCS/scripts; [ -x \$QP ] || { echo 'no QC venv on the server: run .claude/skills/verification-audio/scripts/remote.sh setup'; exit 1; }; \
-  YTA_ON_SERVER=1 QC_PY=\$QP QC_TOOLS=\$QT bash skill/scripts/run.sh $(printf %q "$URL") runs/$SLUG$ARGS"
+  YTA_ON_SERVER=1 QC_PY=\$QP QC_TOOLS=\$QT bash skill/scripts/run.sh $(printf %q "$URL") runs/$SLUG$ARGS")"
 mkdir -p "$OUT"
 # outputs a stage may not have produced this time must not survive from an earlier run
 rm -f "$OUT/audio/qc.json" "$OUT/reference.yaml"

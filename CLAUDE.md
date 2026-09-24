@@ -3,6 +3,8 @@
 > **Trạng thái: VẬN HÀNH** (từ 2026-09-23). Giai đoạn phát triển tooling đã xong; việc chính là làm album thật và đăng lên YouTube.
 > Không cải tiến skill giữa chừng: chỉ sửa khi lỗi **chặn** hoặc **làm hỏng** lần chạy (sai file, tốn credit, mất lời, số sai);
 > lỗi nhỏ ghi lại để sau. Cách dùng từng skill nằm trong `.claude/skills/<skill>/SKILL.md`.
+> **Giao cả lô** ("tạo 5 albums"): skill `production-manager` điều phối sub-agent qua mọi bước, tự trả lời thay chủ kênh
+> (luật quyết định + luật sửa skill trong SKILL.md §5, §7 của nó), chủ kênh chỉ xem kết quả cuối.
 
 ## 1. Project
 
@@ -18,10 +20,10 @@ nhưng giai điệu, lời, tên bài, hình ảnh và danh tính kênh là củ
 |---|---|---|---|---|---|
 | 1 | Research | gửi link YouTube (hàng đợi: `research/list.txt`) | youtube-music-analyzer | `research/<slug>/` + `ideas/NNN-slug/idea.yaml` (6 tiêu chí) | giữ persona? tempo |
 | 2 | Plan | "lên plan album từ idea NNN" | album-plan | `albums/NNN-slug/`: plan, lời, generation.yaml, selection.yaml | duyệt tracklist + lời + credits (`approve`) |
-| 3 | Tạo nhạc | "tạo nhạc" | suno-generate | clip trong `audio/raw_tracks/` + `manifest.json` | OK credits mỗi đợt |
-| 4 | Chọn bản | "verify slot N" | verification-audio | bài được chọn → `audio/tracks/` + front matter | đồng ý bản chọn / tạo lại |
+| 3 | Tạo nhạc | "tạo nhạc" | suno-generate | clip trong `audio/raw_tracks/` + `manifest.json` | — (tự chạy sau approve, §4 Cổng duyệt) |
+| 4 | Chọn bản | "verify slot N" | verification-audio | bài được chọn → `audio/tracks/` + front matter | — (tự accept, §4 Cổng duyệt) |
 | 5 | Ghép | "ghép album" | album-assembly | `audio/master/<album>.wav` + `assembly.md` | — |
-| 6 | Hình | "thumbnail cho …", "render loop" | thumbnail-prompt → video-generator bước 1 | `thumbnail.png` (4K, upscale trên server) + `.jpg`, `video/loop.mp4` | chọn ảnh |
+| 6 | Hình | "thumbnail cho …", "render loop" | thumbnail-prompt → video-generator bước 1 | `thumbnail.png` (4K, upscale trên server) + `.jpg`, `video/loop.mp4` | — (tự chọn ảnh, §4 Cổng duyệt) |
 | 7 | Video | "ghép video với nhạc" | video-generator bước 2 | video trên GPU server (không tải về Mac) | — |
 | 8 | Đăng | "soạn youtube" → "zip lên S3" | youtube-publish → video-generator bước 3 | `youtube.md`; zip (video, thumbnail, youtube.md) lên S3, ghi ở `s3-package.json` | tự upload |
 | 8b | Dịch title | "dịch title" (sau upload, có Video URL) | youtube-translate | title các ngôn ngữ trong `translate.yaml` lên YouTube + `title-translations.yaml` | OK trước khi ghi |
@@ -30,6 +32,7 @@ nhưng giai điệu, lời, tên bài, hình ảnh và danh tính kênh là củ
 
 - **Thứ tự linh hoạt:** skill chỉ giao tiếp qua file. Có hai nhánh không chờ nhau: **nhạc** (2 → 5) và **hình** (6, làm ở thư mục
   idea hay album đều được); gặp nhau ở bước 7. Có thể làm theo lô (analyze nhiều link, plan vài album, làm ảnh/loop hàng loạt).
+- **Chạy cả xưởng:** "tạo N albums" → `production-manager` (lane Suno/ChatGPT 1 luồng, server + plan song song, ledger `channel/<ch>/production/`).
 - **Xem việc còn lại:** `album_plan.py board --channel <ch>` (mọi idea/album/single và bước tiếp theo).
 - **Tiếp tục từ trạng thái hiện có** của album, không làm lại từ đầu.
 - **Single** (một bài đăng riêng): `channel/<ch>/singles/NNN-slug/` (`single.md` trỏ về track gốc), audio bằng `assemble.py single`,
@@ -54,7 +57,15 @@ nhưng giai điệu, lời, tên bài, hình ảnh và danh tính kênh là củ
 ## 4. Luật bắt buộc
 
 - **Credits:** bài 1 = **2 lượt Max** (4 clip), mỗi bài khác = **1 lượt thường**; ≈ 130 credits/album 10 bài, trần **250** (đủ cho album 14–15 bài).
-  Mọi lượt thêm (tạo lại, thêm bản) phải hỏi chủ kênh trước. Làm được nhiều album quan trọng hơn vắt bản hay nhất cho từng bài.
+  Lượt thêm theo **Cổng duyệt** bên dưới. Làm được nhiều album quan trọng hơn vắt bản hay nhất cho từng bài.
+- **Cổng duyệt** (chủ kênh 2026-09-24; nguồn chuẩn, các skill và agent manager theo đây khi SKILL.md nói "hỏi người dùng"):
+  - *Hỏi chủ kênh:* duyệt plan (`approve`) · lượt thêm khi còn chọn được bản ít lỗi nhất, hoặc sẽ vượt `budget_max_credits` ·
+    chạy việc nặng trên Mac (`--local`) · upload YouTube (chủ kênh tự làm) · `auth` YouTube hết hạn · đăng nhập Suno/ChatGPT.
+  - *Tự làm, không hỏi:* mọi lượt đã plan của album đã approve · accept bản verify chọn (`--why "auto-accept …"`) ·
+    REGENERATE → dùng `best_available` (`--why`); chỉ tạo lại 1 lượt khi **mọi** clip hỏng thật và còn trong trần · ghép album
+    (không chờ ai nghe preview) · chọn ảnh thumbnail trong các bản ChatGPT (theo các bước kiểm của thumbnail-prompt;
+    sau này agent manager chọn) · dịch title (`--yes`).
+  - *Dừng hẳn, báo chủ kênh:* `quota` báo lượt tải chính thức tăng · Suno nhận khác spec (exit 2) · server không kết nối được.
 - **Tải nhạc chỉ qua usesuno.com**, cả bản nháp lẫn bản chốt. Không bao giờ bấm Download / "Unlock & Download" của Suno
   (mất lượt tải chính thức 20/tháng); `suno_gen.py quota` dừng cả phiên nếu lượt tải chính thức tăng. Chủ kênh đã chấp nhận rủi ro
   điều khoản thương mại của Suno (chỉ bài tải chính thức mới được dùng thương mại): nhắc một lần lúc đăng, không hỏi lại.
@@ -69,6 +80,10 @@ nhưng giai điệu, lời, tên bài, hình ảnh và danh tính kênh là củ
   đồng ý (hỏi trước, nói rõ việc gì, mất bao lâu); chạy trên Mac làm máy nóng và treo các việc khác. Script mới thuộc loại này phải
   có đường chạy server từ đầu. Chạy song song nhiều việc: gộp vào một lệnh (vd. `verify.py check --slot all`), không chia nhiều
   subagent cùng đẩy/ghi một album.
+- **Server dùng chung: ưu tiên GPU, trần tài nguyên.** Việc nặng chạy được trên GPU thì chạy GPU (model CUDA, encode NVENC,
+  decode NVDEC). Tổng mọi tác vụ của project ≤ ~60 % CPU và 60–70 % RAM của server: mọi runner (`video.py`, `thumb.py`, các
+  `remote.sh`) chạy lệnh nặng trong systemd user slice `youtube.slice` (khối `LIMIT`, giống hệt nhau ở mọi runner). Script
+  mới chạy trên server phải đi qua slice này (chủ kênh 2026-09-24).
 - **Git chỉ giữ tooling:** skills, templates, `CLAUDE.md` và cấu hình kênh (`channel.md`, `rules.md`, `video.json`, `translate.yaml`,
   `voices/README.md`, `image_source/`, `model/`). Mọi thứ sinh ra khi làm video (`albums/`, `ideas/`, `singles/`, `library/`,
   `research/`, `voices/notes/`), media và `remote.env` chỉ nằm trên máy (`.gitignore`; thư mục trống giữ bằng `.keep`).
@@ -148,7 +163,8 @@ youtube/
   Còn: điền Video URL + retention 0:15 / 0:30 / 1:00 vào `youtube.md` (mốc so sánh cho album sau).
   Bản ghép mới `audio/master/001-when-the-night-is-long.wav` không dùng cho video đã đăng. Ghi chú gốc: `notes/suno_gospel_blues_workflow_context.txt`.
 - **Singles 001–003:** có video + `youtube.md`, chưa đăng.
-- **Album tiếp theo:** chưa có idea/plan (đã dọn 2026-09-23). Bắt đầu bằng bước 1 với một link trong `research/list.txt`.
+- **Album 002–006, singles 004–006:** đang làm dở ở nhiều bước. Trạng thái thật luôn lấy từ `album_plan.py board --channel lamplight_gospel`
+  (cột "Việc còn lại"), không từ mục này hay trường `status` viết tay trong `single.md`.
 
 ## 9. Theo dõi sau vài album
 

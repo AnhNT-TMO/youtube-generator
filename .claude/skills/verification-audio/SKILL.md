@@ -69,7 +69,9 @@ album-assembly's job.
 
 ## Rules
 
-- Never copy into `tracks/` or change a clip's status without the user's explicit yes.
+- Never copy into `tracks/` or change a clip's status without the user's explicit yes. **Standing yes (owner 2026-09-24,
+  CLAUDE.md §4 Cổng duyệt):** for an approved album, accept verify's SELECT without asking (`--why "auto-accept …"`), and on
+  REGENERATE use `best_available`; a new round only when every clip is truly broken and the budget allows.
 - Never delete drafts from `raw_tracks/`. Never trigger a generation without asking (credits). Never use Suno's own
   Download (monthly quota); downloads go through usesuno.
 - Never ask the user to listen and judge. Don't add criteria before real listener data (retention) shows a need.
