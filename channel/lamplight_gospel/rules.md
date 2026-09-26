@@ -4,7 +4,7 @@
 đọc khối YAML ở cuối). Chỉ ghi **quyết định**, không ghi phương án; mỗi luật một dòng kèm nguồn + ngày.
 Không có file luật Suno chung nào khác: cách Suno đọc Style/tag/lời cho thể loại này nằm ở §5–§9. Channel khác có rules.md riêng.
 
-**Cách bổ sung:** sau mỗi lần chủ kênh nghe, mỗi lần verification-audio đo, mỗi album có retention, hoặc khi Claude thấy lỗi
+**Cách bổ sung:** sau mỗi lần verification-audio đo, mỗi album có retention, hoặc khi Claude thấy lỗi
 lặp lại → thêm một dòng vào đúng mục (và vào khối YAML nếu máy kiểm được), ghi nguồn. Luật không còn đúng thì xóa, không để hai bản.
 
 ## 1. House sound = MẶC ĐỊNH, không phải khuôn
@@ -25,19 +25,19 @@ lặp lại → thêm một dòng vào đúng mục (và vào khối YAML nếu 
 - **Trong một album** vẫn một nghệ sĩ, một Style, một dải tempo (nhanh nhất / chậm nhất ≤ 20 %). **Giữa các album** tempo,
   energy, concept nên khác nhau: xem `album_plan.py themes --channel lamplight_gospel` trước khi chọn. *Nguồn: chủ kênh 2026-09-23.*
 
-## 1b. Bám video tham khảo ~50 % + bài điểm nhấn
+## 1b. Bám nhóm video tham khảo ~50 % + bài điểm nhấn
 
-- **Tempo = tempo cảm nhận của video tham khảo** (`reference.yaml criteria.tempo.felt_bpm_median`), lệch ≤ `reference_follow.tempo_max_dev_pct`.
-  Không nhích về phía Album 001. **Giọng:** chọn Voice (bảng `voices` dưới) có f0 gần f0 của video tham khảo (lệch ≤ `voice_f0_max_dev_pct`).
-  **Mật độ lời** ≈ của video tham khảo (lệch ≤ `words_per_min_max_dev_pct`), vẫn dưới trần §2.
+- **Tempo = tempo cảm nhận trung vị của nhóm video tham khảo** (reference set của trend: `reference.yaml criteria.tempo.felt_bpm_median`), lệch ≤ `reference_follow.tempo_max_dev_pct`.
+  Không nhích về tempo các album cũ của kênh. **Giọng:** chọn Voice (bảng `voices` dưới) có f0 gần f0 trung vị của nhóm (lệch ≤ `voice_f0_max_dev_pct`).
+  **Mật độ lời** ≈ trung vị của nhóm (lệch ≤ `words_per_min_max_dev_pct`), vẫn dưới trần §2.
   Muốn khác → khai báo `experiment` (album) hoặc `waivers`. *Nguồn: chủ kênh 2026-09-23 ("khoảng 50 % là video tham khảo về tempo, giọng + lời").*
 - **Mỗi album một bài điểm nhấn** (`plan.yaml → highlight`): slot 4 hoặc 7, bài mới, khác thường ở MỘT trục (quãng giọng cao hơn / nâng tông
   chorus cuối, energy vọt, mở a cappella, tempo nhanh hơn rõ, choir dẫn…) nhưng vẫn cùng nghệ sĩ + cùng Voice. Bài này được miễn luật
   bước energy/tempo/intro với bài kề và không tính vào dải tempo của album. Sau khi album xong, bài điểm nhấn **đăng thêm thành single**
   (`singles/NNN-slug`) để đo phản ứng riêng; `youtube.md` ghi mốc thời gian của nó để đọc retention đúng chỗ.
   *Nguồn: chủ kênh 2026-09-23 ("bài 4 hoặc 7 … đăng single luôn để xem phản ứng người nghe").*
-- **Thời lượng album 50–90 phút** đều chấp nhận: Suno không ra đúng độ dài từng bài; số bài theo độ dài bài của video tham khảo.
-  *Nguồn: chủ kênh 2026-09-23.*
+- **Thời lượng album:** theo CLAUDE.md gốc §6 (master 60–90 phút, thiếu thì thêm bài); độ dài từng bài theo video tham khảo.
+  *Nguồn: chủ kênh 2026-09-23, 2026-09-25.*
 - Kiểm tra: `album_plan.py validate` (`reference_follow`, `voice`, `highlight`).
 
 ## 2. Mật độ lời
@@ -56,6 +56,23 @@ lặp lại → thêm một dòng vào đúng mục (và vào khối YAML nếu 
   (vd. `"2026-09-23 clear"` hoặc `"2026-09-23 hit: <bài>, đã đổi"`). `validate --final` báo lỗi khi thiếu.
   Tìm thấy bài trùng mới → thêm vào `known_titles`. *Nguồn: đợt kiểm tra 5 album 2026-09-23 tìm ra 15 trường hợp bằng WebSearch.*
 - Từ Suno hay tự chèn và từ đọc hai cách (`avoid_words`, `heteronyms`): không dùng trong title/hook/lời. *Nguồn: cộng đồng v6 (Neon, Echo, Silver, Shadow… Suno tự chèn).*
+
+## 3b. Hymn public domain
+
+- Được dùng hymn / spiritual public domain (CLAUDE.md §5), nhất là cho album nhánh hymn cổ (R&D 2026-09-25: nhánh mạnh nhất ngách,
+  các kênh thắng bằng bài ai cũng biết + "with lyrics" + tracklist). Title bài = tên hymn gốc; `known_titles` không chặn slot có khối
+  `public_domain` hợp lệ. *Nguồn: CEO 2026-09-25.*
+- Lời: bản PD gốc (hymnary.org ghi năm + tác giả); được lược khổ cho vừa độ dài, không chép phần lời mới của bản phối hiện đại
+  (vd. điệp khúc "My chains are gone" là của 2006, không PD).
+- Sound vẫn là của kênh (house Style, Voice), hoặc nhánh hymn experiment có khai báo. Một album trộn bài mới + bài PD được; PM quyết tỉ lệ.
+- Suno có thể nhận ra tên hymn nổi tiếng và tự ý đổi lời: verify so lời Whisper với lời PD như bài thường.
+- Suno lọc lời (Musixmatch, khớp một phần, mọi chế độ kể cả Cover) và **từ chối** một số hymn PD: "Your lyrics contain copyrighted
+  material", 0 credits. Hymn bị chặn thì đổi tên bài, bớt lặp điệp khúc hay thêm khổ mới đều không qua khi điệp khúc giữ nguyên
+  → thay bằng bài mới phong cách hymn cổ, không thử thêm biến thể. Không lách bằng sai chính tả / ký tự ẩn / lời trong Style.
+  Gửi slot PD lên Suno sớm trong album (bị chặn thì còn thời gian thay). *Nguồn: research/suno-pd-lyrics-2026-09-26.md,
+  research/suno-pd-test-2026-09-26/result.md.*
+- Bảng sàng lọc: khối YAML `pd_screening` (cuối file). Trước khi chọn hymn PD cho plan, đọc bảng: `blocked` = không dùng
+  (validate chặn), `passed` = dùng được; hymn chưa có trong bảng = thử nguyên văn một lần, ghi kết quả vào bảng. *CEO 2026-09-26.*
 
 ## 4. Trùng ý giữa các album
 
@@ -81,7 +98,7 @@ Nguồn: (Suno) = tài liệu Suno · (cộng đồng) = báo cáo thử nghiệ
 - Mọi đoạn đều có tag; đoạn không tag bị coi là verse. Tin được: `[Verse N] [Pre-Chorus] [Chorus] [End]`; vừa: `[Bridge] [Break] [Outro]`;
   không tin được: `[Intro]` trơn. (cộng đồng)
 - Chỉ dẫn nằm TRONG ngoặc sau dấu hai chấm, 1–3 ý, ≤ 3 nhạc cụ, viết khẳng định: `[Verse 2: bass and brushed drums enter]`,
-  không `no guitar`. **Dòng nào ngoài ngoặc Suno đều hát** (bài 01 Album 001 từng để dòng chỉ dẫn trơn). (cộng đồng; đo)
+  không `no guitar`. **Dòng nào ngoài ngoặc Suno đều hát** (cộng đồng; đo)
 - Đoạn nhạc không lời ghi rõ nhạc cụ (`[Instrumental Break: clean blues guitar, Hammond underneath]`); mỗi đoạn thêm ~20–40 s. (cộng đồng)
 - Kết bài: `[Instrumental Outro: <nhạc cụ còn lại>, instrumental only, long sustained final chord]` rồi `[End]`; thiếu `[End]` Suno kéo dài
   hoặc cắt ngang. (cộng đồng)
@@ -136,7 +153,7 @@ house_style:
   groove_line: "Slow {meter} groove, {bpm} BPM."   # câu cuối của Style; {meter} từ plan, {bpm} điền lúc generate
 research:                      # youtube-music-analyzer: từ vựng của thể loại kênh này
   intro_vocab: [vocal_hum, vocal, choir, hammond, piano, acoustic_guitar, slide_guitar, electric_guitar, full_band, strings]
-  genre_words: [gospel, blues, soul, vintage, christian, worship, prayer, prayers, psalm, psalms, praise, hymn, hymns,
+  genre_words: [gospel, blues, soul, vintage, old, time, church, songs, music, classic, original, christian, worship, prayer, prayers, psalm, psalms, praise, hymn, hymns,
                 delta, southern, deep, dark, oldies, faith, spiritual, relaxing, sleep, healing, peace, peaceful, "r&b", rnb]
                                # chữ chỉ thể loại trong title video tham khảo: cụm chỉ gồm các chữ này không bị copy guard chặn
 sources:                       # nguồn mà lời bài diễn giải (idea slots[].source_ref, plan slot.source_ref)
@@ -179,6 +196,10 @@ voices:                        # Suno Voice (riêng tư) + f0 trung vị đo đ�
 avoid_words: [neon, echo, ghost, silver, shadow, whisper, crystal, velvet]
 heteronyms: [tear, tears, wind, winds, wound, wounds, live, lead, bow, close, content, desert, present, read]
 known_titles:                  # bài có thật (title hoặc câu nổi tiếng). Thêm khi tìm thấy; ghi nguồn sau dấu #
+  - Even the Dog Knows            # Rich Wyman 1996, Jemima 2025 (plan 005)
+  - When the Phone Rings          # drama OST, nhiều bài (plan 005)
+  - Peace Be On This House        # Charles Wesley 1742 "Peace be on this house bestowed" (plan 006)
+  - God's Peace Be Unto This House  # bài có thật (plan 006)
   - Amazing Grace
   - I'll Fly Away
   - Peace in the Valley
@@ -270,4 +291,7 @@ known_titles:                  # bài có thật (title hoặc câu nổi tiến
   - I'm Still Yours                        # Kutless (main 2026-09-23)
   - Let It Lie                             # Common; The Bros. Landreth (main 2026-09-23)
   - Turn the Night Around                  # Tommy Rogers 1989 (main 2026-09-23)
+pd_screening:                  # hymn PD đã gửi lên Suno (mode lyrics). blocked → validate chặn slot PD đó; thêm dòng sau mỗi lần thử
+  - {work: "Under His Wings", year: 1896, date: 2026-09-26, result: passed, note: "nguyên văn, album 006 slot 8"}
+  - {work: "God Will Take Care of You", year: 1905, date: 2026-09-26, result: blocked, note: "nguyên văn; đổi Title; điệp khúc 2 lần; điệp khúc + khổ 1 + 50 % lời mới: đều chặn"}
 ```

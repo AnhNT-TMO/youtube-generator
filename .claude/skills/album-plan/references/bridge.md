@@ -105,6 +105,10 @@ Only research, no idea → init writes a skeleton, `notes/plan-reference.md` (pe
 | `slots[].lyrics_sha8` | hash of the track md lyrics at build time |
 | library slots | not listed (nothing to generate) |
 
+- `slots[].cover` = the plan slot's `public_domain.cover_source` when `public_domain.mode: cover` (else null); suno-generate's
+  Cover branch (its SKILL.md §3b) reads it. `cover.file` is relative to the album dir. The plan slot's `public_domain`
+  itself is copied from the idea slot by `init`.
+
 ### selection.yaml (verification-audio)
 
 | selection.yaml | from plan.yaml |

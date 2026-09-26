@@ -7,6 +7,7 @@ from . import planner
 
 NOTES_HEADING = "## Ghi chú"
 MARK = "<!-- sinh bởi skill album-assembly -->"
+OPENING_MAX_DROP_LU = 4.0
 
 
 def fmt_time(t: float) -> str:
@@ -57,6 +58,11 @@ def checks(plan: dict) -> list[tuple[str, int | None, str]]:
         op = res["opening"]
         if op["m_0_5"] < -10:
             out.append(("warn", None, f"0.5–5s đầu video nhỏ hơn thân bài {-op['m_0_5']:.0f} LU"))
+        if plan.get("kind") == "single":
+            for key, span in (("m_0_5", "0.5–5s"), ("m_5_15", "5–15s")):
+                if op[key] < -OPENING_MAX_DROP_LU:
+                    out.append(("warn", None, f"{span} đầu video nhỏ hơn thân bài {-op[key]:.1f} LU (> {OPENING_MAX_DROP_LU:g} LU, CLAUDE.md §6): "
+                                              "dời `in` về gần câu hát đầu / giảm `fade_in` trong assembly.yaml, đặt `opening.locked: true`, rồi `render`"))
         if op["reaches_body_at"] is None or op["reaches_body_at"] > 8:
             out.append(("warn", None, "đến giây 8 vẫn chưa đạt mức thân bài"))
         if res.get("true_peak") is not None and res["true_peak"] > -0.3:

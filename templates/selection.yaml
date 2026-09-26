@@ -8,7 +8,7 @@
 # thêm bài của album CÙNG persona/band để có thang đo ngay từ slot 1.
 references:
   - "audio/tracks/*.wav"
-  # - "../001-when-the-night-is-long/audio/tracks/*.wav"
+  # - "../<NNN-slug>/audio/tracks/*.wav"
 
 tempo:
   target_bpm: 70          # tempo mục tiêu (felt: nhịp chấm đen với 6/8), cũng là số ghi trong Style prompt. album-plan build sinh file này

@@ -268,171 +268,17 @@ def fill_from_channel(tpl, channel_dir):
     tpl.setdefault("packaging", {}).setdefault("ai_disclosure", {"youtube_altered_content_label": True})
 
 
-def fmt_s(x):
-    return "unknown" if x is None else f"{x:g} s"
-
-
-def seed_idea(ref, run, idea_dir, channel_dir):
-    tpl = yaml.safe_load(open(os.path.join(REPO, "templates", "idea.yaml")))
-    todo = []
-    rules = channel_rules(channel_dir)
-    vocab = intro_vocab(rules)
-    _, num_fmt = numbered_source(rules)
-
-    def need(path, what):
-        todo.append(f"{path}: {what}")
-        return None
-    rel = os.path.relpath(os.path.abspath(run), REPO)
-    slug = os.path.basename(idea_dir.rstrip("/"))
-    s, c = ref["source"], ref["criteria"]
-    tempo, voice, op, lyr = c["tempo"], c["voice"], c["opening"], c["lyric_density"]
-    ob = ref.get("our_baseline") or (our_baseline(channel_dir) if channel_dir else None) or {}
-    tpl.update({"id": "idea-" + slug.split("-")[0], "slug": slug.split("-", 1)[1] if "-" in slug else slug,
-                "title_working": need("title_working", "working title (English)"),
-                "channel": os.path.basename(os.path.abspath(channel_dir)) if channel_dir else None,
-                "status": "draft", "created_at": ref["generated_at"], "updated_at": ref["generated_at"],
-                "status_log": [{"date": ref["generated_at"], "status": "draft", "by": "build_reference.py", "note": f"seeded from {rel}/reference.yaml"}]})
-    has_analysis = os.path.exists(os.path.join(run, "analysis.md"))
-    tpl["provenance"] = {"research": [{"path": f"{rel}/analysis.md" if has_analysis else None, "reference": f"{rel}/reference.yaml",
-                                       "url": s["url"], "channel": s["channel"], "video_id": s["video_id"],
-                                       "analyzed_at": ref["generated_at"], "views": s["views"], "subs": s["subscribers"],
-                                       "published_at": s["upload_date"], "duration": s["duration_s"]}],
-                         "derived_by": need("provenance.derived_by", "session / agent"),
-                         "baseline_album": ob.get("album"),
-                         "confidence_notes": ["The reference gives the frame only (6 criteria, SKILL.md); genre, instruments and arc come from our channel."]
-                         + ([] if has_analysis else ["analysis.md not written yet: write it first (SKILL.md step 4)."])}
-    ch = ref.get("channel") or {}
-    share = ch.get("focus_share_of_views")
-    cands = ch.get("opener_single_candidates") or []
-    if ch.get("opener_single"):
-        single, single_src = f"yes, {ch['opener_single']['views'] or 0:,} views as a single", "measured"
-    elif cands:
-        single, single_src = f"likely: same length (±2 s) as the single '{cands[0]['title']}' ({cands[0]['views'] or 0:,} views)", "inferred"
-    else:
-        single, single_src = "no match (by title or length)", "measured"
-    meter_txt = ", ".join(f"{n} songs {METER.get(k, k)}" for k, n in (tempo.get("meter_counts") or {}).items() if n) or "unknown"
-    if tempo.get("tempo_uncertain_songs"):
-        meter_txt += f"; tempo uncertain: songs {tempo['tempo_uncertain_songs']}"
-    tpl["hypothesis"] = {"statement": need("hypothesis.statement", "why this idea should work for our channel"), "risks": [], "evidence": [
-        {"claim": "Reference reach", "value": f"{s['views']:,} views" + (f", {share:.0%} of the channel's listed views" if share else ""), "source": "measured"},
-        {"claim": "Reference opener is the channel's own single", "value": single, "source": single_src},
-        {"claim": "1. Video length / songs", "value": f"{c['video']['duration']}, {c['video']['n_songs']} songs", "source": "measured"},
-        {"claim": "2. Song length", "value": f"median {c['song_length']['median']} ({mmss(c['song_length']['min_s'])}-{mmss(c['song_length']['max_s'])})", "source": "measured"},
-        {"claim": "3. Tempo / meter", "value": f"median {tempo.get('felt_bpm_median')} felt BPM, range {tempo.get('felt_bpm_range')}; {meter_txt}", "source": "measured"},
-        {"claim": "4. Voice", "value": f"{voice.get('gender')}, {voice.get('register')} (f0 {voice.get('f0_median_hz')} Hz)", "source": "measured/model"},
-        {"claim": "5. First 15 s", "value": f"voice {fmt_s(op.get('voice_s'))}, first lyric {fmt_s(op.get('first_lyric_s'))}, "
-                                            f"0-15 s level {op.get('level_0_15s_db')} dB vs body", "source": "measured"},
-        {"claim": "6. Lyric density", "value": f"{lyr.get('words_per_min_sung')} words per sung minute ({lyr.get('label')})", "source": "measured"}]}
-    todo.append("hypothesis.risks: 2-4 risks")
-    g = ref["copy_guard_seed"]
-    used = g.get("sources_used", g.get("psalms_used")) or []
-    src_avoid = [num_fmt.format(n=x) if num_fmt and isinstance(x, int) else str(x) for x in used]
-    tpl["differentiation"] = {"keep": [], "change": [],
-                              "copy_guard": {"titles": g["titles"] + [x for x in g.get("song_titles", []) if x not in g["titles"]],
-                                             "hooks": [], "branding": g["branding"], "visual": [],
-                                             "source_avoid": src_avoid,
-                                             "lyric_rule": "Paraphrase in our own words; never transcribe the reference captions or any existing song."}}
-    todo += ["differentiation.keep: the spirit we keep", "differentiation.change: what we do differently",
-             "differentiation.copy_guard.branding: add their thumbnail/video wordmarks (look at thumbnail.jpg)",
-             "differentiation.copy_guard.visual: their visual traits we must not reuse (thumbnail.jpg)"]
-    tg = tpl["target"]
-    tg["track_count"] = need("target.track_count", f"integer (reference: {c['video']['n_songs']} songs in {c['video']['duration']})")
-    tg["track_duration"] = {"target": need("target.track_duration.target", "m:ss"), "range": [], "reference_median_s": c["song_length"]["median_s"]}
-    ours = (f"ours ({ob.get('album')}): prompt {ob.get('prompt_bpm')}, measured {ob.get('measured_felt_bpm_median') or 'not measured'}"
-            if ob else "ours: no album yet")
-    tg["tempo"] = {"meter": need("target.tempo.meter", f"reference: {meter_txt}"),
-                   "felt_bpm_qc": need("target.tempo.felt_bpm_qc", f"felt BPM (reference {tempo.get('felt_bpm_median')}; {ours})"),
-                   "felt_bpm_qc_range": [], "reference_measured": tempo.get("felt_bpm_median"),
-                   "ours_prompt_bpm": ob.get("prompt_bpm"), "ours_measured": ob.get("measured_felt_bpm_median"), "baseline_album": ob.get("album")}
-    tg["loudness"] = {"master_lufs": -14, "true_peak_max_dbtp": -1.0, "song_lufs_spread_max_lu": 2, "first15s_max_below_body_db": 4,
-                      "_unit": "channel rules (CLAUDE.md), not measured on the reference"}
-    tg["vocal"] = {"presence_max_s": {"track01": 4, "others": 15}, "first_lyric_max_s": {"track01": 10, "others": 20},
-                   "first_hook_max_s": {"track01": 75, "others": None},
-                   "words_per_min": [], "reference_words_per_min": lyr.get("words_per_min_sung"),
-                   "_defaults": "presence/lyric limits = CLAUDE.md channel rule; words_per_min = per sung minute (album-plan's unit)"}
-    todo.append("target.vocal.words_per_min: [lo, hi]")
-    tg["energy_curve"] = []
-    todo.append("target.energy_curve: list of ints, one per slot, adjacent delta <= 2, peak around 60-70 % of the album")
-    calls = voice.get("calls") or {}
-    tpl["identity"]["persona_decision"] = {"decided": False, "owner": "user", "recommended": None,
-                                           "evidence": {"reference_voice": f"{voice.get('gender')}, {voice.get('register')}",
-                                                        "reference_f0_median_hz": voice.get("f0_median_hz"),
-                                                        "our_persona": ob.get("vocal_persona")},
-                                           "options": {"A": "keep our persona", "B": "new persona closer to the reference"}}
-    todo.append("identity.persona_decision.recommended: A or B, with the reason")
-    tpl["track01"].update({"title": None, "concept": None, "hook_phrase": None, "opening_spec": [], "gate": [], "variants": [],
-                           "reference": op})
-    todo += ["track01.title", "track01.concept", "track01.hook_phrase", "track01.opening_spec: 0-15 s timeline",
-             "track01.gate", "track01.variants: 2-3 generation variants"]
-    tpl["slots"] = [{"n": i + 1, "title": None, "source_ref": None, "theme": None, "emotion": None, "energy": None, "valence": None,
-                     "arc_role": "anchor" if i == 0 else None, "intro_type": None, "intro_length": None, "target_duration": None,
-                     "bpm": None, "hook_phrase": None, "imagery": [], "arrangement_note": None,
-                     "source": "new" if i == 0 else None, "library_id": None, "lyrics_file": None} for i in range(10)]
-    vocab_txt = vocab if vocab else "channel rules.md research.intro_vocab (not set)"
-    todo.append(f"slots: fill every slot (count = target.track_count; intro_type from {vocab_txt}); slots[0] is authoritative for the title track")
-    tpl["lyrics_rules"] = {**(tpl.get("lyrics_rules") or {}),
-                           "reference": {"words_per_min_sung": lyr.get("words_per_min_sung"), "density": lyr.get("label"), "source": lyr.get("source")}}
-    tpl["style_prompt"] = {"version": None, "text": None, "chars": None,
-                           "exclude_styles": (rules.get("house_style") or {}).get("exclude"),
-                           "reference_voice": f"{voice.get('gender')}, {voice.get('register')}", "reference_tempo": tempo.get("felt_bpm_median")}
-    todo.append("style_prompt: version + text (English, <= 1000 chars, BPM = target.tempo.felt_bpm_qc; genre/instruments from our channel)")
-    tpl["open_questions"] = [{"id": "q1", "q": "Persona: keep ours or new? (see identity.persona_decision.evidence)", "owner": "user", "blocking": True},
-                             {"id": "q2", "q": f"Tempo target: reference {tempo.get('felt_bpm_median')} vs {ours}?", "owner": "user", "blocking": True}]
-    fill_from_channel(tpl, channel_dir)
-    gen = tpl.setdefault("generation", {}).setdefault("settings", {})
-    gen["voice"] = "identity.suno_voice" if (tpl.get("identity") or {}).get("suno_voice", {}).get("id") else None
-    gen["vocal_gender"] = gen.get("vocal_gender") or ("male" if calls.get("male", 0) >= calls.get("female", 0) else "female")
-    q = tpl.setdefault("qc", {})
-    q["tempo"] = {"target_bpm": None, "meter": None, "_note": "= target.tempo (filled by album-plan)"}
-    q.setdefault("intro_types", {})
-    if isinstance(q.get("style"), dict) and q["style"].get("positive"):
-        todo.append("qc.style.positive: adapt the first line to this idea's sound")
-    tpl["next_steps"] = [
-        {"step": "User answers blocking open_questions -> status approved", "consumer": "user", "reads": ["open_questions"]},
-        {"step": "[music] Plan the album (tracklist, lyrics, plan.yaml -> generation.yaml / selection.yaml / tracks)", "consumer": "album-plan (init from this idea)",
-         "reads": ["slots", "track01", "style_prompt", "identity", "target", "generation", "qc", "lyrics_rules", "differentiation"]},
-        {"step": "[music] Generate Track 01 first, then the other slots", "consumer": "suno-generate", "reads": ["<album>/generation.yaml"]},
-        {"step": "[music] Verify / pick clips", "consumer": "verification-audio", "reads": ["<album>/selection.yaml"]},
-        {"step": "[music] Join the album", "consumer": "album-assembly", "reads": ["<album>/tracks/*.md", "<album>/plan.yaml target.vocal/loudness"]},
-        {"step": "[picture] ChatGPT image prompt -> thumbnail.png", "consumer": "thumbnail-prompt", "reads": ["packaging.thumbnail_brief"]},
-        {"step": "[picture] Thumbnail -> 5-min loop video", "consumer": "video-generator step 1", "reads": ["thumbnail.png", "video.json (lantern.center from thumb.py check)"]},
-        {"step": "Full video (master audio + loop + bars)", "consumer": "video-generator step 2", "reads": ["<album>/audio/master/<album>.wav"]},
-        {"step": "Title, description, chapters, tags, upload; log retention (metrics)", "consumer": "youtube-publish",
-         "reads": ["packaging.video_title_candidates", "packaging.title_rules", "packaging.description_outline", "differentiation.copy_guard"]}]
-    todo += ["packaging: title candidates, thumbnail brief, description outline (ABOUT THIS VIDEO points only)",
-             "generation.budget.gens + total_credits", "metrics.targets"]
-    tpl.pop("todo", None)
-    tpl = {"todo": todo, **tpl}
-    os.makedirs(idea_dir, exist_ok=True)
-    out = os.path.join(idea_dir, "idea.yaml")
-    if os.path.exists(out):
-        out = os.path.join(idea_dir, "idea.seed.yaml")
-    with open(out, "w") as f:
-        f.write("# Seeded by youtube-music-analyzer/build_reference.py from reference.yaml. Fill every item of `todo`, delete it,\n"
-                "# then run validate_idea.py. Intro vocabulary: "
-                + (", ".join(vocab) if vocab else "channel rules.md research.intro_vocab (not set)") + "\n")
-        yaml.safe_dump(tpl, f, sort_keys=False, allow_unicode=True, width=120)
-    return out
-
-
 def main():
-    ap = argparse.ArgumentParser()
+    ap = argparse.ArgumentParser(description="Build research/<slug>/reference.yaml from an analyzer run (ideas: idea.py)")
     ap.add_argument("run")
-    ap.add_argument("--idea-dir")
     ap.add_argument("--channel-dir")
-    ap.add_argument("--seed-only", action="store_true", help="seed the idea from the existing reference.yaml (no raw/ needed)")
     a = ap.parse_args()
     p = os.path.join(a.run, "reference.yaml")
-    if a.seed_only:
-        ref = yaml.safe_load(open(p))
-    else:
-        ref = build(a.run, a.channel_dir)
-        with open(p, "w") as f:
-            f.write("# Machine-readable facts about the reference video (youtube-music-analyzer). Interpretation lives in analysis.md.\n")
-            yaml.safe_dump(ref, f, sort_keys=False, allow_unicode=True, width=120)
-        print("wrote", p)
-    if a.idea_dir:
-        print("seeded", seed_idea(ref, a.run, a.idea_dir, a.channel_dir))
+    ref = build(a.run, a.channel_dir)
+    with open(p, "w") as f:
+        f.write("# Machine-readable facts about the reference video (youtube-music-analyzer). Interpretation lives in analysis.md.\n")
+        yaml.safe_dump(ref, f, sort_keys=False, allow_unicode=True, width=120)
+    print("wrote", p)
 
 
 if __name__ == "__main__":

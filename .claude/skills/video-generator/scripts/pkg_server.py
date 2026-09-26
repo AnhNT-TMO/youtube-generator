@@ -72,9 +72,10 @@ def cmd_build(a):
     os.link(video, dst)
     v = probe(dst)
     warnings = list(meta.get("warnings", []))
-    if (v["width"], v["height"]) != (3840, 2160):
-        warnings.append(f"video {v['width']}×{v['height']}, không phải 4K (3840×2160)")
-    if audio:
+    ew, eh = (int(x) for x in (a[a.index("--expect") + 1] if "--expect" in a else "3840x2160").split("x"))
+    if (v["width"], v["height"]) != (ew, eh):
+        warnings.append(f"video {v['width']}×{v['height']}, không phải {ew}×{eh}")
+    if audio and "--no-audio-check" not in a:
         ad = probe(audio)["duration"]
         if abs(ad - v["duration"]) > 1.5:
             warnings.append(f"video dài {fmt(v['duration'])} ≠ audio đã ghép {fmt(ad)}")

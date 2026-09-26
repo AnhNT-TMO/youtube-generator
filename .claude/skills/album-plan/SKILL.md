@@ -5,17 +5,17 @@ description: Turn a researched idea (youtube-music-analyzer's idea.yaml / refere
 
 # Album plan
 
-BLUEPRINT step of CLAUDE.md (step 3). Input: an idea from the analyzer (preferred) or research only. Output: an
+Step 2 *Plan* of CLAUDE.md §3. Input: an idea (brief + reference set of trend videos, youtube-music-analyzer §6; preferred) or research only. Output: an
 approved `<album>/plan.yaml` plus the files the next skills read. No credits are spent here, so this is the place to
 think, check and ask. After approval, suno-generate only types what this plan says.
 
 ```
-analyzer: reference.yaml + analysis.md + idea.yaml
+analyzer: reference set (research/set-…/reference.yaml) + analysis.md + idea.yaml (brief)
    │ init (mechanical mapping, lists what needs deciding)
    ▼
 plan.yaml ── Claude decides / fills ── validate ── build ──▶ tracks/NN-*.md ── Claude writes lyrics ── validate
    │                                                                                                   │
-   └──────────── summary → user approves → approve (validate --final + build + status approved) ◀─────┘
+   └─────────────── summary → PM approves → approve (validate --final + build + status approved) ◀─────┘
                                    ▼
           generation.yaml (suno-generate) · selection.yaml (verification-audio) · tracks/*.md · album.md
 ```
@@ -52,14 +52,15 @@ SK=.claude/skills/album-plan; P() { $SK/.venv/bin/python $SK/scripts/album_plan.
 - **Our job, not Suno's.** Plan what the album should be, in measurable targets. Never bake in guesses about how
   Suno will behave (e.g. "it renders slower, so write a higher BPM"). The prompt tempo is the planned tempo. What Suno
   actually delivers is measured by verification-audio during generation and corrected there, with data.
-- **Album-first** (CLAUDE.md): one continuous performance (50–90 min, Suno's real lengths vary) by one artist. Lock the artist (persona, Voice, band,
+- **Album-first** (CLAUDE.md): one continuous performance (60–90 min after assembly; short → add songs) by one artist. Lock the artist (persona, Voice, band,
   Style), vary the arrangement, and make every transition deliberate.
 - **Track 01 decides most of it** (CLAUDE.md): new song, strongest concept, voice/hook in the first seconds,
   most rounds.
-- **Inspired, not copied:** keep the reference's spirit (genre, tempo family, opening strategy, lyric source). Change
-  the identity (titles, hooks, imagery, arc, look). Everything of theirs goes into `copy_guard`.
-- **Numbers over taste** (the user doesn't judge music by ear): every target is something validate or
-  verification-audio can check. Ask the user decisions (persona, tempo, count, budget), never "which sounds better".
+- **Inspired, not copied:** keep the reference set's spirit (genre, tempo family, opening strategy, lyric source) and the
+  idea's `brief` (the story, the trend topic; copied into `plan.brief`). Change the identity (titles, hooks, imagery, arc, look). Everything of theirs goes into `copy_guard`.
+- **Numbers over taste** (nobody judges music by ear): every target is something validate or
+  verification-audio can check. Decisions (persona, tempo, count, budget) are open questions (step 2.1), never
+  "which sounds better".
 
 ## 1. Start
 
@@ -70,9 +71,10 @@ P init --channel <channel> --from-idea channel/<channel>/ideas/NNN-<slug>
 This creates `channel/<channel>/albums/NNN-<slug>/` with `plan.yaml` (mapped from the idea), `notes/plan-reference.md`
 (the reference's per-song numbers), and a snapshot of `idea.yaml`/`idea.md`/`thumbnail.png`/`video.json`. It also marks
 the source idea `promoted`. It prints every non-trivial mapping decision: fields ignored (e.g. a `prompt_bpm`), hard-coded
-BPMs turned into `{bpm}`, ranges resolved to one number, fields left empty. Tell the user about those.
+BPMs turned into `{bpm}`, ranges resolved to one number, fields left empty. Report those to the PM.
 
-**From research only:** `P init --channel <ch> --from-research <slug> [<slug2>] --slug <album-slug> --title "<working title>"`.
+**From research only** (legacy single-reference path: only when no reference set exists; the normal path is an idea
+with a reference set): `P init --channel <ch> --from-research <slug> [<slug2>] --slug <album-slug> --title "<working title>"`.
 You get a skeleton plus the reference table and copy guard; do the idea work yourself in step 2 (concept, differentiation).
 
 Use `--out <dir> --no-promote` to try the mapping somewhere without touching the channel.
@@ -85,10 +87,14 @@ the Suno UI accepts. Field meanings are in `templates/plan.yaml`. Work in this o
 
 0. **Read the channel:** `channel/<ch>/rules.md` and `P themes --channel <ch>` (concept, tempo, title track, closer,
    lyric sources, imagery, opening, thumbnail of every album). Pick a concept, tempo and opening the channel doesn't have yet.
-1. **Open questions first.** Blocking ones (persona, tempo, count, budget…) go to the user with AskUserQuestion, with
-   your recommendation first and the measured reason. Record each answer in `open_questions[].answer` and apply it.
-2. **Tempo and voice follow the reference (~50 % of the album is the reference, rules.md §1b).** Tempo (`sound.tempo`):
-   the reference's felt tempo itself (`research/<slug>/reference.yaml criteria.tempo.felt_bpm_median`, ≤ 5 % off) +
+1. **The PM's brief first** (CLAUDE.md §0): `brief.decisions.music` (voice, tempo, meter, branch, experiment, library songs,
+   public-domain songs) is binding; the plan implements it. Open questions the brief does not answer: those the PM's
+   decision policy (production-manager SKILL.md §5) already answers are applied directly (answer text
+   `production-manager <date>: …`); the rest go to the PM (in a production run: return BLOCKED; in a session the CEO runs
+   directly, the CEO answers as PM with AskUserQuestion), with your recommendation first and the measured reason. Record
+   each answer in `open_questions[].answer` and apply it.
+2. **Tempo and voice follow the reference set (~50 % of the album, rules.md §1b; `sources.research[0]` = the set's medians).** Tempo (`sound.tempo`):
+   the set's median felt tempo itself (`research/<slug>/reference.yaml criteria.tempo.felt_bpm_median`, ≤ 5 % off) +
    meter + `why`. Voice (`identity.voice`): the channel Voice (rules.md `voices`) whose measured f0 is closest to the
    reference's `criteria.voice.f0_median_hz` (≤ 15 % off); the Style's vocal sentence comes with it. Lyric density ≈ the
    reference's words per sung minute. validate checks all three (`reference_follow`, `voice`). **One album =
@@ -102,20 +108,25 @@ the Suno UI accepts. Field meanings are in `templates/plan.yaml`. Work in this o
    the house Exclude. Only the mood phrase, meter and tempo are the album's. **Variety is wanted:** an album may differ
    from the house sound on purpose (higher voice, unusual tempo, energy spikes, another band colour…) to test what
    listeners like — declare it in `experiment` (`axes`, `what`, `why`, `measure`), usually because the reference has
-   that trait; ask the owner (open question with a recommendation). Undeclared differences are a `house_style` error.
+   that trait; an open question to the PM with a recommendation (step 2.1). Undeclared differences are a `house_style` error.
    Inside one album: still one artist, one Style, one tempo band.
 3b. **Highlight** (`highlight`, required): one new song at slot 4 or 7 that is unusual on ONE axis (higher register /
    key lift in the last chorus, energy spike, a cappella opening, clearly faster tempo, choir-led…) with the same artist
    and Voice. It is exempt from the energy/tempo/intro step rules with its neighbours and from the album tempo band, and
    is released as a single after the album (singles/NNN-slug) to read listener response on its own.
-4. **Track count and lengths:** `track_count × target_duration` inside `target.duration_min` (assembly trims a few
-   percent). Around 5–5½ min songs → ~10 for 50–56 min; shorter songs (as the reference) → 12–15. Anything from 50 to 90 min after assembly is fine; the count follows the reference's song length.
+4. **Track count and lengths:** `target.duration_min` is the length **after assembly**: 60–90 min (owner 2026-09-25).
+   Assembly keeps only `target.assembly_keep` of the summed `target_duration` (trimmed Suno intros/outros, overlaps:
+   0.87–0.90 measured on the first three assembled albums), so the planned sum must be ≥ 60 / keep ≈ **69 min**.
+   Pick the song length from the reference, then the count that reaches it: ~5–5½ min songs → 13–14; shorter songs → more.
+   Short → **add songs** (new, or library within the reuse caps), never stretch lengths past `track_duration` or
+   transitions. `validate` prints the estimate; `--final` (approve) fails below 60 min.
 5. **Arc:** energy 1–10 per slot, rising to `peak_slots`, landing low; steps ≤ 2. `arc_role`: anchor, build, peak, release, closer…
 6. **Per slot:** our own English `title`, `hook_phrase` (real chorus line, unique), `emotion`, `theme`, `source_ref`,
    `imagery` (vary the main image), `intro_type` + `intro_length` (never the same type back to back; mix the lengths),
    `target_duration`, and `arrangement` (what makes this song's arrangement different). **Web-check every new
    title and hook** (WebSearch `"<phrase>" song`) and write the result in `title_check`; a hit → change it and add
-   the song to `known_titles` in rules.md. Slot 1 also gets `opening_spec`
+   the song to `known_titles` in rules.md. A public-domain slot: pick the hymn from rules.md `pd_screening`
+   (`passed` first; `blocked` fails validate: Suno refuses its lyrics). Slot 1 also gets `opening_spec`
    (0–15 s of the video), more `rounds`, and optionally `variants`.
 7. **Library** (CLAUDE.md): look at `library/catalog.md`. A slot can be `source: library` + `library_id` when an
    existing song fits: same persona/band, fits the energy/tempo curve, freshness OK, never slot 1, at most
@@ -126,7 +137,7 @@ the Suno UI accepts. Field meanings are in `templates/plan.yaml`. Work in this o
 8. **Generation settings** (`generation`): exact numbers only. Credits (CLAUDE.md): `max_mode: false`, slot 1
    `generation_overrides: {max_mode: true}`, `rounds: {track01: 2, others: 1}` (Max = 20 credits, normal = 10 per round
    of 2 clips) → planned ≈ 40 + 10 × (new songs − 1). `budget_max_credits` ≤ 250 (a 14–15-song album still fits).
-   init sets all of this; anything more needs the owner's OK (validate warns `credits_policy`).
+   init sets all of this; anything more needs the PM's OK (validate warns `credits_policy`).
 9. **QC** (`qc`): `rules.duration_range` is the only part verification-audio reads (plus each slot's `target_bpm`). CLAP descriptions (`qc.style`),
    `references` and `thresholds` are no longer used by anything; leave them empty in new plans.
 10. **Opening numbers** (`target.vocal`, `target.loudness`): `first_voice/lyric/hook_max_s`, optional `vocal_at_s`,
@@ -146,14 +157,15 @@ English, copy guard). Build never overwrites lyrics.
 
 ## 4. Approval
 
-1. `P summary <album>` → show the user the tracklist (title, role, mood, energy, tempo, intro, length, hook, source,
+1. `P summary <album>` → show the PM the tracklist (title, role, mood, energy, tempo, intro, length, hook, source,
    rounds), totals (duration, credits), and remaining open questions. Mention any waivers and what init ignored or changed.
-2. Only after an explicit yes: `P approve <album> --by user` (`validate --final`: lyrics for every new slot, blocking
+2. Only after the PM's yes (production-manager SKILL.md §5 *Approve the plan*):
+   `P approve <album> --by production-manager --note "<why>"` (`validate --final`: lyrics for every new slot, blocking
    questions answered, library checked → build → `plan.yaml` + `generation.yaml` `status: approved`, with a fingerprint).
 3. Hand off: the **suno-generate** skill starts from `generation.yaml` (slot 1 first).
 
 Edits after approval: change `plan.yaml`/lyrics → `P build` notices the fingerprint changed, puts both files back to
-`draft`, and the user approves again. Once suno-generate has submitted a generation, the plan is frozen (build
+`draft`, and the PM approves again. Once suno-generate has submitted a generation, the plan is frozen (build
 refuses). Generation-time changes (REGENERATE hints) then go in `generation.yaml` and the track md, owned by
 suno-generate and verification-audio (see bridge.md §1).
 

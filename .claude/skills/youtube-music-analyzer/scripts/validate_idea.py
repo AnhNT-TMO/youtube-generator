@@ -146,6 +146,8 @@ def main():
     for s in slots:
         for k in ("title", "hook_phrase"):
             v = str(s.get(k) or "").lower().strip()
+            if s.get("source") == "library" and v in used and used[v].endswith(f"/{s.get('library_id')}"):
+                continue
             if v and v in used and not (k == "hook_phrase" and v == str(s.get("title") or "").lower().strip() and s.get("n") == 1 and used[v].startswith("idea")):
                 (err if k == "title" else warn)(f"slot {s.get('n')} {k} '{s.get(k)}' is already used by {used[v]}")
 
@@ -257,6 +259,18 @@ def main():
     pd = (d.get("identity") or {}).get("persona_decision") or {}
     if d.get("status") in ("approved", "promoted") and not pd.get("decided"):
         err("status approved but persona_decision.decided is false")
+    br = d.get("brief") or {}
+    if d.get("status") not in ("promoted", "published", "rejected"):
+        dec = br.get("decisions") or {}
+        miss = [k for k in ("by", "music", "title_direction", "description_angle", "thumbnail_concept") if not dec.get(k)]
+        if miss:
+            (warn if a.draft else err)(f"brief.decisions missing {miss}: the PM decides (CLAUDE.md §0)")
+        if not (br.get("text") and br.get("topic") and br.get("angle")):
+            err("brief needs text + topic + angle (the idea comes from a trend topic or a CEO/PM brief, SKILL.md step 6)")
+        first = ((d.get("provenance") or {}).get("research") or [{}])[0]
+        rp0 = first.get("reference") and os.path.join(REPO, first["reference"])
+        if not (rp0 and os.path.exists(rp0) and (yaml.safe_load(open(rp0)) or {}).get("schema") == "reference-set/v1"):
+            err("provenance.research[0] must be a reference set (refset.py over 3-5 trend videos), not a single video")
     for r in (d.get("provenance") or {}).get("research") or []:
         rp = r.get("reference") and os.path.join(REPO, r["reference"])
         if rp and os.path.exists(rp):

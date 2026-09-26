@@ -110,6 +110,9 @@ def print_summary(plan: dict) -> None:
     print(f"\nMở video: bài 01 vào từ {tr[0]['in']:.1f}s, giọng hát ở giây {tr[0]['measured']['vocal_start'] - tr[0]['in']:.1f}")
     if not plan["joins"]:
         print(f"  giữ {tr[0]['in']:.1f}–{tr[0]['out']:.1f}s của file, gain {tr[0]['gain_db']:+.1f} dB")
+    op = (plan.get("result") or {}).get("opening")
+    if op:
+        print(f"  loudness so với thân bài: 0.5–5s {op['m_0_5']:+.1f} LU, 5–15s {op['m_5_15']:+.1f} LU; đạt mức thân bài ở giây {op['reaches_body_at']}")
     for j in plan["joins"]:
         f = j["feel"]
         ov = f"chồng {j['overlap']:.1f}s" if j["overlap"] > 0 else f"lặng {-j['overlap']:.1f}s"

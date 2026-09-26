@@ -14,6 +14,8 @@ channel/*/ideas/*
 !channel/*/ideas/.keep
 channel/*/singles/*
 !channel/*/singles/.keep
+channel/*/shorts/*
+!channel/*/shorts/.keep
 # catalog sinh bởi album_plan.py catalog; kết quả thử voice (voices/README.md vẫn vào git)
 channel/*/library/*
 !channel/*/library/.keep
@@ -46,3 +48,7 @@ channel/*/research-queue.txt
 
 # Ledger của production-manager
 production/
+
+# Ảnh avatar/banner kênh: bản nháp ChatGPT + bản upscale, chỉ trên máy
+channel/*/branding/
+/lamplight-gospel-branding/

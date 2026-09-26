@@ -1,13 +1,14 @@
 ---
 name: verification-audio
-description: Pick one of the Suno clips generated for an album slot (usually the 2 clips of one generation, 4 for the title track) with four simple measured criteria - not broken (length, cut-off ending, silence gap), sings the lyrics (Whisper on the mix, % of lines heard), tempo closest to the prompt BPM, lyrics start earlier - or send the slot back to be generated again when every clip is broken. Then, after the user accepts, copy the chosen clip from audio/raw_tracks/ into audio/tracks/ and fill the track metadata. Whether a song is good is judged by real listeners after upload (retention), not by this skill. Use after new clips land in raw_tracks, or when the user asks "verify", "kiểm tra bản nháp", "chọn bài nào", "bài nào tốt hơn", "2 bài Suno này", "có cần tạo lại không", "đưa bài vào tracks".
+description: Pick one of the Suno clips generated for an album slot (usually the 2 clips of one generation, 4 for the title track) with four simple measured criteria - not broken (length, cut-off ending, silence gap), sings the lyrics (Whisper on the mix, % of lines heard), tempo closest to the prompt BPM, lyrics start earlier - or send the slot back to be generated again when every clip is broken. Then auto-accept the pick (CLAUDE.md §5 approval gate): copy the chosen clip from audio/raw_tracks/ into audio/tracks/ and fill the track metadata. Whether a song is good is judged by real listeners after upload (retention), not by this skill. Use after new clips land in raw_tracks, or when the user asks "verify", "kiểm tra bản nháp", "chọn bài nào", "bài nào tốt hơn", "2 bài Suno này", "có cần tạo lại không", "đưa bài vào tracks".
 ---
 
 # Verification audio
 
 Budget is tight: each slot usually gets one generation (2 clips), the title track two (4 clips). The job is only to
 **pick the more usable clip**, not to grade music. Whether a song works is decided by real listeners after upload
-(retention in `youtube.md`), never by us listening. So: four cheap criteria, one decision, one question to the user.
+(retention in `youtube.md`), never by anyone listening. So: four cheap criteria, one decision, accepted without asking
+(CLAUDE.md §5 *Cổng duyệt*).
 
 ```bash
 SK=.claude/skills/verification-audio; PY=$SK/.venv/bin/python   # run from the repo root
@@ -43,21 +44,20 @@ album-assembly's job.
    parallel there (`--jobs`, default 4 at a time, one Whisper per process), pulls back `notes/verify-slot-NN.{md,json}`
    and the measurement cache, then records each clip's result in the local manifest (status unchanged). An album of
    18 clips / 9 slots: 41 s, ~0 CPU on the Mac. One call, not one subagent per slot: parallel subagents would each
-   push the same album and write `manifest.json` at the same time (lost updates), and only the main conversation can
-   ask the user. Server unreachable → the command stops; ask the user before `--local` (Whisper on the Mac, ~30–80 s
-   per clip, heats the Mac; CLAUDE.md).
-2. **SELECT** → ask the user to accept with AskUserQuestion, **several slots per call** (one question per slot, up to 4
-   per call; or one question "accept all N picks" when every slot is a clean SELECT): the `reasons` in plain Vietnamese (e.g. "hát đúng 100 %
-   lời, bản kia 72 %", "bản kia bị cắt ngang ở cuối", "tempo 57, sát prompt 58; bản kia 49", "vào lời ở giây 12, bản kia giây 31"). Options: accept /
-   use the other clip / stop.
-3. **REGENERATE** (every clip broken) → one question, three options:
-   1. *Tạo lại 1 lượt (N credits, from `generation.yaml`)* — the yes is the credit OK; suno-generate runs
-      `next --slot N --purpose regenerate --reason "<hints>"`. Hints marked `[cả N clip]` come from the prompt/lyrics
-      (fix them first); `[1/N clip]` are random (re-run as is).
-   2. *Dùng bản ít lỗi nhất* (`best_available`) — say what is wrong with it, then step 4 with `--why`.
-   3. *Dừng slot này.*
-   After 3 rounds without a SELECT, recommend option 2 or changing Style/lyrics instead of another identical round.
-4. **Accept** only after an explicit yes:
+   push the same album and write `manifest.json` at the same time (lost updates). Server unreachable → the command
+   stops: stop and report (CLAUDE.md §5); `--local` (Whisper on the Mac, ~30–80 s per clip, heats the Mac) only with
+   the CEO's yes.
+2. **SELECT** → accept it without asking (step 4, `--why "auto-accept: <reasons>"`), the `reasons` in plain Vietnamese
+   (e.g. "hát đúng 100 % lời, bản kia 72 %", "bản kia bị cắt ngang ở cuối", "tempo 57, sát prompt 58; bản kia 49",
+   "vào lời ở giây 12, bản kia giây 31"). Report the picks and reasons in the run summary.
+3. **REGENERATE** (no clip passed) → accept `best_available` (step 4, `--why` saying what is wrong with it). Only when
+   **every** clip is truly broken (cut off, lyrics mostly missing) and the round stays within the plan's credits and
+   `budget_max_credits`, suno-generate makes one new round: `next --slot N --purpose regenerate --reason "<hints>"`.
+   Hints marked `[cả N clip]` come from the prompt/lyrics (fix them first); `[1/N clip]` are random (re-run as is).
+   A round beyond the plan or over the budget → ask the PM (production-manager); in a production run, return
+   `BLOCKED` with the slot, the hints and the credits needed. After 3 rounds without a SELECT, take `best_available`
+   or change Style/lyrics instead of another identical round.
+4. **Accept:**
    ```bash
    $PY $SK/scripts/verify.py accept --album <album-dir> --slot N --clip "<album-dir>/audio/raw_tracks/<file>" [--why "..."]
    ```
@@ -69,12 +69,13 @@ album-assembly's job.
 
 ## Rules
 
-- Never copy into `tracks/` or change a clip's status without the user's explicit yes. **Standing yes (owner 2026-09-24,
-  CLAUDE.md):** for an approved album, accept verify's SELECT without asking (`--why "auto-accept …"`), and on
-  REGENERATE use `best_available`; a new round only when every clip is truly broken and the budget allows.
-- Never delete drafts from `raw_tracks/`. Never trigger a generation without asking (credits). Never use Suno's own
-  Download (monthly quota); downloads go through usesuno.
-- Never ask the user to listen and judge. Don't add criteria before real listener data (retention) shows a need.
+- Accept follows CLAUDE.md §5 *Cổng duyệt*: for an approved album, accept verify's SELECT without asking
+  (`--why "auto-accept …"`); on REGENERATE use `best_available`; a new round only when every clip is truly broken and
+  it stays within the plan and budget. Anything beyond that goes to the PM (production-manager); in a session the CEO
+  runs directly, the CEO acts as PM.
+- Never delete drafts from `raw_tracks/`. Never trigger a round beyond the plan without the PM's decision (credits).
+  Never use Suno's own Download (monthly quota); downloads go through usesuno.
+- Never ask anyone to listen and judge. Don't add criteria before real listener data (retention) shows a need.
 
 ## Files
 

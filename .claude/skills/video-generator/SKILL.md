@@ -11,7 +11,7 @@ Three steps, run on an **idea, album or single folder** inside `channel/<name>/`
 |---|---|---|---|
 | 1. Image → 5-min video | `<dir>/thumbnail.png` + channel look | `video.py loop <dir>` | `<dir>/video/`: `loop.mp4` (seamless 5 min), `loop_intro.mp4` (4 s logo intro), `loop_seam.mp4` (check clip) |
 | 2. Loop → full video | step 1's loop + the **mixed album audio** | `video.py album <dir> <audio>` | full video **on the server** (intro, loop repeated to the audio's length, spectrum bars, audio); `<dir>/video/` gets only `video.mp4.json` (ffprobe), `check_5s.png`, `check_mid.png`, `remote.json` |
-| 3. Package → S3 | step 2's video + `<dir>/youtube.md` + thumbnail | `video.py package <dir>` (run by step 2 itself when `youtube.md` exists) | zip on S3 `s3://$VG_S3_BUCKET/$VG_S3_PREFIX<channel>/<kind>/<slug>/<slug>-<time>.zip` (`remote.env`), recorded in `<dir>/s3-package.json` |
+| 3. Package → S3 | step 2's video + `<dir>/youtube.md` + thumbnail | `video.py package <dir>` (run by step 2 itself when `youtube.md` exists) | zip on S3 `s3://$VG_S3_BUCKET/$VG_S3_PREFIX<channel>/albums/<album>/<slug>-<time>.zip` (`remote.env`); a single goes into its source album's folder (`album:` in `single.md`) as `single-<slug>-<time>.zip`, so one folder holds the album and all its singles, recorded in `<dir>/s3-package.json` |
 
 Step 1 needs no music, so loops can be made for many ideas ahead of time (`video.py batch`), before or after
 their album is planned. Step 2 runs whenever the album's master exists.
@@ -22,7 +22,7 @@ SK=.claude/skills/video-generator
 V="python3 $SK/scripts/video.py"      # run from the repo root; creates $SK/.venv on first use
 ```
 
-Needs python3 and ffmpeg/ffprobe. `loop` / `batch` / `album` render on the GPU server in `$SK/remote.env` by default
+Needs python3 and ffmpeg/ffprobe. `loop` / `batch` / `album` / `short` render on the GPU server in `$SK/remote.env` by default
 (3840×2160, encoded with NVENC on the server GPU, inside the capped `youtube.slice` (CLAUDE.md); a 5-min loop ~1 min,
 a single ~2.5 min, a 50-min album ~10 min including transfers). `--local` renders on this Mac
 (~2 min / ~12 min, heats the Mac and stalls other work): only when the server is unreachable **and the user said yes**
@@ -76,6 +76,20 @@ low-level commands are in `$SK/references/internals.md`.
 3. **Verify.** Read `<dir>/video/video.mp4.json` (ffprobe of the server file): the duration matches the audio, with
    video and audio streams present, and the resolution is 3840×2160 (the renderer's frame, `config.py` `W, H`). Read
    `<dir>/video/check_5s.png` (bars fading in) and `check_mid.png` (mid-album).
+
+## Short (vertical, for the youtube-shorts skill)
+
+`video.py short <short>` renders a Short from `channel/<ch>/shorts/NNN-slug/`: its 9:16 `thumbnail.png` (thumbnail-prompt)
+and `short.json` (youtube-shorts `pick`: audio file, in/out, lyric lines with times, hook, CTA). On the server
+(`scripts/short.py`, `VG_FRAME=1080x1920`, inside `youtube.slice`): a seamless loop exactly as long as the clip (so the
+Short replays without a jump), the clip cut + faded + loudness-normalised to −14 LUFS, spectrum bars, then the text layers
+(hook 0–3 s, one lyric line at a time, CTA in the last 4 s) → `video.mp4` 1080×1920 on the server; back to `<short>/video/`:
+`video.mp4.json`, `check_hook.png`, `check_mid.png`, `check_cta.png`, `overlays.json` (each text block's top/bottom).
+Layout (logo top-left, no subscribe, no intro, bars above the bottom 25 %, text fonts/colours/positions) comes from
+`config.py` `DEFAULTS["short"]`, overridden by the channel's `video.json` → `short` and the Short's own `video.json`
+(image-specific light, lantern, lanes; tune with `video.py frame <short> --at 5`, which renders a 1080×1920 still).
+`package` works on a Short folder too (9:16 thumbnail, `shorts.py check` instead of `publish.py check`, zip into the
+album's S3 folder as `short-<slug>-<time>.zip`).
 
 ## Step 3 — package for YouTube → S3
 

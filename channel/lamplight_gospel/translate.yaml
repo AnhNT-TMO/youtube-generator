@@ -1,5 +1,5 @@
-# Dịch title video (skill youtube-translate). Chỉ title; description/tags giữ tiếng Anh.
-# Title dịch hiện cho người xem đặt giao diện YouTube bằng ngôn ngữ đó, không theo quốc gia. Nên chỉ dịch cho
+# Dịch title + description video (skill youtube-translate). Tags giữ tiếng Anh.
+# Bản dịch hiện cho người xem đặt giao diện YouTube bằng ngôn ngữ đó, không theo quốc gia. Nên chỉ dịch cho
 # ngôn ngữ vừa có nhiều người nghe gospel VỪA dùng YouTube bằng ngôn ngữ khác tiếng Anh.
 # Nguồn: research 2026-09-24 (Pew 2020/2025, thị trường gospel, tỉ lệ đọc web tiếng Anh; chi tiết ở `why`).
 # Có ~2–3 tuần số liệu thật → Analytics → Audience (Geography, ngôn ngữ người xem) quyết định thêm/bớt; ghi ngày + số vào `why`.
@@ -7,6 +7,8 @@
 channel_id: UCzLzi-pXe9KI4iZFE8hQ44g   # Lamplight Gospel
 source_language: en
 keep_song_title: true  # tên bài giữ tiếng Anh: là thứ người nghe nghe hát, và trùng chapters
+translate_description: true   # chủ kênh 2026-09-24: dịch cả description
+keep_lyrics: true     # lời bài trong description (single) giữ tiếng Anh: là thứ người nghe nghe hát
 keep_verbatim: [Lamplight Gospel]
 
 languages:             # thứ tự = ưu tiên
@@ -36,10 +38,10 @@ languages:             # thứ tự = ưu tiên
   # Không dịch (khán giả đã dùng tiếng Anh, title gốc đủ): Philippines (fil), Nigeria, Ghana, Kenya (sw), Nam Phi, Ấn Độ (hi), Singapore.
   # Không dịch: ru (ít thực hành + YouTube bị hạn chế), zh (YouTube bị chặn ở Trung Quốc), am (Ethiopia, nhạc đạo khác hẳn).
 
-glossary:              # thuật ngữ đã chọn (2026-09-24, 4 video đầu); video sau dùng lại y như vậy
-  pt-BR: {Slow Gospel Blues: Gospel Blues lento, Soulful Gospel Blues: Gospel Blues com alma, Prayer: Oração, Song: canção, Full Album: Álbum completo}
-  es-419: {Slow Gospel Blues: Gospel Blues lento, Soulful Gospel Blues: Gospel Blues con alma, Prayer: Oración, Song: canción, Full Album: Álbum completo}
-  fr: {Slow Gospel Blues: gospel blues lent, Soulful Gospel Blues: gospel blues plein d'âme, Prayer: Prière, Song: chant, Full Album: Album complet}
-  ko: {Slow Gospel Blues: 느린 가스펠 블루스, Soulful Gospel Blues: 소울풀 가스펠 블루스, Prayer: 기도, Full Album: 앨범 전곡}
-  de: {Slow Gospel Blues: Langsamer Gospel Blues, Gospel Blues + noun: Gospel-Blues-<Nomen>, Soulful: Gefühlvoll, Prayer: Gebet, Song: Lied, Full Album: Komplettes Album}
-  ja: {Slow Gospel Blues: スロー・ゴスペルブルース, Soulful Gospel Blues: ソウルフルなゴスペルブルース, Prayer: 祈り, Full Album: フルアルバム}
+glossary:              # thuật ngữ đã chọn (2026-09-24, 12 video đầu); video sau dùng lại y như vậy
+  pt-BR: {Slow Gospel Blues: Gospel Blues lento, Soulful Gospel Blues: Gospel Blues com alma, Prayer: Oração, Song: canção, Full Album: Álbum completo, Gospel Blues: Gospel Blues, Testimony: Testemunho, Choir: coral, Prodigal Son: filho pródigo, Prayer of Thanks: Oração de gratidão}
+  es-419: {Slow Gospel Blues: Gospel Blues lento, Soulful Gospel Blues: Gospel Blues con alma, Prayer: Oración, Song: canción, Full Album: Álbum completo, Gospel Blues: Gospel Blues, Testimony: Testimonio, Choir: coro, Prodigal Son: hijo pródigo, Prayer of Thanks: Oración de gratitud}
+  fr: {Slow Gospel Blues: gospel blues lent, Soulful Gospel Blues: gospel blues plein d'âme, Prayer: Prière, Song: chant, Full Album: Album complet, Gospel Blues: gospel blues, Testimony: Témoignage, Choir: chorale, Prodigal Son: fils prodigue, Prayer of Thanks: Prière de gratitude}
+  ko: {Slow Gospel Blues: 느린 가스펠 블루스, Soulful Gospel Blues: 소울풀 가스펠 블루스, Prayer: 기도, Full Album: 앨범 전곡, Gospel Blues: 가스펠 블루스, Testimony: 간증, Choir: 콰이어, Prodigal Son: 탕자, Prayer of Thanks: 감사 기도}
+  de: {Slow Gospel Blues: Langsamer Gospel Blues, Gospel Blues + noun: Gospel-Blues-<Nomen>, Soulful: Gefühlvoll, Prayer: Gebet, Song: Lied, Full Album: Komplettes Album, Gospel Blues: Gospel Blues, Testimony: Zeugnis, Choir: Chor, Prodigal Son: verlorener Sohn, Prayer of Thanks: Dankgebet}
+  ja: {Slow Gospel Blues: スロー・ゴスペルブルース, Soulful Gospel Blues: ソウルフルなゴスペルブルース, Prayer: 祈り, Full Album: フルアルバム, Gospel Blues: ゴスペルブルース, Testimony: 証し, Choir: クワイア, Prodigal Son: 放蕩息子, Prayer of Thanks: 感謝の祈り}

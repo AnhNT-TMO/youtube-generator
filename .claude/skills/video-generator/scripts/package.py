@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 USAGE = """Mac side of `video.py package` (runs in the skill venv: Pillow + boto3).
 
-    package.py stage PKGDIR --youtube-md F --thumbnail IMG --jpg OUT.jpg --channel CH [--source-audio NAME]
+    package.py stage PKGDIR --youtube-md F --thumbnail IMG --jpg OUT.jpg --channel CH [--source-audio NAME] [--vertical]
         PKGDIR/youtube.md, upload/{title,description,tags,pinned_comment}.txt, thumbnail.jpg (YouTube: <= 2 MB),
         thumbnail_full.<ext> (the original, full resolution), meta.json; the same JPG is written to OUT.jpg
     package.py presign  --bucket B --key K --region R --size N [--profile P] [--expires S]
@@ -71,10 +71,11 @@ def cmd_stage(a):
     full = "thumbnail_full" + os.path.splitext(a.thumbnail)[1].lower()
     shutil.copy2(a.thumbnail, os.path.join(a.pkgdir, full))
     warnings = []
-    if w < 3840:
-        warnings.append(f"thumbnail gốc {w}×{h}, chưa phải 4K (3840×2160)")
-    if abs(w / h - 16 / 9) > 0.01:
-        warnings.append(f"thumbnail {w}×{h} không phải 16:9")
+    ratio, full_w = (9 / 16, 2160) if a.vertical else (16 / 9, 3840)
+    if w < full_w:
+        warnings.append(f"thumbnail gốc {w}×{h}, chưa đủ {full_w} px chiều ngang")
+    if abs(w / h - ratio) > 0.01:
+        warnings.append(f"thumbnail {w}×{h} không phải {'9:16' if a.vertical else '16:9'}")
     tags = [t.strip() for t in fields["tags"].split(",") if t.strip()]
     meta = {"created": time.strftime("%Y-%m-%d %H:%M"), "title": fields["title"].strip(), "channel": a.channel,
             "source_audio": a.source_audio,
@@ -135,6 +136,7 @@ def main():
     for k in ("--youtube-md", "--thumbnail", "--jpg", "--channel"):
         st.add_argument(k, required=True)
     st.add_argument("--source-audio")
+    st.add_argument("--vertical", action="store_true", help="Short: 9:16 thumbnail")
     for name in ("presign", "complete", "abort", "head"):
         p = sub.add_parser(name)
         for k in ("--bucket", "--key", "--region"):

@@ -5,7 +5,7 @@ description: Join an album's selected Suno tracks (already in their final order)
 
 # Album assembly
 
-The ASSEMBLE step of CLAUDE.md (step 6) for audio. Input: an album folder
+The ASSEMBLE step of CLAUDE.md (step 5) for audio. Input: an album folder
 `channel/<channel>/albums/<NNN-slug>/` whose `tracks/NN-*.md` front matter has `track_no`, `audio`
 (the selected WAV), and ideally `energy` and `arc_role`. Output, in the album folder:
 
@@ -35,7 +35,7 @@ modules: loudness, Demucs stems, vocal activity, key, tempo, beat_this grid), it
 (+ `audio/master/` for `render` / `single`). The feature cache lives on the server. A 10-track album: `plan` 2 min
 the first time (Demucs + beat_this), `render` ~3.5 min including the ~850 MB master download. `unlock` / `report` run
 here (no measuring). `--local` runs everything on this Mac (Demucs ~1 min per track, heats the Mac): only when the server
-is unreachable **and the user said yes** (CLAUDE.md).
+is unreachable **and the CEO said yes** (CLAUDE.md §5).
 
 Setup once: local venv (only light imports are used here) `python3.12 -m venv $SK/.venv && $SK/.venv/bin/pip install -r $SK/requirements.txt`;
 server: `cp $SK/remote.env.example $SK/remote.env` and fill `QC_REMOTE` (host, key, mirror dir), then venv
@@ -98,11 +98,13 @@ song body (CLAUDE.md). The last track keeps its natural ending, trailing silence
    - *Chênh* (loudness of B's first sung 20 s minus A's last sung 20 s): a few LU down is normal (final chorus → first
      verse); > +1.5 LU up is jarring, < −5 LU loses the entry.
    - *Lặng* longer than planned, or *Hụt* at a join with no planned silence → the fade is too deep; shorten it with `set`.
-   - Duration: 10 Suno songs of ~5:30 give ~49–51 min after trimming. Say so if the user expects a full hour;
-     the fix is more or longer tracks, not stretching transitions.
-4. **Report** to the user: the join table in a few lines, warnings, where the WAV is, and which previews to listen to
-   first (the warned joins, the opening). Ask them to write listening notes in `assembly.md` → `## Ghi chú`; after they
-   listen, apply their notes with `set`, re-render.
+   - Duration: an album master must be **≥ 60 min** (CLAUDE.md §6; the album thumbnail says "1 Hour"). Trimming keeps
+     ~87–90 % of the summed track lengths. Shorter → do not hand off to video: report the shortfall (minutes, and
+     which slot a library song or one new song could fill). The fix is more tracks, never stretched transitions.
+     Albums mastered before 2026-09-25 keep their length.
+4. **Report** to the PM (production-manager; in a session the CEO runs directly, the CEO acts as PM): the join table in
+   a few lines, the render checks, warnings, where the WAV is. The render checks decide: fix a failed check with `set`
+   and re-render; an issue `set` cannot fix (length short, order looks wrong) goes to the PM. Nobody is asked to listen.
 5. **Hand off.** The video is made by the `video-generator` skill from `audio/master/<album>.wav` (whenever the
    user gets to it; the loop may already exist). *Timestamps* here are a preview: youtube-publish measures the final
    chapters on the video file that is uploaded. If an older master is still in `audio/master/`, name the file to use instead of guessing.
@@ -115,8 +117,9 @@ the album), cuts in on a bar so the vocal lands at `--vocal-at` (default 8 s, mo
 body, same rule as an album's track 01), keeps the natural ending, sets gain to −14 LUFS and renders
 `<single>/audio/master/<NNN-slug>.wav` + `previews/00-opening.mp3`, with `assembly.yaml` (`kind: single`, no joins) and
 `assembly.md` in the single folder. Hand edits: change `in`/`fade_in`/`gain_db` in the yaml, set `opening.locked: true` /
-`gain_locked: true` so the next `single` keeps them, then `render`. Report the vocal entry + opening loudness and ask the user
-to listen to the opening preview (CLAUDE.md matters even more when the whole video is one song). The video is then made by
+`gain_locked: true` so the next `single` keeps them, then `render`. Report the vocal entry + opening loudness to the PM; the
+opening checks decide (CLAUDE.md §6 matters even more when the whole video is one song), nobody is asked to listen.
+`single` prints the 0.5–5 s / 5–15 s loudness vs the body and warns (not fails) when either is > 4 LU below it. The video is then made by
 video-generator step 2 from that WAV.
 
 ## Notes

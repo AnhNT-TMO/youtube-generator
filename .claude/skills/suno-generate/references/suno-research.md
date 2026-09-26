@@ -11,7 +11,7 @@
 | 03/09 | **Giới hạn download**: Free 7 bài (trọn đời), **Pro 20 bài/tháng**, Premier 60/tháng. Không cộng dồn, mua thêm được. Một bài tính 1 lần dù tải nhiều format/stems; tải lại không tính. | Không thể tải mọi candidate. 1 album 10–14 bài ≈ gần hết quota Pro. |
 | 03/09 | ToS mới: chỉ được khai thác thương mại bài **đã download qua kênh chính thức**. | Bài dùng cho YouTube bắt buộc phải tải từ Suno (UI), không qua tool bên thứ ba. |
 | 03/09 | Audio bị mã hoá: `cdn1.suno.ai/<id>.mp3/.wav` → 403, `audio_url` → `/api/forbidden`, stream là m4a-opus mã hoá trên CloudFront. | Các cách tải qua CDN cũ đã chết. |
-| 09/09 | **v6** ra mắt (v6, v6-wild cho Pro; v6-mini free). **Toàn bộ model cũ (v4 → v5.5) ngừng generate.** | Album 01 **đã được làm lại toàn bộ trên v6** ngày 22/09 (xem 7.1), nên không bị ảnh hưởng. |
+| 09/09 | **v6** ra mắt (v6, v6-wild cho Pro; v6-mini = model của gói Free: với tài khoản Pro vẫn **10 credits/lượt** như v6, đo 2026-09-26). **Toàn bộ model cũ (v4 → v5.5) ngừng generate.** | Album 01 **đã được làm lại toàn bộ trên v6** ngày 22/09 (xem 7.1), nên không bị ảnh hưởng. |
 
 Nguồn: help.suno.com/en/articles/13614785, 13926209, 13926081, 13924481 · suno.com/blog/suno-updates-tos · suno.com/terms-september-2026 · suno.com/release-notes
 
@@ -196,3 +196,14 @@ Anchor: chạy trước, chờ duyệt, tạo Voice từ Anchor, rồi mới ch�
   Skill không được có bước nào chạm vào hộp Download hay `/api/download/*`.
 - Có nâng lên Premier (60 lượt/tháng) hay mua thêm lượt tải khi làm >1 album/tháng?
 - Format đầu ra của skill phân tích YouTube (session khác) → cần chốt schema blueprint làm input.
+
+## Cover (nhánh §3b SKILL.md, chưa chạy live)
+
+- Menu ⋯ ▸ Remix ▸ Cover trên một clip (clip của mình hoặc bản Upload Audio). Cover giữ giai điệu + cấu trúc của nguồn, hát lời/Style/Voice mới; Audio Influence = mức bám giai điệu. Nguồn upload tối đa ~8 phút (chưa kiểm).
+- Cần ghi lại ở lần chạy đầu: nút Upload Audio + input file, cách form hiện chế độ Cover (read_form `cover_of`), khóa request mang clip nguồn, Suno có từ chối file upload trùng bản thu có bản quyền không.
+
+## Lời public domain bị lọc (2026-09-26, album 006)
+
+- Gõ nguyên lời hymn PD nổi tiếng ("God Will Take Care of You", 1905) → cả 2 clip lỗi "Your lyrics contain copyrighted material. Please change it and try again.", 0 credits. Cùng lời gửi lại sẽ bị từ chối lại: đừng `regenerate`, báo PM (đổi lời / thay bài).
+- Chọn Voice khi đã có Voice: bấm "Remove selected Voice" (nút "Add Voice" bị ẩn) → Add Voice → hộp "Overwrite Styles?" → "Keep Current", rồi mới điền Style.
+- v6-mini (`chirp-goose`) không miễn phí với gói Pro: 1 lượt = 10 credits (1330 → 1320, 2026-09-26); bị từ chối lời = 0 credits như v6. Không dùng để sàng lọc hymn cho rẻ.

@@ -10,7 +10,7 @@
 
 ## Title
 
-Đề xuất (<n> ký tự):
+Đề xuất (<n>/70 ký tự):
 
 ```
 <công thức title single trong channel/<ch>/publish.md>
@@ -39,14 +39,14 @@ LYRICS
 
 ## Tags
 
-12 tags mặc định của channel + ~10 tags theo bài (<n>/500 theo cách YouTube đếm):
+Tags mặc định của channel + 5–12 tags theo bài, đã research bằng `publish.py tags` (<n>/500 theo cách YouTube đếm):
 
 ```
 <defaults>, <song tags>
 ```
 
-| Tag | Vì sao |
-|---|---|
+| Tag | Nhóm | Autocomplete |
+|---|---|---|
 
 ## Thumbnail
 

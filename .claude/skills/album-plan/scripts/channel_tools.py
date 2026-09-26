@@ -8,6 +8,9 @@ from pathlib import Path
 
 import yaml
 
+PACKAGE_SINGLES = 1
+PACKAGE_SHORTS = 1
+
 ROOT = Path(__file__).resolve().parents[4]
 IDEA_ASSETS = ["thumbnail.png", "thumbnail.jpg", "thumbnail-prompt.md", "video.json", "idea.md",
                "video/loop.mp4", "video/loop_intro.mp4", "video/loop_seam.mp4"]
@@ -267,7 +270,9 @@ def single_state(d: Path) -> dict:
     yt = (d / "youtube.md").read_text() if (d / "youtube.md").exists() else ""
     url = re.search(r"\*\*Video URL:\*\*\s*(https?://\S+)", yt)
     todo = []
-    if url:
+    if re.search(r"\*\*Trạng thái:\*\*\s*KHÔNG ĐĂNG", yt):
+        todo.append("không đăng (dự phòng, xem youtube.md)")
+    elif url:
         todo += publish_todo(d, url, yt, packaged)
     else:
         if not master:
@@ -280,8 +285,35 @@ def single_state(d: Path) -> dict:
             todo.append("video-generator album")
         if video:
             todo += publish_todo(d, url, yt, packaged)
-    return {"kind": "single", "name": d.name, "status": fm.get("status") or "?", "thumb": thumb,
+    return {"kind": "single", "name": d.name, "album": Path(str(fm.get("album") or "?")).name, "status": fm.get("status") or "?", "thumb": thumb,
             "loop": (d / "video" / "loop.mp4").exists(), "master": master, "video": video, "next": " · ".join(todo)}
+
+
+def short_state(d: Path) -> dict:
+    fm = front_matter(d / "short.md") if (d / "short.md").exists() else {}
+    thumb = (d / "thumbnail.png").exists()
+    rendered = (d / "video" / "video.mp4.json").exists()
+    video, packaged = video_state(d)
+    yt = (d / "youtube.md").read_text() if (d / "youtube.md").exists() else ""
+    url = re.search(r"\*\*Video URL:\*\*\s*(https?://\S+)", yt)
+    todo = []
+    if url:
+        todo.append("LEARN: engaged views / viewed vs swiped / subs / click Related video vào youtube.md")
+    elif packaged:
+        todo.append("CHỦ KÊNH: upload từ zip S3 + gắn Related video, rồi điền Video URL")
+    else:
+        if not (d / "short.json").exists():
+            todo.append("hook/cta → shorts.py pick")
+        if not thumb:
+            todo.append("thumbnail-prompt (dọc)")
+        if thumb and (d / "short.json").exists() and not rendered:
+            todo.append("video.py short")
+        if not yt:
+            todo.append("youtube.md (youtube-shorts)")
+        if rendered and yt:
+            todo.append("shorts.py check → video.py package")
+    return {"kind": "short", "name": d.name, "album": fm.get("album") or "?", "role": fm.get("role") or "?",
+            "thumb": thumb, "video": rendered, "next": " · ".join(todo)}
 
 
 def cmd_board(a):
@@ -292,6 +324,14 @@ def cmd_board(a):
     ideas = [idea_state(d) for d in sorted(ch.glob("ideas/*/")) if (d / "idea.yaml").exists()]
     albums = [album_state(d) for d in sorted(ch.glob("albums/*/")) if d.is_dir()]
     singles = [single_state(d) for d in sorted(ch.glob("singles/*/")) if d.is_dir()]
+    shorts = [short_state(d) for d in sorted(ch.glob("shorts/*/")) if (d / "short.md").exists()]
+    for r in albums:
+        ns = sum(1 for s in singles if s["album"] == r["name"])
+        n = sum(1 for s in shorts if s["album"] == r["name"])
+        if r["master"] and r["video"] and ns < PACKAGE_SINGLES:
+            r["next"] = " · ".join(x for x in (r["next"], f"single ({ns}/{PACKAGE_SINGLES})") if x)
+        if r["master"] and r["video"] and n < PACKAGE_SHORTS:
+            r["next"] = " · ".join(x for x in (r["next"], f"youtube-shorts ({n}/{PACKAGE_SHORTS} Short)") if x)
     print(f"# {a.channel} · {date.today()}\n")
     if ideas:
         print("## Ideas\n\n| Idea | Status | Thumb | Loop | Việc còn lại (làm song song được) |\n|---|---|---|---|---|")
@@ -306,6 +346,10 @@ def cmd_board(a):
         print("\n## Singles\n\n| Single | Status | Thumb | Master | Video | Việc còn lại |\n|---|---|---|---|---|---|")
         for r in singles:
             print(f"| {r['name']} | {r['status']} | {yn(r['thumb'])} | {yn(r['master'])} | {yn(r['video'])} | {r['next']} |")
+    if shorts:
+        print("\n## Shorts\n\n| Short | Album | Role | Ảnh dọc | Video | Việc còn lại |\n|---|---|---|---|---|---|")
+        for r in shorts:
+            print(f"| {r['name']} | {r['album']} | {r['role']} | {yn(r['thumb'])} | {yn(r['video'])} | {r['next']} |")
     stale = [r["name"] for r in albums if r.get("sync")]
     if stale:
         print(f"\n⚠ Idea có file hình ảnh mới hơn album: {', '.join(stale)} → `album_plan.py sync <album>`")

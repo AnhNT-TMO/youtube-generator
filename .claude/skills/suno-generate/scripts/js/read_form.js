@@ -38,6 +38,9 @@ async () => {
     sliders: Object.fromEntries([...document.querySelectorAll('[role=slider]')].filter(vis)
       .map(s => [s.getAttribute('aria-label'), Number(s.getAttribute('aria-valuenow'))])),
     credits: credits ? Number(credits.replace(/[^0-9]/g, '')) : null,
+    cover_of: (() => { const t = [...document.querySelectorAll('*')].filter(e => vis(e) && e.childElementCount === 0)
+      .map(e => e.textContent.trim()).find(x => /^(Cover(ing)?( of)?\b|Remix: Cover)/i.test(x) && x.length < 120);
+      return t || null; })(),
     create_button: !!document.querySelector('button[aria-label="Create song"]'),
   };
 }

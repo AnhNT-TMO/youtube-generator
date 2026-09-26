@@ -3,8 +3,8 @@ import json
 import math
 import os
 
-W, H = 3840, 2160
-PX_SCALE = W / 1920
+W, H = (int(v) for v in os.environ.get("VG_FRAME", "3840x2160").split("x"))
+PX_SCALE = min(W, H) / 1080
 
 
 def _find_repo():
@@ -129,6 +129,26 @@ DEFAULTS = {
         "fmax": 11000.0,
     },
 
+    "short": {
+        "frame": [1080, 1920],
+        "overrides": {
+            "intro": {"enabled": False},
+            "subscribe": {"enabled": False},
+            "logo": {"corner": "tl", "width_px": 110, "margin_px": 40},
+            "bars": {"bands": 40, "center": 0.45, "span": 0.62, "height_px": 90, "baseline_px": 490,
+                     "scrim": 0.0},
+        },
+        "hook": {"font": "Poppins-Bold.ttf", "size_px": 72, "color": [255, 244, 222], "y": 0.13,
+                 "seconds": 3.0, "fade_seconds": 0.35},
+        "captions": {"font": "Poppins-Bold.ttf", "size_px": 60, "color": [255, 255, 255], "y": 0.63,
+                     "fade_seconds": 0.2, "hold_seconds": 1.2},
+        "cta": {"font": "Poppins-Bold.ttf", "size_px": 52, "color": [255, 226, 170], "y": 0.55,
+                "seconds": 4.0, "fade_seconds": 0.35},
+        "text": {"center_x": 0.45, "max_width": 0.82, "stroke_px": 5, "stroke_color": [0, 0, 0],
+                 "shadow_px": 14, "shadow_opacity": 0.55, "line_spacing": 1.18},
+        "video_bitrate": "10M",
+    },
+
     "encode": {
         "encoder": "x264",
         "crf": 19,
@@ -157,21 +177,27 @@ def _merge(base, over):
     return base
 
 
-def merge_files(paths):
+def _merge_layer(cfg, user):
+    user = copy.deepcopy(user)
+    user.pop("_comment", None)
+    layers = user.pop("particles", None)
+    _merge(cfg, user)
+    for i, p in enumerate(layers or []):
+        if i < len(cfg["particles"]):
+            _merge(cfg["particles"][i], p)
+        else:
+            cfg["particles"].append(p)
+
+
+def merge_files(paths, short=False):
     cfg = copy.deepcopy(DEFAULTS)
     if isinstance(paths, str):
         paths = [paths]
-    for path in paths or []:
+    for i, path in enumerate(paths or []):
         with open(path) as fh:
-            user = json.load(fh)
-        user.pop("_comment", None)
-        layers = user.pop("particles", None)
-        _merge(cfg, user)
-        for i, p in enumerate(layers or []):
-            if i < len(cfg["particles"]):
-                _merge(cfg["particles"][i], p)
-            else:
-                cfg["particles"].append(p)
+            _merge_layer(cfg, json.load(fh))
+        if short and i == 0:
+            _merge_layer(cfg, cfg["short"]["overrides"])
     defaults_p = DEFAULTS["particles"][0]
     cfg["particles"] = [_merge(copy.deepcopy(defaults_p), p) for p in cfg["particles"]]
     for p in cfg["particles"]:

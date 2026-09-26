@@ -1,11 +1,11 @@
 ---
 name: suno-generate
-description: Generate an album's songs on suno.com by driving the user's logged-in Suno in the dedicated Chrome (Chrome DevTools MCP `suno-chrome`), exactly as the album's generation plan (`<album>/generation.yaml` - Style prompt, Voice, model, Max Mode, sliders, duration, per-slot title + lyrics, order, rounds, budget) says - verify every option on the form BEFORE pressing Create and again against what Suno received, then download every clip through usesuno.com into `audio/raw_tracks/` and index it in `raw_tracks/manifest.json` (clip id ↔ slot ↔ round ↔ settings ↔ why it was generated). Also makes the extra rounds that verification-audio asks for (REGENERATE) or the user wants (more) and records them as such so they are never confused with planned ones. Use when the user says "tạo nhạc", "generate", "chạy Suno", "tạo bài 1", "tạo thêm bản", "tạo lại slot N", "tải bản nháp về", or wants the album plan turned into Suno drafts. Does NOT judge or pick clips (that is verification-audio).
+description: Generate an album's songs on suno.com by driving the user's logged-in Suno in the dedicated Chrome (Chrome DevTools MCP `suno-chrome`), exactly as the album's generation plan (`<album>/generation.yaml` - Style prompt, Voice, model, Max Mode, sliders, duration, per-slot title + lyrics, order, rounds, budget) says - verify every option on the form BEFORE pressing Create and again against what Suno received, then download every clip through usesuno.com into `audio/raw_tracks/` and index it in `raw_tracks/manifest.json` (clip id ↔ slot ↔ round ↔ settings ↔ why it was generated). Has a Cover branch for public-domain songs (a slot with `cover` in generation.yaml: render our own organ source from a PD score with pd_source.py, or use a PD recording / our own clip, upload it, Remix ▸ Cover, check the request carries the source). Also makes the extra rounds that verification-audio asks for (REGENERATE) or the user wants (more) and records them as such so they are never confused with planned ones. Use when the user says "tạo nhạc", "generate", "cover bài public domain", "cover hymn", "chạy Suno", "tạo bài 1", "tạo thêm bản", "tạo lại slot N", "tải bản nháp về", or wants the album plan turned into Suno drafts. Does NOT judge or pick clips (that is verification-audio).
 ---
 
 # Suno generate
 
-GENERATE step of CLAUDE.md (step 4). Only three jobs: **type the plan into Suno exactly**, **download the drafts via
+Step 3 *Tạo nhạc* of CLAUDE.md §3. Only three jobs: **type the plan into Suno exactly**, **download the drafts via
 usesuno**, **keep the index**. Choosing clips belongs to `verification-audio`, mixing to `album-assembly`.
 
 ```
@@ -14,8 +14,8 @@ generation.yaml ──▶ suno_gen.py next ──spec──▶ fill form ─▶ 
 raw_tracks/*.wav + manifest.json ◀── ingest ◀── usesuno ◀── complete ◀── poll_feed ◀── submitted (request check)
         │
         ▼
-verification-audio (verify.py check) ── SELECT → user accepts → audio/tracks/
-        └── REGENERATE (+hints) → user OKs credits → next --purpose regenerate --reason "..."
+verification-audio (verify.py check) ── SELECT → auto-accept (CLAUDE.md §5) → audio/tracks/
+        └── REGENERATE (+hints) → PM OKs credits → next --purpose regenerate --reason "..."
 ```
 
 Background facts (Suno v6, Sept 2026) are in `references/suno-research.md` §4 and §7. Read §7.2–7.3 (the page map) when a
@@ -27,10 +27,9 @@ selector breaks.
    download (Pro: 20). Every download goes through usesuno.com. `suno_gen.py quota` stops the run if the official count rises.
 2. **Never press Create unless `check-form` printed `FORM KHỚP SPEC`** for this exact gen id, read after your last edit.
    A wrong option costs credits and produces clips that look valid in the index.
-3. Spend credits only when `generation.yaml` has `status: approved` and the user OKed this batch (standing OK for every
-   planned round of an approved album, owner 2026-09-24: CLAUDE.md)
-   (number of rounds × credits). Every extra round (REGENERATE, or more at the user's request) needs its own OK — the one verification-audio
-   asks ("tạo lại 1 lượt (N credits)?") counts; don't ask the same thing twice.
+3. Spend credits only when `generation.yaml` has `status: approved` (the plan approval is the OK for every planned round,
+   CLAUDE.md §5). Every extra round (REGENERATE, or more at the PM's request) needs the PM's OK (§5 Cổng duyệt); don't ask
+   the same thing twice.
 4. One generation at a time **up to `complete`**: poll + `complete` (it checks what Suno stored) before the next `next`
    (the script enforces this). Downloads are batched: generate every planned round of the batch first, then download +
    ingest all clips at the end (`P status` lists the clips still waiting), then run verification-audio slot by slot.
@@ -72,8 +71,8 @@ P validate $A && P status $A
 - `list_pages` → a `suno.com/create` tab (open one with `new_page` if missing) and a `usesuno.com/tools/downloader/` tab.
   Logged in = the sidebar shows the profile and "Credits remaining".
 - Account baseline: `evaluate_script` with the output of `P js account` → `P quota $A --credits C --downloads-used D --context "start"`.
-- Before the first Create of a batch, tell the user: slots, rounds, credits (from `validate`/`status`), and get an OK
-  unless they already gave one for this batch.
+- Before the first Create of a batch, report slots, rounds and credits (from `validate`/`status`) in your log; the approved
+  plan is the OK (CLAUDE.md §5).
 
 MCP can only write files inside the repo, so every evidence file goes to `$A/notes/suno/<gen>.*.json`.
 
@@ -110,12 +109,17 @@ On the first run of a session, also look at one screenshot to confirm `read_form
 If a field reads `null`, the UI has changed: fix the selector in `read_form.js`, don't skip the check.
 
 **d. Create.** `P js account` → note credits (= credits_before). Real mouse `click` on `button[aria-label="Create song"]`.
-Then `list_network_requests` (resourceTypes fetch/xhr) → the `POST …/api/generate/v2-web/` entry → `get_network_request`
+Then wait ~5 s and `list_network_requests` (resourceTypes fetch/xhr, **`includePreservedRequests: true`**: Create
+soft-reloads the page and the default list comes back empty) → the `POST …/api/generate/v2-web/` entry → `get_network_request`
 with `requestFilePath: $A/notes/suno/<gen>.request.json`, `responseFilePath: $A/notes/suno/<gen>.response.json` →
 `P submitted $A <gen> --request … --response … --credits-before C`.
-- No v2-web request, or not 200 → nothing was submitted? Confirm with `P js find_recent --album $A --gen <gen>` before
-  retrying. Clips found without a captured response → `submitted --clips id1,id2`.
-- Exit code 2 = what Suno received differs from the spec (credits already spent). Stop, show the mismatch, ask the user.
+- **Never click Create a second time** for the same gen until you have proof nothing was sent: the preserved list has no
+  v2-web entry AND the Library shows no new clip. `find_recent` does not return clips in `error` state (e.g. a lyrics
+  refusal), so an empty `find_recent` is not proof. Clips found without a captured response → `submitted --clips id1,id2`.
+- A v2-web 200 does not mean accepted: the lyrics filter answers seconds later in the feed (clip status `error`,
+  "Your lyrics contain copyrighted material…", 0 credits). Same lyrics are refused again: don't regenerate, report to the PM.
+- Exit code 2 = what Suno received differs from the spec (credits already spent). Stop this album's Suno job, show the mismatch
+  and report to the PM (CLAUDE.md §5); the PM decides.
 - The first real run will print which request keys it couldn't match ("chưa kiểm được"). Pin them in
   `REQ_SLIDER_KEYS`/`compare_request` in `scripts/suno_gen.py` once seen, and note them in `references/suno-research.md` §2.2.
 
@@ -136,7 +140,7 @@ duration (±0.6 s), moves it to `audio/raw_tracks/<slug> <id8>.wav` (usesuno's "
 - ingest refuses a file whose duration doesn't match → wrong clip; don't force it.
 
 **g. Quota check.** `P js account` → `P quota $A --credits … --downloads-used … --context "after <gen>"`.
-Exit 3 = official downloads went up → stop everything and tell the user.
+Exit 3 = official downloads went up → stop the Suno lane and report to the PM (CLAUDE.md §5).
 
 ## 3. Hand-off and extra rounds
 
@@ -145,24 +149,62 @@ that slot. Its decision drives what happens next:
 
 | verify decision | this skill |
 |---|---|
-| `SELECT` | nothing; verification-audio asks the user to accept |
-| `REGENERATE` | hints marked `[cả N clip]` come from the prompt/lyrics: change `generation.yaml` (slot `overrides`) or the track md lyrics, add a line to `changes:`; hints marked `[1/N clip]` are random, re-run as is. User OKs credits (and the lyric change, if any) → `next --slot N --purpose regenerate --reason "<hints>"` (+ `--accept-lyrics-change` when the lyrics were edited; the manifest records it) |
-| user picks "dùng bản tốt nhất" | nothing; verification-audio accepts it with `--why` (recorded as `accept_override`) |
+| `SELECT` | nothing; verification-audio auto-accepts it (CLAUDE.md §5) |
+| `REGENERATE` | hints marked `[cả N clip]` come from the prompt/lyrics: change `generation.yaml` (slot `overrides`) or the track md lyrics, add a line to `changes:`; hints marked `[1/N clip]` are random, re-run as is. PM OKs credits (and the lyric change, if any) → `next --slot N --purpose regenerate --reason "<hints>"` (+ `--accept-lyrics-change` when the lyrics were edited; the manifest records it) |
+| verify / PM picks "dùng bản tốt nhất" (`best_available`) | nothing; verification-audio accepts it with `--why` (recorded as `accept_override`) |
 
 **Tempo.** The prompt carries the planned tempo; there is no built-in guess about Suno. verification-audio measures each
 clip's tempo against the BPM typed in its prompt (`settings.bpm`) and prefers the closer clip; album-assembly reports
 tempo jumps between songs. Change `defaults.bpm` / a slot's `overrides.bpm`
 only on measured data and the user's OK, with a `changes:` line.
 
-After 3 rounds without a SELECT on one slot, stop and ask (verification-audio's stop rule). Slot 1 must be accepted
-before any other slot is generated (`gates.anchor_first`); `--force` only when the user says so.
+After 3 rounds without a SELECT on one slot, accept `best_available` and report it to the PM (verification-audio's stop rule). Slot 1 must be accepted
+before any other slot is generated (`gates.anchor_first`); `--force` only when the PM says so.
 If the Anchor defines a new persona, the user creates a Voice from it (song menu → Voice) and you put its name/id in
 `defaults.voice` before slot 2.
 
 Batch runs: go through `order`, one round at a time, and verify each slot as it completes. Give the user a short line
 per round (gen id, clip durations, credits left). At the end, show `P status $A`.
 
-## 4. Resume / recovery
+## 3b. Cover branch (public-domain slots, `cover` in generation.yaml)
+
+A slot whose plan has `public_domain.mode: lyrics` is an ordinary slot (the PD lyrics are its lyrics). `mode: cover` makes
+album-plan write `cover: {kind, file | clip_id, year}` into the slot: Suno keeps the source's melody and structure and sings
+our lyrics, Style and Voice over it. Same hard rules, same `next → check-form → Create → submitted → complete → ingest`.
+**First live run of this branch:** the steps marked (live) are written from Suno's menus (`references/suno-research.md` §7:
+⋯ ▸ Remix ▸ Cover) but their selectors and request keys were not seen yet: take a snapshot at each one, fix `read_form.js`
+(`cover_of`) and `compare_request` if needed, and record what you saw in `references/suno-research.md`.
+
+**The source** (CLAUDE.md §5 — only what the slot names, never other audio):
+
+| `cover.kind` | Source | Before `next` |
+|---|---|---|
+| `own_rendition` | a plain organ rendering of the PD tune, made by us from a PD score | `$SK/.venv/bin/python $SK/scripts/pd_source.py <score.mid/.musicxml/.abc> $A/notes/suno/sNN-cover-source.wav --bpm <slot bpm> [--transpose N] [--parts melody\|all] [--repeat <verses>]`; the score comes from a PD edition (the plan's `public_domain.source_url`) or is typed by us in ABC; a file with its own copyright notice is not used |
+| `pd_recording` | a recording that is itself public domain (US: published ≥ 100 years ago) | the file in the repo path named by `cover.file` |
+| `own_suno_clip` | one of our Suno clips (`cover.clip_id`), e.g. a clip already in our library | nothing to upload |
+
+`validate` refuses a missing file, a source over 8 min, or an unknown kind.
+
+**One Cover round:**
+1. `P next $A --slot N` → the spec says `COVER (<kind>)` and the source.
+2. Source into Suno:
+   - `own_rendition` / `pd_recording` (live): on `suno.com/create` click "Upload Audio" (or "+ Audio"), `upload_file` the
+     exact `cover.file` into the file input, accept Suno's terms dialog only if it asks to confirm you own the rights
+     (true for these kinds), wait until the uploaded clip appears in the workspace, note its clip id (`P js find_recent`
+     by title / the song link) → `P cover-source $A <gen> --clip <id>`. Suno refusing the upload (copyright match) →
+     stop, report to the PM; never try another file.
+   - `own_suno_clip`: `P cover-source $A <gen> --clip <cover.clip_id>`.
+3. (live) Open the source clip's ⋯ menu → Remix → **Cover**. The create form now shows the Cover source (read_form's
+   `cover_of`). Then fill the form exactly as §2 b (Voice first, then Style, lyrics = the PD lyrics, title, options,
+   sliders). In Cover mode "Audio Influence" is how closely the melody is followed: the spec's value.
+4. `read_form` → `check-form`: besides the usual rows it needs `cover_source_clip` (recorded) and `cover_mode` (form shows
+   Cover). Only `FORM KHỚP SPEC` → Create.
+5. `submitted` checks that the request carries the source clip id (a request without it is a normal song: exit 2) and
+   prints the request keys that contain "cover" (pin them after the first run). Then `complete`, usesuno download, `ingest`
+   exactly as §2. The manifest keeps the source (`cover.kind`, `source_clip`) on the generation.
+6. verification-audio as usual; its lyric check compares against the PD lyrics.
+
+## 4. Resume / recovery## 4. Resume / recovery
 
 `P status $A` lists every slot (planned vs extra rounds, clips downloaded, clips waiting, verify decision, selected clip)
 and every unfinished generation with its next step:

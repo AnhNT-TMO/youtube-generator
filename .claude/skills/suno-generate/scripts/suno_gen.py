@@ -15,6 +15,7 @@ settings đó, đặt tên + kiểm tra file tải về, và ghi `audio/raw_trac
     $P complete   <album> <gen> <feed.json> [--credits-after N]
     $P ingest     <album> --clip ID [--file PATH]         # ~/Downloads → raw_tracks/<slug> <id8>.wav
     $P quota      <album> --credits N --downloads-used N --context "..."   # quota tải chính thức KHÔNG được tăng
+    $P cover-source <album> <gen> --clip ID               # lượt Cover: ghi clip nguồn (bản upload hoặc clip của mình)
 
 `<album>` là đường dẫn thư mục album hoặc chỉ tên (vd. `002-<slug>`). Mã lượt (gen) dạng `s01-r03`.
 """
@@ -44,6 +45,8 @@ SUNO_DEFAULTS = {"weirdness": 50, "style_influence": 50, "audio_influence": 25, 
 REQ_SLIDER_KEYS = {"weirdness": ["weirdness_constraint"], "style_influence": ["style_weight"],
                    "audio_influence": ["audio_weight"], "variety": ["aug_creativity"]}
 OPEN_STATES = ("prepared", "submitted", "complete")
+COVER_KINDS = ("own_rendition", "own_suno_clip", "pd_recording")
+COVER_MAX_S = 480
 
 
 def die(msg: str, code: int = 1):
@@ -238,6 +241,23 @@ def validate(plan: Plan, strict_status: bool = False) -> tuple[list, list]:
     check_settings(plan.defaults, "defaults", errs, warns)
     if not plan.slots:
         errs.append("slots trống")
+    for n, sl in plan.slots.items():
+        cv = sl.get("cover")
+        if not cv:
+            continue
+        if cv.get("kind") not in COVER_KINDS:
+            errs.append(f"slot {n}: cover.kind phải là {' | '.join(COVER_KINDS)}")
+        elif cv["kind"] == "own_suno_clip":
+            if not cv.get("clip_id"):
+                errs.append(f"slot {n}: cover own_suno_clip cần clip_id (clip Suno của mình làm nguồn)")
+        else:
+            f = plan.album / str(cv.get("file") or "")
+            if not cv.get("file"):
+                errs.append(f"slot {n}: cover.file trống (đường dẫn tính từ thư mục album, vd. notes/suno/s{n:02d}-cover-source.wav)")
+            elif not f.is_file():
+                warns.append(f"slot {n}: chưa có nguồn cover {cv['file']} — dựng trước `next --slot {n}` (own_rendition: scripts/pd_source.py)")
+            elif audio_duration(f) > COVER_MAX_S:
+                errs.append(f"slot {n}: nguồn cover dài {audio_duration(f):.0f} s > {COVER_MAX_S} s")
     order = r.get("order") or []
     for n in order:
         if n not in plan.slots:
@@ -449,6 +469,9 @@ def cmd_next(a):
             if len([g for g in counted if g.get("variant") == v["name"]]) < int(v.get("rounds", 0)):
                 variant = v
                 break
+    cv = s.get("cover") or {}
+    if cv and cv.get("kind") != "own_suno_clip" and not (plan.album / str(cv.get("file") or "")).is_file():
+        die(f"Slot {n} là Cover nhưng chưa có nguồn {cv.get('file')} (SKILL.md §3b: own_rendition → scripts/pd_source.py)")
     st = plan.settings(n, variant)
     lp = plan.lyrics_path(n, variant)
     lyrics = "" if s.get("instrumental") else read_lyrics(lp)
@@ -486,6 +509,7 @@ def cmd_next(a):
         "variety": st["variety"],
         "personalize": "off",
         "title": s["title"],
+        "cover": s.get("cover") or None,
     }
     spec = {"gen": gid, "album": album.name, "slot": n, "round": rnd, "purpose": purpose, "reason": a.reason,
             "variant": variant.get("name") if variant else None, "lyrics_file": arel(album, lp),
@@ -514,6 +538,12 @@ def cmd_next(a):
           f"max {'On' if form['max_mode'] else 'Off'} · duration {d if d == 'auto' else mmss(d)}")
     if st.get("bpm") is not None:
         print(f"  tempo {st['bpm']} BPM (đã điền vào Style)")
+    if form["cover"]:
+        cv = form["cover"]
+        print(f"  COVER ({cv['kind']}): nguồn {cv.get('clip_id') or cv.get('file')} → SKILL.md §3b: "
+              + ("mở clip đó → ⋯ → Remix → Cover" if cv["kind"] == "own_suno_clip"
+                 else "Upload Audio đúng file này → `cover-source` với clip id của bản upload → ⋯ → Remix → Cover")
+              + "; rồi điền form như thường (lyrics PD, Style, Voice) và check-form")
     print(f"  weirdness {form['weirdness']} · style influence {form['style_influence']} · "
           f"audio influence {form['audio_influence'] if v else '—'} · variety {form['variety']} · personalize off")
     print(f"  style {len(form['style'])}/1000 ký tự ({rel(spec_path(album, gid, 'style.txt'))})")
@@ -564,6 +594,11 @@ def compare_form(spec: dict, f: dict) -> list[tuple[str, bool, str]]:
     s = spec["form"]
     rows = []
     add = lambda k, ok, d="": rows.append((k, bool(ok), d))
+    if s.get("cover"):
+        src = spec.get("cover_source_clip")
+        add("cover_source_clip", bool(src), "đã ghi bằng `cover-source`" if src else "chưa có: `suno_gen.py cover-source <album> <gen> --clip <id>`")
+        cov = f.get("cover_of")
+        add("cover_mode", bool(cov), f"form {cov!r}" if cov else "form không hiện chế độ Cover (read_form.js `cover_of` = null): mở Cover từ ⋯ → Remix → Cover của clip nguồn")
     mode_on = [m["text"] for m in f.get("mode_buttons") or [] if m.get("on") or m.get("selected") == "true"]
     if mode_on:
         add("mode", "Simple" not in mode_on, f"đang bật: {mode_on}")
@@ -672,6 +707,13 @@ def compare_request(spec: dict, req: dict) -> tuple[list, list]:
             continue
         ok = abs(got - want) < 0.01 or abs(got - want / 100) < 0.011
         chk(k, ok, f"request {got} · spec {want}")
+    if s.get("cover"):
+        src = spec.get("cover_source_clip")
+        vals = [str(v) for _, v in walk(req)]
+        if src and not any(src in v for v in vals):
+            bad.append(f"cover: clip nguồn {src} không có trong request (Suno đang tạo bài thường, không phải Cover)")
+        keys = [k for k, _ in walk(req) if "cover" in k.lower()]
+        unk.append(f"cover: khóa request có chữ 'cover': {keys or 'không có'} (ghi vào references/suno-research.md sau lần chạy đầu)")
     if s["duration"] != "auto":
         dur = next((v for kk, v in walk(req) if "duration" in kk.lower() and isinstance(v, (int, float))), None)
         if dur is None:
@@ -868,6 +910,23 @@ def cmd_ingest(a):
         print(f"✔ {g['id']} đã tải đủ → chạy skill verification-audio cho slot {g['slot']} ({rel(album)})")
 
 
+def cmd_cover_source(a):
+    album = album_dir(a.album)
+    sp = spec_path(album, a.gen)
+    spec = load_spec(album, a.gen)
+    if not (spec.get("form") or {}).get("cover"):
+        die(f"{a.gen} không phải lượt Cover (slot không có cover trong generation.yaml)")
+    man = load_manifest(album)
+    g = get_gen(man, a.gen)
+    if g["status"] != "prepared":
+        die(f"{a.gen} đang ở trạng thái {g['status']}: chỉ ghi nguồn trước khi Create")
+    spec["cover_source_clip"] = a.clip
+    sp.write_text(json.dumps(spec, indent=1, ensure_ascii=False) + "\n")
+    g["cover"] = {**spec["form"]["cover"], "source_clip": a.clip, "recorded_at": now()}
+    save_manifest(album, man)
+    print(f"✔ {a.gen}: nguồn Cover = clip {a.clip} ({spec['form']['cover']['kind']}); tiếp: ⋯ → Remix → Cover, điền form, check-form")
+
+
 def cmd_quota(a):
     album = album_dir(a.album)
     man = load_manifest(album)
@@ -908,6 +967,8 @@ def main():
     p = sub.add_parser("ingest"); p.add_argument("album"); p.add_argument("--clip", required=True); p.add_argument("--file")
     p.add_argument("--since", type=float, default=30, help="chỉ xét file trong ~/Downloads mới hơn N phút")
     p.add_argument("--wait", type=float, default=90, help="chờ file tải xong tối đa N giây"); p.set_defaults(fn=cmd_ingest)
+    p = sub.add_parser("cover-source"); p.add_argument("album"); p.add_argument("gen"); p.add_argument("--clip", required=True)
+    p.set_defaults(fn=cmd_cover_source)
     p = sub.add_parser("quota"); p.add_argument("album"); p.add_argument("--credits", type=int, required=True)
     p.add_argument("--downloads-used", type=int, required=True); p.add_argument("--context", default="")
     p.set_defaults(fn=cmd_quota)

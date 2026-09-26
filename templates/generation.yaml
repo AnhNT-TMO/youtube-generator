@@ -58,6 +58,9 @@ slots:
     #  - {name: hum-intro, lyrics_file: tracks/01-song-title.hum.md, rounds: 1}
     #  - {name: cold-open, overrides: {weirdness: 20}, rounds: 1}
     notes: "Mở bằng giọng trong <= 10 s; không [Instrumental Intro] dài"
+    cover: null                # slot public domain mode cover (album-plan chép từ plan public_domain.cover_source):
+                               #  {kind: own_rendition|own_suno_clip|pd_recording, file: notes/suno/sNN-cover-source.wav, clip_id, year}
+                               #  → suno-generate SKILL.md §3b
   - n: 2
     title: "Second Song"
     track: tracks/02-second-song.md

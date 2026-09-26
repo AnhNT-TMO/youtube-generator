@@ -4,8 +4,8 @@ Quy trình người dùng làm trong ChatGPT, và cách sửa các lỗi hay g�
 (ảnh 1672×941, nhân vật trong `model/` cũng tạo bằng ChatGPT ngày 2026-09-22).
 
 ChatGPT Images 2.0 (từ 04/2026) tạo được ảnh 2K và nhiều tỉ lệ khung (có 16:9), và tạo nhiều ảnh trong một lượt được. Nhưng trong
-app ChatGPT, yêu cầu "nhiều ảnh" đôi khi vẫn trả về một ảnh, một lưới ảnh, hoặc lần lượt từng ảnh. Vì vậy khối channel xin **2 ảnh riêng,
-mỗi ảnh 2560×1440**, và cấm ghép (collage/grid/split). Thực tế 2026-09 vẫn ra 1672×941; `fit` cắt 16:9 rồi upscale lên 3840×2160 trên GPU server (SeedVR2 7B).
+app ChatGPT, yêu cầu "nhiều ảnh" đôi khi vẫn trả về một ảnh, một lưới ảnh, hoặc lần lượt từng ảnh. Từ 2026-09-26 trang mới của ChatGPT chỉ
+trả **1 ảnh mỗi lượt**: `gen --n 1` (mặc định) sửa câu "THREE separate images" của khối channel thành xin 1 ảnh 2560×1440, và cấm ghép (collage/grid/split). Thực tế 2026-09 vẫn ra 1672×941; `fit` cắt 16:9 rồi upscale lên 3840×2160 trên GPU server (SeedVR2 7B).
 Nguồn (tra 2026-09-23): https://neurohive.io/en/news/chatgpt-images-2-0-openai-launches-image-generation-model-with-reasoning-2k-resolution-and-multilingual-text/ ,
 https://www.glbgpt.com/hub/can-chatgpt-generate-multiple-images-at-once-2025-definitive-guide/
 
@@ -16,9 +16,9 @@ https://www.glbgpt.com/hub/can-chatgpt-generate-multiple-images-at-once-2025-def
    Nếu mặt hay bị lệch, đính kèm thêm `01-front-eye-contact.png`. Không đính kèm thumbnail cũ, vì ChatGPT sẽ chép bố cục của nó.
 3. **Dán nguyên khối Prompt** trong một tin nhắn, không chia nhỏ.
 4. **Tải về** bằng nút tải xuống để có bản đủ độ phân giải (không chụp màn hình),
-   rồi lưu vào `<dir>/thumbnail-drafts/01.png`, `02.png`… (mỗi lượt 2 ảnh). Gửi đường dẫn cho Claude để kiểm tra.
-   Ra 1 ảnh ghép 2 khung: xin lại `Please give me the two images as two separate files, not combined.`
-   Chỉ ra 1 ảnh: xin thêm `Now make the second variation as a separate image.`
+   rồi lưu vào `<dir>/thumbnail-drafts/01.png`, `02.png`… (mỗi lượt 1 ảnh). Gửi đường dẫn cho Claude để kiểm tra.
+   Ra 1 ảnh ghép nhiều khung: xin lại `Please give me one single image, not a collage or grid.`
+   PM thấy ảnh không hợp vibe bài/album → lượt mới (chat mới); PM quyết số lượt.
 
 ## Sửa bằng lệnh sửa trong cùng chat
 
@@ -43,3 +43,7 @@ Sau khoảng 3 lần sửa mà vẫn lỗi, mở chat mới với prompt đã ch
 - **Đèn không phải điểm sáng nhất** (chùm sáng hoặc chữ vàng sáng hơn): sóng ánh sáng và lửa rung của video-generator sẽ
   đặt sai chỗ. Xem các điểm sáng `check` in ra.
 - Không yêu cầu giống người thật hoặc người nổi tiếng. Nhân vật là nhân vật riêng của kênh.
+- **Prompt nằm yên trong ô chat, Send không ăn** (2026-09-25): Chrome 9223 chạy nền nên trang không vẽ khung mới, nút Send
+  chỉ nhận sau khi trang được vẽ lại. `gen` chụp một khung (`screenshot`) trước mỗi lần bấm. Đừng xóa ô chat bằng
+  `execCommand`: ProseMirror lệch trạng thái rồi giữ nguyên draft (`localStorage` `oai/apps/conversationDrafts`, id `null_thread`);
+  `gen` xóa draft đó rồi tải lại trang.

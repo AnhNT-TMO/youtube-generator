@@ -10,7 +10,7 @@ Mọi chi tiết riêng của kênh nằm trong thư mục này:
 | `voices/README.md` | chọn Suno Voice theo cao độ video tham khảo |
 | `visual.md` | viết prompt thumbnail, chọn và kiểm ảnh |
 | `publish.md` | soạn `youtube.md`: description, tags, title, pinned comment, playlist |
-| `translate.yaml` | dịch title sau khi đăng |
+| `translate.yaml` | dịch title + description sau khi đăng |
 | `research-queue.txt` | link YouTube chờ analyze (chỉ trên máy) |
 
 ## Âm thanh kênh

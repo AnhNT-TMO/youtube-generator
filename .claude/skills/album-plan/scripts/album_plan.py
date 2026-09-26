@@ -14,7 +14,7 @@ USAGE = """Cầu nối research/idea → plan album → các skill sau (suno-gen
     SK=.claude/skills/album-plan; P() { $SK/.venv/bin/python $SK/scripts/album_plan.py "$@"; }
     P init --channel <ch> --from-idea channel/<ch>/ideas/NNN-slug
     P init --channel <ch> --from-research <research-slug> --slug my-album --title "My Album"
-    P validate <album> [--final] · P build <album> · P summary <album> · P approve <album> --by user
+    P validate <album> [--final] · P build <album> · P summary <album> · P approve <album> --by production-manager
     P board --channel <ch> · P sync <album> · P catalog --channel <ch>
 """
 
@@ -218,6 +218,30 @@ def vocal_line(rules: dict, voice) -> str:
     return ws(v.get("vocal_line") or (rules.get("house_style") or {}).get("vocal_line"))
 
 
+PD_WORK_YEAR_MAX = date.today().year - 96
+PD_RECORDING_YEAR_MAX = date.today().year - 101
+
+
+def public_domain_problem(s: dict) -> str | None:
+    pd = s.get("public_domain")
+    if not pd:
+        return None
+    miss = [k for k in ("work", "author", "year", "source_url", "mode") if not pd.get(k)]
+    if miss:
+        return f"public_domain thiếu {miss}"
+    if not isinstance(pd["year"], int) or pd["year"] > PD_WORK_YEAR_MAX:
+        return f"public_domain.year {pd['year']} > {PD_WORK_YEAR_MAX} (Mỹ: tác phẩm xuất bản ≥ 95 năm trước mới là public domain)"
+    if pd["mode"] not in ("lyrics", "cover"):
+        return "public_domain.mode phải là lyrics | cover"
+    if pd["mode"] == "cover":
+        src = pd.get("cover_source") or {}
+        if src.get("kind") not in ("own_rendition", "own_suno_clip", "pd_recording"):
+            return "public_domain.cover_source.kind phải là own_rendition | own_suno_clip | pd_recording (không dùng bản thu hiện đại)"
+        if src.get("kind") == "pd_recording" and not (isinstance(src.get("year"), int) and src["year"] <= PD_RECORDING_YEAR_MAX):
+            return f"bản thu nguồn phải xuất bản ≤ {PD_RECORDING_YEAR_MAX} mới là public domain (Mỹ)"
+    return None
+
+
 def reference_criteria(plan: dict) -> dict:
     for r in (plan.get("sources") or {}).get("research") or []:
         f = ROOT / Path(str(r)).parent / "reference.yaml"
@@ -352,6 +376,7 @@ def plan_from_idea(idea: dict, idea_path: Path, album: Path, rules: dict | None 
     settings = gen.get("settings") or {}
     p["sources"] = {"idea": rel(idea_path), "research": [r["path"] for r in (idea.get("provenance") or {}).get("research") or [] if r.get("path")]}
     p["concept"] = (idea.get("hypothesis") or {}).get("statement") or p["concept"]
+    p["brief"] = idea.get("brief") or None
     dif = idea.get("differentiation") or {}
     cg = dif.get("copy_guard") or {}
     avoid = cg.get("source_avoid") or cg.get("scripture_avoid") or []
@@ -388,7 +413,8 @@ def plan_from_idea(idea: dict, idea_path: Path, album: Path, rules: dict | None 
     p["sound"]["genre_family"], p["sound"]["subgenre"] = None, None
     notes.append(f"sound.genre_family/subgenre để trống: điền theo channel.md (gợi ý từ style: '{genre}')")
     tv = tgt.get("vocal") or {}
-    p["target"] = {"duration_min": tgt.get("duration_min") or p["target"]["duration_min"],
+    p["target"] = {"duration_min": p["target"]["duration_min"],
+                   "assembly_keep": p["target"].get("assembly_keep"),
                    "track_count": tgt.get("track_count") or len(idea.get("slots") or []),
                    "track_duration": (tgt.get("track_duration") or {}).get("range") or p["target"]["track_duration"],
                    "energy_adjacent_max": 2, "bpm_adjacent_max_pct": tgt.get("adjacent_bpm_delta_max_pct", 8),
@@ -457,6 +483,7 @@ def plan_from_idea(idea: dict, idea_path: Path, album: Path, rules: dict | None 
     for s in idea.get("slots") or []:
         n = int(s["n"])
         slot = {"n": n, "title": s.get("title"), "source": s.get("source", "new"), "library_id": s.get("library_id"),
+                "public_domain": s.get("public_domain"),
                 "arc_role": s.get("arc_role"), "emotion": s.get("emotion"), "theme": s.get("theme"),
                 "source_ref": s.get("source_ref") or s.get("scripture"), "energy": s.get("energy"), "valence": s.get("valence"),
                 "bpm": s.get("bpm"), "intro_type": s.get("intro_type"), "intro_length": s.get("intro_length"),
@@ -682,6 +709,17 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
         if dev > rf["tempo_max_dev_pct"]:
             I.err("reference_follow", f"sound.tempo.bpm {tempo['bpm']} lệch {dev:.0f}% so với tempo video tham khảo {ref_bpm} "
                                       f"> {rf['tempo_max_dev_pct']}% (rules.md §1b: tempo = video tham khảo)")
+    brief = plan.get("brief") or {}
+    if brief:
+        dec = brief.get("decisions") or {}
+        miss = [k for k in ("by", "music", "title_direction", "description_angle", "thumbnail_concept") if not dec.get(k)]
+        if miss:
+            (I.err if final else I.warn)("brief", f"brief.decisions của PM thiếu {miss} (CLAUDE.md §0: PM quyết, plan làm theo)")
+        mus = dec.get("music") or {}
+        if mus.get("tempo") and tempo.get("bpm") and abs(float(mus["tempo"]) - float(tempo["bpm"])) > 0.5:
+            I.err("brief", f"sound.tempo.bpm {tempo['bpm']} ≠ tempo PM quyết {mus['tempo']} (brief.decisions.music)")
+        if mus.get("voice") and (ident.get("voice") or {}).get("name") and mus["voice"] != ident["voice"]["name"]:
+            I.err("brief", f"identity.voice {ident['voice']['name']!r} ≠ Voice PM quyết {mus['voice']!r} (brief.decisions.music)")
     hl = plan.get("highlight") or {}
     hcfg = rules.get("highlight") or {}
     hslot = hl.get("slot") if isinstance(hl, dict) else None
@@ -751,6 +789,7 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
     others = other_plans(alb.get("channel", ""), album)
     oplans = channel_plans(alb.get("channel", ""), album)
     known = [(str(t), "rules.md known_titles") for t in rules.get("known_titles") or []]
+    pd_blocked = {norm_text(r.get("work")) for r in rules.get("pd_screening") or [] if r.get("result") == "blocked"}
     for o_album, op in oplans:
         ocg = (op.get("differentiation") or {}).get("copy_guard") or {}
         known += [(str(t), f"copy_guard {o_album}") for t in (ocg.get("titles") or []) + (ocg.get("hooks") or [])]
@@ -827,7 +866,12 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
         for g in guard_brand:
             if g and g in norm_text(title):
                 I.err("copy_guard", f"{w}: title chứa branding của kênh khác '{g}'", [n])
-        if s.get("source") == "new":
+        pd_err = public_domain_problem(s)
+        if pd_err:
+            I.err("public_domain", f"{w}: {pd_err}", [n])
+        if s.get("public_domain") and norm_text(s["public_domain"].get("work")) in pd_blocked:
+            I.err("public_domain", f"{w}: Suno đã chặn lời '{s['public_domain']['work']}' (rules.md pd_screening) → thay bằng bài mới", [n])
+        if s.get("source") == "new" and not s.get("public_domain"):
             for t, src in known:
                 loose = src.startswith("copy_guard") and len(norm_text(t).split()) < 3
                 for what, val in (("title", title), ("hook", s.get("hook_phrase"))):
@@ -962,7 +1006,7 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
             if len(norm_text(g).split()) >= 2 and norm_text(g) in body:
                 I.warn("copy_guard", f"{w}: lời chứa title của kênh khác '{g}'")
         lines = [l for l in ly.splitlines() if l.strip() and not l.strip().startswith(("[", "("))]
-        for t, src in known:
+        for t, src in ([] if s.get("public_domain") else known):
             nt = norm_text(t)
             if len(nt.split()) >= (3 if src.startswith("copy_guard") else 2) and any(f" {nt} " in f" {norm_text(l)} " for l in lines):
                 I.warn("known_title", f"{w}: lời chứa nguyên cụm '{t}' ({src})")
@@ -1001,7 +1045,16 @@ def validate(plan: dict, album: Path, final: bool) -> Issues:
                                            f"{ref_wpm} > ±{rf['words_per_min_max_dev_pct']}% (rules.md §1b)")
     tot = sum(v for v in durations.values() if v)
     lo, hi = (tgt.get("duration_min") or [0, 10 ** 6])[:2]
-    if tot and not lo * 60 <= tot <= hi * 60 * 1.08:
+    keep = tgt.get("assembly_keep")
+    if tot and keep:
+        est = tot * float(keep)
+        if est < lo * 60:
+            (I.err if final else I.warn)(
+                "duration", f"tổng {mmss(tot)} (chưa cắt ghép) → ước lượng sau ghép ~{mmss(est)} (× assembly_keep {keep}) "
+                            f"< {lo} phút: thêm bài (cần tổng chưa ghép ≥ {mmss(lo * 60 / float(keep))})")
+        elif est > hi * 60:
+            I.warn("duration", f"ước lượng sau ghép ~{mmss(est)} (× assembly_keep {keep}) > {hi} phút")
+    elif tot and not lo * 60 <= tot <= hi * 60 * 1.08:
         I.warn("duration", f"tổng {mmss(tot)} (chưa cắt ghép) ngoài {lo}–{hi} phút")
     tr = tgt.get("track_duration")
     if tr:
@@ -1224,6 +1277,8 @@ def build_generation(plan: dict, album: Path, log: list):
                           "lyrics_sha8": hashlib.sha256(ly.encode()).hexdigest()[:8] if ly else None,
                           "rounds": s.get("rounds") or gen["rounds"]["track01" if s["n"] == 1 else "others"],
                           "instrumental": False, "overrides": ov, "variants": s.get("variants") or [],
+                          "cover": ((s.get("public_domain") or {}).get("cover_source")
+                                    if (s.get("public_domain") or {}).get("mode") == "cover" else None),
                           "notes": f"{s.get('arc_role')} · {s.get('emotion')} · E{s.get('energy')} · {s.get('intro_type')}/{s.get('intro_length')}"})
     g = {"schema_version": 1, "album": album.name, "status": "draft",
          "source": {"plan": "plan.yaml", "idea": plan["sources"].get("idea"), "research": plan["sources"].get("research") or []},
@@ -1312,7 +1367,9 @@ def summary_md(plan: dict, album: Path, I: Issues | None = None) -> str:
         hl_ = plan.get("highlight") or {}
         L.append(f"Bài điểm nhấn: slot {hl_.get('slot')} · {hl_.get('axis')} · {hl_.get('what')} · single: {hl_.get('single')}" if hl_ else "Bài điểm nhấn: CHƯA CÓ (rules.md §1b)")
         L.append(f"Voice: {((plan.get('identity') or {}).get('voice') or {}).get('name')} · tempo {((plan.get('sound') or {}).get('tempo') or {}).get('bpm')}")
-        L.append(f"Tổng (chưa cắt ghép): {mmss(I.total)} · credits dự kiến ~{I.credits} / trần {gen.get('budget_max_credits')}")
+        keep = (plan.get("target") or {}).get("assembly_keep")
+        est = f" (≈ {mmss(I.total * float(keep))} sau ghép)" if keep and I.total else ""
+        L.append(f"Tổng (chưa cắt ghép): {mmss(I.total)}{est} · credits dự kiến ~{I.credits} / trần {gen.get('budget_max_credits')}")
     qs = [q for q in plan.get("open_questions") or [] if not q.get("answer")]
     if qs:
         L += ["", "Câu hỏi còn mở:"] + [f"- {'**[blocking]** ' if q.get('blocking') else ''}{q.get('id')}: {q.get('q')}" for q in qs]
@@ -1439,7 +1496,7 @@ def cmd_approve(a):
         for m in I.errors:
             print(f"✖ {m}")
         die("chưa đủ điều kiện duyệt")
-    a.force = False
+    a.force = getattr(a, "force", False)
     cmd_build(a)
     plan = load_plan(album)
     I = validate(plan, album, final=True)
@@ -1475,6 +1532,7 @@ def main():
     p = sub.add_parser("build"); p.add_argument("album"); p.add_argument("--force", action="store_true"); p.set_defaults(fn=cmd_build)
     p = sub.add_parser("summary"); p.add_argument("album"); p.set_defaults(fn=cmd_summary)
     p = sub.add_parser("approve"); p.add_argument("album"); p.add_argument("--by", required=True); p.add_argument("--note")
+    p.add_argument("--force", action="store_true", help="duyệt lại plan đã đóng băng (album mở rộng sau khi generate)")
     p.set_defaults(fn=cmd_approve)
     import channel_tools as ct
     p = sub.add_parser("board", help="trạng thái cả channel"); p.add_argument("--channel", required=True); p.set_defaults(fn=ct.cmd_board)

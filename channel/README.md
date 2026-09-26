@@ -10,7 +10,7 @@ channel/<tên>/
 ├── rules.md            # luật nhạc; khối YAML cuối file = luật máy đọc (validate, analyzer)
 ├── visual.md           # luật hình: hằng số, khối CORE ChatGPT, trục biến thể, điều phải kiểm
 ├── publish.md          # mẫu description, tags mặc định, title, emoji, pinned comment
-├── translate.yaml      # ngôn ngữ dịch title (youtube-translate)
+├── translate.yaml      # ngôn ngữ dịch title + description (youtube-translate)
 ├── video.json          # phong cách video: bụi, ánh sáng, màu sóng nhạc, logo
 ├── research-queue.txt  # link YouTube chờ analyze (chỉ trên máy)
 ├── image_source/logo.png
@@ -43,6 +43,7 @@ channel/<tên>/
 1. `cp -R channel/_template channel/<tên>`
 2. Điền với chủ kênh, theo thứ tự: `channel.md` → `rules.md` (house Style, Voices, khối YAML) → `visual.md` + `model/` →
    `publish.md` → `video.json` + `image_source/logo.png` → `translate.yaml` → `CLAUDE.md`.
+   Kiến thức nền + checklist thiết lập kênh trên YouTube: `docs/seo-youtube/` (04, 08 §A).
 3. Kiểm: `python3 .claude/skills/production-manager/scripts/lint_skills.py` (skill không được nhắc tới kênh),
    `album_plan.py board --channel <tên>`.
 4. Thêm dòng vào bảng dưới.

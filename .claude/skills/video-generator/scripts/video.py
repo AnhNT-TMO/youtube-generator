@@ -6,6 +6,9 @@ USAGE = """video-generator: still thumbnail -> 5-min loop video -> full-length m
     video.py batch channel/<name> [--local]   # step 1 for every idea / album / single with a thumbnail but no loop
     video.py album DIR AUDIO [--local]        # step 2: loop -> video as long as AUDIO, + spectrum bars
     video.py package DIR                      # step 3: zip video + thumbnails + youtube.md on the server -> S3
+    video.py short DIR [--local]              # Short (DIR = channel/<name>/shorts/NNN-slug with short.json + 9:16
+                                              #   thumbnail.png): loop as long as the clip + spectrum + lyric lines + hook
+                                              #   + CTA, 1080x1920; then package like step 3 when DIR/youtube.md exists
 
 DIR sits inside channel/<name>/ (an idea, album or single folder) and holds thumbnail.png. An album made from an
 idea (plan.yaml sources.idea) that has no thumbnail.png / video.json / video/loop.mp4 of its own uses the idea's.
@@ -98,6 +101,7 @@ class Job:
             if newer:
                 print(f"⚠ {os.path.relpath(newer, REPO)} is newer than the album's thumbnail: using the album's; "
                       "run album-plan `album_plan.py sync <album>` to take the idea's", flush=True)
+        self.short = len(rel) >= 4 and rel[2] == "shorts"
         self.out = os.path.join(self.dir, "video")
         self.id = re.sub(r"[^A-Za-z0-9_.-]+", "__", "/".join(rel[1:]))
 
@@ -108,6 +112,15 @@ class Job:
 
     def presets(self):
         return sum((["--preset", p] for p in self.layers), [])
+
+    def config(self):
+        return config.merge_files(self.layers, short=self.short)
+
+    def frame_env(self):
+        if not self.short:
+            return None
+        w, h = self.config()["short"]["frame"]
+        return dict(os.environ, VG_FRAME=f"{w}x{h}")
 
 
 def source_idea(d):
@@ -189,24 +202,36 @@ def _scp_back(src, dst):
          f"{RENV['VG_REMOTE']}:{src}", dst])
 
 
-def remote(job, a, audio=None):
+def _push_base(job, out_clean=""):
     if not RENV["VG_REMOTE"]:
         sys.exit("no VG_REMOTE in remote.env")
-    t0 = time.time()
     R, inp, out = _paths(job)
     ch = f"channel/{job.channel}/image_source"
     if subprocess.run(_ssh("true")).returncode:
         sys.exit(f"GPU server {RENV['VG_REMOTE']} unreachable. Check the network/server and retry; --local renders "
                  "on this Mac (heavy) — ask the channel owner before using it.")
-    run(_ssh(f"mkdir -p {R}/scripts {R}/repo/{ch} {inp} {out} && rm -f {out}/loop_intro.mp4"))
+    run(_ssh(f"mkdir -p {R}/scripts {R}/repo/{ch} {inp} {out} && rm -f {out}/loop_intro.mp4 {out_clean}"))
     _rsync(HERE + "/", f"{R}/scripts/", "--exclude", "__pycache__")
     _rsync(os.path.join(SK, "requirements.txt"), f"{R}/requirements.txt")
     _rsync(os.path.join(job.channel_dir, "image_source") + "/", f"{R}/repo/{ch}/")
     run(_ssh(f"test -x {R}/.venv/bin/python || (python3 -m venv {R}/.venv && "
              f"{R}/.venv/bin/pip install -q -r {R}/requirements.txt)"))
+    return R, inp, out
 
+
+def _push_config(cfg, dst):
     with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as fh:
-        json.dump(config.merge_files(job.layers), fh, indent=1)
+        json.dump(cfg, fh, indent=1)
+        cfg_file = fh.name
+    _rsync(cfg_file, dst, "--checksum")
+    os.remove(cfg_file)
+
+
+def remote(job, a, audio=None):
+    t0 = time.time()
+    R, inp, out = _push_base(job)
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as fh:
+        json.dump(job.config(), fh, indent=1)
         cfg_file = fh.name
     ext = os.path.splitext(job.image)[1]
     _rsync(job.image, f"{inp}/image{ext}")
@@ -252,6 +277,84 @@ def remote(job, a, audio=None):
     print(f"[{time.time() - t0:.0f}s] done -> {os.path.relpath(job.out, REPO)}/", flush=True)
 
 
+def short_spec(job):
+    f = os.path.join(job.dir, "short.json")
+    if not os.path.exists(f):
+        sys.exit(f"{os.path.relpath(f, REPO)} chưa có: chạy skill youtube-shorts (`shorts.py pick`) trước")
+    spec = json.load(open(f))
+    audio = os.path.join(REPO, spec["audio"])
+    if not os.path.exists(audio):
+        sys.exit(f"short.json trỏ tới audio không có: {spec['audio']}")
+    return spec, audio
+
+
+def remote_short(job, a):
+    spec, audio = short_spec(job)
+    dur = spec["out"] - spec["in"]
+    cfg = job.config()
+    cfg["loop_seconds"] = round(dur, 3)
+    w, h = cfg["short"]["frame"]
+    t0 = time.time()
+    R, inp, out = _push_base(job, "video.mp4 video.mp4.json check_*.png overlays.json")
+    ext, aext = os.path.splitext(job.image)[1], os.path.splitext(audio)[1]
+    _rsync(job.image, f"{inp}/image{ext}")
+    _rsync(audio, f"{inp}/audio{aext}")
+    _rsync(os.path.join(job.dir, "short.json"), f"{inp}/short.json", "--checksum")
+    _push_config(cfg, f"{inp}/preset.json")
+    print(f"[{time.time() - t0:.0f}s] inputs synced", flush=True)
+    enc = a.encoder or RENV["VG_ENCODER"]
+    P = f"~/{R}/.venv/bin/python"
+    marks = {"hook": 1.0, "mid": dur / 2, "cta": max(0.0, dur - 2.0)}
+    cmd = (f"cd {R}/scripts && export VG_REPO=~/{R}/repo VG_FRAME={w}x{h} && "
+           f"{P} short.py ~/{inp}/image{ext} ~/{inp}/audio{aext} ~/{inp}/short.json ~/{inp}/preset.json ~/{out} "
+           f"--jobs {a.jobs or int(RENV['VG_JOBS'])} --encoder {enc} && cd ~/{out} && "
+           f"ffprobe -v error -print_format json -show_format -show_streams video.mp4 > video.mp4.json"
+           + "".join(f" && ffmpeg -v error -y -ss {t:.2f} -i video.mp4 -frames:v 1 check_{k}.png"
+                     for k, t in marks.items()))
+    run(_ssh(limited(cmd)))
+    os.makedirs(job.out, exist_ok=True)
+    for name in ["video.mp4.json", "overlays.json"] + [f"check_{k}.png" for k in marks]:
+        _scp_back(f"{out}/{name}", os.path.join(job.out, name))
+    json.dump({"server": RENV["VG_REMOTE"], "video": f"~/{out}/video.mp4", "audio": spec["audio"],
+               "in": spec["in"], "out": spec["out"], "rendered": time.strftime("%Y-%m-%d %H:%M")},
+              open(os.path.join(job.out, "remote.json"), "w"), indent=1)
+    if a.download:
+        _scp_back(f"{out}/video.mp4", os.path.join(job.out, os.path.basename(job.dir) + ".mp4"))
+    print(f"[{time.time() - t0:.0f}s] done: {w}×{h}, {dur:.1f} s · check frames + overlays.json in "
+          f"{os.path.relpath(job.out, REPO)}/", flush=True)
+
+
+def local_short(job, a):
+    spec, audio = short_spec(job)
+    cfg = job.config()
+    cfg["loop_seconds"] = round(spec["out"] - spec["in"], 3)
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as fh:
+        json.dump(cfg, fh, indent=1)
+        preset = fh.name
+    tmp = tempfile.mkdtemp(prefix="vg-short-")
+    try:
+        run([venv_python(), os.path.join(HERE, "short.py"), job.image, audio, os.path.join(job.dir, "short.json"),
+             preset, tmp, "--jobs", str(a.jobs or 4)] + (["--encoder", a.encoder] if a.encoder else []),
+            env=job.frame_env())
+        os.makedirs(job.out, exist_ok=True)
+        shutil.move(os.path.join(tmp, "video.mp4"), os.path.join(job.out, os.path.basename(job.dir) + ".mp4"))
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+        os.remove(preset)
+
+
+def s3_folder(job):
+    rel = os.path.relpath(job.dir, REPO).split(os.sep)[1:]
+    if len(rel) == 3 and rel[1] in ("singles", "shorts"):
+        kind = rel[1][:-1]
+        sm = os.path.join(job.dir, f"{kind}.md")
+        m = re.search(r"^album:[ \t]*[\"']?([^\s#\"']+)", open(sm).read(), re.M) if os.path.exists(sm) else None
+        if not m:
+            print(f"⚠ {os.path.relpath(sm, REPO)} has no album: zip goes to albums/{rel[2]}/", flush=True)
+        return f"{rel[0]}/albums/{m.group(1) if m else rel[2]}", f"{kind}-"
+    return "/".join(rel), ""
+
+
 def package(job, a):
     t0 = time.time()
     R, inp, out = _paths(job)
@@ -273,11 +376,16 @@ def package(job, a):
                  if os.path.exists(os.path.join(job.out, "remote.json")) else None)
     run([py, pkg_py, "stage", pkg, "--youtube-md", ytmd, "--thumbnail", thumb,
          "--jpg", os.path.join(job.dir, "thumbnail.jpg"), "--channel", job.channel]
-        + (["--source-audio", src_audio] if src_audio else []))
+        + (["--source-audio", src_audio] if src_audio else []) + (["--vertical"] if job.short else []))
 
     pub = os.path.join(REPO, ".claude", "skills", "youtube-publish")
     pub_py = os.path.join(pub, ".venv", "bin", "python")
-    if os.path.exists(pub_py):
+    shorts_py = os.path.join(REPO, ".claude", "skills", "youtube-shorts", "scripts", "shorts.py")
+    if job.short:
+        if subprocess.run([sys.executable, shorts_py, "check", job.dir]).returncode and not a.force:
+            shutil.rmtree(stage)
+            sys.exit("youtube.md của Short chưa qua shorts.py check: sửa rồi chạy lại (--force để bỏ qua)")
+    elif os.path.exists(pub_py):
         rc = subprocess.run([pub_py, os.path.join(pub, "scripts", "publish.py"), "check", job.dir]).returncode
         if rc and not a.force:
             shutil.rmtree(stage)
@@ -289,16 +397,18 @@ def package(job, a):
     _rsync(HERE + "/", f"{R}/scripts/", "--exclude", "__pycache__")
     _rsync(pkg, f"{inp}/pkg/")
     shutil.rmtree(stage)
-    zipname = f"{slug}-{time.strftime('%Y%m%d-%H%M%S')}.zip"
+    folder, tag = s3_folder(job)
+    zipname = f"{tag}{slug}-{time.strftime('%Y%m%d-%H%M%S')}.zip"
+    expect = "x".join(map(str, job.config()["short"]["frame"])) if job.short else "3840x2160"
     built = _ssh_json(limited(f"python3 {R}/scripts/pkg_server.py build ~/{inp}/pkg/{slug} ~/{out}/video.mp4 ~/{inp} "
-                      f"~/{out}/{zipname} --video-name {slug}.mp4"))
+                      f"~/{out}/{zipname} --video-name {slug}.mp4 --expect {expect}"
+                      + (" --no-audio-check" if job.short else "")))
     for w in built["warnings"]:
         print(f"⚠ {w}", flush=True)
     size = built["size"]
     print(f"[{time.time() - t0:.0f}s] zip {size / 1e9:.2f} GB on the server", flush=True)
 
-    rel = os.path.relpath(job.dir, REPO).split(os.sep)[1:]
-    key = RENV["VG_S3_PREFIX"] + "/".join(rel) + "/" + zipname
+    key = f"{RENV['VG_S3_PREFIX']}{folder}/{zipname}"
     s3args = ["--bucket", RENV["VG_S3_BUCKET"], "--key", key, "--region", RENV["VG_S3_REGION"]] + (
         ["--profile", RENV["VG_AWS_PROFILE"]] if RENV["VG_AWS_PROFILE"] else [])
     spec = json.loads(subprocess.run([py, pkg_py, "presign", "--size", str(size)] + s3args,
@@ -326,7 +436,7 @@ def package(job, a):
     cleaned = not a.keep_server
     if cleaned:
         run(_ssh(f"rm -rf {inp}/pkg {out}/{zipname} {out}/video.mp4 {out}/video.mp4.json {out}/check_*.png "
-                 f"{inp}/audio.* && du -sh {inp} {out}"))
+                 f"{inp}/audio.* {out}/bars.mp4 {out}/seg.wav && du -sh {inp} {out}"))
         rj = os.path.join(job.out, "remote.json")
         if os.path.exists(rj):
             info = json.load(open(rj))
@@ -348,15 +458,18 @@ def main():
     ap = argparse.ArgumentParser(description=USAGE,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ("frame", "loop", "album", "batch", "package"):
+    for name in ("frame", "loop", "album", "batch", "package", "short"):
         p = sub.add_parser(name)
         p.add_argument("dir")
+        if name == "short":
+            p.add_argument("--download", action="store_true", help="also fetch the Short's mp4 from the server")
+            p.add_argument("--no-package", action="store_true", help="don't zip + upload to S3 after rendering")
         if name == "album":
             p.add_argument("audio", help="the mixed album audio (WAV or AAC)")
             p.add_argument("--out", help="default: DIR/video/<dir name>.mp4")
             p.add_argument("--download", action="store_true", help="also fetch the full mp4 from the server")
             p.add_argument("--no-package", action="store_true", help="don't zip + upload to S3 after rendering")
-        if name in ("album", "package"):
+        if name in ("album", "package", "short"):
             p.add_argument("--thumbnail", help="thumbnail for the package (default: the one the video was made from)")
             p.add_argument("--force", action="store_true", help="package even if publish.py check fails")
             p.add_argument("--keep-server", action="store_true",
@@ -404,12 +517,33 @@ def main():
     job.need_image()
     if a.cmd == "frame":
         out = os.path.join(job.out, f"frame_{a.at:g}s.png")
-        run([venv_python(), os.path.join(HERE, "make_loop.py"), job.image, out,
-             "--frame", str(a.at)] + job.presets())
+        if job.short:
+            with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as fh:
+                json.dump(job.config(), fh, indent=1)
+            run([venv_python(), os.path.join(HERE, "make_loop.py"), job.image, out, "--frame", str(a.at),
+                 "--preset", fh.name], env=job.frame_env())
+            os.remove(fh.name)
+        else:
+            run([venv_python(), os.path.join(HERE, "make_loop.py"), job.image, out,
+                 "--frame", str(a.at)] + job.presets())
     elif a.cmd == "loop":
         remote(job, a) if a.remote else local_loop(job, a)
     elif a.cmd == "package":
         package(job, a)
+    elif a.cmd == "short":
+        if not job.short:
+            sys.exit(f"{a.dir}: `short` needs a channel/<name>/shorts/NNN-slug folder")
+        if not a.remote:
+            local_short(job, a)
+            return
+        remote_short(job, a)
+        if a.no_package:
+            return
+        if os.path.exists(os.path.join(job.dir, "youtube.md")):
+            package(job, a)
+        else:
+            print("chưa có youtube.md: soạn bằng skill youtube-shorts rồi "
+                  f"`video.py package {os.path.relpath(job.dir, REPO)}`", flush=True)
     else:
         a.audio = os.path.abspath(a.audio)
         if not a.remote:

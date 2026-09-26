@@ -9,11 +9,10 @@ RSH="ssh -i $KEY -o BatchMode=yes -o ConnectTimeout=10"
 LIMIT='S=~/.config/systemd/user/youtube.slice; [ -f $S ] || { mkdir -p ${S%/*} && printf "[Unit]\nDescription=youtube project: every skill shares this cap (CLAUDE.md)\n[Slice]\nCPUQuota=%s%%\nMemoryHigh=60%%\nMemoryMax=70%%\n" $(( $(nproc) * 60 )) > $S && systemctl --user daemon-reload; }; systemd-run --user --scope --quiet --collect --slice=youtube.slice -- bash -c'
 URL="$1"; OUT="$2"; shift 2
 SLUG="$(basename "$OUT")"
-CHDIR=""; IDEA=""; ARGS=""; SEGS=""
+CHDIR=""; ARGS=""; SEGS=""
 while [ $# -gt 0 ]; do
   case "$1" in
     --channel-dir) CHDIR="$2"; shift 2 ;;
-    --idea) IDEA="$2"; shift 2 ;;
     --segments) SEGS="$2"; ARGS+=" --segments runs/$SLUG/segments.${2##*.}"; shift 2 ;;
     *) ARGS+=" $(printf %q "$1")"; shift ;;
   esac
@@ -40,5 +39,4 @@ rsync -a -e "$RSH" --prune-empty-dirs \
   "$YTA_REMOTE:yt-analyzer/runs/$SLUG/" "$OUT/"
 echo "== results copied to $OUT (media kept on $YTA_REMOTE:~/yt-analyzer/runs/$SLUG/raw)"
 CH=(); [ -n "$CHDIR" ] && CH=(--channel-dir "$CHDIR")
-ID=(); [ -n "$IDEA" ] && ID=(--idea-dir "$IDEA")
-"$SK/.venv/bin/python" "$SK/scripts/build_reference.py" "$OUT" ${CH[@]+"${CH[@]}"} ${ID[@]+"${ID[@]}"}
+"$SK/.venv/bin/python" "$SK/scripts/build_reference.py" "$OUT" ${CH[@]+"${CH[@]}"}

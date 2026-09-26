@@ -24,6 +24,16 @@ def channel_terms(ch_dir):
             terms[name] = "channel name"
             terms[name.replace(" ", "")] = "channel name"
     rules = yaml_block(os.path.join(ch_dir, "rules.md"))
+    genre = {w.lower() for w in re.findall(r"[A-Za-z&]+", (re.search(r"genre_words:\s*\[(.*?)\]", rules, re.S) or [None, ""])[1])}
+    if md and os.path.exists(md) and m:
+        for w in re.findall(r"[A-Za-z]{5,}", name):
+            if w.lower() not in genre:
+                terms[rf"\b{w}\b"] = "channel name word"
+    tyaml = os.path.join(ch_dir, "trends.yaml")
+    if os.path.exists(tyaml):
+        own = re.search(r"^own_channel:\s*(UC[\w-]+)", open(tyaml, encoding="utf-8").read(), re.M)
+        if own:
+            terms[own.group(1)] = "YouTube channel id"
     for m in re.finditer(r"-\s*name:\s*\"?([^\"\n]+?)\"?\s*\n\s*id:\s*([0-9a-f-]{8,})", rules):
         terms[re.sub(r"\s*\(.*\)$", "", m.group(1)).strip()] = "Suno Voice name"
         terms[m.group(2)[:8]] = "Suno Voice id"
@@ -55,7 +65,7 @@ def main():
             continue
         for t, kind in channel_terms(ch_dir.rstrip("/")).items():
             terms[t] = f"{kind} ({ch})"
-    pats = [(re.compile(re.escape(t), re.I), t, kind) for t, kind in terms.items() if len(t) >= 4]
+    pats = [(re.compile(t if t.startswith(r"\b") else re.escape(t), re.I), t, kind) for t, kind in terms.items() if len(t) >= 4]
     hits = 0
     for path in files():
         try:

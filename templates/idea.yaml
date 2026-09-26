@@ -14,8 +14,26 @@ album: null
 created_at:
 updated_at:
 
+brief:                       # ý tưởng gốc (CLAUDE.md §0): từ trend (R&D) hoặc từ CEO/PM
+  source:                    # trend | ceo | pm
+  text:                      # một–hai câu: album nói về gì (chủ đề trend, hoặc câu chuyện: ai, ở đâu, mong điều gì)
+  topic:                     # chủ đề trend (channel/<ch>/trends.yaml topics) để đánh giá theo trục chủ đề
+  trend_report:              # research/trends/<ch>/reports/YYYY-MM-DD.md
+  angle:                     # ý tưởng gặp trend ở đâu: câu chuyện, ai hát cho ai, vì sao người xem bấm
+  decisions:                 # PM quyết (CLAUDE.md §0), mọi nhân viên làm theo; null = nhân viên tự chọn trong luật kênh
+    by:                      # "PM YYYY-MM-DD"
+    music: {voice: , tempo: , meter: , branch: , experiment: , library: [], public_domain: []}
+    title_direction:         # giọng + khuôn title của video này (theo direction.md)
+    description_angle:       # ABOUT THIS VIDEO nói gì, cho ai
+    thumbnail_concept:       # concept đã chọn (R&D Ý tưởng thumbnail): cảnh, chủ thể, chữ chính (visual.md → Chữ chính trên ảnh), màu + khác 3 album gần nhất ở đâu
+    single_slot:             # bài đăng single (gói CLAUDE.md §3: bài điểm nhấn)
+    shorts: []               # gói CLAUDE.md §3: 1 Short role A; [{role: A, slot: 1, format, part, hook_angle, picture, version}]
+    packaging_version:       # version đóng gói đang thử (một trục mỗi lần)
+    success: {metric: views_7d_vs_median, target: }   # kỳ vọng PM chấm lại sau 7 ngày (results.md)
+
 provenance:
-  research: []               # [{path, measurements, url, channel, video_id, analyzed_at, views, subs, published_at, duration}]
+  research: []               # [0] = reference set (refset.py), sau đó từng video: [{path, reference, url, channel, video_id, views, subs, published_at, duration}]
+  trend: {}                  # {report, topic}
   derived_by:
   confidence_notes: []
 
@@ -36,7 +54,7 @@ differentiation:
     lyric_rule:
 
 target:
-  duration_min: [50, 90]   # 50–90 phút đều chấp nhận (chủ kênh 2026-09-23; Suno không ra đúng độ dài)
+  duration_min: [60, 90]   # sau khi ghép: 1–1,5 giờ, thiếu thì thêm bài (chủ kênh 2026-09-25); tổng slot chưa ghép ≈ ≥ 69 phút
   track_count:
   track_duration: {target: , range: []}
   tempo: {meter: , felt_bpm_qc: , felt_bpm_qc_range: [], reference_measured: , ours_prompt_bpm: , ours_measured: }
@@ -51,7 +69,7 @@ target:
 identity:
   vocal_persona:
   band_profile:
-  persona_decision: {decided: false, owner: user, recommended: , options: {}}
+  persona_decision: {decided: false, owner: PM, recommended: , options: {}}
   suno_voice: {name: , id: , origin_clip: }
 
 style_prompt: {version: , text: , chars: , exclude_styles: , reference_voice: , reference_tempo: }   # text <= 1000 chars, English; genre/instruments from our channel

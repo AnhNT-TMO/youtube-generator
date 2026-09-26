@@ -3,6 +3,9 @@ USAGE = """youtube-publish helper.
 
   chapters <album> --audio <video.mp4|master.wav>   dò timestamps từng bài trong đúng file sẽ upload
   check    <album> [--video <video.mp4>]            kiểm tra youtube.md trước khi dán vào YouTube Studio
+  tags     [<album>] [--try "a, b"] [--expand "seed, seed"] [--own "tên bài, hook"] [--trends]
+                                                    research tags bằng YouTube autocomplete (có người gõ không, người gõ tìm gì)
+                                                    + --trends: lượng tìm Google Trends (YouTube Search, 5 năm) cho từng tag
 
 Chạy từ gốc repo. <album> = channel/<channel>/albums/NNN-slug, hoặc channel/<channel>/singles/NNN-slug
 (bài đăng riêng, có single.md: không chapters, không "Full Album", link về video album).
@@ -13,9 +16,14 @@ import subprocess
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[4]
+
 SR = 2000
 PROBE = 10.0
 MATCH_R = 0.4
+TITLE_MAX = 70
+SUGGEST = "https://suggestqueries.google.com/complete/search"
+TRENDS_MIN = 1.0
 
 
 def fmt(t):
@@ -173,8 +181,9 @@ def cmd_check(a):
             err.append("title có ký tự < hoặc > (YouTube không nhận)")
         if single and re.search(r"full album|playlist|\b\d+\s*(hour|hr)", title, re.I):
             err.append("title của bài đăng riêng không được ghi Full Album / playlist / số giờ")
-        if len(title) > 70:
-            warn.append(f"title {len(title)} ký tự: phần sau ~70 ký tự bị cắt trên kết quả tìm kiếm, keyword chính phải nằm trước")
+        if len(title) > TITLE_MAX:
+            err.append(f"title {len(title)} ký tự > {TITLE_MAX}: YouTube cắt phần sau trên search/mobile (vidIQ cảnh báo); "
+                       "rút gọn theo thứ tự bỏ trong SKILL.md → Title")
     if not desc:
         err.append("thiếu khối description trong ## Description")
         desc = ""
@@ -280,8 +289,10 @@ def cmd_check(a):
             if miss:
                 err.append(f"thiếu tag mặc định của channel: {miss}")
             extra = len([t for t in low if t not in defaults])
-            if not 8 <= extra <= 12:
-                warn.append(f"{extra} tag riêng của {'bài' if single else 'album'} (quy ước ~10)")
+            if not 5 <= extra <= 12:
+                warn.append(f"{extra} tag riêng của {'bài' if single else 'album'} (quy ước 5–12, chỉ tag qua `publish.py tags`)")
+        if not re.search(r"autocomplete|trends", section(y, "## Tags").lower()):
+            warn.append("bảng tag chưa có cột bằng chứng (Trends / autocomplete): chạy `publish.py tags <album> --trends` rồi ghi kết quả vào bảng")
         print(f"tags: {len(tags)} tag, {L}/500 ký tự")
 
     thumb = album / "thumbnail.png"
@@ -298,7 +309,7 @@ def cmd_check(a):
         warn.append("không thấy thumbnail.png/jpg trong thư mục album")
 
     if title:
-        print(f"title: {len(title)}/100 ký tự")
+        print(f"title: {len(title)}/{TITLE_MAX} ký tự")
     print(f"description: {len(desc)}/5000 ký tự" + ("" if single else f", {len(ch_lines)} chapters"))
     for w in warn:
         print(f"⚠️  {w}")
@@ -307,6 +318,139 @@ def cmd_check(a):
     if not err:
         print("✅ youtube.md sẵn sàng để dán vào YouTube Studio")
     sys.exit(1 if err else 0)
+
+
+def split_list(s):
+    return [t.strip() for t in (s or "").replace("\n", ",").split(",") if t.strip()]
+
+
+def compact(s):
+    return re.sub(r"[^a-z0-9]", "", s.lower())
+
+
+def suggest(q, gl):
+    import json
+    from urllib.parse import urlencode
+    from urllib.request import urlopen
+    url = SUGGEST + "?" + urlencode({"client": "firefox", "ds": "yt", "hl": "en", "gl": gl, "q": q})
+    with urlopen(url, timeout=10) as r:
+        return [s.lower() for s in json.loads(r.read().decode("utf-8", "replace"))[1]]
+
+
+def trends_anchor(album, channel=None):
+    pub = (ROOT / "channel" / channel / "publish.md") if channel else (Path(album).resolve().parents[1] / "publish.md" if album else None)
+    m = re.search(r"Mốc Google Trends:\*\*\s*`([^`]+)`\s*=\s*([\d.]+)", pub.read_text()) if pub and pub.exists() else None
+    if not m:
+        sys.exit("--trends cần mốc so sánh: dòng '**Mốc Google Trends:** `<cụm>` = <số>' trong channel/<ch>/publish.md; cho <album> hoặc --channel <ch>")
+    return m.group(1), float(m.group(2))
+
+
+def trends_volume(tags, anchor):
+    import time
+    from pytrends.request import TrendReq
+    term, scale = anchor
+    req, out = TrendReq(hl="en-US", tz=0), {}
+    for i in range(0, len(tags), 4):
+        kw = [term] + [t for t in tags[i:i + 4] if t != term]
+        for attempt in range(3):
+            try:
+                req.build_payload(kw, timeframe="today 5-y", geo="", gprop="youtube")
+                df = req.interest_over_time()
+                break
+            except Exception as e:
+                if attempt == 2:
+                    sys.exit(f"Google Trends từ chối ({e}); đợi vài phút rồi chạy lại")
+                time.sleep(20)
+        means = df.mean(numeric_only=True) if len(df) else {}
+        base = means.get(term, 0) or 1e-9
+        for t in kw[1:]:
+            out[t] = round(float(means.get(t, 0)) / base * scale, 2)
+        time.sleep(4)
+    out[term] = scale
+    return out
+
+
+def reference_handles():
+    root = Path("research")
+    return sorted({p.name.split("-")[0].lower() for p in root.iterdir() if p.is_dir()}) if root.is_dir() else []
+
+
+def own_names(folder):
+    folder = Path(folder)
+    names = [folder.parent.parent.name.replace("_", " ")]
+    if is_single(folder):
+        sfm = front_matter(folder / "single.md")
+        fm = front_matter((folder / sfm["track"]).resolve())
+        names += [fm.get("title", ""), fm.get("hook_phrase", "")]
+        origin = folder.parent.parent / "albums" / str(sfm.get("album", ""))
+        if (origin / "tracks").is_dir():
+            names += [t[1] for t in album_tracks(origin)[:1]]
+    elif (folder / "tracks").is_dir():
+        names += [t[1] for t in album_tracks(folder)]
+    return [n.lower() for n in names if n]
+
+
+def cmd_tags(a):
+    tags, own = split_list(a.try_), split_list(a.own)
+    if a.album:
+        own += own_names(a.album)
+        y = Path(a.album) / "youtube.md"
+        if y.exists() and not a.try_:
+            tags += split_list(code_block(y.read_text(), "## Tags"))
+    refs = reference_handles()
+    if not tags and not a.expand:
+        sys.exit("không có tag nào để kiểm tra: cho <album> có youtube.md, hoặc --try / --expand")
+
+    def fetch(q):
+        try:
+            return suggest(q, a.gl)
+        except Exception as e:
+            sys.exit(f"không gọi được YouTube autocomplete ({e}); kiểm tra mạng rồi chạy lại")
+
+    def ref_of(s):
+        return next((h for h in refs if h in compact(s)), None)
+
+    for seed in split_list(a.expand):
+        got = fetch(seed)
+        marked = [f"{s} (kênh tham khảo)" if ref_of(s) else s for s in got]
+        print(f"🔎 {seed}: {' | '.join(marked) or '(không có gợi ý)'}")
+    if a.expand:
+        print()
+
+    anchor = trends_anchor(a.album, a.channel) if a.trends and tags else None
+    vol = trends_volume([t.lower() for t in tags], anchor) if anchor else {}
+    print(f"autocomplete YouTube, gl={a.gl}. ✅ có người gõ đúng cụm · ⚠️ chỉ gõ dạng khác/ra thứ khác · ❌ bỏ")
+    if vol:
+        print(f"Trends = Google Trends YouTube Search 5 năm, thang \"{anchor[0]}\" = {anchor[1]}; < {TRENDS_MIN} = gần như không ai tìm")
+    print()
+    print("| tag | kết luận |" + (" Trends |" if vol else "") + " người gõ cụm này tìm (gợi ý đầu) |\n|---|---|" + ("---|" if vol else "") + "---|")
+    for t in tags:
+        low = t.lower()
+        got = fetch(low)
+        longer = [s for s in got if s.startswith(low) and s != low]   # "song" → "songs" cũng tính
+        ref = ref_of(low)
+        if ref:
+            verdict = f"❌ trùng tên kênh tham khảo `{ref}`"
+        elif any(low == n or compact(low) == compact(n) for n in own):
+            verdict = "✅ tên riêng" + ("" if low in got else " (chưa ai gõ, vẫn giữ)")
+        elif low in got:
+            verdict = f"✅ có người gõ, {len(longer)} cụm dài hơn"
+        elif longer:
+            verdict = f"⚠️ không ai gõ đúng cụm; dùng dạng người ta gõ: {longer[0]}"
+        elif got:
+            verdict = "⚠️ gõ vào ra thứ khác: xem ý định"
+        else:
+            verdict = "❌ không có gợi ý nào: gần như không ai gõ"
+        top = " · ".join(s for s in got if s != low)[:160]
+        if vol:
+            v = vol.get(low, 0)
+            own_name = verdict.startswith("✅ tên riêng")
+            if v < TRENDS_MIN and verdict.startswith("✅") and not own_name:
+                verdict = f"⚠️ có người gõ nhưng lượng tìm ≈ 0: thay bằng cụm rộng hơn"
+            print(f"| {t} | {verdict} | {v} | {top} |")
+        else:
+            print(f"| {t} | {verdict} | {top} |")
+    print("\nMáy chỉ biết có người gõ hay không. Ý định (cột 3: đúng dòng nhạc của kênh, hay beat, podcast, ca sĩ khác?) phải tự đọc.")
 
 
 def main():
@@ -320,6 +464,15 @@ def main():
     k.add_argument("album")
     k.add_argument("--video", help="file video sẽ upload, để đối chiếu độ dài/chapters")
     k.set_defaults(fn=cmd_check)
+    t = sub.add_parser("tags")
+    t.add_argument("album", nargs="?", help="thư mục album/single: đọc khối ## Tags của youtube.md + tên riêng (tên bài, hook)")
+    t.add_argument("--try", dest="try_", help="tag ứng viên, cách nhau bằng dấu phẩy (thay cho khối trong youtube.md)")
+    t.add_argument("--expand", help="từ gốc để xem người ta gõ tiếp gì (tìm ứng viên), cách nhau bằng dấu phẩy")
+    t.add_argument("--own", help="tên riêng thêm (tên bài, hook), luôn giữ dù ít người gõ")
+    t.add_argument("--gl", default="US", help="thị trường autocomplete (mặc định US)")
+    t.add_argument("--channel", help="kênh (channel/<ch>) để đọc mốc Google Trends khi không cho <album>")
+    t.add_argument("--trends", action="store_true", help="thêm cột lượng tìm Google Trends (YouTube Search, 5 năm); chậm ~5 s mỗi 4 tag")
+    t.set_defaults(fn=cmd_tags)
     a = ap.parse_args()
     a.fn(a)
 

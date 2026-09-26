@@ -48,6 +48,33 @@ TRACKLIST
 
 Emoji của kênh: <bảng emoji>
 
+## Shorts
+
+<skill youtube-shorts đọc mục này>
+
+**Title** (≤ 60 ký tự):
+
+```
+<công thức title Short, vd. <câu cảm xúc từ lời bài> | <Song Title> <emoji>>
+```
+
+**Description:**
+
+```
+<1 câu cho người nghe>
+🎧 <Full album | Full song>: <related video URL>
+💬 <1 câu mời comment gắn với lời bài>
+
+<3 hashtag đúng chủ đề>
+```
+
+**Tags:** tags mặc định + tên bài + tên album. **Pinned comment:** <mẫu, có link video đích>.
+**Chữ trên video:** `hook_text` <cách viết> · `cta_text` Short → album <…> / Short → single <…>.
+
+## Giờ đăng
+
+<giờ ET cho gói một album (CLAUDE.md §3): album → single → Short, không hai video cùng giờ; Shorts buổi chiều tối>
+
 ## Ghi chú kênh
 
 - Playlists trong Studio: `<Channel Name> · Full Albums`, `<Channel Name> · Songs`.

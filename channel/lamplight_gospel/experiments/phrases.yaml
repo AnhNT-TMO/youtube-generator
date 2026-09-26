@@ -1,0 +1,62 @@
+status: approved               # CEO 2026-09-25: chữ chính của mọi ảnh album (visual.md → Chữ chính trên ảnh); single dùng tên bài
+sources:
+  - research/trends/lamplight_gospel/archive/2026-09-25-packaging/report.md
+rules:
+  shape: "<GỌI>, <LỜI CẦU XIN>"   # GỌI = LORD | GOD | JESUS | FATHER; ưu tiên ≤ 6 chữ, ngôi thứ nhất, nỗi đau/nỗi sợ sâu nhất của album (visual.md → Chữ chính trên ảnh)
+  pick_by: album                 # PM viết 5–8 câu từ linh hồn album, chấm theo visual.md → Chữ chính trên ảnh, chọn câu mạnh nhất; kho này chỉ gợi ý, câu mới được thêm
+  no_reuse_days: 14              # một cụm không dùng lại trong 14 ngày; PM ghi used khi chọn
+  collision_check: "tra title ngách (research/trends/<ch>/snapshots/) + WebSearch \"<cụm>\" gospel; trùng nguyên cụm → bỏ"
+  avoid:                          # đã có nhiều kênh ngách dùng (title hoặc chữ thumbnail), 2026-09-25
+    - RESTORE MY SOUL
+    - STAY WITH ME TONIGHT
+    - SIT WITH ME TONIGHT
+    - LEAD ME HOME
+    - MY STRENGTH IS GONE
+    - I'M HOLDING ON
+    - STEP INTO MY STORM
+    - STEP INTO MY SITUATION
+    - I CAN'T DO THIS ALONE
+    - MAKE A WAY WHERE I SEE NO WAY
+    - HOLD ME THROUGH THIS STORM
+    - THANK YOU FOR ONE MORE DAY
+    - HOLD MY FAMILY (TOGETHER)     # Jelly Roll "God Hold My Family" + nhiều kênh ngách (2026-09-25)
+phrases:                          # text · mood · scripture (nếu có) · used (ngày + video, điền khi dùng)
+  - {text: "LORD, KEEP MY LAMP BURNING", mood: [night, faith], scripture: Matthew 25, used: []}
+  - {text: "LORD, I'M TOO TIRED TO PRAY", mood: [weary], scripture: Romans 8:26, used: []}
+  - {text: "JESUS, JUST YOUR NAME IS ENOUGH", mood: [weary, surrender], used: []}
+  - {text: "GOD, RESTORE WHAT I LOST", mood: [healing, loss], scripture: Joel 2:25, used: []}
+  - {text: "FATHER, I'M COMING HOME", mood: [homecoming, prodigal], scripture: Luke 15, used: []}
+  - {text: "LORD, LIGHT MY PATH", mood: [guidance, night], scripture: Psalm 119:105, used: []}
+  - {text: "GOD, BE MY LIGHT TONIGHT", mood: [night, fear], scripture: Psalm 27:1, used: []}
+  - {text: "LORD, DON'T LET GO OF MY HAND", mood: [fear, trust], scripture: Isaiah 41:13, used: []}
+  - {text: "JESUS, MEET ME ON THE FLOOR", mood: [broken, mercy], used: []}
+  - {text: "LORD, GIVE ME ENOUGH FOR TODAY", mood: [daily, provision], scripture: Matthew 6:11, used: []}
+  - {text: "GOD, THANK YOU FOR ENOUGH", mood: [thanks, provision], used: []}
+  - {text: "LORD, WAKE UP MY WEARY SOUL", mood: [morning, revival], used: []}
+  - {text: "JESUS, TURN MY MOURNING TO MORNING", mood: [healing, hope], scripture: Psalm 30:5, used: []}
+  - {text: "LORD, I'LL WAIT ON YOU", mood: [waiting, trust], scripture: Isaiah 40:31, used: []}
+  - {text: "LORD, GUARD MY DOOR TONIGHT", mood: [home, protection], scripture: Psalm 121, used: []}
+  - {text: "JESUS, SEE ME IN THE DARK", mood: [lonely, night], scripture: Psalm 139:12, used: []}
+  - {text: "GOD, I'M STILL YOUR CHILD", mood: [shame, prodigal], used: []}
+  - {text: "LORD, CARRY WHAT I CAN'T", mood: [burden, surrender], scripture: Matthew 11:28, used: []}
+  - {text: "FATHER, MEND MY BROKEN PIECES", mood: [healing, broken], scripture: Psalm 147:3, used: []}
+  - {text: "LORD, QUIET MY RACING MIND", mood: [anxiety, peace], scripture: Philippians 4:7, used: []}
+  - {text: "GOD, BRING ME THROUGH THE VALLEY", mood: [valley, fear], scripture: Psalm 23:4, used: []}
+  - {text: "LORD, STILL MY TROUBLED WATERS", mood: [storm, peace], scripture: Mark 4:39, used: []}
+  - {text: "JESUS, WALK ME TO MORNING", mood: [night, hope], used: []}
+  - {text: "LORD, SET A FIRE IN MY BONES", mood: [revival, energy], scripture: Jeremiah 20:9, used: []}
+  - {text: "JESUS, TAKE THESE BLUES AWAY", mood: [blues, sorrow], used: []}
+  - {text: "LORD, SING OVER ME TONIGHT", mood: [comfort, night], scripture: Zephaniah 3:17, used: []}
+  - {text: "GOD, DON'T PASS ME BY", mood: [mercy, plea], used: []}
+  - {text: "FATHER, FORGIVE THE ROAD I TOOK", mood: [repentance, prodigal], used: []}
+  - {text: "LORD, FILL THIS EMPTY ROOM", mood: [lonely, grief], used: []}
+  - {text: "JESUS, BE THE LAMP IN MY WINDOW", mood: [home, waiting], used: []}
+  - {text: "GOD, GIVE MY HEART A REST", mood: [rest, peace], scripture: Matthew 11:28, used: []}
+  - {text: "GOD, YOUR MERCY IS NEW TODAY", mood: [thanks, morning], scripture: Lamentations 3:22, used: []}
+  - {text: "JESUS, I NEED YOU NEAR", mood: [lonely, need], used: []}
+  - {text: "LORD, RAISE ME FROM THE DUST", mood: [healing, rise], scripture: Psalm 113:7, used: []}
+  - {text: "GOD, YOU NEVER LEFT MY SIDE", mood: [faith, testimony], used: []}
+  - {text: "FATHER, SING OVER THIS HOUSE", mood: [home, hymns, morning, hope], scripture: Zephaniah 3:17, used: []}   # nhẹ, hợp album hy vọng, không hợp album buồn
+  - {text: "LORD, DON'T LET THIS HOUSE GO QUIET", mood: [home, family, grief, hymns], used: ["2026-09-25 album 006-keep-every-name-beneath-this-roof"]}
+  - {text: "LORD, I CAN'T REACH MY CHILDREN", mood: [family, distance, widower, protection], used: ["2026-09-25 album 005-keep-watch-over-mine"]}
+  - {text: "LORD, IS IT TOO LATE FOR ME?", mood: [regret, redemption, old-age, repentance], used: ["2026-09-25 album 004-take-these-blues (làm lại ảnh)"]}

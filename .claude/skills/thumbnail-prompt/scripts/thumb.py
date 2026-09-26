@@ -5,11 +5,12 @@ USAGE = """thumbnail-prompt helper (trên Mac chỉ cần python3 + ffmpeg/ffpro
   fit   <dir> <ảnh ChatGPT> [--x 0.5 --y 0.5] [--no-upscale]
                                       cắt về 16:9 quanh điểm (x, y) ở độ phân giải gốc → GPU server upscale SeedVR2 7B
                                       → <dir>/thumbnail.png 3840×2160 (bản 4K giữ trên máy) + thumbnail.jpg ≤ 2 MB (YouTube)
+                                      <dir> là Short (shorts/NNN-slug): cắt 9:16 → 2160×3840 (--no-upscale: 1080×1920)
                                       --no-upscale: Lanczos 1920×1080 ngay trên Mac (khi server không kết nối được)
   check <dir> [--image <ảnh>]         kích thước, dung lượng, 3 vùng bị phủ trong video, điểm sáng (lantern), prompt
   upscale-setup                       một lần / khi hỏng: cài SeedVR2 + model 7B (~17 GB) vào ~/thumbnail-prompt trên server
 
-Chạy từ gốc repo. <dir> = channel/<ch>/{albums,ideas,singles}/NNN-slug
+Chạy từ gốc repo. <dir> = channel/<ch>/{albums,ideas,singles,shorts}/NNN-slug
 """
 import argparse
 import os
@@ -29,11 +30,19 @@ ZONES = {
     "subscribe (dưới phải)": (0.72, 0.86, 1.00, 1.00),
     "sóng nhạc (dưới giữa)": (0.28, 0.84, 0.72, 1.00),
 }
+ZONES_SHORT = {
+    "thanh trên YouTube": (0.00, 0.00, 1.00, 0.10),
+    "dải lời bài (giữa dưới)": (0.05, 0.56, 0.88, 0.70),
+    "nút bên phải": (0.88, 0.35, 1.00, 0.90),
+    "title + kênh (dưới)": (0.00, 0.76, 1.00, 1.00),
+}
 BUSY_WARN = 1.3
 GW, GH = 192, 108
 CW, CH = 64, 36
-FILE_MAX = 2 * 1024 * 1024
+FILE_MAX = 2_000_000
 HOUSE = "## Prompt ảnh mặc định (ChatGPT)"
+HOUSE_SHORT = "## Prompt ảnh dọc Shorts (ChatGPT)"
+DURATION = "## Dòng thời lượng"
 
 
 def dims(path):
@@ -89,12 +98,12 @@ def cmd_list(a):
             img = next((d / f for f in ("thumbnail.png", "thumbnail.jpg") if (d / f).exists()), None)
             if not fm and not img:
                 continue
-            rows.append((f"{kind}/{d.name}", fm.get("title_text", ""), fm.get("signature", ""), fm.get("lettering", ""),
+            rows.append((f"{kind}/{d.name}", fm.get("title_text", ""), fm.get("duration_line", ""), fm.get("signature", ""), fm.get("lettering", ""),
                          fm.get("wardrobe", "").split(":")[0], fm.get("framing", ""), fm.get("light", ""), fm.get("palette", ""),
                          fm.get("setting", ""), fm.get("time", ""), Path(fm.get("pose", "")).name, fm.get("layout", ""),
                          fm.get("status", "") or ("ảnh có sẵn, chưa có thumbnail-prompt.md" if img else "")))
-    print("| thư mục | chữ | chữ ký album | kiểu chữ | trang phục | khung | ánh sáng | màu | bối cảnh | thời điểm | tư thế | bố cục | trạng thái |")
-    print("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
+    print("| thư mục | chữ | dòng thời lượng | chữ ký album | kiểu chữ | trang phục | khung | ánh sáng | màu | bối cảnh | thời điểm | tư thế | bố cục | trạng thái |")
+    print("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
     for r in rows:
         print("| " + " | ".join(r) + " |")
 
@@ -137,7 +146,7 @@ def reach(env):
     return R
 
 
-def upscale(src, dst):
+def upscale(src, dst, uw=UW, uh=UH):
     env = renv()
     R = reach(env)
     if ssh(env, f"test -x {R}/.venv/bin/python && test -f {R}/models/seedvr2/seedvr2_ema_7b_fp16.safetensors").returncode:
@@ -148,7 +157,7 @@ def upscale(src, dst):
     try:
         scp(env, str(src), f"{env['TP_REMOTE']}:{job}/in.png")
         p = ssh(env, limited(f"cd ~/{R} && .venv/bin/python scripts/upscale_server.py run ~/{job}/in.png ~/{job}/out.png "
-                             f"--w {UW} --h {UH}"), capture_output=True, text=True)
+                             f"--w {uw} --h {uh}"), capture_output=True, text=True)
         if p.returncode:
             sys.exit(f"upscale lỗi trên server:\n{p.stdout}{p.stderr}")
         scp(env, f"{env['TP_REMOTE']}:{job}/out.png", str(dst))
@@ -177,13 +186,22 @@ def youtube_jpg(png, jpg):
     sys.exit(f"không nén {png} xuống ≤ 2 MB được")
 
 
+def is_short(d):
+    return Path(d).resolve().parent.name == "shorts"
+
+
+def frame_of(d):
+    return ((9, 16), (H, W), (UH, UW)) if is_short(d) else ((16, 9), (W, H), (UW, UH))
+
+
 def cmd_fit(a):
     d, src = Path(a.dir), Path(a.image)
+    (rw, rh), (fw, fh), (uw, uh) = frame_of(d)
     w, h = dims(src)
-    if w / h > 16 / 9:
-        cw, chh = round(h * 16 / 9), h
+    if w / h > rw / rh:
+        cw, chh = round(h * rw / rh), h
     else:
-        cw, chh = w, round(w * 9 / 16)
+        cw, chh = w, round(w * rh / rw)
     x = round((w - cw) * min(max(a.x, 0), 1))
     y = round((h - chh) * min(max(a.y, 0), 1))
     out = d / "thumbnail.png"
@@ -199,20 +217,20 @@ def cmd_fit(a):
     crop = f"crop={cw}:{chh}:{x}:{y}"
     if a.no_upscale:
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-vf",
-                        f"{crop},scale={W}:{H}:flags=lanczos,format=rgb24", str(out)], check=True)
-        print(f"{src.name} {w}×{h} → cắt {cw}×{chh} tại ({x},{y}), mất {lost:.0f}% diện tích → {out} {W}×{H} (Lanczos)")
+                        f"{crop},scale={fw}:{fh}:flags=lanczos,format=rgb24", str(out)], check=True)
+        print(f"{src.name} {w}×{h} → cắt {cw}×{chh} tại ({x},{y}), mất {lost:.0f}% diện tích → {out} {fw}×{fh} (Lanczos)")
         print(f"⚠️  chưa phải 4K: khi server có lại, chạy lại `fit` (không --no-upscale) từ cùng ảnh nháp")
     else:
         tmp = drafts / f".crop-{os.getpid()}.png"
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-vf", f"{crop},format=rgb24", str(tmp)],
                        check=True)
-        print(f"{src.name} {w}×{h} → cắt {cw}×{chh} tại ({x},{y}), mất {lost:.0f}% diện tích → upscale {UW}×{UH}",
+        print(f"{src.name} {w}×{h} → cắt {cw}×{chh} tại ({x},{y}), mất {lost:.0f}% diện tích → upscale {uw}×{uh}",
               flush=True)
         try:
-            upscale(tmp, out)
+            upscale(tmp, out, uw, uh)
         finally:
             tmp.unlink(missing_ok=True)
-        print(f"→ {out} {UW}×{UH} {out.stat().st_size / 1e6:.1f} MB (bản 4K giữ trên máy; video-generator đẩy lên server)")
+        print(f"→ {out} {uw}×{uh} {out.stat().st_size / 1e6:.1f} MB (bản 4K giữ trên máy; video-generator đẩy lên server)")
         print("   SeedVR2 vẽ thêm chi tiết: Read ảnh, so với bản nháp — chữ, mặt, tay không được đổi")
     jpg = d / "thumbnail.jpg"
     if out.stat().st_size > FILE_MAX:
@@ -263,24 +281,26 @@ def cmd_check(a):
     d = Path(a.dir)
     img = Path(a.image) if a.image else next((d / f for f in ("thumbnail.png",) if (d / f).exists()), None)
     err, warn = [], []
+    short = is_short(d)
+    (rw, rh), (fw, fh), (uw, uh) = frame_of(d)
     if img and img.exists():
         w, h = dims(img)
         size = img.stat().st_size
         print(f"ảnh: {img}  {w}×{h}  {size / 1e6:.2f} MB")
-        if abs(w / h - 16 / 9) > 0.01:
-            err.append(f"tỉ lệ {w / h:.3f} ≠ 16:9 (1.778): chạy `thumb.py fit`")
-        if w < 1280 or h < 720:
-            err.append("nhỏ hơn 1280×720 (YouTube tối thiểu)")
-        elif w < UW:
-            warn.append(f"{w}×{h} chưa phải 4K ({UW}×{UH}): `thumb.py fit` từ ảnh nháp để upscale "
-                        "(gói S3 của video-generator cảnh báo thumbnail chưa 4K)")
+        if abs(w / h - rw / rh) > 0.01:
+            err.append(f"tỉ lệ {w / h:.3f} ≠ {rw}:{rh} ({rw / rh:.3f}): chạy `thumb.py fit`")
+        if min(w, h) < 720:
+            err.append("cạnh ngắn nhỏ hơn 720 px")
+        elif w < uw:
+            warn.append(f"{w}×{h} chưa đủ {uw}×{uh}: `thumb.py fit` từ ảnh nháp để upscale "
+                        "(gói S3 của video-generator sẽ cảnh báo)")
         jpg = img.with_suffix(".jpg")
         if size > FILE_MAX and not (jpg.exists() and jpg.stat().st_size <= FILE_MAX):
             warn.append("> 2 MB: upload thumbnail YouTube cần bản JPG (`thumb.py fit` tự tạo, hoặc sips -s format jpeg)")
         m, _ = grad_map(img)
         whole = sum(map(sum, m)) / (GW * GH)
         print("\nvùng bị phủ trong video (độ chi tiết so với cả ảnh; > {:.1f} = rối):".format(BUSY_WARN))
-        for name, z in ZONES.items():
+        for name, z in (ZONES_SHORT if short else ZONES).items():
             r = zone_mean(m, z) / whole if whole else 0
             flag = "⚠️ " if r > BUSY_WARN else "  "
             print(f"  {flag}{name:<24} {r:.2f}")
@@ -298,8 +318,9 @@ def cmd_check(a):
         fm = front_matter(pm)
         prompt = code_block(text, "## Prompt")
         ch = channel_of(d)
-        vis = next((f for f in (ch / "visual.md", ch / "channel.md") if f.exists() and HOUSE in f.read_text()), None)
-        house = code_block(vis.read_text(), HOUSE) if vis else None
+        head = HOUSE_SHORT if short else HOUSE
+        vis = next((f for f in (ch / "visual.md", ch / "channel.md") if f.exists() and head in f.read_text()), None)
+        house = code_block(vis.read_text(), head) if vis else None
         existing = fm.get("status") == "existing"
         if not prompt and not existing:
             err.append("thumbnail-prompt.md thiếu khối ``` trong ## Prompt")
@@ -309,14 +330,22 @@ def cmd_check(a):
             elif house:
                 for line in house.splitlines():
                     if line.strip() and line not in prompt:
-                        err.append(f"prompt thiếu dòng của mẫu channel ({HOUSE[3:]}): {line[:60]}…")
+                        err.append(f"prompt thiếu dòng của mẫu channel ({head[3:]}): {line[:60]}…")
             else:
-                warn.append(f"visual.md của channel chưa có mục `{HOUSE}`")
+                (err if short else warn).append(f"visual.md của channel chưa có mục `{head}`")
             t = fm.get("title_text")
             if t and f'"{t}"' not in prompt:
                 err.append(f'prompt không có chữ title nguyên văn trong ngoặc kép: "{t}"')
             if re.search(r"<[^>\n]+>", prompt):
                 err.append("prompt còn placeholder <...>")
+            dl = fm.get("duration_line")
+            if dl and fm.get("kind") in ("single", "short"):
+                err.append(f'single không có dòng thời lượng (duration_line: "{dl}"): chỉ ảnh album mới có')
+            elif dl and f'Duration line: "{dl}"' not in prompt:
+                err.append(f'prompt thiếu dòng THIS IMAGE nguyên văn: Duration line: "{dl}"')
+            elif (not dl and fm.get("kind") in ("album", "idea") and fm.get("status") != "chosen"
+                  and vis and DURATION in vis.read_text()):
+                warn.append(f"ảnh album chưa có duration_line (visual.md → {DURATION[3:]})")
         pose = fm.get("pose")
         if pose and pose.endswith(".png") and not (channel_of(d) / pose).exists():
             err.append(f"không thấy ảnh tham chiếu {pose}")

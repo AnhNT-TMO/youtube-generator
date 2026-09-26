@@ -8,7 +8,7 @@
 # Mọi giá trị đưa vào Suno là MỘT con số chính xác, không phải dải.
 
 schema_version: 1
-status: draft                # draft → approved (người dùng duyệt, `approve`) · generate bắt đầu thì plan coi như đóng băng
+status: draft                # draft → approved (PM duyệt, `approve --by production-manager`) · generate bắt đầu thì plan coi như đóng băng
 status_log: []               # [{date, status, by, note}]
 
 album:
@@ -20,7 +20,9 @@ album:
 
 sources:
   idea: null                 # idea gốc (init chép snapshot vào <album>/idea.yaml)
-  research: []               # research/<slug>/analysis.md đã dùng
+  research: []               # research/<slug>/analysis.md đã dùng ([0] = reference set của trend)
+
+brief: null                  # chép từ idea: {source: trend|ceo|pm, text, topic, trend_report, angle}; topic = trục chủ đề khi đánh giá
 
 concept: >-
   Một đoạn: album là "buổi biểu diễn 60 phút" về điều gì, hành trình cảm xúc từ đầu đến cuối.
@@ -58,7 +60,7 @@ sound:
     meter: "6/8"
     unit: felt               # felt = nhịp cảm nhận: nốt đen chấm với 6/8, 12/8; nốt đen với 4/4
                              # (cùng đơn vị cột "felt BPM" của analyzer và tempo mà verification-audio đo)
-    why: ""                  # vì sao chọn số này (vd. tham khảo đo 53, Album 001 đo 63 → chọn 58)
+    why: ""                  # vì sao chọn số này (vd. tham khảo đo 53, album cũ cùng persona đo 63 → chọn 58)
   style:
     version: abc-v1
     text: >-
@@ -67,7 +69,8 @@ sound:
     exclude: ""                 # house Exclude của channel (rules.md house_style.exclude)
 
 target:
-  duration_min: [50, 90]     # tổng thời lượng album (phút): 50–90 đều chấp nhận, Suno không ra đúng độ dài (chủ kênh 2026-09-23)
+  duration_min: [60, 90]     # thời lượng album SAU KHI GHÉP (phút): 1–1,5 giờ; thiếu thì thêm bài (chủ kênh 2026-09-25)
+  assembly_keep: 0.87        # master / tổng target_duration đo được (0.87–0.90 trên 3 album ghép đầu, 2026-09); validate ước lượng master = tổng × số này
   track_count: 10
   track_duration: ["4:30", "6:00"]
   energy_adjacent_max: 2     # CLAUDE.md §7.2
@@ -86,7 +89,7 @@ target:
     first_hook_max_s: null   # vd. {track01: 75}: hook/chorus đầu tiên trước giây này
     f0_median_hz: null       # [lo, hi] cao độ giọng (giữ trong dải của persona)
     singer_similarity_min: null   # vd. 0.78: độ giống giọng (ECAPA) so với bài tham chiếu của persona
-    singer_similarity_ref: null   # tên bài tham chiếu (vd. wtnl01)
+    singer_similarity_ref: null   # id bài tham chiếu (vd. <album-prefix>01)
   drums_in_s_max: null
   loudness: null             # {master_lufs, true_peak_max_dbtp, song_lufs_spread_max_lu, first15s_max_below_body_db}
                              # master_lufs → album-assembly (--target-lufs); first15s_max_below_body_db → gate Track 01 của verify
@@ -140,6 +143,10 @@ slots:
     title: "Song Title"
     source: new              # new | library (title track luôn new)
     library_id: null         # khi source = library: id bài trong catalog
+    public_domain: null      # bài public domain (CLAUDE.md §5): {work, author, year, source_url, mode: lyrics|cover,
+                             #  cover_source: {kind: own_rendition|own_suno_clip|pd_recording, file, clip_id, year}}; source vẫn là new
+                             #  file (tính từ thư mục album): own_rendition = notes/suno/sNN-cover-source.wav (suno-generate pd_source.py),
+                             #  pd_recording = bản thu PD; clip_id: own_suno_clip
     arc_role: anchor         # anchor | opener | build | peak | release | closer | interlude
     emotion: ""
     theme: ""

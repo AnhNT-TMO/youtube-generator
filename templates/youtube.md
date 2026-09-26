@@ -9,10 +9,10 @@
 
 ## Title
 
-Đề xuất (<n> ký tự):
+Đề xuất (<n>/70 ký tự):
 
 ```
-<Title Track> <emoji> <Genre phrase> for <Use-case> & <Feeling> | Full Album
+<Title Track> <emoji> <Genre phrase> for <Use-case> [& <Feeling>] | Full Album
 ```
 
 Phương án khác:
@@ -39,14 +39,14 @@ Sinh bởi `publish.py chapters <album> --audio <file video>`.
 
 ## Tags
 
-12 tags mặc định của channel + ~10 tags theo chủ đề album (<n>/500 theo cách YouTube đếm):
+Tags mặc định của channel + 5–12 tags theo chủ đề album, đã research bằng `publish.py tags` (<n>/500 theo cách YouTube đếm):
 
 ```
 <defaults>, <album tags>
 ```
 
-| Tag | Vì sao |
-|---|---|
+| Tag | Nhóm | Autocomplete |
+|---|---|---|
 
 ## Thumbnail
 
