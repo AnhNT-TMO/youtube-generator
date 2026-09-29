@@ -1,7 +1,7 @@
 # 05. YouTube Studio, Analytics và thuật toán
 
 Nguồn: Module 3 §2 "YouTube Studio và số liệu phân tích", §3 "Thuật toán của YouTube". Phần đọc số liệu trong tài liệu gốc do trưởng nhóm dạy
-trực tiếp; ở đây giữ khung, thêm cách đọc cho bước 9 "Học" của xưởng.
+trực tiếp; ở đây giữ khung, thêm cách đọc kết quả 48 giờ / 7 ngày của xưởng.
 
 ## 1. YouTube Studio
 
@@ -48,16 +48,16 @@ Mục tiêu duy nhất: **giữ người dùng trên nền tảng càng lâu cà
 ## 4. Mẹo tận dụng thuật toán
 
 1. **Khai thác dữ liệu khán giả:** Analytics → Audience cho biết *kênh khác* khán giả xem (28 ngày) và *video khác* họ xem (7 ngày).
-   Nghiên cứu các kênh/video đó: nội dung gì, xu hướng gì, đối thủ làm gì → đưa vào hàng đợi research (`research-queue.txt`).
+   Nghiên cứu các kênh/video đó: nội dung gì, xu hướng gì, đối thủ làm gì → PM + CEO tra bằng rnd-youtube-api (`yt.py channel/videos/fast`).
 2. **Theo dõi thay đổi thuật toán:** có giai đoạn YouTube ưu tiên Live, có lúc video thường, có lúc trend "24h / 12h / 3h / 1h" (video dài nhiều giờ). Không cố định, phải quan sát.
 3. **Tối ưu metadata** (title, tags, mô tả, thumbnail) + **chapters**: chia timeline thành mục lục, tăng trải nghiệm và giúp thuật toán hiểu từng phần video.
 4. **Nội dung chất lượng**: hình, âm thanh, ánh sáng, biên tập; liên quan sở thích/nhu cầu người xem.
 5. **Kêu gọi xem tiếp và tương tác**: pin comment dẫn tới video nổi bật; playlist theo chủ đề hoặc video xem nhiều nhất; **end screen** gợi ý video liên quan; nhắc like, comment, share, subscribe.
 6. **Theo mùa và chủ đề nóng**: Halloween, Giáng Sinh, Tết… Lên kế hoạch album theo mùa trước vài tuần.
 
-## 5. Đọc số liệu cho bước 9 "Học" của xưởng
+## 5. Đọc kết quả 48 giờ / 7 ngày của xưởng
 
-CLAUDE.md §3 bước 9: sau ~7 ngày ghi retention 0:15 / 0:30 / 1:00 và CTR vào `youtube.md`, so sánh giữa các album. Cách đọc gợi ý
+CLAUDE.md §0 + §3: PM đọc kết quả 48 giờ / 7 ngày (pm-production `results.py` → `results.md`; retention 0:15 / 0:30 / 1:00, CTR), so sánh giữa các album. Cách đọc gợi ý
 (suy ra từ các định nghĩa trên, không phải số chuẩn của YouTube):
 
 | Hiện tượng | Nghĩa là | Việc nên thử |
@@ -66,7 +66,7 @@ CLAUDE.md §3 bước 9: sau ~7 ngày ghi retention 0:15 / 0:30 / 1:00 và CTR v
 | CTR cao, rơi mạnh trước 0:30 | thumbnail/title hứa khác cái người xem nghe thấy, hoặc 15 giây đầu yếu | kiểm cách mở bài 1 (CLAUDE.md §6), độ khớp thumbnail với nhạc |
 | Retention đầu tốt, average view duration thấp | mở hay, thân album hụt | xem đồ thị retention: điểm rơi trùng chuyển bài nào (chapters) |
 | View chủ yếu từ Search | từ khóa đúng nhưng chưa được đề xuất | tăng liên kết giữa các video: playlist, end screen, title/thumbnail nhất quán |
-| View chủ yếu từ Suggested của một kênh khác | đang "ăn theo" kênh đó | analyze kênh đó; giữ copy guard |
-| Returning viewers tăng sau một album | album đó tạo fan | ghi lại đặc điểm (tempo, voice, mood, thumbnail) để làm biến thể tiếp |
+| View chủ yếu từ Suggested của một kênh khác | đang "ăn theo" kênh đó | xem kênh đó bằng rnd-youtube-api (`yt.py videos`); không lấy tên / branding của họ |
+| Returning viewers tăng sau một album | album đó tạo fan | ghi lại đặc điểm (chủ đề, câu title/thumbnail, bài 1, thứ tự bài, biến thể hình) để làm biến thể tiếp |
 
 Chỉ kết luận khi có ≥ vài album; một video lẻ nhiễu nhiều (CLAUDE.md §10).

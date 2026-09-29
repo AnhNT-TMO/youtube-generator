@@ -79,32 +79,39 @@ class GpuScene:
         reg = frame[y0:y1, x0:x1]
         frame[y0:y1, x0:x1] = torch.trunc(reg * (1 - a) + c * a)
 
+    def _draw_lantern(self, acc, t):
+        if not self.lantern:
+            return
+        layer, glow = self.lantern
+        f = layer.c["base"] + wave(t, layer.c["waves"], layer.loop)
+        x0, y0 = layer.xy
+        h, w = glow.shape[:2]
+        sx, sy = max(0, -x0), max(0, -y0)
+        cx0, cy0, cx1, cy1 = max(0, x0), max(0, y0), min(W, x0 + w), min(H, y0 + h)
+        if cx1 > cx0 and cy1 > cy0:
+            g = glow[sy:sy + (cy1 - cy0), sx:sx + (cx1 - cx0)] * (layer.c["strength"] * max(0.0, f))
+            acc[cy0:cy1, cx0:cx1] += torch.trunc(g)
+            acc.clamp_(0, 255)
+
+    def _draw_subscribe(self, acc, t):
+        if not self.subscribe:
+            return
+        layer, sh_rgb, sh_a = self.subscribe
+        o, dy, phase = layer.state(t)
+        if o > 0.003:
+            y = int(layer.y + dy)
+            self._blit(acc, sh_rgb, sh_a, layer.x - layer.sh_off, y - layer.sh_off, o)
+            rgb, al = effects.to_layers(layer.w.render(phase))
+            self._blit(acc, torch.from_numpy(rgb).to(self.dev), torch.from_numpy(al).to(self.dev), layer.x, y, o)
+
     @torch.inference_mode()
     def frame_tensor(self, t):
         acc = self._plate(t).float()
-        if self.lantern:
-            layer, glow = self.lantern
-            f = layer.c["base"] + wave(t, layer.c["waves"], layer.loop)
-            x0, y0 = layer.xy
-            h, w = glow.shape[:2]
-            sx, sy = max(0, -x0), max(0, -y0)
-            cx0, cy0, cx1, cy1 = max(0, x0), max(0, y0), min(W, x0 + w), min(H, y0 + h)
-            if cx1 > cx0 and cy1 > cy0:
-                g = glow[sy:sy + (cy1 - cy0), sx:sx + (cx1 - cx0)] * (layer.c["strength"] * max(0.0, f))
-                acc[cy0:cy1, cx0:cx1] += torch.trunc(g)
-                acc.clamp_(0, 255)
+        self._draw_lantern(acc, t)
         for layer, sprites in self.particles:
             self._splat(acc, layer, sprites, t)
         acc.clamp_(0, 255)
-        if self.subscribe:
-            layer, sh_rgb, sh_a = self.subscribe
-            o, dy, phase = layer.state(t)
-            if o > 0.003:
-                y = int(layer.y + dy)
-                self._blit(acc, sh_rgb, sh_a, layer.x - layer.sh_off, y - layer.sh_off, o)
-                rgb, al = effects.to_layers(layer.w.render(phase))
-                self._blit(acc, torch.from_numpy(rgb).to(self.dev), torch.from_numpy(al).to(self.dev),
-                           layer.x, y, o)
+        self._draw_subscribe(acc, t)
         return acc.to(torch.uint8)
 
     def frame(self, t):

@@ -1,18 +1,20 @@
-# YouTube — <Album Title>
+# YouTube: <Album Title>
 
-<!-- Soạn bằng skill youtube-publish (.claude/skills/youtube-publish/SKILL.md). Kiểm tra: publish.py check <album> --video <file> -->
+<!-- Soạn bằng skill upload-youtube-publish (.claude/skills/upload-youtube-publish/SKILL.md). Kiểm tra: publish.py check <album> -->
 
 - **Trạng thái:** chưa upload
 - **Video URL:**
 - **Ngày upload:**
-- **File video:** `video/<NNN-slug>.mp4` (<độ dài>), dựng từ `<file audio>`
+- **File video:** `video/video.mp4` trên GPU server (<độ dài>), dựng từ `audio/master/<NNN-slug>.wav` (`assembly.json`)
+- **Brief:** `album.md` → brief (<ceo | rnd: báo cáo R&D nào>)
+- **Kho câu (phrase bank):** <id câu kho mà title / chữ thumbnail dùng (nguyên văn hoặc chuyển thể), hoặc "không">
 
 ## Title
 
-Đề xuất (<n>/70 ký tự):
+Đề xuất (<n>/70 ký tự, từ <id câu kho>):
 
 ```
-<Title Track> <emoji> <Genre phrase> for <Use-case> [& <Feeling>] | Full Album
+<title theo công thức trong channel/<ch>/publish.md → Title>
 ```
 
 Phương án khác:
@@ -22,15 +24,16 @@ Phương án khác:
 
 ## Description
 
-Mẫu chung của channel (`channel.md`), chỉ viết ABOUT THIS VIDEO + TRACKLIST.
+Mẫu chung của kênh (`publish.md` → *Description YouTube mặc định*), nguyên văn; chỉ điền các chỗ `[` của mẫu (TRACKLIST; ABOUT THIS
+VIDEO nếu mẫu có).
 
 ```
-<mẫu description của channel, nguyên văn, với ABOUT THIS VIDEO (3–5 câu) và TRACKLIST đã điền>
+<mẫu description của kênh, nguyên văn, với chapters (khối `publish.py chapters`) ở chỗ TRACKLIST; ABOUT THIS VIDEO nếu mẫu có>
 ```
 
 ### Chapters
 
-Sinh bởi `publish.py chapters <album> --audio <file video>`.
+Sinh bởi `publish.py chapters <album>` (từ `assembly.json`).
 
 ```
 0:00 <Track 01>
@@ -39,22 +42,22 @@ Sinh bởi `publish.py chapters <album> --audio <file video>`.
 
 ## Tags
 
-Tags mặc định của channel + 5–12 tags theo chủ đề album, đã research bằng `publish.py tags` (<n>/500 theo cách YouTube đếm):
+Tags mặc định của kênh + tag theo chủ đề album lấp tới sát 500, đã research bằng `publish.py tags` (<n>/500 theo cách YouTube đếm):
 
 ```
 <defaults>, <album tags>
 ```
 
-| Tag | Nhóm | Autocomplete |
+| Tag | Nhóm | Autocomplete / Trends |
 |---|---|---|
 
 ## Thumbnail
 
-- File: `thumbnail.png` (<w>×<h>), <dung lượng> MB (≤ 2 MB).
+- File: `thumbnail.png` (<w>×<h>), <dung lượng> MB (≤ 2 MB, không thì `thumbnail.jpg`); chữ trên ảnh: <brief.thumbnail_text>.
 
 ## Cài đặt khi upload (YouTube Studio)
 
-Chi tiết + lý do: `.claude/skills/youtube-publish/references/studio.md`.
+Chi tiết + lý do: `.claude/skills/upload-youtube-publish/references/studio.md`.
 
 | Mục | Chọn |
 |---|---|
@@ -68,48 +71,29 @@ Chi tiết + lý do: `.claude/skills/youtube-publish/references/studio.md`.
 | License | Standard YouTube License |
 | Allow embedding | Có |
 | Comments | Bật, sort theo Top |
-| Subtitles | Bỏ qua (tùy chọn: .srt lời bài bằng Whisper) |
+| Subtitles | Bỏ qua |
 | End screen | Chỉ Subscribe, 20 s cuối, tránh góc dưới phải/trên phải |
 | Cards | Bỏ qua cho tới khi có album khác |
 | Visibility | Unlisted → kiểm tra → Public/Schedule |
 
 ## Pinned comment
 
-Comment đầu tiên của chủ kênh: đăng bằng tài khoản channel ngay sau khi publish → ⋮ → **Pin** → bấm ❤️.
+Comment đầu tiên của chủ kênh: đăng bằng tài khoản kênh ngay sau khi publish → ⋮ → **Pin** → bấm ❤️.
 
 ```
-<emoji kênh> Welcome to <Channel>. <câu cảm ơn theo publish.md> <emoji kênh>
-
-<emoji> <câu hỏi mời bình luận>
-
-🎶 TRACKLIST 🎶
-1️⃣ 0:00 <Track 01>
-...
-
-✨ Don't miss
-🔥 <ts> <bài cao trào> · <tagline>
-🌅 <ts> <bài chuyển sang hy vọng> · <tagline>
-🌙 <ts> <bài kết> · <tagline>
-
-💛 If this music brought you peace:
-👍 Like · 🔔 Subscribe · 🔁 Share it with someone <…>
-
-<emoji> <câu kết>
+<mẫu pinned comment trong channel/<ch>/publish.md → Pinned comment, đã điền>
 ```
 
 ## Kiểm tra trước khi bấm Publish
 
-- [ ] `publish.py check <album> --video <file>` không còn ❌
-- [ ] Upload Unlisted, bấm thử các chapter (nhất là dòng "ước lượng")
-- [ ] Nghe 15 giây đầu như người lạ (Gate Track 01, CLAUDE.md §3)
+- [ ] `publish.py check <album>` không còn ❌
+- [ ] Upload Unlisted, bấm thử vài chapter
+- [ ] Nghe 15 giây đầu như người lạ (CLAUDE.md §6)
 - [ ] Đã chọn AI use = Yes
-- [ ] Đăng comment đầu tiên bằng tài khoản channel → Pin → ❤️
-- [ ] Sau upload: điền Video URL, ngày upload; retention 0:15 / 0:30 / 1:00 sau 48 giờ và 7 ngày
+- [ ] Đăng comment đầu tiên bằng tài khoản kênh → Pin → ❤️
+- [ ] Sau upload: điền Video URL, ngày upload; đăng Short sau album
 
 ## Analytics (cập nhật sau upload)
-
-Thử nghiệm của album (plan.yaml `experiment`, trống = house sound): …
-Bài điểm nhấn (plan.yaml `highlight`): slot …, mốc thời gian trong video …–… (đọc retention đúng đoạn này), single: `singles/NNN-slug`
 
 | Ngày | Views | CTR | Retention 0:15 | Retention 0:30 | Retention 1:00 | Avg view duration | Ghi chú |
 |---|---|---|---|---|---|---|---|

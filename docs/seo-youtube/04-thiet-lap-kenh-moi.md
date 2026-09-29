@@ -47,14 +47,14 @@ Tài liệu gốc đề xuất description mặc định gồm:
 Tags kênh: 20–25 tag cơ bản, cách nhau bằng dấu phẩy, tổng ≤ 500 ký tự.
 
 **Khác với xưởng:** description mặc định = khối *Description YouTube mặc định* trong `channel/<ch>/publish.md` (giới thiệu kênh + chỗ
-cho ABOUT THIS VIDEO + TRACKLIST + lời kết + hashtag), không có dòng AI, không lặp title. Tags mặc định ~12 tag trong `publish.md`
-+ 5–12 tag riêng mỗi album đã research (file 06 §5), vì tag ít trọng số và tag bịa làm loãng.
+điền TRACKLIST, và ABOUT THIS VIDEO nếu mẫu có + lời kết + hashtag), không có dòng AI, không lặp title. Tags mặc định trong
+`publish.md` + tag riêng mỗi album đã research lấp tới sát 500 ký tự (file 06 §5); tag bịa làm loãng.
 Visibility mặc định Private: điền đủ metadata, kiểm Checks (claim), rồi mới public/schedule.
 
 ## 5. Nội dung trang kênh
 
 - **Giới thiệu (About):** kênh là gì, cho ai, giá trị mang lại; chứa từ khóa chính tự nhiên; email liên hệ.
-- **Playlists** ngay từ đầu (vd. `<Kênh> · Full Albums`, `<Kênh> · Songs`): giúp SEO playlist và tự phát tiếp (file 06 §1).
+- **Playlists** ngay từ đầu (vd. `<Kênh> · Full Albums`; không làm single nên không cần playlist bài lẻ): giúp SEO playlist và tự phát tiếp (file 06 §1).
 - **Trang chủ:** video trailer/featured cho người chưa đăng ký, section theo playlist.
 
 ## 6. Luật cho kênh mới (từ tài liệu gốc)
@@ -62,7 +62,7 @@ Visibility mặc định Private: điền đủ metadata, kiểm Checks (claim),
 - **Upload video đầu tiên trong vòng 7 ngày** kể từ khi tạo kênh.
 - **Không để video nào có claim** trước khi bật kiếm tiền (file 01 §6).
 - Nhân viên mới tập trên kênh "ngoài net" 1–2 tháng (làm video, thumbnail, SEO) trước khi được giao kênh quan trọng.
-  Với xưởng: kênh mới là nơi thử; khóa `rules.md`, `visual.md`, `publish.md` sau vài album đầu dựa trên retention.
+  Với xưởng: kênh mới là nơi thử; khóa `prompt_suno.md`, `naming.md`, `album_rules.md`, `visual.md`, `publish.md` sau vài album đầu dựa trên retention.
 - Mọi thay đổi của kênh (người quản lý, network, dự án) ghi lại ngay (xưởng: `channel/<ch>/CLAUDE.md`).
 
 **Bổ sung (kiểm lại trên trang YPP):** điều kiện YPP đầy đủ thường là 1.000 người đăng ký + 4.000 giờ xem công khai trong 12 tháng

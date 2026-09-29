@@ -27,6 +27,7 @@ Kiểm tra: `python3 .claude/skills/thumbnail-prompt/scripts/thumb.py check <th�
 
 - Từ bài/album: <hình ảnh/cảm xúc cụ thể lấy từ imagery, emotion, hook, lyric_keywords>
 - Chọn trục theo vibe bài: <wardrobe / framing / light / palette đã chọn và vì sao hợp bài>
+- Biến thể (kênh có thumb_pool.json): <tổ hợp `thumb.py variant` chọn; các trục còn lại chọn theo vibe cho hợp nó>
 - Chữ ký album: <giữ trục nào của album; single khác ảnh album ở điểm nào>
 
 ## Đính kèm
@@ -42,6 +43,7 @@ THIS IMAGE: "<title>"
 Title text: "<title_text>"
 Title style: <mẫu lettering trong visual.md, theo album>
 Duration line: "<duration_line; single hoặc kênh không dùng: xóa dòng này>"
+<khối VARIANT in bởi `thumb.py variant <dir>`, nguyên văn; kênh không có thumb_pool.json: xóa dòng này>
 Look: <mẫu các trục trong visual.md "Biến thể hình ảnh", sửa cho hợp cảnh>
 Scene: <bối cảnh, thời điểm, thời tiết, 1–2 chi tiết lấy từ bài>
 The singer: <nhân vật: tư thế theo ảnh tham chiếu, biểu cảm, tay>

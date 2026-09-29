@@ -5,51 +5,51 @@ quy trình dùng chung: chúng đọc những file dưới đây và không bi�
 
 ```
 channel/<tên>/
-├── CLAUDE.md           # chỉ mục + âm thanh/hình ảnh tóm tắt + trạng thái (đọc trước)
-├── channel.md          # danh tính: thể loại, persona, thế giới hình, tài nguyên
-├── rules.md            # luật nhạc; khối YAML cuối file = luật máy đọc (validate, analyzer)
-├── visual.md           # luật hình: hằng số, khối CORE ChatGPT, trục biến thể, điều phải kiểm
-├── publish.md          # mẫu description, tags mặc định, title, emoji, pinned comment
-├── translate.yaml      # ngôn ngữ dịch title + description (youtube-translate)
-├── video.json          # phong cách video: bụi, ánh sáng, màu sóng nhạc, logo
-├── research-queue.txt  # link YouTube chờ analyze (chỉ trên máy)
-├── image_source/logo.png
-├── model/              # ảnh tham chiếu nhân vật cho ChatGPT + README.md
-├── voices/README.md    # Suno Voice + cao độ đo được
-├── ideas/ albums/ singles/ library/   # sinh ra khi làm video (chỉ trên máy)
+├── CLAUDE.md          # chỉ mục + âm thanh/hình ảnh tóm tắt (đọc trước)
+├── channel.md         # danh tính, hợp đồng kênh, tài nguyên
+├── prompt_suno.md     # prompt Suno Simple mode, một prompt cho mỗi loại bài (front matter: mode, model, loại bài)
+├── naming.md          # cách đặt tên bài từ lời + chọn đoạn Short
+├── album_rules.md     # luật chọn bài vào album (front matter máy đọc)
+├── visual.md          # luật hình: form thumbnail, khối CORE ChatGPT, biến thể, ảnh dọc Short
+├── video.json         # phong cách video: chuyển động, ánh sáng, sóng nhạc, logo
+├── publish.md         # mẫu description, tags, title, Shorts, pinned comment, giờ đăng
+├── translate.yaml     # ngôn ngữ dịch title + description
+├── image_source/logo.png, model/          # logo, ảnh nhân vật cho ChatGPT
+└── songs/<type>/ albums/NNN/(short/)    # kho bài theo loại, album + Short của nó (sinh ra khi làm, chỉ trên máy)
 ```
 
-| Skill | Đọc gì của kênh |
-|---|---|
-| youtube-music-analyzer | `rules.md` (`research`, `sources`, `voices`), `channel.md`, album gần nhất |
-| album-plan | `rules.md` (toàn bộ khối YAML + §1–§9), `voices/README.md`, `library/catalog.md` |
-| suno-generate, verification-audio, album-assembly | chỉ file của album (`generation.yaml`, `selection.yaml`, `tracks/`) |
-| thumbnail-prompt | `visual.md`, `model/` |
-| video-generator | `video.json`, `image_source/logo.png` |
-| youtube-publish | `publish.md` |
-| youtube-translate | `translate.yaml` |
-| production-manager | `CLAUDE.md`, `research-queue.txt` |
+| Nhóm | Skill | Đọc gì của kênh |
+|---|---|---|
+| PM | pm-production | `CLAUDE.md`, `channel.md`, `album_rules.md`, `songs/<type>/*.md` |
+| R&D | rnd-youtube-api | `channel.md` (ngách để tìm) |
+| Audio | audio-suno-generate | `prompt_suno.md` |
+| Audio | audio-song-naming | `naming.md`, `songs/raw/` |
+| Audio | audio-album-assembly | `album_rules.md` (`crossfade_s`), `albums/NNN/tracks/` |
+| Video | thumbnail-prompt | `visual.md`, `model/` |
+| Video | video-generator | `video.json`, `image_source/` |
+| Video | video-shorts | `publish.md` → *Shorts*, `songs/<type>/<bài>.md` → `short` |
+| Upload | upload-youtube-publish | `publish.md` |
+| Upload | upload-youtube-translate | `translate.yaml` |
 
 ## Ba lớp cấu hình video
 
-1. **Mặc định của tool** (`.claude/skills/video-generator/scripts/config.py`), giống nhau ở mọi channel:
-   logo góc trên phải, like/subscribe góc dưới phải khoảng 30–45 giây một lần, có sóng nhạc, có intro logo 4 giây, loop 5 phút.
+1. **Mặc định của tool** (`.claude/skills/video-generator/scripts/config.py`), giống nhau ở mọi channel.
 2. **`channel/<tên>/video.json`**: phong cách riêng của channel, chỉ ghi phần khác mặc định.
-3. **`<idea hoặc album>/video.json`** (tuỳ chọn): phần phụ thuộc vào ảnh cụ thể
-   (chùm sáng rơi ở đâu, nguồn sáng nào để rung lửa, bụi dồn về phía nào).
+3. **`<album hoặc short>/video.json`** (tuỳ chọn): phần phụ thuộc vào ảnh cụ thể.
 
-## Thêm channel mới
+## Thêm channel mới (CEO duyệt)
 
 1. `cp -R channel/_template channel/<tên>`
-2. Điền với chủ kênh, theo thứ tự: `channel.md` → `rules.md` (house Style, Voices, khối YAML) → `visual.md` + `model/` →
+2. Điền với CEO, theo thứ tự: `channel.md` → `prompt_suno.md` → `naming.md` + `album_rules.md` → `visual.md` + `model/` →
    `publish.md` → `video.json` + `image_source/logo.png` → `translate.yaml` → `CLAUDE.md`.
    Kiến thức nền + checklist thiết lập kênh trên YouTube: `docs/seo-youtube/` (04, 08 §A).
-3. Kiểm: `python3 .claude/skills/production-manager/scripts/lint_skills.py` (skill không được nhắc tới kênh),
-   `album_plan.py board --channel <tên>`.
+3. Kiểm: `python3 .claude/skills/pm-production/scripts/lint_skills.py` (skill không được nhắc tới kênh),
+   `album.py board --channel <tên>`.
 4. Thêm dòng vào bảng dưới.
 
 ## Channels hiện có
 
-| Channel | Thể loại |
-|---|---|
-| [lamplight_gospel](lamplight_gospel/CLAUDE.md) | Christian Gospel Blues / Southern Gospel Soul |
+| Channel | Thể loại | Trạng thái |
+|---|---|---|
+| [shelter_stone_gospel](shelter_stone_gospel/CLAUDE.md) | Christian gospel blues (kho bài Suno, album 60–80 phút) | đang dựng, kênh chính |
+| [lamplight_gospel](lamplight_gospel/CLAUDE.md) | Christian Gospel Blues / Southern Gospel Soul | **dừng** (CEO 2026-09-28: định hướng fail); giữ file và video đã đăng, không làm album mới; file kênh theo quy trình cũ |

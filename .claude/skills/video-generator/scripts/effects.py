@@ -94,10 +94,7 @@ def add_scrim(plates, cfg):
     plates.burn(rgb, al, x, y)
 
 
-def add_logo(plates, cfg):
-    lc = cfg["logo"]
-    if not lc["enabled"]:
-        return
+def stamp(lc):
     img = Image.open(lc["path"]).convert("RGBA")
     w = lc["width_px"]
     img = img.resize((w, round(img.height * w / img.width)), Image.LANCZOS)
@@ -107,8 +104,19 @@ def add_logo(plates, cfg):
         img = brand.drop_shadow(img, radius=sh["radius"], spread=sh["spread"], offset=(0, round(5 * PX_SCALE)))
         pad = img.info["pad"]
     x, y = corner_xy(lc["corner"], w, img.height - 2 * pad, lc["margin_px"])
+    return img, x - pad, y - pad
+
+
+def add_stamp(plates, lc):
+    if not lc["enabled"]:
+        return
+    img, x, y = stamp(lc)
     rgb, al = to_layers(img)
-    plates.burn(rgb, al, x - pad, y - pad, lc["opacity"])
+    plates.burn(rgb, al, x, y, lc["opacity"])
+
+
+def add_logo(plates, cfg):
+    add_stamp(plates, cfg["logo"])
 
 
 class Lantern:
@@ -158,6 +166,25 @@ def _flake(r):
     return np.clip(arm * 0.85 + _dot(r, 3.0) * 0.6, 0, 1)
 
 
+def _star(r):
+    s = r * 2 + 1
+    yy, xx = np.mgrid[-r:r + 1, -r:r + 1].astype(np.float32)
+    d = np.hypot(xx, yy) / max(r, 1)
+    core = np.clip(1 - d, 0, 1) ** 3.0
+    w = max(0.6, r * 0.06)
+    rays = np.exp(-(yy / w) ** 2) * np.clip(1 - np.abs(xx) / (r + 1e-6), 0, 1) ** 1.8 \
+        + np.exp(-(xx / w) ** 2) * np.clip(1 - np.abs(yy) / (r + 1e-6), 0, 1) ** 1.8
+    out = np.clip(core + 0.9 * rays, 0, 1)
+    return out.reshape(s, s)
+
+
+def _bokeh(r):
+    yy, xx = np.mgrid[-r:r + 1, -r:r + 1].astype(np.float32)
+    d = np.hypot(xx, yy) / max(r, 1)
+    disc = np.clip((1 - d) / 0.12, 0, 1)
+    return (disc * (0.55 + 0.45 * d ** 3)).astype(np.float32)
+
+
 class Particles:
 
     def __init__(self, c, loop):
@@ -168,7 +195,7 @@ class Particles:
         swmin, swmax = c["sway_px"]
         self.m = int(rmax + swmax + 8)
         self.FW, self.FH = W + 2 * self.m, H + 2 * self.m
-        make = _flake if c["shape"] == "flake" else _dot
+        make = {"flake": _flake, "star": _star, "bokeh": _bokeh}.get(c["shape"], _dot)
         self.spr = {r: make(r) for r in range(max(1, int(rmin)), int(rmax) + 1)}
         self.tint = np.array(c["color"], np.float32) / 255.0
 
@@ -203,7 +230,7 @@ class Particles:
             a["tn"][i] = cycles(rnd.uniform(*c["twinkle_seconds"]), loop)
             a["tph"][i] = rnd.random()
         self.a = a
-        L = math.hypot(self.dx, self.dy)
+        L = math.hypot(self.dx, self.dy) or 1.0
         self.px, self.py = -self.dy / L, self.dx / L
 
     def positions(self, t):
@@ -296,6 +323,13 @@ class Subscribe:
         blit(frame, rgb, al, self.x, y, o)
 
 
+def make_scene(image_path, cfg, bars=True):
+    if cfg.get("cinema", {}).get("enabled"):
+        import cinema
+        return cinema.CinemaScene(image_path, cfg, bars=bars)
+    return Scene(image_path, cfg, bars=bars)
+
+
 class Scene:
     def __init__(self, image_path, cfg, bars=True):
         loop = cfg["loop_seconds"]
@@ -306,6 +340,7 @@ class Scene:
         if bars and cfg["bars"]["enabled"] and cfg["bars"]["scrim"] > 0:
             add_scrim(self.plates, cfg)
         add_logo(self.plates, cfg)
+        add_stamp(self.plates, cfg["badge"])
         self.layers = []
         if cfg["lantern"]["enabled"]:
             self.layers.append(Lantern(cfg["lantern"], loop))

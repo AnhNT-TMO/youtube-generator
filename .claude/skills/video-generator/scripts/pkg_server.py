@@ -37,80 +37,129 @@ def fmt(s):
     return f"{s // 3600}:{s // 60 % 60:02d}:{s % 60:02d}" if s >= 3600 else f"{s // 60}:{s % 60:02d}"
 
 
-README = """{title}
-Gói upload YouTube · {slug} · tạo {created}
+def human(n):
+    return f"{n / 1e9:.2f} GB" if n >= 1e9 else f"{n / 1e6:.1f} MB"
 
-Trong gói
-  {video_name:<22} video chính ({width}×{height}, {duration}, {size_gb:.2f} GB)
-  thumbnail.jpg          ảnh thumbnail để upload lên YouTube (≤ 2 MB, {jpg_w}×{jpg_h})
-  {full_name:<22} ảnh thumbnail gốc độ phân giải đầy đủ ({full_w}×{full_h}), để lưu trữ / community post
-  youtube.md             bản đầy đủ: title + phương án khác, description, tags, pinned comment, cài đặt Studio
-  upload/title.txt       dán vào ô Title
-  upload/description.txt dán vào ô Description (đã có TRACKLIST = chapters)
-  upload/tags.txt        dán vào ô Tags
-  upload/pinned_comment.txt  đăng làm comment đầu rồi ghim
-  manifest.json          kích thước + sha256 từng file, thông số video
 
-Các bước trong YouTube Studio
-  1. Upload {video_name}, dán title / description / tags từ upload/.
-  2. Thumbnail: thumbnail.jpg.
-  3. Altered or synthetic content: Yes. Không ghi dòng AI trong description.
-  4. Các mục còn lại: bảng "Cài đặt khi upload" trong youtube.md.
-  5. Sau khi đăng: đăng + ghim pinned comment, điền Video URL vào youtube.md.
-{warn}"""
+STEPS = {
+    "album": ["Upload {video}, dán title / description / tags từ {up}.",
+              "Thumbnail: {thumb}.",
+              "Altered or synthetic content: Yes. Không ghi dòng AI trong description.",
+              "Các mục còn lại: bảng \"Cài đặt khi upload\" trong {ytmd}.",
+              "Sau khi đăng: đăng + ghim pinned comment, điền Video URL vào youtube.md."],
+    "short": ["Upload {video} (dọc, ≤ 3 phút: YouTube tự xếp vào Shorts), dán title / description / tags từ {up}.",
+              "Altered or synthetic content: Yes. Audience: No, it's not made for kids.",
+              "Related video: video album vừa upload ở bước 1.",
+              "Các mục còn lại: mục \"YouTube Studio\" trong {ytmd}.",
+              "Sau khi đăng: đăng + ghim pinned comment."],
+}
+
+
+def part_lines(n, p, part, files):
+    pre = p["sub"] + "/" if p["sub"] else ""
+    th, v = part.get("thumbnail") or {}, part["video"]
+    full = th.get("full_file", "thumbnail_full.png")
+    what = "Short dọc" if p["key"] == "short" else "chính"
+    rows = [(pre + p["name"], f"video {what} ({v['width']}×{v['height']}, {fmt(v['duration'])}, "
+                              f"{human(files[pre + p['name']]['size'])})"),
+            (pre + "thumbnail.jpg", f"ảnh thumbnail để upload lên YouTube (≤ 2 MB, {th.get('jpg_width')}×{th.get('jpg_height')})"),
+            (pre + full, f"ảnh gốc độ phân giải đầy đủ ({th.get('width')}×{th.get('height')}), để lưu trữ / community post"),
+            (pre + "youtube.md", "bản đầy đủ: title + phương án khác, description, tags, pinned comment, cài đặt Studio"),
+            (pre + "upload/title.txt", "dán vào ô Title"),
+            (pre + "upload/description.txt", "dán vào ô Description"
+             + (" (đã có TRACKLIST = chapters)" if p["key"] == "album" else "")),
+            (pre + "upload/tags.txt", "dán vào ô Tags"),
+            (pre + "upload/pinned_comment.txt", "đăng làm comment đầu rồi ghim")]
+    head = {"album": "ALBUM", "short": "SHORT (thư mục short/, đăng sau album)"}.get(p["key"], "VIDEO")
+    out = [f"{n}. {head}: {part.get('title') or p['name']}"]
+    out += [f"  {a:<34} {b}" for a, b in rows]
+    out.append("  Các bước trong YouTube Studio")
+    out += [f"    {i}. " + s.format(video=pre + p["name"], up=pre + "upload/", thumb=pre + "thumbnail.jpg",
+                                     ytmd=pre + "youtube.md")
+            for i, s in enumerate(STEPS["short" if p["key"] == "short" else "album"], 1)]
+    if p["key"] == "short" and "youtu" not in open(os.path.join(p["dir"], "upload", "description.txt")).read():
+        out.append("  ⚠ description của Short chưa có link album: sau khi upload album, dán Video URL của album vào "
+                   "description + pinned comment (dòng link album).")
+    return out
+
+
+def readme(spec, parts, files, warnings, created):
+    main = spec["parts"][0]
+    lines = [parts[main["key"]].get("title") or spec["name"],
+             f"Gói upload YouTube · {spec['name']} · tạo {created}"]
+    if spec["kind"] == "album":
+        short = next((p for p in spec["parts"] if p["key"] == "short"), None)
+        lines.append("Một zip cho cả gói: video album (thư mục này) + Short (short/)." if short else
+                     "Gói này CHỈ có video album (--no-short): Short không nằm trong zip này.")
+        lines += ["", "THỨ TỰ UPLOAD", f"  1. Album: {main['name']}."]
+        if short:
+            lines.append(f"  2. Short: short/{short['name']}, sau album; Related video = album ở bước 1.")
+        lines.append("  AI: Altered or synthetic content = Yes cho " + ("cả hai video" if short else "video")
+                     + "; không ghi dòng AI trong description.")
+        if spec.get("order"):
+            lines.append(f"  Theo channel/{spec['channel']}/publish.md:")
+            lines += [f"    {x}" for x in spec["order"]]
+    for n, p in enumerate(spec["parts"], 1):
+        lines += [""] + part_lines(n, p, parts[p["key"]], files)
+    lines += ["", f"  {'manifest.json':<34} kích thước + sha256 từng file, thông số video"]
+    lines += [f"⚠ {w}" for w in warnings]
+    return "\n".join(lines) + "\n"
 
 
 def cmd_build(a):
-    pkg, video, zip_out = a[0], a[1], a[3]
-    audio = next(iter(sorted(glob.glob(os.path.join(a[2], "audio.*")))), None)
-    name = a[a.index("--video-name") + 1]
-    meta_f = os.path.join(pkg, "meta.json")
-    meta = json.load(open(meta_f)) if os.path.exists(meta_f) else {}
-    dst = os.path.join(pkg, name)
-    if os.path.exists(dst):
-        os.remove(dst)
-    os.link(video, dst)
-    v = probe(dst)
-    warnings = list(meta.get("warnings", []))
-    ew, eh = (int(x) for x in (a[a.index("--expect") + 1] if "--expect" in a else "3840x2160").split("x"))
-    if (v["width"], v["height"]) != (ew, eh):
-        warnings.append(f"video {v['width']}×{v['height']}, không phải {ew}×{eh}")
-    if audio and "--no-audio-check" not in a:
-        ad = probe(audio)["duration"]
-        if abs(ad - v["duration"]) > 1.5:
-            warnings.append(f"video dài {fmt(v['duration'])} ≠ audio đã ghép {fmt(ad)}")
+    spec = json.load(open(os.path.expanduser(a[0])))
+    top, zip_out = os.path.expanduser(spec["pkg"]), os.path.expanduser(spec["zip"])
+    parts, warnings, created = {}, [], None
+    for p in spec["parts"]:
+        p["dir"] = os.path.join(top, p["sub"])
+        meta_f = os.path.join(p["dir"], "meta.json")
+        meta = json.load(open(meta_f)) if os.path.exists(meta_f) else {}
+        if os.path.exists(meta_f):
+            os.remove(meta_f)
+        created = created or meta.get("created")
+        dst = os.path.join(p["dir"], p["name"])
+        if os.path.exists(dst):
+            os.remove(dst)
+        os.link(os.path.expanduser(p["video"]), dst)
+        v = probe(dst)
+        w = list(meta.get("warnings", [])) + p.get("warnings", [])
+        ew, eh = (int(x) for x in p["expect"].split("x"))
+        if (v["width"], v["height"]) != (ew, eh):
+            w.append(f"video {v['width']}×{v['height']}, không phải {ew}×{eh}")
+        audio = next(iter(sorted(glob.glob(os.path.join(os.path.expanduser(p["audio_dir"]), "audio.*")))),
+                     None) if p.get("audio_dir") else None
+        if audio:
+            ad = probe(audio)["duration"]
+            if abs(ad - v["duration"]) > 1.5:
+                w.append(f"video dài {fmt(v['duration'])} ≠ audio đã ghép {fmt(ad)}")
+        warnings += [(f"{p['key']}: " if len(spec["parts"]) > 1 else "") + x for x in w]
+        parts[p["key"]] = {"title": meta.get("title"), "source_audio": meta.get("source_audio"),
+                           "video": dict(v, file=os.path.join(p["sub"], p["name"])), "thumbnail": meta.get("thumbnail"),
+                           "youtube": meta.get("youtube"), "warnings": w}
     files = {}
-    for root, _, names in os.walk(pkg):
+    for root, _, names in os.walk(top):
         for n in sorted(names):
             p = os.path.join(root, n)
-            if p == meta_f:
-                continue
-            files[os.path.relpath(p, pkg)] = {"size": os.path.getsize(p), "sha256": sha256(p)}
-    manifest = {"slug": os.path.basename(pkg), "created": meta.get("created"), "title": meta.get("title"),
-                "channel": meta.get("channel"), "source_audio": meta.get("source_audio"),
-                "video": dict(v, file=name), "thumbnail": meta.get("thumbnail"), "youtube": meta.get("youtube"),
-                "files": files, "warnings": warnings}
-    json.dump(manifest, open(os.path.join(pkg, "manifest.json"), "w"), indent=1, ensure_ascii=False)
-    th = meta.get("thumbnail") or {}
-    open(os.path.join(pkg, "README.txt"), "w").write(README.format(
-        title=meta.get("title") or manifest["slug"], slug=manifest["slug"], created=meta.get("created"),
-        video_name=name, width=v["width"], height=v["height"], duration=fmt(v["duration"]),
-        size_gb=files[name]["size"] / 1e9, jpg_w=th.get("jpg_width"), jpg_h=th.get("jpg_height"),
-        full_name=th.get("full_file", "thumbnail_full.png"), full_w=th.get("width"), full_h=th.get("height"),
-        warn="".join(f"\n⚠ {w}" for w in warnings)))
-    if os.path.exists(meta_f):
-        os.remove(meta_f)
+            files[os.path.relpath(p, top)] = {"size": os.path.getsize(p), "sha256": sha256(p)}
+    manifest = {"name": spec["name"], "created": created, "channel": spec["channel"], "short": spec.get("short"),
+                "parts": parts, "files": files, "warnings": warnings}
+    json.dump(manifest, open(os.path.join(top, "manifest.json"), "w"), indent=1, ensure_ascii=False)
+    text = readme(spec, parts, files, warnings, created)
+    open(os.path.join(top, "README.txt"), "w").write(text)
 
-    top = os.path.basename(pkg)
+    name = os.path.basename(top)
     tmp = zip_out + ".part"
     with zipfile.ZipFile(tmp, "w", zipfile.ZIP_STORED, allowZip64=True) as z:
-        for root, _, names in os.walk(pkg):
+        for root, dirs, names in os.walk(top):
+            dirs.sort()
             for n in sorted(names):
                 p = os.path.join(root, n)
-                z.write(p, os.path.join(top, os.path.relpath(p, pkg)))
+                z.write(p, os.path.join(name, os.path.relpath(p, top)))
     os.replace(tmp, zip_out)
-    print(json.dumps({"zip": zip_out, "size": os.path.getsize(zip_out), "sha256": sha256(zip_out),
-                      "video": v, "files": files, "warnings": warnings}, ensure_ascii=False))
+    with zipfile.ZipFile(zip_out) as z:
+        entries = [[i.filename, i.file_size] for i in z.infolist()]
+    print(json.dumps({"zip": zip_out, "size": os.path.getsize(zip_out), "sha256": sha256(zip_out), "parts": parts,
+                      "files": files, "entries": entries, "warnings": warnings, "readme": text}, ensure_ascii=False))
 
 
 class _Slice:

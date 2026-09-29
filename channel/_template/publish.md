@@ -1,6 +1,6 @@
 # Đăng YouTube: <Channel Name>
 
-Luật đóng gói YouTube riêng của kênh (skill `youtube-publish` là quy trình). `publish.py check` đọc hai khối ``` dưới
+Luật đóng gói YouTube riêng của kênh (skill `upload-youtube-publish` là quy trình, `video-shorts` cho Short). `publish.py check` đọc hai khối ``` dưới
 *Description YouTube mặc định* và *Tags YouTube mặc định* (giữ nguyên tên mục).
 
 ## Description YouTube mặc định
@@ -27,7 +27,6 @@ TRACKLIST
 
 **Album:** `<Title Track> <1 emoji> <Genre phrase> for <Use-case> & <Feeling> | Full Album`
 
-**Single:** `<Song Title> <1 emoji> <Genre phrase> for <Use-case> | <Channel Name>`
 
 ## ABOUT THIS VIDEO
 
@@ -50,7 +49,7 @@ Emoji của kênh: <bảng emoji>
 
 ## Shorts
 
-<skill youtube-shorts đọc mục này>
+<skill video-shorts đọc mục này>
 
 **Title** (≤ 60 ký tự):
 
@@ -62,19 +61,19 @@ Emoji của kênh: <bảng emoji>
 
 ```
 <1 câu cho người nghe>
-🎧 <Full album | Full song>: <related video URL>
+🎧 Full album: <related video URL>
 💬 <1 câu mời comment gắn với lời bài>
 
 <3 hashtag đúng chủ đề>
 ```
 
 **Tags:** tags mặc định + tên bài + tên album. **Pinned comment:** <mẫu, có link video đích>.
-**Chữ trên video:** `hook_text` <cách viết> · `cta_text` Short → album <…> / Short → single <…>.
+**Chữ trên video:** `hook_text` <cách viết> · `cta_text` Short → album <…>.
 
 ## Giờ đăng
 
-<giờ ET cho gói một album (CLAUDE.md §3): album → single → Short, không hai video cùng giờ; Shorts buổi chiều tối>
+<giờ ET cho gói một album (CLAUDE.md §3): album → Short, không hai video cùng giờ; Shorts buổi chiều tối>
 
 ## Ghi chú kênh
 
-- Playlists trong Studio: `<Channel Name> · Full Albums`, `<Channel Name> · Songs`.
+- Playlists trong Studio: `<Channel Name> · Full Albums`, `<Channel Name> · Shorts`.

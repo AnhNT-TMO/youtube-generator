@@ -14,9 +14,10 @@ Trước khi phát triển một dòng nhạc, nhân viên mới phải nộp b�
 3. **Đối tượng nghe**, chia theo khu vực địa lý.
 4. **10 kênh tiêu biểu**: view/tháng, từ khóa, chủ đề, **giờ đăng video**, phân tích hình ảnh (thumbnail, video, hiệu ứng).
 
-**Áp dụng cho xưởng:** đây là khung để điền `channel/<ch>/channel.md` (thể loại, persona, khán giả) và `rules.md` (từ vựng research)
-khi mở kênh mới. Phần 10 kênh tiêu biểu làm bằng youtube-music-analyzer (mỗi kênh/video một lần analyze); giờ đăng lấy từ
-ngày giờ đăng các video của họ + Google Trends (file 06 §2). Nhớ copy guard: học vibe, không chép tên, chữ, hình (CLAUDE.md §1).
+**Áp dụng cho xưởng:** đây là khung để điền `channel/<ch>/channel.md` (thể loại, persona, khán giả) và `prompt_suno.md` (house sound)
+khi mở kênh mới. Phần 10 kênh tiêu biểu làm bằng rnd-youtube-api (`yt.py channel/videos/fast`); giờ đăng lấy từ
+ngày giờ đăng các video của họ + Google Trends (file 06 §2). Nhớ copy guard: không lấy tên, logo, branding, hình của kênh khác; câu cầu nguyện phổ biến trong title/thumbnail được dùng nguyên văn
+(kho câu R&D, CEO 2026-09-28).
 
 ## 2. Nhạc
 
@@ -45,11 +46,13 @@ cập nhật nhạc mới thường xuyên · **không dùng một bản mix cho
 **Tiêu chuẩn cập nhật kho:** phân loại bài hay nhất làm chủ lực · giữ bài hay và tạm được để đa dạng, loại bài dở ·
 theo dõi album mới · đề xuất mua bài từ nền tảng bán nhạc.
 
-**Đối chiếu với xưởng:** các nguyên tắc này đã có (và chặt hơn) trong CLAUDE.md §6: bài 1 là bài mới, mạnh nhất, là title video;
-15 giây đầu có "chữ ký"; arc energy lên tới cao trào rồi hạ; chuyển bài đa dạng; một Style prompt, một nghệ sĩ cho cả album.
-"Không quá nhiều vibe trên một kênh" tương ứng house sound trong `rules.md`; album khác vibe phải khai báo `experiment`.
-"Không dùng một bản mix cho nhiều video" tương ứng giới hạn tái sử dụng library (CLAUDE.md §7).
-Khác duy nhất: xưởng chọn clip bằng số đo (verification-audio), không nghe để chấm (CLAUDE.md §5).
+**Đối chiếu với xưởng:** các nguyên tắc này đã có trong CLAUDE.md §3, §6: bài 1 hợp chủ đề album nhất và chưa từng mở album nào;
+video vào giọng ngay (15 giây đầu có "chữ ký"); loại bài xen kẽ theo `album_rules.md` → `pattern`; một prompt Suno của kênh
+(`prompt_suno.md`) cho mọi bài, nên cả album là một nghệ sĩ.
+"Không quá nhiều vibe trên một kênh" tương ứng house sound trong `prompt_suno.md`.
+"Không dùng một bản mix cho nhiều video" tương ứng luật chọn bài `album_rules.md` (thứ tự không trùng, bài mới tối thiểu; CLAUDE.md §7).
+Khác: xưởng không nghe để chấm (CLAUDE.md §5), bài hay hay dở do retention thật; không cắt ghép trong bài: nối bằng crossfade nhẹ,
+chỉ bỏ im lặng tuyệt đối ở hai đầu file (`album_rules.md`, audio-album-assembly).
 
 ## 3. Hình ảnh
 

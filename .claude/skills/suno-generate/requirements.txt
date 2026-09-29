@@ -1,6 +1,0 @@
-# Python 3.12. Cài (từ gốc repo): SK=.claude/skills/suno-generate; python3 -m venv $SK/.venv && $SK/.venv/bin/pip install -r $SK/requirements.txt
-# Đọc generation.yaml; đo thời lượng file dùng module wave (stdlib) hoặc ffprobe (brew install ffmpeg).
-# numpy + music21: pd_source.py dựng nguồn Cover từ bản nhạc public domain.
-pyyaml
-numpy
-music21

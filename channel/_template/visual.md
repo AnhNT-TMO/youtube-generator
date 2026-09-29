@@ -30,7 +30,7 @@ AVOID: <danh sách tránh>
 ## Ảnh dọc Shorts
 
 <mỗi Short một ảnh dọc 9:16 mới (không crop ảnh ngang), không chữ trên ảnh; cảnh lấy từ đoạn lời của Short; kiểu ảnh theo sheet
-Shorts của R&D (`trend.py shorts`); bố cục điện thoại khớp `video.json` → `short`: mặt/chủ thể ở ~18–52 % chiều cao, 10 % trên tối,
+Shorts của R&D (`yt.py fast --kind short` + `yt.py sheet --vertical`); bố cục điện thoại khớp `video.json` → `short`: mặt/chủ thể ở ~18–52 % chiều cao, 10 % trên tối,
 dưới 56 % yên và tối (lời bài, spectrum, title YouTube), 12 % mép phải đơn giản>
 
 ## Prompt ảnh dọc Shorts (ChatGPT)
@@ -43,11 +43,11 @@ dưới 56 % yên và tối (lời bài, spectrum, title YouTube), 12 % mép ph�
 
 ## Chữ chính trên ảnh (`title_text`)
 
-<album: chữ gì là chữ chính (tên bài 1, hay một câu/lời cầu từ kho `experiments/phrases.yaml`) · single: tên bài · Short: không chữ>
+<album: chữ gì là chữ chính (thường một lời cầu xin lấy từ kho câu R&D `research/phrase-bank/`, nguyên văn hoặc chuyển thể, id ghi ở `album.md` → `brief.phrase_bank`) · Short: không chữ>
 
 ## Dòng thời lượng (chỉ ảnh album)
 
-<tùy chọn: một dòng "1 HOUR …" dưới dòng cố định để ảnh album khác ảnh single; kiểu chữ nằm trong CORE, chữ chọn theo vibe ảnh,
+<tùy chọn: một dòng "1 HOUR …" (`album.md` → `brief.bar_line`); kiểu chữ nằm trong CORE, chữ chọn theo vibe ảnh,
 ghi ở `duration_line:` + `Duration line: "…"` của THIS IMAGE. Kênh không dùng thì xóa mục này.>
 
 ## Biến thể hình ảnh (chọn theo vibe bài)

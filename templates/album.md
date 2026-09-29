@@ -1,38 +1,33 @@
-# Album NNN — Title
+---
+album: <NNN-slug>
+channel: <ch>
+brief:
+  source: <ceo|rnd>
+  topic: "<topic / trend>"
+  story: "<who, what they carry, what they ask God for>"
+  phrase_bank: ["<bank entry id the title / thumbnail text adapts, if any>"]
+  title_direction: "<title voice / the plea>"
+  thumbnail_text: "<main text on the image>"
+  bar_line: "<bottom bar line, e.g. 1 HOUR OF …>"
+  thumbnail_concept: "<scene, framing, light, palette>"
+  description_angle: "<what ABOUT THIS VIDEO says; only if the channel template has that slot>"
+  short: {song: <slug>, why: "<why this song>"}
+  version: "<packaging version being tested, one axis at a time>"
+  experiment: null
+  target: {views_48h: null, views_7d: null}
+tracklist:
+  - <song-slug>
+  - <song-slug>
+waivers: {}
+---
 
-- **Trạng thái:**
-- **Thể loại:**
-- **Vocal persona:** · **Band:** · **Style prompt:**
-- **Nguồn cảm hứng (research):**
-- **Loại album:** mới hoàn toàn / ghép từ library (+ N bài mới)
+# <Album working title>
 
-## Concept
+Album = PM + CEO lên kế hoạch trực tiếp (không có plan.yaml). PM chọn bài từ kho `channel/<ch>/songs/` theo
+`channel/<ch>/album_rules.md`, ghi `tracklist` (thứ tự = thứ tự phát), rồi `album.py check` → `album.py build`
+(sinh `tracks/NN-<slug>.md` cho audio-album-assembly và upload-youtube-publish). Short của album nằm trong thư mục này,
+`short/` (video-shorts `shorts.py new <album>`; bài = `brief.short.song`).
 
-## Khác biệt so với nguồn tham khảo
+## Ghi chú của PM
 
-## Style prompt
-
-```
-```
-
-## Tracklist & energy curve
-
-| # | Title | id | Emotion | Energy | Role | Intro | Mới / tái sử dụng |
-|---|---|---|---|---|---|---|---|
-| 01 | | | | | anchor | | mới |
-
-## Title track & 10–15 giây đầu (CLAUDE.md mục 3)
-
-- [ ] Title track là bản tốt nhất trong nhiều candidate
-- [ ] 10–15 giây đầu của video: có giọng/hook/motif đặc trưng, không trống, không nhỏ hơn thân bài quá nhiều
-- [ ] Cách mở khác các album trước của kênh
-
-## Kiểm tra luật ghép (CLAUDE.md mục 7.2)
-
-- [ ] Đã kiểm tra library trước khi generate bài mới — số bài mới: __ / tổng: __
-- [ ] Title track là bài mới
-- [ ] Cùng persona + band
-- [ ] Energy liền kề lệch ≤ 2, BPM/key tương thích
-- [ ] Không 2 bài liền nhau cùng intro_type
-- [ ] Không trùng hook_phrase / imagery chính
-- [ ] Freshness OK
+- Vì sao chủ đề này, vì sao bài 1 này, bài nào để dành cho album sau.

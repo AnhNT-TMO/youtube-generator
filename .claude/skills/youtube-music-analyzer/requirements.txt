@@ -1,7 +1,0 @@
-yt-dlp[default]
-librosa
-soundfile
-numpy
-scipy
-matplotlib
-pyyaml

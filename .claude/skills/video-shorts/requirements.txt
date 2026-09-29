@@ -1,0 +1,5 @@
+# Python 3.12. Cài (từ gốc repo), chỉ cần cho `shorts.py new/spec` (đọc YAML của album.md + song card):
+#   python3.12 -m venv .claude/skills/video-shorts/.venv
+#   .claude/skills/video-shorts/.venv/bin/pip install -r .claude/skills/video-shorts/requirements.txt
+# Cần thêm ffprobe trong PATH (check đọc kích thước ảnh).
+pyyaml

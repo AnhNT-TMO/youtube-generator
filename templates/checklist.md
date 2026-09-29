@@ -1,33 +1,29 @@
-# Checklist album <NNN-slug> · <Title Track>
+# Checklist album <NNN-slug> · <Album title>
 
-<!-- PM tạo khi giao số album (production/<ch>/checklists/<NNN-slug>.md); tick [x] + ghi kết quả 1 dòng sau mỗi việc.
-     Việc không làm: [-] + lý do. Chi tiết nằm ở file được trỏ tới, không chép vào đây. -->
+<!-- `album.py new` tạo file này ở production/<ch>/checklists/<NNN-slug>.md. PM tick [x] + ghi kết quả 1 dòng sau mỗi việc;
+     việc không làm: [-] + lý do. Chi tiết nằm ở file được trỏ tới, không chép vào đây. -->
 
-**Brief:** <một câu> · **Chủ đề:** <topic> · **Nguồn:** trend | CEO · **Mục tiêu:** <kỳ vọng view>
+**Brief:** <một câu> · **Chủ đề:** <topic> · **Nguồn:** CEO | R&D · **Kho câu:** <id → câu của mình> · **Mục tiêu:** 48 h <n> · 7 d <n>
 
 ## Chuẩn bị
-- [ ] 1. R&D: trend + chủ đề — <báo cáo, trạng thái chủ đề>
-- [ ] 2. R&D: reference set (3–5 video) — <research/set-…: tempo, giọng, mật độ lời>
-- [ ] 3. PM: brief + quyết định (nhạc, title, description, thumbnail + chữ trên ảnh, Short, version) — <tóm tắt>
-- [ ] 4. Idea — <ideas/NNN-slug, validate OK>
-- [ ] 5. Plan + lời — <số bài, phút dự kiến, credits>
-- [ ] 6. PM duyệt plan — <ngày, ghi chú>
+- [ ] 1. Kho bài đủ (`album.py pool`: đủ mỗi loại cho 60–80 phút, bài 1 có đoạn short) — <spoken / sung, bài mới>
+- [ ] 2. album.md: brief + tracklist (PM + CEO) — <chủ đề, bài 1, bài cho Short, câu title / thumbnail>
+- [ ] 3. `album.py check` + `build` — <số bài, phút ước lượng, waiver nếu có>
 
 ## Sản xuất
-- [ ] 7. Tạo nhạc Suno — <lượt, credits dùng / dự kiến>
-- [ ] 8. Chọn bản (verify + accept) — <số bài đạt, bài dùng best_available>
-- [ ] 9. Ghép master — <thời lượng, cảnh báo nối bài>
-- [ ] 10. Thumbnail 4K + loop — <concept đã theo, bản chọn>
-- [ ] 11. youtube.md (title, description, tags) — <title>
-- [ ] 12. Video full + zip S3 — <S3 URI>
-- [ ] 13. Single (bài điểm nhấn) — <thư mục, S3>
-- [ ] 14. Short (điệp khúc bài 1 → album) — <thư mục, S3>
+- [ ] 4. Master (audio-album-assembly) — <thời lượng, cảnh báo>
+- [ ] 5. Thumbnail 4K + jpg (thumbnail-prompt) — <chữ trên ảnh, bản chọn, số vòng vẽ>
+- [ ] 6. Loop (video.py loop / qa) — <variant, qa>
+- [ ] 7. youtube.md (upload-youtube-publish, `publish.py check`) — <title>
+- [ ] 8. Video full (video.py album) — <độ dài = master>
+- [ ] 9. Short (video-shorts: short.json, ảnh dọc, video, youtube.md) — <albums/NNN-slug/short, bài>
+- [ ] 9b. Một zip S3 cho album + Short (video.py package <album>) — <S3 URI, checks>
 
 ## Đăng + kết quả
-- [ ] 15. CEO upload cùng ngày (album → single → Short) — <ngày, Video URL đã điền>
-- [ ] 16. Dịch title + description — <ngôn ngữ>
-- [ ] 17. Kết quả 48 h — <view, x so với trung vị, retention 30 s>
-- [ ] 18. Kết quả 7 ngày + bài học — <kết luận, điều PM đổi trong direction.md>
+- [ ] 10. CEO upload cùng ngày (album → Short) — <ngày, Video URL đã điền, Related video>
+- [ ] 11. Dịch title + description (upload-youtube-translate) — <ngôn ngữ>
+- [ ] 12. Kết quả 48 h — <view, x so với trung vị, ret 30 s>
+- [ ] 13. Kết quả 7 ngày + bài học — <kết luận, điều PM đổi trong direction.md>
 
 ## Vướng / quyết định của PM
 - <ngày · việc · đã quyết gì · vì sao>

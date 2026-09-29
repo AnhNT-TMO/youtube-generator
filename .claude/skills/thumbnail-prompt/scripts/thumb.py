@@ -5,14 +5,21 @@ USAGE = """thumbnail-prompt helper (trên Mac chỉ cần python3 + ffmpeg/ffpro
   fit   <dir> <ảnh ChatGPT> [--x 0.5 --y 0.5] [--no-upscale]
                                       cắt về 16:9 quanh điểm (x, y) ở độ phân giải gốc → GPU server upscale SeedVR2 7B
                                       → <dir>/thumbnail.png 3840×2160 (bản 4K giữ trên máy) + thumbnail.jpg ≤ 2 MB (YouTube)
-                                      <dir> là Short (shorts/NNN-slug): cắt 9:16 → 2160×3840 (--no-upscale: 1080×1920)
+                                      <dir> là Short (albums/NNN-slug/short, cũ: shorts/NNN-slug): cắt 9:16 → 2160×3840
+                                      (--no-upscale: 1080×1920)
                                       --no-upscale: Lanczos 1920×1080 ngay trên Mac (khi server không kết nối được)
   check <dir> [--image <ảnh>]         kích thước, dung lượng, 3 vùng bị phủ trong video, điểm sáng (lantern), prompt
+  variant <dir> [--seed N] [--set axis=name ...] [--title "<chữ>"] [--dry-run]
+                                      chọn 1 option mỗi trục từ channel/<ch>/thumb_pool.json, khác các ảnh gần nhất
+                                      → <dir>/thumb-variant.json + in khối VARIANT để dán vào THIS IMAGE
+  variants <channel dir>              bảng các tổ hợp đã dùng (thư mục, ngày, từng trục)
   upscale-setup                       một lần / khi hỏng: cài SeedVR2 + model 7B (~17 GB) vào ~/thumbnail-prompt trên server
 
-Chạy từ gốc repo. <dir> = channel/<ch>/{albums,ideas,singles,shorts}/NNN-slug
+Chạy từ gốc repo. <dir> = channel/<ch>/{albums,ideas,singles}/NNN-slug hoặc Short channel/<ch>/albums/NNN-slug/short
+(bố cục cũ channel/<ch>/shorts/NNN-slug vẫn nhận là Short)
 """
 import argparse
+import json
 import os
 import re
 import shlex
@@ -22,12 +29,19 @@ import sys
 import time
 from pathlib import Path
 
+import variant
+
 HERE = Path(__file__).resolve().parent
 W, H = 1920, 1080
 UW, UH = 3840, 2160
 ZONES = {
     "logo (trên phải)": (0.84, 0.00, 1.00, 0.27),
     "subscribe (dưới phải)": (0.72, 0.86, 1.00, 1.00),
+    "sóng nhạc (dưới giữa)": (0.28, 0.84, 0.72, 1.00),
+}
+ZONES_LEFT = {
+    "logo (trên trái)": (0.00, 0.00, 0.16, 0.27),
+    "subscribe (dưới trái)": (0.00, 0.86, 0.28, 1.00),
     "sóng nhạc (dưới giữa)": (0.28, 0.84, 0.72, 1.00),
 }
 ZONES_SHORT = {
@@ -117,7 +131,8 @@ def renv():
     return env
 
 
-LIMIT = ("S=~/.config/systemd/user/youtube.slice; [ -f $S ] || { mkdir -p ${S%/*} && printf \"[Unit]\\nDescription="
+LIMIT = ("G=~/youtube-guard/guard.py; if [ -f $G ]; then systemctl --user is-active --quiet youtube-guard || systemd-run --user --unit=youtube-guard --collect -p MemoryMax=256M python3 $G >/dev/null 2>&1; else echo \"WARNING: youtube-guard not installed on the server (pm-production/scripts/server_guard/guard.sh install)\" >&2; fi; "
+         "S=~/.config/systemd/user/youtube.slice; [ -f $S ] || { mkdir -p ${S%/*} && printf \"[Unit]\\nDescription="
          "youtube project: every skill shares this cap (CLAUDE.md)\\n[Slice]\\nCPUQuota=%s%%\\nMemoryHigh=60%%\\n"
          "MemoryMax=70%%\\n\" $(( $(nproc) * 60 )) > $S && systemctl --user daemon-reload; }; "
          "systemd-run --user --scope --quiet --collect --slice=youtube.slice -- bash -c ")
@@ -187,7 +202,8 @@ def youtube_jpg(png, jpg):
 
 
 def is_short(d):
-    return Path(d).resolve().parent.name == "shorts"
+    d = Path(d).resolve()
+    return d.parent.name == "shorts" or (d.name == "short" and d.parent.parent.name == "albums")
 
 
 def frame_of(d):
@@ -277,8 +293,25 @@ def bright_spots(path, n=3):
     return [((x + 0.5) / CW, (y + 0.5) / CH, s) for x, y, s in picks]
 
 
+def chosen_variant(d):
+    f = Path(d) / variant.OUT
+    try:
+        return json.loads(f.read_text()) if f.exists() else None
+    except ValueError:
+        return None
+
+
+def cmd_variant(a):
+    variant.choose(a.dir, seed=a.seed, sets=a.set, title=a.title, dry_run=a.dry_run)
+
+
+def cmd_variants(a):
+    variant.table(a.channel)
+
+
 def cmd_check(a):
     d = Path(a.dir)
+    var = chosen_variant(d)
     img = Path(a.image) if a.image else next((d / f for f in ("thumbnail.png",) if (d / f).exists()), None)
     err, warn = [], []
     short = is_short(d)
@@ -300,7 +333,8 @@ def cmd_check(a):
         m, _ = grad_map(img)
         whole = sum(map(sum, m)) / (GW * GH)
         print("\nvùng bị phủ trong video (độ chi tiết so với cả ảnh; > {:.1f} = rối):".format(BUSY_WARN))
-        for name, z in (ZONES_SHORT if short else ZONES).items():
+        zones = ZONES_SHORT if short else ZONES_LEFT if (var or {}).get("side") == "left" else ZONES
+        for name, z in zones.items():
             r = zone_mean(m, z) / whole if whole else 0
             flag = "⚠️ " if r > BUSY_WARN else "  "
             print(f"  {flag}{name:<24} {r:.2f}")
@@ -333,6 +367,10 @@ def cmd_check(a):
                         err.append(f"prompt thiếu dòng của mẫu channel ({head[3:]}): {line[:60]}…")
             else:
                 (err if short else warn).append(f"visual.md của channel chưa có mục `{head}`")
+            for axis, line in ((var or {}).get("lines") or {}).items():
+                if line not in prompt:
+                    (warn if fm.get("status") in ("chosen", "existing") else err).append(
+                        f"prompt thiếu dòng VARIANT {axis} ({variant.OUT}): {line[:60]}…")
             t = fm.get("title_text")
             if t and f'"{t}"' not in prompt:
                 err.append(f'prompt không có chữ title nguyên văn trong ngoặc kép: "{t}"')
@@ -376,6 +414,16 @@ def main():
     s.add_argument("--y", type=float, default=0.5, help="0 = giữ mép trên, 1 = giữ mép dưới")
     s.add_argument("--no-upscale", action="store_true", help="Lanczos 1920×1080 trên Mac, không dùng GPU server")
     s.set_defaults(fn=cmd_fit)
+    s = sub.add_parser("variant")
+    s.add_argument("dir")
+    s.add_argument("--seed", type=int, help="mặc định: hash đường dẫn thư mục")
+    s.add_argument("--set", action="append", metavar="AXIS=NAME", help="cố định một trục (lặp được)")
+    s.add_argument("--title", help="chữ chính trên ảnh; mặc định: dòng Title trong khối Prompt của thumbnail-prompt.md")
+    s.add_argument("--dry-run", action="store_true", help="in ra, không ghi thumb-variant.json")
+    s.set_defaults(fn=cmd_variant)
+    s = sub.add_parser("variants")
+    s.add_argument("channel")
+    s.set_defaults(fn=cmd_variants)
     s = sub.add_parser("upscale-setup")
     s.set_defaults(fn=cmd_upscale_setup)
     s = sub.add_parser("check")

@@ -81,6 +81,16 @@ DEFAULTS = {
         "shadow": {"radius": 18, "spread": 0.42},
     },
 
+    "badge": {
+        "enabled": False,
+        "path": None,
+        "width_px": 150,
+        "corner": "bl",
+        "margin_px": 30,
+        "opacity": 1.0,
+        "shadow": None,
+    },
+
     "subscribe": {
         "enabled": True,
         "every_seconds": [30, 45],
@@ -106,6 +116,7 @@ DEFAULTS = {
         "halo_color": [255, 209, 140],
         "halo_strength": 110,
         "shine_at": 1.2,
+        "flame": True,
     },
 
     "bars": {
@@ -135,6 +146,8 @@ DEFAULTS = {
             "intro": {"enabled": False},
             "subscribe": {"enabled": False},
             "logo": {"corner": "tl", "width_px": 110, "margin_px": 40},
+            "badge": {"enabled": False},
+            "cinema": {"enabled": False},
             "bars": {"bands": 40, "center": 0.45, "span": 0.62, "height_px": 90, "baseline_px": 490,
                      "scrim": 0.0},
         },
@@ -147,6 +160,26 @@ DEFAULTS = {
         "text": {"center_x": 0.45, "max_width": 0.82, "stroke_px": 5, "stroke_color": [0, 0, 0],
                  "shadow_px": 14, "shadow_opacity": 0.55, "line_spacing": 1.18},
         "video_bitrate": "10M",
+    },
+
+    "cinema": {
+        "enabled": False,
+        "variant": None,
+        "overscan": 0.06,
+        "parallax": 0.3,
+        "focus": 0.5,
+        "feather": 0.015,
+        "camera": {"path": "static", "period": 40, "pan": [0.0, 0.0], "zoom": 0.0, "zoom_period": None,
+                   "phase": 0.0, "zoom_phase": 0.0},
+        "text_zones": [],
+        "static_zones": [],
+        "static_feather": 0.0,
+        "lights": [],
+        "haze": {"enabled": False, "opacity": 0.08, "color": [200, 190, 175], "drift_cycles": 1, "top": 0.35,
+                 "low": True, "seed": 11},
+        "anchors": {},
+        "text_layer": {"enabled": False, "zoom": 0.03, "period": 7, "phase": 0.0, "keep_above": 1.0, "lum_min": 125,
+                       "sat_max": 120, "halo_px": 11, "feather_px": 4, "lum_core": None, "grow_px": 0, "shadow_lum": 256},
     },
 
     "encode": {
@@ -164,7 +197,7 @@ DEFAULTS = {
 
 DIRECTIONS = {
     "top": (0, 1), "top-right": (-1, 1), "right": (-1, 0), "bottom-right": (-1, -1),
-    "bottom": (0, -1), "bottom-left": (1, -1), "left": (1, 0), "top-left": (1, 1),
+    "bottom": (0, -1), "bottom-left": (1, -1), "left": (1, 0), "top-left": (1, 1), "none": (0, 0),
 }
 
 
@@ -225,14 +258,21 @@ def scale_px(node):
 def load(paths=None):
     cfg = merge_files(paths)
     scale_px(cfg)
-    if cfg["logo"].get("shadow"):
-        cfg["logo"]["shadow"]["radius"] = _scale(cfg["logo"]["shadow"]["radius"])
+    for key in ("logo", "badge"):
+        if cfg[key].get("shadow"):
+            cfg[key]["shadow"]["radius"] = _scale(cfg[key]["shadow"]["radius"])
     logo = cfg["logo"]
     if logo["enabled"] or cfg["intro"]["enabled"]:
         if not logo["path"]:
             raise ValueError("logo.path is not set; the channel's video.json should set it")
         if not os.path.isabs(logo["path"]):
             logo["path"] = os.path.join(REPO, logo["path"])
+    badge = cfg["badge"]
+    if badge["enabled"]:
+        if not badge["path"]:
+            raise ValueError("badge.enabled but badge.path is not set")
+        if not os.path.isabs(badge["path"]):
+            badge["path"] = os.path.join(REPO, badge["path"])
     return cfg
 
 

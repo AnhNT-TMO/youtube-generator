@@ -1,0 +1,3 @@
+# Python 3.12. Cài (từ gốc repo): SK=.claude/skills/audio-suno-generate; python3 -m venv $SK/.venv && $SK/.venv/bin/pip install -r $SK/requirements.txt
+# pyyaml đọc front matter của channel/<ch>/prompt_suno.md; đo thời lượng file bằng module wave (stdlib), ffprobe nếu không phải PCM.
+pyyaml

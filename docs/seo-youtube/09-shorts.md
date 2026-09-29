@@ -48,7 +48,7 @@ Không có số chuyển đổi chính thức. Phải đo trên kênh của mìn
 
 | Mức | Rủi ro | Nội dung | Cách tránh |
 |---|---|---|---|
-| **Nghiêm trọng** | Spam: *Automated or synthetic mass-production* [CT] [2801973](https://support.google.com/youtube/answer/2801973) (đã kiểm nguyên văn) | Cấm *"Using automated tools or AI to churn out high volumes of similar content with minimal changes"*. Ví dụ vi phạm: *"Channels that use the exact same background music and repetitive AI generated imagery across many videos, with each video reading out an AI-generated script."* Có thể xóa kênh | Mỗi Short phải khác thật: **bài khác, lời khác, câu hook viết từ lời bài đó**, khung dọc dựng riêng, có lời bài chạy trên màn hình. Không cắt thô 16:9 + viền đen. Không 2 Short từ cùng một bài. Không đăng lại cùng một đoạn |
+| **Nghiêm trọng** | Spam: *Automated or synthetic mass-production* [CT] [2801973](https://support.google.com/youtube/answer/2801973) (đã kiểm nguyên văn) | Cấm *"Using automated tools or AI to churn out high volumes of similar content with minimal changes"*. Ví dụ vi phạm: *"Channels that use the exact same background music and repetitive AI generated imagery across many videos, with each video reading out an AI-generated script."* Có thể xóa kênh | Mỗi Short phải khác thật: **bài khác, lời khác, câu hook viết từ lời bài đó**, khung dọc dựng riêng, có lời bài chạy trên màn hình. Không cắt thô 16:9 + viền đen. Không 2 Short từ cùng một đoạn của một bài (`shorts.py` chặn; kho bài dùng lại qua nhiều album). Không đăng lại cùng một đoạn |
 | **Nghiêm trọng** | YPP: *Inauthentic content* (đổi tên từ "repetitious" ngày 15/7/2025) [CT] [1311392](https://support.google.com/youtube/answer/1311392) | Không cho kiếm tiền: *"image slideshows… scrolling text with minimal or no narrative"*, *"AI-generated content made with generic or unoriginal templates giving the impression of mass production"*. Xét **theo cả kênh** (video mới nhất, nhiều view nhất, metadata, About). Bản làm rõ 7/2026 chia 3 loại, kênh có "quá nhiều" thì bị loại khỏi YPP [CĐ] [TechCrunch 20/7/2026](https://techcrunch.com/2026/07/20/youtube-clarifies-policies-around-ai-slop-and-upsetting-videos/) | Như trên. Shorts làm tăng số video "cùng khuôn" của kênh, nên biến thể giữa các Short (khung, chuyển động, câu mở, cách viết title) là bắt buộc, không phải trang trí |
 | Cao | Khai báo AI [CT] [14328491](https://support.google.com/youtube/answer/14328491) | "AI generated music" thuộc nhóm phải khai báo. Không khai báo nhiều lần → gắn nhãn cưỡng chế hoặc tạm ngưng YPP | Mọi Short: AI use = **Yes** (Studio) hoặc `containsSyntheticMedia=true` (API) |
 | Trung bình | Metadata, hashtag [CT] [6390658](https://support.google.com/youtube/answer/6390658) | > 60 hashtag → bỏ qua toàn bộ; hashtag không liên quan có thể bị gỡ; 3 hashtag đầu hiện trên title | 3–5 hashtag đúng chủ đề; title không hứa điều video không có |
@@ -69,7 +69,7 @@ Không có số chuyển đổi chính thức. Phải đo trên kênh của mìn
 
 ## 6. Cách làm Short nhạc để tăng traffic
 
-Quan sát các kênh cùng ngách (R&D: `research/trends/<ch>/shorts/`) và dữ liệu ở §2–3. Cách xưởng làm: skill `youtube-shorts`.
+Quan sát các kênh cùng ngách (R&D: `rnd-youtube-api` `yt.py fast --kind short` + `yt.py sheet --vertical`) và dữ liệu ở §2–3. Cách xưởng làm: skill `video-shorts`.
 
 1. **Giây 0 là giọng hát trên hook/điệp khúc**, cắt sát trước từ đầu tiên, trên downbeat. Không mở bằng intro nhạc cụ.
 2. **Độ dài là trục thử.** Kênh cùng ngách ăn nhất ở Short 70–180 s có câu cảm xúc, còn clip 9–20 s chỉ được 1–3K view. Dữ liệu chung nghiêng về
@@ -81,11 +81,12 @@ Quan sát các kênh cùng ngách (R&D: `research/trends/<ch>/shorts/`) và dữ
    đều ăn hơn title chỉ ghi tên bài. Đây là trục version.
 6. **Description:** dòng 1 link video dài; 1–2 câu cảm xúc; câu mời comment viết theo lời bài; 3–5 hashtag.
 7. **Related video khớp lời hứa.** Short cắt từ **title track** → album là khớp nhất, vì album mở đúng bằng bài đó ở 0:00 (đúng hướng dẫn
-   "trả lời hứa trong 5–10 s đầu"). Short từ bài giữa album → single của bài đó (bài đó bắt đầu ngay), không phải album (người xem phải tua).
+   "trả lời hứa trong 5–10 s đầu"). Không làm single (CEO 2026-09-28): Related video luôn là album, nên Short mặc định cắt từ bài 1
+   (`album.md` → `brief.short.song`); Short từ bài giữa album thì người xem phải tua, chỉ làm khi PM có lý do (`brief.short.why`).
 8. **Nhịp và giờ:** Shorts ăn nhất chiều tối, video dài ăn nhất buổi sáng; giờ tốt của hai loại gần như không trùng [DL] [Buffer 7/2026](https://buffer.com/resources/best-time-to-post-on-youtube/).
    Đăng video dài trước để Related video gắn được ngay. Mỗi Short thêm vào/tuần giảm nhẹ view trung bình mỗi Short nhưng tổng vẫn tăng [DL] [Metricool](https://metricool.com/youtube-shorts-algorithm/).
 9. **Hình dọc làm mới cho từng Short** (CEO 2026-09-25): ChatGPT vẽ ảnh 9:16 mới, kiểu ảnh theo các Short được xem nhiều nhất trong
-   ngách (`trend.py shorts`), không crop ảnh 16:9; video Short render riêng (layout dọc: logo, spectrum, chữ đều trong vùng an toàn §1).
+   ngách (`yt.py fast --kind short`), không crop ảnh 16:9; video Short render riêng (layout dọc: logo, spectrum, chữ đều trong vùng an toàn §1).
    Làm vậy còn giảm rủi ro "mass-production" (§4): mỗi Short một hình khác thật.
 10. **Remix:** để bật (Short thì bắt buộc). Nhạc chậm khó thành trend "use this sound", không kỳ vọng.
 

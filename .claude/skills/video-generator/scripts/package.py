@@ -54,7 +54,7 @@ def cmd_stage(a):
               "tags": code_block(ytmd, "## Tags"), "pinned_comment": code_block(ytmd, "## Pinned comment")}
     missing = [k for k, v in fields.items() if not v]
     if missing:
-        sys.exit(f"youtube.md thiếu khối: {', '.join(missing)} (chạy skill youtube-publish)")
+        sys.exit(f"youtube.md thiếu khối: {', '.join(missing)} (chạy skill upload-youtube-publish; Short: video-shorts)")
     os.makedirs(os.path.join(a.pkgdir, "upload"), exist_ok=True)
     shutil.copy2(a.youtube_md, os.path.join(a.pkgdir, "youtube.md"))
     for k, v in fields.items():

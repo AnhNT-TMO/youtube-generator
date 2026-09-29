@@ -6,7 +6,7 @@ USAGE = """Tạo ảnh thumbnail bằng ChatGPT (Chrome riêng, agent-browser --
   chatgpt_images.py delete <conversation-id>               xóa đúng thread đó (kiểm tra link trước khi bấm Delete)
 
 Cần: scripts/chatgpt-chrome.sh đang chạy (cổng 9223) và đã đăng nhập ChatGPT trong Chrome đó; `agent-browser` trong PATH.
-<dir> = channel/<ch>/{singles,albums,ideas}/NNN-slug có thumbnail-prompt.md (khối ``` sau "## Prompt", ảnh đính kèm ở "## Đính kèm").
+<dir> = channel/<ch>/{singles,albums,ideas}/NNN-slug hoặc Short channel/<ch>/albums/NNN-slug/short có thumbnail-prompt.md (khối ``` sau "## Prompt", ảnh đính kèm ở "## Đính kèm").
 Chạy từ gốc repo. Tài khoản ChatGPT có thể dùng chung: `gen` in ra conversation id, `delete` chỉ xóa thread có id đó.
 """
 import argparse

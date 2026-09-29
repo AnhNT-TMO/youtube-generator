@@ -6,8 +6,10 @@
 *.mp4
 *.mov
 
-# Nội dung riêng của kênh (album, idea, single: lời, plan, youtube.md, thumbnail, audio, video) — không push,
+# Nội dung riêng của kênh (kho bài, album, Short: lời, youtube.md, thumbnail, audio, video) — không push,
 # chỉ giữ .keep để còn thư mục
+channel/*/songs/*
+!channel/*/songs/.keep
 channel/*/albums/*
 !channel/*/albums/.keep
 channel/*/ideas/*
@@ -22,7 +24,7 @@ channel/*/library/*
 channel/*/voices/notes/
 channel/*/voices/audio/
 
-# Research (youtube-music-analyzer): kết quả phân tích + hàng đợi link
+# Research (rnd-youtube-api): dữ liệu API, kho câu phrase-bank
 research/*
 !research/.keep
 
@@ -46,9 +48,10 @@ node_modules/
 # Hàng đợi link research của từng kênh
 channel/*/research-queue.txt
 
-# Ledger của production-manager
+# Ledger, direction, checklist của pm-production
 production/
 
 # Ảnh avatar/banner kênh: bản nháp ChatGPT + bản upscale, chỉ trên máy
 channel/*/branding/
 /lamplight-gospel-branding/
+

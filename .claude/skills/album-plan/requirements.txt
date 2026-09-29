@@ -1,2 +1,0 @@
-# Cài (từ gốc repo): SK=.claude/skills/album-plan; python3 -m venv $SK/.venv && $SK/.venv/bin/pip install -r $SK/requirements.txt
-pyyaml

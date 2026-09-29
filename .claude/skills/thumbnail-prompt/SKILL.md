@@ -22,6 +22,8 @@ python3 $T list  channel/<ch>                       # text table of every thumbn
 python3 $T fit   <dir> <downloaded.png> [--x .5 --y .5]   # crop to 16:9 around (x, y) → GPU server SeedVR2 7B → <dir>/thumbnail.png 3840×2160 + thumbnail.jpg ≤ 2 MB (~1 min)
 python3 $T fit   <dir> <downloaded.png> --no-upscale     # fallback when the server is down: Lanczos 1920×1080 on this Mac
 python3 $T check <dir> [--image <file>]             # size/ratio (warns < 4K), detail in the 3 covered zones, warm bright spots, prompt vs the channel CORE block
+python3 $T variant <dir> [--set axis=name] [--title "…"] [--seed N] [--dry-run]   # channel has thumb_pool.json: pick one option per axis → <dir>/thumb-variant.json + VARIANT block
+python3 $T variants channel/<ch>                   # table of the combos already used (folder, date, each axis)
 python3 $T upscale-setup                            # once / when broken: SeedVR2 repo (pinned) + venv + 7B model (~17 GB) in ~/thumbnail-prompt on the server
 G=.claude/skills/thumbnail-prompt/scripts/chatgpt_images.py
 .claude/skills/thumbnail-prompt/scripts/chatgpt-chrome.sh   # dedicated real Chrome for ChatGPT, profile ~/.chatgpt-chrome/profile, port 9223
@@ -30,7 +32,7 @@ python3 $G fetch <dir>                              # download the images of the
 python3 $G delete <conversation-id>                 # delete exactly that thread: real click on the ⋯ inside its own link, dialog title checked
 ```
 
-`<dir>` = `channel/<ch>/singles/NNN-slug`, `albums/NNN-slug`, `ideas/NNN-slug` or `shorts/NNN-slug` (see *Short* below). Images can be made for many ideas
+`<dir>` = `channel/<ch>/singles/NNN-slug`, `albums/NNN-slug`, `ideas/NNN-slug` or an album's Short `albums/NNN-slug/short` (see *Short* below; the old `shorts/NNN-slug` is still a Short). Images can be made for many ideas
 ahead of time, before or after their album is planned: an idea that already became an album (`idea.yaml status:
 promoted`) can still be done in the idea folder; album-plan `build`/`sync` copies the newer image into the album and
 video-generator falls back to the idea's. Output: `<dir>/thumbnail-prompt.md`
@@ -55,10 +57,11 @@ UltraSharpV2, Real-ESRGAN, SeedVR2 3B / 7B-sharp and SUPIR. The server keeps not
      Track 01. Idea: `idea.yaml` `packaging.thumbnail_brief` (already a brief).
    - Album or idea: `python3 $T list channel/<ch>` (text only) to see the previous albums' `signature`. Do not open every
      earlier image: the axes already keep images apart.
-   - **The PM's concept is binding** (CLAUDE.md §0): `brief.decisions.thumbnail_concept` of the album's `plan.yaml` / the
+   - **The PM's concept is binding** (CLAUDE.md §0): the album's `album.md` → `brief.thumbnail_concept` (scene, framing,
+     light, palette), `brief.thumbnail_text` (the main text, verbatim) and `brief.bar_line` (the bottom bar line) / the
      idea (and `production/<ch>/direction.md`). Your creativity goes into the exact scene, pose, light and wording inside it.
-     No concept given → pick from R&D (the latest `research/trends/<ch>/thumbs/<date>.md` and the report's *Ý tưởng
-     thumbnail*) by the rules below and say so in your report so the PM can confirm.
+     No concept given → pick from R&D (the phrase bank `research/phrase-bank/` and the latest contact sheet in
+     `research/yt/sheets/`, rnd-youtube-api) by the rules below and say so in your report so the PM can confirm.
 2. **Choose the image** (write it under *Ý tưởng*):
    - One concrete picture from the song, not its abstract theme (`visual.md` has examples for this channel). The image's
      main text (`title_text`) is what `visual.md` → *Chữ chính trên ảnh* says for this kind (e.g. album = a phrase the PM
@@ -68,7 +71,8 @@ UltraSharpV2, Real-ESRGAN, SeedVR2 3B / 7B-sharp and SUPIR. The server keeps not
      *ingredient* from R&D (a scene type, objects without a person, a text role), never another channel's layout. Say
      under *Ý tưởng* which ingredient you took and where the image differs.
    - Keep the channel's constants from `visual.md`; pick every other axis from its *Biến thể hình ảnh* **by the song's vibe**
-     (lyrics, imagery, emotion, energy, arc role) and say why under *Ý tưởng*. Never pick at random or by tool.
+     (lyrics, imagery, emotion, energy, arc role) and say why under *Ý tưởng*. Never pick at random, except the axes of the
+     channel's `thumb_pool.json` (*Variant pool* below): those come from `variant`, and you pick the rest by vibe around them.
    - **Album signature.** An album image picks a title `lettering` style + 2–3 axes as the album's signature (by the album's
      vibe; not the previous album's) and writes them in `signature:` / `lettering:`. Whatever `visual.md` fixes for every
      image (e.g. a channel name line) never changes. Its singles copy that signature and change the other axes, so they
@@ -86,7 +90,7 @@ UltraSharpV2, Real-ESRGAN, SeedVR2 3B / 7B-sharp and SUPIR. The server keeps not
      CORE block states them in %), including any small fixed line, which also stays above the bottom 15 % (spectrum bars).
 3. **Write `thumbnail-prompt.md`** from the template: front matter filled (the axis keys of `visual.md`, `lettering`,
    `signature`; the `list` table reads them), *Đính kèm*, and *Prompt* = the CORE block **verbatim** + a `THIS IMAGE` block
-   (`Title text: "<exact main text>"`, Title style = the album's lettering snippet, `Duration line` for an album, Look = the chosen axis snippets, Scene, the
+   (`Title text: "<exact main text>"`, Title style = the album's lettering snippet, `Duration line` for an album, the `VARIANT` block when the channel has a pool, Look = the chosen axis snippets, Scene, the
    character, Clothing, Light, Composition), in plain English sentences, one idea per line. Keep the main text exactly as
    its source writes it (the song title in the track file, or the PM's phrase; capitalisation may follow the album's style). Run `python3 $T check <dir>` (prompt checks).
 4. **Generate.** Automated (default): `chatgpt-chrome.sh`, then `python3 $G gen <dir>` (run in background; ~1–3 min;
@@ -113,15 +117,40 @@ UltraSharpV2, Real-ESRGAN, SeedVR2 3B / 7B-sharp and SUPIR. The server keeps not
    from `check` is the starting point for `lantern.center` in `<dir>/video.json`. An older 1920×1080 thumbnail can be
    brought to 4K the same way from its draft (or from `thumbnail.png` itself: `fit` backs it up to `thumbnail-drafts/prev-*.png` first).
 
-## Short (vertical, `shorts/NNN-slug`)
+## Variant pool (`channel/<ch>/thumb_pool.json`, optional)
+
+A channel that wants every thumbnail to keep one master form but never look like its recent ones writes a pool (the
+channel's content, not this skill's): `{"avoid_last": 3, "no_repeat": ["pose", "lettering"], "axes": {"<axis>": {"<option>":
+{"text": "<English prompt sentence(s)>", "weight": 1, "needs": [...], "avoid": [...]}}}}`. `weight` defaults to 1 (0 = off);
+`needs` / `avoid` list options of other axes (`name`, or `axis=name` when two axes share a name; several `needs` names in
+one axis = any of them); a layout option may carry `side` (`left` / `right` / `center`: where the lettering sits) and
+`max_title_chars` (only eligible when the main text is at most that long).
+
+`python3 $T variant <dir>` (after the title is known: `--title`, else the `Title` line of the Prompt block) picks one
+option per axis, weighted, seeded by the folder path (`--seed` to change): it respects needs / avoid / max_title_chars,
+never repeats a combo used by another `channel/<ch>/*/*/thumb-variant.json`, differs from each of the last `avoid_last`
+in all axes but one (relaxed one step at a time when impossible), and never reuses the previous image's `no_repeat` axes
+when there is another choice. `--set axis=name` fixes an axis (the PM's concept asks for it); `--dry-run` prints only.
+It writes `<dir>/thumb-variant.json` and prints a `VARIANT (…):` block: paste it **verbatim** into THIS IMAGE of the
+Prompt (after `Title style` / `Duration line`). Those lines replace your free choice for their axes; the Scene / singer /
+Light / Composition lines you write must agree with them. `check` fails when a VARIANT line is missing from the prompt.
+When `side` is set it also prints the overlay corners `<dir>/video.json` must use (left: logo `tl`, subscribe `bl`,
+badge `br`; right / center: `tr` / `br` / `bl`; the badge corner matters only when video-generator stamps the badge, not
+when the channel's `visual.md` has ChatGPT draw it into the image), and `check` measures the covered zones on that side. Run `variant`
+again (or delete the json) only before the image is generated: the file is the history the next picks avoid.
+
+## Short (vertical, `albums/NNN-slug/short`)
 
 A Short gets a **new** 9:16 image (never a crop of the album/single image); it is the background of the Short's own video.
-Same steps, with these differences, all driven by the folder being under `shorts/`:
+Same steps, with these differences, all driven by the folder being an album's `short/` (or the old `shorts/NNN-slug`):
 
-- Inputs: `short.md` → `track` (the Short's lyric lines are in `short.json` `captions`), the album's `signature`, and the
-  niche's latest Shorts sheet from youtube-trend-research (`research/trends/<ch>/shorts/*-sheet.jpg` + `.md`). Read the
-  sheet and name the 2–3 patterns of the most-watched Shorts (framing, setting, subject, palette, light); choose axes close
-  to them within the channel's world and write which under *Ý tưởng*.
+- Inputs: `short.md` → `track` (the Short's lyric lines are in `short.json` `captions`), the album's `signature` (the
+  album is the parent folder), and the niche's latest Shorts sheet from rnd-youtube-api: `yt.py fast --file
+  research/phrase-bank/<niche>.yaml --kind short --name <ch>-shorts` → `research/yt/fast/<date>-<ch>-shorts.json` →
+  `yt.py sheet --from <that json> --vertical --name <ch>-shorts` → `research/yt/sheets/<date>-<ch>-shorts.jpg` (the PM
+  passes the path; a sheet from the last ~7 days is reused). Read the sheet and name the 2–3 patterns of the most-watched
+  Shorts (framing, setting, subject, palette, light); choose axes close to them within the channel's world and write
+  which under *Ý tưởng*.
 - Prompt = the channel's `visual.md` → *Prompt ảnh dọc Shorts (ChatGPT)* block verbatim + THIS IMAGE without Title / Title
   style / Duration line (`kind: short`, no `title_text`, no `duration_line`). No text on the image.
 - `check` uses the vertical zones (top bar, lyric band, right buttons, bottom title area); `fit` crops 9:16 and upscales to

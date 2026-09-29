@@ -24,7 +24,10 @@ def render_part(job):
     cfg = config.load(preset)
     fps = cfg["fps"]
     scene = None
-    if os.environ.get("VG_GPU", "0") == "1":
+    if cfg["cinema"]["enabled"]:
+        import cinema
+        scene = cinema.CinemaScene(image, cfg, bars=bars)
+    elif os.environ.get("VG_GPU", "0") == "1":
         try:
             import effects_gpu
             if effects_gpu.available():
@@ -74,6 +77,7 @@ def main():
     ap.add_argument("--seconds", type=float, help="render only this much (not seamless)")
     ap.add_argument("--start", type=float, default=0.0, help="loop time to start at")
     ap.add_argument("--frame", type=float, help="write the single frame at this time as PNG")
+    ap.add_argument("--qa", action="store_true", help="cinema: measure seam, text, static zones, edges, flicker; write OUT as JSON")
     ap.add_argument("--seam-check", action="store_true")
     ap.add_argument("--no-bars", action="store_true",
                     help="leave out the shade under the spectrum row (for extend --no-bars)")
@@ -88,13 +92,23 @@ def main():
     bars = not a.no_bars
     t0 = time.time()
 
+    if a.qa:
+        import json
+        import cinema
+        rep = cinema.qa(a.image, cfg)
+        json.dump(rep, open(a.out, "w"), indent=1)
+        print(json.dumps(rep, indent=1))
+        return
     if a.frame is not None:
         from PIL import Image
-        from effects import Scene
-        Image.fromarray(Scene(a.image, cfg, bars=bars).frame(a.frame)).save(a.out)
+        from effects import make_scene
+        Image.fromarray(make_scene(a.image, cfg, bars=bars).frame(a.frame)).save(a.out)
         print(a.out)
         return
 
+    if cfg["cinema"]["enabled"]:
+        import depth
+        depth.ensure(a.image)
     intro_out = os.path.splitext(a.out)[0] + "_intro.mp4"
     if cfg["intro"]["enabled"] and not a.seconds:
         import intro

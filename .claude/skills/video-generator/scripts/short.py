@@ -3,7 +3,7 @@ USAGE = """Server side of `video.py short`: vertical Short = seamless loop as lo
 
     VG_FRAME=1080x1920 short.py IMAGE AUDIO SHORT_JSON PRESET_JSON OUTDIR [--jobs N] [--encoder nvenc]
 
-SHORT_JSON (written by the youtube-shorts skill): in/out seconds in AUDIO, fade_in/fade_out, captions [{t0, t1, text}],
+SHORT_JSON (written by the video-shorts skill): in/out seconds in AUDIO, fade_in/fade_out, captions [{t0, t1, text}],
 hook {text, t1}, cta {text, t0} (times from the Short's 0:00). PRESET_JSON: merged video config incl. the `short` block.
 Writes OUTDIR/video.mp4 (+ loop.mp4, seg.wav, bars.mp4 along the way).
 """

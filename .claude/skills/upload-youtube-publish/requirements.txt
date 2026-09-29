@@ -1,0 +1,6 @@
+# Python 3.12. Cài (từ gốc repo):
+#   python3.12 -m venv .claude/skills/upload-youtube-publish/.venv
+#   .claude/skills/upload-youtube-publish/.venv/bin/pip install -r .claude/skills/upload-youtube-publish/requirements.txt
+# Cần thêm ffprobe trong PATH (check --video).
+pyyaml
+pytrends

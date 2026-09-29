@@ -1,7 +1,7 @@
 # 06. SEO: từ khóa, title, description, tags, đẩy kênh
 
 Nguồn: Module 4 "Các phương pháp đẩy kênh trên YouTube" + slide cùng tên (28 slide: nghiên cứu từ khóa, phương pháp đẩy kênh, tối ưu title/mô tả/tag).
-Quy trình cụ thể của xưởng khi soạn metadata: `.claude/skills/youtube-publish/SKILL.md`; nội dung riêng kênh: `channel/<ch>/publish.md`.
+Quy trình cụ thể của xưởng khi soạn metadata: `.claude/skills/upload-youtube-publish/SKILL.md`; nội dung riêng kênh: `channel/<ch>/publish.md`.
 
 ## 1. SEO YouTube là gì
 
@@ -18,8 +18,8 @@ và thu hút đúng khán giả. Mục tiêu: tăng view, người đăng ký, t
 | SEO kênh | tên kênh + từ khóa kênh để kênh lên top khi tìm | khó nhất, cần nền tảng |
 | SEO tổng thể | kết hợp tất cả | giữ top bền lâu |
 
-Với xưởng: mỗi album là một video SEO riêng (từ khóa theo chủ đề album) + playlist Full Albums / Songs + tags mặc định kênh
-làm lớp SEO đề xuất + single (bài điểm nhấn) dẫn về album.
+Với xưởng: mỗi album là một video SEO riêng (từ khóa theo chủ đề album) + playlist Full Albums + tags mặc định kênh
+làm lớp SEO đề xuất + 1 Short mỗi album dẫn về album (Related video); không làm single.
 
 ## 2. Nghiên cứu từ khóa
 
@@ -59,8 +59,8 @@ làm lớp SEO đề xuất + single (bài điểm nhấn) dẫn về album.
 - **Ngắn gọn**: tài liệu gốc ≤ 80 ký tự; không viết hoa toàn bộ, không lạm dụng dấu chấm than, tránh từ khó hiểu.
 - **Thử nghiệm**: A/B test (vidIQ, TubeBuddy; YouTube nay có **Test & compare** cho thumbnail, và title ở một số kênh) và theo dõi CTR, watch time.
 
-**Khác với xưởng:** title ≤ **70** ký tự (mobile và kết quả tìm kiếm cắt ~60–70), mở bằng **tên bài 1** rồi tới cụm thể loại + use-case
-người ta gõ thật, tối đa 1 emoji, chỉ ghi thời lượng khi đúng. Công thức cụ thể: `publish.md` → *Title*. "Giật tít" chỉ theo nghĩa gây tò mò,
+**Khác với xưởng:** title ≤ **70** ký tự (mobile và kết quả tìm kiếm cắt ~60–70), là **lời cầu xin** theo
+`brief.title_direction` (câu kho R&D `research/phrase-bank/`) rồi tới cụm thể loại người ta gõ thật, tối đa 1 emoji, chỉ ghi thời lượng khi đúng. Công thức cụ thể: `publish.md` → *Title*. "Giật tít" chỉ theo nghĩa gây tò mò,
 không hứa điều video không có.
 
 ## 4. Description
@@ -69,7 +69,7 @@ Giúp YouTube và Google hiểu ngữ cảnh → xếp hạng cao hơn, vào Sug
 
 1. **Khớp với title**, nêu rõ nội dung chính và mục đích.
 2. **200 ký tự đầu** là quan trọng nhất (hiện ở kết quả tìm kiếm và trên trang xem trước khi bấm "thêm").
-3. **Hashtag** giúp tìm video cùng chủ đề/kênh (≤ 15; 3 cái đầu hiện trên title).
+3. **Hashtag** giúp tìm video cùng chủ đề/kênh (quá 60 thì YouTube bỏ qua toàn bộ, Help 6390658; tối đa 3 hiện cạnh title).
 4. **Nhắc lại từ khóa chính** một cách tự nhiên.
 5. Thêm **từ khóa bổ sung** (thể loại, chủ đề, đối tượng).
 6. **Hạn chế link**, chỉ để link bắt buộc.
@@ -77,8 +77,8 @@ Giúp YouTube và Google hiểu ngữ cảnh → xếp hạng cao hơn, vào Sug
 8. Dùng **mặc định upload** để nhất quán, tiết kiệm thời gian.
 9. **Dễ đọc**: xuống dòng, chia phần, dấu phân cách.
 
-**Ở xưởng:** mẫu cố định `publish.md` (đã có giới thiệu kênh, CTA, hashtag), mỗi album chỉ viết ABOUT THIS VIDEO + TRACKLIST (chapters).
-Khi viết/sửa mẫu cho kênh mới, kiểm 200 ký tự đầu đã có tên kênh + cụm thể loại chính. Title + description được dịch bằng youtube-translate
+**Ở xưởng:** mẫu cố định `publish.md` (đã có giới thiệu kênh, CTA, hashtag), mỗi album chỉ điền TRACKLIST (chapters từ `assembly.json`; ABOUT THIS VIDEO khi mẫu có).
+Khi viết/sửa mẫu cho kênh mới, kiểm 200 ký tự đầu đã có tên kênh + cụm thể loại chính. Title + description được dịch bằng upload-youtube-translate
 (mục "dùng công cụ dịch để tiếp cận người xem toàn cầu" của tài liệu gốc).
 
 ## 5. Tags
@@ -89,9 +89,9 @@ Khi viết/sửa mẫu cho kênh mới, kiểm 200 ký tự đầu đã có tên
 3. Tài liệu gốc: **10–20 tag** mỗi video (upload default 20–25). Quá nhiều tag không liên quan / spam → YouTube coi là lừa đảo, hạ hạng.
 4. Công cụ gợi ý: vidIQ.
 
-**Ở xưởng:** tags mặc định kênh + 5–12 tag album, tổng ≤ 500 ký tự theo cách YouTube đếm. Mỗi tag phải là cụm người ta gõ thật
-và đúng ý định người tìm (`publish.py tags --expand / --try --trends`, SKILL youtube-publish → Tags). Tag có trọng số thấp trong xếp hạng,
-nên danh sách ngắn mà thật tốt hơn danh sách dài mà bịa. Thứ tự: tên album/bài 1 và cụm chính nhất lên đầu.
+**Ở xưởng:** tags mặc định kênh + tag album lấp tới sát 500 ký tự theo cách YouTube đếm. Mỗi tag phải là cụm người ta gõ thật
+và đúng ý định người tìm (`publish.py tags --expand / --try --trends`, SKILL upload-youtube-publish → Tags). Tag có trọng số thấp trong xếp hạng,
+nên danh sách ngắn mà thật tốt hơn danh sách dài mà bịa. Thứ tự: lời cầu xin / chủ đề của album và cụm chính nhất lên đầu.
 
 ## 6. Phương pháp đẩy kênh
 

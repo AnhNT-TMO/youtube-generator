@@ -24,7 +24,10 @@ Thêm: Help Center https://support.google.com/youtube, "How YouTube works" https
 
 **Bổ sung (không có trong tài liệu gốc, kiểm lại trước khi dùng):** với kênh nhạc AI, rủi ro lớn nhất lúc xét YPP là
 *inauthentic content*: nhiều video na ná nhau, sản xuất hàng loạt, ít khác biệt giữa các video. Luật của xưởng đã
-nhắm vào điều này: mỗi album ≥ 6 bài mới, tối đa 4 bài library, mỗi album cũ góp ≤ 2 bài (CLAUDE.md §7), thumbnail mới cho từng video.
+nhắm vào điều này. Từ 2026-09-28 xưởng dùng lại kho bài qua nhiều album (như các kênh lớn cùng ngách), nên khác biệt phải
+nằm ở chỗ người xem thấy: bài 1 không trùng album nào, thứ tự bài không trùng, bài mới tối thiểu khi kho lớn (`album_rules.md`,
+`album.py check`), lời cầu xin title + chữ thumbnail mới, biến thể ảnh + chuyển động video riêng cho từng video (CLAUDE.md §6–§7).
+Theo dõi Studio (monetization, cảnh báo) khi kho bài được dùng lại nhiều.
 
 ## 3. Mô hình kiếm tiền
 
@@ -101,7 +104,6 @@ Whitelist kênh (cả kênh) khác whitelist video (gửi từng video để g�
 
 - Nhạc Suno là của mình, nhưng vẫn có thể dính claim nếu audio của mình (hoặc của người khác trên Suno) được ai đó đăng ký Content ID qua distributor.
   Sau mỗi upload, xem màn hình **Checks** trong Studio và tab Copyright.
-- Không tự đăng ký Content ID / phát hành qua distributor cho bài Suno khi chưa có quyền thương mại rõ ràng
-  (CLAUDE.md §5: chỉ bài tải chính thức mới được dùng thương mại) và vì dễ claim nhầm video của người khác.
-- Hồ sơ nguồn gốc của mỗi bài đã có sẵn trong album: `generation.yaml`, `raw_tracks/manifest.json` (clip id, ngày tạo),
-  `tracks/*.md` (lời). Đây là bằng chứng khi tranh chấp claim hoặc kháng gậy.
+- Không tự đăng ký Content ID / phát hành qua distributor cho bài Suno: dễ claim nhầm video của người khác.
+- Hồ sơ nguồn gốc của mỗi bài đã có sẵn trong kho: `songs/manifest.json` (lượt Suno, clip id, prompt, ngày tạo),
+  `songs/<bài>.md` (lời, clip id, link Suno). Đây là bằng chứng khi tranh chấp claim hoặc kháng gậy.

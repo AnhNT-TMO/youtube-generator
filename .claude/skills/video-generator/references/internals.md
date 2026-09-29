@@ -69,6 +69,14 @@ Bộ nén (`--encoder`, hoặc `encode.encoder` trong preset):
   ≤ 60 % CPU, RAM 60 % (MemoryHigh) / 70 % (MemoryMax).
 - `videotoolbox`: chip nén của Mac, ít tốn CPU nhưng không nhanh hơn x264 đáng kể.
 
+## Cinema (`cinema.py`)
+
+Mỗi khung dựng trên GPU (torch): ánh sáng trong không gian ảnh → `grid_sample` theo depth map (Depth Anything V2 Small,
+cache `.depth-<hash>.npy` cạnh ảnh trên server) → vùng khóa màn hình → sương → hạt (lớp riêng, giảm trong vùng chữ) → lớp phủ
+(logo, badge, lớp tối sóng nhạc) → subscribe. Đo 2026-09-28: loop 5 phút 4K 139 s (8 phần chung GPU, 28 GB VRAM, CPU gần rảnh);
+nhiều chuyển động nên NVENC cq 24 ≈ 23 Mbps (1 giờ ≈ 10 GB). `qa` so hình chữ bằng tương quan sau khi dò dịch + tỉ lệ
+(0,93–1,07), vì zoom làm chữ to/nhỏ đều mà không méo.
+
 ## Ghi chú
 
 - **Audio:** nên đưa WAV vào. `extend.py` nén một lần sang AAC 320k. Nếu đưa
@@ -81,6 +89,21 @@ Bộ nén (`--encoder`, hoặc `encode.encoder` trong preset):
 - **Preview `--no-bars --start`** bị làm tròn về keyframe gần nhất (không nén lại
   thì không cắt giữa GOP được).
 
+## Đóng gói (`video.py package <album>`)
+
+Một zip cho mỗi album (CEO 2026-09-28): album + Short của nó, để CEO tải một lần.
+
+- Mac: `package.py stage` dựng từng phần vào thư mục tạm (`<album>/` và `<album>/short/`: youtube.md, `upload/*.txt`,
+  `thumbnail.jpg`, `thumbnail_full.*`, `meta.json`), ghi `build.json` (tên, kênh, các phần: video trên server, tên file
+  trong zip, khung mong đợi, thư mục audio để so độ dài, cảnh báo check `--force`; các dòng *Giờ đăng* / *Thứ tự đăng* của
+  `channel/<ch>/publish.md`, bỏ dòng còn `<…>`), rsync sang `in/<album job>/pkg/`.
+- Server: `pkg_server.py build <pkg>/build.json` hard-link hai video vào (`<album>.mp4`, `short/<album>-short.mp4`),
+  ffprobe, `manifest.json` + `README.txt` ở gốc gói, zip (stored, zip64) vào `out/<album job>/`, in một dòng JSON
+  (size, sha256, parts, files, entries, warnings, readme). `--dry-run` in cây file + README rồi xoá zip, không upload.
+- Không đóng gói Short riêng: `package <album>/short` từ chối; `album` chỉ tự đóng gói khi Short đã render + có youtube.md.
+- `s3-package.json` (một file ở thư mục album): mỗi lần upload một bản ghi `s3`, `size`, `sha256`, `parts.{album,short}`
+  (dir, title, video probe, thumbnail, youtube), `checks` (`pass` / `fail, packaged with --force` / `not included (--no-short)`).
+
 ## Server (mặc định; `--local` = render trên Mac)
 
-Host, key, số job, thư mục trạng thái nằm trong `../remote.env` (`VG_REMOTE`, `VG_KEY`, `VG_JOBS`, `VG_DIR`; biến môi trường cùng tên sẽ ghi đè). Trên server: `~/$VG_DIR/scripts` (bản sao scripts), `.venv/`, `repo/channel/<tên>/image_source/`, `in/<job>/`, `out/<job>/`, trong đó `<job>` là đường dẫn thư mục idea/album viết liền. Nhạc đã upload được giữ lại, lần sau không upload lại. Ổ /home trên server đã đầy ~83%, nên thỉnh thoảng xoá `out/*/video.mp4` cũ.
+Host, key, số job, thư mục trạng thái nằm trong `../remote.env` (`VG_REMOTE`, `VG_KEY`, `VG_JOBS`, `VG_DIR`; biến môi trường cùng tên sẽ ghi đè). Trên server: `~/$VG_DIR/scripts` (bản sao scripts), `.venv/`, `repo/channel/<tên>/image_source/`, `in/<job>/`, `out/<job>/`, trong đó `<job>` là đường dẫn thư mục album (hoặc `albums/<album>/short`) viết liền, vd. `<kênh>__albums__<album>__short`. Nhạc đã upload được giữ lại, lần sau không upload lại. Ổ /home trên server đã đầy ~83%, nên thỉnh thoảng xoá `out/*/video.mp4` cũ.

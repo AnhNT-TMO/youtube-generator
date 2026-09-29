@@ -86,8 +86,9 @@ class Intro:
             x, y = int(cx - w / 2), int(cy - w / 2)
             a = (al * logo_op)[:, :, None]
             f[y:y + w, x:x + w] = f[y:y + w, x:x + w] * (1 - a) + rgb * a
-            ignite = _ease_out((t - 0.5) / 0.8) * (0.8 + 0.2 * math.sin(2 * math.pi * t / 1.3))
-            self._add(f, self.flame, cx, cy - w * 0.21, 0.50 / 255.0 * ignite * logo_op)
+            if c.get("flame", True):
+                ignite = _ease_out((t - 0.5) / 0.8) * (0.8 + 0.2 * math.sin(2 * math.pi * t / 1.3))
+                self._add(f, self.flame, cx, cy - w * 0.21, 0.50 / 255.0 * ignite * logo_op)
 
         if u_out > 0:
             f = f * (1 - u_out) + self.scene.frame(t - D).astype(np.float32) * u_out
@@ -105,11 +106,11 @@ def bars_gain(t, cfg):
 def render(image, preset, bars, encoder, out):
     import subprocess
     import config
-    from effects import Scene
+    from effects import make_scene
     from make_loop import encode_cmd
     cfg = config.load(preset)
     fps = cfg["fps"]
-    it = Intro(Scene(image, cfg, bars=bars), image, cfg)
+    it = Intro(make_scene(image, cfg, bars=bars), image, cfg)
     ff = subprocess.Popen(encode_cmd(out, fps, cfg["encode"], encoder), stdin=subprocess.PIPE)
     for k in range(int(round(it.D * fps))):
         ff.stdin.write(it.frame(k / fps).tobytes())

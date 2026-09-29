@@ -1,0 +1,105 @@
+{
+  "_comment": "Shelter Stone Gospel thumbnail variant pool (CEO 2026-09-28). Master form = branding/master (big singer, huge gold plea, gold-lined bottom bar, badge left, logo top corner). Each video combines one option per axis; the master form never changes. Picker: thumbnail-prompt thumb.py variant <dir>.",
+  "avoid_last": 3,
+  "axes": {
+    "layout": {
+      "text_right": {
+        "side": "right",
+        "text": "Layout: the singer big on the left half of the frame, the title block on the right half, high: its top level with the top of the cross, its bottom no lower than 70% of the frame height, its right edge no further than 88% of the frame width; the top-right corner (right 11%, top 18%) stays dark and empty."
+      },
+      "text_left": {
+        "side": "left",
+        "text": "Layout: the singer big on the right half of the frame, his face turned toward the LEFT side of the picture (toward the title); the title block on the left half, high: its top level with the top of the cross, its bottom no lower than 70% of the frame height, its left edge no closer than 12% to the left edge; the top-left corner (left 11%, top 18%) stays dark and empty."
+      },
+      "center_low": {
+        "side": "center",
+        "max_title_chars": 26,
+        "weight": 0.8,
+        "text": "Layout: the singer centered in the upper part of the frame, head and shoulders from 4% to 55% of the frame height, facing the viewer with his head slightly turned; the title in 2 very large lines spanning 8% to 92% of the frame width across the lower half (from 50% to 80% of the frame height), overlapping his chest and hands like a golden banner in front of him; the top-right corner (right 11%, top 18%) stays dark and empty."
+      },
+      "between_hands": {
+        "side": "right",
+        "max_title_chars": 32,
+        "weight": 0.8,
+        "needs": [
+          "arm_raised_side"
+        ],
+        "text": "Layout: the singer big on the left, his face turned toward the RIGHT side of the picture; his far arm is raised high on the right edge of the frame with the open palm lifted toward heaven, so the title block sits between his face and his raised hand, from 18% to 80% of the frame height and from 38% to 82% of the frame width; the top-right corner (right 11%, top 18%) stays dark apart from his hand."
+      }
+    },
+    "lettering": {
+      "polished_gold": {
+        "text": "Lettering finish: polished liquid gold, bright glossy face, brilliant white-gold highlights along the top edges, deep bronze bevels, a few tiny star glints."
+      },
+      "gold_dark_grain": {
+        "text": "Lettering finish: rich gold with a fine dark antique filigree grain engraved inside the letter faces, bright gold bevel edges, deep bronze shading, a few star glints."
+      },
+      "gold_heavy_grain": {
+        "text": "Lettering finish: antique heavy gold with a dense, darker engraved filigree texture inside the letters, strongly contrasted bevels, deep brown-black shading and a heavy dark drop shadow."
+      },
+      "bright_satin_gold": {
+        "text": "Lettering finish: bright warm satin gold, smooth and luminous with a soft golden glow around the letters, crisp bevels, clean without texture."
+      },
+      "gold_dark_edge": {
+        "text": "Lettering finish: deep amber gold faces with near-black beveled edges and a thick dark outline, so the gold glows out of the shadow, subtle metallic sheen."
+      }
+    },
+    "pose": {
+      "hands_clasped": {
+        "text": "Pose: both hands clasped tightly together in prayer in front of his chest just below the vintage chrome microphone, eyes closed, singing with fervor, tears on his cheeks."
+      },
+      "hand_raised": {
+        "text": "Pose: one hand raised high with the palm open toward heaven, head tilted back, mouth wide open on a long high note, eyes shut tight, tears on his cheeks."
+      },
+      "arm_raised_side": {
+        "text": "Pose: his far arm raised high toward the side of the frame with the open palm lifted toward heaven, his near hand clenched in a fist over his heart, singing with all his strength, tears on his cheeks."
+      },
+      "hand_on_chest": {
+        "text": "Pose: one hand pressed flat over his heart, the other resting on the microphone stand, eyes closed, brows drawn together, singing softly with deep emotion."
+      },
+      "both_hands_mic": {
+        "text": "Pose: both hands wrapped around the vintage chrome microphone, leaning into it, eyes closed, singing a powerful line with his whole body."
+      },
+      "fist_heart": {
+        "text": "Pose: a clenched fist pressed against his chest, chin lifted, eyes squeezed shut, singing out in passionate cry, tears on his cheeks."
+      }
+    },
+    "wardrobe": {
+      "charcoal_suit": {
+        "text": "Clothing: a plain deep charcoal church suit jacket over a dark shirt, no tie."
+      },
+      "navy_suit": {
+        "text": "Clothing: a deep navy church suit with a crisp white shirt and a dark navy tie."
+      },
+      "burgundy_suit": {
+        "text": "Clothing: a deep burgundy wool church suit with a black shirt, open collar."
+      },
+      "brown_tweed": {
+        "text": "Clothing: a warm brown tweed jacket over a cream shirt with a dark brown tie."
+      },
+      "black_suit_gold_tie": {
+        "text": "Clothing: a black church suit, white shirt and a plain deep gold tie."
+      },
+      "forest_green": {
+        "text": "Clothing: a deep forest green church suit over a black shirt, no tie."
+      }
+    },
+    "scene": {
+      "window_wood_cross": {
+        "text": "Scene and light: an old stone chapel; a tall arched stained-glass window glows rich golden amber with strong golden rays across his hair and face; a simple rough wooden cross hangs on the stone wall, lit by the window light; the far side falls into deep warm brown shadow; the whole frame stays warm gold and amber."
+      },
+      "altar_candles": {
+        "text": "Scene and light: a dim stone chapel at night; behind him a stone altar with many warm candles and a carved stone cross above it glowing in candlelight; soft golden bokeh from the candles; deep warm brown shadows; the whole frame stays warm gold and amber."
+      },
+      "arched_niche_cross": {
+        "text": "Scene and light: a stone chapel with a deep arched niche behind him holding a simple wooden cross lit from below by a warm golden glow; warm golden light rays from above; dark warm stone around; the whole frame stays warm gold and amber."
+      },
+      "wooden_church": {
+        "text": "Scene and light: an old wooden country church with stained-glass windows glowing gold, a wooden cross on the front wall, dust floating in golden sunbeams; dark warm wood around; the whole frame stays warm gold and amber."
+      },
+      "dawn_rays_cross": {
+        "text": "Scene and light: a stone chapel at dawn, golden morning light pouring in from a high window behind him in wide rays, a tall wooden cross standing in the light; deep warm brown shadows at the edges; the whole frame stays warm gold and amber."
+      }
+    }
+  }
+}

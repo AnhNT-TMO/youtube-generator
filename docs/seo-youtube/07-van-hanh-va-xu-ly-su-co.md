@@ -44,9 +44,9 @@ Kiểm ngay ở màn hình **Checks** khi upload (video còn Private) và tab Co
 
 Có hai lựa chọn khi bị từ chối: chấp nhận, sửa kênh theo gợi ý của support rồi nộp lại; hoặc kháng bằng bằng chứng. Kết quả tùy từng kênh.
 
-**Bằng chứng xưởng có sẵn cho lý do "nội dung lặp lại / thiếu nguyên bản":** mỗi album có bài mới, lời riêng (`tracks/*.md`), plan riêng
-(`plan.yaml`), số bài tái dùng có giới hạn (`album_plan.py validate`), thumbnail riêng; quá trình sáng tạo ghi lại theo từng bước.
-Nếu bị từ chối vì lý do này, trước khi nộp lại cân nhắc: ẩn/gỡ các video quá giống nhau, tăng khác biệt giữa album (tempo, voice, hình), thêm nội dung giá trị riêng.
+**Bằng chứng xưởng có sẵn cho lý do "nội dung lặp lại / thiếu nguyên bản":** mỗi album có brief + tracklist riêng (`album.md`), thứ tự bài
+không trùng album cũ và luật bài mới tối thiểu (`album.py check`, `album_rules.md`), title + thumbnail + biến thể video riêng; quá trình ghi lại theo từng bước.
+Nếu bị từ chối vì lý do này, trước khi nộp lại cân nhắc: ẩn/gỡ các video quá giống nhau, tăng khác biệt giữa album (bài mới, bài 1, thứ tự bài, title/thumbnail, hình), thêm nội dung giá trị riêng.
 
 ## 4. Gậy cộng đồng
 
@@ -81,4 +81,4 @@ Hậu quả gậy bản quyền: mất khả năng tải lên, mất kiếm ti�
 ## 7. Thói quen báo cáo
 
 Tài liệu gốc tổng hợp mọi sự cố vào **thứ 6 hàng tuần**. Với xưởng: mỗi tuần một lần xem Studio (Copyright, Monetization, Community strikes, email YouTube)
-cùng lúc với bước 9 "Học" (file 05 §5), checklist ở file 08 §C.
+cùng lúc với việc đọc kết quả 48 giờ / 7 ngày (file 05 §5), checklist ở file 08 §C.
