@@ -55,6 +55,7 @@ chuyển thể (đổi Lord ↔ Father/Jesus, đổi vài chữ). Không bao gi�
 - **Skill = quy trình, dùng chung cho mọi kênh.** `.claude/skills/<skill>/` chỉ nói *làm thế nào*; không ghi tên kênh, thể loại,
   giọng, nhân vật, màu, câu mẫu hay số đo của một kênh cụ thể. Mỗi skill tự chứa code + venv + cache của nó.
 - **Kênh = nội dung.** Mọi chi tiết *làm gì cho kênh này* nằm trong `channel/<ch>/` (danh sách file: `channel/README.md`).
+- **Ngoại lệ CEO 2026-10-02, chốt 2026-10-04:** `audio-christmas-workflow` là skill chuyên cho carol Christmas nhẹ nhàng. Mỗi giai điệu có ba bản: piano + pad trơn, và piano + pad + một nhạc cụ trang trí (celesta, vibraphone), ba lượt nâng giọng, pattern trang trí chọn theo từng lượt, mỗi bản một điểm nhấn chime thu thật nhẹ tại chuyển lượt gần 1/3; album đích 120–180 phút. Chuẩn ở `research/christmas-carols/STANDARD.md`; style, cân bằng, gesture, tempo, paths và thông số ở `research/christmas-carols/WORKFLOW.json`, không hardcode nội dung kho vào skill.
 - Học được điều gì về một kênh: ghi vào file của kênh đó, không vào skill. Skill chỉ đổi khi *quy trình* đổi.
 - Kiểm: `python3 .claude/skills/pm-production/scripts/lint_skills.py` báo mọi chỗ skill/template nhắc tới một kênh cụ thể.
 
@@ -65,13 +66,27 @@ chuyển thể (đổi Lord ↔ Father/Jesus, đổi vài chữ). Không bao gi�
 | Audio | `audio-suno-generate` | Suno Simple mode + prompt của kênh → tải cả 2 clip qua usesuno → `songs/raw/` |
 | Audio | `audio-song-naming` | đọc lời → đặt tên → đổi tên file → thẻ bài `songs/<type>/<slug>.md` + đoạn Short |
 | Audio | `audio-album-assembly` | nối bài theo tracklist bằng crossfade nhẹ → master + `assembly.json` (chapters) |
+| Audio | `audio-christmas-workflow` | mỗi carol các style theo config (piano + pad, có hoặc không nhạc cụ trang trí) → MIDI/nguồn → ACE-Step → chọn base → accent thu thật hậu kỳ theo config → một bản chính + một dự phòng mỗi style; sửa theo feedback |
 | Video | `thumbnail-prompt` (sẽ đổi tên `video-thumbnail`) | ảnh album 4K + ảnh dọc Short (ChatGPT → SeedVR2 4K) |
+| Video | `video-resource-images` | ảnh cho bộ resource (ChatGPT) qua queue `images` |
+| Video | `video-resource-videos` | clip muse.ai từ ảnh đã đạt qua queue `videos`; soi + cắt clip |
 | Video | `video-generator` (sẽ đổi tên `video-render`) | loop 5 phút / cinema, video đầy đủ trên server, `video.py short`, zip lên S3 |
 | Video | `video-shorts` | 1 Short mỗi album từ đoạn `short` của bài → `short.json` → ảnh dọc → render → `youtube.md` |
+| Video | `video-upscale` | clip → 1920×1080 bằng SeedVR2 3B trên server, cụm ~10 clip/lần nạp model, lính canh nhiệt; bản 1080p vào kho server `~/video_sources/<library>/` (library trong `resource.json` của bộ, vd. `christmas`), giữ cây thư mục như Mac. Clip nào upscale do PM chọn |
 | Upload | `upload-youtube-publish` | title, description, tags, chapters → `youtube.md`; hướng dẫn Studio |
 | Upload | `upload-youtube-translate` | dịch title + description lên YouTube sau khi đăng |
 
+- CEO yêu cầu bỏ bộ skill phối nhạc ngày 2026-10-02: `mc-*`, `audio-composition-plan` và vendor library đã chuyển khỏi repo active. Flow Christmas dùng `track-plan.json` đơn giản và tool source/cover/selection/recorded-accent chung; không gọi lại thư viện phối khí. Sửa source skill ở `.claude/skills/`, rồi chạy `.agents/sync-skills.sh` để đồng bộ sang Codex.
+- Với kho Christmas PD, đọc `research/christmas-carols/HANDOFF.md`, brief và `WORKFLOW.json` hiện hành. `audio-christmas-workflow` sở hữu style, số take, điểm nhấn, chọn/giao audition và vòng feedback; không dùng quy tắc Suno/lyrics, chuẩn album Gospel 60–80 phút hoặc runner A/B/C lịch sử cho kho này. Album Christmas nhắm 120–180 phút; assembly/video là bước riêng khi có brief album.
+
 ## 3. Quy trình
+
+**Kho resource ảnh/video — CEO 2026-10-04:** mỗi bộ resource là một thư mục có `resource.json` (vd. `image_source/`;
+bộ mới = thư mục mới). Hai skill dùng chung `video-resource-images` (ChatGPT) và `video-resource-videos` (muse.ai) chạy
+qua queue `production/resq/<lane>/` (`pm-production/scripts/resq.py`): ảnh tự nạp tới 60 job chờ từ `blocks.json`,
+prompt clip ghép bằng `videos.py draft` từ trường clip reviewer ảnh ghi; PM chỉ viết prompt sửa / đặc biệt; generator nộp bản gốc vào review rồi nhận job tiếp ngay; reviewer cho đạt (clip được cắt nếu còn ≥ 7 s) hoặc làm lại kèm
+lỗi; PM viết prompt sửa và requeue, tối đa 3 lượt/cảnh. Không fit/upscale/4K trong bước resource. Hợp đồng:
+`.claude/skills/pm-production/references/resource-queue.md`.
 
 ```
 KHO BÀI (làm trước, theo lô PM đặt; 1 lượt Suno = 1 bài = 2 bản v1/v2 ~6 phút)
@@ -117,6 +132,11 @@ MỖI ALBUM
 
 ## 5. Luật bắt buộc
 
+- **Model cho resource queue (CEO 2026-10-04):** PM là phiên chính, thức dậy theo `resq.py watch`; 2 generator là tiến
+  trình nền `work` (lane ảnh Chrome 9223/9225, lane clip 9224/9226; không chạy nền được thì agent Sonnet trông lệnh) +
+  reviewer Opus medium mỗi lane, mỗi lượt spawn một lô ≤ 12 job. Claude:
+  `.claude/agents/resource-generator.md`, `resource-reviewer.md`. Codex:
+  `.codex/agents/resource_generator.toml` / `resource_reviewer.toml`. Không thêm generator vào cùng cổng.
 - **Credits:** PM đặt lô (loại bài × số lượt; mỗi lượt ra 1 bài 2 bản v1/v2, hoặc 2 bài khác lời). Trước mỗi lượt kiểm credits còn ≥ lượt đó + dự phòng
   100. Lượt nào Suno lỗi thì báo PM, không tự tạo lại quá 1 lần.
 - **Cổng duyệt:**
@@ -131,6 +151,7 @@ MỖI ALBUM
 - **Điều khoản thương mại Suno: bỏ qua** (CEO 2026-09-25). CEO đã biết và chấp nhận cho mọi video. Không tra cứu lại, không nhắc,
   không hỏi, không đưa vào báo cáo hay đánh giá rủi ro.
 - **Không hỏi ai nghe để chấm nhạc.** Claude không nghe được; bài hay hay dở do **retention thật** sau khi đăng.
+- **Ngoại lệ Christmas cập nhật theo CEO 2026-10-02:** giao một audition chính/style (số style theo WORKFLOW.json) và nhận feedback khi CEO chọn dùng để hiệu chỉnh flow. Không yêu cầu CEO chấm kỹ thuật hoặc nghe mọi seed; retention sau phát hành vẫn là bằng chứng riêng, không thay feedback trước khi chọn.
 - **Không sao chép** tên kênh, logo, branding, hình của kênh khác. Câu cầu nguyện chung dùng nguyên văn được (§1); hai video của
   mình thì không dùng cùng một câu title/thumbnail.
 - **Ngôn ngữ:** mọi text nhập vào Suno và nội dung YouTube bằng **tiếng Anh**; ghi chú, trao đổi bằng tiếng Việt.
@@ -144,7 +165,7 @@ MỖI ALBUM
   Lệnh tạm trên server chạy qua `.claude/skills/pm-production/scripts/server_guard/guard.sh run '<lệnh>'`; job chết bất thường →
   `guard.sh kills` trước khi chạy lại.
 - **Git chỉ giữ tooling:** skills, templates, `CLAUDE.md`, hướng dẫn kênh (`CLAUDE.md`, `channel.md`, `prompt_suno.md`, `naming.md`,
-  `album_rules.md`, `visual.md`, `publish.md`, `video.json`, `translate.yaml`, `image_source/`, `model/`). Mọi thứ sinh ra khi
+  `album_rules.md`, `visual.md`, `publish.md`, `video.json`, `intro.json`, `translate.yaml`, `image_source/`, `model/`). Mọi thứ sinh ra khi
   làm video (`songs/`, `albums/` kể cả `short/` bên trong, `research/`, `production/`), media và `remote.env` chỉ nằm trên máy.
 
 ## 6. Nguyên tắc sáng tạo
@@ -153,7 +174,8 @@ MỖI ALBUM
   gì người xem thấy trước: lời cầu xin trên title + thumbnail, cảnh/tư thế/trang phục của ảnh, biến thể chuyển động video, bài 1
   và thứ tự bài, đoạn Short. Lý do: nhiều video na ná nhau bị YouTube xếp vào *reused / inauthentic content* (`docs/seo-youtube/01`).
 - **Bài 1 và 15 giây đầu quyết định phần lớn việc người xem ở lại.** Bài 1 là bài hợp chủ đề album nhất và chưa từng mở album nào;
-  video vào giọng ngay (lời đọc hoặc câu hát), không mở bằng im lặng hay fade dài.
+  album mở bằng bài có 20 s đầu êm nhất và fade-in 12 s đường cong sin² (`intro_fade_s`, CEO 2026-10-05) để vào nhẹ
+  nhàng, không vồ vập; không mở bằng im lặng.
 - **Title + thumbnail là một lời cầu xin ngôi thứ nhất** về một nỗi đau cụ thể; hai câu bổ sung nhau, không trùng nhau (`publish.md`, `visual.md`).
 - Trend là **nguyên liệu** (chủ đề, điều người xem cần), không phải khuôn; khác biệt mới là thứ được bấm.
 

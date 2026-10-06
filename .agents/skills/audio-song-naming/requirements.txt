@@ -1,0 +1,4 @@
+# Mac (songs.py): python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt  → chỉ pyyaml
+# GPU server (whisper_words.py): scripts/remote.sh setup  → thêm openai-whisper + torch cu128
+pyyaml
+openai-whisper==20250625; sys_platform == "linux"

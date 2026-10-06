@@ -1,6 +1,7 @@
 ---
 length_min: [60, 80]
 crossfade_s: 3
+intro_fade_s: 12
 pattern: [<type-a>, <type-b>]
 sibling_min_gap: 4
 title_song_unique: true

@@ -1,0 +1,1 @@
+Read `CLAUDE.md` for the repo's production rules. Codex project skills are in `.agents/skills/`; their source of truth is `.claude/skills/`. Run `.agents/sync-skills.sh` after changing a source skill.

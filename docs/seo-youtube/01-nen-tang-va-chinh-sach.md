@@ -17,23 +17,37 @@ Kiếm tiền bền vững trên YouTube bắt đầu từ việc nắm luật c
 | Nhóm | Trang | Điều quan trọng với kênh nhạc |
 |---|---|---|
 | Cộng đồng (Community Guidelines) | https://www.youtube.com/howyoutubeworks/policies/community-guidelines/ | spam / metadata gây hiểu lầm, fake engagement, nội dung người lớn (thumbnail gợi cảm dễ bị gậy) |
-| Kiếm tiền (Monetization / YPP) | https://www.youtube.com/howyoutubeworks/policies/monetization-policies/ | nội dung lặp lại / thiếu tính nguyên bản (*inauthentic content*, trước gọi là *reused / repetitious content*), điều kiện YPP |
+| Kiếm tiền (Monetization / YPP) | https://www.youtube.com/howyoutubeworks/policies/monetization-policies/ | *inauthentic content* (đổi tên từ *repetitious content* ngày 15/7/2025) và *reused content* (mục riêng), điều kiện YPP |
 | Bản quyền (Copyright) | https://www.youtube.com/howyoutubeworks/policies/copyright/ | Content ID, claim, gậy bản quyền, tranh chấp |
 
 Thêm: Help Center https://support.google.com/youtube, "How YouTube works" https://www.youtube.com/intl/ALL_vn/howyoutubeworks/.
 
-**Bổ sung (không có trong tài liệu gốc, kiểm lại trước khi dùng):** với kênh nhạc AI, rủi ro lớn nhất lúc xét YPP là
-*inauthentic content*: nhiều video na ná nhau, sản xuất hàng loạt, ít khác biệt giữa các video. Luật của xưởng đã
-nhắm vào điều này. Từ 2026-09-28 xưởng dùng lại kho bài qua nhiều album (như các kênh lớn cùng ngách), nên khác biệt phải
-nằm ở chỗ người xem thấy: bài 1 không trùng album nào, thứ tự bài không trùng, bài mới tối thiểu khi kho lớn (`album_rules.md`,
-`album.py check`), lời cầu xin title + chữ thumbnail mới, biến thể ảnh + chuyển động video riêng cho từng video (CLAUDE.md §6–§7).
-Theo dõi Studio (monetization, cảnh báo) khi kho bài được dùng lại nhiều.
+**Bổ sung (tra trang chính thức 2026-10-04; chi tiết, trích dẫn và mức rủi ro: `research/youtube-policy/POLICY-2026-10.md`):**
+
+- **Inauthentic content** ([1311392](https://support.google.com/youtube/answer/1311392)) xét theo **cả kênh**: *"channels where
+  content feels interchangeable from video to video are not allowed to monetize"*. Người duyệt YPP xem chủ đề chính, video nhiều
+  view nhất, mới nhất, nhiều giờ xem nhất, metadata, About. *Reused content* (dùng nội dung người khác không biến đổi) là mục riêng.
+- **Spam policy** ([2801973](https://support.google.com/youtube/answer/2801973), Community Guidelines, có thể mất kênh, không chỉ
+  mất kiếm tiền): cấm *"using automated tools or AI to churn out high volumes of similar content with minimal changes"*.
+- **Nhãn AI** ([14328491](https://support.google.com/youtube/answer/14328491)): bắt buộc khi nhạc AI là trọng tâm video; khai không
+  làm giảm reach hay kiếm tiền; YouTube có thể tự gắn theo metadata C2PA.
+- **Content ID** ([2605065](https://support.google.com/youtube/answer/2605065)): giai điệu/bản ghi public domain, sound-alike,
+  production loop không đăng ký được. Carol PD hay bị claim sai: giữ hồ sơ PD từng bài để tranh chấp; thua appeal có thể thành gậy.
+- **Made for Kids** ([9528076](https://support.google.com/youtube/answer/9528076)): đồ chơi, nhân vật hoạt hình là tín hiệu MFK; video
+  MFK mất quảng cáo cá nhân hóa và bình luận. Hình Christmas giữ kiểu ấm cúng cho người lớn.
+- **Nhiều kênh:** YPP xét riêng từng kênh; kênh bị chấm dứt thì nội dung không được đăng lại ở kênh khác cùng chủ
+  ([2802168](https://support.google.com/youtube/answer/2802168)).
+
+Với xưởng: khác biệt phải nằm ở chỗ người xem thấy: bài 1 và thứ tự bài không trùng, bài mới tối thiểu khi kho lớn
+(`album_rules.md`, `album.py check`), lời cầu xin title + chữ thumbnail mới, biến thể ảnh + chuyển động riêng (CLAUDE.md §6–§7);
+video ghép clip: gia đình cảnh chủ đạo và kiểm 4 video liền nhau (`image_source/MONTAGE.md`). Theo dõi Studio (monetization,
+cảnh báo) khi kho bài/clip được dùng lại nhiều.
 
 ## 3. Mô hình kiếm tiền
 
 | Mô hình | Cách hoạt động | Với xưởng |
 |---|---|---|
-| Quảng cáo (YPP) | vào YouTube Partner Program, bật quảng cáo trước/giữa/sau video, nhận phần doanh thu; thu nhập theo lượt xem, loại quảng cáo, thị trường | **nguồn chính**. Album 60–90 phút cho phép chèn quảng cáo giữa video (mid-roll, cần video ≥ 8 phút) |
+| Quảng cáo (YPP) | vào YouTube Partner Program, bật quảng cáo trước/giữa/sau video, nhận phần doanh thu; thu nhập theo lượt xem, loại quảng cáo, thị trường | **nguồn chính**. Album 60–80 phút (Gospel) / 120–180 phút (Christmas) cho phép chèn quảng cáo giữa video (mid-roll, cần video ≥ 8 phút; từ 5/2025 tự đặt theo điểm ngắt tự nhiên) |
 | YouTube Premium | nhận phần phí thuê bao theo thời gian xem của người dùng Premium | tự động khi đã vào YPP |
 | Fan funding: Super Chat, Super Thanks, Membership | người xem trả tiền trực tiếp | cân nhắc khi kênh có cộng đồng (live, comment đông) |
 | Bán hàng, tiếp thị liên kết | link sản phẩm, Merch shelf | chưa dùng |

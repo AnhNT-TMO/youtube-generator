@@ -1,0 +1,184 @@
+{
+  "theme": "village/ice-rink",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "night-lights",
+    "motion_elements": "the lights around the rink and the falling snow",
+    "camera": "slide",
+    "focus": "the rink",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls over the empty rink.",
+    "tags": {
+      "place": "outdoor",
+      "time": "night",
+      "palette": "cool-blue",
+      "scale": "vista",
+      "snow": "falling",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "ice-rink-01",
+      "subject": "An empty outdoor ice rink in a town square, strings of warm lights stretched overhead between lamp posts, a tall lit tree at one end and old buildings with lit windows around; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow"
+    },
+    {
+      "id": "ice-rink-02",
+      "subject": "A frozen pond rink at the edge of a village, a lit fir tree on the bank, lanterns on wooden posts around the ice and snowy pines behind; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow"
+    },
+    {
+      "id": "ice-rink-03",
+      "subject": "An ice rink below an old castle wall, the stone battlements softly floodlit, fairy lights along the rink barrier and a lit tree in one corner; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "camera": "push-in"
+    },
+    {
+      "id": "ice-rink-04",
+      "subject": "A wooden skate hut beside the rink with lanterns hanging from its eaves, a rack of skates by the door, a bench under snow and warm light from its small window; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "street",
+        "palette": "warm-gold"
+      },
+      "focus": "the skate hut"
+    },
+    {
+      "id": "ice-rink-05",
+      "subject": "The rink seen from a café terrace above it, snow-covered tables and chairs with candle lanterns in the foreground and the glowing ice below; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "street"
+      },
+      "motion_elements": "the candle lanterns, the rink lights and the falling snow",
+      "focus": "the rink below the terrace",
+      "ambient": "Snow falls over the empty rink. Candle flames flicker in the lanterns."
+    },
+    {
+      "id": "ice-rink-06",
+      "subject": "An ice rink under a big arch of white-gold lights, the arch mirrored in the smooth ice and lit trees standing on both sides; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "palette": "white-gold"
+      },
+      "focus": "the arch of lights",
+      "camera": "push-in"
+    },
+    {
+      "id": "ice-rink-07",
+      "subject": "A long ribbon of ice winding through a snowy park between lit trees, old lamp posts along both edges of the skating path; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "camera": "drone",
+      "focus": "the curving ice path"
+    },
+    {
+      "id": "ice-rink-08",
+      "subject": "A frozen canal used as a rink between old gabled houses, lit windows, stone bridges strung with lights and lanterns along the edge of the ice; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow"
+    },
+    {
+      "id": "ice-rink-09",
+      "subject": "The rink barrier wrapped in pine garland and white lights, a pair of skates hanging on it, the empty glassy ice beyond reflecting a tall lit tree; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the barrier and the ice"
+    },
+    {
+      "id": "ice-rink-10",
+      "subject": "A mountain lake rink ringed by snowy pines and lit chalets, lanterns around the ice and snowy peaks faintly visible against the blue twilight sky; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "time": "twilight"
+      },
+      "look": "twilight",
+      "camera": "push-in"
+    },
+    {
+      "id": "ice-rink-11",
+      "subject": "A high aerial view of an oval rink in a snowy town, the ice glowing under strings of lights, a lit tree in the middle of the rink and snowy roofs around; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "camera": "drone",
+      "focus": "the rink"
+    },
+    {
+      "id": "ice-rink-12",
+      "subject": "A rink with a small wooden gazebo in the middle wrapped in lights, the smooth ice around it reflecting the glow and snowy trees at the edges; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the gazebo"
+    },
+    {
+      "id": "ice-rink-13",
+      "subject": "Wooden benches at the rink side with folded red wool blankets and lanterns, a pine garland along the rail and the empty ice glowing beyond; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "street",
+        "palette": "red-green"
+      },
+      "focus": "the benches and the ice"
+    },
+    {
+      "id": "ice-rink-14",
+      "subject": "The rink entrance through an arch of pine garland and lights between two lit fir trees, the empty ice and a tall tree beyond; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "push-in",
+      "focus": "the rink through the arch"
+    },
+    {
+      "id": "ice-rink-15",
+      "subject": "A rooftop ice rink high above a snowy city, strings of lights overhead, a lit tree on the rink edge and the lit skyline behind; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "focus": "the rink and the skyline",
+      "camera": "push-in"
+    },
+    {
+      "id": "ice-rink-16",
+      "subject": "A small rink beside a country inn, a low stone wall with lanterns along its top, snowy hedges and the glowing windows of the inn behind; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "street",
+        "palette": "warm-gold"
+      },
+      "focus": "the rink and the inn"
+    },
+    {
+      "id": "ice-rink-17",
+      "subject": "A close view of a pair of white vintage skates with red laces resting on the snowy edge of the rink, fairy lights on the barrier and the glowing ice blurred behind; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "macro"
+      },
+      "focus": "the skates",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "ice-rink-18",
+      "subject": "A close view of the smooth ice surface with faint skate marks reflecting the blurred warm lights of the tree and the light strings, snowflakes landing on it; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "macro"
+      },
+      "motion_elements": "the reflected lights and the falling snowflakes",
+      "camera": "push-in",
+      "focus": "the reflections on the ice",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "ice-rink-19",
+      "subject": "A close view of a candle lantern on a snowy wooden post at the rink edge, the flame flickering inside and the rink lights blurred beyond; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "macro",
+        "palette": "warm-gold"
+      },
+      "motion_elements": "the candle flame, the rink lights and the falling snow",
+      "focus": "the lantern",
+      "ambient": "Snow falls. The candle flame flickers in the lantern.",
+      "lens": "85mm lens at f/2.8",
+      "camera": "push-in"
+    },
+    {
+      "id": "ice-rink-20",
+      "subject": "A close view of a steaming cup of cocoa and a pair of wool mittens on the rink barrier, pine garland and warm lights along the rail and the empty ice behind; any town behind is an anonymous small old town with no castle on a hill and no recognisable cathedral or famous skyline; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "macro",
+        "palette": "warm-gold"
+      },
+      "motion_elements": "the steam from the cup, the garland lights and the falling snow",
+      "focus": "the steaming cup",
+      "ambient": "Snow falls. Steam rises from the cup.",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

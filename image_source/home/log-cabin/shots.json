@@ -1,0 +1,199 @@
+{
+  "theme": "home/log-cabin",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "interior-evening",
+    "motion_elements": "the fire, the tree lights and the snow outside the big windows",
+    "camera": "slide",
+    "focus": "the stone fireplace",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "The fire flickers in the stone fireplace. Snow falls in the forest outside the big windows.",
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "warm-gold",
+      "scale": "room",
+      "snow": "window",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "log-cabin-01",
+      "subject": "An A-frame cabin living room with a full-height glass wall onto snowy pines, a river-stone fireplace with a crackling fire, a leather sofa with plaid throws and a tall lit tree beside the glass; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows"
+    },
+    {
+      "id": "log-cabin-02",
+      "subject": "A two-storey log cabin great room with a loft balcony, huge log beams wrapped in fairy lights, a tall lit tree under the beams, a stone fireplace with a garland and big windows onto a snowy forest; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "crane-up",
+      "focus": "the lit tree under the beams"
+    },
+    {
+      "id": "log-cabin-03",
+      "subject": "A cabin kitchen with a black cast-iron wood stove glowing, a kettle steaming on top, a pine garland over open log shelves of enamel mugs and a window onto snowy spruces; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      },
+      "focus": "the wood stove",
+      "ambient": "Firelight flickers behind the stove door. Steam rises from the kettle. Snow falls outside the window.",
+      "motion_elements": "the stove fire, the steam from the kettle and the snow outside the window"
+    },
+    {
+      "id": "log-cabin-04",
+      "subject": "A cabin bedroom with a log bed, a hand-stitched red quilt, an oil lantern glowing on a tree-stump nightstand, a small lit tree and a frosted window onto the snowy woods; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      },
+      "camera": "push-in",
+      "focus": "the lantern on the nightstand",
+      "ambient": "The lantern flame flickers gently. Snow falls outside the window.",
+      "motion_elements": "the lantern flame, the tree lights and the snow outside the window"
+    },
+    {
+      "id": "log-cabin-05",
+      "subject": "The open front door of a log cabin seen from inside, a wreath on the door, snowshoes and a lantern by the threshold, the fire's glow on the floorboards and snow falling over a moonlit clearing outside; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "push-in",
+      "focus": "the open doorway",
+      "ambient": "Snow falls outside the open door. The lantern flame flickers gently.",
+      "motion_elements": "the lantern flame, the firelight and the snow falling outside the door"
+    },
+    {
+      "id": "log-cabin-06",
+      "subject": "A cabin corner with vintage wooden skis and poles leaning on the log wall, two glowing candle lanterns, a small tree with red ornaments on a wooden crate and a window with falling snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the skis and the small tree",
+      "ambient": "Candle flames flicker in the lanterns. Snow falls outside the window.",
+      "motion_elements": "the lantern candles, the tree lights and the snow outside the window"
+    },
+    {
+      "id": "log-cabin-07",
+      "subject": "A timber lodge lounge with a massive floor-to-ceiling stone chimney, a roaring fire, deep armchairs with sheepskins, a big lit tree and a wall of windows onto a snowy mountainside; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows"
+    },
+    {
+      "id": "log-cabin-08",
+      "subject": "A cabin reading corner with a wooden rocking chair, a knitted blanket, a stack of books, a small iron stove glowing and a window onto snowy firs; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "push-in",
+      "focus": "the rocking chair by the stove",
+      "ambient": "Firelight flickers in the small stove. Snow falls outside the window.",
+      "motion_elements": "the stove fire, the fairy lights and the snow outside the window"
+    },
+    {
+      "id": "log-cabin-09",
+      "subject": "A close view of a stone hearth with a crackling log fire, a cast-iron kettle, a basket of pine cones and red stockings hanging from the rough timber mantel with a lit garland; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro",
+        "snow": "none",
+        "palette": "red-green"
+      },
+      "camera": "push-in",
+      "focus": "the fire in the hearth",
+      "ambient": "The fire crackles and flickers in the hearth.",
+      "motion_elements": "the fire and the garland lights on the mantel",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "log-cabin-10",
+      "subject": "A lakeside log cabin with a long dining table set with candles and a pine runner, a stone fireplace at the far end, a lit tree and big windows onto a frozen lake under snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the candlelit dining table",
+      "ambient": "Candle flames flicker on the table. The fire flickers in the fireplace. Snow falls over the frozen lake outside.",
+      "motion_elements": "the fire, the candle flames, the tree lights and the snow outside the windows"
+    },
+    {
+      "id": "log-cabin-11",
+      "subject": "A cabin loft sleeping area under the roof ridge, twin beds with wool blankets, fairy lights strung along the log rafters, a lantern on the floor and a triangular window full of falling snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "push-in",
+      "focus": "the triangular window",
+      "ambient": "Snow falls outside the triangular window. The lantern flame flickers gently.",
+      "motion_elements": "the fairy lights, the lantern and the snow outside the triangular window"
+    },
+    {
+      "id": "log-cabin-12",
+      "subject": "A log cabin living room on a snowy morning, pale daylight through big windows onto snow-laden pines, the fire burning low in the stone fireplace and a lit tree with wrapped gifts beneath; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "time": "day",
+        "palette": "white-gold"
+      },
+      "look": "winter-day"
+    },
+    {
+      "id": "log-cabin-13",
+      "subject": "A cabin window nook with a built-in bench, sheepskins, a wooden tray with two steaming mugs of cocoa, fairy lights around the window and snow falling over a moonlit valley; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "push-in",
+      "focus": "the window nook",
+      "ambient": "Steam rises from the mugs. Snow falls outside the window.",
+      "motion_elements": "the steam from the mugs, the fairy lights and the snow outside the window"
+    },
+    {
+      "id": "log-cabin-14",
+      "subject": "A close view of a log windowsill with a row of candles in glass jars, pine sprigs and a small carved wooden tree, snow falling thickly on the dark forest behind the glass; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the candles on the windowsill",
+      "ambient": "Candle flames flicker gently. Snow falls thickly outside the window.",
+      "motion_elements": "the candle flames and the falling snow",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "log-cabin-15",
+      "subject": "A modern glass-and-timber cabin with a round black hanging fireplace glowing in the middle of the room, low sofas with wool throws, a lit tree and floor-to-ceiling glass onto a snowy forest; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the hanging fireplace",
+      "ambient": "The fire flickers in the hanging fireplace. Snow falls in the forest outside the glass."
+    },
+    {
+      "id": "log-cabin-16",
+      "subject": "A cabin sitting area with a copper-hooded fireplace, two plaid armchairs, an old wooden sled used as a coffee table with candles and pine cones, a garland along the log wall and a window with snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      },
+      "focus": "the fireplace and the sled table"
+    },
+    {
+      "id": "log-cabin-17",
+      "subject": "A one-room trapper's cabin with a pot-bellied stove, a bunk bed with patchwork quilts, oil lamps on the log walls, a small lit tree in a wooden bucket and a small window onto the snowy night forest; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      },
+      "focus": "the pot-bellied stove",
+      "ambient": "Firelight flickers in the stove. The oil lamp flames flicker gently. Snow falls outside the window.",
+      "motion_elements": "the stove fire, the oil lamp flames, the tree lights and the snow outside the window"
+    },
+    {
+      "id": "log-cabin-18",
+      "subject": "A close view of a tree branch with handmade ornaments, felt hearts, wooden stars and dried orange slices among warm lights, the stone fireplace fire glowing softly out of focus behind; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "camera": "push-in",
+      "focus": "the ornaments on the branch",
+      "ambient": "The fire glows and flickers softly in the background.",
+      "motion_elements": "the tree lights and the fire behind",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "log-cabin-19",
+      "subject": "A cabin great room at blue hour, a huge picture window framing a deep blue snowy forest and a distant mountain, a lit tree beside the window and a stone fireplace burning on the side wall; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "time": "twilight"
+      },
+      "focus": "the picture window and the lit tree",
+      "look": "twilight"
+    },
+    {
+      "id": "log-cabin-20",
+      "subject": "A close view of a cabin kitchen table with a gingerbread house, a plate of cookies, a steaming teapot and a lit garland, the window behind showing snow falling on spruces; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro",
+        "palette": "red-green"
+      },
+      "camera": "push-in",
+      "focus": "the gingerbread house",
+      "ambient": "Steam rises from the teapot. Snow falls outside the window.",
+      "motion_elements": "the steam from the teapot, the garland lights and the snow outside the window",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

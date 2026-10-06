@@ -1,0 +1,172 @@
+{
+  "theme": "nature/winter-greenhouse",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "twilight",
+    "motion_elements": "the fairy lights among dry, green indoor plants, with snow only outside the glass",
+    "camera": "push-in",
+    "focus": "the greenhouse path",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls onto the glass roof.",
+    "tags": {
+      "place": "indoor",
+      "time": "twilight",
+      "palette": "red-green",
+      "scale": "room",
+      "snow": "window",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "winter-greenhouse-01",
+      "subject": "A tall Victorian glasshouse with a white iron frame, lush green palms and banana plants rising towards the glass roof, warm fairy lights spiralling up the palm trunks, a dry tiled path down the middle, snow lying only on the outside of the roof panes and on the garden beyond the glass"
+    },
+    {
+      "id": "winter-greenhouse-02",
+      "subject": "Long raised beds of red poinsettias under a long glass roof with snow lying only on the outside of the panes, warm string lights draped along the roof beams and a straight aisle between the beds; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "focus": "the aisle between the poinsettias"
+    },
+    {
+      "id": "winter-greenhouse-03",
+      "subject": "A narrow greenhouse path lined with glowing brass lanterns on the floor, ferns and potted evergreens on both sides and fairy lights along the glass panes, snow resting on the glass outside; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "motion_elements": "the lanterns, the fairy lights and the snow falling on the glass"
+    },
+    {
+      "id": "winter-greenhouse-04",
+      "subject": "Close view of an old wooden potting bench with terracotta pots, pine cones, a small trowel and a little wreath, warm fairy lights draped over its shelf and snowy glass behind; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "tags": {
+        "scale": "macro",
+        "energy": "still"
+      },
+      "focus": "the potting bench",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "winter-greenhouse-05",
+      "subject": "A glass dome conservatory with a tall decorated Christmas tree at its centre, warm lights and red baubles, tropical plants around it and snow resting on the dome panes; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "camera": "arc",
+      "focus": "the lit tree under the glass dome"
+    },
+    {
+      "id": "winter-greenhouse-06",
+      "subject": "An orangery with tall arched windows, rows of potted citrus trees heavy with oranges and lemons, pine garlands with warm lights along the window arches, snow falling outside; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "tags": {
+        "snow": "window"
+      },
+      "focus": "the rows of citrus trees",
+      "motion_elements": "the garland lights and the snow falling outside the windows",
+      "ambient": "Snow falls outside the tall windows."
+    },
+    {
+      "id": "winter-greenhouse-07",
+      "subject": "An indoor lily pond with a small trickling fountain, ferns around its stone edge, warm fairy lights reflected in the water and snow on the glass roof above; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "focus": "the lily pond",
+      "motion_elements": "the fountain water, the fairy light reflections and the snow falling on the glass",
+      "ambient": "Snow falls onto the glass roof. The fountain trickles and the pond water ripples gently."
+    },
+    {
+      "id": "winter-greenhouse-08",
+      "subject": "Close view of a red poinsettia in a terracotta pot with water droplets on its leaves, warm fairy lights blurred behind and a snowy glass pane beside it; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "tags": {
+        "scale": "macro"
+      },
+      "focus": "the red poinsettia",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "winter-greenhouse-09",
+      "subject": "A large glasshouse in a snowy garden at dusk seen from outside, its whole iron-and-glass frame glowing warm from within with lights and green plants, snow on its curved roof and lanterns along the approach path; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "tags": {
+        "place": "outdoor",
+        "scale": "vista"
+      },
+      "camera": "drone",
+      "focus": "the glowing glasshouse",
+      "motion_elements": "the glowing glasshouse lights, the lanterns and the falling snow",
+      "ambient": "Snow falls over the garden and the glass roof."
+    },
+    {
+      "id": "winter-greenhouse-10",
+      "subject": "A greenhouse aisle under hanging baskets of trailing ivy and ferns, fairy lights woven through the baskets, pots of red amaryllis along the floor; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "focus": "the aisle under the hanging baskets"
+    },
+    {
+      "id": "winter-greenhouse-11",
+      "subject": "A cool fern house with tall tree ferns and moss-covered rocks, a small stream running through it, warm lights strung between the fern trunks and snow on the glass roof; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "focus": "the stream between the tree ferns",
+      "motion_elements": "the flowing stream, the string lights and the snow falling on the glass",
+      "ambient": "Snow falls onto the glass roof. The stream flows slowly between the mossy rocks."
+    },
+    {
+      "id": "winter-greenhouse-12",
+      "subject": "A small wooden-framed greenhouse with tables of potted herbs and seedlings, a watering can on the bench and a string of warm bulbs zig-zagging under the roof, snow piled on the glass; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "camera": "slide",
+      "focus": "the tables of potted herbs"
+    },
+    {
+      "id": "winter-greenhouse-13",
+      "subject": "Close view of a glass cloche over a small potted fern on a mossy table, tiny fairy lights glowing inside the cloche, snowflakes settling on the glass roof above; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "tags": {
+        "scale": "macro",
+        "energy": "still"
+      },
+      "camera": "static",
+      "motion_elements": "the fairy lights inside the cloche and the snow falling on the glass roof",
+      "ambient": "Snow settles softly on the glass roof above.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "winter-greenhouse-14",
+      "subject": "An orchid house with white orchids and red anthuriums in hanging baskets, fairy lights draped between the baskets and a wooden walkway running beneath the snowy glass roof; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "focus": "the wooden walkway"
+    },
+    {
+      "id": "winter-greenhouse-15",
+      "subject": "A small glass lean-to greenhouse against a brick garden wall, a wreath on its inner door, pots of white cyclamen and red geraniums, warm string lights along the ridge and snow on the roof; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "camera": "push-in",
+      "focus": "the wreathed inner door"
+    },
+    {
+      "id": "winter-greenhouse-16",
+      "subject": "A nursery greenhouse filled with rows of small potted Christmas firs, holly bushes and white poinsettias, warm lights strung overhead and snow on the roof; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "camera": "slide",
+      "focus": "the rows of potted firs"
+    },
+    {
+      "id": "winter-greenhouse-17",
+      "subject": "A white-painted iron bench under a large potted lemon tree, a lantern glowing on the floor, fairy lights in the branches and snowy glass panes behind; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "focus": "the bench under the lemon tree"
+    },
+    {
+      "id": "winter-greenhouse-18",
+      "subject": "Close view of ripe oranges hanging on a potted citrus tree wrapped in warm fairy lights, a snow-covered glass pane softly blurred behind; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "tags": {
+        "scale": "macro",
+        "palette": "warm-gold"
+      },
+      "focus": "the oranges among the fairy lights",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "winter-greenhouse-19",
+      "subject": "A Victorian glasshouse at night with thousands of warm lights hanging from the iron roof arches like a canopy of stars, palms below and snow on the glass; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "tags": {
+        "time": "night"
+      },
+      "look": "night-lights",
+      "camera": "tilt-up",
+      "focus": "the canopy of lights under the glass roof"
+    },
+    {
+      "id": "winter-greenhouse-20",
+      "subject": "A greenhouse corner with a small cast-iron wood stove glowing, a kettle steaming on top, potted plants around and bundles of dried eucalyptus hanging from a beam with fairy lights; inside the glasshouse every plant, pot, bench and path is completely dry and snow-free, snow only on the outside of the glass",
+      "camera": "push-in",
+      "focus": "the glowing wood stove",
+      "motion_elements": "the stove fire, the kettle steam, the fairy lights and the snow falling on the glass",
+      "ambient": "Flames flicker in the stove. Steam rises from the kettle. Snow falls onto the glass roof."
+    }
+  ]
+}

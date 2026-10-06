@@ -1,0 +1,191 @@
+{
+  "theme": "home/living-room",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "interior-evening",
+    "motion_elements": "the fireplace fire, the tree lights and the snow outside the window",
+    "camera": "slide",
+    "focus": "the Christmas tree",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "The fire flickers softly in the fireplace. Snow falls outside the windows.",
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "warm-gold",
+      "scale": "room",
+      "snow": "window",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "living-room-01",
+      "subject": "A spacious living room with a floor-to-ceiling stone fireplace and a crackling log fire, a tall Christmas tree covered in warm white lights and gold ornaments beside it, deep cream sofas with knit throws and a wide bay window showing snow falling over dark pine trees; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass"
+    },
+    {
+      "id": "living-room-02",
+      "subject": "A Victorian parlour with a carved marble fireplace and a low fire, a Christmas tree hung with glass baubles and red velvet bows, a tufted burgundy sofa and heavy drapes framing a sash window with snow falling on a lamplit street; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "tags": {
+        "palette": "red-green"
+      }
+    },
+    {
+      "id": "living-room-03",
+      "subject": "An open-plan living room seen from the hallway doorway, a wood-burning stove glowing in the far corner, a tall lit tree beside a wall of windows, a long linen sofa on a wool rug and snow falling over a dark garden beyond the glass; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "camera": "push-in",
+      "focus": "the Christmas tree by the windows",
+      "ambient": "The fire flickers behind the stove glass. Snow falls outside the windows.",
+      "motion_elements": "the stove fire, the tree lights and the snow outside the windows"
+    },
+    {
+      "id": "living-room-04",
+      "subject": "A Scandinavian living room in white and pale oak, a slim tree hung with straw stars and warm lights, a low grey sofa with sheepskin throws, paper star lanterns glowing in two tall windows and snow falling on birch trees outside; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "tags": {
+        "palette": "white-gold"
+      },
+      "ambient": "Snow falls outside the tall windows. The paper star lanterns glow softly.",
+      "motion_elements": "the tree lights, the glowing paper star lanterns and the snow outside the windows"
+    },
+    {
+      "id": "living-room-05",
+      "subject": "A modern living room with a deep cream sectional sofa facing a wall of glass onto a snowy pine forest, a tall lit tree in the corner, a long low fire set into a stone wall and candles on a wooden coffee table; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass"
+    },
+    {
+      "id": "living-room-06",
+      "subject": "A classic living room with a black grand piano with a plain unmarked case and fallboard, no maker's name or logo, beside a tall Christmas tree with warm lights and red ribbons, a brick fireplace with a fire under a pine garland, green velvet armchairs and a window with snow falling; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "tags": {
+        "palette": "red-green"
+      }
+    },
+    {
+      "id": "living-room-07",
+      "subject": "A low-beamed English cottage living room with an inglenook fireplace and a log fire, holly and ivy garlands along the oak beam, a floral chintz sofa, a small lit tree on a side table and leaded windows with snow falling outside; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "tags": {
+        "palette": "red-green"
+      }
+    },
+    {
+      "id": "living-room-08",
+      "subject": "A city loft living room with exposed brick, tall arched factory windows showing snow falling over rooftops with warm lit windows, a tall tree with warm lights and brass ornaments, a worn leather sofa and a black cast-iron stove glowing; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "ambient": "The fire glows in the cast-iron stove. Snow falls outside the arched windows.",
+      "motion_elements": "the stove fire, the tree lights and the snow outside the arched windows"
+    },
+    {
+      "id": "living-room-09",
+      "subject": "A sofa corner with a red tartan blanket and plaid cushions, a lit tree right beside it with plaid bows, a wooden side table with a steaming mug and a candle lantern, and a window with snow falling behind; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "tags": {
+        "palette": "red-green"
+      },
+      "focus": "the sofa corner and the tree",
+      "ambient": "Steam rises from the mug. The candle flickers in the lantern. Snow falls outside the window.",
+      "motion_elements": "the tree lights, the candle in the lantern, the steam from the mug and the snow outside the window"
+    },
+    {
+      "id": "living-room-10",
+      "subject": "A white-painted mantel draped with a thick pine garland and warm lights, four knitted stockings hanging above a crackling fire, brass candlesticks with lit candles and a wreath hung above the mantel; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "tags": {
+        "snow": "none",
+        "palette": "red-green"
+      },
+      "camera": "push-in",
+      "focus": "the mantel and the fire",
+      "ambient": "The fire flickers softly. The candle flames sway gently.",
+      "motion_elements": "the fire, the candle flames and the garland lights"
+    },
+    {
+      "id": "living-room-11",
+      "subject": "A tall lit Christmas tree standing inside a deep living room bay window, wrapped gifts at its base, two wingback armchairs on either side and snow falling past the panes onto a lamplit street; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "ambient": "Snow falls outside the bay window.",
+      "motion_elements": "the tree lights and the snow outside the bay window"
+    },
+    {
+      "id": "living-room-12",
+      "subject": "A farmhouse living room corner with a whitewashed brick fireplace and a log fire, a metal bucket of birch logs, a wooden ladder hung with fairy lights and folded quilts, a small tree in a woven basket and a small window with snow falling; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "focus": "the fireplace corner"
+    },
+    {
+      "id": "living-room-13",
+      "subject": "A mid-century living room with a teak sideboard lined with glowing candles and small ceramic trees, a tall lit tree beside a walnut lounge chair and a large window onto a snowy hillside with distant lit houses; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "ambient": "Candle flames flicker on the sideboard. Snow falls outside the window.",
+      "motion_elements": "the candle flames, the tree lights and the snow outside the window"
+    },
+    {
+      "id": "living-room-14",
+      "subject": "A low wooden coffee table in front of a glowing fireplace, set with a tray of steaming mugs of cocoa, a bowl of pine cones and a candle lantern, a lit tree softly blurred at the side; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "tags": {
+        "snow": "none"
+      },
+      "camera": "push-in",
+      "focus": "the coffee table and the fire",
+      "ambient": "The fire flickers softly. Steam rises from the mugs of cocoa.",
+      "motion_elements": "the fire, the steam from the mugs and the tree lights"
+    },
+    {
+      "id": "living-room-15",
+      "subject": "The foot of a tall lit tree in a living room at night, gifts wrapped in gold and kraft paper with velvet ribbons, a brass lantern with a candle on the floor and a french window with snow falling behind; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "camera": "push-in",
+      "focus": "the gifts under the tree",
+      "ambient": "The candle flickers in the lantern. Snow falls outside the french window.",
+      "motion_elements": "the tree lights, the lantern candle and the snow outside the window"
+    },
+    {
+      "id": "living-room-16",
+      "subject": "An alpine chalet living room with pine-panelled walls, a tiled corner stove glowing with fire, a lit tree hung with wooden ornaments and red felt hearts, a bench with sheepskins and a small window onto snowy mountains; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "tags": {
+        "palette": "red-green"
+      },
+      "ambient": "The fire glows in the tiled stove. Snow falls outside the window.",
+      "motion_elements": "the stove fire, the tree lights and the snow outside the window"
+    },
+    {
+      "id": "living-room-17",
+      "subject": "A close view of a mantel corner: a pine garland woven with warm fairy lights, gold ornaments and a lit pillar candle, the fireplace fire glowing softly out of focus below; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "focus": "the garland and the candle",
+      "ambient": "The candle flame flickers. The fire glows softly below.",
+      "motion_elements": "the candle flame, the fairy lights and the fire glow",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "living-room-18",
+      "subject": "A close view of Christmas tree branches beside a living room window, glass baubles and warm lights reflecting the snow falling outside the cold pane; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the ornaments",
+      "ambient": "Snow falls outside the window.",
+      "motion_elements": "the tree lights and the snow outside the window",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "living-room-19",
+      "subject": "A close view of two mugs of cocoa with marshmallows steaming on a wooden tray on the hearth, a folded knit blanket beside them and the fire flickering behind; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "camera": "push-in",
+      "focus": "the steaming mugs",
+      "ambient": "Steam rises from the mugs. The fire flickers softly behind.",
+      "motion_elements": "the steam from the mugs and the fire behind",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "living-room-20",
+      "subject": "A close view of a small ceramic Christmas village of lit houses and frosted trees on a windowsill beside a candle lantern, snow falling outside the glass; inside the room the air and every surface are completely clear and snow-free, snow only outside the glass",
+      "tags": {
+        "scale": "macro"
+      },
+      "focus": "the little lit village",
+      "ambient": "Snow falls outside the window. The candle flickers in the lantern.",
+      "motion_elements": "the lights in the little houses, the lantern candle and the snow outside",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

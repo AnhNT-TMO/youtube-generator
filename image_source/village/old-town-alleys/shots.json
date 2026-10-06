@@ -1,0 +1,171 @@
+{
+  "theme": "village/old-town-alleys",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "twilight",
+    "motion_elements": "the lanterns, the garlands and the falling snow",
+    "camera": "push-in",
+    "focus": "the end of the alley",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls softly in the narrow alley.",
+    "tags": {
+      "place": "outdoor",
+      "time": "twilight",
+      "palette": "warm-gold",
+      "scale": "street",
+      "snow": "falling",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "old-town-alleys-01",
+      "subject": "A narrow cobbled alley between tall old stone houses, pine garlands with warm lights looped overhead from wall to wall, iron lanterns on brackets and snow on the window ledges; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline"
+    },
+    {
+      "id": "old-town-alleys-02",
+      "subject": "A worn stone stairway climbing between old houses, a lantern on every landing, wreaths on the doors and snow on the steps; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "camera": "tilt-up",
+      "focus": "the top of the stairway"
+    },
+    {
+      "id": "old-town-alleys-03",
+      "subject": "A stone archway opening into a hidden courtyard with a small lit tree, a snow-capped well and lanterns on the courtyard walls; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the courtyard through the archway"
+    },
+    {
+      "id": "old-town-alleys-04",
+      "subject": "A canal-side lane with lit windows reflected in the dark water, a small humped stone bridge with lanterns and wooden boats moored under snow; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "motion_elements": "the lanterns, the reflections on the canal and the falling snow",
+      "focus": "the humped bridge",
+      "ambient": "Snow falls softly over the canal. The water ripples gently, carrying the reflections of the lights.",
+      "camera": "slide"
+    },
+    {
+      "id": "old-town-alleys-05",
+      "subject": "An alley café with little bistro tables and chairs under snow, a candle lantern on each table, a garland over the café door and warm windows; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "motion_elements": "the candle lanterns, the garland lights and the falling snow",
+      "focus": "the café tables",
+      "ambient": "Snow falls softly in the narrow alley. Candle flames flicker in the lanterns."
+    },
+    {
+      "id": "old-town-alleys-06",
+      "subject": "Overhanging timber-framed houses leaning over a narrow lane, window boxes of fir branches with fairy lights, lanterns under the eaves and snow on the gables; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline"
+    },
+    {
+      "id": "old-town-alleys-07",
+      "subject": "A covered passageway under a vaulted stone ceiling hung with lanterns, opening onto a snowy lit square with a tree at the far end; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "motion_elements": "the hanging lanterns and the snow falling in the square beyond",
+      "focus": "the square at the end of the passage",
+      "ambient": "Snow falls in the square beyond the passage.",
+      "camera": "slide"
+    },
+    {
+      "id": "old-town-alleys-08",
+      "subject": "A steep alley of stepped cobbles winding downhill between lit windows and lamp posts, with a view over snowy rooftops to a church tower at the bottom; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the church tower beyond the rooftops"
+    },
+    {
+      "id": "old-town-alleys-09",
+      "subject": "A tiny square where three alleys meet, a stone fountain wrapped in a garland, lanterns on the corners and a small lit tree beside it; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the fountain and the tree"
+    },
+    {
+      "id": "old-town-alleys-10",
+      "subject": "A doorway with a carved stone surround, a green door with a big wreath, lanterns on both sides and potted firs strung with lights on the step; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "palette": "red-green"
+      },
+      "focus": "the wreathed door",
+      "camera": "slide"
+    },
+    {
+      "id": "old-town-alleys-11",
+      "subject": "A lane along an old town wall with a stone gate tower at the end, lanterns fixed along the wall and snow on the parapets; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the gate tower"
+    },
+    {
+      "id": "old-town-alleys-12",
+      "subject": "A narrow alley of whitewashed walls and blue shutters with paper star lanterns hanging overhead, fairy lights along the doorframes and snow on the steps; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "palette": "white-gold"
+      }
+    },
+    {
+      "id": "old-town-alleys-13",
+      "subject": "An alley along an ivy-covered wall with a wrought-iron gate hung with a wreath, a lamp above it and a glimpse of a snowy garden with a lit tree beyond; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the garden gate",
+      "camera": "slide"
+    },
+    {
+      "id": "old-town-alleys-14",
+      "subject": "A curving alley of pastel houses in deep blue dusk, a single warm lamp at the curve, and snowy little balconies with small lit trees; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "palette": "cool-blue"
+      },
+      "focus": "the lamp at the curve"
+    },
+    {
+      "id": "old-town-alleys-15",
+      "subject": "A stone niche in an alley wall holding candles and a small lantern, a pine garland with red berries around it, snow on its ledge and the alley stretching beyond; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "palette": "red-green"
+      },
+      "motion_elements": "the candle flames, the garland and the falling snow",
+      "focus": "the candle niche",
+      "ambient": "Snow falls softly in the narrow alley. The candle flames flicker in the niche."
+    },
+    {
+      "id": "old-town-alleys-16",
+      "subject": "An alley under a row of old wooden balconies strung with lights, snow resting on the railings, an iron bench and a lamp post below; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "camera": "slide",
+      "focus": "the lit balconies"
+    },
+    {
+      "id": "old-town-alleys-17",
+      "subject": "A close view of a wrought-iron wall lantern glowing on an old stone wall, a pine swag with red berries below it and snowflakes drifting through the light; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro",
+        "palette": "red-green"
+      },
+      "motion_elements": "the lantern glow and the snowflakes in its light",
+      "focus": "the wall lantern",
+      "lens": "85mm lens at f/2.8",
+      "camera": "slide"
+    },
+    {
+      "id": "old-town-alleys-18",
+      "subject": "A close view of snowy cobblestones with the warm reflections of lanterns, a fallen pine cone and a sprig of holly, the lit alley softly blurred behind; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "motion_elements": "the lantern reflections and the falling snow",
+      "focus": "the cobblestones",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "old-town-alleys-19",
+      "subject": "A close view of a window box of fir branches, pine cones and a string of fairy lights, snow piling on it and a frosted window glowing behind; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "motion_elements": "the fairy lights and the falling snow",
+      "focus": "the window box",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "old-town-alleys-20",
+      "subject": "A close view of a stone step with a row of candle lanterns in glass jars, snow gathering around them and the stairway rising into the blurred glow; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "motion_elements": "the candle flames and the falling snow",
+      "focus": "the candle lanterns",
+      "ambient": "Snow falls softly. The candle flames flicker in the jars.",
+      "lens": "85mm lens at f/2.8",
+      "camera": "slide"
+    }
+  ]
+}

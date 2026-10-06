@@ -37,6 +37,16 @@ LAST_CHAPTER_MARGIN = 10
 DURATION_TOLERANCE = 3.0
 BANK_MIN_WORDS = 4
 TS_RE = re.compile(r"^\d{1,2}:\d{2}(:\d{2})?\s")
+NO_CHAPTERS_RE = re.compile(r"^\*\*Chapters:\*\*\s*(none|không)\b", re.M | re.I)
+
+
+def channel_text(album):
+    ch_dir = Path(album).resolve().parent.parent
+    return "\n".join(f.read_text() for f in (ch_dir / "publish.md", ch_dir / "channel.md") if f.exists())
+
+
+def without_chapters(ch_text):
+    return bool(NO_CHAPTERS_RE.search(ch_text))
 
 
 def fmt(t):
@@ -113,6 +123,8 @@ def chapter_problems(chapters, total=None):
 
 def cmd_chapters(a):
     album = Path(a.album)
+    if without_chapters(channel_text(album)):
+        sys.exit("ℹ️  publish.md của kênh ghi **Chapters:** none: description không có tracklist/chapters")
     asm = assembly(album)
     if not asm:
         sys.exit(f"❌ {album}/assembly.json chưa có: audio-album-assembly ghép album trước")
@@ -388,7 +400,7 @@ def check_title(title, total, err):
         err.append(f"title ghi {m.group(0)} nhưng video dài {fmt(total)}")
 
 
-def check_description(desc, ch_text, chapters, err, warn):
+def check_description(desc, ch_text, chapters, err, warn, nochap=False):
     if len(desc) > 5000:
         err.append(f"description {len(desc)} ký tự > 5000")
     if re.search(r"[<>]", desc):
@@ -416,6 +428,10 @@ def check_description(desc, ch_text, chapters, err, warn):
     if len(re.findall(r"(?<!\w)#\w+", desc)) > 60:
         err.append("quá 60 hashtag: YouTube bỏ qua toàn bộ hashtag của video")
     lines = [l for l in desc.splitlines() if TS_RE.match(l)]
+    if nochap:
+        if headings or lines:
+            err.append("kênh không dùng tracklist (publish.md **Chapters:** none) nhưng description có TRACKLIST/timestamp")
+        return {}
     got = [(parse_ts(l.split()[0]), l.split(None, 1)[1].strip()) for l in lines]
     stray = [l for l in desc.splitlines() if not TS_RE.match(l) and re.search(r"(?<![\w:])\d{1,2}:\d{2}(?![\w])", l)]
     if stray:
@@ -505,7 +521,8 @@ def cmd_check(a):
     if not ym.exists():
         sys.exit(f"❌ {ym} chưa có: soạn theo templates/youtube.md")
     y = ym.read_text()
-    ch_text = "\n".join(f.read_text() for f in (ch_dir / "publish.md", ch_dir / "channel.md") if f.exists())
+    ch_text = channel_text(album)
+    nochap = without_chapters(ch_text)
     err, warn, info = [], [], []
     brief = (front_matter(album / "album.md").get("brief") or {}) if (album / "album.md").exists() else {}
     if not (album / "album.md").exists():
@@ -514,8 +531,10 @@ def cmd_check(a):
         warn.append("album.md chưa có brief.title_direction / description_angle: hỏi PM trước khi chốt title")
 
     asm = assembly(album)
-    chapters = chapters_of(asm) if asm else None
-    if not asm:
+    chapters = chapters_of(asm) if asm and not nochap else None
+    if not asm and nochap:
+        warn.append("chưa có assembly.json: không đối chiếu được độ dài master")
+    elif not asm:
         err.append("chưa có assembly.json (audio-album-assembly): không có chapters để đối chiếu")
     total, source = known_duration(album, a.video)
     if total is None:
@@ -538,7 +557,7 @@ def cmd_check(a):
         want = track_titles(album)
         if want and want != [n for _, n in chapters]:
             warn.append("tên/thứ tự bài trong assembly.json khác tracks/*.md: chapters theo assembly.json")
-    if total is None:
+    if total is None and not nochap:
         warn.append("chưa biết độ dài video (không có --video, video/video.mp4.json, assembly.json duration_s)")
 
     title = (code_block(y, "## Title") or "").strip()
@@ -552,19 +571,21 @@ def cmd_check(a):
         err.append("thiếu khối description trong ## Description")
         desc = ""
     else:
-        got = check_description(desc, ch_text, chapters, err, warn)
+        got = check_description(desc, ch_text, chapters, err, warn, nochap)
     comment = code_block(y, "## Pinned comment")
     if not comment:
         err.append("thiếu khối comment trong ## Pinned comment")
     else:
         check_comment(comment, got, err)
+        if nochap and re.search(r"(?<![\d:])\d{1,2}:\d{2}(?![\w])", comment):
+            err.append("pinned comment có timestamp nhưng kênh không dùng chapters")
     check_tags(y, ch_text, err, warn)
     check_thumbnail(album, err, warn)
     check_bank(album, brief, y, title, ch_text, err, warn, info)
 
     if title:
         print(f"title: {len(title)}/{TITLE_MAX} ký tự")
-    print(f"description: {len(desc)}/5000 ký tự, {len(got)} chapters"
+    print(f"description: {len(desc)}/5000 ký tự, " + ("không tracklist (kênh)" if nochap else f"{len(got)} chapters")
           + (f"; độ dài theo {source}: {fmt(total)}" if total else ""))
     for i in info:
         print(f"ℹ️  {i}")
@@ -635,7 +656,7 @@ def reference_handles():
 def own_names(folder):
     folder = Path(folder)
     names = [folder.parent.parent.name.replace("_", " ")]
-    asm = assembly(folder)
+    asm = None if without_chapters(channel_text(folder)) else assembly(folder)
     names += [t for _, t in chapters_of(asm)] if asm else track_titles(folder)
     return [n.lower() for n in names if n]
 

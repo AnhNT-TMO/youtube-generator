@@ -1,0 +1,205 @@
+{
+  "theme": "home/staircase-hallway",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "interior-evening",
+    "motion_elements": "the garland lights and the snow outside the hall windows",
+    "camera": "crane-up",
+    "focus": "the staircase garland",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls outside the hall windows.",
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "warm-gold",
+      "scale": "room",
+      "snow": "window",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "staircase-hallway-01",
+      "subject": "A grand curved oak staircase in a Georgian entrance hall, the banister wrapped in a thick pine garland with warm lights and red velvet bows, a tall decorated tree at the foot of the stairs and a tall arched landing window with snow falling outside; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      }
+    },
+    {
+      "id": "staircase-hallway-02",
+      "subject": "A farmhouse front hall with a straight white-painted staircase, a eucalyptus garland with fairy lights along the handrail, a wooden bench with wrapped gifts, two candle lanterns glowing on the bottom step and a paned window beside the door onto snowy fields; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "ambient": "Candle flames flicker gently in the lanterns. Snow falls outside the window.",
+      "motion_elements": "the garland lights, the lantern candles and the snow outside the window"
+    },
+    {
+      "id": "staircase-hallway-03",
+      "subject": "A staircase landing window seat with plaid cushions and a folded knit blanket, fairy lights around the deep window frame, a small potted fir with red ornaments beside it and snow falling over a dark garden outside; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "push-in",
+      "focus": "the landing window seat"
+    },
+    {
+      "id": "staircase-hallway-04",
+      "subject": "A long hallway with cream wainscoting and a red runner rug, wreaths with red bows on the closed doors, brass wall sconces, candle lanterns along the floor and a tall window at the far end with falling snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      },
+      "camera": "push-in",
+      "focus": "the window at the end of the hallway",
+      "ambient": "Candle flames flicker gently in the lanterns. Snow falls outside the far window.",
+      "motion_elements": "the lantern candles, the wall sconces and the snow outside the far window"
+    },
+    {
+      "id": "staircase-hallway-05",
+      "subject": "An entry hall with a wooden bench, wool coats and knitted scarves on pegs, a pair of snow boots on a mat, a pine wreath on the half-glass front door and snow falling outside the door glass, lit by a warm pendant lamp and a garland of fairy lights; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide",
+      "focus": "the bench and the front door",
+      "ambient": "Snow falls outside the glass of the front door.",
+      "motion_elements": "the fairy lights and the snow outside the door glass"
+    },
+    {
+      "id": "staircase-hallway-06",
+      "subject": "A grand foyer with a black-and-white marble floor, a round table with a large centrepiece of pine, white roses and pillar candles in hurricane glasses, a crystal chandelier above, twin staircases with lit garlands and tall windows with snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "white-gold"
+      },
+      "focus": "the round table centrepiece",
+      "ambient": "Candle flames flicker gently in the hurricane glasses. Snow falls outside the tall windows.",
+      "motion_elements": "the candle flames, the garland lights and the snow outside the tall windows"
+    },
+    {
+      "id": "staircase-hallway-07",
+      "subject": "A close view of a carved wooden newel post wrapped in pine garland with fairy lights, gold baubles and a large red velvet bow, the lit staircase rising softly out of focus behind; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro",
+        "snow": "none",
+        "palette": "red-green"
+      },
+      "camera": "push-in",
+      "focus": "the red bow on the newel post",
+      "ambient": "The fairy lights glow and twinkle softly along the garland.",
+      "motion_elements": "the fairy lights on the garland",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "staircase-hallway-08",
+      "subject": "A Victorian stair hall with dark mahogany panelling, a turned-spindle staircase dressed in holly and warm lights, a brass lantern glowing on the newel post and a tall arched leaded-glass window on the landing with snow falling outside; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      }
+    },
+    {
+      "id": "staircase-hallway-09",
+      "subject": "A Scandinavian hallway in white and pale oak, an open-tread staircase with glowing paper star lanterns hanging down the stairwell, a slim tree with warm lights by the bottom step and a tall narrow window onto snowy birches; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "white-gold"
+      },
+      "focus": "the paper star lanterns in the stairwell",
+      "motion_elements": "the paper star lanterns, the tree lights and the snow outside the window"
+    },
+    {
+      "id": "staircase-hallway-10",
+      "subject": "A cottage hallway with low beams and whitewashed stone walls, a narrow wooden staircase with an ivy garland and fairy lights, an iron lantern with a candle hanging over the stairs and a deep-set window with snow outside; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "tilt-up",
+      "focus": "the lantern above the stairs",
+      "ambient": "The candle flickers gently in the hanging lantern. Snow falls outside the window.",
+      "motion_elements": "the lantern candle, the fairy lights and the snow outside the window"
+    },
+    {
+      "id": "staircase-hallway-11",
+      "subject": "A close view of a hall console table with a pillar candle in a hurricane glass, a small boxwood wreath, a bowl of pine cones and gold ornaments, the lit staircase garland softly blurred behind; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "camera": "push-in",
+      "focus": "the candle in the hurricane glass",
+      "ambient": "The candle flame flickers gently in the hurricane glass.",
+      "motion_elements": "the candle flame and the garland lights",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "staircase-hallway-12",
+      "subject": "A spiral staircase in the round stone stairwell of an old country house, the iron railing wound from bottom to top with a pine garland and warm lights, a decorated tree at the bottom and a tall narrow window with falling snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the spiral of lit garland"
+    },
+    {
+      "id": "staircase-hallway-13",
+      "subject": "A mudroom entry with wooden cubbies, knit hats and mittens in woven baskets, a wooden sled leaning on the wall, a glowing lantern on the floor and a small wreath on the back door window showing falling snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      },
+      "camera": "slide",
+      "focus": "the cubbies and the sled",
+      "ambient": "The candle flickers in the lantern. Snow falls outside the door window.",
+      "motion_elements": "the lantern, the string lights over the cubbies and the snow outside the door window"
+    },
+    {
+      "id": "staircase-hallway-14",
+      "subject": "An upstairs landing with a wide window, fairy lights along the balustrade, a wooden chest stacked with wrapped gifts, a potted fir with warm lights and snow falling over lit village rooftops outside; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "push-in",
+      "focus": "the landing window"
+    },
+    {
+      "id": "staircase-hallway-15",
+      "subject": "A modern double-height entrance hall with a glass wall, a floating oak staircase, a very tall slim Christmas tree reaching up to the upper floor, warm fairy lights and snow falling on dark pines outside the glass; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "white-gold"
+      },
+      "focus": "the top of the tall tree",
+      "motion_elements": "the tree lights and the snow outside the glass wall"
+    },
+    {
+      "id": "staircase-hallway-16",
+      "subject": "A close view of wooden stair treads decorated with small glass lanterns holding candles, pine sprigs and red berries on each step, the lit garland on the banister glowing above; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro",
+        "snow": "none",
+        "palette": "red-green"
+      },
+      "camera": "tilt-up",
+      "focus": "the garland lights at the top of the stairs",
+      "ambient": "Candle flames flicker gently in the glass lanterns.",
+      "motion_elements": "the candle flames in the lanterns and the garland lights",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "staircase-hallway-17",
+      "subject": "A Tudor-style entrance hall with a stone fireplace burning near the foot of an oak staircase, a garland with lights across the mantel and banister, stockings on the mantel and leaded windows with snow outside; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide",
+      "focus": "the fireplace and the staircase",
+      "ambient": "The fire flickers in the stone fireplace. Snow falls outside the leaded windows.",
+      "motion_elements": "the fire, the garland lights and the snow outside the leaded windows"
+    },
+    {
+      "id": "staircase-hallway-18",
+      "subject": "A bright hallway on a winter morning, a white staircase with a fresh cedar garland and cream ribbons, sunlight through a snowy window across the wooden floor, a basket of pine cones and a small tree with warm lights; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "time": "day",
+        "palette": "white-gold"
+      },
+      "ambient": "Light snow drifts past the window.",
+      "look": "winter-day"
+    },
+    {
+      "id": "staircase-hallway-19",
+      "subject": "A long upstairs gallery in a country manor, a row of tall windows onto a snowy park on one side, a pine garland with lights along the railing and a line of small potted trees with warm lights; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide",
+      "focus": "the row of lit trees",
+      "motion_elements": "the garland lights, the tree lights and the snow outside the tall windows"
+    },
+    {
+      "id": "staircase-hallway-20",
+      "subject": "A close view of a hall windowsill with a row of candles in brass holders, a pine sprig and a small wreath, snow falling heavily outside the old wavy glass; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the candles on the windowsill",
+      "ambient": "Candle flames flicker gently. Snow falls heavily outside the window.",
+      "motion_elements": "the candle flames and the falling snow outside",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "theme": "home/house-lights",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "twilight",
+    "motion_elements": "the house lights and the falling snow",
+    "camera": "drone",
+    "focus": "the lit house",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls. Warm lights glow in every window.",
+    "tags": {
+      "place": "outdoor",
+      "time": "twilight",
+      "palette": "warm-gold",
+      "scale": "street",
+      "snow": "falling",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "house-lights-01",
+      "subject": "A Victorian house with turrets and a wraparound porch, warm white lights outlining every roofline, gable and window, a tall lit fir in the front yard and snow falling on the lawn; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows"
+    },
+    {
+      "id": "house-lights-02",
+      "subject": "A farmhouse on a snowy hill with a big red barn trimmed in lights, a huge lit pine in the yard, a wooden fence wrapped in garland and open fields under snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "vista",
+        "palette": "red-green"
+      },
+      "focus": "the farmhouse and the lit barn"
+    },
+    {
+      "id": "house-lights-03",
+      "subject": "A stone cottage with glowing windows, a wreath on the door, lights along the slate roof edge, smoke rising from the chimney and snow on the garden wall; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "push-in",
+      "focus": "the cottage door",
+      "ambient": "Snow falls. Smoke curls up from the chimney. Warm lights glow in every window.",
+      "motion_elements": "the house lights, the chimney smoke and the falling snow"
+    },
+    {
+      "id": "house-lights-04",
+      "subject": "A street of houses in lights, lit trees in the front windows, garlands on the porches, snowy front lawns and a row of lit trees along the sidewalk; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide",
+      "focus": "the row of lit houses"
+    },
+    {
+      "id": "house-lights-05",
+      "subject": "A lakeside house with lights reflecting on the frozen lake, a wooden dock wrapped in lights and a dark pine forest behind; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "vista"
+      },
+      "focus": "the lakeside house",
+      "motion_elements": "the house lights, their reflections on the ice and the falling snow"
+    },
+    {
+      "id": "house-lights-06",
+      "subject": "A hilltop manor at the end of a long drive lined with lit trees, every window glowing with a wreath and a lit tree by the front steps; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "vista"
+      },
+      "focus": "the manor at the end of the drive"
+    },
+    {
+      "id": "house-lights-07",
+      "subject": "A small A-frame cabin in the woods with its triangle outlined in warm lights, a lit tree on the deck and smoke rising from the chimney; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "push-in",
+      "focus": "the A-frame cabin",
+      "ambient": "Snow falls. Smoke curls up from the chimney. Warm lights glow in every window.",
+      "motion_elements": "the cabin lights, the chimney smoke and the falling snow"
+    },
+    {
+      "id": "house-lights-08",
+      "subject": "A row of narrow gabled townhouses along a canal, candle arches glowing in every window, lights along the gables and reflections on the dark water; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide",
+      "focus": "the row of townhouses",
+      "ambient": "Snow falls. The lights shimmer softly on the water.",
+      "motion_elements": "the window lights, their reflections on the water and the falling snow"
+    },
+    {
+      "id": "house-lights-09",
+      "subject": "A white clapboard colonial house with a candle glowing in every window, a big wreath over the door and two lit trees by the front steps; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      },
+      "camera": "push-in",
+      "focus": "the front of the house"
+    },
+    {
+      "id": "house-lights-10",
+      "subject": "A close view of icicle lights hanging from a snowy roof edge above a glowing window, snowflakes falling; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro",
+        "palette": "white-gold"
+      },
+      "camera": "tilt-up",
+      "focus": "the icicle lights along the roof edge",
+      "ambient": "Snow falls softly past the icicle lights.",
+      "motion_elements": "the icicle lights and the falling snow",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "house-lights-11",
+      "subject": "The front garden of a country house at the end of a snowy lane, a lit tree in the garden and a garland with lights over a wooden gate, forest behind; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "push-in",
+      "focus": "the lit garden gate"
+    },
+    {
+      "id": "house-lights-12",
+      "subject": "Three farmhouses on a snowy valley floor, each outlined in warm lights with a lit tree in its yard, mountains behind in the blue dusk; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "vista"
+      },
+      "camera": "crane-up",
+      "focus": "the lit farmhouses"
+    },
+    {
+      "id": "house-lights-13",
+      "subject": "A brick Georgian townhouse with garland swags and lights over the door and windows, window boxes of pine with lights and iron lanterns at the gate; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      },
+      "camera": "push-in",
+      "focus": "the front door"
+    },
+    {
+      "id": "house-lights-14",
+      "subject": "A modern glass-and-timber house on a snowy slope, a lit tree visible through the tall windows, string lights along the deck railing and small lit pines on the terrace; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "push-in",
+      "focus": "the lit tree behind the tall windows"
+    },
+    {
+      "id": "house-lights-15",
+      "subject": "A close view of small spruces wrapped in warm lights and a lit lantern on a post in a snowy front garden, the glowing house blurred behind; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the lit spruces",
+      "motion_elements": "the tree lights, the lantern and the falling snow",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "house-lights-16",
+      "subject": "A grand house blazing with thousands of lights on the roofline, trees and bushes, a lit arch over the front walk and a huge lit tree on the lawn; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "time": "night",
+        "energy": "lively"
+      },
+      "look": "night-lights"
+    },
+    {
+      "id": "house-lights-17",
+      "subject": "A log cabin in a snowy clearing with lights along the eaves, glowing windows, a lit wreath on the door, a sled by the steps and wood smoke rising from the chimney; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "push-in",
+      "focus": "the log cabin",
+      "ambient": "Snow falls. Smoke curls up from the chimney. Warm lights glow in every window.",
+      "motion_elements": "the cabin lights, the chimney smoke and the falling snow"
+    },
+    {
+      "id": "house-lights-18",
+      "subject": "A farmhouse at sunset with its lights just starting to glow, long shadows across the snow, a big lit tree in the yard and smoke rising from the chimney; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "time": "golden",
+        "snow": "lying"
+      },
+      "ambient": "Smoke rises slowly from the chimney. The lights glow softly in the low sun.",
+      "look": "golden",
+      "motion_elements": "the house lights and the chimney smoke"
+    },
+    {
+      "id": "house-lights-19",
+      "subject": "A half-timbered house with warm lights along the eaves and wooden balcony, window boxes of fir, a lit tree by the arched door and snow falling in the lane; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "push-in",
+      "focus": "the arched door"
+    },
+    {
+      "id": "house-lights-20",
+      "subject": "A close view of a string of large vintage bulbs along a snowy fence rail, warm glow on the snow, the lit house softly blurred behind; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "slide",
+      "focus": "the vintage bulbs on the fence",
+      "ambient": "Snow falls softly past the glowing bulbs.",
+      "motion_elements": "the vintage bulbs and the falling snow",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

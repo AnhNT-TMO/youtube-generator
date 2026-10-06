@@ -1,0 +1,48 @@
+{
+  "_comment": "Example: cool white light and two snow layers drifting in from the top-left corner. Copy and tune per image.",
+  "light": {
+    "shapes": [
+      [[0.30, -0.10], [0.62, -0.10], [0.75, 1.00], [0.20, 1.00]],
+      {"ellipse": [0.85, 0.12, 0.12, 0.10]}
+    ],
+    "color": [235, 242, 255],
+    "amount": 0.14,
+    "blur_px": 170,
+    "waves": [{"period": 9.0, "amp": 0.30}, {"period": 4.0, "amp": 0.10, "phase": 0.7}]
+  },
+  "particles": [
+    {
+      "from": "top-left",
+      "count": 380,
+      "shape": "dot",
+      "color": [255, 255, 255],
+      "intensity": 150,
+      "size_px": [1, 5],
+      "cross_seconds": 22,
+      "parallax": 0.6,
+      "sway_px": [6, 24],
+      "twinkle_depth": 0.4,
+      "seed": 11
+    },
+    {
+      "from": "top-left",
+      "count": 40,
+      "shape": "flake",
+      "color": [255, 255, 255],
+      "intensity": 210,
+      "size_px": [6, 11],
+      "cross_seconds": 14,
+      "parallax": 0.4,
+      "sway_px": [20, 60],
+      "sway_seconds": [8, 16],
+      "twinkle_depth": 0.2,
+      "seed": 12
+    }
+  ],
+  "bars": {
+    "color_tip": [255, 255, 255],
+    "color_base": [196, 214, 240],
+    "glow_color": [200, 220, 255],
+    "scrim": 0.16
+  }
+}

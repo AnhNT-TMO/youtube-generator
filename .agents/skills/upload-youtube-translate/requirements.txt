@@ -1,0 +1,6 @@
+# Python 3.12. Cài (từ gốc repo):
+#   python3.12 -m venv .claude/skills/upload-youtube-translate/.venv
+#   .claude/skills/upload-youtube-translate/.venv/bin/pip install -r .claude/skills/upload-youtube-translate/requirements.txt
+google-api-python-client
+google-auth-oauthlib
+pyyaml

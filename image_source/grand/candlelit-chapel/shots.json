@@ -1,0 +1,197 @@
+{
+  "theme": "grand/candlelit-chapel",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "interior-evening",
+    "motion_elements": "the candle flames and the snow outside the windows",
+    "camera": "push-in",
+    "focus": "the altar candles",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Candle flames flicker softly.",
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "warm-gold",
+      "scale": "room",
+      "snow": "window",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "candlelit-chapel-01",
+      "subject": "A small stone chapel aisle lined on both sides with pillar candles in glass lanterns, wooden pews with pine sprigs and red ribbons on each end, leading to an altar with an advent wreath and arched windows with snow outside"
+    },
+    {
+      "id": "candlelit-chapel-02",
+      "subject": "A plain stone altar with a white cloth, a large fir advent wreath with four lit candles, tall brass candlesticks and a pine garland, a stained-glass window of abstract gold and ruby patterns glowing behind",
+      "tags": {
+        "snow": "none"
+      },
+      "focus": "the advent wreath",
+      "ambient": "Candle flames flicker softly."
+    },
+    {
+      "id": "candlelit-chapel-03",
+      "subject": "A small country stone church in the snow at dusk, warm light glowing through its arched windows, a wreath on the wooden door and a lantern-lined path through the snowy churchyard with pines behind",
+      "tags": {
+        "place": "outdoor",
+        "time": "twilight",
+        "scale": "street",
+        "snow": "falling"
+      },
+      "look": "twilight",
+      "camera": "crane-up",
+      "focus": "the church",
+      "motion_elements": "the glowing windows, the path lanterns and the falling snow",
+      "ambient": "Snow falls. Lantern flames flicker along the path."
+    },
+    {
+      "id": "candlelit-chapel-04",
+      "subject": "A tall arched stained-glass window of abstract geometric patterns in gold, ruby and blue glowing at night above a stone sill crowded with lit candles and a pine garland",
+      "tags": {
+        "snow": "none"
+      },
+      "camera": "tilt-up",
+      "focus": "the stained-glass window",
+      "motion_elements": "the candle flames and the glow of the stained glass"
+    },
+    {
+      "id": "candlelit-chapel-05",
+      "subject": "Low side view along one row of dark oak chapel pews, the camera at the end of a pew looking across the row: small wreaths of box leaves and red berries on each pew end and a lit candle in a glass jar on the stone floor beside each, the candlelight receding diagonally; plain clear leaded windows with snow outside",
+      "tags": {
+        "snow": "none"
+      },
+      "camera": "slide",
+      "focus": "the pew ends and wreaths"
+    },
+    {
+      "id": "candlelit-chapel-06",
+      "subject": "A view from the wooden choir loft of a stone chapel, over a balustrade draped in garland, across rows of empty pews to a candlelit altar with a tall lit tree beside it",
+      "focus": "the candlelit altar"
+    },
+    {
+      "id": "candlelit-chapel-07",
+      "subject": "A whitewashed Scandinavian wooden chapel with simple pews, rows of white candles in black iron candelabras, a straw star hanging in each small square window and snow falling outside"
+    },
+    {
+      "id": "candlelit-chapel-08",
+      "subject": "A tiered brass candle stand of small votive candles glowing against a stone wall, a sprig of pine and red berries at its base",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "focus": "the votive candles",
+      "motion_elements": "the votive candle flames",
+      "ambient": "The small candle flames flicker softly.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "candlelit-chapel-09",
+      "subject": "A Romanesque stone chapel with a barrel-vaulted ceiling, a hanging iron wheel chandelier of lit candles above the aisle, garlands spiralled on the columns and small arched windows with snow outside",
+      "camera": "crane-up",
+      "focus": "the candle chandelier",
+      "motion_elements": "the candle flames on the chandelier and the altar, and the snow outside the windows",
+      "ambient": "Candle flames flicker on the hanging chandelier and the altar."
+    },
+    {
+      "id": "candlelit-chapel-10",
+      "subject": "A chapel side altar niche with a bank of lit candles, a wreath hung on the stone wall, white winter roses and pine in a stone urn and an arched window with snow falling outside",
+      "focus": "the bank of candles"
+    },
+    {
+      "id": "candlelit-chapel-11",
+      "subject": "A tall Gothic chapel nave with pointed stone arches, candle lanterns on every column, a long red runner down the aisle between garland-trimmed pews and tall lancet windows at the far end",
+      "focus": "the far end of the nave"
+    },
+    {
+      "id": "candlelit-chapel-12",
+      "subject": "A carved wooden pipe organ in a chapel loft, its console lit by two brass candle lamps, a garland with warm lights along the pipes and candlelit pews below",
+      "tags": {
+        "snow": "none"
+      },
+      "camera": "tilt-up",
+      "focus": "the organ pipes",
+      "motion_elements": "the candle flames and the garland lights"
+    },
+    {
+      "id": "candlelit-chapel-13",
+      "subject": "A white wooden country chapel with a slim steeple in a snowy meadow at golden hour, a wreath on its red door, candles glowing in the windows, snowy pines and a split-rail fence, light snow flurries sparkling in the sun",
+      "tags": {
+        "place": "outdoor",
+        "time": "golden",
+        "scale": "vista",
+        "snow": "falling"
+      },
+      "look": "golden",
+      "camera": "drone",
+      "focus": "the chapel",
+      "motion_elements": "the glowing windows and the falling snow flurries",
+      "ambient": "Light snow flurries drift down. Candlelight glows in the windows."
+    },
+    {
+      "id": "candlelit-chapel-14",
+      "subject": "An advent wreath of fir, holly and pinecones with four ivory candles lit, resting on dark wood, candlelight catching the holly berries and the altar glow blurred behind",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "focus": "the advent wreath candles",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "candlelit-chapel-15",
+      "subject": "The arched oak chapel door seen from inside, standing open onto a snowy churchyard with lanterns, a large wreath on the door and candle lanterns on the stone floor on either side",
+      "focus": "the open door and the snow outside",
+      "motion_elements": "the lantern flames and the snow falling outside the door",
+      "ambient": "Snow falls outside the open door. Lantern candles flicker."
+    },
+    {
+      "id": "candlelit-chapel-16",
+      "subject": "A circular stone chapel with a domed roof, pews arranged in a ring around a central table with a large advent wreath of lit candles, candle sconces on the walls and small round windows with snow outside",
+      "camera": "arc",
+      "focus": "the central advent wreath"
+    },
+    {
+      "id": "candlelit-chapel-17",
+      "subject": "A carved stone baptismal font ringed with a pine wreath and small candles, lit candle sconces on the pillars nearby and a geometric stained-glass window glowing behind",
+      "tags": {
+        "snow": "none"
+      },
+      "camera": "arc",
+      "focus": "the stone font"
+    },
+    {
+      "id": "candlelit-chapel-18",
+      "subject": "A hanging iron lantern with a lit candle inside, pine wrapped around its chain, a stone arch and the candlelit chapel softly blurred behind",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "camera": "push-in",
+      "focus": "the iron lantern",
+      "motion_elements": "the candle flame in the lantern and the candle bokeh",
+      "ambient": "The candle flame flickers inside the lantern.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "candlelit-chapel-19",
+      "subject": "A small mountain chapel of dark timber with a beamed ceiling, iron lanterns hanging from the beams, a simple altar with a small pine lit with candle-style lights and large windows onto snowy peaks at night",
+      "focus": "the lit tree by the altar",
+      "motion_elements": "the lantern flames, the tree lights and the snow outside the windows",
+      "ambient": "Lantern flames flicker. Snow falls outside the windows."
+    },
+    {
+      "id": "candlelit-chapel-20",
+      "subject": "A dark oak pew end with a small wreath tied with a red velvet ribbon and a lit candle in a glass lantern on the floor, the candlelit aisle blurred behind",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "focus": "the pew wreath and lantern",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "library": "christmas",
+  "title": "Christmas scenes: ChatGPT stills → muse.ai 10 s clips",
+  "shots": "*/*/shots.json",
+  "image": {
+    "rules": "README.md",
+    "review_section": "Duyệt ảnh (bắt buộc trước khi sang muse)",
+    "min_width": 1600,
+    "ratio": [
+      1.7,
+      1.85
+    ],
+    "codes": [
+      "people",
+      "text",
+      "physics",
+      "motion-missing",
+      "off-brief",
+      "not-photo",
+      "format",
+      "duplicate"
+    ],
+    "card_fields": [
+      "clip"
+    ]
+  },
+  "video": {
+    "rules": "VIDEO.md",
+    "min_seconds_after_trim": 7,
+    "codes": [
+      "indoor-particles",
+      "people",
+      "morph",
+      "text",
+      "lights",
+      "camera-still",
+      "camera-far",
+      "scene-cut",
+      "brightness"
+    ],
+    "prompt": "video_prompt.json",
+    "motion_reject": 0.35,
+    "zoom_reject": 1.2
+  }
+}

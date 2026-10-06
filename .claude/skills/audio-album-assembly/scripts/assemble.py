@@ -44,6 +44,8 @@ LONG_EDGE_S = 2.0
 LIMITER_WARN_DB = 3.0
 CHAPTER_MIN_S = 10
 CHECK_FAILED = 4
+INTRO_FADE_S = 12.0
+INTRO_PROBE_S = 20
 
 
 def die(msg, code=1):
@@ -128,6 +130,14 @@ def crossfade_of(album, arg):
     if not isinstance(rules.get("crossfade_s"), (int, float)):
         die(f"không có crossfade_s trong {rel(f)}: thêm vào album_rules.md hoặc dùng --crossfade")
     return float(rules["crossfade_s"])
+
+
+def intro_fade_of(album):
+    rules, f = rules_of(album)
+    v = rules.get("intro_fade_s", INTRO_FADE_S)
+    if not isinstance(v, (int, float)) or v < 0:
+        die(f"intro_fade_s trong {rel(f)} phải là số giây ≥ 0")
+    return float(v)
 
 
 def remote(args, stdin=None, ok=(0,), fatal=True):
@@ -236,12 +246,17 @@ def measure(t):
     loud = loudness_summary(err)
     if loud["lufs_i"] is None:
         die(f"{rel(t['path'])}: không đo được loudness")
+    probe = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-ss", f"{in_s:.3f}", "-t", str(INTRO_PROBE_S),
+                            "-i", str(t["path"]), "-af", "ebur128=framelog=quiet", "-f", "null", "-"],
+                           capture_output=True, text=True).stderr
+    intro_lufs = loudness_summary(probe)["lufs_i"]
     start_sample, end_sample = round(in_s * rate), round(out_s * rate)
     return {"file_s": dur, "rate": rate, "channels": ch, "start_sample": start_sample, "end_sample": end_sample,
-            "in_s": start_sample / rate, "out_s": end_sample / rate, **loud}
+            "in_s": start_sample / rate, "out_s": end_sample / rate,
+            "intro_lu": round(intro_lufs - loud["lufs_i"], 1) if intro_lufs is not None else None, **loud}
 
 
-def filter_graph(tracks, xf, limit_db):
+def filter_graph(tracks, xf, limit_db, fade_in):
     parts = []
     for i, t in enumerate(tracks):
         parts.append(f"[{i}:a]atrim=start_sample={t['start_sample']}:end_sample={t['end_sample']},asetpts=PTS-STARTPTS,"
@@ -256,17 +271,18 @@ def filter_graph(tracks, xf, limit_db):
     else:
         parts.append("".join(f"[t{i}]" for i in range(n)) + f"concat=n={n}:v=0:a=1[x0]")
         cur = "x0"
-    parts.append(f"[{cur}]aresample={SR * OVERSAMPLE}:resampler=soxr,"
+    fade = f"afade=t=in:st=0:d={fade_in:g}:curve=hsin," if fade_in > 0 else ""
+    parts.append(f"[{cur}]{fade}aresample={SR * OVERSAMPLE}:resampler=soxr,"
                  f"alimiter=limit={10 ** (limit_db / 20):.5f}:attack=5:release=50:level=0:latency=1,"
                  f"aresample={SR}:resampler=soxr[out]")
     return ";".join(parts)
 
 
-def render_once(tracks, xf, limit_db, out_wav):
+def render_once(tracks, xf, limit_db, fade_in, out_wav):
     cmd = ["ffmpeg", "-v", "error", "-y"]
     for t in tracks:
         cmd += ["-i", str(t["path"])]
-    cmd += ["-filter_complex", filter_graph(tracks, xf, limit_db), "-map", "[out]", "-ar", str(SR),
+    cmd += ["-filter_complex", filter_graph(tracks, xf, limit_db, fade_in), "-map", "[out]", "-ar", str(SR),
             "-c:a", "pcm_s24le", str(out_wav)]
     if subprocess.run(cmd).returncode:
         die("ffmpeg lỗi khi ghép")
@@ -278,6 +294,7 @@ def render_once(tracks, xf, limit_db, out_wav):
 def render_local(album, a):
     tracks = load_tracks(album)
     xf = crossfade_of(album, a.crossfade)
+    fade_in = intro_fade_of(album)
     print(f"{album.name}: đo {len(tracks)} bài (im lặng hai đầu, loudness)…", flush=True)
     with ThreadPoolExecutor(MEASURE_JOBS) as ex:
         for t, m in zip(tracks, ex.map(measure, tracks)):
@@ -290,7 +307,7 @@ def render_local(album, a):
     limit_db = TP_MAX - LIMIT_MARGIN_DB
     for attempt in range(1, RENDER_TRIES + 1):
         print(f"ghép lần {attempt}: crossfade {xf:g} s, limiter {limit_db:.1f} dB…", flush=True)
-        res = render_once(tracks, xf, limit_db, out_wav)
+        res = render_once(tracks, xf, limit_db, fade_in, out_wav)
         print(f"  {res['duration_s'] / 60:.2f} phút · {res['lufs_i']} LUFS · true peak {res['true_peak_db']} dBTP", flush=True)
         off = TARGET_LUFS - res["lufs_i"]
         if abs(off) <= LUFS_TOL and res["true_peak_db"] <= TP_MAX:
@@ -313,12 +330,13 @@ def render_local(album, a):
                      "gain_db": round(t["gain_db"], 2), "start_s": round(pos, 3), "end_s": round(pos + dur, 3)})
         pos += dur - xf
     data = {"album": album.name, "master": f"audio/master/{album.name}.wav",
-            "duration_s": round(res["duration_s"], 3), "crossfade_s": xf, "target_lufs": TARGET_LUFS, "tracks": rows,
+            "duration_s": round(res["duration_s"], 3), "crossfade_s": xf, "intro_fade_s": fade_in, "target_lufs": TARGET_LUFS, "tracks": rows,
             "measured": {"rendered": str(date.today()), "lufs_i": res["lufs_i"], "true_peak_db": res["true_peak_db"],
                          "lra": res["lra"], "limiter_db": round(limit_db, 2), "renders": attempt,
                          "expected_duration_s": round(pos + xf, 3),
                          "sources": [{"track_no": t["track_no"], "file_s": round(t["file_s"], 3),
-                                      "lufs_i": t["lufs_i"], "true_peak_db": t["true_peak_db"]} for t in tracks]}}
+                                      "lufs_i": t["lufs_i"], "true_peak_db": t["true_peak_db"],
+                                      "intro_lu": t["intro_lu"]} for t in tracks]}}
     (album / "assembly.json").write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n")
     return write_report(album, data)
 
@@ -344,6 +362,11 @@ def checks(album, d):
     add(len(tr) >= 3 and min(spans) >= CHAPTER_MIN_S and tr[0]["start_s"] == 0,
         f"chapters YouTube: ≥ 3 bài, bài 1 ở 0:00, mỗi chapter ≥ {CHAPTER_MIN_S} s", f"{len(tr)} bài, ngắn nhất {min(spans):.0f} s")
     src = {s["track_no"]: s for s in m["sources"]}
+    intro = {k: s.get("intro_lu") for k, s in src.items() if s.get("intro_lu") is not None}
+    if d.get("intro_fade_s") and intro:
+        softest = min(intro, key=intro.get)
+        add(None if softest != 1 else True, f"bài 1 mở êm (fade-in {d['intro_fade_s']:g} s; {INTRO_PROBE_S} s đầu so với cả bài, "
+            "êm nhất nên mở album)", f"bài 1 {intro.get(1, '—')} LU · êm nhất: bài {softest} {intro[softest]} LU")
     for t in tr:
         s = src[t["track_no"]]
         lead, tail = t["in_s"], s["file_s"] - t["out_s"]
@@ -361,7 +384,7 @@ def write_report(album, d):
     m = d["measured"]
     src = {s["track_no"]: s for s in m["sources"]}
     L = [f"# Ghép album: {d['album']}", "",
-         f"_audio-album-assembly `assemble.py` · {m['rendered']} · crossfade {d['crossfade_s']:g} s equal-power · "
+         f"_audio-album-assembly `assemble.py` · {m['rendered']} · crossfade {d['crossfade_s']:g} s equal-power · fade-in đầu album {d.get('intro_fade_s', 0):g} s · "
          f"{d['target_lufs']:g} LUFS · true peak ≤ {TP_MAX:g} dBTP · sinh từ assembly.json, đừng sửa tay._", "",
          f"Master: `{d['master']}` (+ `.mp3`) · **{clock(d['duration_s'])}** ({d['duration_s'] / 60:.1f} phút) · "
          f"{len(d['tracks'])} bài · không cắt, không sửa gì trong bài: chỉ bỏ im lặng số (< {SILENCE_DB} dBFS) ở hai "

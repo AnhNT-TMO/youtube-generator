@@ -1,0 +1,256 @@
+{
+  "theme": "detail/candles-table",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "interior-evening",
+    "motion_elements": "the candle flames and the steam from the cup",
+    "camera": "push-in",
+    "focus": "the candles",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Candle flames flicker softly. Steam rises from the cup.",
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "warm-gold",
+      "scale": "macro",
+      "snow": "window",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "candles-table-01",
+      "subject": "An Advent wreath of fir, pine cones and red berries with four red candles burning on a wooden table, a window behind with snow falling",
+      "focus": "the Advent wreath",
+      "motion_elements": "the four candle flames and the snow outside the window",
+      "ambient": "The four candle flames flicker softly. Snow falls outside the window.",
+      "tags": {
+        "palette": "red-green"
+      },
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "candles-table-02",
+      "subject": "A mug of hot cocoa topped with marshmallows on a window sill, steam rising, a small candle lantern beside it and snow falling outside",
+      "focus": "the mug of cocoa",
+      "motion_elements": "the steam from the cocoa, the candle flame and the snow outside",
+      "ambient": "Steam rises from the cocoa. The candle flame flickers. Snow falls outside the window.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "candles-table-03",
+      "subject": "A plate of gingerbread cookies in star and tree shapes and a thick pillar candle burning on a linen cloth, warm fairy-light bokeh behind",
+      "lens": "100mm macro lens at f/4",
+      "motion_elements": "the candle flame and the bokeh lights",
+      "ambient": "The candle flame flickers softly.",
+      "tags": {
+        "snow": "none"
+      },
+      "camera": "slide"
+    },
+    {
+      "id": "candles-table-04",
+      "subject": "A glass lantern with a burning candle standing in snow on a porch step at blue hour, pine branches around it and snow falling",
+      "lens": "100mm macro lens at f/4",
+      "look": "twilight",
+      "motion_elements": "the candle flame and the falling snow",
+      "ambient": "The candle flame flickers inside the lantern. Snow falls.",
+      "tags": {
+        "place": "outdoor",
+        "time": "twilight",
+        "palette": "cool-blue",
+        "snow": "falling"
+      },
+      "focus": "the candle lantern"
+    },
+    {
+      "id": "candles-table-05",
+      "subject": "A cup of spiced tea with cinnamon sticks and star anise on a saucer, steam rising, white candles burning behind in gold bokeh",
+      "lens": "100mm macro lens at f/4",
+      "focus": "the teacup",
+      "tags": {
+        "palette": "white-gold",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "candles-table-06",
+      "subject": "Mince pies dusted with icing sugar on a wooden board, a teapot with steam curling from its spout and a candle burning beside",
+      "lens": "100mm macro lens at f/4",
+      "focus": "the mince pies",
+      "motion_elements": "the steam from the teapot and the candle flame",
+      "ambient": "Steam curls from the teapot spout. The candle flame flickers.",
+      "tags": {
+        "snow": "none"
+      },
+      "camera": "slide"
+    },
+    {
+      "id": "candles-table-07",
+      "subject": "Glass mugs of mulled wine with orange slices and cinnamon sticks, steaming, sprigs of holly and red candles burning beside them",
+      "lens": "100mm macro lens at f/4",
+      "focus": "the mugs of mulled wine",
+      "motion_elements": "the steam from the mugs and the candle flames",
+      "ambient": "Steam rises from the mugs. Candle flames flicker.",
+      "tags": {
+        "palette": "red-green",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "candles-table-08",
+      "subject": "Tall white taper candles in brass holders on a festive dinner table set with crystal glasses and gold charger plates",
+      "lens": "50mm lens at f/2.8",
+      "camera": "slide",
+      "focus": "the candles",
+      "motion_elements": "the candle flames and their reflections in the glasses",
+      "ambient": "Candle flames flicker softly.",
+      "tags": {
+        "palette": "white-gold",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "candles-table-09",
+      "subject": "White candles in glass jars on a frosted window ledge, deep blue twilight outside and snow falling past the glass",
+      "lens": "100mm macro lens at f/4",
+      "look": "twilight",
+      "motion_elements": "the candle flames and the snow outside",
+      "ambient": "Candle flames flicker softly. Snow falls outside the window.",
+      "tags": {
+        "palette": "cool-blue",
+        "time": "twilight"
+      }
+    },
+    {
+      "id": "candles-table-10",
+      "subject": "Slices of stollen dusted with powdered sugar beside a steaming cup of coffee and a candle lantern on a wooden table",
+      "lens": "100mm macro lens at f/4",
+      "focus": "the stollen",
+      "motion_elements": "the steam from the coffee and the lantern candle",
+      "ambient": "Steam rises from the coffee. The candle flame flickers inside the lantern.",
+      "tags": {
+        "snow": "none"
+      },
+      "camera": "slide"
+    },
+    {
+      "id": "candles-table-11",
+      "subject": "A glass jar of candy canes, a burning red candle and a plate of sugar cookies iced with plain swirls on a green napkin",
+      "lens": "100mm macro lens at f/4",
+      "focus": "the candle",
+      "motion_elements": "the candle flame and the bokeh lights",
+      "ambient": "The candle flame flickers softly.",
+      "tags": {
+        "palette": "red-green",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "candles-table-12",
+      "subject": "A row of tea lights glowing in amber glass holders along a mantel dressed with a pine garland and warm fairy lights",
+      "lens": "50mm lens at f/2.8",
+      "camera": "slide",
+      "focus": "the row of tea lights",
+      "motion_elements": "the tea light flames and the fairy lights",
+      "ambient": "The tea light flames flicker softly.",
+      "tags": {
+        "snow": "none"
+      }
+    },
+    {
+      "id": "candles-table-13",
+      "subject": "A white-frosted Christmas cake on a cake stand, topped with rosemary sprigs and sugared cranberries, white pillar candles burning beside it",
+      "lens": "100mm macro lens at f/4",
+      "focus": "the frosted cake",
+      "motion_elements": "the candle flames and the bokeh lights",
+      "ambient": "Candle flames flicker softly.",
+      "tags": {
+        "palette": "white-gold",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "candles-table-14",
+      "subject": "A silver tray with a steaming teapot, blue and white porcelain cups and silver candlesticks with lit candles, a window behind showing blue-hour snow",
+      "lens": "50mm lens at f/2.8",
+      "look": "twilight",
+      "focus": "the silver tray",
+      "motion_elements": "the steam from the teapot, the candle flames and the snow outside",
+      "ambient": "Steam rises from the teapot. Candle flames flicker. Snow falls outside the window.",
+      "tags": {
+        "palette": "cool-blue",
+        "time": "twilight"
+      },
+      "camera": "slide"
+    },
+    {
+      "id": "candles-table-15",
+      "subject": "A thick beeswax pillar candle burning in the middle of a wreath of pine cones, dried orange slices and cinnamon sticks",
+      "lens": "100mm macro lens at f/4",
+      "motion_elements": "the candle flame and the bokeh lights",
+      "ambient": "The candle flame flickers softly.",
+      "tags": {
+        "snow": "none"
+      }
+    },
+    {
+      "id": "candles-table-16",
+      "subject": "A red mug of hot chocolate with whipped cream and a candy cane on a plaid blanket, a fireplace glowing in soft bokeh behind",
+      "lens": "100mm macro lens at f/4",
+      "focus": "the mug of hot chocolate",
+      "motion_elements": "the steam from the mug and the fire behind",
+      "ambient": "Steam rises from the mug. The fire flickers behind.",
+      "tags": {
+        "palette": "red-green",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "candles-table-17",
+      "subject": "A wooden Advent candle arch with seven warm glowing candle bulbs on a window sill, snow falling outside on a dark garden",
+      "lens": "50mm lens at f/2.8",
+      "focus": "the candle arch",
+      "motion_elements": "the glowing candle bulbs and the snow outside",
+      "ambient": "Snow falls outside the window.",
+      "camera": "slide"
+    },
+    {
+      "id": "candles-table-18",
+      "subject": "Shortbread stacked under a glass cloche beside a steaming cup of milky tea and a white pillar candle on a lace tablecloth",
+      "lens": "100mm macro lens at f/4",
+      "focus": "the glass cloche",
+      "tags": {
+        "palette": "white-gold",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "candles-table-19",
+      "subject": "A bowl of roasted chestnuts, a mug of cider with steam rising and a candle burning on a rustic wooden board",
+      "lens": "100mm macro lens at f/4",
+      "focus": "the mug of cider",
+      "tags": {
+        "snow": "none"
+      }
+    },
+    {
+      "id": "candles-table-20",
+      "subject": "Candles glowing inside frozen ice lanterns on a snowy window ledge outside at blue hour, the warm room faintly lit behind and snow falling",
+      "lens": "100mm macro lens at f/4",
+      "look": "twilight",
+      "focus": "the ice lanterns",
+      "motion_elements": "the candle flames inside the ice and the falling snow",
+      "ambient": "Candle flames flicker inside the ice lanterns. Snow falls.",
+      "tags": {
+        "place": "outdoor",
+        "time": "twilight",
+        "palette": "cool-blue",
+        "snow": "falling"
+      },
+      "camera": "slide"
+    }
+  ]
+}

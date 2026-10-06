@@ -1,0 +1,190 @@
+{
+  "theme": "home/attic-loft",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "interior-evening",
+    "motion_elements": "the fairy lights on the beams and the snow outside the round window",
+    "camera": "push-in",
+    "focus": "the round attic window",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls outside the round window.",
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "warm-gold",
+      "scale": "room",
+      "snow": "window",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "attic-loft-01",
+      "subject": "A sloped-roof attic bedroom with whitewashed timber beams wrapped in fairy lights, a brass bed with a patchwork quilt, a small lit tree and a round window at the gable end with snow falling outside; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows"
+    },
+    {
+      "id": "attic-loft-02",
+      "subject": "An attic window nook with a brass telescope on a tripod facing the round window, a cushioned bench, a small lit tree and snow falling over dark rooftops outside; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the telescope and the round window"
+    },
+    {
+      "id": "attic-loft-03",
+      "subject": "An attic craft corner with a long wooden table covered in spools of red ribbon, rolls of plain wrapping paper, half-wrapped gifts and a desk lamp, fairy lights on the rafters and a dormer window with snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      },
+      "camera": "slide",
+      "focus": "the wrapping table",
+      "ambient": "Snow falls outside the dormer window.",
+      "motion_elements": "the fairy lights on the rafters and the snow outside the dormer window"
+    },
+    {
+      "id": "attic-loft-04",
+      "subject": "An attic reading bed tucked under a skylight with snow falling on the glass, piled pillows, a knitted throw, a small clip-on lamp and warm string lights along the roof slope; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "tilt-up",
+      "focus": "the snowy skylight",
+      "ambient": "Snow falls onto the skylight glass.",
+      "motion_elements": "the string lights and the snow falling on the skylight"
+    },
+    {
+      "id": "attic-loft-05",
+      "subject": "A close view of an old leather trunk open on the attic floorboards, full of vintage glass ornaments, tinsel and a coiled string of glowing lights, the round window softly out of focus behind; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro"
+      },
+      "focus": "the open trunk",
+      "motion_elements": "the glowing string of lights in the trunk and the snow outside the round window",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "attic-loft-06",
+      "subject": "An attic playroom with a wooden toy train on a track around a small lit tree, a wooden rocking horse, a play tent strung with fairy lights and a round window with snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      },
+      "focus": "the toy train around the tree"
+    },
+    {
+      "id": "attic-loft-07",
+      "subject": "A converted attic living space with an exposed brick chimney, a black wood stove glowing, a velvet sofa with throws, a tall lit tree under the ridge beam and a round window at the end; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "ambient": "Firelight flickers in the wood stove. Snow falls outside the round window.",
+      "motion_elements": "the stove fire, the tree lights and the snow outside the round window"
+    },
+    {
+      "id": "attic-loft-08",
+      "subject": "An attic corner with an old upright piano, brass candlesticks with lit candles on top, a garland with lights along the piano and a round window with falling snow beside it; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide",
+      "focus": "the upright piano",
+      "ambient": "Candle flames flicker gently on the piano. Snow falls outside the round window.",
+      "motion_elements": "the candle flames, the garland lights and the snow outside the round window"
+    },
+    {
+      "id": "attic-loft-09",
+      "subject": "A long narrow attic guest room with two iron beds under the sloping roof, red plaid blankets, a garland with lights along the ridge beam and a round window at the far end; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      }
+    },
+    {
+      "id": "attic-loft-10",
+      "subject": "A close view of a small round attic window with frost on the old panes, fairy lights around the frame, a candle and a pine sprig on the sill and snow falling over dark rooftops; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro"
+      },
+      "ambient": "The candle flame flickers gently. Snow falls outside the round window.",
+      "motion_elements": "the candle flame, the fairy lights and the snow outside the round window",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "attic-loft-11",
+      "subject": "An attic painting studio with an easel holding an unfinished snowy landscape, jars of brushes, fairy lights on the rafters, a small lit tree and a large dormer window with falling snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide",
+      "focus": "the easel",
+      "ambient": "Snow falls outside the dormer window.",
+      "motion_elements": "the fairy lights and the snow outside the dormer window"
+    },
+    {
+      "id": "attic-loft-12",
+      "subject": "An attic bedroom on a snowy morning with soft daylight through the round window and a dormer, white bedding, a garland of paper stars and a small tree with warm lights; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "time": "day",
+        "palette": "white-gold"
+      },
+      "ambient": "Light snow drifts past the round window.",
+      "look": "winter-day"
+    },
+    {
+      "id": "attic-loft-13",
+      "subject": "An attic storage corner with stacked vintage suitcases and hatboxes, a glowing candle lantern, a little tree in a zinc pail and a garland with lights along the beam, the round window beside; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide",
+      "focus": "the suitcases and the little tree",
+      "ambient": "The candle flickers in the lantern. Snow falls outside the round window.",
+      "motion_elements": "the lantern candle, the garland lights and the snow outside the round window"
+    },
+    {
+      "id": "attic-loft-14",
+      "subject": "A Scandinavian attic loft in white-painted boards and pale wood, a low bed on the floor, glowing paper star lanterns hanging from the ridge, a slim tree and a round window with snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "white-gold"
+      },
+      "motion_elements": "the paper star lanterns, the tree lights and the snow outside the round window"
+    },
+    {
+      "id": "attic-loft-15",
+      "subject": "An attic window seat built into a dormer with deep cushions, a steaming mug on the sill, fairy lights along the dormer walls and snow falling over a village of lit rooftops; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the dormer window seat",
+      "ambient": "Steam rises from the mug. Snow falls outside the dormer window.",
+      "motion_elements": "the steam from the mug, the fairy lights and the snow outside the dormer window"
+    },
+    {
+      "id": "attic-loft-16",
+      "subject": "A close view of an attic beam wrapped in fairy lights, hung with felt stars, paper snowflakes and a small brass lantern with a candle, the sloped ceiling blurred behind; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "camera": "slide",
+      "focus": "the lit beam",
+      "ambient": "The candle flickers in the small brass lantern.",
+      "motion_elements": "the fairy lights and the candle in the lantern",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "attic-loft-17",
+      "subject": "A Victorian attic bedroom with floral wallpaper, a small cast-iron fireplace with a low fire and stockings, a brass bed with red bedding and a round window with falling snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      },
+      "ambient": "The fire flickers in the small fireplace. Snow falls outside the round window.",
+      "motion_elements": "the fire, the fairy lights and the snow outside the round window"
+    },
+    {
+      "id": "attic-loft-18",
+      "subject": "An attic room seen from the top of the ladder stairs through the open hatch, a bed and a lit tree under rafters wrapped in warm lights, the round window glowing with snow at the far end; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "crane-up",
+      "focus": "the attic room"
+    },
+    {
+      "id": "attic-loft-19",
+      "subject": "An attic room at blue hour, a large round window framing a snowy village with lit windows and a church spire, a small lit tree and candles on the deep sill; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "time": "twilight"
+      },
+      "ambient": "Candle flames flicker on the sill. Snow falls over the village outside.",
+      "look": "twilight",
+      "motion_elements": "the candle flames, the tree lights and the snow outside the round window"
+    },
+    {
+      "id": "attic-loft-20",
+      "subject": "A close view of a wooden dollhouse decorated for Christmas with miniature lights and a tiny tree on an attic shelf, the round window with falling snow blurred behind; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro"
+      },
+      "focus": "the dollhouse",
+      "motion_elements": "the miniature lights and the snow outside the round window",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

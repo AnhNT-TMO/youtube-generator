@@ -1,0 +1,197 @@
+{
+  "theme": "nature/snowy-forest",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "twilight",
+    "motion_elements": "the lanterns and the falling snow",
+    "camera": "push-in",
+    "focus": "the forest trail",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls between the pines.",
+    "tags": {
+      "place": "outdoor",
+      "time": "twilight",
+      "palette": "cool-blue",
+      "scale": "vista",
+      "snow": "falling",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "snowy-forest-01",
+      "subject": "A narrow trail winding through tall snow-laden spruce trees, iron candle lanterns on wooden posts along both sides, a small fir beside the trail wrapped in warm string lights, deep blue sky between the treetops"
+    },
+    {
+      "id": "snowy-forest-02",
+      "subject": "A round forest clearing ringed by tall snowy pines, one lone fir in the middle decorated with warm fairy lights and glass baubles, snow falling through the blue dusk",
+      "camera": "arc",
+      "focus": "the lit fir in the clearing"
+    },
+    {
+      "id": "snowy-forest-03",
+      "subject": "An old wooden sleigh with curved runners parked under heavy snowy pines, a pine garland and warm fairy lights along its rails, two glowing lanterns hanging from its front posts, a folded wool blanket on the seat",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "slide",
+      "focus": "the parked sleigh"
+    },
+    {
+      "id": "snowy-forest-04",
+      "subject": "A deep snowy pine forest seen along a cleared track, a small log cabin far away between the trunks with glowing windows and warm string lights on its porch, smoke rising from its chimney",
+      "focus": "the distant cabin",
+      "motion_elements": "the cabin lights, the chimney smoke and the falling snow",
+      "ambient": "Snow falls between the pines. Chimney smoke rises slowly from the distant cabin."
+    },
+    {
+      "id": "snowy-forest-05",
+      "subject": "A rustic wooden footbridge over a half-frozen creek in a snowy forest, warm fairy lights wound along its rails, a lantern at each end, dark water running between snow-capped stones",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the footbridge",
+      "motion_elements": "the fairy lights, the flowing creek and the falling snow",
+      "ambient": "Snow falls between the pines. The creek flows slowly between the ice."
+    },
+    {
+      "id": "snowy-forest-06",
+      "subject": "The edge of a snowy pine forest with a split-rail wooden fence strung with warm lights running along the tree line, an open white meadow in front and a last pale glow of sunset behind the pines",
+      "camera": "slide",
+      "focus": "the lit fence along the forest edge",
+      "motion_elements": "the fence lights and the falling snow"
+    },
+    {
+      "id": "snowy-forest-07",
+      "subject": "A woodsman's lean-to shelter in the snowy forest with neatly stacked firewood, a lantern hanging from its beam and warm string lights under the roof edge, a small campfire glowing in a stone ring in front",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the lean-to shelter and the campfire",
+      "motion_elements": "the campfire flames, the string lights and the falling snow",
+      "ambient": "Snow falls between the pines. The campfire flames flicker in the stone ring."
+    },
+    {
+      "id": "snowy-forest-08",
+      "subject": "A high view over a vast snowy pine forest in a valley at blue hour, a thin lantern-lit trail and a few decorated trees glowing warm among the dark snowy treetops, mountains behind",
+      "camera": "drone",
+      "focus": "the glowing trees in the forest",
+      "motion_elements": "the glowing trees, the lantern trail and the falling snow",
+      "ambient": "Snow falls over the forest. Thin mist drifts slowly between the treetops."
+    },
+    {
+      "id": "snowy-forest-09",
+      "subject": "Close view of snow-heavy spruce branches hung with a few glass baubles and a string of warm fairy lights, snowflakes falling in the foreground, the blue forest softly blurred behind",
+      "tags": {
+        "scale": "macro"
+      },
+      "focus": "the decorated spruce branch",
+      "motion_elements": "the fairy lights, the baubles and the falling snow",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "snowy-forest-10",
+      "subject": "A tunnel-like trail through young firs bending under heavy snow, glowing paper star lanterns hanging from the branches overhead, warm light pooling on the fresh snow",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the star lanterns over the trail"
+    },
+    {
+      "id": "snowy-forest-11",
+      "subject": "A frozen forest waterfall with long blue icicles and a thin stream still running below it, snowy pines around, a small wooden viewing platform beside it with warm lights along its rail",
+      "focus": "the frozen waterfall",
+      "motion_elements": "the running water, the platform lights and the falling snow",
+      "ambient": "Snow falls between the pines. Water trickles down beneath the icicles."
+    },
+    {
+      "id": "snowy-forest-12",
+      "subject": "A wood shed at the edge of the snowy forest with stacked logs and a wheelbarrow of split wood, a hanging lantern and warm string lights along its eaves, tall pines behind",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "slide",
+      "focus": "the wood shed",
+      "motion_elements": "the lantern, the string lights and the falling snow"
+    },
+    {
+      "id": "snowy-forest-13",
+      "subject": "Close view of an old iron lantern standing on a snowy tree stump in the forest, its candle glowing through frosted glass, pine cones around it and warm fairy lights blurred in the trees behind",
+      "tags": {
+        "scale": "macro",
+        "energy": "still"
+      },
+      "camera": "static",
+      "motion_elements": "the candle flame, the blurred fairy lights and the falling snow",
+      "ambient": "The candle flickers inside the lantern. Snow falls between the pines.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "snowy-forest-14",
+      "subject": "An old snowy logging road running straight into a dense pine forest, low wooden posts topped with glowing lanterns on both sides and a lit wreath hanging on a timber gate across the road",
+      "focus": "the wreathed gate on the forest road"
+    },
+    {
+      "id": "snowy-forest-15",
+      "subject": "A snowy pine forest at night under a clear starry sky, a small lit Christmas tree on a rise between the dark pines, a line of lanterns leading up the trail to it",
+      "tags": {
+        "time": "night",
+        "snow": "lying"
+      },
+      "look": "night-lights",
+      "camera": "tilt-up",
+      "focus": "the starry sky above the pines",
+      "motion_elements": "the tree lights, the lanterns and the twinkling stars",
+      "ambient": "Stars twinkle above the pines. The lanterns glow on the snow."
+    },
+    {
+      "id": "snowy-forest-16",
+      "subject": "A rustic wooden archway at the start of a forest trail, wrapped in pine garland and warm fairy lights, lanterns hanging on each post, the snowy trail disappearing between tall pines beyond",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the lit archway"
+    },
+    {
+      "id": "snowy-forest-17",
+      "subject": "Close view of a snowy fence post at the forest edge tied with a red ribbon and a sprig of pine cones, warm fairy lights wrapped around it, the blue pines blurred behind",
+      "tags": {
+        "scale": "macro"
+      },
+      "focus": "the ribboned fence post",
+      "motion_elements": "the fairy lights, the ribbon ends and the falling snow",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "snowy-forest-18",
+      "subject": "A snowy pine forest at sunset with low golden light streaming between the trunks, long blue shadows on the snow, a lone fir beside the trail decorated with warm fairy lights",
+      "tags": {
+        "time": "golden",
+        "snow": "lying",
+        "palette": "warm-gold"
+      },
+      "look": "golden",
+      "motion_elements": "the fairy lights and the gently swaying pine branches",
+      "ambient": "The fairy lights twinkle. The pine branches sway slightly in a light breeze."
+    },
+    {
+      "id": "snowy-forest-19",
+      "subject": "A row of hand-made wooden sleds leaning against a thick snowy pine trunk, lanterns hung on nails above them, warm fairy lights looped through the lower branches",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the sleds under the pine"
+    },
+    {
+      "id": "snowy-forest-20",
+      "subject": "Ground-level view along a lantern trail, fresh untouched snow sparkling in the foreground, a row of glowing lanterns receding along the path between softly blurred snowy pines",
+      "tags": {
+        "scale": "macro"
+      },
+      "focus": "the row of lanterns",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

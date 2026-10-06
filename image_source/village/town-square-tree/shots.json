@@ -1,0 +1,174 @@
+{
+  "theme": "village/town-square-tree",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "night-lights",
+    "motion_elements": "the giant tree lights and the falling snow",
+    "camera": "crane-up",
+    "focus": "the giant tree",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls around the giant tree.",
+    "tags": {
+      "place": "outdoor",
+      "time": "night",
+      "palette": "warm-gold",
+      "scale": "vista",
+      "snow": "falling",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "town-square-tree-01",
+      "subject": "A giant Christmas tree glowing with thousands of warm lights in the middle of a snowy square of old stone buildings with ornate gabled facades, every window lit and garlands along the ground-floor arcades; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline"
+    },
+    {
+      "id": "town-square-tree-02",
+      "subject": "The giant square tree beside a frozen stone fountain topped with snow and icicles, lamps around the basin and an old stone tower with lit arched windows behind; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the giant tree and the fountain"
+    },
+    {
+      "id": "town-square-tree-03",
+      "subject": "A vintage carousel with carved horses and a gilded canopy glowing next to the giant square tree, strings of lights linking the two across snowy cobblestones, lit facades all around; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "motion_elements": "the giant tree lights, the turning carousel and the falling snow",
+      "ambient": "Snow falls around the giant tree. The carousel turns slowly."
+    },
+    {
+      "id": "town-square-tree-04",
+      "subject": "An arcaded square with stone arches strung with pine garlands and lights, a lantern hanging in each arch, snow on the balustrades above and the giant tree glowing in the centre; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline"
+    },
+    {
+      "id": "town-square-tree-05",
+      "subject": "The giant square tree framed by a snowy stone arch in the foreground, lanterns on the inner walls of the arch and the lit square opening out beyond; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "push-in",
+      "focus": "the giant tree through the arch"
+    },
+    {
+      "id": "town-square-tree-06",
+      "subject": "A square with a ring of lit wooden stalls around the giant tree, pine garlands on the stall roofs, steam rising from a mulled wine stall and old houses behind; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "palette": "red-green"
+      },
+      "motion_elements": "the giant tree lights, the stall lights, the steam and the falling snow",
+      "ambient": "Snow falls around the giant tree. Steam rises from a stall."
+    },
+    {
+      "id": "town-square-tree-07",
+      "subject": "A high aerial view of a snow-covered old town at night, the giant lit tree glowing in the central square and lines of street lights radiating out between the snowy roofs; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "camera": "drone",
+      "focus": "the lit tree in the square"
+    },
+    {
+      "id": "town-square-tree-08",
+      "subject": "A giant tree standing before the tall stone facade of an old gothic church with a glowing rose window, lanterns lining the wide steps and snow on every ledge; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline"
+    },
+    {
+      "id": "town-square-tree-09",
+      "subject": "The foot of the giant tree ringed by a low wooden fence wrapped in lights and a circle of small lit fir trees in pots, snowy cobbles and glowing facades behind; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "tilt-up",
+      "focus": "the top of the giant tree"
+    },
+    {
+      "id": "town-square-tree-10",
+      "subject": "A giant tree decorated only in white-gold lights and silver ornaments in a square of pale limestone buildings, a large star glowing on top and snow on the balconies; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "palette": "white-gold"
+      }
+    },
+    {
+      "id": "town-square-tree-11",
+      "subject": "The square tree seen past a row of snow-covered wooden benches and old iron lamp posts, a small bandstand wrapped in garlands and lights glowing to one side; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "slide",
+      "focus": "the benches and the giant tree"
+    },
+    {
+      "id": "town-square-tree-12",
+      "subject": "The giant tree beside a long stone reflecting pool, mostly frozen with an open channel of dark water that mirrors its lights, a balustrade and lamps along the edge; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "motion_elements": "the giant tree lights, the reflections on the water and the falling snow",
+      "ambient": "Snow falls around the giant tree. The open water ripples gently, moving the reflections."
+    },
+    {
+      "id": "town-square-tree-13",
+      "subject": "A small hill-town square with the giant tree on a raised stone terrace, a wide stone staircase with lanterns climbing up to it and lit houses stacked up the hillside behind; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline"
+    },
+    {
+      "id": "town-square-tree-14",
+      "subject": "The giant tree seen along a colonnade walkway, stone columns wrapped in spiral warm lights, snow on the pavement between them and the tree glowing at the end; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "push-in",
+      "focus": "the tree at the end of the colonnade"
+    },
+    {
+      "id": "town-square-tree-15",
+      "subject": "A small Ferris wheel lit with warm bulbs beside the giant square tree, its open gondolas dusted with snow, lit townhouses and snowy rooftops behind; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "motion_elements": "the giant tree lights, the slowly turning Ferris wheel and the falling snow",
+      "ambient": "Snow falls around the giant tree. The Ferris wheel turns very slowly."
+    },
+    {
+      "id": "town-square-tree-16",
+      "subject": "A view from a snowy stone balcony with a garland-wrapped balustrade and a glowing lantern, looking down on the giant tree and the lit square below; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "camera": "push-in",
+      "focus": "the giant tree below the balcony"
+    },
+    {
+      "id": "town-square-tree-17",
+      "subject": "A close view of the giant tree's branches with glowing warm bulbs, gold glass baubles and gold ribbon, snowflakes settling on the needles and the lit square softly blurred behind; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "motion_elements": "the tree lights and the falling snowflakes",
+      "camera": "push-in",
+      "focus": "the baubles on the branches",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "town-square-tree-18",
+      "subject": "A close view of the great star on top of the giant tree glowing against the deep blue night sky, snow drifting past it and lit rooftops faintly visible below; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro",
+        "palette": "white-gold"
+      },
+      "motion_elements": "the glowing star, the top tree lights and the falling snow",
+      "camera": "push-in",
+      "focus": "the star on top of the tree",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "town-square-tree-19",
+      "subject": "A close view of the snowy rim of a stone fountain with icicles and a small candle lantern standing on it, the giant tree glowing as soft bokeh behind; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "motion_elements": "the candle flame, the tree bokeh and the falling snow",
+      "camera": "push-in",
+      "focus": "the lantern on the fountain rim",
+      "ambient": "Snow falls. The candle flame flickers in the lantern.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "town-square-tree-20",
+      "subject": "A close view of oversized wrapped gift boxes in red and gold stacked at the foot of the giant tree, satin ribbons dusted with snow and the lowest tree lights glowing above; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro",
+        "palette": "red-green"
+      },
+      "motion_elements": "the tree lights and the falling snow",
+      "camera": "push-in",
+      "focus": "the gift boxes",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

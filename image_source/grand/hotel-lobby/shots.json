@@ -1,0 +1,204 @@
+{
+  "theme": "grand/hotel-lobby",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "interior-bright",
+    "motion_elements": "the chandelier sparkle and the tree lights",
+    "camera": "crane-up",
+    "focus": "the tall tree",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Chandelier crystals sparkle softly.",
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "white-gold",
+      "scale": "vista",
+      "snow": "none",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "hotel-lobby-01",
+      "subject": "A grand marble hotel lobby with a very tall Christmas tree in gold and ivory ornaments at its centre, two crystal chandeliers hanging high on either side of it, the tree's star well clear of both, a polished checkerboard floor mirroring the lights and cream columns wrapped in pine garland"
+    },
+    {
+      "id": "hotel-lobby-02",
+      "subject": "A hotel lobby grand staircase of pale stone sweeping up in two curved flights, both balustrades wrapped in pine garland and warm lights, a tall tree standing between the flights and a crystal chandelier hanging in the stairwell",
+      "focus": "the grand staircase and the tree"
+    },
+    {
+      "id": "hotel-lobby-03",
+      "subject": "A hotel lobby lounge with a carved stone fireplace and a crackling log fire, a garland with gold ribbons on the mantel, deep cream armchairs around a low marble table and a lit tree beside the hearth",
+      "tags": {
+        "scale": "room"
+      },
+      "camera": "push-in",
+      "focus": "the fireplace",
+      "motion_elements": "the fire, the tree lights and the chandelier sparkle",
+      "ambient": "The fire flickers in the fireplace. Chandelier crystals sparkle softly."
+    },
+    {
+      "id": "hotel-lobby-04",
+      "subject": "The brass-and-glass revolving door of an old hotel lobby under a garland arch full of warm lights, two small potted trees on either side, a polished marble floor, and snow falling on a lamplit street outside the glass",
+      "tags": {
+        "scale": "room",
+        "snow": "window"
+      },
+      "camera": "push-in",
+      "focus": "the revolving door",
+      "motion_elements": "the garland lights, the street lamps and the snow falling outside the doors",
+      "ambient": "Snow falls on the street outside the glass doors. Chandelier crystals sparkle softly."
+    },
+    {
+      "id": "hotel-lobby-05",
+      "subject": "A wood-panelled hotel lobby bar with a long polished counter, a mirrored back bar of glowing crystal glassware and unlabelled decanters, a garland with gold baubles along the counter edge and a small lit tree at its end",
+      "tags": {
+        "scale": "room",
+        "palette": "warm-gold"
+      },
+      "camera": "slide",
+      "focus": "the bar counter",
+      "motion_elements": "the garland lights, the glowing glassware and the mirror reflections",
+      "ambient": "The glassware on the back bar glints softly."
+    },
+    {
+      "id": "hotel-lobby-06",
+      "subject": "A tall glass-roofed hotel atrium hung with dozens of glowing brass star lanterns at different heights, a tall tree ringed by white poinsettias on the floor below and the balconies of the upper floors wrapped in warm lights",
+      "camera": "tilt-up",
+      "focus": "the hanging star lanterns",
+      "motion_elements": "the star lanterns, the tree lights and the balcony lights",
+      "ambient": "The hanging star lanterns glow and sway very slightly."
+    },
+    {
+      "id": "hotel-lobby-07",
+      "subject": "An Art Deco hotel lobby with a gold-inlaid marble floor, stepped geometric brass chandeliers, black lacquered columns trimmed with garland and a tall tree dressed in white and silver"
+    },
+    {
+      "id": "hotel-lobby-08",
+      "subject": "A high view from a hotel mezzanine balcony looking over its garland-wrapped railing down onto a tall lit tree, the crystal chandelier hanging at eye level and the glossy marble floor far below",
+      "camera": "slide",
+      "focus": "the tall tree below"
+    },
+    {
+      "id": "hotel-lobby-09",
+      "subject": "A long carved-wood hotel reception desk dressed with a thick garland, gold baubles and a pair of small brass lamps, a brass service bell on the counter, a large wreath on the panelled wall behind and a lit tree to one side",
+      "tags": {
+        "scale": "room"
+      },
+      "camera": "slide",
+      "focus": "the reception desk",
+      "motion_elements": "the garland lights, the lamp glow and the tree lights"
+    },
+    {
+      "id": "hotel-lobby-10",
+      "subject": "A marble side table in a hotel lobby with a silver bowl of gold and glass ornaments, a pair of tall lit white candles and a sprig of pine, the tall tree and chandelier glowing as soft bokeh behind",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the candles and the ornaments",
+      "motion_elements": "the candle flames and the bokeh of the tree lights",
+      "ambient": "Candle flames flicker softly.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "hotel-lobby-11",
+      "subject": "A palm court tea lounge under a stained-glass skylight dome of gold and cream geometric panes, tall potted palms wound with fairy lights, round tables in white linen with small candles and a tall tree in the centre",
+      "focus": "the tree beneath the glass dome",
+      "motion_elements": "the candle flames, the fairy lights in the palms and the tree lights",
+      "ambient": "Small candle flames flicker on the tables."
+    },
+    {
+      "id": "hotel-lobby-12",
+      "subject": "A hotel lobby seating nook by tall arched windows, cream velvet sofas, a brass floor lamp, a low table with a gingerbread house and snow falling on a lamplit square outside",
+      "tags": {
+        "scale": "room",
+        "snow": "window"
+      },
+      "camera": "push-in",
+      "focus": "the window seating",
+      "motion_elements": "the lamp glow, the tree lights and the snow outside the windows",
+      "ambient": "Snow falls outside the tall windows. Chandelier crystals sparkle softly."
+    },
+    {
+      "id": "hotel-lobby-13",
+      "subject": "A circular domed hotel rotunda with a round marble floor, a tall tree in the exact centre beneath a golden coffered dome, and a ring of cream columns each spiralled with garland and warm lights",
+      "focus": "the tree under the dome"
+    },
+    {
+      "id": "hotel-lobby-14",
+      "subject": "A brass luggage trolley piled with wrapped gifts in cream and gold paper and velvet ribbons, standing beside a lit tree on a marble lobby floor, a crystal chandelier glowing above",
+      "tags": {
+        "scale": "room"
+      },
+      "camera": "arc",
+      "focus": "the luggage trolley of gifts"
+    },
+    {
+      "id": "hotel-lobby-15",
+      "subject": "A crystal chandelier dressed with a ring of pine and small gold baubles, its hundreds of prisms catching warm light, the top of the tall lobby tree softly blurred below",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the chandelier crystals",
+      "motion_elements": "the chandelier prisms and the soft bokeh of the tree lights",
+      "ambient": "The chandelier prisms sparkle and catch the light.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "hotel-lobby-16",
+      "subject": "The stone front of a grand old hotel at night, tall glowing windows on every floor, a deep entrance canopy edged with lights, two tall lit trees in planters flanking wide steps and snow falling on the forecourt",
+      "tags": {
+        "place": "outdoor",
+        "scale": "street",
+        "snow": "falling"
+      },
+      "look": "night-lights",
+      "focus": "the hotel entrance",
+      "motion_elements": "the canopy lights, the lit trees and the falling snow",
+      "ambient": "Snow falls over the forecourt."
+    },
+    {
+      "id": "hotel-lobby-17",
+      "subject": "A glossy white grand piano beside a tall lit tree in a hotel lobby, a garland with warm lights draped along the curve of the piano, a tall vase of white roses and pine on a stand nearby and a chandelier above",
+      "tags": {
+        "scale": "room"
+      },
+      "camera": "arc",
+      "focus": "the grand piano"
+    },
+    {
+      "id": "hotel-lobby-18",
+      "subject": "A hotel lobby seen from the entrance doors: a wide marble aisle between two rows of small lit trees in gold pots, leading to a very tall tree beneath a crystal chandelier",
+      "camera": "push-in",
+      "focus": "the tall tree at the end of the aisle"
+    },
+    {
+      "id": "hotel-lobby-19",
+      "subject": "A stone staircase balustrade wrapped in a thick pine garland with gold ribbon bows, pinecones and warm lights, the lobby and its chandelier blurred into bokeh beyond",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "slide",
+      "focus": "the garland on the balustrade",
+      "motion_elements": "the garland lights and the chandelier bokeh",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "hotel-lobby-20",
+      "subject": "The lower branches of the lobby tree hung with glass, gold and pearl ornaments and warm bulbs, wrapped gifts piled beneath, the polished marble floor reflecting every light",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the ornaments on the tree",
+      "motion_elements": "the tree lights and their reflections on the marble floor",
+      "ambient": "The ornaments glint softly.",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

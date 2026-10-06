@@ -1,0 +1,194 @@
+{
+  "theme": "nature/mountain-cabin",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "twilight",
+    "motion_elements": "the cabin lights, the chimney smoke and the falling snow",
+    "camera": "drone",
+    "focus": "the cabin",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls. Chimney smoke drifts slowly.",
+    "tags": {
+      "place": "outdoor",
+      "time": "twilight",
+      "palette": "cool-blue",
+      "scale": "vista",
+      "snow": "falling",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "mountain-cabin-01",
+      "subject": "A timber chalet on a steep snowy slope with every window glowing warm, string lights along its balcony and roof edge, chimney smoke rising, jagged snowy peaks under a deep blue sky behind"
+    },
+    {
+      "id": "mountain-cabin-02",
+      "subject": "A steep A-frame cabin among tall snowy pines, its triangular glass front glowing with a lit Christmas tree inside, fairy lights along the roof edges and smoke from a metal chimney",
+      "focus": "the A-frame cabin"
+    },
+    {
+      "id": "mountain-cabin-03",
+      "subject": "The snowy wooden deck of a log cabin with a decorated Christmas tree glowing at its corner, lanterns on the rail, lit glass doors behind and a valley of snowy peaks beyond",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "arc",
+      "focus": "the lit tree on the deck"
+    },
+    {
+      "id": "mountain-cabin-04",
+      "subject": "A snowy mountain road winding up to a lone log cabin at its end, lantern posts along the last stretch, a lit wreath on the gate and smoke rising from the chimney",
+      "focus": "the cabin at the end of the road"
+    },
+    {
+      "id": "mountain-cabin-05",
+      "subject": "A cluster of small wooden cabins in a snowy high valley, each with glowing windows and warm lights on the eaves, chimney smoke drifting, a frozen stream curving between them",
+      "focus": "the cabin cluster"
+    },
+    {
+      "id": "mountain-cabin-06",
+      "subject": "A remote log cabin under a clear starry sky with the Milky Way arching over the peaks, windows glowing warm and fairy lights on the porch, smoke from the chimney",
+      "tags": {
+        "time": "night",
+        "snow": "lying"
+      },
+      "look": "night-lights",
+      "camera": "tilt-up",
+      "focus": "the starry sky above the cabin",
+      "motion_elements": "the cabin lights, the chimney smoke and the twinkling stars",
+      "ambient": "Stars twinkle over the peaks. Chimney smoke drifts slowly."
+    },
+    {
+      "id": "mountain-cabin-07",
+      "subject": "The front porch of a mountain cabin with a pine wreath on the door, stacked firewood, a pair of old snowshoes on the wall and warm string lights under the porch roof, snow falling beyond the posts",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "push-in",
+      "focus": "the wreathed door",
+      "motion_elements": "the porch lights and the falling snow"
+    },
+    {
+      "id": "mountain-cabin-08",
+      "subject": "A stone-and-timber mountain hut perched on a rocky ridge, glowing windows, a line of lanterns marking the snowy path up to it, clouds filling the valley below",
+      "focus": "the ridge hut",
+      "motion_elements": "the hut lights, the lanterns, the chimney smoke and the drifting clouds",
+      "ambient": "Snow falls lightly. Clouds drift slowly in the valley below. Chimney smoke rises."
+    },
+    {
+      "id": "mountain-cabin-09",
+      "subject": "A log cabin beside a half-frozen mountain stream, a small wooden bridge with fairy lights leading to its lit door, snowy boulders and smoke from the chimney",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "slide",
+      "focus": "the bridge and the cabin",
+      "motion_elements": "the cabin lights, the flowing stream, the chimney smoke and the falling snow",
+      "ambient": "Snow falls. The stream flows past the boulders. Chimney smoke drifts slowly."
+    },
+    {
+      "id": "mountain-cabin-10",
+      "subject": "Close view of a cabin window seen from outside, a candle and a small lit wreath on the inner sill, warm fairy lights around the frame, fresh snow piled on the outer sill",
+      "tags": {
+        "scale": "macro",
+        "palette": "warm-gold"
+      },
+      "camera": "push-in",
+      "focus": "the glowing window",
+      "motion_elements": "the candle flame, the fairy lights and the falling snow",
+      "ambient": "The candle flickers behind the glass. Snow falls past the window.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "mountain-cabin-11",
+      "subject": "A tiny cabin high on an open snowy mountainside seen from far away, its warm windows and roof lights the only glow in a vast blue landscape",
+      "focus": "the tiny lit cabin"
+    },
+    {
+      "id": "mountain-cabin-12",
+      "subject": "The snowy backyard of a cabin with a steaming wooden hot tub, lanterns and warm string lights around it, snowy pines and peaks behind",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "push-in",
+      "focus": "the steaming hot tub",
+      "motion_elements": "the steam, the string lights and the falling snow",
+      "ambient": "Snow falls. Steam rises from the hot tub. Chimney smoke drifts behind."
+    },
+    {
+      "id": "mountain-cabin-13",
+      "subject": "A mountain cabin at sunset with golden alpenglow on the peaks, warm lights on its balcony, long blue shadows across the fresh snow and thin chimney smoke",
+      "tags": {
+        "time": "golden",
+        "snow": "lying",
+        "palette": "warm-gold"
+      },
+      "look": "golden",
+      "motion_elements": "the balcony lights, the chimney smoke and the drifting clouds",
+      "ambient": "Chimney smoke drifts slowly. Clouds drift past the glowing peaks."
+    },
+    {
+      "id": "mountain-cabin-14",
+      "subject": "The side of a log cabin with a window glowing warm and a lit tree visible inside, a snowy wooden sled leaning below it and icicles along the eaves lit by fairy lights",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "slide",
+      "focus": "the glowing side window"
+    },
+    {
+      "id": "mountain-cabin-15",
+      "subject": "Close view of a stone chimney on a snowy cabin roof, wood smoke curling up into the blue dusk, warm fairy lights along the roof ridge and pine tops behind",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "crane-up",
+      "focus": "the smoking chimney",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "mountain-cabin-16",
+      "subject": "A modern black timber cabin with tall glass walls on a snowy cliff edge above a deep valley, a lit tree glowing inside and warm lights along its terrace",
+      "focus": "the glass cabin on the cliff"
+    },
+    {
+      "id": "mountain-cabin-17",
+      "subject": "Two small cabins sharing a snowy yard, warm string lights zig-zagging between their roofs, a lit tree in the middle and lanterns on the fence",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "push-in",
+      "focus": "the lit tree between the cabins"
+    },
+    {
+      "id": "mountain-cabin-18",
+      "subject": "Close view of a cabin door with a big pine wreath, a red ribbon and warm fairy lights, a brass lantern glowing beside it and snow drifted against the threshold",
+      "tags": {
+        "scale": "macro",
+        "palette": "red-green",
+        "energy": "still"
+      },
+      "camera": "static",
+      "motion_elements": "the lantern flame, the fairy lights and the falling snow",
+      "ambient": "The lantern flame flickers. Snow falls past the door.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "mountain-cabin-19",
+      "subject": "A cabin on a snowy saddle between two peaks, a long line of lanterns and fairy-lit posts leading up the ridge path, valley lights twinkling far below",
+      "focus": "the cabin on the saddle"
+    },
+    {
+      "id": "mountain-cabin-20",
+      "subject": "An old alpine stone cottage with a slate roof heavy with snow, green shutters, warm lit windows and a lit garland over the door, smoke from its chimney and pine forest behind",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "push-in",
+      "focus": "the stone cottage"
+    }
+  ]
+}

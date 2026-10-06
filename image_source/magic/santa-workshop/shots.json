@@ -1,0 +1,193 @@
+{
+  "theme": "magic/santa-workshop",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "interior-evening",
+    "motion_elements": "the lamp glow, the fire and the snow outside",
+    "camera": "push-in",
+    "focus": "the workbench",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "The fire flickers. Snow falls outside the workshop windows.",
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "red-green",
+      "scale": "room",
+      "snow": "window",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "santa-workshop-01",
+      "subject": "A vast timber-beamed toy workshop with long oak workbenches covered in half-carved wooden toys, rows of hanging brass lamps, a big stone fireplace crackling at the far end and tall arched windows showing snow falling on dark pine trees"
+    },
+    {
+      "id": "santa-workshop-02",
+      "subject": "A worn oak workbench with half-painted wooden rocking horses, carving chisels laid on a leather roll, a pot of red paint and curls of pine shavings, a green-shaded brass lamp glowing above and a frosted window with falling snow behind",
+      "motion_elements": "the lamp glow and the snow outside the window",
+      "ambient": "Snow falls outside the window. The lamp glows softly."
+    },
+    {
+      "id": "santa-workshop-03",
+      "subject": "A tall wall of wooden shelves packed with finished toys, wooden soldiers, spinning tops, drums and little dolls' houses, tied with red and green ribbons, fairy lights along every shelf, a rolling library ladder and a round window at the end with falling snow",
+      "camera": "slide",
+      "focus": "the toy shelves",
+      "motion_elements": "the shelf fairy lights and the snow outside the round window",
+      "ambient": "Snow falls outside the round window."
+    },
+    {
+      "id": "santa-workshop-04",
+      "subject": "A red wooden sleigh with gold scrollwork and leather seats parked on the plank floor in the middle of the workshop, piled with wrapped gifts and burlap sacks, lanterns hanging from the rafters and big barn doors half open onto a snowy yard",
+      "camera": "arc",
+      "focus": "the sleigh",
+      "motion_elements": "the lanterns and the snow falling beyond the open doors",
+      "ambient": "Snow falls in the yard beyond the open barn doors. The lantern flames flicker gently."
+    },
+    {
+      "id": "santa-workshop-05",
+      "subject": "A long wrapping table with rolls of red, green and gold paper on wall-mounted wooden spindles, spools of satin ribbon, stacks of plain boxes and twine, pendant lamps glowing overhead and a small-paned window with falling snow",
+      "focus": "the wrapping table",
+      "motion_elements": "the pendant lamps and the snow outside the window",
+      "ambient": "Snow falls outside the window.",
+      "camera": "slide"
+    },
+    {
+      "id": "santa-workshop-06",
+      "subject": "An old roll-top desk with a green banker's lamp, bundles of blank unaddressed envelopes tied with twine and sealed with red wax, a quill in a brass inkwell and a lit candle, a frosted window with falling snow behind",
+      "lens": "50mm lens at f/2.8",
+      "focus": "the roll-top desk",
+      "motion_elements": "the candle flame, the lamp glow and the snow outside",
+      "ambient": "The candle flame flickers. Snow falls outside the window.",
+      "tags": {
+        "scale": "macro"
+      }
+    },
+    {
+      "id": "santa-workshop-07",
+      "subject": "A workshop stone fireplace with a roaring log fire, a row of knitted red and green stockings on the mantel, a pine garland with red berries, two leather armchairs and a line of freshly finished wooden toy trains on the hearth",
+      "focus": "the fireplace",
+      "motion_elements": "the fire and the fairy lights on the garland",
+      "ambient": "The fire flickers and crackles in the hearth.",
+      "tags": {
+        "snow": "none"
+      }
+    },
+    {
+      "id": "santa-workshop-08",
+      "subject": "Rows of freshly painted wooden nutcracker figures drying on a wooden rack beside jars of brushes and pots of red, green and gold paint, a warm clamp work lamp and a small-paned window with falling snow",
+      "lens": "50mm lens at f/2.8",
+      "focus": "the painted nutcrackers",
+      "motion_elements": "the work lamp glow and the snow outside",
+      "ambient": "Snow falls outside the window.",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "slide"
+    },
+    {
+      "id": "santa-workshop-09",
+      "subject": "A two-level toy workshop seen from a wooden mezzanine railing wrapped in garland, workbenches and toy-filled shelves on the floor below, strings of warm lights across the rafters, a glowing pot-bellied iron stove and big windows with falling snow",
+      "camera": "pull-out",
+      "focus": "the workshop floor below",
+      "ambient": "The stove fire glows and flickers. Snow falls outside the windows."
+    },
+    {
+      "id": "santa-workshop-10",
+      "subject": "An antique treadle sewing machine on a wooden table with half-stitched red velvet stockings, spools of red and green thread, a basket of felt star ornaments, a warm table lamp and a frosted window with falling snow",
+      "focus": "the sewing machine",
+      "motion_elements": "the lamp glow and the snow outside the window",
+      "ambient": "Snow falls outside the window."
+    },
+    {
+      "id": "santa-workshop-11",
+      "subject": "A tinker's bench scattered with brass gears, tiny wind-up tin toys and fine screwdrivers, a magnifying lamp glowing over them and a mug of cocoa steaming beside, workshop lights in soft bokeh behind",
+      "lens": "100mm macro lens at f/4",
+      "focus": "the tin toys",
+      "motion_elements": "the steam from the mug and the bokeh lights",
+      "ambient": "Steam rises gently from the mug of cocoa.",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "santa-workshop-12",
+      "subject": "The workshop's tall arched double doors seen from inside, framed with a thick pine garland and a big wreath, lanterns on iron hooks, a wooden toy wagon full of wrapped gifts waiting by the door and snow falling past the glass panes",
+      "focus": "the arched doors",
+      "motion_elements": "the lanterns and the snow falling beyond the glass",
+      "ambient": "Snow falls outside the glass door panes. The lantern flames flicker gently.",
+      "camera": "slide"
+    },
+    {
+      "id": "santa-workshop-13",
+      "subject": "A big test layout on a workshop table where a hand-built wooden toy train circles carved wooden hills and little wooden trees, work lamps glowing above and a window with falling snow behind",
+      "camera": "slide",
+      "focus": "the wooden toy train",
+      "motion_elements": "the wooden toy train, the lamp glow and the snow outside",
+      "ambient": "The wooden toy train rolls slowly around the track. Snow falls outside the window."
+    },
+    {
+      "id": "santa-workshop-14",
+      "subject": "A glass-ornament corner with a small brick furnace glowing orange through its open port, racks of hand-blown red and gold baubles cooling, long copper tools on hooks and a window with falling snow",
+      "focus": "the racks of baubles",
+      "motion_elements": "the furnace glow, the reflections in the baubles and the snow outside",
+      "ambient": "The fire glows and flickers inside the furnace. Snow falls outside the window."
+    },
+    {
+      "id": "santa-workshop-15",
+      "subject": "A storage loft under a sloping timber roof stacked high with gifts wrapped in red, green and gold paper and tied with ribbons, burlap sacks and wooden crates, fairy lights along the beams and a small dormer window with falling snow",
+      "focus": "the stacks of gifts",
+      "motion_elements": "the fairy lights on the beams and the snow outside the dormer",
+      "ambient": "Snow falls outside the dormer window."
+    },
+    {
+      "id": "santa-workshop-16",
+      "subject": "A woodworking corner with an old wooden lathe, turned spindles and sawdust, small wooden sleds hanging on the plank wall, hanging lanterns and a cast-iron stove glowing through its grate",
+      "focus": "the lathe",
+      "ambient": "The stove fire glows and flickers. The lantern flames flicker gently.",
+      "motion_elements": "the stove fire and the lanterns",
+      "tags": {
+        "snow": "none"
+      },
+      "camera": "slide"
+    },
+    {
+      "id": "santa-workshop-17",
+      "subject": "The workshop at closing time, tools hung neatly on a pegboard wall, a line of finished toys waiting on the bench under a single glowing lamp, embers in the fireplace and snow drifting past the windows",
+      "focus": "the line of finished toys",
+      "tags": {
+        "energy": "still"
+      }
+    },
+    {
+      "id": "santa-workshop-18",
+      "subject": "A cozy break corner of the workshop with a copper kettle steaming on a small wood stove, enamel mugs on hooks, a plate of cookies on a checked red cloth, a garland over the window and snow falling outside",
+      "focus": "the steaming kettle",
+      "motion_elements": "the steam from the kettle, the stove fire and the snow outside",
+      "ambient": "Steam rises from the kettle. The stove fire flickers. Snow falls outside the window."
+    },
+    {
+      "id": "santa-workshop-19",
+      "subject": "A wooden tray of freshly carved toy ornaments, stars, little trees and tiny sleighs, with a carving knife and pine shavings, a candle lantern glowing beside it and the workshop lights in soft bokeh behind",
+      "lens": "100mm macro lens at f/4",
+      "camera": "slide",
+      "focus": "the carved ornaments",
+      "motion_elements": "the lantern candle flame and the bokeh lights",
+      "ambient": "The candle flame flickers inside the lantern.",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "santa-workshop-20",
+      "subject": "The whole workshop seen from the far doorway, a long aisle between workbenches and toy shelves leading to a giant decorated Christmas tree in the centre, lamps glowing everywhere and a fireplace burning at the end",
+      "focus": "the Christmas tree",
+      "motion_elements": "the tree lights, the lamp glow and the fire",
+      "camera": "slide"
+    }
+  ]
+}

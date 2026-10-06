@@ -1,0 +1,199 @@
+{
+  "theme": "home/reading-nook",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "interior-evening",
+    "motion_elements": "the reading lamp glow, the fairy lights and the snow outside",
+    "camera": "push-in",
+    "focus": "the armchair",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls outside the window. Steam rises from a cup of tea.",
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "warm-gold",
+      "scale": "room",
+      "snow": "window",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "reading-nook-01",
+      "subject": "A home library corner with floor-to-ceiling bookshelves wrapped in a pine garland and fairy lights, a rolling ladder, a deep leather armchair with a plaid throw under a brass reading lamp, a side table with a steaming cup of tea and a tall window with snow falling; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows"
+    },
+    {
+      "id": "reading-nook-02",
+      "subject": "A window seat nook built between two bookcases, piled with cushions and a knit blanket, fairy lights around the window frame, a stack of books and a steaming mug on the sill and snow falling over a lamplit street; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the window seat",
+      "ambient": "Snow falls outside the window. Steam rises from the mug.",
+      "motion_elements": "the fairy lights, the steam from the mug and the snow outside"
+    },
+    {
+      "id": "reading-nook-03",
+      "subject": "An attic reading corner under a sloped ceiling with a skylight showing falling snow, a velvet armchair, a floor lamp, low shelves of books and a small lit tree; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide"
+    },
+    {
+      "id": "reading-nook-04",
+      "subject": "A fireside reading corner in a stone cottage with a wingback chair beside a glowing fire, a basket of logs, a stack of wrapped books tied with ribbon, a reading lamp and a leaded window with snow falling; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the wingback chair",
+      "ambient": "The fire flickers softly. Snow falls outside the window.",
+      "motion_elements": "the fire, the reading lamp glow and the snow outside"
+    },
+    {
+      "id": "reading-nook-05",
+      "subject": "A Scandinavian reading nook in white and oak with a sheepskin-covered lounge chair, a paper star lantern glowing in the window, a slim tree with warm lights and a low shelf of books, snow falling on birch trees outside; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "white-gold"
+      },
+      "focus": "the lounge chair",
+      "motion_elements": "the paper star lantern, the tree lights and the snow outside"
+    },
+    {
+      "id": "reading-nook-06",
+      "subject": "A bay window nook overlooking a snowy village street with warm lit cottage windows, a curved cushioned seat, a brass reading lamp, a small tree on a side table and a teapot steaming on a tray; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the bay window seat",
+      "ambient": "Snow falls on the street outside. Steam rises from the teapot.",
+      "motion_elements": "the reading lamp glow, the tree lights, the steam from the teapot and the snow outside",
+      "camera": "slide"
+    },
+    {
+      "id": "reading-nook-07",
+      "subject": "A dark wood study with a green leather armchair, a green-shaded desk lamp glowing, bookcases garlanded with holly and red berries, a decorated tree in the corner and snow falling past a tall arched window; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      }
+    },
+    {
+      "id": "reading-nook-08",
+      "subject": "A reading loft on a mezzanine with a wooden railing wrapped in fairy lights, a low daybed piled with blankets, bookshelves along the wall and a big round window with falling snow; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the daybed",
+      "ambient": "Snow falls outside the round window.",
+      "motion_elements": "the fairy lights on the railing and the snow outside the round window"
+    },
+    {
+      "id": "reading-nook-09",
+      "subject": "A leather armchair beside a bookcase draped with a garland and lights, a knit throw over its arm, a floor lamp glowing, a cup of tea steaming on a stack of books and a dark window with falling snow behind; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide"
+    },
+    {
+      "id": "reading-nook-10",
+      "subject": "A ladder bookshelf wrapped in warm fairy lights, books and small potted pines on its steps, a pouf with a folded blanket and a lantern with a candle on the floor; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "snow": "none"
+      },
+      "camera": "slide",
+      "focus": "the ladder bookshelf",
+      "ambient": "The candle flickers in the lantern.",
+      "motion_elements": "the fairy lights and the lantern candle"
+    },
+    {
+      "id": "reading-nook-11",
+      "subject": "A reading corner with a small lit tree, a velvet armchair with a closed book and a ribbon bookmark on the seat, a brass lamp and a window onto snowy fir trees; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows"
+    },
+    {
+      "id": "reading-nook-12",
+      "subject": "A fireside chair with a stack of books wrapped in brown paper and twine, a tartan blanket, a cup of cocoa steaming on the hearth and the fire glowing in a small iron grate; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "snow": "none",
+        "palette": "red-green"
+      },
+      "focus": "the fireside chair",
+      "ambient": "The fire flickers softly. Steam rises from the cocoa.",
+      "motion_elements": "the fire and the steam from the cocoa"
+    },
+    {
+      "id": "reading-nook-13",
+      "subject": "A deep window seat set into a thick stone wall with a sheepskin and cushions, a candle lantern, a pile of books and snow falling over a dark forest; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the window seat",
+      "ambient": "Snow falls outside the window. The candle flickers in the lantern.",
+      "motion_elements": "the candle in the lantern and the snow outside",
+      "camera": "slide"
+    },
+    {
+      "id": "reading-nook-14",
+      "subject": "A reading nook under the stairs with built-in shelves, a cushioned bench, a string of paper star lights, a tiny lit tree and a mug steaming on the shelf; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "snow": "none"
+      },
+      "focus": "the nook under the stairs",
+      "ambient": "Steam rises from the mug.",
+      "motion_elements": "the paper star lights, the tree lights and the steam from the mug"
+    },
+    {
+      "id": "reading-nook-15",
+      "subject": "A conservatory reading corner with a wicker armchair, plaid blankets, potted poinsettias, fairy lights along the glass and snow falling on the garden at dusk; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "time": "twilight",
+        "palette": "red-green"
+      },
+      "focus": "the wicker armchair",
+      "ambient": "Snow falls outside the glass.",
+      "look": "twilight",
+      "motion_elements": "the fairy lights and the snow outside the glass"
+    },
+    {
+      "id": "reading-nook-16",
+      "subject": "A cabin reading corner with a log wall, a rocking chair with a patchwork quilt, an oil lantern glowing on a wooden trunk, a shelf of old books and a small window onto a snowy forest; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "red-green"
+      },
+      "focus": "the rocking chair",
+      "ambient": "The lantern flame flickers. Snow falls outside the window.",
+      "motion_elements": "the lantern flame and the snow outside",
+      "camera": "slide"
+    },
+    {
+      "id": "reading-nook-17",
+      "subject": "A close view of a side table with a steaming cup of tea on a saucer, a closed hardback book, reading glasses and a sprig of holly under the warm pool of a reading lamp, fairy lights blurred behind; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "focus": "the cup of tea",
+      "ambient": "Steam rises from the cup of tea.",
+      "motion_elements": "the steam from the tea and the fairy lights",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "reading-nook-18",
+      "subject": "A close view of a stack of old books tied with red ribbon beside a lit candle and a pine cone on a windowsill, snow falling outside the glass; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro"
+      },
+      "focus": "the books and the candle",
+      "ambient": "The candle flame flickers. Snow falls outside the window.",
+      "motion_elements": "the candle flame and the snow outside",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "reading-nook-19",
+      "subject": "A close view of a jar of fairy lights and a small brass lantern on a bookshelf between rows of books, a pine garland along the shelf edge; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "camera": "slide",
+      "focus": "the bookshelf",
+      "ambient": "The lantern candle flickers.",
+      "motion_elements": "the fairy lights and the lantern candle",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "reading-nook-20",
+      "subject": "A close view of the arm of a knit-covered armchair with a folded tartan blanket and a mug of mulled wine steaming on a small tray, the fire glowing out of focus; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "focus": "the steaming mug",
+      "ambient": "Steam rises from the mug. The fire glows softly out of focus.",
+      "motion_elements": "the steam from the mug and the fire glow",
+      "lens": "85mm lens at f/2.8",
+      "camera": "slide"
+    }
+  ]
+}

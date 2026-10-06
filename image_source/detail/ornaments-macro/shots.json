@@ -1,0 +1,201 @@
+{
+  "theme": "detail/ornaments-macro",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "interior-evening",
+    "motion_elements": "the bokeh lights and the ornament reflections",
+    "camera": "slide",
+    "focus": "the ornaments",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Bokeh lights twinkle softly in the background.",
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "warm-gold",
+      "scale": "macro",
+      "snow": "none",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "ornaments-macro-01",
+      "subject": "A matte satin gold bauble hanging on a pine branch, its soft brushed surface showing only a blurred warm glow and no mirror reflection, warm tree lights and soft golden bokeh behind",
+      "lens": "100mm macro lens at f/4"
+    },
+    {
+      "id": "ornaments-macro-02",
+      "subject": "A gold glitter star topper on the tip of a Christmas tree, warm fairy lights wound around the top branches, deep golden bokeh behind",
+      "lens": "100mm macro lens at f/4",
+      "camera": "tilt-up",
+      "focus": "the gold star"
+    },
+    {
+      "id": "ornaments-macro-03",
+      "subject": "Red satin baubles and a big red velvet bow on a fir branch, glossy green needles and warm bokeh behind; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4",
+      "tags": {
+        "palette": "red-green"
+      }
+    },
+    {
+      "id": "ornaments-macro-04",
+      "subject": "Vintage mercury-glass ornaments in silver, pale pink and champagne nestled in an old wooden box lined with tissue, a strand of fairy lights draped over; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4",
+      "camera": "push-in",
+      "focus": "the vintage ornaments",
+      "motion_elements": "the fairy lights and the reflections in the ornaments",
+      "tags": {
+        "palette": "white-gold"
+      }
+    },
+    {
+      "id": "ornaments-macro-05",
+      "subject": "Frosted pine cones and pine sprigs wrapped with a strand of tiny warm lights, frost crystals sparkling on the scales",
+      "lens": "100mm macro lens at f/4",
+      "motion_elements": "the tiny lights and the sparkling frost",
+      "tags": {
+        "palette": "white-gold"
+      }
+    },
+    {
+      "id": "ornaments-macro-06",
+      "subject": "Hand-carved wooden ornaments, a star, a little tree and a heart, hanging on a green tree among red berries and warm lights; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4",
+      "tags": {
+        "palette": "red-green"
+      }
+    },
+    {
+      "id": "ornaments-macro-07",
+      "subject": "An icy blue glass ornament with frost patterns hanging in front of a frosted window at blue hour, silver bokeh and snow falling softly beyond the glass; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4",
+      "look": "twilight",
+      "motion_elements": "the bokeh, the ornament reflections and the snow outside",
+      "ambient": "Snow falls softly outside the window. Bokeh lights twinkle.",
+      "tags": {
+        "palette": "cool-blue",
+        "time": "twilight",
+        "snow": "window"
+      }
+    },
+    {
+      "id": "ornaments-macro-08",
+      "subject": "Silver and pale blue baubles on a white-flocked branch lit by cool white fairy lights, silver bokeh behind; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4",
+      "tags": {
+        "palette": "cool-blue"
+      }
+    },
+    {
+      "id": "ornaments-macro-09",
+      "subject": "A red and green plaid ribbon woven through a pine garland with red baubles, cinnamon sticks and dried orange slices, warm lights tucked in; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4",
+      "tags": {
+        "palette": "red-green"
+      }
+    },
+    {
+      "id": "ornaments-macro-10",
+      "subject": "A clear glass ornament filled with tiny glowing fairy lights hanging on a white-flocked branch, gold bokeh all around; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4",
+      "camera": "push-in",
+      "focus": "the glowing glass ornament",
+      "tags": {
+        "palette": "white-gold"
+      }
+    },
+    {
+      "id": "ornaments-macro-11",
+      "subject": "Wide gold ribbon curling around a wrapped gift under the tree, a small brass bell tied to it and warm tree lights in bokeh",
+      "lens": "100mm macro lens at f/4",
+      "focus": "the gold ribbon"
+    },
+    {
+      "id": "ornaments-macro-12",
+      "subject": "A candy-cane striped glass ornament beside sprigs of holly with glossy leaves and red berries, warm fairy lights behind; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4",
+      "camera": "static",
+      "tags": {
+        "palette": "red-green",
+        "energy": "still"
+      }
+    },
+    {
+      "id": "ornaments-macro-13",
+      "subject": "Crystal snowflake ornaments catching blue and white light, hanging against a dark blue window with falling snow blurred behind; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4",
+      "look": "twilight",
+      "motion_elements": "the glinting crystals, the bokeh and the snow outside",
+      "ambient": "Snow falls softly outside the window. The crystals glint.",
+      "tags": {
+        "palette": "cool-blue",
+        "time": "twilight",
+        "snow": "window"
+      }
+    },
+    {
+      "id": "ornaments-macro-14",
+      "subject": "A pearl bead garland draped over champagne-gold baubles and ivory satin ribbon on a pale tree, soft warm-white bokeh; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4",
+      "tags": {
+        "palette": "white-gold"
+      }
+    },
+    {
+      "id": "ornaments-macro-15",
+      "subject": "Scandinavian straw star ornaments hanging on a fir branch beside warm candle-like bulbs, golden bokeh behind; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4"
+    },
+    {
+      "id": "ornaments-macro-16",
+      "subject": "Knitted and felt ornaments, tiny red stockings and green mittens, hanging on a tree among warm lights; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4",
+      "camera": "arc",
+      "focus": "the knitted ornaments",
+      "tags": {
+        "palette": "red-green"
+      }
+    },
+    {
+      "id": "ornaments-macro-17",
+      "subject": "Clear glass icicle ornaments hanging from a frosted branch, each one holding a drop of cool light, in front of a window with pale winter daylight and snow; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4",
+      "look": "winter-day",
+      "motion_elements": "the glinting icicles, the bokeh and the snow outside",
+      "ambient": "Snow falls softly outside the window. Light glints along the icicles.",
+      "tags": {
+        "palette": "cool-blue",
+        "time": "day",
+        "snow": "window"
+      }
+    },
+    {
+      "id": "ornaments-macro-18",
+      "subject": "A white porcelain bell ornament with a gold ribbon hanging among white lights on a flocked branch, gold bokeh behind; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4",
+      "camera": "push-in",
+      "focus": "the porcelain bell",
+      "tags": {
+        "palette": "white-gold"
+      }
+    },
+    {
+      "id": "ornaments-macro-19",
+      "subject": "Amber glass teardrop ornaments with warm light shining through them, honey-coloured reflections on the pine needles around them; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4"
+    },
+    {
+      "id": "ornaments-macro-20",
+      "subject": "A glossy red bauble reflecting a whole lit living room and tree in its curved surface, green pine needles framing it; every bauble matte, satin or glittered, none mirror-polished, so no reflections",
+      "lens": "100mm macro lens at f/4",
+      "camera": "push-in",
+      "focus": "the red bauble",
+      "tags": {
+        "palette": "red-green"
+      }
+    }
+  ]
+}

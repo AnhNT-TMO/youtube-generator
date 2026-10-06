@@ -1,0 +1,202 @@
+{
+  "theme": "grand/manor-house",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "interior-evening",
+    "motion_elements": "the fire, the tree lights and the snow outside",
+    "camera": "slide",
+    "focus": "the great fireplace",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "The fire flickers in the great fireplace. Snow falls outside.",
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "red-green",
+      "scale": "room",
+      "snow": "window",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "manor-house-01",
+      "subject": "A manor great hall with a massive carved stone fireplace ablaze, a thick garland with red bows along the mantel, a very tall tree in red and gold, oak panelling hung with landscape oil paintings and mullioned windows with snow outside"
+    },
+    {
+      "id": "manor-house-02",
+      "subject": "A manor library with dark oak bookcases, a green leather chesterfield, garlands with red berries along the shelves, a fire in a marble fireplace and a tall window with snow falling",
+      "camera": "push-in",
+      "focus": "the fireplace"
+    },
+    {
+      "id": "manor-house-03",
+      "subject": "A long panelled manor gallery with wreaths and red bows hung on its tall windows, a red runner on polished boards, landscape paintings in gold frames, candle sconces glowing and a lit tree at the far end",
+      "camera": "push-in",
+      "focus": "the tree at the far end",
+      "motion_elements": "the candle sconces, the tree lights and the snow outside the windows",
+      "ambient": "Candle flames flicker in the sconces. Snow falls outside the tall windows."
+    },
+    {
+      "id": "manor-house-04",
+      "subject": "A stone manor house front in deep snow, every mullioned window glowing gold, a huge wreath on the oak door, lanterns along a gravel drive and tall pines strung with lights",
+      "tags": {
+        "place": "outdoor",
+        "time": "twilight",
+        "scale": "vista",
+        "snow": "falling"
+      },
+      "look": "twilight",
+      "camera": "drone",
+      "focus": "the manor house",
+      "motion_elements": "the glowing windows, the lanterns, the lit pines and the falling snow",
+      "ambient": "Snow falls over the drive. Lantern flames flicker."
+    },
+    {
+      "id": "manor-house-05",
+      "subject": "A Victorian manor conservatory of white iron and glass, potted palms and citrus trees wound with fairy lights, a small tree with red ornaments, wicker chairs and snow settled on the glass roof and falling outside",
+      "focus": "the conservatory",
+      "motion_elements": "the fairy lights, the tree lights and the snow falling outside the glass",
+      "ambient": "Snow falls outside the glass walls."
+    },
+    {
+      "id": "manor-house-06",
+      "subject": "A manor dining hall with a long oak table set for a feast, silver candelabras with lit red candles, a runner of pine and holly, and a tall tree beside a stone fireplace with a fire",
+      "tags": {
+        "snow": "none"
+      },
+      "focus": "the long dining table",
+      "motion_elements": "the candle flames, the fire and the tree lights",
+      "ambient": "Candle flames flicker on the table. The fire flickers in the fireplace."
+    },
+    {
+      "id": "manor-house-07",
+      "subject": "A manor entrance hall with a wide oak staircase rising to a landing, its carved banister wound with garland and red bows, a tall tree at the foot, a stone fireplace burning on one side and a lantern chandelier above",
+      "tags": {
+        "snow": "none"
+      },
+      "camera": "crane-up",
+      "focus": "the staircase and the tree",
+      "ambient": "The fire flickers in the fireplace."
+    },
+    {
+      "id": "manor-house-08",
+      "subject": "A stone fireplace mantel with a garland of fir, holly and pinecones, red velvet stockings, brass candlesticks with lit candles and the fire glowing below",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "camera": "push-in",
+      "focus": "the mantel garland and candles",
+      "motion_elements": "the candle flames, the fire glow and the garland lights",
+      "ambient": "Candle flames flicker. The fire glows and flickers below.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "manor-house-09",
+      "subject": "A small castle hall with rough stone walls and a vaulted ceiling, an iron ring chandelier of lit candles, a huge hearth with a roaring log fire, a tall tree in red and green and deep window recesses with snow outside",
+      "focus": "the great hearth",
+      "motion_elements": "the fire, the candle chandelier, the tree lights and the snow outside",
+      "ambient": "The log fire flickers in the hearth. Candle flames flicker on the chandelier. Snow falls outside."
+    },
+    {
+      "id": "manor-house-10",
+      "subject": "A manor drawing room with red damask walls, a gilt mirror over a marble fireplace with a fire, a garland along the mantel and a tree in the bay window with snow falling beyond"
+    },
+    {
+      "id": "manor-house-11",
+      "subject": "A manor music room with a harp and a pianoforte, garlands on gilded mirrors, a tree with red velvet bows and a fire in a small marble fireplace, tall windows with snow outside",
+      "camera": "arc",
+      "focus": "the harp and pianoforte"
+    },
+    {
+      "id": "manor-house-12",
+      "subject": "The snowy inner courtyard of a manor at night, a frozen stone fountain wrapped in a lit garland, lanterns on the walls, glowing windows all around and a tall lit tree in the centre",
+      "tags": {
+        "place": "outdoor",
+        "scale": "street",
+        "snow": "falling"
+      },
+      "look": "night-lights",
+      "camera": "crane-up",
+      "focus": "the tree in the courtyard",
+      "motion_elements": "the lanterns, the glowing windows, the tree lights and the falling snow",
+      "ambient": "Snow falls into the courtyard. Lantern flames flicker."
+    },
+    {
+      "id": "manor-house-13",
+      "subject": "A silver tray with a crystal decanter, two glasses, mince pies and a sprig of holly on a side table by the fire, the flames glowing out of focus behind",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "camera": "push-in",
+      "focus": "the silver tray",
+      "motion_elements": "the fire glow behind and the tree lights",
+      "ambient": "The fire flickers in the background.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "manor-house-14",
+      "subject": "A manor window seat in a deep stone bay with red velvet cushions and a tartan throw, a garland along the leaded windows and snow falling on the lamplit park outside",
+      "camera": "push-in",
+      "focus": "the window seat",
+      "motion_elements": "the garland lights and the snow falling outside",
+      "ambient": "Snow falls outside the leaded windows."
+    },
+    {
+      "id": "manor-house-15",
+      "subject": "A timber-framed Tudor manor hall with dark beams and white plaster, holly and ivy over every beam, a long refectory table, a tall lit tree and a stone fireplace with a log fire"
+    },
+    {
+      "id": "manor-house-16",
+      "subject": "A manor vestibule with a boot bench, tartan blankets and a small lit tree, lanterns on either side of the oak front door with a great wreath, its glazed upper panes showing snow falling on the drive",
+      "camera": "push-in",
+      "focus": "the front door",
+      "motion_elements": "the lantern flames, the tree lights and the snow outside the door",
+      "ambient": "Snow falls outside the door. Lantern flames flicker."
+    },
+    {
+      "id": "manor-house-17",
+      "subject": "The great hall tree hung with red glass baubles, tartan bows, gold pinecones and warm bulbs, the stone fireplace glowing out of focus behind",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "camera": "push-in",
+      "focus": "the ornaments",
+      "ambient": "The fire flickers out of focus behind.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "manor-house-18",
+      "subject": "A double-height manor saloon with a minstrels' gallery hung with garlands, a tall tree reaching up toward it and a pair of fireplaces burning at either end",
+      "tags": {
+        "snow": "none"
+      },
+      "camera": "crane-up",
+      "focus": "the tall tree and the gallery",
+      "ambient": "Fires flicker in both fireplaces."
+    },
+    {
+      "id": "manor-house-19",
+      "subject": "A corner of a manor sitting room with a chess table set by the fire, two green velvet wingback chairs, a garland over the fireplace, a small tree and a window with snow falling",
+      "camera": "arc",
+      "focus": "the chess table"
+    },
+    {
+      "id": "manor-house-20",
+      "subject": "A pair of brass fire dogs and crackling logs in a stone hearth, a garland hanging from the mantel edge above and red stockings at the edge of the frame",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "camera": "push-in",
+      "focus": "the log fire",
+      "motion_elements": "the flames and glowing embers of the log fire",
+      "ambient": "The log fire crackles and flickers.",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

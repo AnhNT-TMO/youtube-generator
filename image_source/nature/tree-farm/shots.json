@@ -1,0 +1,182 @@
+{
+  "theme": "nature/tree-farm",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "golden",
+    "motion_elements": "the string lights and the falling snow",
+    "camera": "slide",
+    "focus": "the rows of pines",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls gently over the rows of pines.",
+    "tags": {
+      "place": "outdoor",
+      "time": "golden",
+      "palette": "red-green",
+      "scale": "vista",
+      "snow": "falling",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "tree-farm-01",
+      "subject": "Long rows of snowy young fir trees on a gentle hillside, a big red barn at the top with warm string lights along its roofline and a wreath on its doors, the low sun behind the barn"
+    },
+    {
+      "id": "tree-farm-02",
+      "subject": "A vintage farm truck with rounded fenders parked beside the fir rows, a freshly cut fir tied on its back, warm string lights draped along the truck bed and snow on the hood",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "arc",
+      "focus": "the vintage truck"
+    },
+    {
+      "id": "tree-farm-03",
+      "subject": "A small wooden hut selling trees at the farm entrance, a counter with a glowing lantern, its roof edged with warm bulbs and pine garland, cut trees leaning in rows beside it",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the lit tree stand hut"
+    },
+    {
+      "id": "tree-farm-04",
+      "subject": "A snowy tree-farm path between tall rows of firs lined with lanterns on short wooden posts, strings of warm lights draped from post to post, the path leading toward a red barn",
+      "camera": "push-in",
+      "focus": "the lantern-lit path",
+      "motion_elements": "the lanterns, the string lights and the falling snow"
+    },
+    {
+      "id": "tree-farm-05",
+      "subject": "Bundled fir trees wrapped in twine leaning against a snowy split-rail fence, warm string lights along the top rail and the sunlit snowy field behind",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the bundled trees on the fence"
+    },
+    {
+      "id": "tree-farm-06",
+      "subject": "A wide snowy farm field at golden hour with scattered firs of every size, a lone lit Christmas tree on a small rise and a farmhouse with glowing windows in the distance",
+      "camera": "drone",
+      "focus": "the lone lit tree on the rise"
+    },
+    {
+      "id": "tree-farm-07",
+      "subject": "An old red tractor pulling a flat hay wagon loaded with hay bales and cut firs, warm string lights along the wagon rails, stopped on a snowy farm lane between the fir rows",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the tractor and the hay wagon"
+    },
+    {
+      "id": "tree-farm-08",
+      "subject": "Close view of a freshly cut fir lying on the snow beside its stump, a wooden bow saw and a coil of twine next to it, warm fairy lights glowing on the nearby branches",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the freshly cut fir",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "tree-farm-09",
+      "subject": "A red barn with a large lit wreath above its open doors, the barn interior glowing warm with hanging bulbs and stacked trees, snowy fir rows in the foreground",
+      "camera": "push-in",
+      "focus": "the open barn doors"
+    },
+    {
+      "id": "tree-farm-10",
+      "subject": "A tree-baling station under a wooden roof, a fir being pulled through a big funnel into white netting, netted trees stacked around it and warm bulbs strung overhead",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the netted trees under the lights"
+    },
+    {
+      "id": "tree-farm-11",
+      "subject": "Rolling snowy hills covered in neat rows of firs, a winding farm lane with lantern posts and a little white farmhouse with red trim glowing warm",
+      "camera": "drone",
+      "focus": "the farmhouse on the lane"
+    },
+    {
+      "id": "tree-farm-12",
+      "subject": "Close view of snowy fir branches tied with plain red ribbons, warm fairy lights wound through the needles and a soft golden sun flare behind",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the ribboned fir branches",
+      "motion_elements": "the fairy lights, the ribbon ends and the falling snow",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "tree-farm-13",
+      "subject": "A small wooden cider stand at the farm with a steaming pot on a burner, stacked mugs and warm bulbs along its awning, snowy fir rows behind",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "push-in",
+      "focus": "the steaming cider pot",
+      "motion_elements": "the steam, the string lights and the falling snow",
+      "ambient": "Steam rises from the cider pot. Snow falls gently."
+    },
+    {
+      "id": "tree-farm-14",
+      "subject": "The tree farm at blue hour after sunset, the red barn and the sales hut lit with warm string lights, rows of firs dark blue in the snow",
+      "tags": {
+        "time": "twilight"
+      },
+      "look": "twilight"
+    },
+    {
+      "id": "tree-farm-15",
+      "subject": "A rustic wooden sled loaded with a small cut fir and a wreath, parked in the snow between fir rows, warm string lights on the nearest trees",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the loaded sled"
+    },
+    {
+      "id": "tree-farm-16",
+      "subject": "A tall windbreak of mature spruces along the edge of the farm, their lower branches wrapped in warm lights, young fir rows in the foreground and a golden sky behind"
+    },
+    {
+      "id": "tree-farm-17",
+      "subject": "Close view of a stack of fresh pine wreaths with red bows hanging on a weathered barn wall, warm string lights along the wall and snow settling on the wreaths",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the wreaths on the barn wall",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "tree-farm-18",
+      "subject": "A snowy tree-farm yard with a stone fire pit burning, log benches around it, warm bulbs strung between tall poles and a cut tree leaning on a post",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "arc",
+      "focus": "the fire pit",
+      "motion_elements": "the fire pit flames, the string lights and the falling snow",
+      "ambient": "Snow falls gently. The fire pit flames flicker."
+    },
+    {
+      "id": "tree-farm-19",
+      "subject": "A tree farm in a snowy valley seen from a hilltop, a patchwork of fir plantations, a red barn and a lit farm lane, the golden sun low over the far hills",
+      "camera": "drone",
+      "focus": "the red barn in the valley"
+    },
+    {
+      "id": "tree-farm-20",
+      "subject": "Close view of a row of small potted firs in burlap sacks on a wooden table under warm bulbs, snow dusting their tips",
+      "tags": {
+        "scale": "macro"
+      },
+      "focus": "the potted firs",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

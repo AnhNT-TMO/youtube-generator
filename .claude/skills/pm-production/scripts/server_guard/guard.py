@@ -13,7 +13,7 @@ DEFAULTS = {
     "idle_exit_seconds": 900,
     "min_available_ram_share": 0.15,
     "slice_ram_share": 0.60,
-    "scope_ram_gb": 40,
+    "scope_ram_gb": 50,
     "gpu_mem_gb": 60,
     "gpu_temp_c": 88,
     "load_factor": 1.5,

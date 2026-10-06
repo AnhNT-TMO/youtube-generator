@@ -48,7 +48,9 @@ $PY $P tags     <album> [--trends]             # kiểm khối ## Tags: có ngư
    báo PM render lại từ master. File video có trên máy thì thêm `--video <file>`. `youtube.md` thường soạn trước khi
    render: chưa có video / thumbnail chỉ là ⚠️; master ngoài `length_min` của `channel/<ch>/album_rules.md` là ❌ (PM
    thêm/bớt bài).
-2. **Chapters.** `publish.py chapters <album>` in khối các dòng chapter từ `assembly.json` (không đo audio: ghép nhẹ,
+2. **Chapters.** Kênh ghi `**Chapters:** none` trong `publish.md` (vd. nhạc nền không đặt tên bài) → bỏ bước này:
+   description không có `TRACKLIST` / timestamp, pinned comment không timestamp (`check` ❌ nếu có), không cần
+   `assembly.json` (có thì vẫn so độ dài video). Còn lại: `publish.py chapters <album>` in khối các dòng chapter từ `assembly.json` (không đo audio: ghép nhẹ,
    crossfade ngắn, `start_s` là chỗ bài bắt đầu trong master). Khối không có dòng `TRACKLIST`: mẫu kênh đã có dòng đó,
    dán khối vào ngay dưới (`check` ❌ khi description có 2 dòng `TRACKLIST`). Luật YouTube (không thì không có chapters): dòng đầu `0:00`, ≥ 3
    chapters, mỗi chapter ≥ 10 s, tăng dần, timestamp đầu dòng + dấu cách + tên bài (không gạch, không "01."), không dòng
@@ -89,7 +91,7 @@ Mẫu kênh trong `publish.md` → *Description YouTube mặc định* dùng **n
    (1) album nói về ai / nỗi gì / xin gì (câu chuyện của brief), độ dài, số bài; (2) một câu hát thật của bài 1 (từ
    `## Lyrics` của `tracks/01-*.md`), trong ngoặc kép; (3) âm thanh trong một dòng; (4, tùy chọn) bài kết và cảm giác cuối.
    Cụ thể cho album này, không hứa điều video không có.
-2. **TRACKLIST**: vào chỗ `[` của mẫu (dưới dòng `TRACKLIST` của mẫu), dán nguyên khối của `publish.py chapters <album>`.
+2. **TRACKLIST** (trừ kênh `**Chapters:** none`): vào chỗ `[` của mẫu (dưới dòng `TRACKLIST` của mẫu), dán nguyên khối của `publish.py chapters <album>`.
 
 Không thêm gì khác: không dòng AI (AI khai báo bằng nút trong Studio, `references/studio.md`), không dòng bản quyền,
 không điều `publish.md` cấm, trừ khi PM bảo. Giới hạn: 5000 ký tự, ≤ 60 hashtag (YouTube Help 6390658: quá 60 thì bỏ qua toàn bộ; 3 hashtag hiện trên title).

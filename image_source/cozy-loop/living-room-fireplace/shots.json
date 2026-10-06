@@ -1,0 +1,492 @@
+{
+  "theme": "cozy-loop/living-room-fireplace",
+  "target": 50,
+  "defaults": {
+    "lens": "35mm lens at f/8",
+    "look": "interior-evening",
+    "composition": "One wide view in which all of these are clearly visible and not blocking each other: a fireplace with a real burning wood fire, a decorated Christmas tree with warm fairy lights, a large window with big snowflakes clearly falling outside against the night sky, and in the foreground a low table with a cup of hot coffee giving off a clearly visible thin wisp of white steam rising against a darker background and a small plate of Christmas food",
+    "motion_elements": "the burning fire, the tree lights, the steam from the cup and the falling snow outside the window",
+    "camera": "static",
+    "out_and_back": false,
+    "seconds": 10,
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "warm-gold",
+      "scale": "room",
+      "snow": "window",
+      "energy": "still",
+      "fire": true
+    },
+    "motion": [
+      "fire",
+      "candles",
+      "mug-steam",
+      "tree-lights",
+      "window-view"
+    ],
+    "place_name": "cozy living room",
+    "motion_where": {
+      "window-view": "winter landscape"
+    },
+    "sound": "fireplace"
+  },
+  "shots": [
+    {
+      "id": "cozy-01",
+      "subject": "A log cabin living room with a tall stone fireplace, a red plaid sofa, a tall pine tree with warm white lights and red baubles, and a big window onto snowy pines; on the table a mug of coffee and gingerbread cookies",
+      "tags": {
+        "style": "log-cabin",
+        "palette": "red-green",
+        "time": "night"
+      },
+      "place_name": "cozy log cabin living room",
+      "motion_where": {
+        "fire": "stone fireplace",
+        "candles": "on the mantel, in the lanterns and in the glass holder on the table",
+        "window-view": "pine forest"
+      }
+    },
+    {
+      "id": "cozy-02",
+      "subject": "A Victorian parlour with a carved marble fireplace, a green velvet armchair, a tree with gold ornaments, and a tall sash window onto a snowy street; on the table a china cup of coffee and mince pies",
+      "tags": {
+        "style": "victorian",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-03",
+      "subject": "A Scandinavian living room in white and pale wood with a round black wood stove, a sheepskin chair, a slim tree with warm lights and straw stars, and a window onto a snowy forest; on the table a coffee cup and cinnamon buns",
+      "tags": {
+        "style": "scandinavian",
+        "palette": "white-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-04",
+      "subject": "A farmhouse living room with a brick fireplace and a wooden mantel with stockings, a cream linen sofa, a tree with red and white ornaments, and a window onto a snowy field and red barn; on the table coffee and sugar cookies",
+      "tags": {
+        "style": "farmhouse",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-05",
+      "subject": "An alpine chalet living room with pine walls, a stone fireplace, a leather sofa with fur throws, a tree with wooden ornaments, and a big window onto snowy mountains; on the table coffee and a slice of stollen",
+      "tags": {
+        "style": "chalet",
+        "palette": "warm-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-06",
+      "subject": "An English cottage sitting room with a low beamed ceiling, an inglenook fireplace, a floral armchair, a small tree with vintage glass ornaments, and a leaded window onto a snowy garden; on the table a teacup of coffee and shortbread",
+      "tags": {
+        "style": "cottage",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-07",
+      "subject": "A modern cozy loft with a concrete fireplace, a big grey sofa, a tall tree with warm lights, and floor-to-ceiling windows onto a snowy city at dusk; on the table a coffee cup and chocolate truffles",
+      "tags": {
+        "style": "modern",
+        "palette": "white-gold",
+        "time": "twilight"
+      }
+    },
+    {
+      "id": "cozy-08",
+      "subject": "A stone manor drawing room with a grand carved fireplace, a burgundy chesterfield sofa, a very tall tree with gold and red ornaments, and a tall arched window onto a snowy park; on the table coffee and a fruit cake",
+      "tags": {
+        "style": "manor",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-09",
+      "subject": "A lakeside cabin living room with a river-stone fireplace, a blue plaid armchair, a tree with silver and blue ornaments, and a wide window onto a frozen lake; on the table coffee and blueberry muffins",
+      "tags": {
+        "style": "lakeside",
+        "palette": "cool-blue",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-10",
+      "subject": "A rustic barn conversion living room with exposed beams, a black iron wood stove, a cognac leather sofa, a tree with burlap bows, and a big barn window onto snowy hills; on the table coffee and a cinnamon roll",
+      "tags": {
+        "style": "barn",
+        "palette": "warm-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-11",
+      "subject": "A cozy apartment living room with a white brick fireplace, a mustard velvet sofa, a tree with multicolour vintage ornaments, and a window onto a snowy old-town street with lit windows; on the table coffee and a croissant",
+      "tags": {
+        "style": "apartment",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-12",
+      "subject": "A mountain lodge great room with a huge stone chimney, twin leather armchairs, a tall tree with pine cones and red berries, and a big window onto snowy peaks at twilight; on the table coffee and pecan pie",
+      "tags": {
+        "style": "lodge",
+        "palette": "warm-gold",
+        "time": "twilight"
+      }
+    },
+    {
+      "id": "cozy-13",
+      "subject": "A Nordic cabin living room with dark wood walls, a corner fireplace, a wool-covered daybed, a small tree with white lights, and a window onto a snowy spruce forest; on the table a coffee cup and saffron buns",
+      "tags": {
+        "style": "nordic",
+        "palette": "white-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-14",
+      "subject": "A French country living room with a limestone fireplace, a linen sofa, a tree with champagne gold ornaments, and french doors onto a snowy terrace; on the table coffee and macarons",
+      "tags": {
+        "style": "french-country",
+        "palette": "white-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-15",
+      "subject": "A small cottage room with a cast-iron stove, a rocking chair with a knitted blanket, a small tree on a side table, and a four-pane window onto a snowy lane; on the table coffee and a slice of apple pie",
+      "tags": {
+        "style": "cottage",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-16",
+      "subject": "A living room with a double-sided fireplace between two rooms, a sofa with red cushions, a tree with red ornaments, and a bay window with a window seat onto a snowy garden; on the table coffee and chocolate chip cookies",
+      "tags": {
+        "style": "classic",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-17",
+      "subject": "A wooden A-frame cabin living room with a round hanging fireplace, a low sofa with sheepskins, a tree with warm lights, and a triangular glass wall onto snowy pines; on the table coffee and brownies",
+      "tags": {
+        "style": "a-frame",
+        "palette": "warm-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-18",
+      "subject": "A Georgian townhouse living room with a white marble fireplace, a blue velvet sofa, a tall tree with silver and white ornaments, and tall windows onto a snowy square; on the table coffee and a lemon tart",
+      "tags": {
+        "style": "georgian",
+        "palette": "cool-blue",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-19",
+      "subject": "A craftsman bungalow living room with a tiled fireplace, built-in bookshelves, a leather armchair, a tree with vintage bubble lights, and a window onto a snowy porch; on the table coffee and gingerbread",
+      "tags": {
+        "style": "craftsman",
+        "palette": "warm-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-20",
+      "subject": "A ski chalet living room with a modern steel fireplace, a white sofa with red throws, a tree with red ornaments, and a panoramic window onto snowy slopes with a lit chairlift; on the table coffee and a waffle",
+      "tags": {
+        "style": "ski-chalet",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-21",
+      "subject": "A cabin living room at night with a stone fireplace, a green plaid sofa, a tree with gold lights, and a window onto snowy pines under a starry sky; on the table coffee and pumpkin bread",
+      "tags": {
+        "style": "log-cabin",
+        "palette": "warm-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-22",
+      "subject": "A bright living room in the morning with a white fireplace, a pale sofa, a tree with white and gold ornaments, and a window onto softly falling snow in daylight; on the table coffee and a plate of croissants",
+      "tags": {
+        "style": "classic",
+        "palette": "white-gold",
+        "time": "day"
+      }
+    },
+    {
+      "id": "cozy-23",
+      "subject": "A living room with a brick fireplace painted white, a red armchair, a tree with red and green ornaments, and a window onto a snowy village church; on the table coffee and a stack of butter cookies",
+      "tags": {
+        "style": "classic",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-24",
+      "subject": "A wood-panelled den with a stone fireplace, a tartan armchair, pine garlands along the walls, a tree with plaid ribbons, and a window onto a snowy forest road; on the table coffee and oat cookies",
+      "tags": {
+        "style": "den",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-25",
+      "subject": "An old farmhouse keeping room with a wide open hearth, a wooden settle bench with cushions, a tree with dried orange slices and cinnamon sticks, and a small window onto snow; on the table coffee and a slice of gingerbread loaf",
+      "tags": {
+        "style": "farmhouse",
+        "palette": "warm-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-26",
+      "subject": "A living room with a tall bookcase wall, a stone fireplace, a leather chesterfield, a tree with gold ornaments, and a window onto a snowy courtyard with lanterns; on the table coffee and a slice of yule log cake",
+      "tags": {
+        "style": "library",
+        "palette": "warm-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-27",
+      "subject": "A cozy cabin nook with a small black wood stove, a deep armchair with a fur throw, a small potted tree with lights, and a window onto snowy birch trees; on the table coffee and a chocolate croissant",
+      "tags": {
+        "style": "nook",
+        "palette": "white-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-28",
+      "subject": "A seaside cottage living room with a whitewashed stone fireplace, a blue striped sofa, a tree with seashell and glass ornaments, and a window onto a snowy harbour with lit boats; on the table coffee and scones",
+      "tags": {
+        "style": "seaside",
+        "palette": "cool-blue",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-29",
+      "subject": "A living room in a converted mill with a stone fireplace, a sofa with wool throws, a tall tree with copper ornaments, and an arched window onto a snowy riverside; on the table coffee and almond biscotti",
+      "tags": {
+        "style": "mill",
+        "palette": "warm-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-30",
+      "subject": "A Swiss chalet stube with carved pine walls, a green tiled stove with a small fire door open, a bench with cushions, a tree with red apples and straw stars, and a small window onto snow; on the table coffee and nut cake",
+      "tags": {
+        "style": "stube",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-31",
+      "subject": "A living room with a curved sofa facing a wide stone fireplace, a tree with silver and gold ornaments, and a wall of windows onto a snowy mountain valley at dusk; on the table coffee and chocolate cake",
+      "tags": {
+        "style": "modern",
+        "palette": "white-gold",
+        "time": "twilight"
+      }
+    },
+    {
+      "id": "cozy-32",
+      "subject": "A small studio cabin with a pot-belly stove, a daybed with patchwork quilts, a small tree in a basket, and a window onto a snowy meadow; on the table coffee and a slice of banana bread",
+      "tags": {
+        "style": "studio",
+        "palette": "warm-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-33",
+      "subject": "A plantation-style living room with a wide white fireplace, cream armchairs, a tall tree with red velvet bows, and tall windows onto snowy oaks; on the table coffee and pecan cookies",
+      "tags": {
+        "style": "classic",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-34",
+      "subject": "A living room with a rustic reclaimed-wood mantel over a stone fireplace, a sofa with red knit pillows, a tree with red berries and pine cones, and a window onto a snowy pine hill; on the table coffee and cranberry scones",
+      "tags": {
+        "style": "rustic",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-35",
+      "subject": "A Tudor-style living room with dark oak beams, a large stone fireplace, a wingback chair, a tree with gold and red ornaments, and a diamond-pane window onto snow; on the table coffee and mince pies",
+      "tags": {
+        "style": "tudor",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-36",
+      "subject": "A Japanese-Nordic living room with light wood, a modern wood stove, a low sofa, a slim tree with warm lights, and a large window onto snowy maples; on the table coffee and matcha cookies",
+      "tags": {
+        "style": "japandi",
+        "palette": "white-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-37",
+      "subject": "A treehouse-style cabin living room with round windows, a small stone fireplace, a hammock chair with blankets, a small tree with lights, and snow falling on the pine branches outside; on the table coffee and cookies",
+      "tags": {
+        "style": "treehouse",
+        "palette": "warm-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-38",
+      "subject": "A living room with a grand piano beside a marble fireplace, a velvet sofa, a tall tree with gold ornaments, and tall windows onto a snowy garden; on the table coffee and chocolate truffles",
+      "tags": {
+        "style": "grand",
+        "palette": "white-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-39",
+      "subject": "A lodge-style living room with a massive stone fireplace, leather club chairs, a tree with plaid ribbons, and a window onto a snowy lake; on the table coffee and shortbread",
+      "tags": {
+        "style": "lodge",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-40",
+      "subject": "A cottage kitchen-living room with an old range stove next to a small fireplace, a farmhouse table, a tree in the corner, and a window onto a snowy garden; on the table coffee and a plate of warm cinnamon rolls",
+      "tags": {
+        "style": "cottage",
+        "palette": "warm-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-41",
+      "subject": "A cabin living room with a corner stone fireplace, two rocking chairs, a small tree with red bead garlands, and a window onto a snowy forest at dusk; on the table coffee and gingerbread men",
+      "tags": {
+        "style": "log-cabin",
+        "palette": "red-green",
+        "time": "twilight"
+      }
+    },
+    {
+      "id": "cozy-42",
+      "subject": "A Parisian apartment living room with a marble fireplace, a gilded mirror above it, a pink velvet sofa, a tree with blush and gold ornaments, and a tall window onto snowy rooftops; on the table coffee and a pastry",
+      "tags": {
+        "style": "parisian",
+        "palette": "white-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-43",
+      "subject": "A cozy basement den with a brick fireplace, a big corduroy sofa, a tree with multicolour lights, and a high garden-level window with snow; on the table coffee and a plate of popcorn and cookies",
+      "tags": {
+        "style": "den",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-44",
+      "subject": "A mountain cabin living room with a glass-front wood stove, a sofa with Nordic knit blankets, a tree with white and red ornaments, and a big window onto snowy peaks under a pink dusk sky; on the table coffee and waffles",
+      "tags": {
+        "style": "mountain",
+        "palette": "red-green",
+        "time": "twilight"
+      }
+    },
+    {
+      "id": "cozy-45",
+      "subject": "A living room with a stone fireplace flanked by two windows, both showing falling snow, a sofa with plaid throws, a tree with gold lights; on the table coffee and a slice of carrot cake",
+      "tags": {
+        "style": "classic",
+        "palette": "warm-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-46",
+      "subject": "A small Norwegian cabin with a cast-iron stove, a bench with reindeer-pattern cushions, a tree with woven hearts, and a window onto a snowy fjord; on the table coffee and krumkake cookies",
+      "tags": {
+        "style": "norwegian",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-47",
+      "subject": "A lodge living room with a raised stone hearth, a sectional sofa with wool blankets, a very tall tree with warm lights, and a two-storey window onto snowy firs; on the table coffee and cheesecake",
+      "tags": {
+        "style": "lodge",
+        "palette": "warm-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-48",
+      "subject": "A warm cottage living room with a whitewashed brick fireplace, a slipcovered sofa, a tree with vintage mercury glass ornaments, and a window onto a snowy picket fence; on the table coffee and lemon cookies",
+      "tags": {
+        "style": "cottage",
+        "palette": "white-gold",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-49",
+      "subject": "A living room with a tall black fireplace surround, an emerald velvet sofa, a tree with gold and green ornaments, and a large window onto a snowy park with old lamps; on the table coffee and chocolate cookies",
+      "tags": {
+        "style": "classic",
+        "palette": "red-green",
+        "time": "night"
+      }
+    },
+    {
+      "id": "cozy-50",
+      "subject": "A cabin living room with a stone fireplace, a big armchair with a knit throw, a tree with red plaid bows and wooden stars, and a window onto a snowy forest with a lit neighbouring cabin; on the table coffee and a plate of Christmas cookies",
+      "tags": {
+        "style": "log-cabin",
+        "palette": "red-green",
+        "time": "night"
+      }
+    }
+  ]
+}

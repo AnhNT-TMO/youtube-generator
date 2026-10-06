@@ -1,0 +1,201 @@
+{
+  "theme": "nature/frozen-lake",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "twilight",
+    "motion_elements": "the lantern lights, their reflections on the ice and the falling snow",
+    "camera": "drone",
+    "focus": "the lakeside cabin",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls over the frozen lake.",
+    "tags": {
+      "place": "outdoor",
+      "time": "twilight",
+      "palette": "cool-blue",
+      "scale": "vista",
+      "snow": "falling",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "frozen-lake-01",
+      "subject": "A long wooden jetty reaching out onto a frozen lake, glowing lanterns on every post and warm string lights along its rails, a red lakeside cabin with lit windows at the shore end, dark snowy mountains beyond; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the jetty and the lakeside cabin"
+    },
+    {
+      "id": "frozen-lake-02",
+      "subject": "A small red lakeside cabin at the edge of the ice, windows glowing, warm string lights along its eaves and a lit wreath on the door, chimney smoke rising, an upturned canoe under snow beside it; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "push-in",
+      "motion_elements": "the cabin lights, the chimney smoke and the falling snow",
+      "ambient": "Snow falls over the frozen lake. Chimney smoke drifts slowly from the cabin."
+    },
+    {
+      "id": "frozen-lake-03",
+      "subject": "A little wooden ice-fishing hut standing alone on the snowy lake ice, outlined in warm fairy lights, a lantern by its door and a small lit tree beside it, the far shore a dark line of pines; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "arc",
+      "focus": "the ice-fishing hut"
+    },
+    {
+      "id": "frozen-lake-04",
+      "subject": "A wooden boathouse on stilts at the lake edge wrapped in warm lights, its glow reflected on smooth dark ice, snowy pines behind under a deep blue sky; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the boathouse"
+    },
+    {
+      "id": "frozen-lake-05",
+      "subject": "A wide frozen lake between snowy mountains, a small village on the far shore with glowing windows and a tall lit Christmas tree at the end of its jetty; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the lit village shore",
+      "motion_elements": "the village lights, their reflections on the ice and the falling snow"
+    },
+    {
+      "id": "frozen-lake-06",
+      "subject": "Close view of an old wooden canoe upturned under snow on the lake shore, warm fairy lights draped along its hull, a glowing lantern on a pole beside it, the frozen lake softly blurred behind; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the snowy canoe and its lantern",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "frozen-lake-07",
+      "subject": "Clear black ice on a frozen mountain lake with cracks and trapped bubbles, reflecting a row of lanterns on the shore and a lit cabin, peaks glowing pink in the last light; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "snow": "lying"
+      },
+      "focus": "the lantern-lit shore",
+      "motion_elements": "the lanterns, their reflections in the black ice and the drifting clouds",
+      "ambient": "The lanterns and their reflections in the ice glow and twinkle. Clouds drift slowly past the peaks."
+    },
+    {
+      "id": "frozen-lake-08",
+      "subject": "A cleared skating rink on the lake ice bordered by snowbanks with warm string lights on short wooden posts, a snowy bench with a pair of old skates on it and a lit tree at the rink edge; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "slide",
+      "focus": "the lit skating rink"
+    },
+    {
+      "id": "frozen-lake-09",
+      "subject": "A frozen lake at night under a starry sky, a lone lakeside cabin with glowing windows and a lit tree on its deck, the Milky Way above the far hills; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "time": "night",
+        "snow": "lying"
+      },
+      "look": "night-lights",
+      "motion_elements": "the cabin lights, the tree lights and the twinkling stars",
+      "ambient": "Stars twinkle over the lake. The cabin lights glow on the snow."
+    },
+    {
+      "id": "frozen-lake-10",
+      "subject": "A lakeside sauna hut with a small wooden deck, steam rising from its chimney, lanterns along the deck, warm lights on the eaves and a hole cut in the ice showing dark water; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "push-in",
+      "focus": "the sauna hut",
+      "motion_elements": "the steam, the lanterns, the dark water and the falling snow",
+      "ambient": "Snow falls. Steam drifts up from the sauna chimney. The dark water in the ice hole ripples gently."
+    },
+    {
+      "id": "frozen-lake-11",
+      "subject": "Close view of a glass lantern with a glowing candle standing on the snowy lake ice, frost patterns around its base, warm fairy lights and a lit cabin softly blurred behind; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro",
+        "energy": "still"
+      },
+      "camera": "static",
+      "motion_elements": "the candle flame, the blurred lights and the falling snow",
+      "ambient": "The candle flickers inside the lantern. Snow falls over the ice.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "frozen-lake-12",
+      "subject": "A narrow frozen inlet between snowy pine-covered banks, a small stone bridge at the far end with warm lights along its parapet and their reflections on the ice; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the lit stone bridge"
+    },
+    {
+      "id": "frozen-lake-13",
+      "subject": "A snowy lakeside dock with two wooden rowing boats frozen into the ice, lanterns on the mooring posts and a string of warm lights running overhead from post to post; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "slide",
+      "focus": "the frozen rowing boats"
+    },
+    {
+      "id": "frozen-lake-14",
+      "subject": "A frozen lake at sunset with golden light on the snow, a lakeside cabin with warm glowing windows and a small lit tree by the shore, long blue shadows of pines stretching across the ice; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "time": "golden",
+        "snow": "lying",
+        "palette": "warm-gold"
+      },
+      "look": "golden",
+      "motion_elements": "the cabin lights, the tree lights and the drifting clouds",
+      "ambient": "The cabin lights and tree lights twinkle. Clouds drift slowly across the golden sky."
+    },
+    {
+      "id": "frozen-lake-15",
+      "subject": "A small island in the middle of a frozen lake with a single cabin and a big lit Christmas tree beside it, a lantern-lit path across the ice leading to it; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the island cabin"
+    },
+    {
+      "id": "frozen-lake-16",
+      "subject": "A lakeside gazebo on a small rocky point, its railings wrapped in pine garland and warm lights, the snowy lake and mountains stretching behind; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "arc",
+      "focus": "the lit gazebo"
+    },
+    {
+      "id": "frozen-lake-17",
+      "subject": "Close view of a pair of old leather ice skates hanging by their laces from a snowy fence post by the frozen lake, a glowing lantern and warm fairy lights beside them; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the hanging ice skates",
+      "motion_elements": "the lantern, the fairy lights and the falling snow",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "frozen-lake-18",
+      "subject": "A fire pit on the snowy lakeshore with a crackling campfire, wooden chairs under snow around it and warm string lights strung between two pines, the frozen lake beyond; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "push-in",
+      "focus": "the campfire",
+      "motion_elements": "the campfire flames, the string lights and the falling snow",
+      "ambient": "Snow falls over the frozen lake. The campfire flames flicker."
+    },
+    {
+      "id": "frozen-lake-19",
+      "subject": "A frozen lake in a narrow mountain valley below steep snowy cliffs, a row of three red lakeside cabins with lit windows and garlands along the shore; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the row of red cabins"
+    },
+    {
+      "id": "frozen-lake-20",
+      "subject": "Close view of snow-covered reeds poking through the lake ice, warm fairy lights woven among them, a lantern-lit jetty softly blurred in the distance; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "slide",
+      "focus": "the frosted reeds",
+      "motion_elements": "the fairy lights, the swaying reeds and the falling snow",
+      "ambient": "Snow falls over the frozen lake. The reeds sway very slightly.",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

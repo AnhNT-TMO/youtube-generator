@@ -1,0 +1,70 @@
+{
+ "moves": {
+  "default": [
+   "slide to the left",
+   "slide to the right"
+  ],
+  "deep": [
+   "slide to the left",
+   "slide to the right"
+  ]
+ },
+ "deep_field": "deep",
+ "sequence": [
+  {
+   "text": "{shot} shot; the camera makes one slow, gentle, steady {move} that keeps going for the whole clip but covers only a very short distance, about a thirtieth of the frame width in total; the camera stays at the same height with a fixed lens, never moves closer to anything and never zooms in; it never travels down the aisle, path or room, so the last frame shows almost the same view as the first frame, every object still in frame."
+  },
+  {
+   "if": "window",
+   "text": "The view through the windows stays frozen like a soft, slightly out-of-focus still photograph of {window}, with nothing moving outside; every window pane keeps exactly the same size and shape; no new buildings, lights, people or trees appear in the window view."
+  },
+  {
+   "if": "indoor",
+   "text": "The air inside the room is perfectly clean, clear and still: no particles, flakes, dust or sparkles float or fall anywhere inside the room."
+  },
+  {
+   "if": "window",
+   "text": "Only the flames and the lights inside the room move."
+  },
+  {
+   "if": "snowfall",
+   "text": "Light snowflakes drift down slowly through the cold air."
+  },
+  {
+   "field": "motion"
+  },
+  {
+   "field": "extra"
+  },
+  {
+   "if": "outdoor",
+   "text": "Every street, square, path, stall and terrace stays completely empty and deserted for the whole clip: nobody walks in or appears anywhere, not even tiny figures far in the background."
+  },
+  {
+   "text": "The {lock} keep their exact shape and position; every door stays exactly as open or closed as in the first frame; no new objects, people, hands or text appear; no statues, busts, sculptures or figures of people."
+  },
+  {
+   "text": "The {light} stays as bright and warm as the first frame throughout, with the same colors."
+  },
+  {
+   "text": "Sound: {sound}."
+  }
+ ],
+ "forbid": {
+  "indoor": [
+   "flakes drift",
+   "snow"
+  ]
+ },
+ "fields": {
+  "shot": "Wide | Medium | Close",
+  "deep": "true khi cảnh sâu (lối đi, hành lang, dãy kệ, lối giữa nhà nguyện) hoặc toàn cảnh ngoài trời rộng: chỉ slide/arc",
+  "window": "cảnh thấy qua cửa sổ, tiếng Anh, không chữ gốc snow (vd. 'dark pine trees and a lit village at night'); \"\" nếu không thấy cửa sổ",
+  "snowfall": "true khi cảnh ngoài trời có tuyết đang rơi trong ảnh",
+  "motion": "2–4 câu tiếng Anh, mỗi câu một thứ chuyển động CÓ TRONG ẢNH và ở đâu (lửa, nến, khói cốc, đèn cây, hơi nước, mặt nước, khói ống khói, cực quang, đèn toa…), theo câu mẫu ở blocks.json → video.motion / VIDEO.md",
+  "extra": "0–2 câu tùy chọn: chợ/phố đã đóng cửa vắng người, tàu đứng yên trên ray, thú ngoài trời…",
+  "lock": "danh sách vật chính để khóa, tiếng Anh, số nhiều (vd. 'stone fireplace, Christmas tree, armchair, coffee table and window frames')",
+  "light": "room | market stall | street | scene … (chủ ngữ câu ánh sáng)",
+  "sound": "âm thanh hợp cảnh, tiếng Anh (vd. 'a soft crackling fire and a quiet cozy room tone')"
+ }
+}

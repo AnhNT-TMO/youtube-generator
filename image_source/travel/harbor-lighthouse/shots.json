@@ -1,0 +1,202 @@
+{
+  "theme": "travel/harbor-lighthouse",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "twilight",
+    "motion_elements": "the boat lights, their reflections on the water and the falling snow",
+    "camera": "drone",
+    "focus": "the harbour",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Gentle ripples move on the harbour water. Snow falls.",
+    "tags": {
+      "place": "outdoor",
+      "time": "twilight",
+      "palette": "cool-blue",
+      "scale": "vista",
+      "snow": "falling",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "harbor-lighthouse-01",
+      "subject": "A small fishing harbour at dusk with painted wooden boats strung with lights along their masts, reflections on the calm water and colourful quayside houses with lit windows; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline"
+    },
+    {
+      "id": "harbor-lighthouse-02",
+      "subject": "A white stone lighthouse on a rocky point at dusk with a large wreath on its door and its lamp glowing, snow on the rocks and soft waves breaking below; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "camera": "arc",
+      "focus": "the lighthouse",
+      "motion_elements": "the lighthouse lamp, the breaking waves and the falling snow",
+      "ambient": "Waves wash gently over the rocks. Snow falls."
+    },
+    {
+      "id": "harbor-lighthouse-03",
+      "subject": "A row of tall narrow harbour houses in red, ochre and blue with glowing windows, wreaths on the doors and garlands along the quay railing, all reflected in the water; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "slide",
+      "focus": "the harbour houses",
+      "motion_elements": "the window lights, the garland lights, their reflections and the falling snow"
+    },
+    {
+      "id": "harbor-lighthouse-04",
+      "subject": "A long wooden pier with a lantern on every post, a garland along the rail and snow on the planks, leading out to a small lit boat moored at its end; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "push-in",
+      "focus": "the end of the pier",
+      "motion_elements": "the lanterns, their reflections on the water and the falling snow"
+    },
+    {
+      "id": "harbor-lighthouse-05",
+      "subject": "A wooden sailboat moored at the quay with a small lit tree lashed on its deck and lights strung up the mast, the harbour lights reflected in the water; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street",
+        "palette": "red-green"
+      },
+      "camera": "arc",
+      "focus": "the sailboat"
+    },
+    {
+      "id": "harbor-lighthouse-06",
+      "subject": "The harbour seen from a snowy hilltop above the town, rooftops and a church spire below, the lit quay curving round the bay and the lighthouse at the harbour mouth; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline"
+    },
+    {
+      "id": "harbor-lighthouse-07",
+      "subject": "A lantern hanging from a mooring post with a small wreath, snow falling, the lit boats blurred on the water behind; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the lantern",
+      "motion_elements": "the lantern flame, the blurred boat lights and the falling snow",
+      "ambient": "Snow falls. The lantern flame flickers.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "harbor-lighthouse-08",
+      "subject": "A long stone breakwater with a small red lighthouse at its end, lights strung along the breakwater wall, boats moored inside and a pale pink afterglow on the horizon; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "palette": "red-green"
+      },
+      "focus": "the red lighthouse"
+    },
+    {
+      "id": "harbor-lighthouse-09",
+      "subject": "A fishing boat at the quay with lobster pots stacked on deck and wrapped in lights, a wreath on the wheelhouse, coiled ropes and nets and snow on the deck; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street",
+        "palette": "red-green"
+      },
+      "camera": "slide",
+      "focus": "the fishing boat"
+    },
+    {
+      "id": "harbor-lighthouse-10",
+      "subject": "A harbour village in a narrow snowy fjord with red wooden boathouses on stilts along the water, lit windows and lights reflected in the still water and steep white mountains behind; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline"
+    },
+    {
+      "id": "harbor-lighthouse-11",
+      "subject": "A harbour cottage window seat looking out over the lit boats moored below, a ship's lantern on the sill, a small tree with shell ornaments and a knitted throw on the cushions; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "place": "indoor",
+        "scale": "room",
+        "snow": "window",
+        "palette": "warm-gold"
+      },
+      "look": "interior-evening",
+      "camera": "push-in",
+      "focus": "the window view",
+      "motion_elements": "the lantern, the tree lights, the boat lights outside and the snow outside the window",
+      "ambient": "Snow falls outside. The boat lights shimmer on the water beyond the window."
+    },
+    {
+      "id": "harbor-lighthouse-12",
+      "subject": "The harbour water at the edge of the quay reflecting the golden and red lights of the boats in long rippling streaks, snow falling onto the water and a wooden hull at one side; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "slide",
+      "focus": "the reflections on the water",
+      "motion_elements": "the rippling light reflections and the falling snow",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "harbor-lighthouse-13",
+      "subject": "A keeper's cottage and lighthouse tower on a small snowy island, the cottage windows glowing, a lit tree by the gate and the calm blue sea all around; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the island lighthouse"
+    },
+    {
+      "id": "harbor-lighthouse-14",
+      "subject": "A stone quay with a tall lit tree on the waterfront, a row of old iron lamp posts and moored rowing boats in the foreground; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "crane-up",
+      "focus": "the tree on the quay"
+    },
+    {
+      "id": "harbor-lighthouse-15",
+      "subject": "A small harbour in low golden winter sun, snow on the quay and on the boats' decks, the lights on the masts softly glowing and a church tower above the harbour houses; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "time": "golden",
+        "palette": "warm-gold"
+      },
+      "look": "golden",
+      "motion_elements": "the mast lights, the water reflections and the drifting snow",
+      "ambient": "Gentle ripples move on the harbour water. A few snowflakes drift in the sun."
+    },
+    {
+      "id": "harbor-lighthouse-16",
+      "subject": "The deck of an old wooden sailing ship moored at the quay, lights strung along its rigging, lanterns on the rails, a wreath on the bow and the town lights across the water; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "tilt-up",
+      "focus": "the lit rigging"
+    },
+    {
+      "id": "harbor-lighthouse-17",
+      "subject": "The lantern room at the top of a lighthouse, its great lens glowing warm, garland wrapped around the gallery railing and snow drifting past; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "arc",
+      "focus": "the lighthouse lens",
+      "motion_elements": "the glowing lens, the railing lights and the falling snow",
+      "ambient": "Snow falls past the lantern room.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "harbor-lighthouse-18",
+      "subject": "A harbour at blue hour seen from the water, the whole waterfront of lit houses, a tall lit tree on the quay and every light doubled in the calm water; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the waterfront"
+    },
+    {
+      "id": "harbor-lighthouse-19",
+      "subject": "A wooden boathouse with its doors open and a lantern hanging inside, a garland over the doors, a rowing boat on the snowy slipway leading down to the water; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "push-in",
+      "focus": "the boathouse",
+      "motion_elements": "the lantern, the garland lights, the water and the falling snow"
+    },
+    {
+      "id": "harbor-lighthouse-20",
+      "subject": "A brass porthole of a moored boat with a small wreath around it, warm light glowing inside and snow gathering on the rim, the harbour lights blurred behind; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the porthole",
+      "motion_elements": "the glow inside the porthole, the blurred harbour lights and the falling snow",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

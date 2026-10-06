@@ -1,0 +1,68 @@
+{
+  "image": {
+    "head": "Generate a still IMAGE (a single photograph, not a video). One single picture, not a collage, grid or split frame:",
+    "realism": "Realistic photograph, looks like a real place shot on a full-frame camera with a {lens}, true-to-life materials and textures, accurate real-world scale and proportions, believable natural amount of decoration, natural color grading.",
+    "look": {
+      "interior-bright": "Bright and well-lit, warm high-key lighting with lifted shadows and no dark corners.",
+      "interior-evening": "Evening interior lit by warm lamps, candles and tree lights, bright and well exposed with lifted shadows and no dark corners, cozy but never dim or murky.",
+      "twilight": "Blue-hour twilight: deep blue sky with a last soft glow on the horizon, warm glowing windows and lights, well exposed with clear detail in the shadows, no crushed blacks.",
+      "night-lights": "Night scene lit by thousands of warm lights, bright and festive, well exposed with rich detail, no crushed blacks.",
+      "winter-day": "Soft bright winter daylight under a pale sky, clean fresh snow, the Christmas lights still softly glowing as warm accents.",
+      "golden": "Low golden winter sun, long soft shadows, warm glow on the snow, the Christmas lights softly glowing."
+    },
+    "lights": "Decorative Christmas lights as a key feature: realistic warm white string lights and fairy lights with visible tiny bulbs, soft glow halos, warm reflections on ornaments, glass and polished surfaces; the air itself is perfectly clear, with no floating sparkles, glitter, dust motes or specks of light anywhere.",
+    "motion_ready": "Clear foreground, middle ground and background layers, with {motion_elements} clearly visible.",
+    "clean": "The place is completely deserted, as if just after closing time: no people at all, no pedestrians, shoppers, vendors or passengers, no human figures or silhouettes even tiny in the far background or behind glass; no animals; the far end of every street, hall or path is empty too; no text, letters or numbers anywhere: shop signs blank, book covers and spines plain, appliances without brand badges, labels or digital displays; no logos or brand names.",
+    "tail": "Sharp focus, wide 16:9 landscape format.",
+    "lights_snowing": "Decorative Christmas lights as a key feature: realistic warm white string lights and fairy lights with visible tiny bulbs, soft glow halos, warm reflections on ornaments, glass and polished surfaces; apart from the falling snowflakes the air is clear, with no floating sparkles, glitter, dust motes or specks of light.",
+    "snowing": "Snow is actively falling at the moment of the shot: many clearly visible white snowflakes in the air across the whole frame, larger and softly blurred close to the camera, finer in the distance, caught in the glow of the lights."
+  },
+  "video": {
+    "head": "Generate a VIDEO, not an image: animate the attached image into a {seconds}-second moving video clip of the exact same scene.",
+    "camera": {
+      "static": "Camera: a locked-off tripod shot. The camera does not move, pan, zoom or shake at all; the framing stays identical from the first frame to the last.",
+      "push-in": "Camera movement: a very slow, smooth dolly push-in toward {focus}.",
+      "pull-out": "Camera movement: a very slow, smooth dolly pull-back away from {focus}, revealing a little more of the scene.",
+      "slide": "Camera movement: a very slow lateral slider move from left to right past {focus}.",
+      "arc": "Camera movement: a very slow, smooth arc around {focus}.",
+      "crane-up": "Camera movement: a very slow, smooth crane rise over {focus}.",
+      "drone": "Camera movement: a smooth, very slow drone glide toward {focus}.",
+      "tilt-up": "Camera movement: a very slow, smooth tilt up from the lower part of the frame to {focus}."
+    },
+    "out_and_back": "Out-and-back path: for the first half the camera moves along this path at a slow constant speed; for the second half it travels back along the same path and ends on exactly the same framing as the first frame, with smooth easing at the turning point. Stabilized gimbal or slider motion, no shake, no cuts, no sudden speed changes. Realistic parallax: nearby objects shift more than distant ones, and the room or place keeps its real geometry.",
+    "static_only": "Only the things named under ambient motion move; everything else in the room stays perfectly still, with no warping or morphing.",
+    "lights_motion": "Decorative lights are a key part of the motion: every string light, fairy light and tree light twinkles realistically, each small bulb fading softly in and out at its own slow random rhythm, with gentle slow waves of brightness travelling along the garlands. The warm glow halos around the bulbs breathe softly, and their reflections on ornaments, glass and polished surfaces glint in step. Bulbs stay fixed on their wires, keep the same warm color, and the overall scene brightness stays constant.",
+    "anchored": "Buildings, furniture and decorations stay fixed in their real positions; apart from the ambient motion described above, only the camera moves.",
+    "snow": "Physics: snowflakes fall downward at a slow steady speed with slight wind drift, larger and blurrier near the camera and smaller in the distance. They never rise, hover or loop. They do not fall under roofs or inside buildings.",
+    "tail": "Flames stay anchored. Lights stay fixed in position and keep a constant color temperature. Keep the bright, well-lit exposure and warm colors of the source image; lighting never dims or darkens. No people or animals appear, and no text appears.",
+    "motion": {
+      "fire": {
+        "text": "The wood fire in the {where} burns with gentle dancing flames and glowing embers.",
+        "where": "fireplace"
+      },
+      "candles": {
+        "text": "The small candle flames {where} flicker softly.",
+        "where": "in the room"
+      },
+      "mug-steam": {
+        "text": "A very faint, thin wisp of steam curls up slowly just above the {where}.",
+        "where": "coffee mug"
+      },
+      "tree-lights": {
+        "text": "The warm white fairy lights on the Christmas tree stay switched on the whole time and shimmer gently, all in the same warm white color as in the first frame."
+      },
+      "window-view": {
+        "text": "The view through the windows stays the same {where} as in the first frame, with no new buildings or objects appearing.",
+        "where": "scene"
+      }
+    },
+    "motion_frame": {
+      "static": "Locked-off tripod shot of this {place}; the camera never moves.",
+      "hold": "Everything else stays completely still.",
+      "exposure": "The {space} stays brightly lit for the whole clip, exactly as bright, warm and golden as the first frame, with the same white balance and exposure in every frame.",
+      "sound": {
+        "fireplace": "Sound: a soft crackling fireplace only."
+      }
+    }
+  }
+}

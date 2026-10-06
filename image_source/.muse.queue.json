@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "workers": {
+    "cron-videos-a": {
+      "port": 9224,
+      "slots": {
+        "1": "C295226BFDCF179A5DD398102E1E3FF7",
+        "2": "30475C8BE0095B22F674A3A77D08F76D"
+      }
+    },
+    "cron-videos-b": {
+      "port": 9226,
+      "slots": {
+        "1": "41AC835D88CBC60B5517CE4EF87B1627",
+        "2": "ABA003787196EE3C59526A8AA8544E4F"
+      }
+    }
+  },
+  "jobs": [
+    {
+      "worker": "cron-videos-a",
+      "theme": "home/attic-loft",
+      "id": "attic-loft-08",
+      "enqueued": "2026-10-03T18:21:08+07:00"
+    }
+  ]
+}

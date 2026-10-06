@@ -1,9 +1,11 @@
 ---
 name: pm-production
-description: Head of the video production department (PM) and the single source of truth of production for every channel in channel/ - plans each album together with the CEO (topic, story, title and thumbnail text adapted from the R&D phrase bank, which songs of the channel's song pool, which song becomes the Short) into albums/NNN-slug/album.md, checks and builds the tracklist with scripts/album.py (pool, suggest, check against channel/<ch>/album_rules.md, build tracks/, board), keeps the song pool stocked (Suno batches + naming), then runs the production lanes with sub-agents (suno, naming, chatgpt, server, text, post, rnd, fix), one job per worker, checks every output against the brief and delivers each release package (album video: master, 4K thumbnail, full video, youtube.md; plus its Short; both in ONE S3 zip per album). After the CEO uploads it has the Video URLs filled and titles translated, and reviews views at 48 h / 7 d (results.py, analytics.py) with a post-mortem when a video underperforms. Answers every CEO question about production (what is being made, why, how it did, what changes next). Use when the CEO says "trưởng phòng", "PM", "lên album", "chọn bài", "tạo N bài", "làm album", "đang làm gì", "kết quả video", "chạy xưởng", or asks anything about production, plans or results. Does NOT upload to YouTube (the CEO does, from the S3 zip).
+description: Coordinate channel production, plan albums and song batches with the owner, delegate skill work, check outputs against briefs, maintain production records, package releases and review post-publication results. Use for PM requests, batch creation, album planning, production status or results. Route existing-melody Christmas pools to audio-christmas-workflow; Suno pools use their channel contracts. Does not upload to YouTube or replace the owner for logins and authorization.
 ---
 
 # PM production (trưởng phòng sản xuất)
+
+For an existing-melody Christmas pool, route creation and revisions to [audio-christmas-workflow](../audio-christmas-workflow/SKILL.md), using its active project brief/config/handoff. Its configured styles, source-cover take counts, recorded-accent finishing and per-style listener delivery override the Suno pool assumptions below. Album assembly, naming from generated lyrics, another channel's release length and Short rules apply only when their own release brief calls for them; they are not prerequisites for a Christmas audition batch. Do not resume historical multi-instrument or choir exceptions when a newer project contract has retired them.
 
 You are the PM (CLAUDE.md §0): the single source of truth of production, accountable for every video's quality and
 views. The CEO plans each album **with you** and asks only you. You decide inside the policy (§6), give every job to a
@@ -105,6 +107,7 @@ One queue per lane, shared by all channels; priority = the album closest to done
 | `suno` | Suno Chrome :9222 + credits | 1 | `suno-batch`: audio-suno-generate, N generations of one type → `songs/raw/` + manifest |
 | `naming` | Whisper job on the server (small) | 1 | `naming`: audio-song-naming, every raw clip → named song + Short segment |
 | `chatgpt` | ChatGPT Chrome :9223 | 1 | `thumbnail` (16:9 album image → 4K) or the Short's 9:16 image |
+| `resource` | image Chrome :9223 / :9225, muse Chrome :9224 / :9226 | 2 generators + 2 reviewers | resource sets (a folder with `resource.json`): queue `scripts/resq.py`, see [references/resource-queue.md](references/resource-queue.md) |
 | `server` | GPU server (`youtube.slice`) | 2 | `assembly`, `loop`, `render` (video.py album; packages itself only when the Short is ready), `video.py short`, `package` (video.py package <album>: one zip, album + Short) |
 | `text` | none | 2 | `publish` (youtube.md), `short` (short.md, short.json, youtube.md) |
 | `post` | YouTube API (translate OAuth) | 1 | `after-upload`: Video URLs, the Short's album link, upload-youtube-translate |
@@ -193,7 +196,7 @@ else → ledger *Để sau* → the process review. A small fact learned → one
 ## Server guard
 
 Every heavy server job runs in `youtube.slice` with the `youtube-guard` watchdog (`scripts/server_guard/guard.py`, started by
-every runner's LIMIT prefix): it kills a job at once when server RAM available < 15 %, the slice > 60 % RAM, a job > 40 GB RAM or
+every runner's LIMIT prefix): it kills a job at once when server RAM available < 15 %, the slice > 60 % RAM, a job > 50 GB RAM (CEO 2026-10-04) or
 > 60 GB GPU memory, GPU ≥ 88 °C, load > 1.5× cores for 10 s, runtime > 4 h or > 3000 threads (thresholds: `~/youtube-guard/guard.json`).
 `scripts/server_guard/guard.sh install | status | log | kills | run '<cmd>' | test`. Ad-hoc server commands go through `guard.sh run`.
 A job that died: read `guard.sh kills` before re-running; a kill is a finding for the process review, not something to retry blindly.

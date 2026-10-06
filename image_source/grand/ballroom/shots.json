@@ -1,0 +1,199 @@
+{
+  "theme": "grand/ballroom",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "interior-bright",
+    "motion_elements": "the chandeliers, the mirror reflections and the snow outside the tall windows",
+    "camera": "slide",
+    "focus": "the ballroom",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls outside the tall windows.",
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "white-gold",
+      "scale": "vista",
+      "snow": "window",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "ballroom-01",
+      "subject": "A mirrored ballroom with a pair of tall Christmas trees in white and gold at either end, three crystal chandeliers down the centre, a gleaming parquet floor and tall arched windows with snow falling outside"
+    },
+    {
+      "id": "ballroom-02",
+      "subject": "A gilded baroque ballroom with an ornate gilded plaster ceiling, a row of chandeliers, gold-framed wall mirrors hung with wreaths, a tall tree beside the windows and a polished floor reflecting it all"
+    },
+    {
+      "id": "ballroom-03",
+      "subject": "A plain black grand piano with no maker's name or logo on its case on a polished ballroom floor, a garland with warm lights draped along its closed lid, a tall tree beside it and tall windows with falling snow behind",
+      "tags": {
+        "scale": "room"
+      },
+      "camera": "arc",
+      "focus": "the grand piano"
+    },
+    {
+      "id": "ballroom-04",
+      "subject": "A high view from the ballroom's musicians' balcony over a garland-wrapped railing, down onto the empty polished dance floor, the chandeliers at eye level and a tall tree below",
+      "focus": "the dance floor below"
+    },
+    {
+      "id": "ballroom-05",
+      "subject": "A ballroom set for a Christmas gala with round tables in ivory linen, gold chargers, tall candelabras with lit candles and pine centrepieces, chandeliers above and a tall tree at the head of the room",
+      "motion_elements": "the candle flames, the chandeliers and the snow outside the tall windows",
+      "ambient": "Candle flames flicker on the tables. Snow falls outside the tall windows."
+    },
+    {
+      "id": "ballroom-06",
+      "subject": "A row of tall french windows along a ballroom wall, each framed by a garland with warm lights and sheer curtains tied back, a snowy terrace with lit stone urns outside",
+      "tags": {
+        "scale": "room"
+      },
+      "focus": "the french windows"
+    },
+    {
+      "id": "ballroom-07",
+      "subject": "A snowy stone terrace outside a ballroom at night, its balustrade wrapped in lights, lit topiary cones in stone urns, and the tall ballroom windows glowing gold with chandeliers visible inside",
+      "tags": {
+        "place": "outdoor",
+        "time": "twilight",
+        "scale": "street",
+        "snow": "falling"
+      },
+      "look": "twilight",
+      "camera": "crane-up",
+      "focus": "the glowing ballroom windows",
+      "motion_elements": "the glowing windows, the balustrade lights and the falling snow",
+      "ambient": "Snow falls on the terrace."
+    },
+    {
+      "id": "ballroom-08",
+      "subject": "An oval ballroom with a domed ceiling and one enormous chandelier, cream and gold wall panels, a ring of small lit trees around the edge of an empty inlaid dance floor and tall windows with snow outside",
+      "camera": "crane-up",
+      "focus": "the great chandelier"
+    },
+    {
+      "id": "ballroom-09",
+      "subject": "An empty bandstand at the end of a ballroom, a harp and a double bass resting beside gilded chairs, a garland arch with warm lights above and a tall lit tree on each side",
+      "tags": {
+        "scale": "room",
+        "snow": "none"
+      },
+      "camera": "push-in",
+      "focus": "the bandstand",
+      "motion_elements": "the garland lights, the tree lights and the chandelier sparkle",
+      "ambient": "Chandelier crystals sparkle softly."
+    },
+    {
+      "id": "ballroom-10",
+      "subject": "A gold candelabra with lit white candles on a gala table, crystal glasses and a pine and white rose centrepiece, the ballroom chandeliers blurred into bokeh behind",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "camera": "push-in",
+      "focus": "the candelabra",
+      "motion_elements": "the candle flames and the chandelier bokeh",
+      "ambient": "Candle flames flicker softly.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "ballroom-11",
+      "subject": "A long gallery ballroom with arched mirrors facing tall windows, chandeliers repeating into the distance, a garland with lights along every mirror arch and a tree at the far end",
+      "camera": "push-in",
+      "focus": "the tree at the far end"
+    },
+    {
+      "id": "ballroom-12",
+      "subject": "A curved marble staircase descending into a ballroom, its balustrade wrapped in garland and warm lights, a tall tree at the foot of the stairs and chandeliers beyond",
+      "tags": {
+        "scale": "room",
+        "snow": "none"
+      },
+      "camera": "tilt-up",
+      "focus": "the chandelier above the staircase",
+      "motion_elements": "the garland lights, the tree lights and the chandelier sparkle",
+      "ambient": "Chandelier crystals sparkle softly."
+    },
+    {
+      "id": "ballroom-13",
+      "subject": "A long buffet table at the side of a ballroom with a tall white Christmas cake, silver tiered stands of pastries, candles glowing in glass hurricanes and a garland along the front, the tall tree behind",
+      "tags": {
+        "scale": "room",
+        "snow": "none"
+      },
+      "focus": "the buffet table",
+      "motion_elements": "the candle flames, the garland lights and the tree lights",
+      "ambient": "Candle flames flicker in the glass hurricanes."
+    },
+    {
+      "id": "ballroom-14",
+      "subject": "A white and silver winter ballroom with frosted white trees lit with warm lights, icicle crystal chandeliers, silver chairs lining the walls and tall windows onto falling snow"
+    },
+    {
+      "id": "ballroom-15",
+      "subject": "A tall gilt-framed ballroom mirror with a wreath hung on it, reflecting the chandeliers and the tall tree lights from across the room",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "focus": "the mirror and its reflections",
+      "motion_elements": "the reflected chandeliers and tree lights in the mirror",
+      "ambient": "The reflected lights shimmer in the mirror.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "ballroom-16",
+      "subject": "A ballroom alcove with a gilded settee, a tall potted tree with warm lights, a brass floor candelabra with lit candles and a tall window with snow falling on a lit garden",
+      "tags": {
+        "scale": "room"
+      },
+      "camera": "push-in",
+      "focus": "the alcove",
+      "motion_elements": "the candle flames, the tree lights and the snow outside the window",
+      "ambient": "Candle flames flicker. Snow falls outside the window."
+    },
+    {
+      "id": "ballroom-17",
+      "subject": "A ballroom seen through tall open double doors framed with garland, the doorway opening onto a gleaming empty floor, a tall tree and three chandeliers beyond",
+      "camera": "push-in",
+      "focus": "the open doors and the ballroom beyond"
+    },
+    {
+      "id": "ballroom-18",
+      "subject": "The branches of the ballroom tree hung with gold, ivory and mercury glass ornaments and warm bulbs, a chandelier and the tall windows softly blurred behind",
+      "tags": {
+        "scale": "macro",
+        "snow": "none"
+      },
+      "camera": "push-in",
+      "focus": "the ornaments",
+      "motion_elements": "the tree lights, the ornament reflections and the chandelier bokeh",
+      "ambient": "The ornaments glint softly.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "ballroom-19",
+      "subject": "A grand ballroom with a sweeping gallery on three sides, garland swags with lights along the gallery railings, a tall tree in the centre of the floor and chandeliers hanging from a coffered ceiling",
+      "camera": "crane-up",
+      "focus": "the tree in the centre"
+    },
+    {
+      "id": "ballroom-20",
+      "subject": "A deep ballroom window sill with a garland and small brass lanterns, frost on the glass and snow falling on the lit terrace beyond",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "push-in",
+      "focus": "the frosted window",
+      "motion_elements": "the lantern flames, the garland lights and the snow outside",
+      "ambient": "Snow falls outside the window. The lantern flames flicker.",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

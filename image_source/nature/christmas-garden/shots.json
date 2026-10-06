@@ -1,0 +1,198 @@
+{
+  "theme": "nature/christmas-garden",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "twilight",
+    "motion_elements": "the garden lights, the lanterns and the falling snow",
+    "camera": "push-in",
+    "focus": "the garden path",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls over the garden.",
+    "tags": {
+      "place": "outdoor",
+      "time": "twilight",
+      "palette": "warm-gold",
+      "scale": "vista",
+      "snow": "falling",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "christmas-garden-01",
+      "subject": "A long gravel garden path under a tunnel of arched iron hoops wrapped in warm white fairy lights, snow-covered clipped box hedges on both sides, looking down the glowing tunnel to a lit stone fountain at the far end"
+    },
+    {
+      "id": "christmas-garden-02",
+      "subject": "A formal snowy garden of tall cone-shaped yew topiaries each wrapped in spiralling warm lights, a straight snowy path between them leading to an old stone manor house with glowing windows"
+    },
+    {
+      "id": "christmas-garden-03",
+      "subject": "A small frozen ornamental pond ringed by glowing paper lanterns on low posts, a humpbacked wooden footbridge with fairy lights along its rails, snowy weeping willows lit from below, lantern reflections on the ice",
+      "camera": "arc",
+      "focus": "the lantern-lit pond",
+      "motion_elements": "the lanterns, their reflections on the ice and the falling snow"
+    },
+    {
+      "id": "christmas-garden-04",
+      "subject": "A walled kitchen garden in snow with a white wooden gazebo at its centre, the gazebo roof edged with warm string lights and a pine wreath hanging inside, old brick walls behind with lit espaliered pear trees",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the lit gazebo"
+    },
+    {
+      "id": "christmas-garden-05",
+      "subject": "Close view of a snow-laden rose arch over a small garden gate, woven with warm fairy lights and clusters of frozen red rose hips, the lantern-lit path beyond softly blurred",
+      "tags": {
+        "scale": "macro",
+        "palette": "red-green"
+      },
+      "focus": "the rose hips on the lit arch",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "christmas-garden-06",
+      "subject": "A wooden garden bench under a wide bare old oak whose branches are wrapped in thousands of warm white lights, snow on the bench seat, a glowing lantern on the ground beside it, a snowy lawn stretching behind",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "slide",
+      "focus": "the bench under the lit oak"
+    },
+    {
+      "id": "christmas-garden-07",
+      "subject": "A terraced hillside garden with stone steps edged by glowing lanterns, snowy clipped hedges on every terrace, a tall lit Christmas tree on the top terrace and distant village lights twinkling in the valley below",
+      "camera": "crane-up",
+      "focus": "the lit tree on the top terrace"
+    },
+    {
+      "id": "christmas-garden-08",
+      "subject": "A maze of low snow-covered hedges seen from slightly above, every hedge top outlined in warm string lights, a decorated lit tree standing in the central clearing",
+      "tags": {
+        "time": "night"
+      },
+      "look": "night-lights",
+      "camera": "drone",
+      "focus": "the lit tree at the centre of the maze"
+    },
+    {
+      "id": "christmas-garden-09",
+      "subject": "A long pergola walk of timber beams covered with bare wisteria vines wrapped in warm fairy lights, glass lanterns hanging every few metres, snow on the stone paving and on top of the beams",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the pergola walk"
+    },
+    {
+      "id": "christmas-garden-10",
+      "subject": "Close view of a snow-capped clipped box ball in a weathered stone urn, wound with tiny warm fairy lights and a red velvet bow, the lit garden path in soft bokeh behind",
+      "tags": {
+        "scale": "macro",
+        "energy": "still"
+      },
+      "focus": "the lit box ball in the urn",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "christmas-garden-11",
+      "subject": "A Japanese-style winter garden with a snow-capped stone lantern glowing with a candle, a red lacquered bridge over a half-frozen stream, low pines wrapped in warm lights",
+      "tags": {
+        "palette": "red-green"
+      },
+      "camera": "slide",
+      "focus": "the red bridge and the stone lantern",
+      "motion_elements": "the stone lantern glow, the flowing stream and the falling snow",
+      "ambient": "Snow falls over the garden. The unfrozen stream flows slowly under the bridge."
+    },
+    {
+      "id": "christmas-garden-12",
+      "subject": "A round stone fountain frozen into long icicles in the middle of a snowy parterre, four small lit Christmas trees around it and warm lights running along the low box hedges",
+      "tags": {
+        "scale": "street"
+      },
+      "camera": "arc",
+      "focus": "the frozen fountain"
+    },
+    {
+      "id": "christmas-garden-13",
+      "subject": "A long avenue of small standard trees in a walled garden, each tree wrapped in warm lights, a snowy gravel walk between them and a wrought-iron gate at the end hung with a big pine wreath, low golden sun behind the wall",
+      "tags": {
+        "time": "golden",
+        "snow": "lying"
+      },
+      "look": "golden",
+      "focus": "the wreathed gate",
+      "motion_elements": "the tree lights and the wreath ribbons stirring in the breeze",
+      "ambient": "The tree lights twinkle along the avenue. The wreath ribbons stir slightly in a light breeze."
+    },
+    {
+      "id": "christmas-garden-14",
+      "subject": "Close view of a wrought-iron lantern hanging from a snowy branch, a candle glowing inside, frost on its glass panes and warm fairy lights blurred behind",
+      "tags": {
+        "scale": "macro",
+        "energy": "still"
+      },
+      "camera": "static",
+      "motion_elements": "the candle flame, the blurred fairy lights and the falling snow",
+      "ambient": "The candle flame flickers inside the lantern. Snow falls past it.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "christmas-garden-15",
+      "subject": "A wide snowy lawn with giant light-wire stars and glowing spheres standing on the snow, a long old stone orangery with warm lit windows on the far side",
+      "tags": {
+        "time": "night"
+      },
+      "look": "night-lights",
+      "focus": "the glowing light sculptures"
+    },
+    {
+      "id": "christmas-garden-16",
+      "subject": "A snowy herb garden with a small wooden potting shed, a pine wreath on its door and warm string lights along its eaves, a lantern on the doorstep and snow-covered raised beds in front",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the potting shed"
+    },
+    {
+      "id": "christmas-garden-17",
+      "subject": "A woodland garden glade of white-barked birch trees lit softly from below, warm fairy lights wrapped around their trunks, a winding snowy path with glowing lanterns hung at head height",
+      "tags": {
+        "scale": "street",
+        "palette": "white-gold"
+      },
+      "focus": "the winding path between the birches"
+    },
+    {
+      "id": "christmas-garden-18",
+      "subject": "A round stone moon gate in an old garden wall framed with a pine garland and warm fairy lights, looking through it to a snowy lawn with a single lit Christmas tree",
+      "tags": {
+        "scale": "street"
+      },
+      "focus": "the moon gate"
+    },
+    {
+      "id": "christmas-garden-19",
+      "subject": "A Victorian cast-iron bandstand in a snowy park garden, its roof edge lined with warm bulbs and pine garland, lit lamp posts around it and snow-covered lawns",
+      "tags": {
+        "time": "night"
+      },
+      "look": "night-lights",
+      "camera": "arc",
+      "focus": "the bandstand"
+    },
+    {
+      "id": "christmas-garden-20",
+      "subject": "Close view of a snow-covered holly bush with bright red berries and glossy dark leaves threaded with tiny warm fairy lights, the lit garden path blurred behind",
+      "tags": {
+        "scale": "macro",
+        "palette": "red-green"
+      },
+      "focus": "the holly berries",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

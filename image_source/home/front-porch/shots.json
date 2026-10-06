@@ -1,0 +1,176 @@
+{
+  "theme": "home/front-porch",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "twilight",
+    "motion_elements": "the porch lights, the lanterns and the falling snow",
+    "camera": "push-in",
+    "focus": "the front door wreath",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls softly. Lantern flames flicker gently.",
+    "tags": {
+      "place": "outdoor",
+      "time": "twilight",
+      "palette": "red-green",
+      "scale": "street",
+      "snow": "falling",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "front-porch-01",
+      "subject": "A red front door with a big pine wreath and red bow, two black candle lanterns on the stone steps, potted fir trees wrapped in lights on each side and white clapboard walls; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows"
+    },
+    {
+      "id": "front-porch-02",
+      "subject": "A wraparound porch of a Victorian farmhouse with rocking chairs, a pine garland with lights along the railing and posts, wreaths in every window and snow falling on the yard; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide",
+      "focus": "the wraparound porch"
+    },
+    {
+      "id": "front-porch-03",
+      "subject": "A stone cottage porch with a small lit tree in a galvanized pail, a wooden bench with a folded plaid blanket, a glowing lantern and a green door with a wreath; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows"
+    },
+    {
+      "id": "front-porch-04",
+      "subject": "A row of townhouse stoops with iron railings wound in garland and lights, wreaths on the black doors, candle lanterns on the steps and snow falling on the quiet street; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide",
+      "focus": "the lit stoops"
+    },
+    {
+      "id": "front-porch-05",
+      "subject": "A farmhouse porch with a vintage wooden sled, a galvanized bucket of pine and birch branches, string lights along the eaves, a lantern and a white door with a wreath; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide"
+    },
+    {
+      "id": "front-porch-06",
+      "subject": "A porch swing with plaid blankets and cushions under swags of string lights, a lantern on the floorboards, a pine garland on the rail and snow falling on the garden beyond; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide",
+      "focus": "the porch swing"
+    },
+    {
+      "id": "front-porch-07",
+      "subject": "A close view of a front door wreath of fir, pine cones, red berries and a velvet bow with tiny lights woven through, a brass door knocker above and snowflakes settling on the greenery; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro"
+      },
+      "ambient": "Snow falls softly past the wreath.",
+      "motion_elements": "the tiny wreath lights and the falling snow",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "front-porch-08",
+      "subject": "A mountain chalet porch with a carved wooden balcony, lanterns and a garland along the rail, old skis leaning on the wall, a glowing window and heavy snow falling; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "warm-gold"
+      },
+      "focus": "the chalet door"
+    },
+    {
+      "id": "front-porch-09",
+      "subject": "A colonial house entry with white columns, a pair of tall urns of fir branches and lights, garlands framing a black door with a large wreath and a brass lantern glowing above; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "camera": "slide"
+    },
+    {
+      "id": "front-porch-10",
+      "subject": "A close view of a candle lantern on a snowy porch step with a scatter of pine cones and a small gift wrapped in red paper, snow falling; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro"
+      },
+      "focus": "the lantern",
+      "ambient": "Snow falls softly. The candle flame flickers gently in the lantern.",
+      "motion_elements": "the candle flame and the falling snow",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "front-porch-11",
+      "subject": "A cottage porch on a snowy winter morning, a sage-green door with a wreath, window boxes of fir and red berries, lights still glowing along the eaves and fresh snow on the path; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "time": "day"
+      },
+      "ambient": "Light snow falls softly.",
+      "look": "winter-day",
+      "motion_elements": "the porch lights and the light falling snow"
+    },
+    {
+      "id": "front-porch-12",
+      "subject": "A covered porch with an old wooden bench, a basket of split firewood, two lanterns, a small tree in lights and a glowing half-moon window over the door; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the bench and the lanterns",
+      "camera": "slide"
+    },
+    {
+      "id": "front-porch-13",
+      "subject": "A white shingled coastal cottage with a garland of lights along the picket fence and gate, a wreath on the door, lanterns on the path and snowy dune grass beyond; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the front door"
+    },
+    {
+      "id": "front-porch-14",
+      "subject": "A back porch with a screen door, a hanging lantern, a crate of pine cones, a birch-branch star lit with warm lights and snow falling on a stacked woodpile; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "warm-gold"
+      },
+      "focus": "the lit birch star"
+    },
+    {
+      "id": "front-porch-15",
+      "subject": "A close view of a porch railing wound with a pine garland and lights, a red bow, snow gathering on the rail and the lit front windows softly blurred behind; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro"
+      },
+      "camera": "slide",
+      "focus": "the garland on the railing",
+      "ambient": "Snow falls softly and gathers on the rail.",
+      "motion_elements": "the garland lights and the falling snow",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "front-porch-16",
+      "subject": "A snowy front path lined with glowing paper-bag luminarias leading up to a lit porch with a wreath on the door and a garland on the railing; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "palette": "warm-gold"
+      },
+      "focus": "the lit porch at the end of the path",
+      "ambient": "Snow falls softly. Candle flames flicker inside the luminarias.",
+      "motion_elements": "the luminaria candles, the porch lights and the falling snow",
+      "camera": "slide"
+    },
+    {
+      "id": "front-porch-17",
+      "subject": "A Tudor-style stone house entrance with an arched oak door, iron lanterns on both sides, a garland with lights over the arch and two small lit trees in stone planters; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the arched oak door"
+    },
+    {
+      "id": "front-porch-18",
+      "subject": "A porch with two rocking chairs, a small table with two steaming mugs of cocoa, a lantern and a lit garland on the rail, snow falling over the evening street; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "focus": "the steaming mugs on the table",
+      "ambient": "Steam rises from the mugs. Snow falls softly. The lantern flame flickers gently.",
+      "motion_elements": "the steam from the mugs, the lantern, the garland lights and the falling snow"
+    },
+    {
+      "id": "front-porch-19",
+      "subject": "A red barn-style farmhouse porch at sunset, low golden light on the snow, a big wreath on the barn door, lanterns glowing and a string of lights along the porch roof; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "time": "golden"
+      },
+      "focus": "the wreath on the barn door",
+      "ambient": "A few snowflakes drift in the low sun. Lantern flames flicker gently.",
+      "look": "golden",
+      "motion_elements": "the porch lights, the lanterns and the light drifting snow",
+      "camera": "slide"
+    },
+    {
+      "id": "front-porch-20",
+      "subject": "A close view of the window beside a front door, a candle on the inner sill and a small wreath hanging in the window, snow falling past the frosted glass; indoors the air and every surface are completely clear and snow-free, no floating sparkles or specks, snow only outside the windows",
+      "tags": {
+        "scale": "macro"
+      },
+      "focus": "the candle in the window",
+      "ambient": "Snow falls softly past the window. The candle flame flickers gently.",
+      "motion_elements": "the candle flame and the falling snow",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

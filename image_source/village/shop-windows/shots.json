@@ -1,0 +1,180 @@
+{
+  "theme": "village/shop-windows",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "twilight",
+    "motion_elements": "the window displays, the shop lights and the falling snow",
+    "camera": "slide",
+    "focus": "the shop windows",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls past the glowing shop windows.",
+    "tags": {
+      "place": "outdoor",
+      "time": "twilight",
+      "palette": "red-green",
+      "scale": "street",
+      "snow": "falling",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "shop-windows-01",
+      "subject": "A row of old timber shopfronts along a snowy lane, each with a glowing bay window of Christmas displays, pine garlands and red bows over the doors, blank wooden signboards and lamp posts in front; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline"
+    },
+    {
+      "id": "shop-windows-02",
+      "subject": "A bakery window full of stollen, gingerbread houses and star-shaped cookies on tiered wooden stands, warm lamps inside, a wreath on the door and snow on the sill; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "palette": "warm-gold"
+      },
+      "focus": "the bakery window"
+    },
+    {
+      "id": "shop-windows-03",
+      "subject": "A toy shop window with a model steam train circling a small snowy village, wooden nutcrackers, a rocking horse and a lit tree, snow gathering on the outer ledge; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "motion_elements": "the toy train, the window lights and the falling snow",
+      "focus": "the toy shop window",
+      "ambient": "Snow falls past the window. A toy train circles slowly inside the display."
+    },
+    {
+      "id": "shop-windows-04",
+      "subject": "A sweet shop window with glass jars of striped candies, bundles of candy canes, a lollipop tree and fairy lights, a red awning dusted with snow above; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the sweet shop window"
+    },
+    {
+      "id": "shop-windows-05",
+      "subject": "A flower shop on a snowy corner seen from across the street, poinsettias, fresh wreaths and fir branches in buckets on the pavement, warm light from inside and garlands around the door; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the flower shop"
+    },
+    {
+      "id": "shop-windows-06",
+      "subject": "An antique shop window with vintage glass ornaments on a brass tree, an old gramophone, a music box and brass candlesticks with lit candles, soft lamp light and frost on the corners of the glass; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "palette": "warm-gold"
+      },
+      "motion_elements": "the candle flames, the window lights and the falling snow",
+      "focus": "the antique shop window",
+      "ambient": "Snow falls past the window. Candle flames flicker inside the display."
+    },
+    {
+      "id": "shop-windows-07",
+      "subject": "A corner shop with curved glass windows glowing onto two snowy streets, a big wreath above the corner door, snow on the striped canopy and a lamp post at the kerb; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline"
+    },
+    {
+      "id": "shop-windows-08",
+      "subject": "A covered shopping arcade with a glass roof, shop windows glowing on both sides with Christmas displays, garlands hanging from the iron arches and snow lying on the glass roof above; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "snow": "lying",
+        "palette": "warm-gold"
+      },
+      "motion_elements": "the shop window lights and the lit garlands",
+      "camera": "push-in",
+      "focus": "the far end of the arcade",
+      "ambient": "The lights in the shop windows twinkle along the arcade."
+    },
+    {
+      "id": "shop-windows-09",
+      "subject": "A steep curving street of small shops seen from its top, glowing shop windows stepping down both sides, strings of lights criss-crossing overhead and snow on the stone steps; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "camera": "push-in",
+      "focus": "the bottom of the street"
+    },
+    {
+      "id": "shop-windows-10",
+      "subject": "A knitwear shop window with red and green scarves, mittens and wool hats arranged on a small lit tree and a wooden sled, fairy lights framing the glass; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the knitwear window"
+    },
+    {
+      "id": "shop-windows-11",
+      "subject": "A chocolate shop window with a big chocolate yule log, stacked truffle boxes tied with ribbon, a chocolate house and warm lights, snow on the brass window frame; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "palette": "warm-gold"
+      },
+      "focus": "the chocolate shop window"
+    },
+    {
+      "id": "shop-windows-12",
+      "subject": "A candle shop window with dozens of lit candles of different heights on wooden tiers, pine sprigs and brass holders, frost on the glass and snow falling outside; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "palette": "warm-gold"
+      },
+      "motion_elements": "the candle flames, the window lights and the falling snow",
+      "focus": "the candle shop window",
+      "ambient": "Snow falls past the window. Dozens of candle flames flicker gently."
+    },
+    {
+      "id": "shop-windows-13",
+      "subject": "A pastry shop window with a tall choux-pastry tower, macarons stacked into a tree and white and gold decorations under warm lights, snow on the marble sill; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "palette": "white-gold"
+      },
+      "focus": "the pastry shop window"
+    },
+    {
+      "id": "shop-windows-14",
+      "subject": "A small shop on a canal bank with its window glowing onto the dark water, a little stone bridge beside it, snow on the railings and lanterns on the quay; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "motion_elements": "the shop window light, the reflections on the canal and the falling snow",
+      "focus": "the shop across the water",
+      "ambient": "Snow falls past the glowing shop window. The canal water ripples gently, carrying the reflections."
+    },
+    {
+      "id": "shop-windows-15",
+      "subject": "An old wooden general store with a covered porch, crates of pine cones, a wooden sled and lanterns on the porch, the front window full of jars and ribbons and a wreath on the door; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "focus": "the general store porch"
+    },
+    {
+      "id": "shop-windows-16",
+      "subject": "Two old shopfronts facing each other across a narrow snowy street, both windows glowing with Christmas displays and a garland stretched between them with a lit star in the middle; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "camera": "push-in",
+      "focus": "the lit star between the shops"
+    },
+    {
+      "id": "shop-windows-17",
+      "subject": "A close view of a toy shop display behind glass: a wooden nutcracker, a small music-box carousel turning, wrapped toys and fairy lights, snowflakes melting on the glass; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "motion_elements": "the turning music-box carousel, the fairy lights and the snowflakes on the glass",
+      "camera": "push-in",
+      "focus": "the window display",
+      "ambient": "Snowflakes drift past the glass. The small music-box carousel turns slowly.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "shop-windows-18",
+      "subject": "A close view of a bakery window ledge with a gingerbread house covered in white icing, sugar-dusted cookies and a tiny lit tree inside, real snow gathering on the outside sill; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro",
+        "palette": "warm-gold"
+      },
+      "motion_elements": "the tiny tree lights and the falling snow",
+      "camera": "push-in",
+      "focus": "the gingerbread house",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "shop-windows-19",
+      "subject": "A close view of a shop door with a brass bell, a big fir wreath with red berries and a lantern glowing beside it, snow on the stone step; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "motion_elements": "the lantern glow and the falling snow",
+      "camera": "push-in",
+      "focus": "the wreathed shop door",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "shop-windows-20",
+      "subject": "A close view of frosted shop window glass with ice patterns around the edges, the soft blurred glow of a Christmas display inside and snowflakes drifting past; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow; any town in view is an anonymous small old town with no castle on a hill and no recognisable cathedral, bridge or famous skyline",
+      "tags": {
+        "scale": "macro"
+      },
+      "motion_elements": "the glowing display lights and the drifting snowflakes",
+      "camera": "push-in",
+      "focus": "the frosted glass",
+      "lens": "85mm lens at f/2.8"
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "theme": "magic/light-festival",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "night-lights",
+    "motion_elements": "the thousands of lights and the falling snow",
+    "camera": "push-in",
+    "focus": "the tunnel of lights",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls through the lights.",
+    "tags": {
+      "place": "outdoor",
+      "time": "night",
+      "palette": "warm-gold",
+      "scale": "vista",
+      "snow": "falling",
+      "energy": "lively"
+    }
+  },
+  "shots": [
+    {
+      "id": "light-festival-01",
+      "subject": "A long walk-through tunnel of warm white lights arching over a snowy park path, thousands of tiny bulbs on curved frames, the snow on the path glowing gold"
+    },
+    {
+      "id": "light-festival-02",
+      "subject": "A dark park lake dotted with hundreds of glowing floating light spheres, their reflections trembling on the water, snowy willows and lit trees along the shore",
+      "camera": "slide",
+      "focus": "the floating light spheres",
+      "motion_elements": "the floating light spheres, their reflections and the falling snow",
+      "ambient": "The light spheres bob gently on the water. Snow falls."
+    },
+    {
+      "id": "light-festival-03",
+      "subject": "An avenue of huge old bare trees wrapped from trunk to fingertip in warm lights, a snowy path running straight between them into the distance",
+      "focus": "the far end of the avenue"
+    },
+    {
+      "id": "light-festival-04",
+      "subject": "Seen from a stone terrace high above, a snowy formal garden at night laid out in glowing patterns: ornate gold lace-like light arches along its paths, lit topiary cones and a softly lit pavilion at the centre, falling snow",
+      "focus": "the far arches"
+    },
+    {
+      "id": "light-festival-05",
+      "subject": "Curtains of warm light strands hanging down from the branches of huge old oaks over a snowy lawn, glowing like falling rain",
+      "camera": "slide",
+      "focus": "the light curtains"
+    },
+    {
+      "id": "light-festival-06",
+      "subject": "A garden of big glowing silk lanterns shaped like stars, crescent moons and snowflakes standing on the snowy lawn beside a still pond",
+      "camera": "slide",
+      "focus": "the lantern garden",
+      "motion_elements": "the glowing lanterns, their reflections in the pond and the falling snow"
+    },
+    {
+      "id": "light-festival-07",
+      "subject": "A giant cone-shaped Christmas tree made entirely of lights in a park clearing, a big glowing star on top and lit paths radiating out across the snow",
+      "camera": "tilt-up",
+      "focus": "the star on top of the light tree"
+    },
+    {
+      "id": "light-festival-08",
+      "subject": "A rolling snowy meadow filled with thousands of small glowing light stems like a field of stars, a line of lit trees along the horizon",
+      "camera": "drone",
+      "focus": "the field of lights"
+    },
+    {
+      "id": "light-festival-09",
+      "subject": "An ice-blue tunnel of hanging snowflake-shaped lights in white and pale blue over a snowy path, the snow glowing cool silver",
+      "focus": "the end of the snowflake tunnel",
+      "tags": {
+        "palette": "cool-blue"
+      }
+    },
+    {
+      "id": "light-festival-10",
+      "subject": "A frozen ornamental fountain in a formal winter garden wrapped in warm lights, rows of lit topiary cones around it and a lit balustrade behind",
+      "camera": "arc",
+      "focus": "the fountain",
+      "tags": {
+        "scale": "street"
+      }
+    },
+    {
+      "id": "light-festival-11",
+      "subject": "An old stone footbridge in a park outlined in warm lights, floating lanterns on the dark river below and trees glowing on both banks",
+      "camera": "slide",
+      "focus": "the stone bridge",
+      "motion_elements": "the bridge lights, the floating lanterns and the falling snow",
+      "ambient": "Snow falls. The floating lanterns drift slowly on the river."
+    },
+    {
+      "id": "light-festival-12",
+      "subject": "A Victorian glasshouse in a botanic garden glowing gold from inside, its outline traced in lights, lit paths and light-wrapped trees leading to it across the snow",
+      "focus": "the glasshouse"
+    },
+    {
+      "id": "light-festival-13",
+      "subject": "A path under red and white striped light arches with green-lit shrubs on both sides and giant glowing gift-box light sculptures standing on the snowy lawn",
+      "focus": "the path ahead",
+      "tags": {
+        "palette": "red-green"
+      }
+    },
+    {
+      "id": "light-festival-14",
+      "subject": "Huge chandeliers made of lights hanging from tall trees over a snowy forest path, glowing crystals catching the light",
+      "camera": "tilt-up",
+      "focus": "the light chandeliers"
+    },
+    {
+      "id": "light-festival-15",
+      "subject": "A lakeside promenade lined with giant glowing light sculptures of baubles and stars, their reflections stretching across the still black water, snowy hills behind",
+      "camera": "slide",
+      "focus": "the light sculptures",
+      "motion_elements": "the light sculptures, their reflections on the lake and the falling snow"
+    },
+    {
+      "id": "light-festival-16",
+      "subject": "A close view inside a tunnel of lights, individual warm bulbs crisp in the foreground and the long glowing corridor melting into golden bokeh",
+      "lens": "50mm lens at f/2.8",
+      "camera": "slide",
+      "focus": "the bulbs",
+      "motion_elements": "the bulbs and the golden bokeh",
+      "tags": {
+        "scale": "street",
+        "energy": "calm"
+      }
+    },
+    {
+      "id": "light-festival-17",
+      "subject": "An aerial view of a park festival at night, paths traced in warm lights winding through snowy woods, glowing arches and a big light tree at the centre",
+      "camera": "drone",
+      "focus": "the glowing tree at the centre"
+    },
+    {
+      "id": "light-festival-18",
+      "subject": "A hedge maze in a snowy park, its paths lined with glowing ground lights, warm string lights along the hedge tops and a lit gazebo at the centre",
+      "camera": "crane-up",
+      "focus": "the gazebo"
+    },
+    {
+      "id": "light-festival-19",
+      "subject": "A walkway of tall white-gold light pillars joined by garlands of glowing stars under snow-laden pine trees",
+      "focus": "the end of the walkway",
+      "tags": {
+        "palette": "white-gold"
+      }
+    },
+    {
+      "id": "light-festival-20",
+      "subject": "The festival at blue hour, a long line of glowing light trees along a snowy lakeshore under a deep blue sky, their reflections in the calm water",
+      "look": "twilight",
+      "camera": "slide",
+      "focus": "the line of light trees",
+      "tags": {
+        "time": "twilight"
+      }
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "theme": "magic/snow-globes",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "interior-evening",
+    "motion_elements": "the snow inside the globe and the tree lights behind",
+    "camera": "push-in",
+    "focus": "the snow globe",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow swirls slowly inside the globe.",
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "warm-gold",
+      "scale": "macro",
+      "snow": "none",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "snow-globes-01",
+      "subject": "A glass snow globe with a tiny snow-covered village and a lit chapel inside, sitting on a mantel among pine garland and red berries, warm Christmas tree lights in soft bokeh behind",
+      "lens": "100mm macro lens at f/4"
+    },
+    {
+      "id": "snow-globes-02",
+      "subject": "A row of six vintage snow globes on a dark wooden shelf, each holding a different tiny winter scene, a cottage, a pine forest, a lit tree, a church, fairy lights running along the shelf edge",
+      "lens": "50mm lens at f/2.8",
+      "camera": "slide",
+      "focus": "the row of snow globes",
+      "motion_elements": "the snow inside the globes and the fairy lights on the shelf",
+      "ambient": "Snow drifts slowly inside every globe."
+    },
+    {
+      "id": "snow-globes-03",
+      "subject": "A porcelain miniature Christmas village on a sideboard with cotton-wool snow, tiny lights glowing in every window, bottle-brush trees and a little lit church on a hill",
+      "lens": "50mm lens at f/2.8",
+      "camera": "slide",
+      "focus": "the miniature village",
+      "motion_elements": "the tiny lights in the village windows",
+      "ambient": "Tiny lights glow in the miniature windows."
+    },
+    {
+      "id": "snow-globes-04",
+      "subject": "A large snow globe with a tiny cabin and pines on a dry wooden window sill inside a closed paned window at night, fairy lights on the window frame, a candle beside it, and snow falling only outside behind the glass panes",
+      "lens": "100mm macro lens at f/4",
+      "motion_elements": "the snow inside the globe and the snow falling outside the window",
+      "ambient": "Snow swirls slowly inside the globe. Snow falls outside the window.",
+      "tags": {
+        "snow": "window"
+      }
+    },
+    {
+      "id": "snow-globes-05",
+      "subject": "An open wooden music box with a tiny carousel of little sleighs and gold stars under a striped canopy, warm tree lights reflecting on its brass poles",
+      "lens": "100mm macro lens at f/4",
+      "camera": "arc",
+      "focus": "the music box carousel",
+      "motion_elements": "the turning carousel and the tree lights behind",
+      "ambient": "The tiny carousel turns slowly."
+    },
+    {
+      "id": "snow-globes-06",
+      "subject": "A glass bell-jar cloche on a walnut base over a tiny decorated bottle-brush tree wrapped in micro lights, pine cones and a candle beside it",
+      "lens": "100mm macro lens at f/4",
+      "focus": "the glass cloche",
+      "motion_elements": "the micro lights on the tiny tree and the candle flame",
+      "ambient": "The candle flame flickers gently beside the cloche."
+    },
+    {
+      "id": "snow-globes-07",
+      "subject": "A snow globe with a tiny log cabin in a pine forest, nested among pine branches and pine cones on a rustic table, lit pillar candles glowing behind",
+      "lens": "100mm macro lens at f/4",
+      "motion_elements": "the snow inside the globe and the candle flames",
+      "ambient": "Snow swirls slowly inside the globe. Candle flames flicker behind."
+    },
+    {
+      "id": "snow-globes-08",
+      "subject": "A glass-fronted curio cabinet filled with a collection of snow globes of every size on glass shelves, tiny lights inside the cabinet and a lit tree reflected in the glass doors",
+      "lens": "50mm lens at f/2.8",
+      "camera": "push-in",
+      "focus": "the snow globe collection",
+      "motion_elements": "the snow inside the globes and the cabinet lights",
+      "ambient": "Snow drifts slowly inside the globes."
+    },
+    {
+      "id": "snow-globes-09",
+      "subject": "A large snow globe holding a tiny steam train circling a miniature Christmas tree, on a velvet tree skirt among wrapped gifts, tree lights glowing overhead",
+      "lens": "100mm macro lens at f/4"
+    },
+    {
+      "id": "snow-globes-10",
+      "subject": "A snow globe on a bedside table next to a small glowing lamp and a folded knit blanket, a lit Christmas tree softly blurred in the corner of the room",
+      "lens": "50mm lens at f/2.8",
+      "motion_elements": "the snow inside the globe and the lamp and tree lights"
+    },
+    {
+      "id": "snow-globes-11",
+      "subject": "A snow globe with a tiny white church standing on a polished grand piano lid beside two brass candlesticks with lit candles, their reflections on the black lacquer",
+      "lens": "100mm macro lens at f/4",
+      "motion_elements": "the snow inside the globe and the candle flames",
+      "ambient": "Snow swirls slowly inside the globe. Candle flames flicker gently."
+    },
+    {
+      "id": "snow-globes-12",
+      "subject": "Small water-filled glass globe ornaments hanging on the branches of a Christmas tree, gold glitter swirling inside them among warm tree lights",
+      "lens": "100mm macro lens at f/4",
+      "camera": "slide",
+      "focus": "the globe ornaments",
+      "motion_elements": "the glitter inside the globes and the tree lights",
+      "ambient": "Gold glitter swirls slowly inside the globe ornaments."
+    },
+    {
+      "id": "snow-globes-13",
+      "subject": "A gold-glitter snow globe with a tiny white chapel inside on a gilded base, gold glitter swirling, white candles and gold bokeh behind",
+      "lens": "100mm macro lens at f/4",
+      "motion_elements": "the swirling gold glitter and the candle flames",
+      "ambient": "Gold glitter swirls slowly inside the globe. Candle flames flicker behind.",
+      "tags": {
+        "palette": "white-gold"
+      }
+    },
+    {
+      "id": "snow-globes-14",
+      "subject": "A snow globe with a tiny silver birch forest and a frozen lake on a silver base, standing on a window sill at blue hour with snowy rooftops outside",
+      "lens": "100mm macro lens at f/4",
+      "look": "twilight",
+      "motion_elements": "the snow inside the globe and the snow falling outside the window",
+      "ambient": "Snow swirls slowly inside the globe. Snow falls outside the window.",
+      "tags": {
+        "time": "twilight",
+        "palette": "cool-blue",
+        "snow": "window"
+      }
+    },
+    {
+      "id": "snow-globes-15",
+      "subject": "A tabletop miniature ski village on cotton-wool snow with a tiny lit chalet, a little chairlift climbing a papier-mache slope and bottle-brush pines glowing with micro lights",
+      "lens": "50mm lens at f/2.8",
+      "camera": "slide",
+      "focus": "the miniature ski village",
+      "motion_elements": "the tiny chairlift and the micro lights",
+      "ambient": "The tiny chairlift moves slowly up the slope."
+    },
+    {
+      "id": "snow-globes-16",
+      "subject": "A snow globe with a tiny cottage on a stone hearth, a log fire glowing in the fireplace behind it and stockings hanging above",
+      "lens": "100mm macro lens at f/4",
+      "motion_elements": "the snow inside the globe and the fire behind",
+      "ambient": "Snow swirls slowly inside the globe. The fire flickers behind."
+    },
+    {
+      "id": "snow-globes-17",
+      "subject": "A big snow globe centrepiece on a festive dining table, a tiny lit village inside, surrounded by crystal glasses, gold-rimmed plates and lit taper candles",
+      "lens": "50mm lens at f/2.8",
+      "camera": "arc",
+      "focus": "the snow globe centrepiece",
+      "motion_elements": "the snow inside the globe and the candle flames",
+      "ambient": "Snow swirls slowly inside the globe. Candle flames flicker gently."
+    },
+    {
+      "id": "snow-globes-18",
+      "subject": "A miniature Victorian street inside a glass-fronted shadow box, tiny lamp posts glowing, shop windows lit, cotton-wool snow on the roofs and mica flakes glittering",
+      "lens": "100mm macro lens at f/4",
+      "focus": "the miniature street",
+      "motion_elements": "the tiny lamp posts and lit windows",
+      "ambient": "Tiny lamps glow along the miniature street."
+    },
+    {
+      "id": "snow-globes-19",
+      "subject": "A snow globe sitting in real snow on an outside window ledge, the warm lit room with a Christmas tree glowing through the glass behind it, real snow falling",
+      "lens": "100mm macro lens at f/4",
+      "look": "night-lights",
+      "motion_elements": "the snow inside the globe, the falling snow and the lit room behind",
+      "ambient": "Snow swirls slowly inside the globe. Snow falls around it.",
+      "tags": {
+        "place": "outdoor",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "snow-globes-20",
+      "subject": "A snow globe beside a steaming mug of cocoa and an open book with blank pages on a knitted blanket, fairy lights coiled around them",
+      "lens": "100mm macro lens at f/4",
+      "motion_elements": "the snow inside the globe, the steam from the mug and the fairy lights",
+      "ambient": "Snow swirls slowly inside the globe. Steam rises from the mug."
+    }
+  ]
+}

@@ -45,7 +45,11 @@ phần lớn là đẩy bài + kéo master; album 1 giờ kéo về ~1 GB WAV. `
 3. Nối: `acrossfade` `c1=qsin:c2=qsin` (equal-power) dài `crossfade_s`; `crossfade_s = 0` → nối thẳng.
 4. Limiter an toàn chạy ở 4× (192 kHz, soxr) tại −2.0 dB rồi về 48 kHz → true peak ≤ −1.5 dBTP. Đo lại master; lệch
    > 0.5 LU hoặc true peak vượt → chỉnh gain / hạ limiter, ghép lại (tối đa 3 lần, `measured.renders`).
-5. `start_s` bài i = Σ(độ dài bài trước − crossfade); bài 1 = 0; chapter = floor(start_s). Độ dài master =
+5. **Vào album nhẹ nhàng (CEO 2026-10-05):** master fade-in `intro_fade_s` giây (album_rules; mặc định 12, `0` = tắt)
+   bằng đường cong sin² (`afade curve=hsin`: lúc đầu lên rất chậm) trước limiter. Mỗi bài đo `intro_lu` = loudness 20 s
+   đầu − loudness cả bài; assembly.md báo bài 1 có phải bài mở êm nhất không (⚠️ nếu không). PM chọn bài 1 trong số bài
+   có `intro_lu` thấp nhất mà vẫn hợp chủ đề.
+6. `start_s` bài i = Σ(độ dài bài trước − crossfade); bài 1 = 0; chapter = floor(start_s). Độ dài master =
    Σ(out_s − in_s) − (n − 1) × crossfade (kiểm tra ±0.05 s). Thử nghiệm: tương quan chéo master với file gốc tại `start_s`
    cho lệch 0 ms, mức = `gain_db`.
 

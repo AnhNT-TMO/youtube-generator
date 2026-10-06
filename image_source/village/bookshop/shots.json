@@ -1,0 +1,189 @@
+{
+  "theme": "village/bookshop",
+  "target": 20,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "interior-evening",
+    "motion_elements": "the fairy lights on the shelves and the snow outside the window",
+    "camera": "push-in",
+    "focus": "the shelves",
+    "out_and_back": true,
+    "seconds": 10,
+    "ambient": "Snow falls outside the shop window.",
+    "tags": {
+      "place": "indoor",
+      "time": "night",
+      "palette": "warm-gold",
+      "scale": "room",
+      "snow": "window",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "bookshop-01",
+      "subject": "A narrow old bookshop with floor-to-ceiling wooden shelves on both sides, a brass rolling ladder, fairy lights along the top shelves and a snowy window at the far end; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow"
+    },
+    {
+      "id": "bookshop-02",
+      "subject": "A bookshop front window seen from inside, with a tree built from stacked books wrapped in fairy lights, a garland across the top of the glass and snow falling on the street outside; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "focus": "the book tree in the window"
+    },
+    {
+      "id": "bookshop-03",
+      "subject": "A worn leather reading armchair among tall shelves, a glowing floor lamp, a knitted throw, a pile of books and a cup of tea steaming on a small side table; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "snow": "none"
+      },
+      "motion_elements": "the fairy lights on the shelves and the steam from the tea",
+      "focus": "the reading chair",
+      "ambient": "Steam rises from the cup of tea.",
+      "camera": "slide"
+    },
+    {
+      "id": "bookshop-04",
+      "subject": "A two-floor bookshop with a wooden spiral staircase up to a gallery, garlands and lights wound around the banister, shelves on every wall and a tall snowy window; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "camera": "crane-up",
+      "focus": "the spiral staircase and the gallery"
+    },
+    {
+      "id": "bookshop-05",
+      "subject": "A wooden bookshop counter with a small lit tree, a brass desk lamp, books wrapped in brown paper and tied with string, and a glass jar of cinnamon sticks; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "snow": "none"
+      },
+      "motion_elements": "the small tree lights and the fairy lights on the shelves",
+      "focus": "the counter",
+      "ambient": "The tree lights twinkle softly."
+    },
+    {
+      "id": "bookshop-06",
+      "subject": "A bookshop doorway seen from inside, the open door showing a snowy cobbled lane with lamps, shelves on either side of the door and a wreath hanging on it; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "motion_elements": "the fairy lights on the shelves and the snow falling in the lane outside",
+      "focus": "the open doorway",
+      "ambient": "Snow falls in the lane outside the open door."
+    },
+    {
+      "id": "bookshop-07",
+      "subject": "An attic bookshop under a sloping beamed ceiling, fairy lights strung along the beams, low shelves and a round dormer window with falling snow; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "focus": "the round dormer window",
+      "camera": "slide"
+    },
+    {
+      "id": "bookshop-08",
+      "subject": "A bookshop with a fireplace at the back, armchairs facing it, shelves around the hearth, a garland on the mantel and a lit tree by the snowy window; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "motion_elements": "the fire, the tree lights and the snow outside the window",
+      "focus": "the fireplace",
+      "ambient": "The fire flickers in the hearth. Snow falls outside the shop window."
+    },
+    {
+      "id": "bookshop-09",
+      "subject": "An aisle between tall shelves leading to a snowy arched window, a garland hanging along the shelf tops and a lantern on the floor; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "focus": "the window at the end of the aisle"
+    },
+    {
+      "id": "bookshop-10",
+      "subject": "A reading nook built into a bay window, cushions and a blanket, a stack of books, a candle lantern and snow falling on the street outside; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "motion_elements": "the candle flame, the fairy lights and the snow outside the window",
+      "focus": "the bay window nook",
+      "ambient": "Snow falls outside the bay window. The candle flame flickers in the lantern.",
+      "camera": "slide"
+    },
+    {
+      "id": "bookshop-11",
+      "subject": "A grand old bookshop in a vaulted stone hall with tall arched windows, rows of oak shelves, a big lit Christmas tree in the middle aisle and snow outside; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "focus": "the tree in the middle aisle"
+    },
+    {
+      "id": "bookshop-12",
+      "subject": "A children's corner in the bookshop with low shelves, a small tree with paper ornaments, floor cushions, a wooden toy train and fairy lights around a snowy window; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "palette": "red-green"
+      },
+      "focus": "the children's corner"
+    },
+    {
+      "id": "bookshop-13",
+      "subject": "A basement bookshop under brick vaulted ceilings, warm pendant bulbs and fairy lights, shelves built into the arches and a small street-level window showing snow at the top; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "focus": "the arches of shelves",
+      "camera": "slide"
+    },
+    {
+      "id": "bookshop-14",
+      "subject": "A table of old leather-bound books with plain unmarked spines, a brass magnifying lamp, an antique globe and a candle, a garland along the shelf behind; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "snow": "none"
+      },
+      "motion_elements": "the candle flame and the fairy lights on the shelves",
+      "focus": "the book table",
+      "ambient": "The candle flame flickers."
+    },
+    {
+      "id": "bookshop-15",
+      "subject": "The front of an old bookshop seen from the snowy street, a warm bay window full of books and a book tree, a wreath on the green door and a lantern beside it; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "place": "outdoor",
+        "time": "twilight",
+        "scale": "street",
+        "snow": "falling",
+        "palette": "red-green"
+      },
+      "look": "twilight",
+      "motion_elements": "the lit shop window, the lantern and the falling snow",
+      "focus": "the bookshop window",
+      "ambient": "Snow falls in front of the bookshop."
+    },
+    {
+      "id": "bookshop-16",
+      "subject": "The top of a rolling ladder against high shelves with a lantern hung on it, garlands along the shelf edges and a skylight above with snow settling on the glass; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "camera": "tilt-up",
+      "focus": "the skylight"
+    },
+    {
+      "id": "bookshop-17",
+      "subject": "A close view of a closed old book tied with red ribbon and a sprig of holly, a steaming mug of tea and a flickering candle on a wooden table, lit shelves blurred behind; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "macro",
+        "snow": "none",
+        "palette": "red-green"
+      },
+      "motion_elements": "the candle flame, the steam from the mug and the fairy-light bokeh",
+      "focus": "the book and the mug",
+      "ambient": "Steam rises from the mug. The candle flame flickers.",
+      "lens": "85mm lens at f/2.8",
+      "camera": "slide"
+    },
+    {
+      "id": "bookshop-18",
+      "subject": "A close view of a shelf of old books with plain spines, a string of fairy lights draped along them and a small brass lantern, a snowy window softly blurred behind; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "macro"
+      },
+      "focus": "the lit shelf",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "bookshop-19",
+      "subject": "A close view of a bookshop windowsill with a stack of wrapped books, a candle in a glass holder and frost on the pane, snow falling outside; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "macro"
+      },
+      "motion_elements": "the candle flame and the snow outside the window",
+      "focus": "the windowsill",
+      "ambient": "Snow falls outside the window. The candle flame flickers.",
+      "lens": "85mm lens at f/2.8"
+    },
+    {
+      "id": "bookshop-20",
+      "subject": "A close view of an antique globe on a wooden stand next to a candle lantern and a garland of dried orange slices and pine, a snowy window behind; anywhere indoors the air and every surface are completely clear, no floating sparkles, specks or snow",
+      "tags": {
+        "scale": "macro"
+      },
+      "motion_elements": "the candle flame and the snow outside the window",
+      "focus": "the globe and the lantern",
+      "ambient": "Snow falls outside the window. The candle flame flickers in the lantern.",
+      "lens": "85mm lens at f/2.8",
+      "camera": "slide"
+    }
+  ]
+}

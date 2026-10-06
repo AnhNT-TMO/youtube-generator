@@ -12,6 +12,7 @@ channel/<tên>/
 ├── album_rules.md     # luật chọn bài vào album (front matter máy đọc)
 ├── visual.md          # luật hình: form thumbnail, khối CORE ChatGPT, biến thể, ảnh dọc Short
 ├── video.json         # phong cách video: chuyển động, ánh sáng, sóng nhạc, logo
+├── intro.json         # intro mở video dài (video-montage render): logo tròn, tên kênh, tagline, font
 ├── publish.md         # mẫu description, tags, title, Shorts, pinned comment, giờ đăng
 ├── translate.yaml     # ngôn ngữ dịch title + description
 ├── image_source/logo.png, model/          # logo, ảnh nhân vật cho ChatGPT
@@ -27,6 +28,7 @@ channel/<tên>/
 | Audio | audio-album-assembly | `album_rules.md` (`crossfade_s`), `albums/NNN/tracks/` |
 | Video | thumbnail-prompt | `visual.md`, `model/` |
 | Video | video-generator | `video.json`, `image_source/` |
+| Video | video-montage | `intro.json` (intro logo + tên kênh mở video dài) |
 | Video | video-shorts | `publish.md` → *Shorts*, `songs/<type>/<bài>.md` → `short` |
 | Upload | upload-youtube-publish | `publish.md` |
 | Upload | upload-youtube-translate | `translate.yaml` |
