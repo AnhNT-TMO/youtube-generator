@@ -1,0 +1,190 @@
+{
+  "theme": "green-woodland/close",
+  "target": 16,
+  "defaults": {
+    "lens": "85mm lens at f/5.6",
+    "look": "day",
+    "composition": "One main texture of leaves, moss, fronds or blossom fills most of the frame at a natural close range, with the woodland behind softly out of focus but still readable; the camera sits level with the subject.",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "close",
+      "category": "green-woodland",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "gw-c-01",
+      "subject": "Fresh beech leaves unfolding on a low branch in a spring wood, pale green and slightly translucent, with the misty woodland and grey trunks softly blurred behind.",
+      "look": "soft-morning",
+      "motion_elements": "the fresh beech leaves",
+      "tags": {
+        "time": "morning",
+        "palette": "pale green"
+      }
+    },
+    {
+      "id": "gw-c-02",
+      "subject": "Young fern fronds uncurling from a mossy bank on the woodland floor, with sunlit woodland and white birch trunks softly blurred behind.",
+      "lens": "70mm lens at f/5.6",
+      "look": "day",
+      "motion_elements": "the uncurling fern fronds",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "gw-c-03",
+      "subject": "Hazel catkins hanging from thin twigs at the edge of a wood in warm low light, with the green woodland blurred into soft shapes behind.",
+      "lens": "100mm lens at f/5.6",
+      "look": "golden",
+      "motion_elements": "the hazel catkins",
+      "tags": {
+        "time": "golden",
+        "palette": "pale yellow"
+      }
+    },
+    {
+      "id": "gw-c-04",
+      "subject": "A thick cushion of green moss on a fallen log with small wood sorrel leaves growing through it, soft grey-green trunks blurred behind.",
+      "look": "overcast",
+      "motion_elements": "the wood sorrel leaves",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss"
+      }
+    },
+    {
+      "id": "gw-c-05",
+      "subject": "Raindrops hanging from the tips of young birch leaves on a low branch in a spring wood, with the wet woodland softly blurred behind.",
+      "lens": "100mm lens at f/5.6",
+      "look": "after-rain",
+      "motion_elements": "the birch leaves and the hanging raindrops",
+      "tags": {
+        "time": "after-rain",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "gw-c-06",
+      "subject": "White wood anemone flowers among dewy grass at the edge of a woodland path, with a pale glow among the soft blurred trees behind.",
+      "lens": "70mm lens at f/5.6",
+      "look": "soft-morning",
+      "motion_elements": "the anemone flowers and the grass",
+      "tags": {
+        "time": "morning",
+        "palette": "white blossom"
+      }
+    },
+    {
+      "id": "gw-c-07",
+      "subject": "A low rowan branch with fresh feathery leaves in dappled sunlight, with blurred smooth beech trunks and a bright woodland behind.",
+      "look": "day",
+      "motion_elements": "the rowan leaves",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "gw-c-08",
+      "subject": "Young bracken shoots and tall grass blades backlit by low warm light at a woodland edge, with soft blurred trees behind.",
+      "lens": "85mm lens at f/8",
+      "look": "golden",
+      "motion_elements": "the bracken shoots and the grass blades",
+      "tags": {
+        "time": "golden",
+        "palette": "pale yellow"
+      }
+    },
+    {
+      "id": "gw-c-09",
+      "subject": "Wild garlic leaves with small white star flowers on the woodland floor, with the shaded wood and pale trunks soft behind.",
+      "lens": "50mm lens at f/5.6",
+      "look": "overcast",
+      "motion_elements": "the wild garlic leaves",
+      "tags": {
+        "time": "overcast",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "gw-c-10",
+      "subject": "A thin trickle of rainwater running over green moss on a woodland stone, with wet ferns and dark trunks blurred behind.",
+      "look": "after-rain",
+      "motion_elements": "the trickle of rainwater",
+      "tags": {
+        "time": "after-rain",
+        "palette": "moss"
+      }
+    },
+    {
+      "id": "gw-c-11",
+      "subject": "Thin mist drifting past a mossy oak trunk, a twig of fresh small leaves in front of it and a pale woodland soft behind.",
+      "lens": "85mm lens at f/5.6",
+      "look": "soft-morning",
+      "motion_elements": "the drifting mist and the fresh leaves",
+      "tags": {
+        "time": "morning",
+        "palette": "moss"
+      }
+    },
+    {
+      "id": "gw-c-12",
+      "subject": "A primrose clump on a mossy woodland bank, pale yellow flowers among crinkled leaves, with the sunny wood blurred behind.",
+      "lens": "70mm lens at f/8",
+      "look": "day",
+      "motion_elements": "the primrose flowers and leaves",
+      "tags": {
+        "time": "day",
+        "palette": "pale yellow"
+      }
+    },
+    {
+      "id": "gw-c-13",
+      "subject": "A spray of white hawthorn blossom on a branch at the edge of a wood, lit by warm low sun, with a soft green woodland background.",
+      "look": "golden",
+      "motion_elements": "the hawthorn blossom spray",
+      "tags": {
+        "time": "golden",
+        "palette": "white blossom"
+      }
+    },
+    {
+      "id": "gw-c-14",
+      "subject": "Bluebell stems scattered among broad green leaves at the base of a smooth beech trunk, with the quiet wood soft behind.",
+      "lens": "85mm lens at f/5.6",
+      "look": "overcast",
+      "motion_elements": "the bluebell stems",
+      "tags": {
+        "time": "overcast",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "gw-c-15",
+      "subject": "Wet lady fern fronds glistening beside a small woodland pool after rain, the still water reflecting the fresh canopy and blurred trees behind.",
+      "lens": "70mm lens at f/5.6",
+      "look": "after-rain",
+      "motion_elements": "the fern fronds and the pool reflection",
+      "tags": {
+        "time": "after-rain",
+        "palette": "moss"
+      }
+    },
+    {
+      "id": "gw-c-16",
+      "subject": "Soft young larch tufts with fresh pale new needles on a slender twig at a woodland edge, with a misty pale hillside wood softly blurred behind.",
+      "lens": "100mm lens at f/5.6",
+      "look": "soft-morning",
+      "motion_elements": "the larch tufts",
+      "tags": {
+        "time": "morning",
+        "palette": "pale green"
+      }
+    }
+  ]
+}

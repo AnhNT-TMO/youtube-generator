@@ -1,0 +1,364 @@
+{
+  "theme": "wildflower-meadows/wide",
+  "target": 32,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "day",
+    "composition": "Wide open view across the meadow at standing height: young grass and a few wildflowers in the foreground, the meadow with its trees, hedges or woodland edge across the middle ground, and soft hills or forest with sky in the background, looking across the meadow, with far more green than flower color.",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "wide",
+      "category": "wildflower-meadows",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "wm-w-01",
+      "subject": "A gently rolling meadow of young grass with scattered buttercups and white daisies, a single spreading oak in fresh leaf and a beech woodland edge behind",
+      "look": "day",
+      "motion_elements": "the swaying young grass and the oak leaves",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "wm-w-02",
+      "subject": "A woodland clearing of fresh grass with Queen Anne's lace along its edge, slender birch trunks in new leaf and a thin morning haze among the trees",
+      "look": "soft-morning",
+      "motion_elements": "the Queen Anne's lace heads, the birch leaves and the thin haze",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "20mm lens at f/8"
+    },
+    {
+      "id": "wm-w-03",
+      "subject": "A sloping hillside meadow with patches of red clover, a hawthorn hedge in white blossom crossing the middle ground and soft green hills beyond",
+      "look": "golden",
+      "motion_elements": "the swaying grass and the hawthorn branches",
+      "tags": {
+        "time": "golden",
+        "palette": "white blossom"
+      },
+      "lens": "35mm lens at f/8"
+    },
+    {
+      "id": "wm-w-04",
+      "subject": "A damp lowland meadow with scattered ragged-robin and lady's smock, a line of pollarded willows along a shallow ditch and a pale sky",
+      "look": "overcast",
+      "motion_elements": "the meadow grass and the willow leaves",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss"
+      },
+      "lens": "28mm lens at f/8"
+    },
+    {
+      "id": "wm-w-05",
+      "subject": "A wet hay meadow with beaded grass and scattered meadow buttercups, a low mossy dry-stone wall and a hill with clearing cloud behind",
+      "look": "after-rain",
+      "motion_elements": "the beaded grass and the clearing cloud",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      },
+      "lens": "16mm lens at f/8"
+    },
+    {
+      "id": "wm-w-06",
+      "subject": "A broad valley meadow with a small meandering brook crossing it sideways, marsh marigolds on its banks, scattered alder trees and gentle wooded hills",
+      "look": "day",
+      "motion_elements": "the flowing brook and the swaying grass",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "wm-w-07",
+      "subject": "An upland pasture of short fresh grass with scattered cowslips, a few young rowan trees and low mist resting in the valley beyond",
+      "look": "soft-morning",
+      "motion_elements": "the low mist and the rowan leaves",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "20mm lens at f/8"
+    },
+    {
+      "id": "wm-w-08",
+      "subject": "A meadow on a forest edge with tall grasses and scattered ox-eye daisies, a row of young beech trees backlit at the edge and a hazy ridge beyond",
+      "look": "golden",
+      "motion_elements": "the tall grasses and the beech leaves",
+      "tags": {
+        "time": "golden",
+        "palette": "warm green"
+      },
+      "lens": "35mm lens at f/8"
+    },
+    {
+      "id": "wm-w-09",
+      "subject": "A wide flat meadow with patches of pale lilac cuckooflower, a few solitary hawthorn shrubs and a long mixed woodland edge under soft cloud",
+      "look": "overcast",
+      "motion_elements": "the meadow grass and the hawthorn leaves",
+      "tags": {
+        "time": "overcast",
+        "palette": "soft lilac"
+      },
+      "lens": "28mm lens at f/8"
+    },
+    {
+      "id": "wm-w-10",
+      "subject": "A clearing in a beech wood after rain, wet fresh grass with bluebells scattered at the woodland margin and light mist rising between the trunks",
+      "look": "after-rain",
+      "motion_elements": "the rising mist and the dripping beech leaves",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      },
+      "lens": "16mm lens at f/8"
+    },
+    {
+      "id": "wm-w-11",
+      "subject": "A hillside meadow with scattered early purple orchids and buttercups, a lone wild cherry tree in white blossom and blue-green hills on the horizon",
+      "look": "day",
+      "motion_elements": "the hillside grass and the cherry blossom branches",
+      "tags": {
+        "time": "day",
+        "palette": "soft pink"
+      }
+    },
+    {
+      "id": "wm-w-12",
+      "subject": "A riverside meadow with dew on the grass, scattered dandelion clocks, a line of fresh green willows along the bank and a pale sky",
+      "look": "soft-morning",
+      "motion_elements": "the dewy grass, the dandelion clocks and the willow leaves",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "20mm lens at f/8"
+    },
+    {
+      "id": "wm-w-13",
+      "subject": "A gently sloping meadow with scattered red campion, a small copse of silver birch in new leaf and long shadows across the grass",
+      "look": "golden",
+      "motion_elements": "the grass and the birch leaves",
+      "tags": {
+        "time": "golden",
+        "palette": "warm green"
+      },
+      "lens": "35mm lens at f/8"
+    },
+    {
+      "id": "wm-w-14",
+      "subject": "A wide meadow below a wooded hill, scattered pale primroses along a shallow bank, a few young oaks and soft gray-green distance",
+      "look": "overcast",
+      "motion_elements": "the meadow grass and the oak leaves",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss"
+      },
+      "lens": "28mm lens at f/8"
+    },
+    {
+      "id": "wm-w-15",
+      "subject": "A meadow beside a small pond, puddled grass, yellow flag iris buds at the water edge and willows dripping in the background",
+      "look": "after-rain",
+      "motion_elements": "the rippling pond and the dripping willow leaves",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      },
+      "lens": "16mm lens at f/8"
+    },
+    {
+      "id": "wm-w-16",
+      "subject": "A gently undulating meadow of fresh grass and scattered Queen Anne's lace, a low hedgerow of blackthorn in white blossom and soft clouds over distant fields",
+      "look": "day",
+      "motion_elements": "the drifting clouds and the swaying grass",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "wm-w-17",
+      "subject": "A small meadow in a wooded valley, morning haze between young larch trees in soft green needles and wood anemones at the grass edge",
+      "look": "soft-morning",
+      "motion_elements": "the morning haze and the larch branches",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "20mm lens at f/8"
+    },
+    {
+      "id": "wm-w-18",
+      "subject": "A wide sloping meadow with tufts of fresh grass and scattered cowslips, a single old apple tree in pale pink blossom and low sun from the side",
+      "look": "golden",
+      "motion_elements": "the grass tufts and the apple blossom branches",
+      "tags": {
+        "time": "golden",
+        "palette": "soft pink"
+      },
+      "lens": "35mm lens at f/8"
+    },
+    {
+      "id": "wm-w-19",
+      "subject": "A meadow edge where a narrow beck crosses the frame diagonally, scattered marsh marigolds, mossy stones and a band of birch woodland",
+      "look": "overcast",
+      "motion_elements": "the flowing beck and the birch leaves",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss"
+      },
+      "lens": "28mm lens at f/8"
+    },
+    {
+      "id": "wm-w-20",
+      "subject": "A wide hay meadow at the foot of a steep beech wood, wet grass shining, scattered buttercups and a band of mist clinging to the trees",
+      "look": "after-rain",
+      "motion_elements": "the shining wet grass and the mist band",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      },
+      "lens": "16mm lens at f/8"
+    },
+    {
+      "id": "wm-w-21",
+      "subject": "A clearing on a gentle slope with scattered wild violets and young bracken unfurling, an old field maple in new leaf and drifting white clouds",
+      "look": "day",
+      "motion_elements": "the maple leaves and the drifting clouds",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "wm-w-22",
+      "subject": "A broad floodplain meadow with dew-silvered grass, scattered snake's-head fritillaries, a row of poplars in pale new leaf and a soft hazy sky",
+      "look": "soft-morning",
+      "motion_elements": "the poplar leaves and the dewy grass",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "20mm lens at f/8"
+    },
+    {
+      "id": "wm-w-23",
+      "subject": "An open meadow on a low ridge with knee-high grasses, sparse ox-eye daisies, one hawthorn tree and layered green hills in warm haze",
+      "look": "golden",
+      "motion_elements": "the knee-high grass and the hawthorn leaves",
+      "tags": {
+        "time": "golden",
+        "palette": "warm green"
+      },
+      "lens": "35mm lens at f/8"
+    },
+    {
+      "id": "wm-w-24",
+      "subject": "A quiet meadow with a simple wooden rail fence along one side, a copse of hazel hung with catkins and scattered primroses under a pale sky",
+      "look": "overcast",
+      "motion_elements": "the hazel catkins and the meadow grass",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss"
+      },
+      "lens": "28mm lens at f/8"
+    },
+    {
+      "id": "wm-w-25",
+      "subject": "A grassy bank above a small stream, damp grass with scattered red campion, clear water running below and wet alder leaves",
+      "look": "after-rain",
+      "motion_elements": "the clear stream water and the alder leaves",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      },
+      "lens": "16mm lens at f/8"
+    },
+    {
+      "id": "wm-w-26",
+      "subject": "A wide sunny pasture with scattered dandelions and daisies, a line of horse chestnut trees in fresh leaf with white flower candles along the far edge",
+      "look": "day",
+      "motion_elements": "the chestnut leaves and the swaying grass",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "wm-w-27",
+      "subject": "A meadow in a shallow dell with soft mist pooling in the hollow, scattered cuckooflowers and a ring of young birches",
+      "look": "soft-morning",
+      "motion_elements": "the pooling mist and the birch leaves",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "20mm lens at f/8"
+    },
+    {
+      "id": "wm-w-28",
+      "subject": "A meadow beside a beech wood with long evening shadows, a few bluebells under the first trees and sparse buttercups in the open grass",
+      "look": "golden",
+      "motion_elements": "the beech leaves and the long grass",
+      "tags": {
+        "time": "golden",
+        "palette": "warm green"
+      },
+      "lens": "35mm lens at f/8"
+    },
+    {
+      "id": "wm-w-29",
+      "subject": "A wide grassy common with scattered gorse in yellow bloom, young birch trees and a soft gray horizon of low hills",
+      "look": "overcast",
+      "motion_elements": "the grass and the birch leaves",
+      "tags": {
+        "time": "overcast",
+        "palette": "pale yellow"
+      },
+      "lens": "28mm lens at f/8"
+    },
+    {
+      "id": "wm-w-30",
+      "subject": "A green meadow with a shallow rain pool reflecting the sky, daisies around it, a hawthorn hedge in bud and lifting cloud",
+      "look": "after-rain",
+      "motion_elements": "the rippling rain pool and the lifting cloud",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      },
+      "lens": "16mm lens at f/8"
+    },
+    {
+      "id": "wm-w-31",
+      "subject": "A hillside terrace of short turf with scattered cowslips and early purple orchids, a few young ash trees and fresh green slopes falling away to a valley",
+      "look": "day",
+      "motion_elements": "the hillside grass and the ash leaves",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "wm-w-32",
+      "subject": "A wide meadow with dew-heavy grass, scattered ragged-robin, a solitary wild pear tree in white blossom and morning mist lying over distant woodland",
+      "look": "soft-morning",
+      "motion_elements": "the morning mist and the pear blossom branches",
+      "tags": {
+        "time": "morning",
+        "palette": "white blossom"
+      },
+      "lens": "20mm lens at f/8"
+    }
+  ]
+}

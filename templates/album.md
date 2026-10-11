@@ -23,7 +23,7 @@ waivers: {}
 
 # <Album working title>
 
-Album = PM + CEO lên kế hoạch trực tiếp (không có plan.yaml). PM chọn bài từ kho `channel/<ch>/songs/` theo
+Album = PM + CEO lên kế hoạch trực tiếp. PM chọn bài từ kho `channel/<ch>/songs/` theo
 `channel/<ch>/album_rules.md`, ghi `tracklist` (thứ tự = thứ tự phát), rồi `album.py check` → `album.py build`
 (sinh `tracks/NN-<slug>.md` cho audio-album-assembly và upload-youtube-publish). Short của album nằm trong thư mục này,
 `short/` (video-shorts `shorts.py new <album>`; bài = `brief.short.song`).

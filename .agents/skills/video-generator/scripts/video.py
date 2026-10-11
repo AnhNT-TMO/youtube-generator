@@ -6,18 +6,18 @@ USAGE = """video-generator: still thumbnail -> 5-min loop video -> full-length m
     video.py variant DIR [--seed N]           # cinema channels: pick this video's camera + parallax + particles +
                                               #   lights from the channel's cinema_pool, unlike its last videos
     video.py loop  DIR [--local] [--seconds N] # step 1: thumbnail -> 5-min seamless loop + logo intro (N: short preview)
-    video.py batch channel/<name> [--local]   # step 1 for every idea / album / single with a thumbnail but no loop
+    video.py batch channel/<name> [--local]   # step 1 for every album with a thumbnail but no loop
     video.py album DIR AUDIO [--local]        # step 2: loop -> video as long as AUDIO, + spectrum bars
     video.py package ALBUM [--no-short] [--force] [--dry-run]
                                               # step 3: ONE zip for the album + its Short (ALBUM/short/): album video,
                                               #   thumbnails, youtube.md, paste fields + short/ with the same for the
-                                              #   Short, README.txt with the upload order; built on the server -> S3
+                                              #   Short, README.txt with the upload order; built on the server ->
+                                              #   Google Drive (rclone on the server), or S3 when no Drive remote
     video.py short DIR [--local]              # Short (DIR = channel/<name>/albums/NNN-slug/short, or the old
                                               #   channel/<name>/shorts/NNN-slug, with short.json + 9:16 thumbnail.png):
                                               #   loop as long as the clip + spectrum + lyric lines + hook + CTA,
                                               #   1080x1920; render only (it ships in the album's zip)
-DIR sits inside channel/<name>/ (an idea, album or single folder, or an album's short/) and holds thumbnail.png. An album made from an
-idea (plan.yaml sources.idea) that has no thumbnail.png / video.json / video/loop.mp4 of its own uses the idea's.
+DIR sits inside channel/<name>/ (an album folder, or an album's short/) and holds thumbnail.png.
 Config layers: tool defaults < channel/<name>/video.json < DIR/video.json.
 Everything is written to DIR/video/.
 
@@ -25,8 +25,9 @@ loop / batch / album render on the GPU server from remote.env (next to this skil
 scripts, the channel's image_source/ and the job's inputs are synced over,
 unchanged files are not uploaded again. Loops come back to DIR/video/; the full video of `album` stays on the
 server (only its ffprobe + two check frames come back; --download also fetches the mp4) and `package` zips it there
-with DIR/youtube.md, the thumbnails and the Short's part, and uploads the zip to S3 through presigned requests signed
-with this Mac's AWS credentials (bucket/prefix in remote.env). `album` runs `package` itself only when youtube.md and
+with DIR/youtube.md, the thumbnails and the Short's part, and the server uploads the zip to Google Drive with rclone
+(VG_DRIVE_REMOTE / VG_DRIVE_PREFIX in remote.env); without VG_DRIVE_REMOTE it goes to S3 through presigned requests
+signed with this Mac's AWS credentials (VG_S3_* in remote.env). `album` runs `package` itself only when youtube.md and
 the Short (rendered + short/youtube.md) are both ready; otherwise it prints the `package` command to run later.
 --local renders on this Mac instead (heavy: only when the server is unreachable and the owner agreed).
 """
@@ -51,6 +52,7 @@ REPO = config.REPO
 
 def _remote_env():
     env = {"VG_REMOTE": "", "VG_KEY": "~/.ssh/id_rsa", "VG_JOBS": "16", "VG_DIR": "video-generator", "VG_ENCODER": "nvenc",
+           "VG_DRIVE_REMOTE": "", "VG_DRIVE_PREFIX": "",
            "VG_S3_BUCKET": "", "VG_S3_REGION": "ap-northeast-1", "VG_S3_PREFIX": "", "VG_AWS_PROFILE": ""}
     path = os.path.join(SK, "remote.env")
     if os.path.exists(path):
@@ -93,21 +95,11 @@ class Job:
         self.layers = [os.path.join(self.channel_dir, "video.json")]
         if not os.path.exists(self.layers[0]):
             sys.exit(f"missing {self.layers[0]}")
-        self.idea = source_idea(self.dir)
-        look = [self.dir] + ([self.idea] if self.idea else [])
-        own = next((os.path.join(d, "video.json") for d in look if os.path.exists(os.path.join(d, "video.json"))), None)
-        if own:
+        own = os.path.join(self.dir, "video.json")
+        if os.path.exists(own):
             self.layers.append(own)
-        self.image = next((os.path.join(d, f) for d in look for f in
-                           ("thumbnail.png", "thumbnail.jpg", "thumbnail.jpeg")
-                           if os.path.exists(os.path.join(d, f))), None)
-        if self.image and self.idea and not self.image.startswith(self.idea + os.sep):
-            newer = next((os.path.join(self.idea, f) for f in ("thumbnail.png", "thumbnail.jpg")
-                          if os.path.exists(os.path.join(self.idea, f))
-                          and os.path.getmtime(os.path.join(self.idea, f)) > os.path.getmtime(self.image)), None)
-            if newer:
-                print(f"⚠ {os.path.relpath(newer, REPO)} is newer than the album's thumbnail: using the album's; "
-                      "run album-plan `album_plan.py sync <album>` to take the idea's", flush=True)
+        self.image = next((os.path.join(self.dir, f) for f in ("thumbnail.png", "thumbnail.jpg", "thumbnail.jpeg")
+                           if os.path.exists(os.path.join(self.dir, f))), None)
         self.album_short = len(rel) == 5 and rel[2] == "albums" and rel[4] == "short"
         self.short = self.album_short or (len(rel) >= 4 and rel[2] == "shorts")
         self.is_album = len(rel) == 4 and rel[2] == "albums"
@@ -133,18 +125,6 @@ class Job:
         return dict(os.environ, VG_FRAME=f"{w}x{h}")
 
 
-def source_idea(d):
-    f = os.path.join(d, "plan.yaml")
-    if not os.path.exists(f):
-        return None
-    m = re.search(r"^sources:\s*\n(?:[ \t]+.*\n)*?[ \t]+idea:\s*['\"]?([^'\"\n#]+?)['\"]?\s*$", open(f).read(), re.M)
-    if not m or m.group(1) in ("null", "~"):
-        return None
-    p = os.path.join(REPO, m.group(1).strip())
-    p = os.path.dirname(p) if p.endswith((".yaml", ".yml")) else p
-    return p if os.path.isdir(p) else None
-
-
 def run(cmd, **kw):
     print("$ " + " ".join(os.path.relpath(c, REPO) if c.startswith(REPO) else c
                           for c in cmd), flush=True)
@@ -163,10 +143,6 @@ def local_loop(job, a):
 
 def local_album(job, a):
     loop = os.path.join(job.out, "loop.mp4")
-    idea_loop = os.path.join(job.idea, "video", "loop.mp4") if job.idea else None
-    if not os.path.exists(loop) and idea_loop and os.path.exists(idea_loop) and job.image.startswith(job.idea + os.sep):
-        loop = idea_loop
-        print(f"using the idea's loop {os.path.relpath(loop, REPO)}", flush=True)
     if not os.path.exists(loop):
         local_loop(job, a)
     run([venv_python(), os.path.join(HERE, "extend.py"), loop, a.audio, album_out(job, a),
@@ -388,15 +364,8 @@ def human(n):
     return f"{n / 1e9:.2f} GB" if n >= 1e9 else f"{n / 1e6:.1f} MB" if n >= 1e5 else f"{n / 1e3:.1f} KB"
 
 
-def s3_folder(job):
-    parts = rel(job.dir).split(os.sep)[1:]
-    if len(parts) == 3 and parts[1] == "singles":
-        sm = os.path.join(job.dir, "single.md")
-        m = re.search(r"^album:[ \t]*[\"']?([^\s#\"']+)", open(sm).read(), re.M) if os.path.exists(sm) else None
-        if not m:
-            print(f"⚠ {rel(sm)} has no album: zip goes to albums/{parts[2]}/", flush=True)
-        return f"{parts[0]}/albums/{m.group(1) if m else parts[2]}", "single-"
-    return "/".join(parts), ""
+def package_folder(job):
+    return "/".join(rel(job.dir).split(os.sep)[1:])
 
 
 def on_server(job):
@@ -466,6 +435,55 @@ def stage_part(py, pkg_py, pj, pkg, thumb):
         + (["--source-audio", src_audio] if src_audio else []) + (["--vertical"] if pj.short else []))
 
 
+def drive_path(folder, zipname):
+    return f"{RENV['VG_DRIVE_REMOTE']}:{RENV['VG_DRIVE_PREFIX']}{folder}/{zipname}"
+
+
+def s3_key(folder, zipname):
+    return f"{RENV['VG_S3_PREFIX']}{folder}/{zipname}"
+
+
+def upload_drive(py, pkg_py, R, inp, out, folder, zipname, size):
+    dest = drive_path(folder, zipname)
+    print(f"upload: rclone -> {dest}", flush=True)
+    run(_ssh(limited(f"rclone copyto ~/{out}/{zipname} {shlex.quote(dest)} --drive-chunk-size 256M --retries 3 "
+                     "--low-level-retries 20 --stats 60s --stats-one-line -v")))
+    r = subprocess.run(_ssh(f"rclone lsjson --stat {shlex.quote(dest)}"), stdout=subprocess.PIPE, text=True)
+    info = json.loads(r.stdout) if r.returncode == 0 and r.stdout.strip() else {}
+    if info.get("Size") != size:
+        sys.exit(f"Drive có {info.get('Size')} byte, zip {size} byte: upload chưa đủ, chạy lại `video.py package`")
+    return {"drive": dest, "url": f"https://drive.google.com/file/d/{info['ID']}/view" if info.get("ID") else None}
+
+
+def upload_s3(py, pkg_py, R, inp, out, folder, zipname, size):
+    key = s3_key(folder, zipname)
+    s3args = ["--bucket", RENV["VG_S3_BUCKET"], "--key", key, "--region", RENV["VG_S3_REGION"]] + (
+        ["--profile", RENV["VG_AWS_PROFILE"]] if RENV["VG_AWS_PROFILE"] else [])
+    up = json.loads(subprocess.run([py, pkg_py, "presign", "--size", str(size)] + s3args,
+                                   stdout=subprocess.PIPE, text=True, check=True).stdout)
+    print(f"upload: multipart, {len(up['urls'])} presigned parts -> s3://{RENV['VG_S3_BUCKET']}/{key}", flush=True)
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as fh:
+        json.dump(up, fh)
+        spec_file = fh.name
+    try:
+        _rsync(spec_file, f"{inp}/s3spec.json")
+        res = _ssh_json(limited(f"python3 {R}/scripts/pkg_server.py upload ~/{out}/{zipname} ~/{inp}/s3spec.json"))
+        with open(spec_file, "w") as fh:
+            json.dump(res, fh)
+        run([py, pkg_py, "complete", "--upload-id", up["upload_id"], "--etags", spec_file] + s3args)
+    except (subprocess.CalledProcessError, KeyError, ValueError):
+        subprocess.run([py, pkg_py, "abort", "--upload-id", up["upload_id"]] + s3args)
+        raise
+    finally:
+        os.remove(spec_file)
+        subprocess.run(_ssh(f"rm -f {inp}/s3spec.json"))
+    head = json.loads(subprocess.run([py, pkg_py, "head"] + s3args, stdout=subprocess.PIPE, text=True,
+                                     check=True).stdout)
+    if head["size"] != size:
+        sys.exit(f"S3 có {head['size']} byte, zip {size} byte: upload chưa đủ, chạy lại `video.py package`")
+    return {"s3": f"s3://{RENV['VG_S3_BUCKET']}/{key}", "region": RENV["VG_S3_REGION"]}
+
+
 def package(job, a):
     t0 = time.time()
     if job.short:
@@ -480,8 +498,9 @@ def package(job, a):
     ytmd = os.path.join(job.dir, "youtube.md")
     if not os.path.exists(ytmd):
         sys.exit(f"{rel(ytmd)} chưa có: soạn bằng skill upload-youtube-publish rồi chạy `video.py package`")
-    if not dry and not RENV["VG_S3_BUCKET"]:
-        sys.exit("thiếu VG_S3_BUCKET trong remote.env")
+    drive = bool(RENV["VG_DRIVE_REMOTE"])
+    if not dry and not drive and not RENV["VG_S3_BUCKET"]:
+        sys.exit("thiếu VG_DRIVE_REMOTE (Google Drive) hoặc VG_S3_BUCKET trong remote.env")
     if not on_server(job):
         sys.exit(f"server chưa có video của {job.name}: chạy `video.py album {rel(job.dir)} <audio>` trước")
     no_short = getattr(a, "no_short", False)
@@ -493,14 +512,14 @@ def package(job, a):
     if job.is_album and not sj:
         checks["short"] = "not included (--no-short)"
     parts = [(job, a.thumbnail and os.path.abspath(a.thumbnail) or job.image, "")] + ([(sj, sj.image, "short")] if sj else [])
-    py = venv_python(extra=() if dry else ("boto3",))
+    py = venv_python(extra=() if dry or drive else ("boto3",))
     pkg_py = os.path.join(HERE, "package.py")
     stage = tempfile.mkdtemp(prefix="vg-pkg-")
     try:
         for pj, thumb, sub in parts:
             stage_part(py, pkg_py, pj, os.path.join(stage, job.name, sub), thumb)
-        folder, tag = s3_folder(job)
-        zipname = f"{tag}{job.name}-{time.strftime('%Y%m%d-%H%M%S')}.zip"
+        folder = package_folder(job)
+        zipname = f"{job.name}-{time.strftime('%Y%m%d-%H%M%S')}.zip"
         spec = {"pkg": f"~/{inp}/pkg/{job.name}", "zip": f"~/{out}/{zipname}", "name": job.name,
                 "kind": "album" if job.is_album else "video", "channel": job.channel,
                 "short": "included" if sj else ("not included (--no-short)" if job.is_album else None),
@@ -526,39 +545,14 @@ def package(job, a):
     print("checks: " + " · ".join(f"{k} {v}" for k, v in checks.items()), flush=True)
     for w in built["warnings"]:
         print(f"⚠ {w}", flush=True)
-    key = f"{RENV['VG_S3_PREFIX']}{folder}/{zipname}"
     if dry:
         print("\n--- README.txt ---\n" + built["readme"], flush=True)
         run(_ssh(f"rm -rf {inp}/pkg {out}/{zipname}"))
-        print(f"dry run: không upload (sẽ là s3://{RENV['VG_S3_BUCKET']}/{key}); đã xoá zip thử trên server, "
-              "video vẫn ở server", flush=True)
+        dest = drive_path(folder, zipname) if drive else f"s3://{RENV['VG_S3_BUCKET']}/{s3_key(folder, zipname)}"
+        print(f"dry run: không upload (sẽ là {dest}); đã xoá zip thử trên server, video vẫn ở server", flush=True)
         return
-
-    s3args = ["--bucket", RENV["VG_S3_BUCKET"], "--key", key, "--region", RENV["VG_S3_REGION"]] + (
-        ["--profile", RENV["VG_AWS_PROFILE"]] if RENV["VG_AWS_PROFILE"] else [])
-    up = json.loads(subprocess.run([py, pkg_py, "presign", "--size", str(size)] + s3args,
-                                   stdout=subprocess.PIPE, text=True, check=True).stdout)
-    print(f"upload: multipart, {len(up['urls'])} presigned parts -> s3://{RENV['VG_S3_BUCKET']}/{key}", flush=True)
-    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as fh:
-        json.dump(up, fh)
-        spec_file = fh.name
-    try:
-        _rsync(spec_file, f"{inp}/s3spec.json")
-        res = _ssh_json(limited(f"python3 {R}/scripts/pkg_server.py upload ~/{out}/{zipname} ~/{inp}/s3spec.json"))
-        with open(spec_file, "w") as fh:
-            json.dump(res, fh)
-        run([py, pkg_py, "complete", "--upload-id", up["upload_id"], "--etags", spec_file] + s3args)
-    except (subprocess.CalledProcessError, KeyError, ValueError):
-        subprocess.run([py, pkg_py, "abort", "--upload-id", up["upload_id"]] + s3args)
-        raise
-    finally:
-        os.remove(spec_file)
-        subprocess.run(_ssh(f"rm -f {inp}/s3spec.json"))
-    head = json.loads(subprocess.run([py, pkg_py, "head"] + s3args, stdout=subprocess.PIPE, text=True,
-                                     check=True).stdout)
-    if head["size"] != size:
-        sys.exit(f"S3 có {head['size']} byte, zip {size} byte: upload chưa đủ, chạy lại `video.py package`")
-    uri = f"s3://{RENV['VG_S3_BUCKET']}/{key}"
+    where = (upload_drive if drive else upload_s3)(py, pkg_py, R, inp, out, folder, zipname, size)
+    uri = where["drive"] if drive else where["s3"]
     cleaned = not a.keep_server
     if cleaned:
         dirs = [d for pj, _, _ in parts for d in _paths(pj)[1:]]
@@ -569,18 +563,18 @@ def package(job, a):
             rj = os.path.join(pj.out, "remote.json")
             if os.path.exists(rj):
                 info = json.load(open(rj))
-                info.update(video=None, cleaned=time.strftime("%Y-%m-%d %H:%M"), s3=uri)
+                info.update(video=None, cleaned=time.strftime("%Y-%m-%d %H:%M"), package=uri)
                 json.dump(info, open(rj, "w"), indent=1)
 
-    rec = {"s3": uri, "region": RENV["VG_S3_REGION"], "zip": zipname, "size": size, "sha256": built["sha256"],
+    rec = {**where, "zip": zipname, "size": size, "sha256": built["sha256"],
            "uploaded": time.strftime("%Y-%m-%d %H:%M"),
            "parts": {k: dict(p, dir=rel((sj if k == "short" else job).dir)) for k, p in built["parts"].items()},
            "checks": checks, "files": sorted(built["files"]), "warnings": built["warnings"], "server_cleaned": cleaned}
     log = os.path.join(job.dir, "s3-package.json")
     hist = json.load(open(log)) if os.path.exists(log) else []
     json.dump(hist + [rec], open(log, "w"), indent=1, ensure_ascii=False)
-    print(f"[{time.time() - t0:.0f}s] ✔ {uri} ({human(size)}, {' + '.join(built['parts'])}) · ghi vào {rel(log)}"
-          + (" · đã dọn video/zip/audio trên server" if cleaned else ""), flush=True)
+    print(f"[{time.time() - t0:.0f}s] ✔ {where.get('url') or uri} ({human(size)}, {' + '.join(built['parts'])})"
+          f" · ghi vào {rel(log)}" +(" · đã dọn video/zip/audio trên server" if cleaned else ""), flush=True)
 
 
 def main():
@@ -652,21 +646,14 @@ def main():
     if a.cmd == "batch":
         ch = os.path.abspath(a.dir)
         todo = []
-        for kind in ("ideas", "albums", "singles"):
-            root = os.path.join(ch, kind)
-            if not os.path.isdir(root):
+        root = os.path.join(ch, "albums")
+        for d in sorted(os.listdir(root)) if os.path.isdir(root) else []:
+            d = os.path.join(root, d)
+            if not os.path.isdir(d) or os.path.exists(os.path.join(d, "video", "loop.mp4")):
                 continue
-            for d in sorted(os.listdir(root)):
-                d = os.path.join(root, d)
-                if not os.path.isdir(d) or os.path.exists(os.path.join(d, "video", "loop.mp4")):
-                    continue
-                if os.path.exists(os.path.join(d, "video", os.path.basename(d) + ".mp4")):
-                    continue
-                idea = source_idea(d)
-                if idea and os.path.exists(os.path.join(idea, "video", "loop.mp4")) and not any(
-                        os.path.exists(os.path.join(d, f)) for f in ("thumbnail.png", "thumbnail.jpg")):
-                    continue
-                todo.append(d)
+            if os.path.exists(os.path.join(d, "video", os.path.basename(d) + ".mp4")):
+                continue
+            todo.append(d)
         skipped = [d for d in todo if not Job(d).image]
         todo = [d for d in todo if d not in skipped]
         print(f"{len(todo)} folder(s) to render"

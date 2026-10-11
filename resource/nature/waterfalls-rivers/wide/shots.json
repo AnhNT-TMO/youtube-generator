@@ -1,0 +1,424 @@
+{
+ "theme": "waterfalls-rivers/wide",
+ "target": 27,
+ "defaults": {
+  "lens": "24mm lens at f/8",
+  "look": "day",
+  "composition": "Wide landscape view with clear foreground, middle ground and background.",
+  "camera": "slide",
+  "seconds": 10,
+  "tags": {
+   "place": "outdoor",
+   "scale": "wide",
+   "category": "waterfalls-rivers",
+   "energy": "calm"
+  }
+ },
+ "shots": [
+  {
+   "id": "wr-w-01",
+   "subject": "A tall ribbon waterfall dropping down a gray granite cliff streaked with dark wet stains into a wide pool, spruce forest along the cliff rim, scattered boulders on a gravel shore and pale ridges beyond",
+   "lens": "24mm lens at f/8",
+   "look": "dawn",
+   "composition": "Eye-level view straight across the wide pool from the gravel shore: a few boulders along the lower edge, the thin ribbon of water falling in the right third of the frame against the cliff, the spruce rim and pale ridges filling the top.",
+   "motion_elements": "the falling ribbon of water and the rippling pool surface",
+   "tags": {
+    "comp": "across",
+    "anchor": "ribbon",
+    "season": "summer",
+    "time": "dawn",
+    "palette": "slate blue"
+   }
+  },
+  {
+   "id": "wr-w-02",
+   "subject": "A broad braided glacial river spreading across a gray gravel floodplain, pale milky pale grey-green channels weaving between gravel bars, low willow scrub on the near terrace and snow-streaked mountains behind",
+   "lens": "20mm lens at f/8",
+   "look": "day",
+   "composition": "High viewpoint from a moraine crest looking down at about 40 degrees: willow scrub on the terrace edge at the bottom, the braided channels weaving across the whole middle of the frame, the mountain wall as a narrow band along the top.",
+   "motion_elements": "the shallow braided channels of flowing water",
+   "tags": {
+    "comp": "overlook",
+    "anchor": "braided",
+    "season": "summer",
+    "time": "day",
+    "palette": "turquoise gray"
+   }
+  },
+  {
+   "id": "wr-w-03",
+   "subject": "A broad waterfall breaking over dark, irregular granite blocks in a narrow birch-and-spruce valley in late autumn, thin rust-colored birch leaves on the slopes and a flat wet rock shelf in front",
+   "lens": "16mm lens at f/8",
+   "look": "misty",
+   "composition": "Camera low on the flat rock shelf, the wet shelf with a few fallen leaves filling the lower third, the broken falls spreading across the middle ground left of center, misty forested slopes behind.",
+   "motion_elements": "the water sheeting over the ledges and the light mist at the base",
+   "tags": {
+    "comp": "low-foreground",
+    "anchor": "tiered",
+    "season": "autumn",
+    "time": "misty",
+    "palette": "gray mist"
+   }
+  },
+  {
+   "id": "wr-w-04",
+   "subject": "Several thin snowmelt waterfalls streaming down a far steep valley wall, old snow patches in the gullies above, dark fir slopes and pale mist between the ridges",
+   "lens": "135mm lens at f/5.6",
+   "look": "misty",
+   "composition": "Long-lens view with no foreground: three overlapping ridges compressed into flat layers, the threads of falling water on the middle wall in the center, mist separating each layer.",
+   "motion_elements": "the thin streaming waterfalls and the mist drifting between the ridges",
+   "tags": {
+    "comp": "tele-layers",
+    "anchor": "ribbon",
+    "season": "late-snow",
+    "time": "morning",
+    "palette": "gray mist"
+   }
+  },
+  {
+   "id": "wr-w-05",
+   "subject": "A river looping in wide curves across a flat valley of tawny autumn grass, pale gravel bars on the bends, a few golden larches and a low range of soft blue hills",
+   "lens": "20mm lens at f/8",
+   "look": "golden",
+   "composition": "Low horizon in the bottom third: the river loops shining across the valley floor, the thin line of blue hills on the horizon, and a tall evening sky of soft drifting clouds filling more than half of the frame.",
+   "motion_elements": "the glinting river current, the swaying valley grass and the slow clouds",
+   "tags": {
+    "comp": "big-sky",
+    "anchor": "meander",
+    "season": "autumn",
+    "time": "golden",
+    "palette": "muted gold"
+   }
+  },
+  {
+   "id": "wr-w-06",
+   "subject": "A powerful plunge waterfall leaping from a dark-mossed granite lip into a deep round basin, dripping spruce trunks close to the camera and wet dull olive ferns at their feet",
+   "lens": "24mm lens at f/8",
+   "look": "after-rain",
+   "composition": "Seen through a gap between two dark wet spruce trunks that hold the left and right edges of the frame, low boughs across the top, the plunge and its basin centered in the opening with the forested headwall behind.",
+   "motion_elements": "the plunging water, the spray at the base and the dripping fern fronds",
+   "tags": {
+    "comp": "natural-frame",
+    "anchor": "plunge",
+    "season": "summer",
+    "time": "after-rain",
+    "palette": "wet green"
+   }
+  },
+  {
+   "id": "wr-w-07",
+   "subject": "A long narrow slate gorge with a dark river running along its floor, yellow birches clinging to both rims and a small waterfall at the far end",
+   "lens": "28mm lens at f/8",
+   "look": "misty",
+   "composition": "View straight along the length of the gorge from a ledge at its mouth: dark slate walls on both sides converging toward the far waterfall, the river running toward the camera along the bottom, mist hanging between the rims.",
+   "motion_elements": "the river flowing toward the camera, the far waterfall and the hanging mist",
+   "tags": {
+    "comp": "axis",
+    "anchor": "gorge",
+    "season": "autumn",
+    "time": "morning",
+    "palette": "gray mist"
+   }
+  },
+  {
+   "id": "wr-w-08",
+   "subject": "A modest, uneven waterfall breaking into several separate white strands over a broken, stepped dark basalt ledge into a dark pool, ice collars on the pool-edge boulders and thin snow on low rolling moorland, no canyon",
+   "lens": "28mm lens at f/8",
+   "look": "overcast",
+   "composition": "Level view across the pool from the far bank: ice-rimmed boulders along the bottom edge, the full width of the curtain spanning the middle ground, snowy moorland and a flat gray sky above the rim.",
+   "motion_elements": "the curtain of falling water and the rippling pool",
+   "tags": {
+    "comp": "across",
+    "anchor": "curtain",
+    "season": "winter-edge",
+    "time": "overcast",
+    "palette": "slate gray"
+   }
+  },
+  {
+   "id": "wr-w-09",
+   "subject": "A narrow plunge waterfall: one white column of water falling freely and clearly downward from a rock lip into a deep round pool with white foam at its foot, the outflow river winding away through birch forest with muted ochre and dull copper leaves, soft overcast light, natural unprocessed photo with realistic tree detail",
+   "lens": "24mm lens at f/8",
+   "look": "day",
+   "composition": "High on a neighbouring cliff beside the falls, looking diagonally down about 30 degrees at the free-falling white column from its lip to the pool, the pool and foam below, the river winding away through the forest toward the far valley.",
+   "motion_elements": "the falling water, the foam in the pool and the flowing outflow river",
+   "tags": {
+    "comp": "overlook",
+    "anchor": "plunge",
+    "season": "autumn",
+    "time": "day",
+    "palette": "muted gold"
+   }
+  },
+  {
+   "id": "wr-w-10",
+   "subject": "A wide river rapid in midsummer tumbling between rounded grey granite boulders, the water clear dark slate-grey with white foam, dark green pines on a rocky bank and soft warm late light on distant deep-green forested ridges",
+   "lens": "16mm lens at f/8",
+   "look": "golden",
+   "composition": "Camera just above the waterline behind a large wet granite boulder that fills the lower left third, the rapid racing across the middle ground from left to right, the pine bank and warm ridges behind.",
+   "motion_elements": "the white rapids and the spray around the boulders",
+   "tags": {
+    "comp": "low-foreground",
+    "anchor": "rapids",
+    "season": "summer",
+    "time": "golden",
+    "palette": "muted gold"
+   }
+  },
+  {
+   "id": "wr-w-11",
+   "subject": "A tall multi-tier waterfall swollen with snowmelt stepping down a far mountainside of dark spruce, old snow on the upper slopes and ridges behind fading in warm haze",
+   "lens": "200mm lens at f/5.6",
+   "look": "golden",
+   "composition": "Long-lens view with no foreground: the slope and its tiers of water in the middle, two compressed ridge layers stacked behind in warm haze, the waterfall slightly right of center.",
+   "motion_elements": "the falling tiers of water and the drifting haze between the ridges",
+   "tags": {
+    "comp": "tele-layers",
+    "anchor": "tiered",
+    "season": "late-snow",
+    "time": "golden",
+    "palette": "muted gold"
+   }
+  },
+  {
+   "id": "wr-w-12",
+   "subject": "Meltwater streams braiding across a broad alpine flat of wet grass and small boulders, old snowbanks melting at the edges and a low ridge under tall breaking clouds",
+   "lens": "20mm lens at f/8",
+   "look": "after-rain",
+   "composition": "Horizon low in the frame: the braided streams shining across the flat in the lower third, the low ridge as a dark line, and a big sky of breaking rain clouds and blue gaps filling more than half of the frame.",
+   "motion_elements": "the braided streams and the breaking clouds",
+   "tags": {
+    "comp": "big-sky",
+    "anchor": "braided",
+    "season": "late-snow",
+    "time": "after-rain",
+    "palette": "wet green"
+   }
+  },
+  {
+   "id": "wr-w-13",
+   "subject": "A horsetail waterfall fanning down a smooth gray granite face, two leaning birch trunks with soft pale ochre autumn leaves on a rocky bank and a pool below, flat soft grey light with gentle low contrast",
+   "lens": "35mm lens at f/8",
+   "look": "overcast",
+   "composition": "Two leaning birch trunks with yellow leaves frame the left and right edges and arch across the top, the horsetail fanning down the granite in the opening, the pool and bank stones at the bottom.",
+   "motion_elements": "the fanning horsetail of water, the pool ripples and the trembling birch leaves",
+   "tags": {
+    "comp": "natural-frame",
+    "anchor": "horsetail",
+    "season": "autumn",
+    "time": "overcast",
+    "palette": "muted gold"
+   }
+  },
+  {
+   "id": "wr-w-14",
+   "subject": "A slow river bend through a wide open valley, a gravel beach on the inside curve, dark green alders on the far bank and a low line of hills in mist",
+   "lens": "20mm lens at f/8",
+   "look": "misty",
+   "composition": "Eye-level view across the bend from a grassy bank: the gravel beach curving through the lower middle, the river crossing the frame, the alders on the far bank and the misty hills behind.",
+   "motion_elements": "the slow river current and the thin mist above the water",
+   "tags": {
+    "comp": "across",
+    "anchor": "meander",
+    "season": "summer",
+    "time": "morning",
+    "palette": "gray mist"
+   }
+  },
+  {
+   "id": "wr-w-15",
+   "subject": "A milky gray meltwater river rushing out from beneath the dirty ice of a glacier snout, a rocky moraine field around it and dark mountain walls under low cloud",
+   "lens": "24mm lens at f/8",
+   "look": "overcast",
+   "composition": "From a high moraine ridge looking down at about 35 degrees: gray boulders along the bottom, the river issuing from the ice in the middle ground and flowing toward the lower right, the mountain walls and low cloud at the top.",
+   "motion_elements": "the rushing meltwater and the low cloud on the walls",
+   "tags": {
+    "comp": "overlook",
+    "anchor": "glacial-outflow",
+    "season": "summer",
+    "time": "overcast",
+    "palette": "glacier gray"
+   }
+  },
+  {
+   "id": "wr-w-16",
+   "subject": "A wide sheet of water sliding over a huge smooth granite slab, scattered pine trees on rocky islands and a forested valley rim behind",
+   "lens": "16mm lens at f/8",
+   "look": "dawn",
+   "composition": "Camera low on the wet slab, the thin water film reflecting the pale dawn sky across the lower third, the sliding sheet running from the center to the right, pines on the rocky islands and the valley rim behind.",
+   "motion_elements": "the sliding sheet of water over the slab",
+   "tags": {
+    "comp": "low-foreground",
+    "anchor": "slide",
+    "season": "summer",
+    "time": "dawn",
+    "palette": "slate blue"
+   }
+  },
+  {
+   "id": "wr-w-17",
+   "subject": "Pale braided river channels catching first light at the foot of snow-dusted mountains, dark spruce bands on the lower slopes",
+   "lens": "200mm lens at f/5.6",
+   "look": "dawn",
+   "composition": "Long-lens view with no foreground: the bright braided channels as a band along the bottom, compressed layers of spruce slope and fresh-snow ridges stacked above them.",
+   "motion_elements": "the shining braided channels and thin mist over the river flats",
+   "tags": {
+    "comp": "tele-layers",
+    "anchor": "braided",
+    "season": "early-snow",
+    "time": "dawn",
+    "palette": "slate blue"
+   }
+  },
+  {
+   "id": "wr-w-18",
+   "subject": "A lone plunge waterfall on a dark distant cliff, first snow dusting the ledges above it and layers of dark spruce ridges in front",
+   "lens": "135mm lens at f/5.6",
+   "look": "overcast",
+   "composition": "Long-lens view with no foreground: two compressed spruce ridges in the lower half, the dark cliff and its white plunge above them slightly left of center, a gray sky over the snowy rim.",
+   "motion_elements": "the plunging waterfall and the mist rising from its base",
+   "tags": {
+    "comp": "tele-layers",
+    "anchor": "plunge",
+    "season": "early-snow",
+    "time": "overcast",
+    "palette": "slate gray"
+   }
+  },
+  {
+   "id": "wr-w-19",
+   "subject": "A low waterfall spanning the full width of a river, pine forest along both banks and tall white summer clouds over pale distant hills",
+   "lens": "16mm lens at f/8",
+   "look": "day",
+   "composition": "Horizon low: the full-width curtain of water as a white band across the lower third, pine banks on both sides, and a big blue sky with towering clouds filling more than half of the frame.",
+   "motion_elements": "the wide veil of water over the ledge and the slow clouds",
+   "tags": {
+    "comp": "big-sky",
+    "anchor": "curtain",
+    "season": "summer",
+    "time": "day",
+    "palette": "deep green"
+   }
+  },
+  {
+   "id": "wr-w-20",
+   "subject": "A dark river rapid running between snow-capped boulders in a spruce valley, frost on the spruce boughs and pale light on the far slope",
+   "lens": "24mm lens at f/8",
+   "look": "dawn",
+   "composition": "Seen through frost-covered spruce boughs that frame the left edge and the top, a snowy boulder holding the lower right, the rapid running across the opening and the far slope glowing behind.",
+   "motion_elements": "the white water of the rapid and the thin mist above it",
+   "tags": {
+    "comp": "natural-frame",
+    "anchor": "rapids",
+    "season": "winter-edge",
+    "time": "dawn",
+    "palette": "slate blue"
+   }
+  },
+  {
+   "id": "wr-w-21",
+   "subject": "A chain of small snowmelt cascades descending a coniferous mountainside, moss-covered rocks and old hemlock trunks along the water and patches of old snow on the banks",
+   "lens": "28mm lens at f/8",
+   "look": "after-rain",
+   "composition": "Looking up the line of the stream from a rock in its bed: the cascades stacked one above another toward the top center, the hemlock trunks and snow patches lining both sides.",
+   "motion_elements": "the small cascades and the drifting mist",
+   "tags": {
+    "comp": "axis",
+    "anchor": "cascade",
+    "season": "late-snow",
+    "time": "after-rain",
+    "palette": "wet green"
+   }
+  },
+  {
+   "id": "wr-w-22",
+   "subject": "A calm river pool below a small waterfall in a broad valley, round stones visible through clear water, burnt copper larch on the slope and pale mist along the far bank",
+   "lens": "35mm lens at f/8",
+   "look": "dawn",
+   "composition": "Level view across the pool from a stony bank: clear shallow water over round stones at the bottom, the small fall at the left end of the pool, the orange larch slope and misty far bank behind.",
+   "motion_elements": "the small waterfall, the gentle ripples across the pool and the mist along the bank",
+   "tags": {
+    "comp": "across",
+    "anchor": "pool",
+    "season": "autumn",
+    "time": "dawn",
+    "palette": "slate blue"
+   }
+  },
+  {
+   "id": "wr-w-23",
+   "subject": "A deep limestone canyon with a milky pale grey-green river at the bottom, pale walls streaked with wet dark olive moss and dense deep olive-green forest on both rims",
+   "lens": "24mm lens at f/8",
+   "look": "after-rain",
+   "composition": "From the canyon rim looking down at about 45 degrees: rim shrubs at the bottom edge, the pale walls dropping on both sides, the milky pale grey-green river curving through the center and mist rising from the far bend.",
+   "motion_elements": "the milky pale grey-green river current and the rising mist",
+   "tags": {
+    "comp": "overlook",
+    "anchor": "gorge",
+    "season": "summer",
+    "time": "after-rain",
+    "palette": "turquoise gray"
+   }
+  },
+  {
+   "id": "wr-w-24",
+   "subject": "Clear springs welling from a dark-mossed hillside and gathering into a stream that runs down a wide valley toward cloud-hung ridges",
+   "lens": "20mm lens at f/8",
+   "look": "misty",
+   "composition": "Camera low among cushions of wet moss, the spring rivulets running toward the lens across the lower third, the young stream winding down the valley in the middle ground, the cloud-hung ridges behind.",
+   "motion_elements": "the spring rivulets, the flowing stream and the drifting cloud on the ridges",
+   "tags": {
+    "comp": "low-foreground",
+    "anchor": "spring",
+    "season": "summer",
+    "time": "morning",
+    "palette": "deep green"
+   }
+  },
+  {
+   "id": "wr-w-25",
+   "subject": "A horsetail waterfall swollen with snowmelt fanning down a dark cliff across a narrow valley in late spring, old snow lying only in the gullies and on the rim, larches with fresh pale-green new needles, young bright-green meadow grass below, no yellow, red or brown autumn leaves anywhere",
+   "lens": "35mm lens at f/8",
+   "look": "day",
+   "composition": "Level view across the valley from the opposite slope: meadow grass along the bottom edge, the fan of water down the cliff in the left third, the snowy gullies and rim above.",
+   "motion_elements": "the fanning waterfall and the swaying meadow grass",
+   "tags": {
+    "comp": "across",
+    "anchor": "horsetail",
+    "season": "late-snow",
+    "time": "day",
+    "palette": "deep green"
+   }
+  },
+  {
+   "id": "wr-w-26",
+   "subject": "A creek cascading through snow-edged boulders in a spruce valley, low winter sun on the snow and blue shadow in the gully",
+   "lens": "24mm lens at f/8",
+   "look": "golden",
+   "composition": "From a slope above looking down at about 35 degrees: snowy spruce tips at the bottom edge, the creek cascading diagonally through the boulders from upper left to lower right, the sunlit far slope at the top.",
+   "motion_elements": "the cascading creek water",
+   "tags": {
+    "comp": "overlook",
+    "anchor": "cascade",
+    "season": "winter-edge",
+    "time": "golden",
+    "palette": "muted gold"
+   }
+  },
+  {
+   "id": "wr-w-27",
+   "subject": "A calm dark green pool below a short cascade in a narrow rocky glen, fresh snow on the ledges and on the dark slate walls",
+   "lens": "28mm lens at f/8",
+   "look": "overcast",
+   "composition": "Seen through a gap between two snow-dusted slate walls that hold the left and right edges, the dark pool filling the lower middle of the opening, the short cascade entering at the back.",
+   "motion_elements": "the short cascade and the slow ripples spreading across the pool",
+   "tags": {
+    "comp": "natural-frame",
+    "anchor": "pool",
+    "season": "early-snow",
+    "time": "overcast",
+    "palette": "slate gray"
+   }
+  }
+ ]
+}

@@ -1,0 +1,373 @@
+{
+  "theme": "grounds/snow-forest",
+  "target": 25,
+  "defaults": {
+    "lens": "35mm lens at f/5.6",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "mid",
+      "category": "snow-forest"
+    }
+  },
+  "shots": [
+    {
+      "id": "sf-01",
+      "subject": "A mysterious ancient forest on a snowy winter night: huge gnarled old trees with mossy trunks and snow on their branches, a narrow snowy path winding between them, dozens of tiny warm fireflies glowing softly among the trunks, and a few white candles floating in mid-air between the trees with steady small flames, soft silver moonlight and a thin low mist between the trunks; magical and calm, never scary",
+      "composition": "Eye-level view along a gentle bend of the path; big trunks frame the left and right edges, the floating candles and fireflies spread through the middle ground, the mist fades into the dark trees behind",
+      "look": "snowy-night",
+      "motion_elements": "the glowing fireflies, the small flames of the floating candles and the low mist",
+      "tags": {
+        "time": "night",
+        "people": "none"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-02",
+      "subject": "A narrow frozen stream winding through an ancient snowy forest at night: thick clear ice with dark water still trickling along one open edge, snow-covered rocks and gnarled old roots on both banks, dozens of tiny warm fireflies hovering low over the ice, a few white candles floating perfectly still in mid-air above the stream with small steady flames reflected in the ice; calm, quiet and magical, never scary",
+      "composition": "Low eye-level view standing on the bank, looking along the stream as it curves away into the trees; the open dark water runs along the lower right, the floating candles hang over the middle ground.",
+      "look": "snowy-night",
+      "motion_elements": "the trickling dark water at the edge of the ice, the glowing fireflies and the small candle flames",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-03",
+      "subject": "A round snowy clearing in an old forest at blue-hour twilight: one enormous ancient oak with wide snow-laden branches stands in the middle, a loose ring of white candles floats perfectly still in mid-air around its trunk at head height, small warm flames glowing, soft mist lying low over the untouched snow, tall dark firs all around the edge of the clearing; peaceful and enchanted",
+      "composition": "Wide view from the edge of the clearing with the great oak slightly left of center; an open band of smooth snow fills the foreground and the dark firs frame both sides.",
+      "look": "twilight",
+      "motion_elements": "the falling snow, the small candle flames and the low drifting mist",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "falling",
+        "scale": "vista"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-04",
+      "subject": "A snowy forest path on a quiet overcast winter afternoon: the path runs straight between rows of tall old firs heavy with fresh snow, and at its far end, through a gap in the trees, an ancient castle school of magic rises on a hill with many towers and warm golden windows; a few white candles float perfectly still above the path with small warm flames",
+      "composition": "Eye-level central perspective down the path; the firs form a tunnel toward the bright gap, the distant castle sits small in the upper middle of the frame.",
+      "look": "snow-day",
+      "motion_elements": "the falling snow, the small candle flames and the soft haze between the trees",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-05",
+      "subject": "Two students stand still on a snowy forest path at night, seen strictly from behind, gazing up at a group of white candles floating perfectly still among huge mossy tree trunks; one has short straight brown hair and a green-and-silver striped scarf, the other dark brown hair tied low and a yellow-and-black striped scarf, both in long plain black wool robes; warm fireflies glow around them and a thin mist drifts between the trees",
+      "composition": "Wide view from far back on the path, with an open stretch of untouched snow in the foreground; the two figures stand small in the middle distance, each about one sixth of the frame height, and the candles and fireflies fill the space above and ahead.",
+      "look": "snowy-night",
+      "motion_elements": "the small candle flames, the glowing fireflies and the drifting mist",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-06",
+      "subject": "Deep inside a forest of very old snow-laden pines on a silver-grey winter afternoon: tall straight trunks rising out of deep soft snow, branches bowed under thick white snow, a pale mist rising slowly between the trunks in soft layers, a single small cluster of white candles floating perfectly still in mid-air in the middle distance with tiny warm flames, total stillness and calm",
+      "composition": "Slightly low eye-level view between the trunks; clean snow fills the foreground, the trunks recede in layers into the mist with the candle cluster just right of center.",
+      "look": "snow-day",
+      "motion_elements": "the slowly rising mist, the small candle flames and the fine snow dust drifting off the branches",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-07",
+      "subject": "A small frozen waterfall in a rocky forest gully at blue-hour twilight: long pale icicles and frozen cascades hang over a mossy stone ledge, a thin thread of water still trickles down the middle into a dark pool, snowy boulders and old twisted trees around it, soft mist rising from the pool and a few white candles floating perfectly still above the water with warm flames",
+      "composition": "Eye-level view from across the pool; the frozen waterfall fills the center of the frame, the dark pool with its mist lies across the lower third.",
+      "look": "twilight",
+      "motion_elements": "the trickling water, the rising mist from the pool and the small candle flames",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-08",
+      "subject": "A gigantic ancient hollow tree in a snowy forest at night: its wide gnarled trunk splits open at the base into a tall natural archway lined with moss and frost, a few white candles float perfectly still inside the hollow and around it with small warm flames, fireflies glowing softly in the dark around the roots, deep fresh snow; wondrous and gentle, never scary",
+      "composition": "Medium-wide view from a few meters in front of the tree; the trunk and its glowing hollow sit in the center, open snow in the foreground, dark trunks fading behind.",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the small candle flames and the glowing fireflies",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-09",
+      "subject": "A grove of slender white birch trees in fresh snow on a calm overcast winter afternoon: pale bark streaked with black, fine bare branches dusted with white, a soft silver mist hanging between the trunks, and a handful of white candles floating perfectly still in mid-air at different heights with small warm flames that glow gently against the cool grey light",
+      "composition": "Eye-level view into the grove with the birches spaced across the frame; open snow in the foreground, the floating candles spread through the middle ground.",
+      "look": "snow-day",
+      "motion_elements": "the falling snow, the small candle flames and the hanging mist",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-10",
+      "subject": "One student stands still in the middle of a small arched stone footbridge over a half-frozen forest stream at blue-hour twilight, seen strictly from behind, looking down the stream toward a few white candles floating perfectly still above the water; dark braided hair, a blue-and-bronze striped scarf and a long plain black wool robe; dark water flows between snowy ice shelves under ancient snow-covered trees",
+      "composition": "Wide view from further back in the snowy bank a little behind and to the side of the bridge; the small figure on the bridge sits in the middle third, the stream runs away into the trees.",
+      "look": "twilight",
+      "motion_elements": "the flowing stream, the falling snow and the small candle flames",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "falling"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-11",
+      "subject": "The snowy edge of an ancient forest at blue-hour twilight, looking out over a wide white slope toward a distant ancient castle school of magic on a hill with many towers and warm golden windows; the last dark firs frame the view, a few white candles float perfectly still between them with small flames, a thin mist lies along the hollow of the slope",
+      "composition": "Wide view from just inside the treeline; trunks frame the left and right edges, the open slope fills the lower half and the castle sits small in the upper middle on the horizon.",
+      "look": "twilight",
+      "motion_elements": "the low mist along the slope, the small candle flames and the castle window lights",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none",
+        "scale": "vista"
+      },
+      "lights": false,
+      "lens": "50mm lens at f/8"
+    },
+    {
+      "id": "sf-12",
+      "subject": "A still forest pool among snow-covered mossy boulders and frosted ferns at night: the black water is unfrozen and mirror-smooth, reflecting a cluster of white candles that float perfectly still above it with small warm flames, dozens of tiny fireflies glowing over the water and among the boulders, ancient trees leaning in around the pool, a thin mist on the surface",
+      "composition": "Low eye-level view from the near bank; the pool and its reflections fill the lower half, the candles and boulders sit in the middle ground, dark trees behind.",
+      "look": "snowy-night",
+      "motion_elements": "the glowing fireflies, the candle flames and their reflections, and the thin mist on the water",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-13",
+      "subject": "A snowy forest path passing under a natural archway of young trees bent over by heavy snow on a quiet overcast winter afternoon: their white-laden branches meet overhead like a tunnel, soft grey light glows at the far end, a light mist hangs in the tunnel and three white candles float perfectly still above the path with small warm flames",
+      "composition": "Central eye-level view into the snowy tunnel; the arch of bent trees frames the whole picture, the path leads to the bright opening in the middle.",
+      "look": "snow-day",
+      "motion_elements": "the falling snow, the small candle flames and the hanging mist",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-14",
+      "subject": "Three students stand still at the edge of a moonlit forest clearing at night, seen strictly from behind, watching hundreds of tiny warm fireflies swirl softly over the snow among a few white candles floating perfectly still in mid-air; one has a long blonde ponytail and a yellow-and-black striped scarf, one wears a grey knitted wool hat and a blue-and-bronze scarf, one has a light brown braid and a green-and-silver scarf; all in long plain black wool robes",
+      "composition": "Very wide view from far back among the trees; the three tiny figures stand together in the middle distance at the lower left, the glowing clearing opens up across the rest of the frame; no castle or buildings.",
+      "look": "snowy-night",
+      "motion_elements": "the glowing fireflies, the small candle flames and the soft mist over the snow",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none",
+        "scale": "vista"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-15",
+      "subject": "A clear forest stream flowing between deep snowy banks on a silver-grey winter afternoon: dark water ripples over round stones, ice edges and snow pillows on the rocks, delicate frost on overhanging branches, a soft mist rising off the water, ancient snow-covered firs on both sides and a few white candles floating perfectly still over the stream with small warm flames",
+      "composition": "Eye-level view from a rock on the bank looking upstream; the water fills the lower middle and leads the eye into the trees, the candles hang above the far bend.",
+      "look": "snow-day",
+      "motion_elements": "the rippling stream, the rising mist and the small candle flames",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-16",
+      "subject": "A high forest ridge at blue-hour twilight: a snowy path runs along the crest among old windswept pines, a long line of white candles floats perfectly still in mid-air along the path with small warm flames, and beyond the ridge a valley filled with soft mist stretches toward dark snowy hills under the deep blue sky",
+      "composition": "Wide view along the ridge from slightly above; the candle-lit path curves from the lower left into the middle ground, the misty valley fills the right half.",
+      "look": "twilight",
+      "motion_elements": "the falling snow, the small candle flames and the mist in the valley",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "falling",
+        "scale": "vista"
+      },
+      "lights": false,
+      "lens": "50mm lens at f/8"
+    },
+    {
+      "id": "sf-17",
+      "subject": "A close, low view of the snowy forest floor at night: soft fresh snow, frosted ferns and the curling roots of an ancient tree, three white candles floating perfectly still just above the snow with small warm flames, tiny glowing fireflies drifting among the ferns, the soft blurred trunks and more floating candles glowing far behind in the dark forest",
+      "composition": "Low angle just above the snow; the nearby candles and roots sit in the lower middle third in sharp focus, the background softly out of focus.",
+      "look": "snowy-night",
+      "motion_elements": "the small candle flames, the drifting fireflies and the faint mist",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "close"
+      },
+      "lights": false,
+      "lens": "50mm lens at f/2.8"
+    },
+    {
+      "id": "sf-18",
+      "subject": "One student stands still on a snowy forest path on a quiet overcast winter afternoon, seen strictly from behind, looking toward a distant hillside of snow-covered firs fading into soft mist through a gap in the trees; the student wears a cream knitted wool hat, a yellow-and-black striped scarf and a long plain black wool robe; two white candles float perfectly still above the path",
+      "composition": "Very wide view from far back on the path; the tiny figure stands in the middle distance, the firs frame the edges and the misty hillside fills the upper center; no castle or buildings.",
+      "look": "snow-day",
+      "motion_elements": "the falling snow, the small candle flames and the soft haze between the trees",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "falling"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-19",
+      "subject": "A ring of ancient weathered standing stones in a snowy forest glade at blue-hour twilight: the tall grey stones capped with snow, frost on their lichen, a white candle floating perfectly still above each stone with a small warm flame, soft mist curling low between them, old dark firs and bare oaks around the glade; mysterious but peaceful",
+      "composition": "Eye-level view from just outside the ring; the stones spread across the middle third of the frame, smooth snow in the foreground, the forest behind.",
+      "look": "twilight",
+      "motion_elements": "the small candle flames, the curling mist and the faint fireflies near the stones",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-20",
+      "subject": "The bank of a frozen forest stream at night beneath the huge exposed roots of an ancient tree: the roots arch over the ice like a frosted gateway, white candles float perfectly still under and beside the roots with small warm flames, their golden glow reflected in the smooth ice, fireflies glowing among the roots, deep snow on the bank",
+      "composition": "Medium-wide view from the frozen stream bed; the arching roots fill the right half, the candle reflections stretch across the ice in the lower half.",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the small candle flames and the glowing fireflies",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-21",
+      "subject": "The frozen edge of a small forest lake on a silver-grey winter afternoon: smooth grey-white ice stretches away, frosted reeds and snowy rocks along the shore, a thin pale mist drifts over the ice, ancient snow-covered firs line the far shore and a few white candles float perfectly still above the ice near the shore with small warm flames",
+      "composition": "Wide eye-level view from the shore; the ice and the mist fill the lower half, the far forest wall runs across the middle, the candles hang on the left.",
+      "look": "snow-day",
+      "motion_elements": "the drifting mist over the ice, the small candle flames and fine snow blowing off the reeds",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none",
+        "scale": "vista"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-22",
+      "subject": "Two students sit still side by side on a large snow-covered fallen log in a forest clearing at blue-hour twilight, seen strictly from behind, watching a few white candles floating perfectly still among the trees ahead; one has a long chestnut ponytail and a scarlet-and-gold striped scarf, the other short straight dark brown hair and a blue-and-bronze striped scarf, both in long plain black wool robes; fireflies glow faintly and mist lies low",
+      "composition": "Very wide view from far back across the clearing; the log with the two tiny figures sits in the middle distance, the candles and the dark trees fill the space ahead.",
+      "look": "twilight",
+      "motion_elements": "the small candle flames, the faint fireflies and the low mist",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "none"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-23",
+      "subject": "A dense forest of tall old firs on a snowy night: pale moonlight falls in soft shafts between the trunks, snowflakes glinting as they fall through the beams, dozens of tiny fireflies glowing low over the deep snow, a few white candles floating perfectly still in mid-air between the trees with warm flames; serene, hushed and magical",
+      "composition": "Eye-level view into the forest; the trunks stand in rhythmic layers, the moonbeams cross the middle of the frame from the upper left.",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow in the moonbeams, the glowing fireflies and the small candle flames",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-24",
+      "subject": "An old wooden footbridge with simple log railings crossing a small rushing forest stream on a quiet overcast winter afternoon: snow piled thick on the planks and railings, dark water tumbling over stones beneath with icy edges, snow-heavy firs leaning over both banks, and two white candles floating perfectly still above the middle of the bridge with small warm flames",
+      "composition": "Eye-level view from the bank a little downstream; the bridge crosses the middle third at an angle, the rushing water fills the lower part of the frame.",
+      "look": "snow-day",
+      "motion_elements": "the rushing stream, the falling snow and the small candle flames",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling"
+      },
+      "lights": false
+    },
+    {
+      "id": "sf-25",
+      "subject": "One student stands still beside a frozen forest stream at night, seen strictly from behind, looking at a long line of white candles floating perfectly still above the ice as it winds away between ancient snowy trees; the student has a short dark bob, a scarlet-and-gold striped scarf and a long plain black wool robe; warm candle glow reflected in the ice, fireflies drifting along the banks",
+      "composition": "Wide view from further back, a few meters behind on the bank; the small figure stands in the lower left third, the candle-lit stream curves away through the center.",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the small candle flames and the drifting fireflies",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "falling"
+      },
+      "lights": false
+    },
+    {
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling"
+      },
+      "id": "sf-26",
+      "subject": "An ancient snowy pine forest on a quiet overcast Christmas afternoon: only tall dark pine trunks and branches heavy with fresh snow, a narrow smooth path of untouched snow winding between them, soft silver light. There are no lanterns, lamp posts, buildings, bridges, streams, fences or footprints anywhere; only trees and snow. Nobody is in the scene; no animals.",
+      "composition": "Eye-level view along the winding path into the forest",
+      "look": "snow-day",
+      "motion_elements": "the gently falling snow"
+    },
+    {
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "sf-27",
+      "subject": "A snowy forest clearing at blue hour on Christmas Eve: a single tall fir tree in the middle decorated with small warm lights, deep untouched snow around it, dark pines circling the clearing under a calm deep-blue sky. Nobody is in the scene; no animals.",
+      "composition": "Wide view from the edge of the clearing, the lit tree in the centre",
+      "look": "twilight",
+      "motion_elements": "the warm lights on the tree"
+    }
+  ]
+}

@@ -1,0 +1,270 @@
+{
+  "theme": "castle/staircase",
+  "target": 20,
+  "defaults": {
+    "lens": "35mm lens at f/5.6",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "indoor",
+      "scale": "mid",
+      "category": "staircase"
+    }
+  },
+  "shots": [
+    {
+      "id": "st-01",
+      "subject": "A grand ancient stone staircase hall inside the castle: wide worn stone steps climb in several flights around a tall square stairwell, carved stone balustrades wound with evergreen garlands and red ribbons, iron wall brackets holding burning torches, a tall narrow Gothic window with snow outside, plain stone walls without any paintings",
+      "composition": "Looking diagonally up from a landing toward the flights climbing above, the torch on the left wall in the foreground, the window high on the right",
+      "look": "candle-night",
+      "motion_elements": "the burning torch flames on the walls",
+      "tags": {
+        "time": "night",
+        "people": "none"
+      }
+    },
+    {
+      "id": "st-02",
+      "subject": "A tight spiral stone staircase inside an ancient castle tower on Christmas night: worn stone steps wind upward around a central column, an evergreen garland with red ribbons spirals along the outer wall, small candles burn in carved niches every few steps, a narrow slit window shows snow outside, warm light glowing on the rough stone",
+      "composition": "Looking up the curve of the spiral from the lower steps, the steps and niches climbing out of frame at the top right",
+      "look": "candle-night",
+      "motion_elements": "the candle flames in the wall niches",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-03",
+      "subject": "A grand stone stair hall of an ancient castle school of magic on a snowy winter afternoon: wide flights climb around a tall square stairwell, balustrades wound with evergreen garlands, torches still burning in iron brackets, soft grey daylight from a tall Gothic window; one student with a blonde ponytail and a blue-and-bronze striped scarf stands on a landing with their back to the camera, looking out of the window",
+      "composition": "Wide view from further back in the flight below; the student stands small on the landing at center right, the window above them",
+      "look": "interior-day",
+      "motion_elements": "the torch flames on the walls",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-04",
+      "subject": "A broad flight of ancient stone stairs descending toward a huge carved oak doorway at blue hour, a decorated Christmas fir with gold and red baubles on the lower landing, torches burning in iron brackets on both walls, a tall window showing a deep blue twilight sky and snowy towers",
+      "composition": "View from the top of the flight looking down the steps to the tree and the doorway",
+      "look": "candle-night",
+      "motion_elements": "the torch flames and the lights on the Christmas tree",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-05",
+      "subject": "Two students sit on the worn steps of a narrow ancient stone staircase in a castle on Christmas night, their backs to the camera, one reading a book on their knees; one has short straight brown hair and a yellow-and-black striped scarf, one has a long dark braid and a green-and-silver striped scarf; a torch burns on the wall above them and a small wreath hangs on an iron-studded door at the top",
+      "composition": "Wide view from further back, a few steps below; the students sit small in the middle of the stair, the door and torch above",
+      "look": "candle-night",
+      "motion_elements": "the torch flame on the wall and a candle burning on a stone ledge",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-06",
+      "subject": "Looking straight down a deep square stairwell in an ancient stone castle on Christmas night: flight after flight of stone steps spiraling down around the open well, a burning torch on every landing, evergreen garlands with red ribbons hanging over the balustrades, the warm glow fading gently toward the bottom",
+      "composition": "Top-down view over the balustrade into the stairwell, the flights forming a square spiral toward the center",
+      "look": "candle-night",
+      "motion_elements": "the torch flames on every landing",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "st-07",
+      "subject": "A wide stone stair climbing along an arched cloister walk of an ancient castle on a snowy winter morning: open pointed arches look onto a snow-covered courtyard, grey daylight falls across the steps, iron lanterns with candles burn on the pillars, evergreen garlands hang in the arches, the stone steps worn smooth in the middle by centuries of feet and a few pine cones tucked into the garlands",
+      "composition": "Medium-wide view from the foot of the stair looking up along the arches",
+      "look": "interior-day",
+      "motion_elements": "the candle flames in the iron lanterns",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-08",
+      "subject": "The foot of a grand ancient stone staircase at blue hour, where a towering decorated Christmas fir with gold and red baubles and warm lights stands in the stairwell, torches burning on the walls; one student in a knitted wool hat and a scarlet-and-gold striped scarf stands still at the bottom step with their back to the camera, looking up at the tree",
+      "composition": "Wide view from far back behind the student, across an open stretch of floor or ground, who is small at the lower center, the tree rising through the stairwell above",
+      "look": "candle-night",
+      "motion_elements": "the lights on the Christmas tree and the torch flames",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-09",
+      "subject": "A narrow winding stair inside a castle turret on Christmas night: rough stone walls with arrow-slit windows showing snow on the ledges, iron candle sconces with burning candles, small evergreen wreaths with red ribbons hung on iron hooks, the steps curving out of sight, warm candlelight glowing on the rough stone walls and the deep worn hollows of every step",
+      "composition": "Eye-level view from a lower step following the curve up and to the left",
+      "look": "candle-night",
+      "motion_elements": "the candle flames in the iron sconces",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-10",
+      "subject": "A wide stone landing halfway up a grand castle staircase on Christmas night, a tall arched window showing a snowy night, an iron brazier burning beside it, torches on the walls; three students stand still at the window with their backs to the camera, one with a blonde bob and a scarlet-and-gold striped scarf, one with a long dark braid and a blue-and-bronze striped scarf, one with short straight brown hair and a yellow-and-black striped scarf",
+      "composition": "Wide view from further back in the flight below; the students stand small together at the window, the brazier at right",
+      "look": "candle-night",
+      "motion_elements": "the fire in the brazier and the torch flames",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-11",
+      "subject": "A wide ceremonial stone staircase of an ancient castle on a snowy winter afternoon: a long deep red carpet runner, carved stone balustrades with evergreen garlands and red bows, a great iron chandelier with lit candles hanging still above, soft grey daylight from tall windows, the carved newel posts topped with small evergreen wreaths and the old stone glowing warm in the candlelight",
+      "composition": "Medium-wide view from the side of the stair hall, the staircase rising diagonally from lower left to upper right",
+      "look": "interior-day",
+      "motion_elements": "the candle flames on the chandelier",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-12",
+      "subject": "A double stone staircase curving up both sides of a castle entrance hall at blue hour to meet at a landing, beneath the landing a wide stone fireplace with a fire, torches on the walls and garlands along both balustrades, a twilight window above; evergreen wreaths with red bows hang above the fireplace and the old stone glows warm in the firelight",
+      "composition": "Symmetrical medium-wide view from the center of the hall facing the twin stairs and fireplace",
+      "look": "candle-night",
+      "motion_elements": "the fire in the fireplace and the torch flames",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none",
+        "scale": "vista"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "st-13",
+      "subject": "A stone stair descending into the lower vaults of an ancient castle on Christmas night, well lit by torches all the way down, a faint cold mist lying over the lowest steps, a single evergreen wreath with a red ribbon on an iron-studded door at the bottom, the rough vaulted ceiling and old stone walls glowing warm in the torchlight",
+      "composition": "View from the top of the stair looking down to the door at the bottom",
+      "look": "candle-night",
+      "motion_elements": "the torch flames and the faint mist drifting over the lowest steps",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-14",
+      "subject": "A stone window seat on a stair landing of an ancient castle on a snowy winter afternoon, grey daylight through leaded panes, a candle burning on the sill and a small fire in a wall hearth beside the stairs; one student with an auburn bob and a green-and-silver striped scarf sits on the seat with their back to the camera, reading",
+      "composition": "Wide view from further back in the steps below; the student sits small on the landing, the stairs continuing upward on the left",
+      "look": "interior-day",
+      "motion_elements": "the candle flame and the fire in the wall hearth",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-15",
+      "subject": "A broad ancient stone stair climbing toward a great open arched doorway on Christmas night, tall iron candelabras with burning candles on the newel posts, garlands wound along the balustrades, and through the doorway at the top a glowing decorated Christmas tree in a candlelit hall, the worn steps glowing gold where the candlelight falls across them",
+      "composition": "Eye-level view from the bottom of the stair looking straight up toward the doorway",
+      "look": "candle-night",
+      "motion_elements": "the candelabra flames and the lights on the Christmas tree",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-16",
+      "subject": "A high stone landing at the top of a great stair hall at blue hour: two students stand at the carved stone balustrade with their backs to the camera, looking down into the torchlit stairwell, one with a long dark braid and a scarlet-and-gold striped scarf, one with short dark brown hair and a green-and-silver striped scarf; garlands drape the balustrade and a twilight window glows beyond",
+      "composition": "Wide view from further back, behind on the landing, the students small at the left, the stairwell opening below on the right",
+      "look": "candle-night",
+      "motion_elements": "the torch flames and the candle flames on the landing",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-17",
+      "subject": "A tall ancient stone stair hall on Christmas night where a large black iron chandelier with burning candles hangs still in the open stairwell, flights of stairs rising around it, garlands with red bows on every balustrade and a great Gothic window showing snow-covered rooftops, torches burning on the walls of every landing below",
+      "composition": "Medium-wide view from a mid-level landing, the chandelier in the upper center and the window behind",
+      "look": "candle-night",
+      "motion_elements": "the candle flames on the chandelier",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-18",
+      "subject": "A wide stone landing of a castle staircase on Christmas night with a low iron brazier burning on the flagstones, evergreen garlands and wreaths on the walls, a small decorated fir beside the brazier, stairs rising up on either side into torchlight, warm firelight glowing on the worn flagstones, the carved balustrades and the old stone walls",
+      "composition": "Medium view from the lower flight looking onto the landing, the brazier and tree at center",
+      "look": "candle-night",
+      "motion_elements": "the fire in the brazier, the lights on the small fir and the torch flames",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-19",
+      "subject": "The foot of a stone staircase in an ancient castle on Christmas night where a fire burns in a wide hearth beside the bottom steps, torches on the walls, a garland on the newel post; one student in a cream knitted wool hat and a yellow-and-black striped scarf sits on the bottom step with their back to the camera, facing the fire Bare stone walls with no paintings, portraits or icons; no window in view.",
+      "composition": "Wide view from further back, behind and to the side; the student sits small at lower right near the hearth",
+      "look": "candle-night",
+      "motion_elements": "the fire in the hearth and the torch flames",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "st-20",
+      "subject": "A winding stone stair passing an open arch in a high castle tower at blue hour, the arch looking out over snowy roofs and towers under a deep blue twilight sky, candles burning in iron sconces; one student with short straight brown hair and a blue-and-bronze striped scarf stands still in the arch with their back to the camera, looking out",
+      "composition": "Wide view from further back in the steps below; the student stands small in the archway against the twilight",
+      "look": "candle-night",
+      "motion_elements": "the candle flames in the iron sconces",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "st-21",
+      "subject": "A wide stone staircase in a medieval castle on Christmas night, its carved stone banister wound with an evergreen garland and red bows, iron wall torches burning high on the walls, a tall decorated fir tree on the landing glowing with warm lights. No candles or lanterns stand on the floor. No banners, tapestries, crests or lettering anywhere. No people.",
+      "composition": "Low view from the foot of the stairs looking up toward the tree on the landing",
+      "look": "candle-night",
+      "motion_elements": "the torch flames and the tree lights"
+    }
+  ]
+}

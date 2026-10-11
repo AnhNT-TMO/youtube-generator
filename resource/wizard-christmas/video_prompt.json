@@ -1,0 +1,78 @@
+{
+ "moves": {
+  "default": [
+   "slide to the left",
+   "slide to the right"
+  ],
+  "deep": [
+   "slide to the left",
+   "slide to the right"
+  ]
+ },
+ "deep_field": "deep",
+ "sequence": [
+  {
+   "text": "{shot} shot; the camera makes one slow, gentle, steady {move} that keeps going for the whole clip but covers only a very short distance, about a thirtieth of the frame width in total; the camera stays at the same height with a fixed lens, never moves closer to anything and never zooms in; it never travels down the hall, aisle, street or path, so the last frame shows almost the same view as the first frame, every object still in frame."
+  },
+  {
+   "if": "window",
+   "text": "The view through the windows stays like a soft, slightly out-of-focus still photograph of {window}; every window pane keeps exactly the same size and shape; nothing new appears in the window view."
+  },
+  {
+   "if": "still_air",
+   "text": "The indoor air is perfectly clean, clear, dry and still, like a sealed warm room: nothing floats, drifts or falls anywhere between the camera and the walls, and every surface in the room stays exactly as it is."
+  },
+  {
+   "if": "snowfall",
+   "text": "Light snowflakes drift down slowly through the cold air."
+  },
+  {
+   "if": "indoor_snow",
+   "text": "Only a few sparse snowflakes drift down very slowly from high above and fade away in the air before they reach anything; they stay few and never hide the scene."
+  },
+  {
+   "field": "motion"
+  },
+  {
+   "if": "people",
+   "text": "The {people} stay perfectly still in the same pose with their backs to the camera for the whole clip; they never turn their heads, never look back and never show their faces; their bodies, hands and robes keep exactly their shape; their arms stay hidden at their sides and their scarves, hair and robes do not move at all."
+  },
+  {
+   "if": "!people",
+   "text": "Nobody appears anywhere in the scene for the whole clip, not even tiny figures far in the background."
+  },
+  {
+   "field": "extra"
+  },
+  {
+   "text": "The clip is one single continuous shot with no cuts and no change of view. The {lock} keep their exact shape, number and position; every door stays exactly as open or closed as in the first frame; no new objects, people, hands, faces, text or emblems appear, and nothing morphs or melts."
+  },
+  {
+   "text": "The {light} stays as bright and warm as the first frame throughout, with the same colors."
+  },
+  {
+   "text": "Sound: {sound}."
+  }
+ ],
+ "forbid": {
+  "still_air": [
+   "flakes drift",
+   "snow fall",
+   "snowflake"
+  ]
+ },
+ "fields": {
+  "shot": "Wide | Medium | Close",
+  "deep": "true khi cảnh sâu (hành lang, lối giữa sảnh, phố dài, dãy kệ, cầu cạn) hoặc toàn cảnh ngoài trời rộng",
+  "window": "cảnh thấy qua cửa sổ, tiếng Anh (vd. 'snowy castle towers at night'); \"\" nếu không thấy cửa sổ",
+  "snowfall": "true khi cảnh ngoài trời có tuyết đang rơi trong ảnh",
+  "indoor_snow": "true khi trong nhà có tuyết phép rơi thưa từ trần (sảnh lớn)",
+  "still_air": "true cho cảnh trong nhà không có tuyết phép",
+  "people": "\"\" nếu không có người; có thì tả ngắn tiếng Anh, số nhiều/ít đúng ảnh (vd. 'two students in black robes and scarlet-and-gold scarves sitting in the armchairs')",
+  "motion": "2–4 câu tiếng Anh, mỗi câu một thứ chuyển động CÓ TRONG ẢNH và ở đâu (lửa lò sưởi, nến, nến bay lơ lửng tại chỗ, đuốc, khói ống khói, hơi nước tàu, đom đóm, sương, đèn cây…)",
+  "extra": "0–2 câu tùy chọn cho ràng buộc đặc biệt (vd. tàu đứng yên trên cầu, nến bay giữ nguyên vị trí)",
+  "lock": "danh sách vật chính để khóa, tiếng Anh, số nhiều",
+  "light": "room | hall | street | scene … (chủ ngữ câu ánh sáng)",
+  "sound": "âm thanh hợp cảnh, tiếng Anh"
+ }
+}

@@ -1,0 +1,162 @@
+[
+ {
+  "name": "1080-b113-tile",
+  "res": "1080",
+  "batch": 113,
+  "extra": [
+   "--dit_offload_device",
+   "cpu",
+   "--vae_offload_device",
+   "cpu",
+   "--tensor_offload_device",
+   "cpu",
+   "--vae_encode_tiled",
+   "--vae_decode_tiled"
+  ]
+ },
+ {
+  "name": "1080-b77-tile",
+  "res": "1080",
+  "batch": 77,
+  "extra": [
+   "--dit_offload_device",
+   "cpu",
+   "--vae_offload_device",
+   "cpu",
+   "--tensor_offload_device",
+   "cpu",
+   "--vae_encode_tiled",
+   "--vae_decode_tiled"
+  ]
+ },
+ {
+  "name": "1080-b61-tile",
+  "res": "1080",
+  "batch": 61,
+  "extra": [
+   "--dit_offload_device",
+   "cpu",
+   "--vae_offload_device",
+   "cpu",
+   "--tensor_offload_device",
+   "cpu",
+   "--vae_encode_tiled",
+   "--vae_decode_tiled"
+  ]
+ },
+ {
+  "name": "1080-b45-tile",
+  "res": "1080",
+  "batch": 45,
+  "extra": [
+   "--dit_offload_device",
+   "cpu",
+   "--vae_offload_device",
+   "cpu",
+   "--tensor_offload_device",
+   "cpu",
+   "--vae_encode_tiled",
+   "--vae_decode_tiled"
+  ]
+ },
+ {
+  "name": "1080-b77-tile-swap16",
+  "res": "1080",
+  "batch": 77,
+  "extra": [
+   "--dit_offload_device",
+   "cpu",
+   "--vae_offload_device",
+   "cpu",
+   "--tensor_offload_device",
+   "cpu",
+   "--vae_encode_tiled",
+   "--vae_decode_tiled",
+   "--blocks_to_swap",
+   "16"
+  ]
+ },
+ {
+  "name": "1080-b61-tile-cvae",
+  "res": "1080",
+  "batch": 61,
+  "extra": [
+   "--dit_offload_device",
+   "cpu",
+   "--vae_offload_device",
+   "cpu",
+   "--tensor_offload_device",
+   "cpu",
+   "--vae_encode_tiled",
+   "--vae_decode_tiled",
+   "--compile_vae"
+  ]
+ },
+ {
+  "name": "1080-b61-tile1536-m2",
+  "res": "1080",
+  "batch": 61,
+  "vae_mem": 2,
+  "extra": [
+   "--dit_offload_device",
+   "cpu",
+   "--vae_offload_device",
+   "cpu",
+   "--tensor_offload_device",
+   "cpu",
+   "--vae_encode_tiled",
+   "--vae_decode_tiled",
+   "--vae_encode_tile_size",
+   "1536",
+   "--vae_decode_tile_size",
+   "1536"
+  ]
+ },
+ {
+  "name": "2k-b33-tile",
+  "res": "2k",
+  "batch": 33,
+  "extra": [
+   "--dit_offload_device",
+   "cpu",
+   "--vae_offload_device",
+   "cpu",
+   "--tensor_offload_device",
+   "cpu",
+   "--vae_encode_tiled",
+   "--vae_decode_tiled"
+  ]
+ },
+ {
+  "name": "2k-b25-tile",
+  "res": "2k",
+  "batch": 25,
+  "extra": [
+   "--dit_offload_device",
+   "cpu",
+   "--vae_offload_device",
+   "cpu",
+   "--tensor_offload_device",
+   "cpu",
+   "--vae_encode_tiled",
+   "--vae_decode_tiled"
+  ]
+ },
+ {
+  "name": "2k-b41-tile-swap24",
+  "res": "2k",
+  "batch": 41,
+  "extra": [
+   "--dit_offload_device",
+   "cpu",
+   "--vae_offload_device",
+   "cpu",
+   "--tensor_offload_device",
+   "cpu",
+   "--vae_encode_tiled",
+   "--vae_decode_tiled",
+   "--blocks_to_swap",
+   "24"
+  ]
+ }
+]

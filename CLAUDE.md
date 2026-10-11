@@ -1,5 +1,9 @@
 # CLAUDE.md
 
+Kiến thức dùng chung Claude/Codex: đọc `.claude/knowledge/README.md` để tìm memory đã nhập và hồ sơ bàn giao sản xuất.
+Kiến thức mới phải ghi vào file skill/kênh/hồ sơ phù hợp trong repo, không chỉ trong memory riêng của Claude.
+Chạy `.agents/sync-skills.sh` sau khi sửa skill hoặc `.claude/knowledge/`; `--check` kiểm hai bản còn khớp.
+
 ## 0. Công ty
 
 Project là một công ty sản xuất nhạc cho các kênh YouTube. Mục tiêu: nhiều người nghe thật, bền lâu, cải tiến liên tục; mọi việc
@@ -11,7 +15,7 @@ cân giá trị với công sức. Chuỗi chỉ huy: **CEO → PM → các nhó
 | **PM** | skill `pm-production` | nguồn sự thật duy nhất của sản xuất; thảo luận với CEO, chọn bài, viết brief, giao việc cho sub-agent, **duyệt chất lượng đầu ra**, đọc kết quả |
 | **R&D** | nhóm `rnd-` | dùng YouTube Data API tìm và hiểu kênh/video; giữ kho câu title/thumbnail (`research/phrase-bank/`); đưa số liệu, không quyết |
 | **Audio** | nhóm `audio-` | tạo bài vào kho bằng Suno, đặt tên bài + chọn đoạn Short, ghép album |
-| **Video** | nhóm `video-` | thumbnail album + ảnh dọc Short, video loop + video đầy đủ, Short, đóng gói S3 |
+| **Video** | nhóm `video-` | thumbnail album + ảnh dọc Short, video loop + video đầy đủ, Short, đóng gói lên Google Drive |
 | **Upload** | nhóm `upload-` | title, description, tags, chapters (`youtube.md`); dịch title + description sau khi đăng |
 
 - **CEO và PM lên kế hoạch album trực tiếp** (không còn idea/plan): chủ đề, câu chuyện, lời cầu xin trên title/thumbnail, bài nào.
@@ -55,7 +59,7 @@ chuyển thể (đổi Lord ↔ Father/Jesus, đổi vài chữ). Không bao gi�
 - **Skill = quy trình, dùng chung cho mọi kênh.** `.claude/skills/<skill>/` chỉ nói *làm thế nào*; không ghi tên kênh, thể loại,
   giọng, nhân vật, màu, câu mẫu hay số đo của một kênh cụ thể. Mỗi skill tự chứa code + venv + cache của nó.
 - **Kênh = nội dung.** Mọi chi tiết *làm gì cho kênh này* nằm trong `channel/<ch>/` (danh sách file: `channel/README.md`).
-- **Ngoại lệ CEO 2026-10-02, chốt 2026-10-04:** `audio-christmas-workflow` là skill chuyên cho carol Christmas nhẹ nhàng. Mỗi giai điệu có ba bản: piano + pad trơn, và piano + pad + một nhạc cụ trang trí (celesta, vibraphone), ba lượt nâng giọng, pattern trang trí chọn theo từng lượt, mỗi bản một điểm nhấn chime thu thật nhẹ tại chuyển lượt gần 1/3; album đích 120–180 phút. Chuẩn ở `research/christmas-carols/STANDARD.md`; style, cân bằng, gesture, tempo, paths và thông số ở `research/christmas-carols/WORKFLOW.json`, không hardcode nội dung kho vào skill.
+- **Ngoại lệ CEO 2026-10-02, chuẩn ambient chốt 2026-10-06:** `audio-christmas-workflow` là skill chuyên cho carol Christmas ambient piano. Mỗi bài ở một key quen tai (key sách thánh ca in nhiều), ba lượt cùng key, chỉ đổi màu nhạc cụ; bài liền nhau cùng key hoặc key kề trên vòng quãng năm; một album một vibe, 120–180 phút. Chuẩn ở `research/christmas-carols/STANDARD.md`; vibe, key được phép và ngưỡng kiểm ở `research/christmas-carols/VIBES.json` + `allowed_keys.json`, không hardcode nội dung kho vào skill.
 - Học được điều gì về một kênh: ghi vào file của kênh đó, không vào skill. Skill chỉ đổi khi *quy trình* đổi.
 - Kiểm: `python3 .claude/skills/pm-production/scripts/lint_skills.py` báo mọi chỗ skill/template nhắc tới một kênh cụ thể.
 
@@ -66,18 +70,18 @@ chuyển thể (đổi Lord ↔ Father/Jesus, đổi vài chữ). Không bao gi�
 | Audio | `audio-suno-generate` | Suno Simple mode + prompt của kênh → tải cả 2 clip qua usesuno → `songs/raw/` |
 | Audio | `audio-song-naming` | đọc lời → đặt tên → đổi tên file → thẻ bài `songs/<type>/<slug>.md` + đoạn Short |
 | Audio | `audio-album-assembly` | nối bài theo tracklist bằng crossfade nhẹ → master + `assembly.json` (chapters) |
-| Audio | `audio-christmas-workflow` | mỗi carol các style theo config (piano + pad, có hoặc không nhạc cụ trang trí) → MIDI/nguồn → ACE-Step → chọn base → accent thu thật hậu kỳ theo config → một bản chính + một dự phòng mỗi style; sửa theo feedback |
+| Audio | `audio-christmas-workflow` | carol PD: giai điệu chép từ bản in ≤ 1930 + PD audit → plan → render nhạc cụ ảo thu thật trên server theo vibe + key → ghép album 120–180 phút + flow check |
 | Video | `thumbnail-prompt` (sẽ đổi tên `video-thumbnail`) | ảnh album 4K + ảnh dọc Short (ChatGPT → SeedVR2 4K) |
 | Video | `video-resource-images` | ảnh cho bộ resource (ChatGPT) qua queue `images` |
 | Video | `video-resource-videos` | clip muse.ai từ ảnh đã đạt qua queue `videos`; soi + cắt clip |
-| Video | `video-generator` (sẽ đổi tên `video-render`) | loop 5 phút / cinema, video đầy đủ trên server, `video.py short`, zip lên S3 |
+| Video | `video-generator` (sẽ đổi tên `video-render`) | loop 5 phút / cinema, video đầy đủ trên server, `video.py short`, zip lên Google Drive (rclone) |
 | Video | `video-shorts` | 1 Short mỗi album từ đoạn `short` của bài → `short.json` → ảnh dọc → render → `youtube.md` |
 | Video | `video-upscale` | clip → 1920×1080 bằng SeedVR2 3B trên server, cụm ~10 clip/lần nạp model, lính canh nhiệt; bản 1080p vào kho server `~/video_sources/<library>/` (library trong `resource.json` của bộ, vd. `christmas`), giữ cây thư mục như Mac. Clip nào upscale do PM chọn |
 | Upload | `upload-youtube-publish` | title, description, tags, chapters → `youtube.md`; hướng dẫn Studio |
 | Upload | `upload-youtube-translate` | dịch title + description lên YouTube sau khi đăng |
 
-- CEO yêu cầu bỏ bộ skill phối nhạc ngày 2026-10-02: `mc-*`, `audio-composition-plan` và vendor library đã chuyển khỏi repo active. Flow Christmas dùng `track-plan.json` đơn giản và tool source/cover/selection/recorded-accent chung; không gọi lại thư viện phối khí. Sửa source skill ở `.claude/skills/`, rồi chạy `.agents/sync-skills.sh` để đồng bộ sang Codex.
-- Với kho Christmas PD, đọc `research/christmas-carols/HANDOFF.md`, brief và `WORKFLOW.json` hiện hành. `audio-christmas-workflow` sở hữu style, số take, điểm nhấn, chọn/giao audition và vòng feedback; không dùng quy tắc Suno/lyrics, chuẩn album Gospel 60–80 phút hoặc runner A/B/C lịch sử cho kho này. Album Christmas nhắm 120–180 phút; assembly/video là bước riêng khi có brief album.
+- CEO yêu cầu bỏ bộ skill phối nhạc ngày 2026-10-02: `mc-*`, `audio-composition-plan` và vendor library đã chuyển khỏi repo active. Flow Christmas dùng `track-plan.json` + render ambient của `audio-christmas-workflow`; không gọi lại thư viện phối khí. Sửa source skill ở `.claude/skills/`, rồi chạy `.agents/sync-skills.sh` để đồng bộ sang Codex.
+- Với kho Christmas PD, đọc `research/christmas-carols/HANDOFF.md` trước. `audio-christmas-workflow` sở hữu PD audit, plan, vibe, key và render; không dùng quy tắc Suno/lyrics hoặc chuẩn album Gospel 60–80 phút cho kho này. Album Christmas nhắm 120–180 phút; assembly/video là bước riêng khi có brief album.
 
 ## 3. Quy trình
 
@@ -102,7 +106,7 @@ MỖI ALBUM
             upload-youtube-publish → youtube.md ─▶ video-generator album (server): video đầy đủ 4K
             video-shorts (albums/NNN/short/): short.json → ảnh dọc → video.py short → youtube.md
                                 ▼
-            video.py package <album>: MỘT zip trên S3 = album + short/ + README thứ tự đăng
+            video.py package <album>: MỘT zip trên Google Drive = album + short/ + README thứ tự đăng
                                 ▼
             CEO tải 1 lần, đăng (album → Short) → upload-youtube-translate → kết quả 48 giờ / 7 ngày (pm-production)
 ```
@@ -126,7 +130,9 @@ MỖI ALBUM
   **mặc định chạy trên server** (các skill tự gọi qua runner của mình); `--local` mới chạy trên Mac. Mac chỉ làm việc nhẹ: điều
   khiển Chrome, tải clip, text/yaml, chỉnh ảnh, `video.py frame`.
 - **Cấu hình máy** (không vào git): skill dùng server có `remote.env`, chép từ `remote.env.example` cạnh nó. Tiền tố biến: `QC_`
-  (audio-song-naming, audio-album-assembly), `VG_` (video-generator, thêm S3), `TP_` (thumbnail-prompt).
+  (audio-song-naming, audio-album-assembly), `VG_` (video-generator, thêm Drive/S3), `TP_` (thumbnail-prompt).
+- **Google Drive** (gói upload): remote rclone `gdrive` trên server (CEO đăng nhập Google; làm lại khi token hết hạn:
+  `video-generator` SKILL.md → Notes).
 - **YouTube Data API:** key ở `~/.config/yt-research/api_key` (R&D); OAuth của kênh cho dịch + analytics (`auth`, CEO làm).
 - Gói **Suno Pro**: 2.500 credits/tháng, 20 lượt tải chính thức/tháng (không dùng).
 

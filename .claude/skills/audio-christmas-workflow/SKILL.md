@@ -1,115 +1,98 @@
 ---
 name: audio-christmas-workflow
-description: Runbook for producing gentle instrumental Christmas carols (piano + pad, plus celesta / vibraphone versions) from a public-domain melody file through a MIDI source, ACE-Step covers on the GPU server and one recorded chime. Use to plan, render, deliver or revise songs of a Christmas batch. Album assembly is a separate skill.
+description: Audit public-domain Christmas melodies and produce carol audio through the lane approved in the album brief, including self-arranged Piano in 162 bell-piano variants or Mureka melody sources and cover prompts. Use for PD evidence, piano arrangements, variant rendering and Christmas album masters. Video and upload are separate skills.
 ---
 
 # Christmas carol runbook
 
-Everything runs from the repo root on the Mac; `scripts/` below means `.claude/skills/audio-christmas-workflow/scripts/` and `run.sh` means `bash scripts/run.sh <phase> <slug> [revision]`. Mac phases run locally; every other phase is forwarded to the GPU server through `guard.sh run`. Never run audio work on the Mac, never edit `guard.json`, `CLAUDE.md` or `AGENTS.md`.
+Everything runs from the repo root; `scripts/` below means `.claude/skills/audio-christmas-workflow/scripts/`. Planning runs on the Mac; rendering and joining run on the GPU server through `.claude/skills/pm-production/scripts/server_guard/guard.sh run`. Never run audio rendering on the Mac.
 
 ## Read first
 
-- `research/christmas-carols/STANDARD.md`: what a finished song is (CEO standard). `WORKFLOW.json`: every number, path, style, gate, chime and the pattern library. Change neither on your own.
-- The batch brief named by the PM and `research/christmas-carols/batches/<batch>/songs.json` (one entry per song) and `PLAN_REVIEW.md` (decision log for the batch).
-- `research/christmas-carols/pool-state.json`: what is delivered, ready or blocked. Resume from it; do not redo delivered revisions.
+- Choose the production lane from the latest approved album brief before following the older handoff. For self-arranged bell piano, read [references/bell-piano.md](references/bell-piano.md). Mureka-specific source, no-choir and prompt rules below apply only to the Mureka lane.
 
-## Ambient render (CEO 2026-10-05)
+- `research/christmas-carols/HANDOFF.md` (current state), `STANDARD.md` (what a finished song is), `VIBES.json` + `VIBE_FIT.md` (vibes, album rules, which song fits which vibe), `allowed_keys.json`. Change none of them on your own.
+- `research/christmas-carols/pd-audit/` + [references/pd-audit.md](references/pd-audit.md): the current Mureka lane uses only songs in `research/christmas-carols/MUREKA-ALLOWLIST.json`; stale or withdrawn audit labels stay out. An allowlist basis starting `CEO exception` admits a song without scan evidence; its `album_limit` (copied into `metadata.json`) binds album selection.
 
-ACE-Step is retired. Carols are rendered from `track-plan.json` with real-recorded virtual instruments on the GPU server (`~/music-tools`: DawDreamer, Salamander piano, VSCO-2-CE, `sfz/real` celeste/chorus/tubular bells, Dragonfly Hall). Vibes: `snowglobe` (piano, harp, cello + viola, celesta, sleigh bells) and `church` (piano, organ, choir, tubular bell).
+## Mureka source lane
 
-- `scripts/ambient_batch.sh <root> [slug...]`: for each `<root>/<slug>/track-plan.json`, renders every vibe in `VIBES` to `<slug>-<vibe>.mp3/.mid/.json`, finished at −18 LUFS with true peak ≤ −1.6 dBFS. Run it through `guard.sh run`. Output goes to `audio/christmas/<slug>/`.
+When the album brief chooses Mureka, Mureka receives a dry piano melody source and makes the cover from one of three English prompts. Self-arranged bell-piano albums use the separate lane linked above.
+
+- `python3 scripts/mureka_source.py --root research/christmas-carols --out research/christmas-carols/mureka --piano-sf2 <server SoundFont>` creates three consecutive exact melody passes per song as 48 kHz/24-bit piano WAV, matching MIDI, metadata, and `styles.md`.
+- Run the renderer on the GPU server inside `youtube.slice`; preserve every melody pitch, rhythm, rest, meter, key and fixed quarter-note BPM across exactly three consecutive passes. Add no inter-pass gaps, intro, outro, harmony or accompaniment; retain the natural piano release tail after pass three.
+- `styles.md` contains three prompts in the CEO's chamber-trio form (CEO 2026-10-09: the first prompt that added no other instrument and no drums, Lo, How a Rose m020 both takes; `mureka_source.prompt_text`, `v6c-chamber-trio-steady`). Paragraphs, kept with their blank lines: `Minimal intimate chamber trio.` → piano is the clear lead and plays the uploaded melody faithfully, the bed stays quietly behind, the sparse accent plays only occasional single notes → an explicit no-rhythm list (no rhythm section, beat, drums, kick, snare, hi-hat, cymbals, toms, shaker, tambourine, sleigh bells, rhythmic percussion) then one sentence per other excluded sound, written the same way: `No bass. No guitar.` (+ `No strings.` on the pad bed, `No synths.` on the strings bed) `No brass. No woodwinds. No choir. No vocals.` (CEO 2026-10-09: the earlier comma list `No bass, guitar, …, choir or vocals.` gave Silent Night m021 v8 a real voice in pass 3) → the accent is the only pitched percussion and never plays a rhythmic pattern → steady energy: `Same soft volume and energy from beginning to end. No crescendo. No swells. No build-up. No climax.` + the bed never plays the melody, never rises to high notes, stays quieter than the piano (CEO 2026-10-09: Silent Night m022 v10 strings soared high twice, energy must stay even across all 3 passes; string beds sit in the middle register, the old `Airy high string pad` wording is gone) → key, BPM, gentle warm bright intimate, sparse with empty space, dry close piano with short natural decay → `Only piano, <bed> and sparse <accent>.` Each style has exactly three instruments: grand piano + one bed (soft pad, sustained strings or soft string pad) + one accent (celesta, vibraphone or glockenspiel). Mood stays warm and joyful, never dark; the piano is clear and dry, no ambient/reverb words (2026-10-09: washy, boomy, gloomy takes). All three styles are instrumental, Instrumental switch on, no lyrics (choir dropped 2026-10-09). Every prompt stays ≤ 1024 chars (Mureka limit). `STYLE N` header lines separate the styles; the readers keep the paragraphs inside a style.
+- `metadata.json` records the BPM source and any fallback.
+- The handoff is `research/christmas-carols/mureka/manifest.json`; skipped songs retain a machine-readable reason. Use only songs in `research/christmas-carols/MUREKA-ALLOWLIST.json`; tier III songs stay out.
+
+## Mureka web lane (current: web plan, Gold)
+
+The CEO's Mureka plan is the web plan, not API credit. `scripts/mureka_web.py` + `scripts/js/mureka_*.js` drive mureka.ai in the dedicated Chrome (`.claude/skills/audio-suno-generate/scripts/suno-chrome.sh`, port 9222, MCP `suno-chrome`; CEO logs in to Mureka there) and download through murekadownloader.com, never Mureka's own download. One generation = one song × one style = 2 takes; both takes are downloaded unless the PM/CEO says otherwise.
+
+```
+P() { python3 .claude/skills/audio-christmas-workflow/scripts/mureka_web.py "$@"; }
+P next <slug> --style N            # GEN=mNNN, Mureka title "<Song> mNNN" (unique, used to find the feed); writes the upload copy research/christmas-carols/mureka/_upload/<slug>.mp3 and the same file as audio/christmas/mureka/<slug>/original.mp3 for the CEO to compare
+mureka.ai tab: evaluate_script `P js attach --gen G`   # Custom → + Remix → Upload list → row <slug> + MP3 length (Mureka rounds it either way) → Use → Save
+               (need_upload:true → upload_file the _upload/<slug>.mp3 copy, never the WAV (CEO 2026-10-09: WAV is heavy and failed to extract), into the dialog's file input; an older row with the same title gives a 500, delete it first; run attach again)
+               evaluate_script `P js fill --gen G`     # Instrumental on, Style = styles.md prompt byte-exact, title; ok:true only if every readback matches
+               click Create once (real click), only after fill returned ok:true
+               evaluate_script `P js feed --gen G`, filePath audio/christmas/mureka/<slug>/gen/G.feed.json   # waits ≤ 4 min; done:false → again
+P complete --gen G                 # 2 songs, stored prompt = ours, model; names takes <slug>_<variant>_vN.wav
+per take: navigate_page the murekadownloader tab to the URL `P status` prints → evaluate_script `P js download --gen G --take vN` → P ingest --gen G --take vN
+P accept --gen G --take vN --reason "CEO ..."   # CEO listened to a flagged take and keeps it; mureka_pick uses clean takes first, then accepted ones
+P status [--slug S]                # every generation and its next step
+```
+
+- Output: `audio/christmas/mureka/<slug>/<slug>_<variant>_vN.wav` + `.json` (prompt, feed/song ids, share link, durations, sha256) and `audio/christmas/mureka/manifest.json` (the ledger; only this script writes it). Variant = style bed + support instrument from `mureka_source.variant_names` (`pad_celesta`, `cello_vibraphone`, `strings_glockenspiel`). Take numbers continue per song + variant (a second style-1 run gives v3/v4), v1 = the feed's first song.
+- A take the PM/CEO does not keep: `P skip --gen G --take vN --reason …`. A generation made by hand on the web: `P next <slug> --style N --existing-feed <feed_id>` then feed/complete/ingest as above (the prompt check is skipped and the stored prompt kept).
+- Feed API (logged-in tab): `GET /api/pgc/feed/list?…&folder_id=<My workspace>`; one feed = one generation, `state 3` = done. Share link `https://www.mureka.ai/song-detail/<share_key>`; downloader page `https://murekadownloader.com/download?type=mureka&url=<encoded share link>` (WAV 48 kHz 16-bit, File Name field sets the download name). `ingest` refuses a file whose length differs from the feed by > 0.3 s.
+- Remix accepts audio of 10–480 s. In Remix mode the model menu is hidden; the CEO sets the model in the UI and `complete` checks the feed model against `--model` (default V9 since 2026-10-09: the chamber-trio prompt test ran on V9).
+- Melody check: `python3 scripts/mureka_fidelity.py <slug> [file.wav ...]` pushes the source MIDI/WAV + takes to the server mirror, transcribes every take with the ByteDance piano model (`~/piano_transcription_inference_data/*.pth`, skill venv `.venv` on the server) under `guard.sh run`, aligns it to the source by chroma DTW for each of the 12 transpositions and keeps the one where the most source notes are found (chroma cost alone is fooled: a melody-only source that dwells on its fifth reads as the dominant key, so a correct take in F scored +5) and writes `audio/christmas/mureka/<slug>/fidelity.json`. Columns: exact pitch / pitch class within ±0.2 s of the warped MIDI onset, per pass, the same match half a beat off (chance control), transposition, time ratio, extra notes per MIDI note, low-register onsets per bar, in-order match (banded LCS ±1.5 s) vs shuffled. Read every percentage against its control: the source itself scores 100 %, a synthetic cover (true melody + dense Mureka bed, 4.5 % faster) scores ~16 points over control, so a take near its control does not carry the MIDI melody. `pass_bounds_s` = each melody pass in take seconds, from the DTW warp of the source pass starts (Mureka stretches and adds intros, so passes are not equal thirds); pass 1 includes any intro, pass 3 any outro.
+- Acceptance standard (CEO 2026-10-09): Mureka takes are arrangements *inspired by* the carol. Mureka keeps key and harmony but not the note order (in-order match ≈ shuffled in most test takes), and prompting cannot force it. A take is usable when the carol stays recognizable, and recognition comes from the piano-led opening: `opening.recognizable` in `fidelity.json` = pass-1 pitch-class match ≥ 10 points over its control (all 11 Deck the Halls / Silent Night test takes passed, +11 to +37). A take that fails the opening gate is not used; whole-song fidelity and the sequence column are reported, not gated.
+- Stems check: `python3 scripts/mureka_stems.py <slug> [file.wav ...]` splits every take into Demucs htdemucs 4 stems on the server (venv of `audio-song-naming`) and writes `audio/christmas/mureka/<slug>/stems.json`. Voice: per melody pass (`pass_bounds_s` from `fidelity.json`, so run the melody check first), the share of 0.5 s windows whose vocal stem is above −12 dB vs the rest; present in a pass at ≥ 10 %; `ok` = no voice in any pass. Percussion: the drums stem's share of the whole take's energy; ≥ 1 % = the take has percussion (2026-10-09: clean takes ≤ 0.43 %, the piano sources 0 %, takes with an audible drum pulse 2.7–4.4 %). Guitar stem (`htdemucs_6s`, `guitar_energy_pct`) is recorded for reference only and is not a flag: the CEO heard no guitar in takes the stem put at 5–16 % (2026-10-09, Auld Lang Syne V9); Demucs' guitar stem absorbs vibraphone, strings and piano, so guitar is judged by ear.
+- Take pick: `python3 scripts/mureka_pick.py <slug>...` reads `fidelity.json` + `stems.json` and writes `picks.json`. A take is flagged for an unrecognizable opening, a moved key, percussion, or voice. Clean takes are used: per style the larger opening margin is the pick (within 5 points the one with fewer extra notes), the other clean take is the spare for a later album on the same bed.
+- Flagged takes during the trial (CEO 2026-10-09): nothing is deleted automatically. The PM lists every flagged take with its reasons for the CEO to listen to, also when the other version of the same generation is clean. Only on the CEO's word: `mureka_web.py drop --gen mNNN --take vN --reason ...` deletes the take's files and marks it `deleted` in the ledger. A style is regenerated only when both versions are flagged and the CEO drops them. Once several rounds pass without CEO corrections, the policy becomes: one flagged version is dropped without listening and the clean one is kept (no regeneration); both flagged → regenerate.
+- Mureka Remix upload: when Select Music Clip fails ("Failed to extract the song", or the clip waveform never loads and Save stays disabled), it is a Mureka page fault, not our file; stop the lane and report to the PM. Do not switch to the API without a CEO decision.
+
+## Mureka album
+
+Rules: `research/christmas-carols/MUREKA-ALBUM.json` (CEO 2026-10-09; the PM edits the numbers there). One loop of 20–22 songs, each on one bed (style), repeated three times in the same order to ~3 h; no chapters for Christmas albums. Inside the loop neighbours change bed, keys move by the ambient standard (same, fifth or relative, the seam back to track 1 included), tier I opens the loop, minor/modal songs never adjacent. The next album changes opener, order and the bed of every reused song. Plan the loop before generating, then generate only the planned style per song.
+
+## Mureka API lane (needs API credit)
+
+- `python3 scripts/mureka_remix.py <slug> [--styles 1,2,3] [--dry-run]` sends the piano source to the Mureka API, one call per style, and saves `mureka/<slug>/style<N>.mp3/.wav/.json` (request, task, files). API key: `MUREKA_API_KEY` or `~/.config/mureka/api_key`. Account limit: 1 concurrent request, so styles run one after another; an unfinished task is resumed on the next run, a finished style is skipped unless `--force`.
+- `/v1/song/remix` refuses audio without sung lyrics ("Cannot recognize valid lyrics"), so the default `--mode track` uses `/v1/track/generate` (`generate_type` Instrumental) over the uploaded piano. The remix `prompt` limit is 1024 chars; the script shortens two fixed contract sentences and refuses a prompt still over the limit.
+
+## Plan a song
+
+- `python3 scripts/spec.py <batch> <slug>... --write`: default entry in `research/christmas-carols/batches/<batch>/songs.json` from `melodies/b*/<slug>.json` and the tempo references (exit 2 = BLOCKED, read the reason). Statement `file` ranges and `phrases` must cover the whole melody file.
+- `python3 scripts/make_plan.py <batch> <slug> --workdir research/christmas-carols/work-pdfix` then `python3 scripts/check_plan.py <batch> <slug> --workdir research/christmas-carols/work-pdfix` (0 FAIL; WARN lines are read). Numbers and the pattern library come from `research/christmas-carols/WORKFLOW.json` (config read by `plan_io.py`).
+- Copy `work-pdfix/<slug>/<style>/<rev>/track-plan.json` to `audio/christmas/plans/<slug>/track-plan.json` and to the same path on the server; a changed plan file makes `ambient_keychain.py` render the song again.
+
+## Legacy self-render (not the current Mureka lane)
+
+The following ambient render tools are retained for historical compatibility and are not used to create the new Mureka source pool.
+
+Carols are rendered from `track-plan.json` with real-recorded virtual instruments on the GPU server (`~/music-tools`: DawDreamer, Salamander piano, VSCO-2-CE, `sfz/real` celeste/chorus/tubular bells, Dragonfly Hall). Vibes: `snowglobe` (piano, harp, cello + viola, celesta, sleigh bells) and `church` (piano, organ, choir, tubular bell).
+
+- Layout (one standard, same on Mac and server): `audio/<library>/plans/<slug>/track-plan.json` holds each song's plan; every render of a vibe lives in `audio/<library>/<vibe>/<slug>/`: `<slug>.mp3/.mid/.json` (plan key and tempo) and `<slug>-<key>.mp3/.row.json` (album key, vibe tempo). Album-level files (pool index, order, master) live with the album, never in the library.
+- `scripts/ambient_batch.sh <root> [slug...]`: for each `<root>/plans/<slug>/track-plan.json`, renders every vibe in `VIBES` (default `snowglobe church`; pilots `jazz lofi fireside rain`, piano always on the melody) to `<root>/<vibe>/<slug>/<slug>.mp3/.mid/.json`, finished at −18 LUFS with true peak ≤ −1.6 dBFS. Run it through `guard.sh run`.
 - `scripts/ambient_render.py`: arranges and mixes. `scripts/ambient_harmony.py`: chord colours with a melody-fit check, and a slight ritardando at every 4-bar phrase end.
   - Plan sections `A1_2`/`A2_2`/`A3_2` merge into their pass, and `A2F` plays as pass 3.
   - The three passes are forced to 0 / +0.5 / +1.0 dB: no climax, no lead swap.
-- `scripts/ambient_album.py <order.json> <root> <out> [--target S] [--wav] [--intro-fade 12]`: joins `<root>/<slug>/<slug>-<vibe>.mp3` in the order given, with an equal-power crossfade and no loudness change. `--target` solves the crossfade so the master is exactly the video montage length (it refuses outside 1–4 s: add or remove tracks instead). The album always opens with a slow fade-in (`afade curve=hsin`, 12 s, the same rule as audio-album-assembly, CEO 2026-10-05) under the video's opening intro. Writes `<out>.mp3`, `<out>.wav` (48 kHz 24-bit, with `--wav`) and `<out>.json` (start_s per track). Run it on the server and keep the master there for the video join.
+  - Sleigh bells (CEO 2026-10-07) are sparse accents, never a pulse: 3.3 hits per minute, 8–12 per song, spread over all three passes, each one halfway through a held melody note (≥ 1 beat) nearest an even spacing, so it answers the piano instead of striking with it, and never within 0.4 beat of a celesta note.
+- `scripts/ambient_album.py <order.json> <root> <out> [--target S] [--wav] [--intro-fade 12]`: joins `<root>/<vibe>/<slug>/<slug>.mp3` in the order given, with an equal-power crossfade and no loudness change. `--target` solves the crossfade so the master is exactly the video montage length (it refuses outside 1–4 s: add or remove tracks instead). The album always opens with a slow fade-in (`afade curve=hsin`, 12 s, the same rule as audio-album-assembly, CEO 2026-10-05) under the video's opening intro. Writes `<out>.mp3`, `<out>.wav` (48 kHz 24-bit, with `--wav`) and `<out>.json` (start_s per track). Run it on the server and keep the master there for the video join.
+- `scripts/ambient_keychain.py` (standard: `research/christmas-carols/STANDARD.md`; run on the server from the repo root through `guard.sh run`):
+  - `render <VIBES.json> <pool.json> --vibe V --out DIR`: pool = `[{"slug", "key", "tier"}]`. It refuses any song whose `pd_audit` verdict (VIBES.json `pd_audit` folder, copied to the server first) is not `clean`. Each song is flattened to one key for all passes (no lift), moved to its key (refused unless listed in `allowed_keys.json`), fitted to the vibe tempo, then its melody is compared note by note with the source melody file (`research/christmas-carols/melodies/`, copied to the server with the pd-audit folder; every statement must be an exact run of the source in one transposition and the last statement must reach the source's final note; any difference stops the run, also for a song already rendered, whose saved `.plan.json` is checked again) and rendered once to the library (`VIBES.json out`/`<vibe>/<slug>/<slug>-<key>.mp3`, reused by later albums until the plan file changes: the row keeps the plan hash); `DIR/songs/index.json` keeps length and head/tail loudness and brightness.
+  - `rounds <VIBES.json> <order.json> --out DIR [--target S]`: orders the pool into reshuffled rounds under VIBES.json `rounds` (key step, tier-I opening minutes, openers, endings, no neighbour pair twice, repeat gap), picking the order with the smallest head/tail change at every join. `--target` keeps adding tracks until the length is reached.
+  - `album <VIBES.json> <order.json> --vibe V --out DIR [--target S]`: joins the order (repeats reuse the song render; 2 s qsin crossfade, or the crossfade solved for `--target` within 1–4 s; −6 dB entry ramp; 12 s fade-in) and runs the flow check. Writes `DIR/album.mp3` + `album.json` (start_s per track). `check` re-runs the flow check on any joined file.
 - `scripts/ambient_index_vsco.py` and `scripts/ambient_index_real.py` rebuild the sample indexes. Sources and licences are in [references/ambient-samples.md](references/ambient-samples.md).
-
-## Command order
-
-| # | Command | Where | Done when |
-|---|---|---|---|
-| 1 | `python3 scripts/spec.py <batch> <slug>... --write` | Mac | entry in `songs.json`, exit 0 (exit 2 = BLOCKED, read the reason) |
-| 2 | `python3 scripts/make_plan.py <batch> <slug> [--revision rNNN]` | Mac | `work/<slug>/<rev>-pm/arrangement-plan.json` + `work/<slug>/<style>/<rev>/track-plan.json` |
-| 3 | `python3 scripts/check_plan.py <batch> <slug> [--revision rNNN]` | Mac | 0 FAIL (exit 1 on any FAIL); WARN lines are read and logged |
-| 4 | `run.sh sync <slug> [rev]` | Mac | `TOOLS_SYNCED` + `PLANS_SYNCED` |
-| 5 | `run.sh source <slug> [rev]` | server | `SOURCE_COMPLETE`; buzz ≤ limit; key check `method_valid` on source |
-| 6 | `run.sh covers <slug> [rev]` | server | `EVALUATION_COMPLETE` per style; `BLOCKED_STYLES` lists styles with no passing take |
-| 7 | `run.sh finish <slug> [rev]` | server | chime + loudness finish written to the published dir |
-| 8 | `run.sh deliver <slug> [rev]` | server | `DELIVERED`, `all_pass` in qa |
-| 9 | `run.sh pull <slug> [rev]` | Mac | `PULLED ... checksums OK` into `ace-steps/christmas-carols/<slug>/<rev>/` |
-| 10 | `run.sh record <slug> [rev]` | Mac | pool-state.json and `accent-library/usage.jsonl` updated |
-
-Other phases: `status` (pick per style), `gate` (re-run picks + key gate on existing covers), `refsplit` (rebuild the copy-gate reference set), `calibrate` (renderer calibration, once per server), `remix <slug> <parent> <new> <reason>` (re-finish a delivered revision after a mix-only change, no new AI generation). The default revision is `r001`. A revision is final once its sources exist or it is published: any change means the next revision (`r002`, ...) declared under `revisions` in the song entry.
-
-## What each step decides
-
-- **spec.py** writes the default entry: tempo = median of category-1 relaxed piano references (beat unit checked), first key so the final statement top note ≤ the configured ceiling, three statements with a whole-step lift, whole-bar interlude/outro, length 2–4 min with the chime near 1/3, a pattern set rotated by meter so adjacent songs differ, captions from the template. Extra rules the PM adds for the remaining pool (tempo density cap, statement groups, half-plus-full form, minor/modal lifts) live in `research/christmas-carols/batches/SPEC_RULES.md`; build them into `spec.py` before running the queue `batches/QUEUE.json`. It refuses (BLOCKED) only what those rules cannot place.
-- **make_plan.py** turns the entry into notes: piano melody + spacious left hand, pad, support patterns from the library on the beat grid, pivots, dropped/shifted support notes with reasons.
-- **check_plan.py** checks the plan against the standard (range, clashes, chime window, density, lengths).
-- **source** renders MIDI → stems → `src_A.wav` per style and measures buzz and the planned keys on the source.
-- **covers** runs the ACE-Step take matrix (seed × noise from WORKFLOW.json), evaluations (copy gate, HF/opening, vocal proxy), picks primary/backup and the key gate. Key gate rule: the best of the planned keys for each statement with margin ≥ 0.3; the 24-key result is diagnostic only.
-- **finish** adds the one configured chime at the real A1 → A2 boundary of the selected cover and applies fixed gain under the true-peak ceiling. Quieter than −18 LUFS because of the ceiling is accepted; no limiter.
-- **deliver** writes `NGHE_THU.md`, `listening-map.json`, `proof/`, `evidence/`, runs `verify.py` and seals `checksums.json`.
-
-## Logs to read
-
-- Server run logs: `~/ace-step/christmas-v5/<slug>/<rev>-run/{raw-render,source,source-buzz,finish,deliver,qa}.log`.
-- Per style: `~/ace-step/christmas-v5/<slug>/<style>/<rev>/{source-key-check,cover,eval-a,eval-b,select,key-gate}.log` and `picks.json`.
-- After pull everything needed for review is in the delivery: `evidence/run/*.log`, `evidence/<style>/*.log`, `worker-qa.json`.
-
-## Delivery layout
-
-`ace-steps/christmas-carols/<slug>/<rev>/` on the Mac, `~/youtube-qc/ace-steps/christmas-carols/<slug>/<rev>/` on the server, identical by `checksums.json`. The batch name goes in `NGHE_THU.md` / `listening-map.json`, never in the path.
-
-- `<Title>_<Style>_<rev>.mp3` per ready style, `NGHE_THU.md`, `listening-map.json`, `worker-qa.json`, `checksums.json`.
-- `raw/<style>-primary-*.flac` and `raw/<style>-backup-*.flac` with request sidecars.
-- `proof/`: what a Content ID dispute needs: `PD-BASIS.md`, `DISPUTE.txt`, `melody-source.json`, `arrangement-plan.json`, `chime/` (manifest + license page), and per style `src_A.mid`, `track-plan.json`, `ace-request-*.json`, `cover-revision.json`, `mix-plan.json`, `mix-manifest.json`, `finishing.json`, `hashes.json`.
-- `evidence/`: run logs, source checks, evaluations, picks, key gate, alignment and chime manifests per style. `tools/`: the exact scripts used.
-
-## Worker decides alone (log the reason in the batch `PLAN_REVIEW.md`)
-
-- Rounding interlude or outro to whole bars.
-- Swapping a pattern for another from the library (density, clash or chime-beat reasons).
-- Adding or removing a statement, or using the chorus / second half, to reach the length or the chime window.
-- Rerunning a job the guard killed: `guard.sh kills`, then the same `run.sh` command again.
-- One source fix of 1–2 bars after an HF / opening fail (for example `revisions.rNNN.source_fix.drop_support_bars`), then the next revision with the same seeds and noise.
-- Fixing a small bug in a script (keep one copy, in `scripts/`, then `run.sh sync`).
-
-## Stop and write BLOCKED for the PM
-
-Write `BLOCKED <slug> <rev>: <reason, numbers, logs>` in `PLAN_REVIEW.md` and in the report, then continue with other songs.
-
-- Tempo would move more than ±10 % from the reference median.
-- Any standard would change: instruments, arrangement rules, chime, finish level, gates or their thresholds.
-- A version still fails after one source fix.
-- The melody file looks wrong (notes, chords, meter, pickup, or it does not match the public-domain tune).
-- The server is unreachable (do not fall back to the Mac).
-
-## Common errors
-
-| Message | Fix |
-|---|---|
-| `copy-gate reference set missing` | `run.sh refsplit`, then `covers` again |
-| exit 65 `... exists` / `already started` | revision is final: declare the next revision and plan it |
-| `no ... run sync from the Mac first` / `no sources` / `no calibration` | run the missing earlier phase |
-| `another carol worker is active` (73) | another job holds the song: wait, do not start a second one |
-| `SOURCE_BUZZ_FAIL` (4) | source too bright: change the source (support register / pattern), next revision |
-| job killed, no output | `guard.sh kills`, then the same command |
-| `PULL_CHECKSUM_FAIL` | pull again; if it persists the server package changed: report |
-| `server melody-source.json differs` | the melody file changed after earlier revisions: PM decides |
-
-## After delivery
-
-- `run.sh record` adds one usage row per chime to `accent-library/usage.jsonl` (skips rows already there) and sets each style in `pool-state.json` to `ready_for_listening` or `BLOCKED_no_take_passes_all_gates`.
-- `source_verified`, `technical_pass`, `ready_for_listening`, `listener_accepted` and `release_approved` stay separate. Only the CEO's listening sets `listener_accepted`; record feedback as `use_now`, `small_revision` or `rearrange` ([listener feedback](references/listener-feedback.md)). Accent-only feedback uses `remix`; source feedback needs a new revision.
+- `scripts/pd_audit.py` (`compare` / `check` / `summary [--album]` / `dispute <slug>`): public-domain proof per melody file in `research/christmas-carols/pd-audit/<slug>.json`. A song goes into an album only when its verdict is `clean`; a Content ID claim is answered with `dispute <slug>`. Rules: [references/pd-audit.md](references/pd-audit.md).
 
 ## Hard rules
 
-- Melody, rhythm, meter and harmony of the public-domain tune stay intact; piano plays every melody note.
-- Instruments are exactly those of the style (piano, pad, optional celesta or vibraphone). No voice, strings, choir, percussion, glockenspiel.
-- Two takes per style (seed and noise from WORKFLOW.json); no seed search. Both fail → fix the source.
-- Chime only in finishing, never in source or caption. Raw covers are never edited, cut or limited.
+- The current Mureka source lane accepts only the PM allowlist and tier I/II songs. Do not revive withdrawn audit entries or tier III songs.
+- The piano WAV and MIDI contain three consecutive complete source melody passes. Do not add harmony, intros, outros or extra notes, and do not add a fourth pass.
+- Every Mureka prompt asks for the exact input melody, key, meter and quarter-note BPM; a take is accepted on the recognizable-opening gate above, not on exact notes. Every take is instrumental; any voice is a flag.
+- Melody, rhythm and meter of the public-domain print stay intact; piano plays every melody note (the render refuses a melody that differs from the source file).
 - Claude/Codex cannot judge sound by ear: report measurements, never claim it sounds good.
-- One worker per song at a time; all server commands through `.claude/skills/pm-production/scripts/server_guard/guard.sh run`.
-
-References: [ACE-Step operations](references/ace-step.md), [recorded chime](references/real-accents.md), [listener feedback](references/listener-feedback.md).
+- All server commands go through `guard.sh run`; one render job at a time.

@@ -22,7 +22,7 @@ A suggest <album> [--title-song <slug>] [--write]    # tracklist by album_rules.
 A check   <album>                                    # every album_rules.md rule + master estimate Σ duration − (n−1) × crossfade_s; exit 1 on ✖
 A build   <album> [--force]                          # tracks/NN-<slug>.md (templates/track.md) from album.md; deletes stale ones; refuses on ✖
                                                      # <album> = albums/NNN-slug dir, or the name NNN-slug [--channel <ch>]
-A board   --channel <ch>                             # each album + its Short: tracks, master, 4K image, loop, video, youtube.md, S3, uploaded, next job
+A board   --channel <ch>                             # each album + its Short: tracks, master, 4K image, loop, video, youtube.md, package (Drive), uploaded, next job
 $PY $PM/scripts/results.py --channel <ch> [--no-fetch]   # production/<ch>/results.md: each video vs the channel median at 48 h / 7 d
 .claude/skills/upload-youtube-translate/.venv/bin/python $PM/scripts/analytics.py fetch --channel <ch>   # retention, CTR, traffic (CEO: `auth` once)
 python3 $PM/scripts/lint_skills.py                   # no skill / template may name a channel (CLAUDE.md §2)
@@ -61,7 +61,7 @@ R&D data (yt.py fast, phrase bank) + results.md + CEO idea ──▶ PM + CEO: a
                      video.py album (server): full video on the server                        Short render + youtube.md
                                             └──────────────────────────────┬──────────────────────────────────────┘
                                                                            ▼
-                                    video.py package <album> (server): ONE zip on S3 = album + short/ + README
+                                    video.py package <album> (server): ONE zip on Google Drive = album + short/ + README
                                                                            ▼
             CEO uploads album → Short (same day, hours in publish.md) → after-upload (post): Video URLs, Short's album link, translate
                                                                            ▼
@@ -85,7 +85,7 @@ R&D data (yt.py fast, phrase bank) + results.md + CEO idea ──▶ PM + CEO: a
 
 ## 3. Definition of done
 
-Delivered = the CEO can upload the whole package from **one** S3 zip (board: `CEO: upload album → Short`):
+Delivered = the CEO can upload the whole package from **one** zip on Google Drive (board: `CEO: upload album → Short`):
 
 | Album (`albums/NNN-slug/`) | Short (`albums/NNN-slug/short/`, part of the album; old `shorts/NNN-slug/`: `shorts.py migrate`) |
 |---|---|
@@ -94,7 +94,7 @@ Delivered = the CEO can upload the whole package from **one** S3 zip (board: `CE
 | `thumbnail.png` 3840×2160 + `thumbnail.jpg` ≤ 2 MB, text = `brief.thumbnail_text` | Short video rendered (`video/video.mp4.json`) |
 | `video/loop.mp4` (+ `video.py qa` PASS on a cinema channel) | `youtube.md` passing `shorts.py check` |
 | full video on the server (`video/video.mp4.json`, length = master) | inside the album's zip (`short/`) |
-| `youtube.md` passing `publish.py check` · one zip on S3 with album + Short (`video.py package <album>`, `s3-package.json` → `parts` album + short, `checks` pass) | |
+| `youtube.md` passing `publish.py check` · one zip on Google Drive with album + Short (`video.py package <album>`, `s3-package.json` → `parts` album + short, `checks` pass) | |
 
 Then (not part of delivery): Video URLs filled, translations written, results at 48 h / 7 d, checklist ticked.
 
@@ -157,7 +157,7 @@ Record every decision in the ledger (`what · chosen · why`).
 - Suno official download count went up (quota alert) → stop the suno lane for the whole run.
 - Suno / ChatGPT logged out → that lane stops. Chrome window missing → start it (`suno-chrome.sh` / `chatgpt-chrome.sh`).
 - GPU server unreachable → server jobs wait; retry with a background `until ssh … true; do sleep 300; done`.
-- S3 / AWS fails → report "video on server, not packaged". Credits below the reserve → hold the suno lane.
+- Drive (rclone) / S3 upload fails → report "video on server, not packaged". Credits below the reserve → hold the suno lane.
 
 ## 8. Results review
 
@@ -178,9 +178,16 @@ else → ledger *Để sau* → the process review. A small fact learned → one
 
 1. **Bám trend / brief:** each album · its topic · source (CEO / R&D) · the bank entry its title and image text adapt.
 2. **View:** each published video at 48 h / 7 d · × the median of its kind · the verdict.
-3. Đã làm (per package: title · length · songs new/reused · S3 or what is missing) · credits used, official downloads unchanged.
+3. Đã làm (per package: title · length · songs new/reused · Drive link or what is missing) · credits used, official downloads unchanged.
 4. Quyết định của PM (from the ledger) · bài học + what changed in `direction.md` · việc cần CEO (upload album → Short
    in the hours of `publish.md`, AI disclosure = Yes, Related video on the Short; logins; proposals ≤ 5).
+
+## 11. Codex workers (only when the CEO asks)
+
+Known-flow work whose output a tool can check may go to Codex (`cx/gpt-6.1-sol`) to save Claude tokens; you still write the
+brief, watch every command (`scripts/codex_task.py status`, `--forbid`, `audit`) and check the output by machine before it
+counts. A worker sees only images attached at start (`--image`), never ones it opens itself; never give it a check whose
+answer it can reach; calibrate a new job type on items you already know first. Rules, commands, lessons: [references/codex.md](references/codex.md).
 
 ## Files
 
@@ -191,6 +198,8 @@ else → ledger *Để sau* → the process review. A small fact learned → one
 | `scripts/inventory.py` | pool counts, next numbers, credits, Chrome + server health (python3 only) |
 | `scripts/results.py` | views at 48 h / 7 d from rnd-youtube-api `yt.py videos` snapshots (`research/yt/videos/<channel_id>/`) |
 | `scripts/analytics.py` | YouTube Analytics per video → `production/<ch>/analytics.json` (upload-youtube-translate's venv + OAuth client) |
+| `scripts/codex_task.py` | Codex worker: start on a brief (allow / forbid), status, audit out-of-scope writes, stop |
+| `scripts/codex_agent.py` | named Codex agents from `.codex/agents/*.toml` (resource queue reviewer) |
 | `scripts/lint_skills.py` | reports every skill / template line naming a channel |
 
 ## Server guard

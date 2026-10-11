@@ -1,5 +1,5 @@
 ---
-album: <NNN-album>                 # album chứa Short này (thư mục cha) = Related video; Short nằm trong zip S3 của album này
+album: <NNN-album>                 # album chứa Short này (thư mục cha) = Related video; Short nằm trong zip (Google Drive) của album này
 song: <song-slug>                  # bài trong kho channel/<ch>/songs/ (album.md brief.short.song, mặc định bài 1)
 title: <Song Title>                # tên bài (song card)
 clip_id: <suno clip uuid>          # để tìm lại bài khi bài bị đổi tên (`shorts.py spec`)

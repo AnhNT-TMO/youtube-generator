@@ -1,0 +1,581 @@
+{
+  "theme": "castle/great-hall",
+  "target": 40,
+  "defaults": {
+    "lens": "35mm lens at f/5.6",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "indoor",
+      "scale": "vista",
+      "category": "great-hall"
+    }
+  },
+  "shots": [
+    {
+      "id": "gh-01",
+      "subject": "A vast medieval great hall of an ancient castle school of magic on Christmas night: four long wooden banquet tables set with golden plates and goblets run toward a raised high table, hundreds of lit white candles float motionless in the air above the tables, a row of tall decorated Christmas fir trees with gold and red baubles stands along the stone walls, evergreen garlands and long plain scarlet, green, blue and yellow banners hang from the walls, and the high enchanted ceiling shows a dark starry night sky from which a few sparse snowflakes drift down and fade away above the candles",
+      "composition": "Eye-level view from a front corner of the hall looking diagonally across the long tables toward the high table and the tall arched windows at the far end; the floating candles fill the upper third, the nearest table runs from the lower left",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames, the fir tree lights and the few sparse snowflakes high above",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "indoor-sparse"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "gh-02",
+      "subject": "A vast medieval great hall of an ancient castle with bare honey-colored stone walls on Christmas night: four long wooden banquet tables set with golden plates and goblets run toward a raised high table, hundreds of lit white candles float motionless in the air above the tables, a row of tall decorated Christmas fir trees with gold and red baubles stands along the stone walls, thick evergreen garlands with red ribbons and iron candle sconces on the walls, tall arched leaded windows at the far end, and a high dark vaulted ceiling with a starry night sky; the walls carry no banners, flags, tapestries or hangings of any kind",
+      "composition": "Eye-level view from a front corner of the hall looking diagonally across the long tables toward the high table and the tall arched windows; the floating candles fill the upper third, the nearest table runs from the lower left",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames, the wall sconce flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "gh-03",
+      "subject": "The vast great hall of an ancient castle school of magic on Christmas night seen from the raised high table: four long wooden banquet tables set with golden plates run away toward a pair of huge carved oak entrance doors, hundreds of lit white candles float motionless above them, tall decorated fir trees with gold and red baubles line both stone walls, and thick evergreen garlands with red ribbons swag between iron wall sconces",
+      "composition": "High eye-level view from behind the centre of the high table looking straight down the hall to the entrance doors; the empty high table edge sits low in frame, the floating candles fill the upper third",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames, the wall sconce flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "gh-04",
+      "subject": "The great hall of an ancient castle school of magic on Christmas night seen from a high carved stone gallery: long banquet tables glitter with golden plates and goblets far below, a sea of lit candles floats motionless at gallery height, rows of decorated fir trees glow along the walls, and a few sparse snowflakes drift down from the dark enchanted starry ceiling and fade away before reaching the candles",
+      "composition": "High-angle view from a side gallery looking down and across the whole hall toward the tall arched windows; the stone balustrade runs thin along the very bottom edge",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames, the fir tree lights and the few sparse snowflakes drifting from the ceiling",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "indoor-sparse"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "gh-05",
+      "subject": "Looking up from the central aisle of a vast medieval great hall on Christmas night: hundreds of lit white candles float motionless at different heights against a high enchanted ceiling that shows a deep blue starry night sky, the tops of tall decorated fir trees with gold baubles rise along both walls, stone pillars and garlands frame the view, and a few sparse snowflakes drift down from the ceiling and fade above the candles",
+      "composition": "Low-angle upward view from the aisle floor; the tips of two long tables lead in from the lower corners, candles and starry ceiling fill the upper two thirds",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames, the fir tree lights and the few sparse snowflakes high above",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "indoor-sparse"
+      },
+      "lens": "20mm lens at f/5.6"
+    },
+    {
+      "id": "gh-06",
+      "subject": "A huge carved stone fireplace in the side wall of a medieval great hall on Christmas night, tall enough to stand in, with a great Yule log burning in a roaring fire, a thick evergreen garland with red ribbons and pine cones across the mantel, two tall decorated fir trees with gold and red baubles flanking it, iron candle stands on either side and the end of a long banquet table with golden goblets in the foreground middle",
+      "composition": "Medium-wide frontal view of the fireplace from across the hall floor, the fireplace centred, the end of a banquet table at the lower left in the middle distance",
+      "look": "candle-night",
+      "motion_elements": "the roaring fire, the candle flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "gh-07",
+      "subject": "A long row of twelve giant Christmas fir trees standing along the stone wall of a medieval castle great hall at night, each richly decorated with gold and red baubles, small warm candle-like lights and red ribbon bows, tall iron sconces with burning candles between them, evergreen garlands across the stone, and lit candles floating motionless just above the treetops",
+      "composition": "Medium view along the line of trees in receding perspective from one end of the wall, the trees diminishing toward the far windows",
+      "look": "candle-night",
+      "motion_elements": "the fir tree lights, the sconce candle flames and the floating candle flames",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      },
+      "lens": "50mm lens at f/4"
+    },
+    {
+      "id": "gh-08",
+      "subject": "The great hall of an ancient castle school of magic on a snowy Christmas morning: soft grey daylight pours through tall arched leaded windows with snow piled on the sills and snow falling outside, long tables are laid for a Christmas breakfast with silver teapots and porridge bowls gently steaming, candles float motionless above, and tall decorated fir trees glow warmly along the walls",
+      "composition": "Wide eye-level view from a corner across the tables toward the bright windows on the long side wall",
+      "look": "interior-day",
+      "motion_elements": "bowls, the floating candle flames and the snow falling outside the windows",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "gh-09",
+      "subject": "A vast candlelit great hall of an ancient castle on Christmas night, almost empty after the feast: at the far end of one long banquet table two students sit side by side reading old books by a golden candelabra, seen strictly from behind in long black wool robes, one with short straight brown hair and a scarlet-and-gold striped scarf, the other with a blonde ponytail and a blue-and-bronze striped scarf; candles float motionless overhead and fir trees glow along the walls",
+      "composition": "Eye-level view straight down the length of the table from its near end; the two students sit small in the middle distance with their backs to the camera, the table top leading toward them",
+      "look": "candle-night",
+      "motion_elements": "the candelabra flames, the floating candle flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "gh-10",
+      "subject": "A single student stands still in front of the tallest Christmas fir tree at the end of a medieval great hall on Christmas night, looking up at it, seen strictly from behind in a long black wool robe with a green-and-silver striped scarf and a dark braid down the back; the tree is covered in gold and red baubles and warm candle-like lights, lit candles float motionless above, and a stone fireplace glows to one side",
+      "composition": "Wide view from further back in the aisle behind the student; the student is small in the lower centre, the towering tree fills the middle of the frame",
+      "look": "candle-night",
+      "motion_elements": "the fir tree lights, the floating candle flames and the fireplace fire",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "gh-11",
+      "subject": "A tall arched bay of leaded windows in a medieval castle great hall at blue hour on Christmas Eve, deep blue snowy grounds and dark distant mountains visible outside with snow falling past the glass, wide stone window sills set with thick burning candles and small evergreen sprigs, a decorated fir tree glowing beside the bay, and floating candles hanging motionless in the warm air of the hall",
+      "composition": "Medium-wide view from inside the hall toward the window bay, the windows filling the centre, a stretch of empty flagstone floor in the foreground",
+      "look": "candle-night",
+      "motion_elements": "the candle flames on the sills, the fir tree lights and the snow falling outside the windows",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "gh-12",
+      "subject": "Seen from the dark stone entrance hall through a pair of enormous open carved oak doors: the great hall of an ancient castle school of magic glows beyond on Christmas night, its long tables shining with golden plates, hundreds of candles floating motionless above, decorated fir trees in rows, evergreen garlands, and warm golden light spilling across the threshold onto the worn flagstones of the entrance hall",
+      "composition": "Wide view centred on the open doorway from inside the entrance hall; the open doors frame the bright hall, the dim entrance floor in the foreground is empty",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames, the fir tree lights and the torch flames beside the doors",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "gh-13",
+      "subject": "A Christmas feast laid on a long oak banquet table in a medieval castle great hall: roast birds on silver platters, bowls of roast potatoes and steaming soup tureens, plum puddings, mince pies, golden goblets and tall candelabra with burning candles, red Christmas crackers beside the plates, holly sprigs along the table, and decorated fir trees glowing softly in the background",
+      "composition": "Medium view along the table at seated eye level, the table running diagonally from the lower left into the soft background",
+      "look": "candle-night",
+      "motion_elements": "the steam rising from the dishes, the candelabra flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      },
+      "lens": "50mm lens at f/4"
+    },
+    {
+      "id": "gh-14",
+      "subject": "A student sits still on a deep cushioned stone window seat in a medieval castle great hall on a snowy Christmas afternoon, seen strictly from behind, looking out of a tall arched leaded window at snowy grounds and a frozen lake; long black wool robe, a yellow-and-black striped scarf and a grey knitted wool hat; snow falls outside, a decorated fir tree glows beside the window and candles float motionless in the hall",
+      "composition": "Wide view from further back, inside the hall behind the student; the window bay fills the centre with the small seated figure in its lower part",
+      "look": "interior-day",
+      "motion_elements": "the snow falling outside, the fir tree lights and the floating candle flames",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "gh-15",
+      "subject": "A medieval castle great hall dressed for a winter Christmas ball: long garlands of frosted evergreen, white winter roses and silver-white baubles hang along the stone walls, tall fir trees are frosted with silver and white decorations and warm small lights, icicle-like crystal ornaments sparkle on iron chandeliers full of burning candles, the long tables are covered in white cloths with silver candelabra, and candles float motionless overhead",
+      "composition": "Wide eye-level view from the side wall diagonally across the tables toward the far fireplace",
+      "look": "candle-night",
+      "motion_elements": "the chandelier candle flames, the candelabra flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "gh-16",
+      "subject": "The raised high table of a medieval castle great hall on Christmas night: a long oak table with high-backed carved chairs, golden candelabra with tall burning candles, golden plates and a centrepiece of holly, pine cones and red ribbons, a towering arched leaded window behind it showing a snowy night, and two tall decorated fir trees standing at each end of the dais",
+      "composition": "Medium frontal view from the hall floor slightly below the dais, the high table centred under the great window",
+      "look": "candle-night",
+      "motion_elements": "the candelabra flames, the fir tree lights and the snow falling beyond the window",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      },
+      "lens": "50mm lens at f/4"
+    },
+    {
+      "id": "gh-17",
+      "subject": "Three students stand still side by side in a tall window bay of a candlelit medieval castle great hall on Christmas night, watching snow fall over the dark castle grounds, seen strictly from behind in long black wool robes: one with a short auburn bob and a blue-and-bronze striped scarf, one with short dark brown hair and a green-and-silver scarf, one in a knitted wool hat with a yellow-and-black scarf",
+      "composition": "Wide view from further back in the hall behind them; the three small figures stand in the lower centre of the tall windows, a decorated fir tree at the edge of the bay",
+      "look": "candle-night",
+      "motion_elements": "the snow falling outside the windows, the floating candle flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "gh-18",
+      "subject": "A vast medieval castle great hall on a quiet snowy Christmas day: soft silver light from a whole wall of tall arched leaded windows falls across four long empty banquet tables, snow falls thickly outside the glass, decorated fir trees with gold and red baubles glow warmly along the opposite wall, evergreen garlands hang between iron sconces, and lit candles float motionless high above the tables",
+      "composition": "Wide eye-level view from the entrance end along the window wall, the bright windows on the left, the trees on the right",
+      "look": "interior-day",
+      "motion_elements": "the snow falling outside the windows, the floating candle flames and the fir tree lights",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "gh-19",
+      "subject": "A medieval castle great hall on Christmas night seen from the side wall: four long banquet tables cross the frame in parallel rows, each lined with golden goblets and burning candelabra, hundreds of white candles float motionless in rows above each table, and on the far wall a long row of tall arched windows with snow on their ledges alternates with decorated fir trees and garlands",
+      "composition": "Wide eye-level view perpendicular to the tables, the table ends stepping back in layers toward the far wall",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames, the candelabra flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "gh-20",
+      "subject": "A single student sits still on a low wooden bench before the huge stone fireplace of a medieval castle great hall on Christmas night, reading an old book in the firelight, seen strictly from behind in a long black wool robe with a blue-and-bronze striped scarf and short curly dark hair; a great log fire burns, evergreen garlands with red ribbons hang over the mantel and a decorated fir tree glows beside the hearth",
+      "composition": "Wide view from further back in the hall floor behind the student, the fireplace in the centre, the small seated figure in the lower middle",
+      "look": "candle-night",
+      "motion_elements": "the fireplace fire, the fir tree lights and the candle flames on the mantel",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "gh-21",
+      "subject": "A medieval castle great hall on Christmas night hung with huge round iron chandeliers on long chains, each ringed with dozens of burning candles and wrapped in evergreen and red ribbon, holly-and-ivy arches spanning the aisles between the long banquet tables, kissing boughs of mistletoe hanging from the arches, golden goblets on the tables and tall decorated fir trees glowing along the walls. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "Wide eye-level view down the central aisle through the succession of evergreen arches toward the far windows",
+      "look": "candle-night",
+      "motion_elements": "the chandelier candle flames, the table candles and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "gh-22",
+      "subject": "A corner of a medieval castle great hall on Christmas night: a tall decorated fir tree with gold and red baubles and warm candle-like lights stands beside a stone window, a heap of presents wrapped in brown paper and red ribbon lies beneath it, a small iron brazier with glowing coals warms the corner, and a pair of thick candles burns on the deep window sill with a calm dark night outside. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "Medium view of the tree and window from a few metres away, open flagstone floor in front",
+      "look": "candle-night",
+      "motion_elements": "the fir tree lights, the brazier coals and candle flames, and the snow falling outside",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      },
+      "lens": "50mm lens at f/4"
+    },
+    {
+      "id": "gh-23",
+      "subject": "Two students stand still in the central aisle of a medieval castle great hall on a snowy Christmas morning, looking straight ahead toward the tall end windows, seen strictly from behind in long black wool robes with their hands hidden in their sleeves: one with a short brown bob and a scarlet-and-gold scarf, one with short straight brown hair and a green-and-silver scarf; the high enchanted ceiling is a flat, plain silver-grey daytime sky with no stars and nothing falling from it; grey daylight from tall windows. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "Wide eye-level view down the aisle from far behind them, the two small figures (about one sixth of the frame height) in the middle distance between the long tables",
+      "look": "interior-day",
+      "motion_elements": "the floating candle flames and the fir tree lights",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "gh-24",
+      "subject": "A long dessert table in a medieval castle great hall on Christmas night: plum puddings crowned with holly, one of them flickering with soft blue brandy flames, tiered plates of mince pies and gingerbread, a tall croquembouche, silver jugs of hot custard gently steaming, golden candelabra with burning candles, and decorated fir trees glowing softly behind",
+      "composition": "Medium view across the table at standing eye level, the table running from the lower right into the soft background",
+      "look": "candle-night",
+      "motion_elements": "the blue flames on the pudding and the candelabra flames",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      },
+      "lens": "50mm lens at f/4"
+    },
+    {
+      "id": "gh-25",
+      "subject": "A student sits perfectly still halfway along an empty long banquet table, far from the camera, in a medieval castle great hall on Christmas night, hands hidden in the sleeves, in the light of a golden candelabra, seen strictly from behind in a long black wool robe with a yellow-and-black striped scarf and a long dark braid; the rest of the table stretches away with golden plates, hundreds of candles float motionless above and fir trees glow along the far wall",
+      "composition": "Wide view from far back, the empty table end and bare stone floor in the foreground, the small seated figure (about one sixth of the frame height) halfway down the table toward the far wall",
+      "look": "candle-night",
+      "motion_elements": "the candelabra flames, the floating candle flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "gh-26",
+      "subject": "A view from a dim stone side corridor through a tall pointed archway into the great hall of an ancient castle school of magic on Christmas night: beyond the arch the hall glows gold with floating motionless candles, long tables with golden goblets and a row of decorated fir trees, while iron torches burn on the corridor walls and an evergreen garland with red ribbons hangs over the arch",
+      "composition": "Eye-level view down the short corridor, the archway framing the bright hall in the centre, the empty corridor floor in the foreground",
+      "look": "candle-night",
+      "motion_elements": "the corridor torch flames, the floating candle flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "gh-27",
+      "subject": "A medieval castle great hall late on Christmas night after everyone has gone: the table candles have burned out, only the floating candles still glow motionless above the long empty tables, the great fireplace has burned down to glowing embers with a few low flames, decorated fir trees shimmer softly, and pale cool moonlight falls through the tall arched leaded windows across the flagstones, mixing with the warm candle glow. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills. The windows are softly glowing frosted glass with no clear view through them. No teapots, kettles, pots, cups, mugs, tankards or jugs anywhere. Any fireplace mantel is plain stone with no carved emblem or shield; tapestries and banners are plain.",
+      "composition": "Wide eye-level view from a front corner diagonally across the tables toward the moonlit windows and the fireplace",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames, the low fireplace flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "gh-28",
+      "subject": "Seen from very far back across the hall, two tiny students (each about one eighth of the frame height) sit still on a low bench beside a tall decorated Christmas fir tree in a medieval castle great hall on Christmas night, looking up at its warm lights, seen strictly from behind in long black wool robes: one with a dark brown bob and a green-and-silver striped scarf, one with short straight dark-brown hair and a yellow-and-black striped scarf; gold and red baubles, candles float motionless above, and a long banquet table glows beyond Any fireplace mantel is plain stone with no carved emblem or shield; tapestries and banners are plain. No teapots, kettles, pots, cups, mugs, tankards or jugs anywhere.",
+      "composition": "Very wide view from the far end of the hall: the tall tree and the bench small in the distance, lots of empty floor and tables in front",
+      "look": "candle-night",
+      "motion_elements": "the fir tree lights, the floating candle flames and the candelabra flames on the table",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "gh-29",
+      "subject": "A medieval castle great hall on Christmas Eve with its stone pillars wound in thick evergreen garlands and red ribbons, potted fir trees dusted with real snow standing between the pillars and glowing with small warm candle-like lights, frost patterns on the tall windows, long tables set with silver and gold, and lit candles floating motionless overhead. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "Wide view between two rows of pillars along a side aisle, the garlanded pillars receding toward the far end",
+      "look": "candle-night",
+      "motion_elements": "the fir tree lights, the floating candle flames and the candles on the tables",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "gh-30",
+      "subject": "Seen from far back, a single small student (about one sixth of the frame height) stands still in the middle of the aisle of a medieval castle great hall on Christmas night, looking up at the calm, plain deep-blue enchanted ceiling where nothing moves or falls, seen strictly from behind in a long black wool robe, a blue-and-bronze striped scarf and a cream knitted wool hat; long tables, floating motionless candles and decorated fir trees all around No altar, shrine, statue or carved centrepiece anywhere; the high table is a plain long wooden table. The windows are softly glowing frosted glass with no clear view through them. No teapots, kettles, pots, cups, mugs, tankards or jugs anywhere.",
+      "composition": "Wide eye-level view from behind the student along the aisle; the small figure stands in the lower centre, the ceiling and candles fill the upper half",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "gh-31",
+      "subject": "A row of three tall arched leaded windows in the stone wall of a medieval castle great hall on Christmas night, their small panes edged with frost, thick white candles burning on the deep stone sills between evergreen sprigs and red ribbons, only a flat, plain, calm dark night sky outside with nothing in it, and the warm glow of the hall's floating candles reflected faintly in the glass. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills. No teapots, kettles, pots, cups, mugs, tankards or jugs anywhere.",
+      "composition": "Medium frontal view of the three windows from inside the hall, the sills at lower third, plain stone wall between the windows",
+      "look": "candle-night",
+      "motion_elements": "the candle flames on the sills, the snow falling outside and the reflected candle glow",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      },
+      "lens": "50mm lens at f/4"
+    },
+    {
+      "id": "gh-32",
+      "subject": "A carved oak minstrels' gallery high on the end wall of a medieval castle great hall on Christmas night, its balustrade wound with thick evergreen garlands, red ribbons and small warm candle-like lights, a row of tall church candles burning along its rail, a decorated fir tree standing at each end of the gallery, and below it the glowing tops of long banquet tables under motionless floating candles",
+      "composition": "Medium-wide upward view from the hall floor toward the gallery, the gallery across the upper middle, the tables' far ends along the bottom",
+      "look": "candle-night",
+      "motion_elements": "the gallery candle flames, the garland lights and the floating candle flames",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      },
+      "lens": "35mm lens at f/5.6"
+    },
+    {
+      "id": "gh-33",
+      "subject": "Seen from far back, two small students (about one sixth of the frame height) sit still side by side on a bench at a long banquet table in a medieval castle great hall on Christmas night, facing away toward the high table and the tall glowing windows, seen strictly from behind in long black wool robes: one with a dark braid and a scarlet-and-gold scarf and one with short straight brown hair and a yellow-and-black scarf; candles float motionless above. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills. The windows are softly glowing frosted glass with no clear view through them. No teapots, kettles, pots, cups, mugs, tankards or jugs anywhere.",
+      "composition": "Wide eye-level view from the aisle behind them, the three small seated figures in the middle distance along the table",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames, the candelabra flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "gh-34",
+      "subject": "A single Christmas place setting on a long oak banquet table in a medieval castle great hall: a golden plate, a golden goblet, a red paper Christmas cracker, a sprig of holly, a small dish of clove-studded oranges and gingerbread stars, and a short golden candlestick with a burning candle, with the softly blurred golden glow of floating candles and decorated fir trees behind. No cups, mugs, jugs or steam anywhere.",
+      "composition": "Close view at seated eye level, the setting in the lower centre, a deep soft-focus background of hall lights",
+      "look": "candle-night",
+      "motion_elements": "the candle flame and the soft lights behind",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "close"
+      },
+      "lens": "50mm lens at f/2.8"
+    },
+    {
+      "id": "gh-35",
+      "subject": "A student sits still on the broad stone hearth step beside the great fireplace of a medieval castle great hall on a snowy Christmas afternoon, reading, seen strictly from behind in a long black wool robe with a green-and-silver striped scarf and a short straight dark ponytail; a log fire burns warmly, soft grey daylight glows through tall plain frosted silver-grey windows, and a decorated fir tree glows by the hearth. Nothing outside is visible through the frosted glass: no rooftops, towers or trees. No jugs, cups or pots anywhere.",
+      "composition": "Wide view from further back in the hall floor behind and slightly to the side of the student, the fire on the left, the windows in the background",
+      "look": "interior-day",
+      "motion_elements": "the fireplace fire and the fir tree lights",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "gh-36",
+      "subject": "A medieval castle great hall on Christmas night seen from the far end looking back toward the entrance: the huge carved oak doors stand closed and are flanked by two giant decorated fir trees reaching nearly to the ceiling, the four long tables lead toward them glittering with golden plates, hundreds of candles float motionless overhead, and garlands with red ribbons swag above the doors",
+      "composition": "Wide eye-level view from the dais steps looking down the hall, the doors and twin trees centred at the far end",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames, the giant fir tree lights and the torches beside the doors",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "gh-37",
+      "subject": "Two students sit still on the wide stone steps of the raised dais in a medieval castle great hall on Christmas night, looking out across the hall, seen strictly from behind in long black wool robes: one with a short auburn bob and a yellow-and-black striped scarf, one with short straight blonde hair and a blue-and-bronze striped scarf; before them long tables shine with golden plates under hundreds of motionless floating candles",
+      "composition": "Wide high eye-level view from the high table behind them, the two small seated figures on the steps in the lower third, the hall spreading out beyond",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames, the candelabra flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "gh-38",
+      "subject": "The great hall of an ancient castle on Christmas night under a high dark carved wooden-beam ceiling: hundreds of motionless floating candles, long tables set with golden plates, decorated fir trees glowing along the walls, plain stone columns, and a great fire burning at the far end beneath a garland on a plain stone mantel. The air is perfectly still and no snow falls anywhere in the hall.",
+      "composition": "Wide eye-level view from just inside the entrance doors looking down the whole hall toward the far fireplace",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames and the fireplace fire",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "gh-39",
+      "subject": "A single small student (about one sixth of the frame height) stands still a few steps inside a pair of huge open carved oak doors, looking into the golden great hall of an ancient castle on Christmas night, seen strictly from behind in a long black wool robe with a yellow-and-black striped scarf and short straight light-brown hair; beyond, long tables glitter beneath hundreds of motionless floating candles and rows of decorated fir trees. Hands hidden in the robe. No lanterns or candles on the floor; only torches fixed high on the walls.",
+      "composition": "Very wide view from far back in the dim entrance hall behind the student; the tiny figure stands in the lower centre of the bright doorway",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames, the fir tree lights and the torch flames on the door frame",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "gh-40",
+      "subject": "A medieval castle great hall at blue hour on Christmas Eve, the candles just lit: deep blue twilight glows through tall arched frosted leaded windows, while inside the floating candles, the candelabra on the long tables and the great fireplace cast warm gold across stone walls hung with garlands and decorated fir trees. Nothing outside is visible through the frosted glass: no rooftops, towers or trees. No snow falls anywhere.",
+      "composition": "Wide eye-level view from a corner across the tables toward the blue windows, warm hall and blue windows balanced in frame",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames, the fireplace fire and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "gh-41",
+      "subject": "Twelve tall decorated fir trees lining the stone walls of a vast medieval castle great hall on Christmas night, glowing with warm candle-like lights and gold baubles, hundreds of motionless floating candles high above, long empty oak tables down the middle with golden plates, plain stone columns, a great fire at the far end. The windows are thick frosted leaded glass glowing softly; nothing outside is visible through them and no snow falls indoors. No teapots, kettles, pots, cups, mugs or jugs anywhere. No candles or lanterns stand on the floor. No banners, tapestries, crests or lettering anywhere.",
+      "composition": "Wide eye-level view down the length of the hall between the trees, the far fire in the centre",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames, the tree lights and the far fire",
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "close"
+      },
+      "id": "gh-42",
+      "subject": "Close view of a long oak banquet table in a castle great hall on Christmas night: golden plates, golden goblets, red paper crackers, bowls of oranges and gingerbread, sprigs of holly and short golden candlesticks with burning candles, the softly blurred glow of floating candles and fir trees behind. No teapots, kettles, pots, cups, mugs or jugs anywhere. No banners, tapestries, crests or lettering anywhere.",
+      "composition": "Low view along the table surface, the setting fading into soft focus",
+      "look": "candle-night",
+      "motion_elements": "the candle flames on the table and the soft lights behind",
+      "lens": "50mm lens at f/2.8"
+    },
+    {
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "gh-43",
+      "subject": "The great stone fireplace of a medieval castle great hall on Christmas night: a huge log fire, a thick evergreen garland with red bows and pine cones along a plain stone mantel, two tall decorated fir trees on either side, golden floating candles above. No teapots, kettles, pots, cups, mugs or jugs anywhere. No candles or lanterns stand on the floor. No banners, tapestries, crests or lettering anywhere.",
+      "composition": "Medium-wide view straight at the fireplace from the hall floor, the trees framing it",
+      "look": "candle-night",
+      "motion_elements": "the log fire and the floating candle flames"
+    },
+    {
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "gh-44",
+      "subject": "A quiet corner of a medieval castle great hall on a snowy Christmas afternoon: an empty carved oak bench and the end of a long table set with plates, a decorated fir tree glowing beside a plain stone column, soft grey daylight through tall frosted windows, golden floating candles. The windows are thick frosted leaded glass glowing softly; nothing outside is visible through them and no snow falls indoors. No teapots, kettles, pots, cups, mugs or jugs anywhere. No candles or lanterns stand on the floor. No banners, tapestries, crests or lettering anywhere.",
+      "composition": "Medium view from the side, the tree and column on the left, the table end on the right",
+      "look": "interior-day",
+      "motion_elements": "the tree lights and the floating candle flames"
+    }
+  ]
+}

@@ -27,6 +27,9 @@ Output: `<album>/youtube.md` (mẫu `templates/youtube.md`), mỗi ô trong mộ
   không ghi kho.
 - **Mẫu description của kênh** là `publish.md` → *Description YouTube mặc định*, dùng **nguyên văn**. Kênh mới chờ
   CEO gửi mẫu: khi khối mẫu còn chỗ `<…>`, `check` báo ❌ và `video.py package` không đóng gói. Không tự viết thay mẫu.
+- **Dòng chỉ cho nhạc public domain** (CEO 2026-10-08): dòng mẫu nào cũng nằm trong khối của mục
+  *Description: dòng chỉ cho nhạc public domain* của `publish.md` thì chỉ ghi khi `album.md` có `music_source: pd`;
+  `music_source: suno` (nhạc gốc) → bỏ hẳn các dòng đó. `check` ❌ khi ghi sai, hoặc khi album thiếu `music_source`.
 
 Chọn gì ở từng màn hình YouTube Studio, kèm lý do: `references/studio.md` (đọc khi chủ kênh hỏi một nút, hoặc trước khi
 hướng dẫn upload).

@@ -1,0 +1,26 @@
+{
+  "image": {
+    "head": "Generate a still IMAGE (a single photograph, not a video). One single picture, not a collage, grid or split frame:",
+    "realism": "Realistic landscape photograph, looks like a real place shot on a full-frame camera with a {lens}, true-to-life materials and textures, accurate real-world scale and proportions. Muted natural color grading like a calm documentary photo: greens are deep and slightly desaturated, never lime or neon; gentle contrast, no HDR look, no oversharpening. Bare rock, water and grass show irregular natural detail, slightly soft like an unprocessed camera file, never a repeating crosshatch or woven pattern. Autumn foliage reads as muted copper, rust and ochre, never saturated orange or red.",
+    "look": {
+      "interior-bright": "Bright natural daylight with lifted shadows and clear detail, never murky or crushed.",
+      "day": "Soft daylight under thin high cloud, balanced exposure with detail in both highlights and shadows, no harsh midday sun.",
+      "misty": "Cool diffused daylight through thin mountain mist, gentle contrast and clear readable layers.",
+      "golden": "Low warm golden-hour light in muted gold and soft amber tones under a pale sky, long soft shadows, restrained saturation and highlights, never a blazing orange sky.",
+      "overcast": "Quiet bright overcast daylight, soft shadows, muted contrast and natural colors.",
+      "dawn": "Early morning light with a pale cool sky and a subtle warm glow near the horizon, never a painted sunrise.",
+      "after-rain": "Soft light just after rain, damp natural surfaces and gentle reflections, subdued colors, without dramatic storm clouds."
+    },
+    "lights": "Natural light only: believable sun, sky light and soft reflections from the landscape; no artificial glow, fantasy beams or floating sparkles.",
+    "motion_ready": "Clearly visible and physically plausible in the frame: {motion_elements}.",
+    "clean": "The place is unoccupied: no people, human figures or silhouettes, no animals, birds, vehicles, signs, text, numbers, logos or brand marks; all rocks, trees, water and architecture have believable real-world geometry.",
+    "tail": "Sharp focus, a single 16:9 landscape photograph, clean edges and natural photographic depth.",
+    "season": {
+      "summer": "It is midsummer: every leaf, tree, fern, heather and grass blade is fresh green, with no yellow, orange, red or brown foliage anywhere and no snow except on the highest far peaks.",
+      "autumn": "It is autumn: the foliage shows natural autumn colors, gentle and true to life, never neon or oversaturated.",
+      "late-snow": "It is late winter going into spring: old snow lies in patches, with bare ground and pale grass showing between them.",
+      "early-snow": "It is early winter: a thin first snow lies unevenly, with grass, rock and earth showing through in many places.",
+      "winter-edge": "It is the edge of winter: frost and thin ice, pale dry grass and bare branches, with very little snow."
+    }
+  }
+}

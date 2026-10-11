@@ -1,0 +1,36 @@
+{
+  "moves": {
+    "default": ["slide to the left", "slide to the right"],
+    "deep": ["slide to the left", "slide to the right"]
+  },
+  "deep_field": "deep",
+  "sequence": [
+    {
+      "text": "Animate the exact same spring landscape from the attached image into a 10-second video. {shot} shot; the camera makes one slow, gentle lateral slider move {move} over a very short distance, about one thirtieth of the frame width in total, at the same height and with nearly the same framing from start to finish; it never travels forward or backward, never zooms, never cuts and never changes speed."
+    },
+    {
+      "field": "motion"
+    },
+    {
+      "text": "{lock} keep their exact shape, position and number for the whole clip. The moving elements described above may move naturally, but no new objects, people, animals, structures or text appear, and nothing morphs, multiplies or melts."
+    },
+    {
+      "text": "The {light} keeps the same brightness, white balance and fresh natural colors as the first frame throughout the clip."
+    },
+    {
+      "field": "extra"
+    },
+    {
+      "text": "Sound: {sound}."
+    }
+  ],
+  "fields": {
+    "shot": "Wide | Medium | Close",
+    "deep": "true for a broad meadow, long woodland path or long garden perspective; false otherwise",
+    "motion": "2-4 short English sentences, one sentence per thing that visibly moves in the source image: leaves, grass, water, mist, flowers or light",
+    "lock": "the main trees, branches, flowers, stones, water and other fixed subjects, in English and plural",
+    "light": "scene",
+    "sound": "a quiet spring ambience in English",
+    "extra": "0-2 optional English sentences for a special physical constraint; otherwise empty"
+  }
+}

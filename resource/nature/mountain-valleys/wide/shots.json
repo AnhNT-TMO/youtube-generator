@@ -1,0 +1,417 @@
+{
+  "theme": "mountain-valleys/wide",
+  "target": 27,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "day",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "wide",
+      "category": "mountain-valleys",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "mv-w-01",
+      "subject": "A broad glacial valley in early summer whose far wall is one long continuous rock-and-forest ridge, a braided pale river on the gravel floor, scattered spruce stands and a thin band of low cloud along the far ridge.",
+      "look": "dawn",
+      "composition": "Eye-level view straight across the valley from the opposite slope, facing the far wall square-on so it runs parallel to the top of the frame with no converging walls and no vanishing point; a thin strip of dark heather along the bottom edge, the braided river running sideways through the lower third, and the far wall with its cloud band filling the upper half.",
+      "motion_elements": "the braided river channels and the thin band of low cloud",
+      "tags": {
+        "comp": "across",
+        "anchor": "braided-river",
+        "season": "summer",
+        "time": "dawn",
+        "palette": "slate blue"
+      }
+    },
+    {
+      "id": "mv-w-02",
+      "subject": "A high alpine valley in autumn with golden larch slopes, grey limestone cliffs on the rim, a stream looping in tight curves across the meadow floor and soft cloud resting on the distant summits.",
+      "lens": "20mm lens at f/8",
+      "look": "golden",
+      "composition": "Looking down at about 40 degrees from a high rim, the meadow floor and its looping stream filling the lower two thirds, the larch slopes curving around it on both sides, and a thin line of distant summits along the top edge.",
+      "motion_elements": "the looping stream and the soft cloud on the summits",
+      "tags": {
+        "comp": "overlook",
+        "anchor": "river-meander",
+        "season": "autumn",
+        "time": "golden",
+        "palette": "muted gold"
+      }
+    },
+    {
+      "id": "mv-w-03",
+      "subject": "Five or six forested mountain ridges in summer, dark spruce on every crest, each ridge paler than the one in front of it and mist lying in the gaps between them.",
+      "lens": "200mm lens at f/8",
+      "look": "misty",
+      "composition": "Compressed telephoto view with no foreground, the overlapping ridges stacked from the bottom edge to near the top of the frame, darkest at the bottom and palest at the top, with a narrow strip of pale sky above.",
+      "motion_elements": "the mist lying between the ridges",
+      "tags": {
+        "comp": "tele-layers",
+        "anchor": "ridge-layers",
+        "season": "summer",
+        "time": "morning",
+        "palette": "gray mist"
+      }
+    },
+    {
+      "id": "mv-w-04",
+      "subject": "A wide treeless mountain valley in late spring with dark scree slopes, a broad gravel riverbed, long patches of old snow in the gullies and a textured grey cloud ceiling grazing the peaks.",
+      "lens": "20mm lens at f/8",
+      "look": "overcast",
+      "composition": "Low horizon: the scree ridges and snow gullies occupy only the bottom third, the riverbed is a pale line along the very bottom, and the vast textured cloud ceiling fills the upper sixty percent of the frame.",
+      "motion_elements": "the textured cloud ceiling and the shallow river channels",
+      "tags": {
+        "comp": "big-sky",
+        "anchor": "cloud-ceiling",
+        "season": "late-snow",
+        "time": "overcast",
+        "palette": "slate gray"
+      }
+    },
+    {
+      "id": "mv-w-05",
+      "subject": "A deep olive-green hanging valley after rain in summer, a wet basalt cliff streaked with several thin white waterfalls, dense grassy benches below it and torn clouds lifting off the upper slopes.",
+      "lens": "28mm lens at f/8",
+      "look": "after-rain",
+      "composition": "Two wet birch trunks and their leaning leafy branches frame the left and right edges, the basalt cliff with its thin waterfalls sits centered between them in the middle distance, and the grassy benches spread below it.",
+      "motion_elements": "the thin waterfalls, the lifting clouds and the birch leaves at the edges",
+      "tags": {
+        "comp": "natural-frame",
+        "anchor": "waterfall-thread",
+        "season": "summer",
+        "time": "after-rain",
+        "palette": "deep green"
+      }
+    },
+    {
+      "id": "mv-w-06",
+      "subject": "A sweeping view across a wide valley to a jagged dark granite range under the first snow of the season, mixed pine and yellowing birch forest on the lower slopes and fair-weather clouds above.",
+      "lens": "35mm lens at f/8",
+      "look": "day",
+      "composition": "Eye-level view across the valley from a forest clearing, the band of pine and yellow birch running horizontally through the middle of the frame, and the jagged snowy range filling the upper half with its sharpest summit just right of center.",
+      "motion_elements": "the fair-weather clouds and their soft shadows on the slopes",
+      "tags": {
+        "comp": "across",
+        "anchor": "granite-range",
+        "season": "early-snow",
+        "time": "day",
+        "palette": "slate blue"
+      }
+    },
+    {
+      "id": "mv-w-07",
+      "subject": "A mountain valley at first light in autumn, a sea of fog filling the whole valley floor, dark pine-covered spurs rising out of it and a distant snowy ridge catching pale light.",
+      "look": "dawn",
+      "composition": "From a high summit looking down at about 35 degrees, the fog sea fills the lower half with dark spurs breaking through it on the left and right, and the distant ridge runs along the horizon in the upper third.",
+      "motion_elements": "the valley fog flowing slowly around the spurs",
+      "tags": {
+        "comp": "overlook",
+        "anchor": "fog-sea",
+        "season": "autumn",
+        "time": "dawn",
+        "palette": "cool blue"
+      }
+    },
+    {
+      "id": "mv-w-08",
+      "subject": "A long valley flank in autumn, a large burnt copper-lichened boulder in tawny grass, scattered stone pines on the slope below, a winding silver stream on the valley floor and far peaks layered in warm haze.",
+      "lens": "20mm lens at f/8",
+      "look": "golden",
+      "composition": "Camera low beside the boulder, which fills the lower left third of the frame with amber grass around it, the slope dropping away in the middle ground to the silver stream, and the hazy peaks across the top.",
+      "motion_elements": "the amber grass around the boulder and the winding silver stream",
+      "tags": {
+        "comp": "low-foreground",
+        "anchor": "orange-boulder",
+        "season": "autumn",
+        "time": "golden",
+        "palette": "muted gold"
+      }
+    },
+    {
+      "id": "mv-w-09",
+      "subject": "A long deep olive-green mountain valley in summer with a clear river curving gently between forested slopes, gravel banks on the bends and rounded mountains closing the valley far away under white clouds.",
+      "lens": "35mm lens at f/8",
+      "look": "day",
+      "composition": "Standing on a gravel bar in the middle of the valley and looking up its length, the river curves away to the left after a short distance, the forested slopes rise on both sides, and the distant mountains close the view at the center.",
+      "motion_elements": "the clear river current and the white clouds",
+      "tags": {
+        "comp": "axis",
+        "anchor": "valley-river",
+        "season": "summer",
+        "time": "day",
+        "palette": "deep green"
+      }
+    },
+    {
+      "id": "mv-w-10",
+      "subject": "A rugged mountain pass in summer, a wide grassy saddle between two dark rocky peaks, rounded schist boulders on its slopes and a thick river of cloud spilling slowly over the saddle.",
+      "lens": "28mm lens at f/8",
+      "look": "misty",
+      "composition": "Eye-level view across a shallow side valley toward the pass, a band of boulders and tufted grass along the bottom edge, the saddle centered in the middle ground, and the cloud pouring over it between the two peaks.",
+      "motion_elements": "the cloud spilling over the saddle",
+      "tags": {
+        "comp": "across",
+        "anchor": "pass-saddle",
+        "season": "summer",
+        "time": "morning",
+        "palette": "gray mist"
+      }
+    },
+    {
+      "id": "mv-w-11",
+      "subject": "A cluster of freshly snow-dusted summits at dawn in early winter, pale pink light on the highest snow, dark forested ridges below them and a thin cloud ribbon drawn across the middle.",
+      "lens": "135mm lens at f/8",
+      "look": "dawn",
+      "composition": "Telephoto view with no foreground, the dark forested ridges forming the bottom band, the thin cloud ribbon across the middle, and the lit snowy summits stacked in the upper half.",
+      "motion_elements": "the thin cloud ribbon",
+      "tags": {
+        "comp": "tele-layers",
+        "anchor": "snow-peaks",
+        "season": "early-snow",
+        "time": "dawn",
+        "palette": "cool blue"
+      }
+    },
+    {
+      "id": "mv-w-12",
+      "subject": "A deep olive-green mountain valley in summer just after rain under a soft grey overcast sky with no direct sun, a shallow clear stream over rounded grey cobbles, wet grassy banks, a dark forested slope and a ridge with low grey clouds slowly lifting off it.",
+      "lens": "16mm lens at f/8",
+      "look": "after-rain",
+      "composition": "Camera almost at water level at the stream edge, the wet cobbles and running water filling the bottom third, the stream leading off to one side across the valley floor, and the forested slope and breaking clouds behind.",
+      "motion_elements": "the running stream over the cobbles and the breaking clouds",
+      "tags": {
+        "comp": "low-foreground",
+        "anchor": "stream-cobbles",
+        "season": "summer",
+        "time": "after-rain",
+        "palette": "slate blue"
+      }
+    },
+    {
+      "id": "mv-w-13",
+      "subject": "The head of a remote valley in autumn, a tall headwall of grey limestone tiers, rust-colored alder scrub on the avalanche slopes below and low cloud resting under the rim.",
+      "lens": "35mm lens at f/8",
+      "look": "misty",
+      "composition": "Seen from under a leaning larch: its yellow branches hang across the top edge and a dark rock ledge runs along the bottom and left edge, framing the headwall in the center of the opening.",
+      "motion_elements": "the low cloud under the rim and the yellow larch needles at the top edge",
+      "tags": {
+        "comp": "natural-frame",
+        "anchor": "cliff-headwall",
+        "season": "autumn",
+        "time": "morning",
+        "palette": "gray mist"
+      }
+    },
+    {
+      "id": "mv-w-14",
+      "subject": "A single long grassy ridge above a valley in autumn, tawny slopes with a few dark junipers, the ridge line catching the last sun and tall layered clouds lit gold above it.",
+      "look": "golden",
+      "composition": "Low horizon: the ridge line runs gently across the lower third with its tawny slope below it, and the layered golden clouds fill the upper sixty percent of the frame.",
+      "motion_elements": "the layered golden clouds and the tawny grass on the slope",
+      "tags": {
+        "comp": "big-sky",
+        "anchor": "lone-ridge",
+        "season": "autumn",
+        "time": "golden",
+        "palette": "muted gold"
+      }
+    },
+    {
+      "id": "mv-w-15",
+      "subject": "A valley glacier in late spring seen from a moraine crest, its grey-blue tongue ending in a gravel outwash plain threaded with milky streams, old snow on the side slopes and cloud covering the ice field above.",
+      "lens": "28mm lens at f/8",
+      "look": "overcast",
+      "composition": "Looking down at about 35 degrees from the moraine crest, the glacier tongue curving in from the upper right, the outwash plain and its streams spreading across the lower half, and cloud closing the top edge.",
+      "motion_elements": "the milky meltwater streams and the cloud over the ice field",
+      "tags": {
+        "comp": "overlook",
+        "anchor": "glacier-tongue",
+        "season": "late-snow",
+        "time": "overcast",
+        "palette": "slate gray"
+      }
+    },
+    {
+      "id": "mv-w-16",
+      "subject": "A wet mountain valley in autumn after rain, a dark spruce forest mixed with copper birches on the far side, grey cliffs above and a long horizontal shelf of white cloud hanging halfway up the slopes.",
+      "look": "after-rain",
+      "composition": "Eye-level view across the valley from a damp meadow, a strip of wet grass along the bottom edge, the forest across the middle, and the cloud shelf stretching horizontally across the whole frame just below the cliffs.",
+      "motion_elements": "the horizontal cloud shelf and the wet meadow grass",
+      "tags": {
+        "comp": "across",
+        "anchor": "cloud-shelf",
+        "season": "autumn",
+        "time": "after-rain",
+        "palette": "deep green"
+      }
+    },
+    {
+      "id": "mv-w-17",
+      "subject": "A cold valley at the start of winter, frost-white tussock grass on the near slope, snow-dusted slopes above the treeline, a dark band of spruce forest and a river with icy edges crossing the floor.",
+      "lens": "20mm lens at f/8",
+      "look": "dawn",
+      "composition": "Camera low among the frosted tussocks, which fill the lower third of the frame, the slope falling to the dark forest and the icy river in the middle ground, and the snow-dusted slopes under a pale sky behind.",
+      "motion_elements": "the open water of the river and the frosted grass blades",
+      "tags": {
+        "comp": "low-foreground",
+        "anchor": "frosted-tussocks",
+        "season": "winter-edge",
+        "time": "dawn",
+        "palette": "cool blue"
+      }
+    },
+    {
+      "id": "mv-w-18",
+      "subject": "Overlapping mountain slopes in early winter where a level snow line cuts across each slope, dark conifers below the line, white above, and grey cloud dragging along the upper slopes.",
+      "lens": "135mm lens at f/8",
+      "look": "overcast",
+      "composition": "Telephoto view with no foreground, three slopes overlapping from left to right, the snow line running almost level across all of them through the middle of the frame, and the cloud touching the top edge.",
+      "motion_elements": "the grey cloud dragging along the slopes",
+      "tags": {
+        "comp": "tele-layers",
+        "anchor": "snow-line",
+        "season": "early-snow",
+        "time": "overcast",
+        "palette": "slate gray"
+      }
+    },
+    {
+      "id": "mv-w-19",
+      "subject": "A sunlit deep olive-green valley floor in summer with a river and scattered spruce groves, seen from inside a shaded rocky side gully, wild grass and young rowan on the gully walls.",
+      "lens": "50mm lens at f/8",
+      "look": "day",
+      "composition": "Looking out from the shaded gully: its dark rock walls with grass and rowan leaves fill the left and right edges, and the bright valley floor with the river and far slopes sits in the opening between them.",
+      "motion_elements": "the rowan leaves and grass on the gully walls and the river on the valley floor",
+      "tags": {
+        "comp": "natural-frame",
+        "anchor": "valley-floor",
+        "season": "summer",
+        "time": "day",
+        "palette": "deep green"
+      }
+    },
+    {
+      "id": "mv-w-20",
+      "subject": "A long autumn valley of interlocking spurs, each spur covered in dark pine and yellow birch, mist lying between them and the valley disappearing into soft grey distance.",
+      "look": "misty",
+      "composition": "Looking down the length of the valley from a high bench, the spurs overlap alternately from the left and right sides, each one paler than the last, with mist between them and no straight converging lines.",
+      "motion_elements": "the mist lying between the spurs",
+      "tags": {
+        "comp": "axis",
+        "anchor": "receding-spurs",
+        "season": "autumn",
+        "time": "morning",
+        "palette": "gray mist"
+      }
+    },
+    {
+      "id": "mv-w-21",
+      "subject": "A high tundra valley in late spring after a shower, rust-colored lichen ground, low willow scrub, a network of shallow streams across the flat floor, snow patches on the dark mountains and a clearing sky with big drifting clouds.",
+      "lens": "20mm lens at f/8",
+      "look": "after-rain",
+      "composition": "Low horizon: the flat tundra floor and its streams occupy the bottom third with the dark mountains as a low band, and the clearing sky with large drifting clouds fills the upper sixty percent.",
+      "motion_elements": "the shallow streams and the drifting clouds",
+      "tags": {
+        "comp": "big-sky",
+        "anchor": "tundra-streams",
+        "season": "late-snow",
+        "time": "after-rain",
+        "palette": "slate blue"
+      }
+    },
+    {
+      "id": "mv-w-22",
+      "subject": "A junction of two mountain valleys in summer, forested ridges on both sides, a bright gravel river joined by a second stream on the floor and snowy peaks under thin high clouds.",
+      "lens": "16mm lens at f/8",
+      "look": "day",
+      "composition": "Looking down at about 45 degrees from a ridge between the two valleys, the two rivers meeting in the lower center of the frame, the forested ridges spreading to each side, and the snowy peaks along the top edge.",
+      "motion_elements": "the two joining rivers and the thin high clouds",
+      "tags": {
+        "comp": "overlook",
+        "anchor": "valley-junction",
+        "season": "summer",
+        "time": "day",
+        "palette": "slate blue"
+      }
+    },
+    {
+      "id": "mv-w-23",
+      "subject": "A high summer valley meadow with white cotton grass in dense deep olive-green grass, a calm stream on the floor and steep dark ridges still holding snow in their gullies.",
+      "look": "day",
+      "composition": "Camera low inside the meadow, a few cotton grass heads standing sharp in the lower third, the meadow opening out to the calm stream in the middle ground, and the dark ridges against the sky behind.",
+      "motion_elements": "the cotton grass heads and the calm stream",
+      "tags": {
+        "comp": "low-foreground",
+        "anchor": "cotton-grass",
+        "season": "summer",
+        "time": "day",
+        "palette": "deep green"
+      }
+    },
+    {
+      "id": "mv-w-24",
+      "subject": "The far side of a quiet valley in late spring, wide pale scree fans spreading from gullies down to a green floor, sparse dwarf pine between them, melting snow in the gullies and grey cloud moving over the crest.",
+      "lens": "28mm lens at f/8",
+      "look": "overcast",
+      "composition": "Eye-level view across the valley from a grassy slope, the green valley floor along the lower third, the row of scree fans and gullies across the middle, and the cloud along the crest at the top.",
+      "motion_elements": "the meltwater trickles on the scree fans and the grey cloud over the crest",
+      "tags": {
+        "comp": "across",
+        "anchor": "scree-fan",
+        "season": "late-snow",
+        "time": "overcast",
+        "palette": "gray green"
+      }
+    },
+    {
+      "id": "mv-w-25",
+      "subject": "Steep deep olive-green forested mountainsides after summer rain, dark wet cliffs and ragged strips of white cloud torn and drifting across the slopes at several heights.",
+      "lens": "85mm lens at f/8",
+      "look": "after-rain",
+      "composition": "Telephoto view with no foreground, three green slopes stacked behind each other filling the frame, the ragged cloud strips crossing each slope at a different height.",
+      "motion_elements": "the ragged cloud strips",
+      "tags": {
+        "comp": "tele-layers",
+        "anchor": "torn-cloud",
+        "season": "summer",
+        "time": "after-rain",
+        "palette": "moss green"
+      }
+    },
+    {
+      "id": "mv-w-26",
+      "subject": "A valley under its first snow at dawn, white meadows and a dark winding river on the floor, snow-covered spruce on the slopes and a pale lit ridge beyond.",
+      "lens": "35mm lens at f/8",
+      "look": "dawn",
+      "composition": "Seen between snow-laden spruce boughs that hang in from the left edge and the top, with a dark trunk on the right edge, the valley floor and river framed in the bright opening.",
+      "motion_elements": "the dark river current and the snow-laden spruce boughs at the edges",
+      "tags": {
+        "comp": "natural-frame",
+        "anchor": "snowy-valley",
+        "season": "early-snow",
+        "time": "dawn",
+        "palette": "cool blue"
+      }
+    },
+    {
+      "id": "mv-w-27",
+      "subject": "A forested valley at the edge of winter seen from a ridge, light snow on dark spruce, a dark river winding through the white floor and the last warm light touching the opposite slope.",
+      "lens": "28mm lens at f/8",
+      "look": "golden",
+      "composition": "Looking down at about 30 degrees from a ridge edge, the snowy forest falling away in the lower half, the dark river winding across the middle, and the sunlit opposite slope filling the upper third.",
+      "motion_elements": "the dark river current and the thin cloud on the opposite crest",
+      "tags": {
+        "comp": "overlook",
+        "anchor": "snowy-forest",
+        "season": "winter-edge",
+        "time": "golden",
+        "palette": "muted gold"
+      }
+    }
+  ]
+}

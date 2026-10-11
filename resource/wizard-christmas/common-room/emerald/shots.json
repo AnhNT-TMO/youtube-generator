@@ -1,0 +1,137 @@
+{
+  "theme": "common-room/emerald",
+  "target": 10,
+  "defaults": {
+    "lens": "35mm lens at f/5.6",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "indoor",
+      "scale": "mid",
+      "category": "emerald"
+    }
+  },
+  "shots": [
+    {
+      "id": "cre-01",
+      "subject": "A long low sitting room deep in the dungeons of an old stone castle beneath a lake on Christmas night: rough stone walls and ribbed vaulted ceilings, deep green leather sofas and dark carved wooden chairs, a big carved stone fireplace with a roaring fire, silver candelabra with lit candles, a Christmas tree with silver and green baubles, and thick round windows set into the wall showing dark green lake water lit faintly from within",
+      "composition": "Wide view down the length of the vaulted room; the fireplace glows at center, the round lake windows line the left wall, the tree stands at the right, open stone floor and a plain green rug in the foreground.",
+      "look": "candle-night",
+      "motion_elements": "the roaring fire, the candle flames on the silver candelabra and the tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cre-02",
+      "subject": "A deep green leather sofa facing a big carved stone fireplace in a vaulted sitting room deep in the dungeons of an old stone castle on Christmas night: a roaring fire, silver candlesticks and an evergreen garland with silver ribbons on the mantel, green velvet cushions; two young people in long black wool cloaks and knitted green-and-silver striped scarves sit on the sofa facing the fire, seen from behind, one with short dark brown hair, one with a long dark braid",
+      "composition": "Wide view from further back, behind the sofa a good distance back; the two students sit small in the middle, well under a quarter of the frame height, the fire is the bright center, open floor in front.",
+      "look": "candle-night",
+      "motion_elements": "the roaring fire and the candle flames on the mantel",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cre-03",
+      "subject": "A huge thick round window set deep into the stone wall of a vaulted sitting room under a lake on a winter afternoon: pale green daylight filtering down through the lake water outside, long water weeds swaying slowly beyond the glass, the greenish light rippling across the stone floor; one young person in a black wool robe and a knitted green-and-silver striped scarf stands before the window looking into the water, seen from behind, with a brown ponytail; a small fire burns in a hearth to the right",
+      "composition": "Wide view from further back in the middle of the room toward the window; the student stands small at center, the glowing green window behind them, the hearth at the right edge.",
+      "look": "interior-day",
+      "motion_elements": "the water weeds swaying and the light rippling through the lake water, and the fire in the hearth",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cre-04",
+      "subject": "The carved stone mantel of a big dungeon fireplace on Christmas night: a crackling log fire, a long evergreen garland wound with silver ribbon and white berries, tall silver candlesticks with lit candles, a row of dark green velvet stockings, a heavy wrought-iron fire screen, a soft green rug in front, rough stone vaulting rising above",
+      "composition": "Close view straight onto the fireplace from a few steps back; the fire glows at center, the garland and candles across the top, the empty rug at the bottom.",
+      "look": "candle-night",
+      "motion_elements": "the crackling fire and the candle flames",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "close"
+      }
+    },
+    {
+      "id": "cre-05",
+      "subject": "Looking through a low rounded stone archway into a vaulted sitting room deep in the dungeons of an old castle on Christmas night: the archway hung with an evergreen garland and silver ribbons, beyond it green leather armchairs, a fire glowing in a big stone hearth, iron lamps with candle flames hanging on chains from the vaults, a decorated tree with silver baubles, and a round lake window glowing dark green",
+      "composition": "Wide view from the dim stone passage, the arch framing the warm room; the fire sits at center beyond the arch, the passage floor is open in front.",
+      "look": "candle-night",
+      "motion_elements": "the fire in the hearth and the candle flames in the hanging lamps",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cre-06",
+      "subject": "A high-backed green velvet armchair beside a small table with lit candles in a dungeon sitting room under a lake at dusk on Christmas Eve: a round window beside it shows deep teal lake water fading to dark, silver candlesticks and a pile of plain leather books, a fire in a stone hearth further back; one young person in a black wool cloak and a knitted green-and-silver striped scarf sits in the armchair reading, seen from behind, with sleek short dark-brown hair",
+      "composition": "Wide view from further back, behind and slightly to the side of the armchair, a good distance back; the reader's head shows small above the chair back, the teal window glows to the left, the hearth to the right.",
+      "look": "candle-night",
+      "motion_elements": "the candle flames on the table and the fire in the hearth",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cre-07",
+      "subject": "A tall Christmas tree standing beneath a stone vault in a dungeon sitting room on Christmas night: silver and deep green baubles, white ribbons and small warm candle-like lights, gifts wrapped in plain green and silver paper around its foot, a silver candelabra glowing beside it, the rough stone walls and a round lake window behind showing the dark green water",
+      "composition": "Medium view from a low angle; the tree fills the center, the lake window glows behind its left side, open stone floor and a plain rug in the foreground.",
+      "look": "candle-night",
+      "motion_elements": "the tree lights and the candle flames on the candelabra",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cre-08",
+      "subject": "A long dark oak table under a low stone vault in a sitting room deep in the dungeons of an old castle on Christmas night: a chessboard with carved wooden pieces, silver candlesticks with tall burning candles, two goblets and a plate of gingerbread; two young people in black wool robes and knitted green-and-silver striped scarves sit at the far side of the table bent over the chessboard, seen from behind, one in a knitted grey wool hat, one with a light-brown bob",
+      "composition": "Wide view from further back, behind the two students down the length of the table; they sit small in the middle distance, the candles glow along the table, the vaulted room opens behind.",
+      "look": "candle-night",
+      "motion_elements": "the candle flames on the table and the fire glow on the stone vault",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cre-09",
+      "subject": "The side wall of a vaulted sitting room deep under a lake on Christmas night: a row of thick round windows showing dark green water, wavering green lake light dancing across the stone ceiling ribs, green leather sofas and silver lamps below the windows, a fire glowing in a carved hearth at the end of the room, evergreen garlands with silver ribbons hanging between the windows",
+      "composition": "Wide view at an angle along the wall of windows; the windows recede toward the fireplace in the distance, open floor in the foreground.",
+      "look": "candle-night",
+      "motion_elements": "the rippling lake light on the ceiling, the fire in the hearth and the candle flames in the lamps",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cre-10",
+      "subject": "A low alcove beside a big stone hearth in a dungeon sitting room on Christmas night: a polished silver kettle steaming on a small iron grate over the fire, a dark green velvet chaise with silver-grey cushions, a low shelf of plain leather books and silver candlesticks, a sprig of holly and a small wreath with silver ribbon on the stone wall",
+      "composition": "Medium view of the alcove from a few steps away; the fire and kettle at left, the chaise at center, nothing close to the lens.",
+      "look": "candle-night",
+      "motion_elements": "the fire and the candle flames",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    }
+  ]
+}

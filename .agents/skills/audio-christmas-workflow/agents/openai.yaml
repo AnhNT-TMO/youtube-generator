@@ -1,4 +1,4 @@
 interface:
   display_name: "Christmas Carol Runbook"
-  short_description: "Plan, render, deliver and record gentle piano + pad carols with run.sh"
-  default_prompt: "Use $audio-christmas-workflow to take the songs of the batch through spec, make_plan, check_plan, sync, source, covers, finish, deliver, pull and record, logging own decisions in the batch PLAN_REVIEW.md and stopping with BLOCKED where the runbook says."
+  short_description: "Audit, plan, render and join public-domain Christmas carols"
+  default_prompt: "Use $audio-christmas-workflow to read the album brief, choose its approved bell-piano, Mureka or ambient lane, verify the melody evidence and produce the requested audio on the server."

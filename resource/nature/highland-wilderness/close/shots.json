@@ -1,0 +1,409 @@
+{
+  "theme": "highland-wilderness/close",
+  "target": 26,
+  "defaults": {
+    "lens": "50mm lens at f/5.6",
+    "look": "day",
+    "composition": "One natural material near the camera with a slice of highland behind",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "close",
+      "category": "highland-wilderness",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "hw-c-01",
+      "subject": "Snow- and frost-tipped tussock grass on an upland moor, the blades bending in the breeze and a fog-filled valley beyond",
+      "lens": "50mm lens at f/4",
+      "look": "dawn",
+      "composition": "Tussock blades filling the frame two to four meters from the camera, the fog valley showing only in a thin strip along the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the tussock blades and the distant fog",
+      "tags": {
+        "time": "dawn",
+        "palette": "slate blue",
+        "comp": "texture-field",
+        "anchor": "tussock",
+        "season": "early-snow"
+      }
+    },
+    {
+      "id": "hw-c-02",
+      "subject": "A dense bank of autumn heather and bilberry leaves beaded with mist, fog sliding past rocks beyond",
+      "lens": "50mm lens at f/4",
+      "look": "misty",
+      "composition": "Viewed from the side at knee height, the heather and bilberry covering most of the frame, the fog and rocks in a soft strip at the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the heather stems and the sliding fog",
+      "tags": {
+        "time": "morning",
+        "palette": "gray mist",
+        "comp": "texture-field",
+        "anchor": "heather",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-c-03",
+      "subject": "A field of white cotton grass heads on a highland bog, the heads nodding in the breeze above dark peat",
+      "lens": "85mm lens at f/4",
+      "look": "day",
+      "composition": "The cotton grass heads filling the frame at three to five meters, a narrow band of open moor and pale sky along the top edge. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the cotton grass heads",
+      "tags": {
+        "time": "day",
+        "palette": "slate blue",
+        "comp": "texture-field",
+        "anchor": "cotton-grass",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "hw-c-04",
+      "subject": "Rust-brown autumn bracken fronds covering a hillside, gray rocks showing between them and a muted far slope",
+      "lens": "35mm lens at f/4",
+      "look": "overcast",
+      "composition": "The fronds filling the frame from one to four meters away, the far slope visible only in a thin band at the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the bracken fronds",
+      "tags": {
+        "time": "overcast",
+        "palette": "muted gold",
+        "comp": "texture-field",
+        "anchor": "bracken",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-c-05",
+      "subject": "A patch of wet thawing snow crust with dry grass blades poking through and stirring, meltwater glistening and a gray hillside beyond",
+      "lens": "50mm lens at f/4",
+      "look": "after-rain",
+      "composition": "The snow crust and grass blades covering most of the frame at two to three meters, the hillside in a soft strip along the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the grass blades and the glistening meltwater",
+      "tags": {
+        "time": "after-rain",
+        "palette": "gray mist",
+        "comp": "texture-field",
+        "anchor": "thaw-snow",
+        "season": "late-snow"
+      }
+    },
+    {
+      "id": "hw-c-06",
+      "subject": "A single wind-twisted dwarf pine about two meters away growing from a snowy rock, its needles stirring and a pale ridge beyond",
+      "lens": "35mm lens at f/4",
+      "look": "dawn",
+      "composition": "The pine as the one subject in the center of the frame, snowy rock at its base and a narrow slice of pale ridge and sky behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the pine needles",
+      "tags": {
+        "time": "dawn",
+        "palette": "slate blue",
+        "comp": "hero-object",
+        "anchor": "krummholz",
+        "season": "late-snow"
+      }
+    },
+    {
+      "id": "hw-c-07",
+      "subject": "A lichen-crusted granite boulder with first snow on its top and cushion moss on its side, fog drifting behind",
+      "lens": "50mm lens at f/4",
+      "look": "misty",
+      "composition": "The boulder three meters away on the left half of the frame, snowy grass at its foot and the fog filling the right half behind it. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the drifting fog",
+      "tags": {
+        "time": "morning",
+        "palette": "gray mist",
+        "comp": "hero-object",
+        "anchor": "boulder",
+        "season": "early-snow"
+      }
+    },
+    {
+      "id": "hw-c-08",
+      "subject": "A young larch about a meter tall with golden needles on a plateau rim, gently swaying, and a cloud sea far beyond",
+      "lens": "50mm lens at f/4",
+      "look": "golden",
+      "composition": "The sapling two meters away on the right third, tawny grass at its base and a slice of the cloud sea across the background. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the larch twigs and the cloud sea",
+      "tags": {
+        "time": "golden",
+        "palette": "muted gold",
+        "comp": "hero-object",
+        "anchor": "larch-sapling",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-c-09",
+      "subject": "A low juniper bush spreading over a sunlit granite ledge, its sprigs stirring, with an alpine basin and clouds beyond",
+      "lens": "35mm lens at f/4",
+      "look": "day",
+      "composition": "The juniper and its ledge filling the lower center two meters away, the basin and clouds as a soft slice across the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the juniper sprigs and the drifting clouds",
+      "tags": {
+        "time": "day",
+        "palette": "deep green",
+        "comp": "hero-object",
+        "anchor": "juniper",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "hw-c-10",
+      "subject": "A rowan sapling with muted rust berries and wet leaves growing from a crack in a dark rock, a misty moor beyond",
+      "lens": "70mm lens at f/4",
+      "look": "after-rain",
+      "composition": "The sapling three meters away on the left third, the rock at its foot and the moor as a soft band behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the rowan leaves",
+      "tags": {
+        "time": "after-rain",
+        "palette": "muted gold",
+        "comp": "hero-object",
+        "anchor": "rowan-sapling",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-c-11",
+      "subject": "Clear water sliding over flat slate stones in a small upland brook, dry summer sedge leaning in at the edges and a hillside beyond",
+      "lens": "70mm lens at f/4",
+      "look": "overcast",
+      "composition": "From the bank, the water sheet crossing the lower half of the frame two meters away, sedge at the edges and a slice of hillside at the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the sliding brook water and the sedge",
+      "tags": {
+        "time": "overcast",
+        "palette": "deep green",
+        "comp": "water-detail",
+        "anchor": "brook",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "hw-c-12",
+      "subject": "A shallow tarn edge with thin new ice along the shore stones, open water rippling gently and a pale ridge on the far side",
+      "lens": "50mm lens at f/4",
+      "look": "dawn",
+      "composition": "Low at the shore, the ice rim and open water filling the lower two thirds two to three meters away, the ridge in a thin strip at the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the rippling open water",
+      "tags": {
+        "time": "dawn",
+        "palette": "slate blue",
+        "comp": "water-detail",
+        "anchor": "tarn-ice",
+        "season": "early-snow"
+      }
+    },
+    {
+      "id": "hw-c-13",
+      "subject": "A small rainwater runnel of tea-brown peat water spilling between mossy stones on a moorland slope, rust grass around it",
+      "lens": "50mm lens at f/4",
+      "look": "after-rain",
+      "composition": "Looking across the slope, the runnel crossing the frame from upper left to lower center two meters away, rounded hills as a slice behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the spilling runnel water and the grass",
+      "tags": {
+        "time": "after-rain",
+        "palette": "muted gold",
+        "comp": "water-detail",
+        "anchor": "peat-runnel",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-c-14",
+      "subject": "A meltwater trickle running out from under the edge of an old snow patch over clean gray stones, brown grass around it",
+      "lens": "35mm lens at f/4",
+      "look": "day",
+      "composition": "The snow edge and trickle in the lower center one to three meters away, the open slope and blue sky as a narrow band at the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the meltwater trickle",
+      "tags": {
+        "time": "day",
+        "palette": "slate blue",
+        "comp": "water-detail",
+        "anchor": "meltwater",
+        "season": "late-snow"
+      }
+    },
+    {
+      "id": "hw-c-15",
+      "subject": "Smooth, rounded, water-polished grey pebbles of varied size, blurred slightly by clear shallow moving water at a bend of a highland stream, glints and soft ripples on the surface, a grassy bank edge",
+      "lens": "50mm lens at f/4",
+      "look": "overcast",
+      "composition": "Looking down about 70 degrees from the bank, the pebbles and water filling the frame, a strip of grassy bank along one side",
+      "motion_elements": "the shallow moving water",
+      "tags": {
+        "time": "overcast",
+        "palette": "slate blue",
+        "comp": "top-down",
+        "anchor": "gravel-bar",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "hw-c-16",
+      "subject": "Wet deep olive-green and red sphagnum moss with a small clear pool, sedge blades and crowberry sprigs on a moor",
+      "lens": "50mm lens at f/5.6",
+      "look": "after-rain",
+      "composition": "Looking straight down from standing height, the moss carpet filling the frame with the small pool off center",
+      "motion_elements": "the sedge blades and the pool surface",
+      "tags": {
+        "time": "after-rain",
+        "palette": "deep green",
+        "comp": "top-down",
+        "anchor": "sphagnum",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "hw-c-17",
+      "subject": "Fresh snow on heather and lichen-covered stones on a plateau, light snowflakes still drifting down",
+      "lens": "35mm lens at f/5.6",
+      "look": "misty",
+      "composition": "Looking down about 60 degrees, the snowy heather and stones filling the frame, the ground fading into mist at the top edge",
+      "motion_elements": "the drifting snowflakes and the heather tips",
+      "tags": {
+        "time": "morning",
+        "palette": "gray mist",
+        "comp": "top-down",
+        "anchor": "snow-heather",
+        "season": "early-snow"
+      }
+    },
+    {
+      "id": "hw-c-18",
+      "subject": "A small dark rock pool with fallen golden birch leaves floating on it, grass and a little rough, uneven, lichen-covered stone at its rim",
+      "lens": "85mm lens at f/2.8",
+      "look": "golden",
+      "composition": "Low oblique view from the pool's edge at about 25 degrees: the water surface and floating leaves fill most of the frame, a thin strip of rough rim stone and grass in the foreground, the far rim softly out of focus",
+      "motion_elements": "the floating leaves and the pool surface",
+      "tags": {
+        "time": "golden",
+        "palette": "muted gold",
+        "comp": "water-detail",
+        "anchor": "leaf-pool",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-c-19",
+      "subject": "The grassy rim of a plateau escarpment with old snow along its edge and a cloud sea far below",
+      "lens": "35mm lens at f/4",
+      "look": "dawn",
+      "composition": "The rim line running diagonally from the lower left to the upper right three meters away, the snowy grass on one side and the cloud sea below on the other. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the cloud sea and the rim grass",
+      "tags": {
+        "time": "dawn",
+        "palette": "slate blue",
+        "comp": "edge-line",
+        "anchor": "cliff-edge",
+        "season": "late-snow"
+      }
+    },
+    {
+      "id": "hw-c-20",
+      "subject": "The boundary between a damp cushion moss bank and a smooth weathered grey stone slab, softly mottled with lichen and not grainy, short grass along the seam and a soft pale mist beyond",
+      "lens": "85mm lens at f/2.8",
+      "look": "misty",
+      "composition": "The moss-rock seam running diagonally across the frame two meters away, mist as a soft band behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the short grass along the seam",
+      "tags": {
+        "time": "morning",
+        "palette": "deep green",
+        "comp": "edge-line",
+        "anchor": "moss-rock",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "hw-c-21",
+      "subject": "The edge where a gray scree slope meets a strip of brown winter grass, a few crumbs of old snow among the stones and the grass blades stirring in the wind",
+      "lens": "50mm lens at f/4",
+      "look": "overcast",
+      "composition": "The scree-grass edge running diagonally from the lower right to the upper left two to four meters away, a slice of gray hillside at the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the grass blades",
+      "tags": {
+        "time": "overcast",
+        "palette": "gray mist",
+        "comp": "edge-line",
+        "anchor": "scree-grass",
+        "season": "late-snow"
+      }
+    },
+    {
+      "id": "hw-c-22",
+      "subject": "The dark peat bank of a moor pool topped with bronze heather, the brown water below and rolling moor beyond",
+      "lens": "35mm lens at f/4",
+      "look": "day",
+      "composition": "The bank edge running diagonally across the frame two meters away, water on one side, heather on the other and the moor as a slice behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the pool ripples and the heather",
+      "tags": {
+        "time": "day",
+        "palette": "muted gold",
+        "comp": "edge-line",
+        "anchor": "peat-bank",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-c-23",
+      "subject": "Seed heads of mountain feather grass on a plateau edge, their stems swaying and layered ridges in a hazy valley beyond",
+      "lens": "85mm lens at f/4",
+      "look": "golden",
+      "composition": "Facing the low sun, the backlit grass glowing across the lower two thirds three meters away, the hazy ridges behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the swaying feather grass",
+      "tags": {
+        "time": "golden",
+        "palette": "muted gold",
+        "comp": "backlit",
+        "anchor": "feather-grass",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "hw-c-24",
+      "subject": "Small burnt copper dwarf birch leaves on a frosty tundra slope glowing against the low dawn sun, pale ridges beyond",
+      "lens": "70mm lens at f/4",
+      "look": "dawn",
+      "composition": "Facing the sunrise, the backlit birch twigs filling the lower half two meters away, the ridges as a pale band behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the birch leaves",
+      "tags": {
+        "time": "dawn",
+        "palette": "muted gold",
+        "comp": "backlit",
+        "anchor": "dwarf-birch",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-c-25",
+      "subject": "Rime-coated grass stems on a snowy ridge glinting against the sun, a distant snow slope beyond",
+      "lens": "85mm lens at f/4",
+      "look": "day",
+      "composition": "Shooting toward the sun at a low angle, the rimed stems across the lower half three meters away and the snow slope as a bright band behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the grass stems",
+      "tags": {
+        "time": "day",
+        "palette": "slate blue",
+        "comp": "backlit",
+        "anchor": "rime-grass",
+        "season": "early-snow"
+      }
+    },
+    {
+      "id": "hw-c-26",
+      "subject": "Tall tawny sedge at the edge of a highland marsh glowing in low evening sun, a dark hillside behind",
+      "lens": "70mm lens at f/4",
+      "look": "golden",
+      "composition": "Facing the sun, the sedge blades rimmed with light across the frame two to four meters away, the dark hillside behind making the rims stand out. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+      "motion_elements": "the sedge blades",
+      "tags": {
+        "time": "golden",
+        "palette": "muted gold",
+        "comp": "backlit",
+        "anchor": "sedge",
+        "season": "autumn"
+      }
+    }
+  ]
+}

@@ -14,6 +14,7 @@ Every command prints one JSON line. AWS credentials: this Mac's default chain (o
 import argparse
 import json
 import math
+import mimetypes
 import os
 import re
 import shutil
@@ -103,7 +104,7 @@ def s3(a):
 
 def cmd_presign(a):
     c = s3(a)
-    up = c.create_multipart_upload(Bucket=a.bucket, Key=a.key, ContentType="application/zip")["UploadId"]
+    up = c.create_multipart_upload(Bucket=a.bucket, Key=a.key, ContentType=mimetypes.guess_type(a.key)[0] or "application/octet-stream")["UploadId"]
     n = math.ceil(a.size / PART)
     urls = [c.generate_presigned_url("upload_part", ExpiresIn=a.expires, Params={
         "Bucket": a.bucket, "Key": a.key, "UploadId": up, "PartNumber": i + 1}) for i in range(n)]

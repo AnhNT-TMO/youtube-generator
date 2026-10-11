@@ -1,0 +1,172 @@
+{
+  "theme": "common-room/scarlet",
+  "target": 10,
+  "defaults": {
+    "lens": "35mm lens at f/5.6",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "indoor",
+      "scale": "mid",
+      "category": "scarlet"
+    }
+  },
+  "shots": [
+    {
+      "id": "crs-01",
+      "subject": "A cozy round tower common room of the scarlet-and-gold house on Christmas night: a big stone fireplace with a roaring fire, overstuffed scarlet armchairs and a worn sofa, plain scarlet and gold wall hangings without any emblem, a decorated Christmas tree in the corner, evergreen garlands and red stockings over the mantel, tall windows with snow on the panes; two students in scarlet-and-gold striped scarves sit in the armchairs facing the fire, seen from behind",
+      "composition": "Wide view from further back, behind the armchairs; the backs of the two students' heads and shoulders show above the chair backs in the lower third, the fireplace is the bright center, the Christmas tree stands on the right",
+      "look": "candle-night",
+      "motion_elements": "the roaring fire in the fireplace and the small lights on the Christmas tree",
+      "tags": {
+        "time": "night",
+        "people": "students"
+      }
+    },
+    {
+      "id": "crs-02",
+      "subject": "A cozy round sitting room high in a tower of an old stone castle on Christmas night: bare warm stone walls with wooden bookshelves, a big stone fireplace with a roaring fire, deep red velvet armchairs and a worn brown leather sofa with plain cushions, a thick plain red rug, a decorated Christmas tree in the corner, evergreen garlands and red stockings over the mantel, tall leaded windows with snow on the panes; no banners, flags, tapestries or wall hangings anywhere; far from the camera, two young people in long black wool cloaks and knitted red-and-gold striped scarves sit on the sofa facing the fire, seen from behind: one with short straight light-brown hair, one wearing a knitted wool hat",
+      "composition": "Wide view from the far side of the room near the door; the whole room is visible, the two people sit small on the sofa in the middle distance, each well under a quarter of the frame height, the fireplace is the bright center, the Christmas tree stands on the right, an empty armchair and the rug fill the foreground",
+      "look": "candle-night",
+      "motion_elements": "the roaring fire in the fireplace and the small lights on the Christmas tree",
+      "tags": {
+        "time": "night",
+        "people": "students"
+      }
+    },
+    {
+      "id": "crs-03",
+      "subject": "A cozy round sitting room high in a tower of an old stone castle on a snowy Christmas afternoon: a deep window seat with plain scarlet cushions set into the thick stone wall, tall leaded windows looking out over snowy grounds under a silver sky; one young person in a long black wool cloak and a knitted scarlet-and-gold striped scarf sits in the window seat looking out, seen from behind, with a blonde ponytail; a small fire glows in a stone fireplace on the left, evergreen garlands along the sill",
+      "composition": "Wide view from further back in the middle of the room toward the window; the student sits small in the window seat at center right, well under a quarter of the frame height, the fireplace glows at the left edge, open rug in the foreground.",
+      "look": "interior-day",
+      "motion_elements": "the fire in the fireplace and the candle flames on the windowsill",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "crs-04",
+      "subject": "The great stone fireplace of a round tower sitting room on Christmas night: a crackling log fire, a thick evergreen garland with gold ribbons and red berries along the mantel, five red wool stockings hanging in a row, tall brass candlesticks with lit candles at both ends, a plain scarlet rug in front, and the arm of a deep red velvet armchair at the edge of the frame",
+      "composition": "Close view straight onto the fireplace from a few steps back; the fire is the bright center, the garland and stockings frame the upper half, the empty rug fills the bottom.",
+      "look": "candle-night",
+      "motion_elements": "the crackling fire and the candle flames on the mantel",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "close"
+      }
+    },
+    {
+      "id": "crs-05",
+      "subject": "A tall Christmas tree standing beside a tall leaded window in a cozy round tower room on Christmas night: gold and red baubles, red velvet bows and small warm candle-like lights, gifts wrapped in plain scarlet and gold paper heaped at its foot, snow piled on the outside of the window panes and dark night sky beyond, a row of lit candles on the deep stone windowsill, a red velvet armchair with a plain gold cushion beside it",
+      "composition": "Medium view from a low angle; the tree fills the left half, the window and candle-lit sill fill the right half, the wrapped gifts sit on an open patch of rug in the foreground.",
+      "look": "candle-night",
+      "motion_elements": "the small lights on the tree and the candle flames on the windowsill",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "crs-06",
+      "subject": "A round wooden study table beside a tall arched window in a cozy sitting room high in a castle tower at blue-hour twilight on Christmas Eve: deep blue snowy hills beyond the glass, three lit candles in brass holders and open plain leather books on the table, red velvet curtains tied back with gold cords; two young people in black wool robes and knitted scarlet-and-gold striped scarves sit at the table facing the window, seen from behind, one with short dark curly hair, one with a long dark braid",
+      "composition": "Wide view from further back, behind the table across the room; the two students sit small in the middle distance with their backs to the camera, the blue window glows beyond them, the floor in front is open.",
+      "look": "candle-night",
+      "motion_elements": "the candle flames on the table and the fire glow flickering on the stone wall",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "crs-07",
+      "subject": "Looking into a cozy round tower sitting room from the top step of a curving stone stair on Christmas night: a roaring fire at the far wall, a worn scarlet sofa and gold-tasselled cushions, a low wooden table with a chessboard and three mugs of hot chocolate still steaming, an iron candle chandelier hanging from dark beams, a decorated Christmas tree glowing to the right, snow on the tall windows",
+      "composition": "Wide view from the stair head at the room's edge, the curved stone wall on the left leading the eye to the fireplace; the room opens out in front with a clear floor in the foreground.",
+      "look": "candle-night",
+      "motion_elements": "the roaring fire, the steam rising from the mugs and the candle flames on the chandelier",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "crs-08",
+      "subject": "A cozy round tower sitting room long after midnight on Christmas night: the fire has burned down to glowing embers and low flames, a few tall candles still burn on an iron candelabra, heavy scarlet curtains half drawn over tall windows thick with snow on the panes, empty red armchairs turned toward the hearth, a knitted gold blanket over the sofa arm, the Christmas tree lights still twinkling softly in the corner",
+      "composition": "Low wide view from the floor near the door; the whole quiet room is visible, the hearth glows at center left, the tree at right, open floorboards and rug in the foreground.",
+      "look": "candle-night",
+      "motion_elements": "the glowing embers and low flames, the candle flames and the tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "crs-09",
+      "subject": "A reading nook built into the curved stone wall of a cozy tower sitting room on Christmas night: a deep red velvet armchair heaped with gold and scarlet cushions, a small round side table with a brass oil lamp, a white teapot and a plate of mince pies, stacks of plain leather books without titles, a low arched window with snow on the sill and a small wreath with a red ribbon hanging in it. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "Medium view of the nook from across a short stretch of rug; the armchair sits at center, the lamp and teapot to its right, the window above, nothing close to the lens.",
+      "look": "candle-night",
+      "motion_elements": "the flame of the oil lamp",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "crs-10",
+      "subject": "A cozy round sitting room high in a castle tower seen from a narrow wooden gallery that runs around its upper wall on Christmas night: below, a roaring stone fireplace, a circle of scarlet armchairs and a worn sofa on a plain red rug, a tall decorated Christmas tree whose top reaches nearly to the gallery, garlands of evergreen with gold ribbons looping along the gallery rail, tall windows with snow on the panes",
+      "composition": "High wide view looking down from the gallery rail at an angle; the fireplace and tree glow in the lower half, the curved wall and windows rise on the far side, the rail runs low along the bottom edge.",
+      "look": "candle-night",
+      "motion_elements": "the roaring fire and the small lights on the Christmas tree",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "vista"
+      }
+    },
+    {
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "crs-11",
+      "subject": "A cozy round tower common room on Christmas night in scarlet and gold: a deep red velvet sofa with plain gold cushions facing a crackling fire, a decorated fir tree with red and gold baubles, presents in plain red paper under it. The windows are thick frosted leaded glass glowing softly; nothing outside is visible through them and no snow falls indoors. No teapots, kettles, pots, cups, mugs or jugs anywhere. No candles or lanterns stand on the floor. No banners, tapestries, crests or lettering anywhere.",
+      "composition": "Medium view from behind the sofa toward the fire and the tree",
+      "look": "candle-night",
+      "motion_elements": "the fire and the tree lights"
+    },
+    {
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "crs-12",
+      "subject": "A cozy round tower common room on a snowy Christmas afternoon in scarlet and gold: worn red armchairs, a round table with a chessboard and a bowl of sweets, a garland over the stone hearth with a low fire, soft grey light through tall frosted windows. The windows are thick frosted leaded glass glowing softly; nothing outside is visible through them and no snow falls indoors. No teapots, kettles, pots, cups, mugs or jugs anywhere. No candles or lanterns stand on the floor. No banners, tapestries, crests or lettering anywhere.",
+      "composition": "Medium-wide view across the table toward the hearth",
+      "look": "interior-day",
+      "motion_elements": "the low fire"
+    },
+    {
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "crs-13",
+      "subject": "A stone fireplace in a scarlet-and-gold tower common room on Christmas Eve: a thick garland with red bows and pine cones on a plain stone mantel, red knitted stockings hanging below it, a warm log fire, two red armchairs angled toward it. No teapots, kettles, pots, cups, mugs or jugs anywhere. No candles or lanterns stand on the floor. No banners, tapestries, crests or lettering anywhere.",
+      "composition": "Medium view straight at the fireplace, the armchairs at the lower edges",
+      "look": "candle-night",
+      "motion_elements": "the log fire"
+    }
+  ]
+}

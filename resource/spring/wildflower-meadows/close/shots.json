@@ -1,0 +1,191 @@
+{
+  "theme": "wildflower-meadows/close",
+  "target": 16,
+  "defaults": {
+    "lens": "85mm lens at f/5.6",
+    "look": "day",
+    "composition": "Close view of one flower clump or grass texture in the lower two-thirds of the frame at a low side angle, with the meadow and trees behind softly out of focus so the wider setting stays readable, framed at a natural arm's-length distance.",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "close",
+      "category": "wildflower-meadows",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "wm-c-01",
+      "subject": "A few meadow buttercups and fresh grass blades rising above clover leaves at the edge of a sunny meadow, a hawthorn hedge blurred far behind",
+      "look": "day",
+      "motion_elements": "the buttercups and grass blades",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "wm-c-02",
+      "subject": "Dew drops on young grass blades and a single nodding cowslip stem on a meadow bank, a hazy hedge and pale sky softly behind",
+      "look": "soft-morning",
+      "motion_elements": "the grass blades and the cowslip",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "100mm lens at f/5.6"
+    },
+    {
+      "id": "wm-c-03",
+      "subject": "Backlit seed grasses with a few ox-eye daisies at the edge of an open meadow, warm light on the stems and a dark beech wood edge behind",
+      "look": "golden",
+      "motion_elements": "the seed grasses",
+      "tags": {
+        "time": "golden",
+        "palette": "warm green"
+      },
+      "lens": "70mm lens at f/4"
+    },
+    {
+      "id": "wm-c-04",
+      "subject": "A small clump of cuckooflowers in damp meadow grass, pale lilac heads on thin stems and a gray-green meadow with willows blurred behind",
+      "look": "overcast",
+      "motion_elements": "the cuckooflower heads",
+      "tags": {
+        "time": "overcast",
+        "palette": "soft lilac"
+      },
+      "lens": "50mm lens at f/4"
+    },
+    {
+      "id": "wm-c-05",
+      "subject": "Rain-beaded red clover heads and grass blades in a hay meadow, tiny droplets on the leaves and a misty meadow with hedges behind",
+      "look": "after-rain",
+      "motion_elements": "the beaded grass blades",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      }
+    },
+    {
+      "id": "wm-c-06",
+      "subject": "Queen Anne's lace umbels at the edge of a meadow against a soft blue sky, fresh grass below and a green hawthorn hedge blurred behind",
+      "look": "day",
+      "motion_elements": "the Queen Anne's lace umbels",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      },
+      "lens": "100mm lens at f/5.6"
+    },
+    {
+      "id": "wm-c-07",
+      "subject": "Young bracken fronds uncurling among white wood anemones at the edge of a clearing, fresh grass around them and haze in the trees behind",
+      "look": "soft-morning",
+      "motion_elements": "the bracken fronds and the anemones",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "70mm lens at f/4"
+    },
+    {
+      "id": "wm-c-08",
+      "subject": "A cluster of red campion in tall fresh grass on a sloping meadow, low sun rimming the petals and a soft green hillside behind",
+      "look": "golden",
+      "motion_elements": "the campion stems",
+      "tags": {
+        "time": "golden",
+        "palette": "soft pink"
+      },
+      "lens": "50mm lens at f/4"
+    },
+    {
+      "id": "wm-c-09",
+      "subject": "A few snake's-head fritillaries nodding in damp floodplain grass, checkered purple bells on thin stems and a line of poplars softly behind",
+      "look": "overcast",
+      "motion_elements": "the nodding flowers",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss"
+      }
+    },
+    {
+      "id": "wm-c-10",
+      "subject": "Wet bluebell stems and small beech seedlings at the edge of a wood, droplets on the leaves and mist hanging between the trunks behind",
+      "look": "after-rain",
+      "motion_elements": "the bluebell stems and the mist",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      },
+      "lens": "100mm lens at f/5.6"
+    },
+    {
+      "id": "wm-c-11",
+      "subject": "A tuft of fresh meadow grass with a few daisies and dandelions on a gentle slope, the open meadow and a single oak blurred behind",
+      "look": "day",
+      "motion_elements": "the grass tuft and the daisies",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      },
+      "lens": "70mm lens at f/4"
+    },
+    {
+      "id": "wm-c-12",
+      "subject": "Dandelion seed heads standing in dewy meadow grass, soft pale light on the silvery clocks and a fresh green willow bank blurred behind",
+      "look": "soft-morning",
+      "motion_elements": "the dandelion clocks",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "50mm lens at f/4"
+    },
+    {
+      "id": "wm-c-13",
+      "subject": "Meadow foxtail grass heads and a few buttercups in warm side light along a field margin, white hawthorn blossom blurred in the hedge behind",
+      "look": "golden",
+      "motion_elements": "the foxtail grass heads",
+      "tags": {
+        "time": "golden",
+        "palette": "warm green"
+      }
+    },
+    {
+      "id": "wm-c-14",
+      "subject": "Pale yellow primroses at the foot of a mossy bank, damp fresh grass around their leaves and an oak trunk softly blurred behind",
+      "look": "overcast",
+      "motion_elements": "the grass blades around the primroses",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss"
+      },
+      "lens": "100mm lens at f/5.6"
+    },
+    {
+      "id": "wm-c-15",
+      "subject": "Marsh marigolds beside a small trickle of water crossing a meadow, wet glossy leaves, a few mossy stones and a green meadow blurred beyond",
+      "look": "after-rain",
+      "motion_elements": "the trickling water and the marigold leaves",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      },
+      "lens": "70mm lens at f/4"
+    },
+    {
+      "id": "wm-c-16",
+      "subject": "A sprig of blackthorn blossom over fresh meadow grass at the edge of a hedgerow, a sunlit field and soft blue sky behind",
+      "look": "day",
+      "motion_elements": "the blossom twig and the grass",
+      "tags": {
+        "time": "day",
+        "palette": "white blossom"
+      },
+      "lens": "50mm lens at f/4"
+    }
+  ]
+}

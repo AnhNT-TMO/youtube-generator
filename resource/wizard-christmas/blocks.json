@@ -1,0 +1,26 @@
+{
+  "image": {
+    "head": "Generate a still IMAGE (a single photograph, not a video). One single picture, not a collage, grid or split frame:",
+    "realism": "Realistic cinematic photograph, like a frame from a big-budget live-action fantasy film shot on real sets and real locations with a full-frame camera and a {lens}: true-to-life old stone, dark carved wood, wrought iron, velvet, wool and parchment textures, accurate real-world scale and proportions, believable amount of decoration, natural film color grading, gentle contrast, no HDR look, no oversharpening, never a painting, illustration or 3D render.",
+    "look": {
+      "candle-night": "Night interior lit by many real candles, firelight and warm lanterns, rich golden light, well exposed with lifted shadows and clear detail in every corner, cozy and magical but never dim or murky.",
+      "interior-day": "Soft grey winter daylight falls through tall leaded windows, while the candles and fire stay lit as warm accents; balanced exposure, slightly cool silver tones in the window light, warm amber tones indoors.",
+      "twilight": "Blue-hour twilight: a deep blue sky with a last soft glow near the horizon, warm golden windows and lights glowing, well exposed with clear detail in the shadows, no crushed blacks.",
+      "snowy-night": "Snowy night lit by warm golden windows, lamps and candles against a deep blue night sky, bright and well exposed with rich detail, no crushed blacks.",
+      "snow-day": "Quiet overcast winter afternoon with a soft silver-grey sky and fresh snow everywhere: low contrast, gently muted and slightly cool colors, no blue sky and no hard sunlight, while warm golden lights still glow in windows and lamps, so it sits naturally next to twilight scenes."
+    },
+    "lights": "Christmas decorations where they fit the place: evergreen garlands and wreaths with red ribbons, decorated fir trees with gold and red baubles and small warm candle-like lights; all light is warm and old-fashioned, from candles, fires, oil lamps and glowing windows, no neon or colored LEDs; the air is clear, with no floating sparkles, glitter or dust motes beyond what is described.",
+    "lights_snowing": "Christmas decorations where they fit the place: evergreen garlands and wreaths with red ribbons and warm old-fashioned lights from candles, lamps and glowing windows, no neon or colored LEDs; apart from the falling snowflakes the air is clear, with no sparkles or glitter.",
+    "snowing": "Snow is gently falling at the moment of the shot: clearly visible white snowflakes in the air across the frame, larger and softly blurred close to the camera, finer in the distance, caught in the warm glow of the lights.",
+    "motion_ready": "Clear foreground, middle ground and background layers, with {motion_elements} clearly visible.",
+    "clean": {
+      "none": "Nobody is in the scene: no people, human figures or silhouettes anywhere, not even tiny far in the background or behind glass; no animals or birds; no statues or portraits of people. No text, letters or numbers anywhere: signs, banners, book spines and labels are plain; no crests, coats of arms, emblems, heraldic animals, logos or brand marks.",
+      "students": "The only people are the students described, seen strictly from behind, with the back of the head toward the camera and the face completely hidden, holding still in a calm pose; they are small figures in the middle distance, never in the foreground: each person is no taller than about one sixth of the frame height, with an open stretch of floor, path or snow between the camera and them and plenty of room around them; their hair styles are ordinary and varied as described, never messy black hair with round glasses, long bushy brown curls or ginger hair, and never a group that looks like a famous trio of film characters; they wear long plain black school robes and knitted striped scarves in their house colors, with no badge, patch or emblem; no wands; nobody else anywhere, not even tiny in the background; no animals; no statues or portraits of people. No text, letters or numbers anywhere: signs, banners, book spines and labels are plain; no crests, coats of arms, emblems, heraldic animals, logos or brand marks."
+    },
+    "tail": "Sharp focus, a single wide 16:9 landscape photograph.",
+    "wild": "The woods themselves are wild and untouched: no lanterns, lamps, lamp posts, street lights, string lights, torches, fences, garden walls, pillars, huts or houses among the trees; any warm light comes only from what is described above (floating candles, fireflies, a train's lamps or the windows of a distant castle).",
+    "lead": {
+      "students": "Very wide establishing shot taken from far away: the place itself is the subject and fills the frame, and the people are only a tiny detail in the middle distance, each about one eighth of the frame height, with a wide open stretch of ground between the camera and them."
+    }
+  }
+}

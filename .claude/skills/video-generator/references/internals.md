@@ -101,7 +101,7 @@ Một zip cho mỗi album (CEO 2026-09-28): album + Short của nó, để CEO t
   ffprobe, `manifest.json` + `README.txt` ở gốc gói, zip (stored, zip64) vào `out/<album job>/`, in một dòng JSON
   (size, sha256, parts, files, entries, warnings, readme). `--dry-run` in cây file + README rồi xoá zip, không upload.
 - Không đóng gói Short riêng: `package <album>/short` từ chối; `album` chỉ tự đóng gói khi Short đã render + có youtube.md.
-- `s3-package.json` (một file ở thư mục album): mỗi lần upload một bản ghi `s3`, `size`, `sha256`, `parts.{album,short}`
+- `s3-package.json` (sổ gói, một file ở thư mục album, giữ tên cũ): mỗi lần upload một bản ghi `drive` + `url` (hoặc `s3` + `region`), `size`, `sha256`, `parts.{album,short}`
   (dir, title, video probe, thumbnail, youtube), `checks` (`pass` / `fail, packaged with --force` / `not included (--no-short)`).
 
 ## Server (mặc định; `--local` = render trên Mac)

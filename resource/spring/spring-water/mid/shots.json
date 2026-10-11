@@ -1,0 +1,356 @@
+{
+  "theme": "spring-water/mid",
+  "target": 32,
+  "defaults": {
+    "lens": "50mm lens at f/8",
+    "look": "day",
+    "composition": "One clear anchor sits in the middle ground on a third of the frame, the near bank or shallow water forms the foreground, and young green woodland or meadow recedes softly behind; the view looks sideways across the water",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "mid",
+      "category": "spring-water",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "sw-m-01",
+      "subject": "A moss-covered boulder in a clear brook, the water parting gently around it and young ferns unfurling on the bank behind",
+      "look": "soft-morning",
+      "motion_elements": "the water parting around the boulder and the young fern fronds stirring",
+      "tags": {
+        "time": "morning",
+        "palette": "moss green"
+      }
+    },
+    {
+      "id": "sw-m-02",
+      "subject": "A simple plank footbridge spanning a narrow stream, fresh grass on both banks and a young birch leaning over the water",
+      "lens": "40mm lens at f/8",
+      "look": "day",
+      "motion_elements": "the stream flowing under the footbridge and the birch leaves fluttering",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "sw-m-03",
+      "subject": "A small two-step waterfall in a beech wood stream, warm low light on the falling water and pale new beech leaves above",
+      "look": "golden",
+      "motion_elements": "the falling water and the beech leaves stirring",
+      "tags": {
+        "time": "golden",
+        "palette": "pale gold"
+      }
+    },
+    {
+      "id": "sw-m-04",
+      "subject": "A clump of yellow marsh marigolds on a wet bank beside a slow stream, soft grey light and gentle ripples beyond",
+      "lens": "60mm lens at f/8",
+      "look": "overcast",
+      "motion_elements": "the gentle ripples beyond the bank and the marsh marigold leaves moving",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss yellow"
+      }
+    },
+    {
+      "id": "sw-m-05",
+      "subject": "An old low mossy stone wall ending at the edge of a brook, rain-darkened stones, fresh grass at its foot and dripping hazel branches overhead",
+      "look": "after-rain",
+      "motion_elements": "the brook flowing past the wall and the hazel branches dripping",
+      "tags": {
+        "time": "after-rain",
+        "palette": "moss green"
+      }
+    },
+    {
+      "id": "sw-m-06",
+      "subject": "A willow bowing over a still pond, its long new-leafed fronds touching the water and faint mist across the surface",
+      "lens": "70mm lens at f/8",
+      "look": "soft-morning",
+      "motion_elements": "the willow fronds swaying and the faint mist across the pond",
+      "tags": {
+        "time": "morning",
+        "palette": "pale green"
+      }
+    },
+    {
+      "id": "sw-m-07",
+      "subject": "A cluster of young reeds and yellow flag iris leaves in the shallows of a pond, clear water and a sunny bank behind",
+      "look": "day",
+      "motion_elements": "the reeds and iris leaves swaying and the ripples in the shallows",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "sw-m-08",
+      "subject": "A flowering blackthorn bush on a grassy stream bank, its white blossom backlit by low sun and the slow water glinting below",
+      "lens": "85mm lens at f/8",
+      "look": "golden",
+      "motion_elements": "the blossom stirring and the glinting water",
+      "tags": {
+        "time": "golden",
+        "palette": "white gold"
+      }
+    },
+    {
+      "id": "sw-m-09",
+      "subject": "A woodland stream running over flat grey slate ledges between young ferns and wood sorrel, with wet stone and a mossy oak trunk behind",
+      "look": "overcast",
+      "motion_elements": "the water running over the slate ledges and the fern fronds moving",
+      "tags": {
+        "time": "overcast",
+        "palette": "slate green"
+      }
+    },
+    {
+      "id": "sw-m-10",
+      "subject": "A spring bubbling up into a small pool among mossy stones, with wet ferns, fresh green grass and a young hazel around it",
+      "lens": "50mm lens at f/5.6",
+      "look": "after-rain",
+      "motion_elements": "the spring bubbling up and the ferns trembling",
+      "tags": {
+        "time": "after-rain",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "sw-m-11",
+      "subject": "A short bend of a meadow brook with buttercups on the inner bank and dew on the grass, early mist lying low on the water",
+      "look": "soft-morning",
+      "motion_elements": "the low mist on the water and the buttercups nodding",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      }
+    },
+    {
+      "id": "sw-m-12",
+      "subject": "A fallen mossy log lying across a narrow stream, young beech saplings behind and dappled light on the moving water",
+      "lens": "40mm lens at f/8",
+      "look": "day",
+      "motion_elements": "the stream flowing beneath the log and the beech leaves fluttering",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "sw-m-13",
+      "subject": "A grassy bank under a wild cherry tree in bloom, a few fallen petals on the slow stream and warm light on the trunk",
+      "look": "golden",
+      "motion_elements": "the slow stream carrying the petals and the blossom stirring",
+      "tags": {
+        "time": "golden",
+        "palette": "soft pink"
+      }
+    },
+    {
+      "id": "sw-m-14",
+      "subject": "A small natural rock weir across a lowland stream, water pouring over it in a smooth sheet and young alder leaves hanging above",
+      "lens": "60mm lens at f/8",
+      "look": "overcast",
+      "motion_elements": "the smooth sheet of water and the alder leaves moving",
+      "tags": {
+        "time": "overcast",
+        "palette": "silver green"
+      }
+    },
+    {
+      "id": "sw-m-15",
+      "subject": "A hawthorn branch in white blossom hanging over a slow brook, wet petals, a grassy bank and a soft reflection in the water",
+      "look": "after-rain",
+      "motion_elements": "the hawthorn blossom swaying and the soft reflection rippling",
+      "tags": {
+        "time": "after-rain",
+        "palette": "white blossom"
+      }
+    },
+    {
+      "id": "sw-m-16",
+      "subject": "A shallow pebble ford in a stream with a band of sunlight crossing the water and young hazel bushes on the far bank",
+      "lens": "35mm lens at f/8",
+      "look": "soft-morning",
+      "motion_elements": "the water rippling over the pebbles and the hazel leaves stirring",
+      "tags": {
+        "time": "morning",
+        "palette": "pale gold"
+      }
+    },
+    {
+      "id": "sw-m-17",
+      "subject": "A patch of water crowfoot with small white flowers floating on a clear stream, long green fronds streaming in the current",
+      "lens": "70mm lens at f/8",
+      "look": "day",
+      "motion_elements": "the long fronds streaming in the current",
+      "tags": {
+        "time": "day",
+        "palette": "white green"
+      }
+    },
+    {
+      "id": "sw-m-18",
+      "subject": "A young birch on a small grassy island in a pond, its tiny new leaves glowing in low sun and its reflection on the water",
+      "look": "golden",
+      "motion_elements": "the birch leaves fluttering and the reflection rippling",
+      "tags": {
+        "time": "golden",
+        "palette": "soft gold"
+      }
+    },
+    {
+      "id": "sw-m-19",
+      "subject": "A tumble of mossy boulders where a hill stream drops into a pool, ferns and wood anemones on the bank",
+      "lens": "40mm lens at f/8",
+      "look": "overcast",
+      "motion_elements": "the stream dropping into the pool and the ferns stirring",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss green"
+      }
+    },
+    {
+      "id": "sw-m-20",
+      "subject": "A clear pool below a short cascade between mossy rocks, wet pale primroses on the stones beside it and young ferns along the bank",
+      "look": "after-rain",
+      "motion_elements": "the short cascade and the ripples spreading across the pool",
+      "tags": {
+        "time": "after-rain",
+        "palette": "primrose green"
+      }
+    },
+    {
+      "id": "sw-m-21",
+      "subject": "Lily pads just unfurling on a calm pond with a stand of young sedges on the right and soft mist beyond",
+      "lens": "85mm lens at f/8",
+      "look": "soft-morning",
+      "motion_elements": "the soft mist and the sedges swaying",
+      "tags": {
+        "time": "morning",
+        "palette": "pale green"
+      }
+    },
+    {
+      "id": "sw-m-22",
+      "subject": "A low dry stone wall running beside a brook, Queen Anne's lace along its foot and the water sparkling in daylight",
+      "look": "day",
+      "motion_elements": "the sparkling brook and the Queen Anne's lace heads nodding",
+      "tags": {
+        "time": "day",
+        "palette": "white green"
+      }
+    },
+    {
+      "id": "sw-m-23",
+      "subject": "A gentle riffle in a lowland stream catching warm low light, bordered by fresh grass and an old willow trunk",
+      "lens": "50mm lens at f/8",
+      "look": "golden",
+      "motion_elements": "the rippling riffle and the grass moving",
+      "tags": {
+        "time": "golden",
+        "palette": "soft gold"
+      }
+    },
+    {
+      "id": "sw-m-24",
+      "subject": "A small rustic wooden fence post line along a pond edge, reeds and new grass at its feet and calm grey water",
+      "look": "overcast",
+      "motion_elements": "the reeds swaying and the calm water rippling",
+      "tags": {
+        "time": "overcast",
+        "palette": "soft green"
+      }
+    },
+    {
+      "id": "sw-m-25",
+      "subject": "A narrow stream bend under young beech trees after rain, wet leaves dripping and the water flowing clear over brown stones",
+      "lens": "35mm lens at f/8",
+      "look": "after-rain",
+      "motion_elements": "the stream flowing over the stones and the dripping leaves",
+      "tags": {
+        "time": "after-rain",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "sw-m-26",
+      "subject": "A shallow spring pool with bright green watercress and a thin trickle of water flowing in, early pale sun on the bank",
+      "lens": "60mm lens at f/5.6",
+      "look": "soft-morning",
+      "motion_elements": "the trickle flowing in and the watercress leaves moving",
+      "tags": {
+        "time": "morning",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "sw-m-27",
+      "subject": "Bluebells on a shady bank beside a slow woodland stream, young beech trunks and dappled light shifting on the water",
+      "look": "day",
+      "motion_elements": "the dappled light shifting on the water and the bluebell stems nodding",
+      "tags": {
+        "time": "day",
+        "palette": "bluebell green"
+      }
+    },
+    {
+      "id": "sw-m-28",
+      "subject": "A small sandy beach on a stream bend with a young alder leaning over and warm light on the shallow water",
+      "lens": "70mm lens at f/8",
+      "look": "golden",
+      "motion_elements": "the shallow water flowing and the alder leaves stirring",
+      "tags": {
+        "time": "golden",
+        "palette": "pale gold"
+      }
+    },
+    {
+      "id": "sw-m-29",
+      "subject": "A mossy boulder in the middle of a broad shallow stream with smooth water streaming past and pale willows behind",
+      "look": "overcast",
+      "motion_elements": "the smooth water streaming past and the willow leaves moving",
+      "tags": {
+        "time": "overcast",
+        "palette": "silver green"
+      }
+    },
+    {
+      "id": "sw-m-30",
+      "subject": "An old apple tree in white and pink blossom leaning over a stream at an orchard edge, wet petals on the grass and soft clouds clearing",
+      "lens": "50mm lens at f/8",
+      "look": "after-rain",
+      "motion_elements": "the apple blossom stirring and the stream flowing",
+      "tags": {
+        "time": "after-rain",
+        "palette": "white blossom"
+      }
+    },
+    {
+      "id": "sw-m-31",
+      "subject": "A small natural spring trickling from between mossy stones into a fern-lined pool, with pale morning light on the moss",
+      "look": "soft-morning",
+      "motion_elements": "the trickle of water and the fern fronds stirring",
+      "tags": {
+        "time": "morning",
+        "palette": "moss green"
+      }
+    },
+    {
+      "id": "sw-m-32",
+      "subject": "A rippling meander of a meadow stream with a bank of fresh grass and a young hawthorn in new leaf on the far side",
+      "lens": "40mm lens at f/8",
+      "look": "day",
+      "motion_elements": "the rippling meander and the hawthorn leaves stirring",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    }
+  ]
+}

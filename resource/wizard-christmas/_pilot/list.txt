@@ -1,0 +1,8 @@
+file '../castle/great-hall/gh-02.mp4'
+file '../castle/vista/cv-01.mp4'
+file '../castle/library/lb-01.mp4'
+file '../castle/staircase/st-01.mp4'
+file '../grounds/keeper-hut/kh-01.mp4'
+file '../town/wizard-alley/wa-01.mp4'
+file '../grounds/snow-forest/sf-01.mp4'
+file '../grounds/viaduct-train/vt-01.mp4'

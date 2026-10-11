@@ -1,0 +1,404 @@
+{
+  "theme": "town/wizard-alley",
+  "target": 30,
+  "defaults": {
+    "lens": "35mm lens at f/5.6",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "street",
+      "category": "wizard-alley"
+    }
+  },
+  "shots": [
+    {
+      "id": "wa-01",
+      "subject": "A narrow crooked cobblestone wizard shopping street at night under falling snow: tall leaning timber and stone shopfronts in deep colors with bow windows full of glowing displays of brass cauldrons, plain-covered spellbooks, broomsticks, glass jars of sweets and empty brass birdcages, wreaths on the doors, evergreen garlands strung across the street, old iron street lamps, snow on the cobbles and the crooked roofs; all shop signs blank",
+      "composition": "Looking up the curving street from its middle at eye level; the shopfronts lean in from both sides, the bend of the street disappears behind the buildings in the background",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow and the warm flickering light in the shop windows and street lamps",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "wa-02",
+      "subject": "A crooked cobbled wizard shopping street on a quiet snowy afternoon seen from above: steep snow-covered roofs, leaning timber and stone shopfronts in deep green, plum and oxblood paint, bay windows glowing warm with cauldrons, broomsticks and jars of sweets, evergreen garlands with red ribbons strung from house to house across the street, smoke curling from crooked chimneys, all shop signs blank",
+      "composition": "High view from a first-floor window looking down the length of the street, the garlands crossing the frame in layers and the street bending out of sight in the distance",
+      "look": "snow-day",
+      "motion_elements": "the falling snow, the chimney smoke and the warm glow in the shop windows",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling",
+        "scale": "vista"
+      }
+    },
+    {
+      "id": "wa-03",
+      "subject": "A wizard cauldron shop on a crooked cobbled street at blue hour: a deep bay window stacked with gleaming copper, brass and pewter cauldrons of every size, a small fire glowing under one of them, a wreath on the green door, garlands above; one student in a long black robe and a blue-and-bronze striped scarf, short straight brown hair, stands still on the snowy cobbles looking into the window",
+      "composition": "Wide eye-level view from further back, across the street; the window fills the center and the student stands small in the lower left with plenty of empty cobbles around",
+      "look": "twilight",
+      "motion_elements": "the fire glowing under the cauldron, the steam rising from it and the flickering window light",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "wa-04",
+      "subject": "Inside a crowded old wizard apothecary shop at night: dark wooden shelves up to the beamed ceiling packed with glass jars of dried herbs, roots and colored powders with plain labels, bundles of herbs hanging from the beams, a brass scale on a long worn counter, a small stone fireplace with a crackling fire, many candles, a garland and a small decorated fir tree in the corner",
+      "composition": "Wide view from the doorway along the counter toward the fireplace at the back, the floor in front open and clear",
+      "look": "candle-night",
+      "motion_elements": "the crackling fire, the candle flames",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "place": "indoor",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "wa-05",
+      "subject": "A wizard sweet shop on a snowy cobbled street in soft grey afternoon light: a big curved bay window crowded with glass jars of colorful boiled sweets, striped candy canes, trays of fudge and towers of wrapped treats, a candy-striped awning dusted with snow, a wreath on the door; two students in long black robes stand still before the window, one with a blonde ponytail and a scarlet-and-gold striped scarf, one in a grey knitted wool hat and a green-and-silver striped scarf",
+      "composition": "Wide eye-level view from further back in the middle of the street; the window glows at the center and the two students stand small in the lower middle, backs to the camera",
+      "look": "snow-day",
+      "motion_elements": "the falling snow and the warm flickering light behind the jars",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "wa-06",
+      "subject": "A crooked wizard shopping street at blue hour seen from just above the snowy cobbles: arches of evergreen garland with red ribbons and small warm lights crossing the street one behind another, old iron street lamps glowing, leaning shopfronts with lit bay windows of brooms and books on both sides, snow piled on window ledges and sills",
+      "composition": "Low camera at knee height in the middle of the empty street looking along the garland arches into the distance, the snowy cobbles leading the eye",
+      "look": "twilight",
+      "motion_elements": "the falling snow, the flickering street lamps and the glowing garland lights",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "wa-07",
+      "subject": "A broomstick shop on a narrow wizard street at night: a tall arched shop window displaying polished wooden broomsticks standing in a rack and one laid on a velvet stand, brass fittings gleaming in candlelight, a garland and red bows around the window frame, an old iron street lamp beside it with snow on its top; one student in a long black robe and a yellow-and-black striped scarf, a dark braid down the back, stands still under the lamp looking at the window",
+      "composition": "Wide view from further back, across the street at eye level; the window is right of center, the student small in front of it with the lamp on the left",
+      "look": "snowy-night",
+      "motion_elements": "the flickering lamp flame, the candle flames in the window and a thin wisp of breath steam",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "wa-08",
+      "subject": "The bay window of an old wizard bookshop on a snowy afternoon, seen close: stacks of thick leather-bound books with plain blank spines, a brass globe, a small candle-lit Christmas tree with red baubles, frost patterns on the small glass panes, fresh snow heaped on the sill and on a wreath beside the window",
+      "composition": "Medium-close eye-level view of the whole bay window from the snowy cobbles, the window filling most of the frame with a little of the wall and door on each side",
+      "look": "snow-day",
+      "motion_elements": "the candle flames on the little tree, the flickering lamp inside and a little snow drifting off the sill",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none",
+        "scale": "close"
+      },
+      "lens": "50mm lens at f/4"
+    },
+    {
+      "id": "wa-09",
+      "subject": "Inside a towering old wizard bookshop at night: tall dark wooden bookcases climbing to a beamed ceiling with rolling ladders, thousands of old books with plain blank spines, stacks of books on the floor, a stone fireplace with a log fire, warm candles in brass holders, a decorated Christmas tree with gold baubles between the shelves, garlands along the gallery railing",
+      "composition": "Wide view down the central aisle between the bookcases toward the fireplace, the worn wooden floor open in front",
+      "look": "candle-night",
+      "motion_elements": "the log fire, the candle flames and the twinkling candle-like lights on the tree",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "place": "indoor",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "wa-10",
+      "subject": "A tiny cobbled square where crooked wizard shopping lanes meet at blue hour: a tall decorated Christmas fir tree in the middle hung with gold and red baubles and warm candle-like lights, leaning shops with glowing bay windows all around, garlands across the lanes; three students in long black robes stand still near the tree looking up at it, one with an auburn bob and a blue-and-bronze scarf, one with short blonde hair and a yellow-and-black scarf, one in a knitted wool hat and a green-and-silver scarf",
+      "composition": "Wide eye-level view from the edge of the square; the tree rises in the center and the three students stand small at its foot, backs to the camera",
+      "look": "twilight",
+      "motion_elements": "the falling snow, the twinkling tree lights and the chimney smoke above the roofs",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "wa-11",
+      "subject": "A narrow stepped side passage leading off a wizard shopping street on a snowy night: worn stone steps climbing between leaning timber-framed walls, small shop windows glowing with jars and candles on both sides, wall-mounted iron lamps, a wreath on a low wooden door, evergreen sprigs over the doorways, snow covering every step",
+      "composition": "Eye-level view from the foot of the steps looking up the passage as it climbs and turns out of sight",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the flickering wall lamps and the candlelight in the windows",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "wa-12",
+      "subject": "A crooked wizard shopping street on a quiet grey snowy afternoon: one student in a long black robe and a scarlet-and-gold striped scarf, short wavy light-brown hair, sits still on worn stone steps in front of a closed shop door reading a book, a wreath on the door above, bay windows of brass instruments and glass jars glowing on both sides, smoke from the chimneys",
+      "composition": "Wide view from further back, behind and slightly above the student across the street, so the student is small at the lower center seen from the back, the street continuing to the right",
+      "look": "snow-day",
+      "motion_elements": "the chimney smoke, the warm glow in the windows and the steam of breath in the cold air",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "wa-13",
+      "subject": "The snowy rooftops of a crooked wizard shopping street at night: a jumble of steep leaning roofs, crooked chimneys trailing smoke, dormer windows glowing gold, garlands strung across the narrow gap below where the lit street glows, the dark blue night sky above with soft clouds, warm candle-like lights twinkling along the garlands and soft snow lying thick on every ledge and gutter",
+      "composition": "High wide view from a rooftop at the end of the street looking along the roofline, the glowing street a warm ribbon down the middle",
+      "look": "snowy-night",
+      "motion_elements": "the chimney smoke, the flickering dormer windows and the glow of the street below",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "vista"
+      }
+    },
+    {
+      "id": "wa-14",
+      "subject": "Inside a wizard cauldron and brass shop on a grey winter afternoon: soft daylight through small leaded panes falling on rows of copper and pewter cauldrons stacked on shelves and the floor, brass scales and kettles hung from the beams, a fireplace with a low fire, a garland along the mantel and a small decorated Christmas tree in the window",
+      "composition": "Wide view from just inside the door across the shop toward the fireplace and the window, the stone floor open in front",
+      "look": "interior-day",
+      "motion_elements": "the low fire and the candle flames on the mantel",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none",
+        "place": "indoor",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "wa-15",
+      "subject": "A wizard shop selling empty ornate brass birdcages and travel trunks at blue hour: the bay window hung with gleaming empty cages of every shape lit by small candles, stacked leather trunks with brass corners, a wreath above the door; two students in long black robes stand still before the window, one with a short dark bob and a green-and-silver scarf, one with a long light-brown ponytail and a blue-and-bronze scarf. The shop fronts have no fascia boards and no hanging signs at all, only garlands and wreaths above the windows; no lettering, numbers or symbols anywhere. No lanterns or candles stand on the steps, doorsteps or in the snow.",
+      "composition": "Wide eye-level view from further back in the far side of the street; the window is at the center and the two students stand small in front of it, backs to the camera",
+      "look": "twilight",
+      "motion_elements": "the candle flames in the cages, the flickering window glow and the chimney smoke above",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "wa-16",
+      "subject": "A crooked stone archway opening onto a hidden wizard shopping street on a snowy night: an old brick wall courtyard in front, the tall arch in the middle, and through it the glowing curving street of leaning shopfronts, garlands and street lamps, a wreath hung from the keystone of the arch, snow on the ground",
+      "composition": "Eye-level view from the quiet courtyard looking straight through the archway into the bright street beyond, the arch framing the scene",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the flickering street lamps and the glowing window light beyond the arch",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "wa-17",
+      "subject": "The bend of a crooked wizard shopping street on a snowy grey afternoon: tall leaning shopfronts curve away, bay windows glowing with books, brooms and sweets, garlands across the street; two students in long black robes stand still in the middle of the snowy cobbles looking up the street, one in a red knitted wool hat and a yellow-and-black scarf, one with short straight dark-brown hair and a scarlet-and-gold scarf",
+      "composition": "Wide eye-level view from behind the students down the street; the two students are small in the lower center, backs to the camera, the bend opening beyond them",
+      "look": "snow-day",
+      "motion_elements": "the falling snow, the chimney smoke and the warm shop window glow",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "wa-18",
+      "subject": "A wizard robe and hat shop on a crooked street at blue hour: a bay window displaying folded black wool cloaks, velvet capes on wooden stands and tall pointed hats on hat stands, bolts of deep-colored fabric, candles in brass holders, a garland with red ribbons above the window and a wreath on the door, snow on the sill and the cobbles",
+      "composition": "Medium-wide eye-level view from across the street, the window centered, the snowy street edge in front",
+      "look": "twilight",
+      "motion_elements": "the candle flames in the window, the flickering street lamp and the chimney smoke above",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "wa-19",
+      "subject": "Inside a wizard sweet shop at night: shelves from floor to ceiling filled with glass jars of colorful sweets, trays of fudge and toffee, candy canes in tall jars, a polished wooden counter, candles and small warm lamps, garlands and red bows; far back across the shop, one small student (about one sixth of the frame height) in a long black robe and a green-and-silver striped scarf, a long dark braid, stands still at the counter with the back to the camera looking at the shelves No teapots, kettles, pots, cups, mugs or jugs anywhere in the room. No window in view.",
+      "composition": "Wide view from the shop doorway, the small student far away at the counter",
+      "look": "candle-night",
+      "motion_elements": "the candle flames, the warm lamplight",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none",
+        "place": "indoor",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "wa-20",
+      "subject": "A narrow wizard shopping street at blue hour with a candy-striped awning sweet shop on the corner: leaning painted shopfronts, glowing windows full of colorful jars and gift boxes tied with ribbon, snow on the awnings and the street, a small decorated fir tree in a wooden tub beside the door, garlands across the street",
+      "composition": "Eye-level view from the street corner diagonally across the shopfronts, the corner shop in the foreground right and the street receding left",
+      "look": "twilight",
+      "motion_elements": "the twinkling tree lights, the window glow and the chimney smoke",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "wa-21",
+      "subject": "A little humped stone footbridge crossing a narrow frozen canal that runs through a wizard shopping district at blue hour: crooked shopfronts lining both banks with glowing bay windows reflected on the ice, garlands on the bridge railings, old iron lamps at each end, snow on every ledge, small decorated fir trees in tubs beside the shop doors",
+      "composition": "Eye-level view from the canal bank looking at the bridge, the reflections on the ice in the foreground and the shops beyond",
+      "look": "twilight",
+      "motion_elements": "the falling snow, the flickering lamps and the window light reflected on the ice",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "wa-22",
+      "subject": "A small old-fashioned toy shop on a snowy street at night: a big bay window with a decorated Christmas tree inside, spinning tops, music boxes and stacks of colorful wrapped boxes, warm candle-like lights, a wreath on the door; two students in long black robes stand still before the window, one with a blonde bob and a blue-and-bronze scarf, one with short brown curls under a grey wool hat and a yellow-and-black scarf. The air is perfectly calm and no snow is falling; old snow only lies still on the rooftops and sills. The far street and every archway are completely empty; nobody else is anywhere.",
+      "composition": "Wide eye-level view from further back, across the cobbles; the window at the center, the two students small in front of it, backs to the camera",
+      "look": "snowy-night",
+      "motion_elements": "the twinkling tree lights, the candle flames and the chimney smoke above",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "wa-23",
+      "subject": "Inside a small wizard tea shop on a grey winter afternoon: round wooden tables with lace cloths, tiered cake stands with iced cakes and small vases of holly, a glass counter of cakes, soft daylight through a softly glowing frosted bay window, a fire in a tiled stove, a decorated Christmas tree and garlands. The windows show only a flat, plain, calm sky: no towers, battlements, buildings, hills or trees are visible through them, and no snow is falling. No teapots, kettles, pots, cups, mugs, tankards or jugs anywhere.",
+      "composition": "Wide view from the back of the shop toward the bay window, the tables arranged with an open floor in front",
+      "look": "interior-day",
+      "motion_elements": "the fire in the stove and the candle flames on the tables",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none",
+        "place": "indoor",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "wa-24",
+      "subject": "The top of a crooked wizard shopping street at blue hour: one student in a long black robe and a scarlet-and-gold striped scarf, a long dark brown ponytail, stands still far from the camera, small (about one sixth of the frame height), halfway down a short flight of snowy stone steps, hands hidden in the robe looking down the street, below glowing bay windows of shops, garlands across the street and old street lamps",
+      "composition": "Wide view from further back, behind and above the student; the student is small in the lower left, back to the camera, the street spreading below",
+      "look": "twilight",
+      "motion_elements": "the falling snow, the flickering street lamps and the chimney smoke",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "wa-25",
+      "subject": "The bay window of a wizard quill and parchment shop at night, seen close: long feather quills in brass pots, glass ink bottles in deep colors, rolls of blank parchment tied with red ribbon, sealing wax and candles, a tiny wreath hung in the window, frost on the small panes and snow on the sill",
+      "composition": "Medium-close eye-level view of the whole window from the snowy cobbles",
+      "look": "snowy-night",
+      "motion_elements": "the candle flames inside, the flickering lamp and a little snow sliding off the sill",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "close"
+      },
+      "lens": "50mm lens at f/4"
+    },
+    {
+      "id": "wa-26",
+      "subject": "A row of small wooden Christmas market stalls along a crooked wizard shopping street on a grey snowy afternoon: stalls with snowy roofs selling roasted chestnuts, gingerbread and carved wooden ornaments and plain wrapped sweets, garlands and red bows on the stalls, leaning shopfronts with glowing windows behind, warm lamps hanging under each stall roof",
+      "composition": "Eye-level view along the line of stalls, the nearest stall at the right edge and the rest receding along the street",
+      "look": "snow-day",
+      "motion_elements": "the smoke from the chestnut brazier and the falling snow",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "wa-27",
+      "subject": "An empty crooked wizard shopping street late at night: one student in a long black robe and a green-and-silver striped scarf, a grey knitted wool hat over short dark-brown hair, stands still alone in the middle of the snowy cobbles under the evergreen garlands, the shop windows glowing gold on both sides, iron street lamps lit",
+      "composition": "Wide eye-level view from far behind the student; the student is tiny in the center of the street, back to the camera, the street rising and bending beyond",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the flickering street lamps and the warm window light",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "wa-28",
+      "subject": "A crooked corner of a wizard shopping street at blue hour: a narrow three-storey shop leaning sharply over the lane, bay windows stacked one above another, each glowing with different wares, brass telescopes, cauldrons, glass jars, a wreath on every window, garlands at each storey, snow on the ledges, a lit iron street lamp at the corner. The fascia boards above the bay windows are plain dark carved wood with no lettering, signs or symbols anywhere. All shop fascia boards, signs and door frames are plain painted wood without any lettering, numbers or symbols.",
+      "composition": "Eye-level view from the lane looking up slightly at the leaning shop, the lane passing it on the left",
+      "look": "twilight",
+      "motion_elements": "the flickering candlelight in the windows, the chimney smoke and the glowing garland lights",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "wa-29",
+      "subject": "A wizard broomstick shop on a quiet snowy afternoon: a tall arched window with polished broomsticks displayed upright, brass fittings, a garland around the frame; one student in a long black robe and a yellow-and-black striped scarf, chin-length wavy dark-blonde hair, stands still close to the window looking in, snowy cobbles and the next shopfronts on either side. All shop fascia boards, signs and door frames are plain painted wood without any lettering, numbers or symbols.",
+      "composition": "Wide eye-level view from further back, across the street; the student is small at the center in front of the window, back to the camera",
+      "look": "snow-day",
+      "motion_elements": "the warm candle glow in the window, the chimney smoke and the steam of breath in the cold air",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "wa-30",
+      "subject": "A crooked wizard shopping street at night seen from the bend looking back toward its entrance: the street dips and straightens, glowing bay windows on both sides, garlands across the street with warm small lights, iron street lamps, heavy snow on the roofs and drifts against the doorsteps, fresh untouched snow on the cobbles. The shop fronts have no fascia boards and no hanging signs at all, only garlands and wreaths above the windows; no lettering, numbers or symbols anywhere. No lanterns or candles stand on the steps, doorsteps or in the snow.",
+      "composition": "Eye-level view from the middle of the bend looking back down the slope of the street, the far end glowing faintly",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the glowing garland lights and the chimney smoke",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling"
+      },
+      "id": "wa-31",
+      "subject": "A narrow cobbled wizard shopping street at night under gently falling snow: tall crooked shops with glowing bow windows full of plain wares, garlands and wreaths above every window, lit iron lamp posts, snow on every ledge. The shop fronts have no fascia boards and no hanging signs; no lettering, numbers or symbols anywhere. Nobody is in the scene; no animals. No lanterns or candles on the steps or in the snow.",
+      "composition": "Eye-level view down the middle of the empty street",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow and the warm window glow"
+    }
+  ]
+}

@@ -1,0 +1,464 @@
+{
+  "theme": "castle/vista",
+  "target": 35,
+  "defaults": {
+    "lens": "35mm lens at f/5.6",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "vista",
+      "category": "vista"
+    }
+  },
+  "shots": [
+    {
+      "id": "cv-01",
+      "subject": "A huge ancient Gothic stone castle school with many towers, turrets and pointed spires on a rocky cliff above a frozen dark lake, hundreds of warm golden lit windows, thick snow on every roof and battlement, a long covered stone bridge, dark snowy pine forest and snowy mountains around it",
+      "composition": "Wide view from a snowy shore across the frozen lake; the castle rises on the right two thirds above its cliff, the frozen lake and snowy reeds fill the lower third, mountains fade into the background on the left",
+      "look": "twilight",
+      "motion_elements": "the falling snow and thin chimney smoke rising from a few towers",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "cv-02",
+      "subject": "Seen from a high snowy hilltop on a quiet Christmas afternoon: a huge ancient Gothic stone castle school of magic with many towers, turrets and pointed spires stands on a rocky cliff far below above a frozen lake, every roof and battlement thick with snow, warm golden light glowing in its windows, thin smoke rising from many chimneys, snowy pine forests and a winding valley spreading away toward pale snowy mountains",
+      "composition": "High wide view from the hill crest, untouched snow sloping down in the foreground, the castle in the middle distance on the right third",
+      "look": "snow-day",
+      "motion_elements": "the chimney smoke, the mist drifting in the valley and the glowing windows",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cv-03",
+      "subject": "From the edge of a snowy pine forest on Christmas night: across a wide snow-covered meadow a huge ancient Gothic stone castle school of magic with many towers, turrets and pointed spires glows with hundreds of warm golden windows on its cliff, a tall decorated Christmas tree lit in its forecourt, chimney smoke rising, snow falling softly through the frame, and the dark pines framing both sides",
+      "composition": "Wide eye-level view from just inside the treeline, open snow in the foreground, the castle across the meadow in the centre",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the chimney smoke and the glowing windows",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "cv-04",
+      "subject": "A long curved stone viaduct of many tall arches crosses a deep snowy glen at blue hour, its track empty and white with snow, leading the eye toward a huge ancient Gothic stone castle school of magic with many towers, turrets and pointed spires rising on a distant cliff with warm golden windows; mist lies in the glen below, a frozen river winds beneath the arches and snowy mountains glow faintly against the deep blue sky",
+      "composition": "Wide view from a snowy slope beside the viaduct, the arches curving from the left foreground into the distance toward the castle",
+      "look": "twilight",
+      "motion_elements": "the mist in the glen, the chimney smoke over the castle and the glowing windows",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "cv-05",
+      "subject": "A tight cluster of tall stone towers, turrets and slender pointed spires of an ancient castle school of magic at blue hour on Christmas Eve, snow thick on every conical roof and ledge, rows of warm golden windows glowing, wreaths with red ribbons hung on a few tall windows, thin chimney smoke rising into the deep blue sky with a last soft glow on the horizon",
+      "composition": "Telephoto view compressing the towers into layered silhouettes, the spires reaching the upper third, sky behind",
+      "look": "twilight",
+      "motion_elements": "the chimney smoke, the glowing windows and a faint drifting mist between the towers",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "85mm lens at f/5.6"
+    },
+    {
+      "id": "cv-06",
+      "subject": "Heavy snow falls on a Christmas night over a frozen lake: on the near shore an old stone-and-timber boathouse with a steep snowy roof and a warm lamp glowing in its small window, a short wooden jetty half buried in snow, and across the ice a huge ancient Gothic stone castle school of magic with many towers, turrets and pointed spires rises on its cliff with hundreds of golden windows softened by the falling snow",
+      "composition": "Wide view from the snowy shore, the boathouse on the left third in the middle ground, the castle across the lake on the right",
+      "look": "snowy-night",
+      "motion_elements": "the heavy falling snow, the boathouse lamp glow and the chimney smoke",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "cv-07",
+      "subject": "An old stone-and-timber boathouse at the edge of a frozen lake below a castle at blue hour on Christmas Eve: its wide wooden doors stand open to the ice, small wooden rowing boats lie frozen in beside a snowy jetty, warm lamplight glows inside and in a small upper window, an evergreen wreath hangs over the doors, and a curl of smoke rises from its stone chimney",
+      "composition": "Medium-wide view from the ice in front of the boathouse, the open doors centred, smooth snowy ice in the foreground",
+      "look": "twilight",
+      "motion_elements": "the chimney smoke, the warm lamplight and a thin mist drifting over the ice",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      },
+      "lens": "50mm lens at f/5.6"
+    },
+    {
+      "id": "cv-08",
+      "subject": "The inner courtyard of an ancient castle school of magic on Christmas night: a giant decorated fir tree with gold and red baubles and warm candle-like lights stands in the middle of the snowy flagstones, a frozen stone fountain beside it, cloister arcades with garlands and lit iron lamps run around all four sides, rows of golden windows rise above, and snow falls gently",
+      "composition": "Wide eye-level view from one corner of the courtyard under the arcade edge, the tree in the centre, open snow in the foreground",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the tree lights and the iron lamp flames",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "cv-09",
+      "subject": "A long covered wooden bridge with a pitched snowy roof and open timber sides spans a deep rocky gorge on a quiet Christmas afternoon, leading from snowy grounds to the towers of an ancient stone castle school of magic, evergreen garlands with red ribbons hung along its outer beams, warm lamps glowing in its rafters, mist rising from the gorge and snowy pines clinging to the cliffs",
+      "composition": "Wide side view from the edge of the gorge, the bridge crossing the frame diagonally toward the castle in the upper right",
+      "look": "snow-day",
+      "motion_elements": "the mist rising from the gorge, the lamp glow in the rafters and a gentle chimney smoke from the castle",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cv-10",
+      "subject": "A row of tall old Victorian glasshouses in the snowy gardens of an ancient castle school of magic at blue hour on Christmas Eve, their curved glass roofs glowing warm gold from lamps among green plants inside, condensation and faint steam on the panes, snow thick on the frames and paths, and the dark castle towers with golden windows rising behind",
+      "composition": "Wide view along the snowy garden path in front of the glasshouses, receding to the castle in the background",
+      "look": "twilight",
+      "motion_elements": "the steam drifting from the glasshouse vents, the warm glow inside and the chimney smoke over the castle",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "cv-11",
+      "subject": "Seen from a high mountain shoulder on a snowy Christmas day: a huge ancient Gothic stone castle school of magic with many towers, turrets and pointed spires sits on its cliff far below at the edge of a long frozen lake, tiny warm windows glowing, snow-covered forests and hills folding away around it, light snow falling across the frame and low clouds drifting between the peaks",
+      "composition": "Very wide high view over a snowy rock ledge at the bottom edge, the castle and lake small in the middle third",
+      "look": "snow-day",
+      "motion_elements": "the falling snow, the drifting low clouds and the chimney smoke far below",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling"
+      },
+      "lens": "24mm lens at f/8"
+    },
+    {
+      "id": "cv-12",
+      "subject": "A clear still Christmas night over a frozen lake: a bright moon and stars above, a vast old granite castle with tall slate-roofed towers on its cliff and many warm golden windows, thin smoke rising straight up from its chimneys, the snowy ice of the lake gleaming in the moonlight with a few dark open patches of water reflecting the warm windows, and dark pines along the shore",
+      "composition": "Wide view from the shore at ice level, the lake filling the lower third, the castle on the left two thirds",
+      "look": "snowy-night",
+      "motion_elements": "the chimney smoke, the gently rippling dark water in the open patches and the twinkling windows",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cv-13",
+      "subject": "Two tiny students stand still on a snowy lamplit path that winds up a hillside toward a huge ancient Gothic stone castle school of magic with many towers, turrets and pointed spires at blue hour on Christmas Eve, seen strictly from behind, looking up at the glowing castle, in long black wool cloaks, one with a blonde ponytail and a scarlet-and-gold striped scarf, one in a knitted wool hat and a green-and-silver scarf; old iron lamp posts glow along the path",
+      "composition": "Wide view from further down the path behind them; the two figures are very small in the middle distance, the castle fills the upper half",
+      "look": "twilight",
+      "motion_elements": "the lamp post flames, the chimney smoke over the castle and a faint mist on the hillside",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cv-14",
+      "subject": "Three tiny students stand still in the middle of a long covered wooden bridge over a snowy gorge on a quiet Christmas afternoon, looking toward the towers of an ancient stone castle school of magic, seen strictly from behind in long black wool cloaks with striped scarves in scarlet-and-gold, blue-and-bronze and yellow-and-black; one with a dark braid, one with short brown hair, one in a knitted hat",
+      "composition": "Wide view from the bridge entrance looking along its length, the three small figures far in the middle, the castle beyond the far end",
+      "look": "snow-day",
+      "motion_elements": "the mist rising from the gorge, the lamp glow in the rafters and the chimney smoke from the castle",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cv-15",
+      "subject": "A single student stands still on a high snowy battlement walk of an ancient castle on Christmas night, looking out over a frozen lake and dark snowy mountains, seen strictly from behind in a long black wool cloak with a blue-and-bronze striped scarf and a short auburn bob; snow falls, warm golden windows glow in the towers on either side and a wreath hangs on the crenellations",
+      "composition": "Wide view along the wall walk from behind the student, the small figure in the lower middle, the valley spreading beyond the parapet",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the glowing tower windows and the chimney smoke",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "falling"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "cv-16",
+      "subject": "Two tiny students stand still at the snowy edge of a frozen lake on a quiet Christmas afternoon, looking across the ice at a huge ancient Gothic stone castle school of magic with many towers, turrets and pointed spires on its cliff, seen strictly from behind in long black wool cloaks, one with short straight blonde hair and a yellow-and-black striped scarf, one with a dark braid and a scarlet-and-gold scarf; mist drifts over the ice and the windows glow warm",
+      "composition": "Wide view from the shore behind them, the two small figures in the lower left third, the castle across the lake on the right",
+      "look": "snow-day",
+      "motion_elements": "the mist drifting over the ice, the chimney smoke and the glowing windows",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cv-17",
+      "subject": "A single tiny student stands still at a low stone balustrade on a snowy garden terrace beside old glasshouses on a Christmas afternoon, looking up at the towers of an ancient stone castle school of magic, seen strictly from behind in a long black wool cloak with a green-and-silver striped scarf and short straight brown hair; snow falls gently and the glasshouses glow warm with steam on their panes",
+      "composition": "Wide view from behind on the terrace, the small figure at the balustrade in the lower centre, the castle above",
+      "look": "snow-day",
+      "motion_elements": "the falling snow, the steam on the glasshouse panes and the chimney smoke",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "cv-18",
+      "subject": "The great arched stone gatehouse of an ancient castle school of magic on Christmas night: tall wrought-iron gates stand open between two massive stone pillars topped with plain snow-capped stone spheres, iron lamps glow on the pillars, a long snowy drive lined with small lit fir trees leads up to the castle towers with golden windows, and snow falls softly",
+      "composition": "Wide eye-level view from the road in front of the gates, the open gates centred, the drive leading through them toward the castle",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the lamp flames and the small fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "cv-19",
+      "subject": "A snowy stone courtyard of an ancient castle school of magic on a quiet Christmas afternoon, dominated by a tall clock tower with a plain clock face without numbers, a frozen round fountain hung with icicles in the centre, a decorated Christmas tree with warm lights beside it, garlands on the arches of the surrounding cloisters and warm golden lamps lit under them",
+      "composition": "Wide eye-level view from the cloister entrance across the courtyard toward the clock tower",
+      "look": "snow-day",
+      "motion_elements": "the tree lights, the lamp flames and the chimney smoke above the roofs",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "cv-20",
+      "subject": "A curving pine-lined shore of a frozen lake at blue hour on Christmas Eve, low mist drifting over the snowy ice, and at the far end of the bend an ancient castle school of magic rising on its cliff with towers and spires, warm golden windows and a soft rosy afterglow behind the mountains",
+      "composition": "Wide view along the shoreline curve, the frozen lake on the right, snowy pines on the left leading toward the castle",
+      "look": "twilight",
+      "motion_elements": "the mist drifting over the ice, the chimney smoke and the glowing windows",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "50mm lens at f/5.6"
+    },
+    {
+      "id": "cv-21",
+      "subject": "A lone tall round stone tower with a conical snowy roof standing on a snowy hill apart from an ancient castle on Christmas night, warm light glowing from its narrow arched windows, a wreath with a red ribbon on its wooden door, smoke rising from its chimney, snow falling, and the larger castle with its golden windows glowing in the background",
+      "composition": "Medium-wide view from the snowy hillside below, the tower in the left third, the castle soft in the right background",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the chimney smoke and the glowing windows",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling",
+        "scale": "mid"
+      },
+      "lens": "50mm lens at f/5.6"
+    },
+    {
+      "id": "cv-22",
+      "subject": "Rolling snowy hills under a soft silver sky on Christmas day with light snow falling: far away in the centre a huge ancient Gothic stone castle school of magic with many towers, turrets and pointed spires rises on its cliff over a frozen lake, its warm windows faintly glowing, an old dry-stone wall and a few bare trees crossing the hills in the middle distance",
+      "composition": "Very wide view from a low hilltop, smooth untouched snow in the foreground, the castle small at the horizon line",
+      "look": "snow-day",
+      "motion_elements": "the falling snow, the chimney smoke and the drifting mist over the lake",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling"
+      },
+      "lens": "24mm lens at f/8"
+    },
+    {
+      "id": "cv-23",
+      "subject": "A long winding stone stairway path descends a snowy cliff from the towers of an ancient castle school of magic down to a lakeside boathouse on Christmas night, lit by a line of old iron lamps with warm flames, evergreen garlands with red ribbons on its stone railings, the frozen lake below, and snow falling softly",
+      "composition": "Wide view from the lake shore looking up the zigzag stairway toward the castle at the top of the frame",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the lamp flames and the chimney smoke at the top",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "cv-24",
+      "subject": "Looking up from the snowy valley floor at the sheer rocky cliff below an ancient castle school of magic at blue hour: massive stone walls and buttresses rise straight from the rock, towers and spires above them with warm golden windows, snow on every ledge, chimney smoke drifting into the deep blue sky and a last soft glow behind",
+      "composition": "Low-angle wide view from the valley, the cliff and walls rising from the lower third into the sky",
+      "look": "twilight",
+      "motion_elements": "the chimney smoke, the glowing windows and thin mist around the cliff base",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "cv-25",
+      "subject": "A tall stone viaduct of many arches crosses a wide snowy valley on a quiet Christmas afternoon, its empty track white with snow, a frozen river winding beneath the arches through snowy pines, and beyond it a huge ancient Gothic stone castle school of magic with many towers, turrets and pointed spires glows faintly on a distant cliff under a soft silver sky",
+      "composition": "Wide view from a snowy hillside, the viaduct spanning the middle third from left to right, the castle in the upper right background",
+      "look": "snow-day",
+      "motion_elements": "the mist in the valley, the chimney smoke from the castle and the glowing windows",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "24mm lens at f/8"
+    },
+    {
+      "id": "cv-26",
+      "subject": "A single large domed Victorian glasshouse in the snowy gardens of an ancient castle on Christmas night, its glass glowing warm gold from lamps hung among tall green palms and potted plants inside, a decorated small fir tree by its door, condensation on the panes, snow piled on its ironwork, snow falling around it and dark castle towers behind",
+      "composition": "Medium-wide view from the snowy garden path, the glasshouse centred, open snow in the foreground",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the warm glow inside the glass and the steam on the panes",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling",
+        "scale": "mid"
+      },
+      "lens": "50mm lens at f/5.6"
+    },
+    {
+      "id": "cv-27",
+      "subject": "A long cloister walkway of a castle school of magic on a snowy Christmas afternoon: pointed stone arches open onto a snowy garth, an evergreen wreath with a red ribbon hangs in every arch, iron lamps glow warmly between them, a decorated fir tree stands in the snowy garth, and soft silver light falls across the worn flagstones",
+      "composition": "Medium-wide view along the walkway in receding perspective, the arches on the left opening onto the snow, open flagstones ahead",
+      "look": "snow-day",
+      "motion_elements": "the lamp flames, the tree lights and a light breath of snow blown off the arches",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      },
+      "lens": "35mm lens at f/5.6"
+    },
+    {
+      "id": "cv-28",
+      "subject": "A castle courtyard seen from an upper stone arcade at blue hour on Christmas Eve: below, a giant decorated fir tree glows in the centre surrounded by four smaller lit fir trees on the snowy flagstones, garlands hang on the cloister arches, golden windows glow on the surrounding towers, and smoke curls from chimneys into the deep blue sky",
+      "composition": "High-angle wide view over the arcade parapet into the courtyard, the trees in the centre, towers around the edges",
+      "look": "twilight",
+      "motion_elements": "the tree lights, the glowing windows and the chimney smoke",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "cv-29",
+      "subject": "Snowy battlements of an ancient castle school of magic on Christmas night: a long wall walk with crenellations each topped by a small evergreen wreath, tall towers rising along it with warm golden windows, iron braziers burning on the wall, and beyond the parapet a sweeping view of a frozen lake and dark snowy forests under falling snow",
+      "composition": "Wide view along the empty wall walk, the crenellations receding to the left, the towers and the valley on the right",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the brazier flames and the chimney smoke",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "cv-30",
+      "subject": "From the edge of a snowy forest on a quiet Christmas afternoon: a frozen stream winds out of the pines across a white meadow toward a huge ancient Gothic stone castle school of magic with many towers, turrets and pointed spires on its cliff, with warm windows glowing softly, chimney smoke rising and thin mist lying over the meadow under a soft silver sky",
+      "composition": "Wide low view beside the stream, the frozen stream leading from the lower left toward the castle in the upper right",
+      "look": "snow-day",
+      "motion_elements": "the mist over the meadow, the chimney smoke and a trickle of open water in the stream",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cv-31",
+      "subject": "A clear starry Christmas night: a huge ancient Gothic stone castle with many towers, turrets and pointed spires on its cliff glows with hundreds of golden windows under a vast deep blue sky full of stars, smoke rising from many chimneys, snow on every roof, the frozen lake below white and still, and the dark silhouettes of snowy mountains around",
+      "composition": "Wide view from a raised snowy bank, the castle in the centre third, a large expanse of starry sky above",
+      "look": "snowy-night",
+      "motion_elements": "the chimney smoke, the twinkling stars and the glowing windows",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "cv-32",
+      "subject": "A walled winter garden of an ancient castle school of magic on a quiet Christmas afternoon: clipped yew hedges and topiary cones heavy with snow, a frozen stone fountain in the centre, gravel paths hidden under fresh snow, small lit fir trees in stone urns, and the castle's towers with warm golden windows rising beyond the old garden wall",
+      "composition": "Wide eye-level view along the central garden path toward the fountain and the castle beyond",
+      "look": "snow-day",
+      "motion_elements": "the small fir tree lights, the chimney smoke and the glowing windows",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "cv-33",
+      "subject": "An old arched stone footbridge crosses a half-frozen river in a snowy glen below a huge ancient Gothic stone castle school of magic with many towers, turrets and pointed spires at blue hour on Christmas Eve, dark water flowing between ice sheets under the arch, mist rising from the water, snowy pines on the banks, and the castle glowing high above on the cliff",
+      "composition": "Wide view from the riverbank, the footbridge across the middle ground, the castle in the upper third",
+      "look": "twilight",
+      "motion_elements": "the flowing water, the mist rising from the river and the chimney smoke",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cv-34",
+      "subject": "The grand front steps of an ancient castle school of magic on Christmas night: wide snowy stone steps rise to a pair of enormous open oak doors spilling warm golden light, a thick evergreen garland with red ribbons arches over the doorway, tall lit fir trees stand on each side, iron torches burn on the walls and snow falls softly",
+      "composition": "Medium-wide view from the courtyard at the foot of the steps, the open doorway centred, untouched snow on the lower steps",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the torch flames and the fir tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling",
+        "scale": "mid"
+      },
+      "lens": "50mm lens at f/5.6"
+    },
+    {
+      "id": "cv-35",
+      "subject": "From a high snowy mountain pass at blue hour on Christmas Eve with snow falling: far below, a huge ancient Gothic stone castle school of magic with many towers, turrets and pointed spires glows on its cliff above a frozen lake, its golden windows like embers, snowy forests and frozen streams around it and the last soft glow of the day on the horizon",
+      "composition": "Very wide high view from the pass, a snowy rock edge along the bottom, the castle small in the centre of the valley",
+      "look": "twilight",
+      "motion_elements": "the falling snow, the drifting low clouds and the chimney smoke far below",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "falling"
+      },
+      "lens": "24mm lens at f/8"
+    }
+  ]
+}

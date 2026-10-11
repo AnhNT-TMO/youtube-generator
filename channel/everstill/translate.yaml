@@ -1,0 +1,49 @@
+channel_id: UCYk2g3M7w2lXE_UHwayJ29g   # Everstill
+source_language: en
+keep_song_title: false
+translate_description: true
+keep_lyrics: false
+keep_verbatim: [Everstill, Tian]
+languages:             # CEO 2026-10-06: only high-RPM markets, same 10 languages for every Everstill album (English covers US/UK/CA/AU/NZ/IE)
+  - code: de
+    name: German
+    why: CEO 2026-10-06 high-RPM markets only; Germany, Austria, Switzerland (Weihnachtsmusik)
+  - code: fr
+    also: [fr-CA]
+    name: French
+    why: CEO 2026-10-06 high-RPM markets only; France, Switzerland, Belgium, Luxembourg, Quebec (musique de Noël)
+  - code: nl
+    name: Dutch
+    why: CEO 2026-10-06 high-RPM markets only; Netherlands, Belgium (kerstmuziek)
+  - code: "no"
+    name: Norwegian
+    why: CEO 2026-10-06 high-RPM markets only; Norway (julemusikk)
+  - code: da
+    name: Danish
+    why: CEO 2026-10-06 high-RPM markets only; Denmark (julemusik)
+  - code: sv
+    name: Swedish
+    why: CEO 2026-10-06 high-RPM markets only; Sweden (julmusik)
+  - code: fi
+    name: Finnish
+    why: CEO 2026-10-06 high-RPM markets only; Finland (joulumusiikki)
+  - code: ja
+    name: Japanese
+    why: CEO 2026-10-06 high-RPM markets only; Japan, big market for Christmas piano / cafe BGM
+  - code: ko
+    name: Korean
+    why: CEO 2026-10-06 high-RPM markets only; Korea, big market for piano BGM and study music
+  - code: it
+    name: Italian
+    why: CEO 2026-10-06 high-RPM markets only; Italy + Ticino (musica di Natale), mid-high RPM
+glossary:
+  de: {Christmas Music: Weihnachtsmusik, Christmas Piano Waltz: Weihnachtswalzer am Klavier, Christmas Eve: Heiligabend, Where Time Becomes Sound: wo Zeit zu Klang wird}
+  fr: {Christmas Music: musique de Noël, Christmas Piano Waltz: valse de Noël au piano, Christmas Eve: Réveillon, Where Time Becomes Sound: là où le temps devient musique}
+  nl: {Christmas Music: kerstmuziek, Christmas Piano Waltz: kerstwals op piano, Christmas Eve: Kerstavond, Where Time Becomes Sound: waar tijd klank wordt}
+  "no": {Christmas Music: julemusikk, Christmas Piano Waltz: julevals på piano, Christmas Eve: Julaften, Where Time Becomes Sound: der tid blir til lyd}
+  da: {Christmas Music: julemusik, Christmas Piano Waltz: julevals på klaver, Christmas Eve: Juleaften, Where Time Becomes Sound: hvor tid bliver til lyd}
+  sv: {Christmas Music: julmusik, Christmas Piano Waltz: julvals på piano, Christmas Eve: Julafton, Where Time Becomes Sound: där tid blir ljud}
+  fi: {Christmas Music: joulumusiikki, Christmas Piano Waltz: joulupianovalssi, Christmas Eve: Jouluaatto, Where Time Becomes Sound: missä aika muuttuu ääneksi}
+  ja: {Christmas Music: クリスマス音楽, Christmas Piano Waltz: クリスマス・ピアノワルツ, Christmas Eve: クリスマスイブ, Where Time Becomes Sound: 時間が音になる場所}
+  ko: {Christmas Music: 크리스마스 음악, Christmas Piano Waltz: 크리스마스 피아노 왈츠, Christmas Eve: 크리스마스 이브, Where Time Becomes Sound: 시간이 소리가 되는 곳}
+  it: {Christmas Music: musica di Natale, Christmas Piano Waltz: valzer di Natale al piano, Christmas Eve: Vigilia di Natale, Where Time Becomes Sound: dove il tempo diventa suono}

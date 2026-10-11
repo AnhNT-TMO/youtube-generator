@@ -8,22 +8,18 @@ Luật đóng gói YouTube riêng của kênh (skill `upload-youtube-publish` l�
 Dòng nhạc Christmas của kênh không có tracklist tên bài (CEO 2026-10-05): description không có dòng `TRACKLIST`, không
 timestamp; pinned comment cũng không timestamp. Studio: bỏ tick *Automatic chapters*.
 
+**Dịch sau khi đăng (CEO 2026-10-06):** mọi album và Short dịch title + description sang đúng 10 ngôn ngữ thị trường RPM cao
+trong `translate.yaml` (de, fr + fr-CA, nl, no, da, sv, fi, ja, ko, it); không thêm ngôn ngữ thị trường view rẻ. Thuật ngữ
+dùng lại theo `glossary`, "Everstill" và "Tian" giữ nguyên.
+
 ## Description YouTube mặc định
 
-Mẫu CEO 2026-10-05, dùng nguyên văn cho mọi album; không có chỗ điền.
+Mẫu CEO 2026-10-06: description nói về video, không kể chuyện kênh. Dòng `[…]` ngay sau dòng 🎄 Everstill là chỗ điền ABOUT THIS VIDEO (3–5 câu riêng cho từng video); mọi dòng còn lại dùng nguyên văn, kể cả đoạn 🙏 tri ân tác giả các bài thánh ca public domain. Upload defaults trong Studio (Settings → Upload defaults → Description) = mẫu này bỏ dòng `[…]` và dòng trống ngay sau nó; khi đăng, dán đoạn ABOUT THIS VIDEO của `youtube.md` vào dưới dòng 🎄 Everstill.
 
 ```
-🎄 Relaxing Christmas Instrumental Music & Cozy Winter Ambience | Everstill ❄️🔥
+🎄 Everstill — relaxing Christmas instrumental music and cozy winter ambience. Soft piano carols with gentle strings, set to slow-moving winter scenes. ❄️🔥
 
-Welcome to Everstill — Where Time Becomes Sound. 🎧
-
-I’m Tian, a developer and the person behind Everstill. Instrumental music has always been part of my everyday life — while coding, working, studying, resting, or simply slowing down at the end of the day.
-
-For this Christmas collection, I wanted to create that feeling I love most about the season: warm lights glowing against a cold winter evening, snow falling outside, a peaceful room, and gentle music filling the silence. 🎄✨
-
-Each piece is shaped by experimenting with melodies, piano, strings, guitar, soft orchestration, and atmosphere until everything feels calm, warm, and timeless.
-
-I hope this music can become a small part of your Christmas — whether you're studying late at night, working quietly, reading beside the window, decorating your home, spending time with family, or simply enjoying a peaceful moment alone. ❤️
+[Write 3–5 sentences here about this video: the scenes you see, the light and mood, the carols you hear, how long it plays.]
 
 🎧 Perfect for:
 
@@ -37,16 +33,28 @@ I hope this music can become a small part of your Christmas — whether you're s
 
 🔥 Put on your headphones, lower the lights, and let the music stay with you for a while.
 
-If Everstill brings you even a little more peace, focus, warmth, or happiness, then creating it was worth it to me.
+🎹 Every arrangement and recording here was created, arranged and performed by Everstill. Please do not copy, re-upload or cover these recordings in any form.
 
-Thank you for listening and for spending part of your time here. 🌿
+🙏 With gratitude to the composers and hymn writers, known and unknown, whose Christmas carols have been sung for generations. Every melody here is a public domain carol, arranged for gentle piano by Everstill.
 
-🎶 Welcome to Everstill.  
-⏳ Where Time Becomes Sound.
-
-If you enjoy the music, please leave a like, share the video, or subscribe. Every listen helps me keep creating new music and peaceful places for you to return to. ❤️
+If you enjoy the music, please leave a like, share the video, or subscribe. ❤️
 
 #christmasmusic, #christmasambience, #relaxingchristmasmusic, #instrumentalmusic, #christmasmusic2026, #cozychristmas, #winterambience, #studymusic, #relaxingmusic, #piano, #pianomusic, #calmpianomusic, #softpiano, #soothingpianomusic, #musicforsleep, #musicforstudying, #peacefulmusic, #everstill
+```
+
+## Description: dòng chỉ cho nhạc public domain
+
+CEO 2026-10-08: các dòng dưới đây chỉ ghi khi album dùng carol public domain (`album.md` → `music_source: pd`). Album nhạc
+gốc (`music_source: suno`) bỏ hẳn các dòng này cùng dòng trống ngay trước; `publish.py check` báo ❌ nếu ghi sai.
+
+**Dòng chủ quyền (CEO 2026-10-11):** album nào dùng giai điệu public domain do mình phối khí và thu (`music_source: pd`) ghi thêm
+dòng 🎹 khẳng định bản phối + bản thu là của Everstill và đề nghị không copy / đăng lại / cover, đặt **ngay trước dòng 🙏 tri ân**.
+Giai điệu gốc là PD nên dòng này chỉ nói về *bản phối và bản thu*, không nhận quyền với bài hát.
+
+```
+🎹 Every arrangement and recording here was created, arranged and performed by Everstill. Please do not copy, re-upload or cover these recordings in any form.
+
+🙏 With gratitude to the composers and hymn writers, known and unknown, whose Christmas carols have been sung for generations. Every melody here is a public domain carol, arranged for gentle piano by Everstill.
 ```
 
 ## Tags YouTube mặc định
@@ -57,15 +65,17 @@ Everstill, christmas music, christmas instrumental music, relaxing christmas mus
 
 ## Title
 
-**Album:** `<Khung cảnh của album> <1 emoji> <Vibe> <Christmas genre phrase có người gõ> [for <Use-case / cảm giác>]`
+**Album (CEO 2026-10-07):** `<Christmas genre phrase có người gõ> 🎄 <Khung cảnh của album> ❄️ <Christmas genre phrase thứ hai>`,
+vd. `Relaxing Christmas Piano 🎄 Cozy Snowy Village ❄️ Christmas Ambience`; ≤ 70 ký tự; mẫu tham khảo chỉ là kiểu, không chép
+cụm của người khác. Tên vibe (Snow Globe…) chỉ là tên nội bộ, không làm chủ đề title.
 
 - **Không ghi độ dài** (không "3 Hours") (CEO 2026-10-05).
-- **Vibe của album đứng ngay trước genre phrase** (CEO 2026-10-05), vd. album vui tươi yêu đời → `Cheerful` / `Happy` /
+- **Chữ vibe nằm trong genre phrase** (CEO 2026-10-05), vd. album vui tươi yêu đời → `Cheerful` / `Happy` /
   `Joyful`; chọn chữ vibe đi với genre phrase mà người ta có gõ (`publish.py tags --expand "<vibe> christmas music"`).
 - Mỗi album một khung cảnh / cảm giác khác (theo thumbnail + video: đêm Giáng Sinh trong nhà, tuyết ngoài cửa sổ, lò sưởi…)
   và một genre phrase khác (chọn từ `publish.py tags --expand`), để các video không na ná nhau.
-- Emoji dùng được: 🎄 ❄️ 🔥 ✨ (một cái trong title). Không ghi "No Ads" (không hứa điều kênh không kiểm soát).
-- Tên kênh không vào title (đã có ở dòng đầu description).
+- Emoji dùng được: 🎄 ❄️ 🔥 ✨ (hai cái, ngăn ba cụm). Không ghi "No Ads" (không hứa điều kênh không kiểm soát).
+- Tên kênh không vào title (đã có trong description).
 
 ## Tags: các nhóm
 
@@ -96,3 +106,4 @@ Emoji của kênh: 🎄 ❄️ 🔥 ✨ 🎧 ❤️ 🌿. Không timestamp. Mẫ
 ## Ghi chú kênh
 
 - Playlists trong Studio: `Everstill · Christmas`.
+- Thumbnail (CEO 2026-10-06): mọi thumbnail có logo `branding/logo-clock-piano.png` ở góc phải trên (rộng 15 % ảnh, lề 2,5 %, bóng mờ nhẹ); giữ bản không logo `thumbnail-nologo.png`.

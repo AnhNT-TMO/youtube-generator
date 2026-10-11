@@ -1,0 +1,411 @@
+{
+  "theme": "mountain-valleys/mid",
+  "target": 27,
+  "defaults": {
+    "lens": "50mm lens at f/8",
+    "look": "day",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "mid",
+      "category": "mountain-valleys",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "mv-m-01",
+      "subject": "A dark stepped gneiss pillar with grassy ledges on the side of a narrow Alpine valley in summer, its base wrapped in dark conifers, a pale scree slope at its foot and moving cloud around its upper half.",
+      "lens": "70mm lens at f/8",
+      "look": "misty",
+      "composition": "Side view across the valley, the buttress standing in the right third of the frame from the conifers to its top, with open moving cloud filling the left two thirds.",
+      "motion_elements": "the moving cloud around the buttress",
+      "tags": {
+        "comp": "side-anchor",
+        "anchor": "gneiss-pillar",
+        "season": "summer",
+        "time": "morning",
+        "palette": "gray mist"
+      }
+    },
+    {
+      "id": "mv-m-02",
+      "subject": "A cascading mountain stream on a steep late-summer slope of tawny dry grass, grey boulders and a few dark spruce along its edges.",
+      "lens": "35mm lens at f/8",
+      "look": "day",
+      "composition": "Viewed from the side of the slope, the white stream runs diagonally from the upper left corner to the lower right corner, with the tawny slope on both sides and a sliver of sky at the top left.",
+      "motion_elements": "the cascading stream and the dry grass",
+      "tags": {
+        "comp": "diagonal",
+        "anchor": "cascading-stream",
+        "season": "summer",
+        "time": "day",
+        "palette": "muted gold"
+      }
+    },
+    {
+      "id": "mv-m-03",
+      "subject": "A wide gravel bar in a mountain river in late spring, several shallow channels crossing it, a cut bank of grey glacial silt and old snow lying on the dark forested bank beyond.",
+      "look": "overcast",
+      "composition": "Looking down at about 45 degrees from the top of the cut bank, the gravel bar and its channels filling most of the frame, with the far bank and forest only along the top edge.",
+      "motion_elements": "the shallow river channels",
+      "tags": {
+        "comp": "look-down",
+        "anchor": "gravel-bar",
+        "season": "late-snow",
+        "time": "overcast",
+        "palette": "slate gray"
+      }
+    },
+    {
+      "id": "mv-m-04",
+      "subject": "A wet dark basalt cliff after summer rain with three thin waterfalls threading down it, dark olive moss and grass on its ledges and grey-white cloud moving across the sky above.",
+      "lens": "35mm lens at f/8",
+      "look": "after-rain",
+      "composition": "Camera low on the grassy slope at the cliff foot looking up, the cliff rising through the frame from the bottom edge, the waterfalls in the left half, and the cloud and sky across the top quarter.",
+      "motion_elements": "the thin waterfalls and the moving cloud",
+      "tags": {
+        "comp": "look-up",
+        "anchor": "cliff-waterfalls",
+        "season": "summer",
+        "time": "after-rain",
+        "palette": "deep green"
+      }
+    },
+    {
+      "id": "mv-m-05",
+      "subject": "A rocky ridge spur in autumn with golden larches on its flank and soft clouds moving behind it.",
+      "lens": "70mm lens at f/8",
+      "look": "golden",
+      "composition": "Seen past two dark out-of-focus rock slabs at the left and bottom edges, the sunlit spur and its larches sit in the center and right of the frame with the clouds behind.",
+      "motion_elements": "the soft clouds and the larch branches",
+      "tags": {
+        "comp": "past-foreground",
+        "anchor": "larch-spur",
+        "season": "autumn",
+        "time": "golden",
+        "palette": "muted gold"
+      }
+    },
+    {
+      "id": "mv-m-06",
+      "subject": "A sharp crest of dark rock with a line of wind-shaped pines along it in autumn, a slope of russet grass below and drifting mist half covering it.",
+      "lens": "135mm lens at f/8",
+      "look": "misty",
+      "composition": "Telephoto isolation of one stretch of the crest running across the upper middle of the frame, the russet slope below it, and the mist crossing the pines.",
+      "motion_elements": "the drifting mist and the russet grass",
+      "tags": {
+        "comp": "tele-isolate",
+        "anchor": "ridge-pines",
+        "season": "autumn",
+        "time": "morning",
+        "palette": "gray mist"
+      }
+    },
+    {
+      "id": "mv-m-07",
+      "subject": "A small still tarn below a rocky saddle with the first snow on its rim, the saddle and pale dawn sky mirrored in the water and thin mist hanging over the surface.",
+      "look": "dawn",
+      "composition": "Symmetrical composition: the saddle and its reflection meet at the shoreline just below the middle of the frame, a narrow band of snowy stones along the near shore.",
+      "motion_elements": "the thin mist and the faint ripples on the tarn",
+      "tags": {
+        "comp": "reflection",
+        "anchor": "tarn-saddle",
+        "season": "early-snow",
+        "time": "dawn",
+        "palette": "cool blue"
+      }
+    },
+    {
+      "id": "mv-m-08",
+      "subject": "A glacier snout of grey-blue ice on dark moraine in late spring, a milky meltwater stream emerging beneath it and cloud covering the ice field above.",
+      "look": "overcast",
+      "composition": "Side view, the ice front filling the left third of the frame, the meltwater stream flowing out to the right across the moraine, and grey cloud along the top edge.",
+      "motion_elements": "the meltwater stream and the cloud above the ice",
+      "tags": {
+        "comp": "side-anchor",
+        "anchor": "glacier-snout",
+        "season": "late-snow",
+        "time": "overcast",
+        "palette": "slate blue"
+      }
+    },
+    {
+      "id": "mv-m-09",
+      "subject": "A milky pale grey-green mountain river in summer between pale limestone banks, a fringe of young pines along one side and a sunny wooded slope behind.",
+      "look": "day",
+      "composition": "From a raised bank, the river runs diagonally from the lower left corner to the upper right, the pine fringe along its far side and the wooded slope filling the top.",
+      "motion_elements": "the milky pale grey-green river and the young pines",
+      "tags": {
+        "comp": "diagonal",
+        "anchor": "turquoise-river",
+        "season": "summer",
+        "time": "day",
+        "palette": "slate blue"
+      }
+    },
+    {
+      "id": "mv-m-10",
+      "subject": "A frosty valley meadow at the edge of winter, a slow dark stream meandering through white frosted grass of uneven, irregular tufts, a few scattered frosted willow bushes of different sizes on its banks and thin mist over the water; the water reflects only the sky and the bushes that stand on the bank.",
+      "look": "dawn",
+      "composition": "Looking down at about 40 degrees from a low terrace, the stream's curves filling the frame from bottom to top, with frosted grass on both sides and no horizon.",
+      "motion_elements": "the thin mist over the water and the slow stream",
+      "tags": {
+        "comp": "look-down",
+        "anchor": "frosted-stream",
+        "season": "winter-edge",
+        "time": "dawn",
+        "palette": "cool blue"
+      }
+    },
+    {
+      "id": "mv-m-11",
+      "subject": "A stand of tall stone pines on a rocky shoulder of the valley in summer, their broad crowns against a blue sky with drifting white clouds and a grassy slope beneath them.",
+      "look": "day",
+      "composition": "Camera low on the grassy slope looking up at about 25 degrees, the pine trunks rising from the lower third, their crowns spread across the middle, and the clouds in the sky above.",
+      "motion_elements": "the drifting white clouds and the pine crowns",
+      "tags": {
+        "comp": "look-up",
+        "anchor": "stone-pines",
+        "season": "summer",
+        "time": "day",
+        "palette": "slate blue"
+      }
+    },
+    {
+      "id": "mv-m-12",
+      "subject": "A forest edge of wet birch and spruce at the foot of a valley slope after summer rain, damp meadow grass in front and low cloud lifting along the upper trees.",
+      "lens": "85mm lens at f/8",
+      "look": "after-rain",
+      "composition": "Seen through a gap in wet out-of-focus alder leaves at the left and right edges, the forest edge and meadow sharp in the center of the frame with the cloud above the trees.",
+      "motion_elements": "the alder leaves, the meadow grass and the lifting low cloud",
+      "tags": {
+        "comp": "past-foreground",
+        "anchor": "forest-edge",
+        "season": "summer",
+        "time": "after-rain",
+        "palette": "moss green"
+      }
+    },
+    {
+      "id": "mv-m-13",
+      "subject": "A lone dark rock pinnacle standing on a grassy ridge on an autumn morning, russet grass on the ridge and a stream of fog pouring past its base from the valley behind.",
+      "lens": "135mm lens at f/8",
+      "look": "dawn",
+      "composition": "Telephoto isolation of the pinnacle in the left third of the frame, the ridge line cutting across the lower third, and the pouring fog filling the right side against the pale dawn sky.",
+      "motion_elements": "the fog pouring past the pinnacle",
+      "tags": {
+        "comp": "tele-isolate",
+        "anchor": "rock-pinnacle",
+        "season": "autumn",
+        "time": "dawn",
+        "palette": "cool blue"
+      }
+    },
+    {
+      "id": "mv-m-14",
+      "subject": "A still backwater of a mountain river in autumn, a short stretch of muted ochre larches and one grey crag mirrored in the water, seen from close enough that no far peaks or horizon show.",
+      "look": "overcast",
+      "composition": "Mid framing about 40 meters across: the larches and the crag base in the upper half and their reflection in the lower half, a thin line of sedge along the waterline; nothing floats on the water.",
+      "motion_elements": "the faint ripples on the water and the sedge tips",
+      "tags": {
+        "comp": "reflection",
+        "anchor": "backwater-larches",
+        "season": "autumn",
+        "time": "overcast",
+        "palette": "muted gold"
+      }
+    },
+    {
+      "id": "mv-m-15",
+      "subject": "A stream pouring over a rock step at the lip of a hanging valley in summer, its fall softened by mist and dark green slopes rising beside it.",
+      "lens": "70mm lens at f/8",
+      "look": "misty",
+      "composition": "Side view from across the slope, the rock step and its pouring stream placed in the left third of the frame, the green slope and mist filling the right two thirds.",
+      "motion_elements": "the pouring stream and the mist",
+      "tags": {
+        "comp": "side-anchor",
+        "anchor": "rock-step-fall",
+        "season": "summer",
+        "time": "morning",
+        "palette": "deep green"
+      }
+    },
+    {
+      "id": "mv-m-16",
+      "subject": "A slope of red-brown scree and lichen-covered boulders in late spring, a narrow clear stream fed by a melting snow patch, clumps of alpine grass between the stones and a grey ridge above.",
+      "look": "overcast",
+      "composition": "From the side of the slope, the stream and snow patch run diagonally from the upper right corner to the lower left corner, the scree filling the rest of the frame and the ridge across the top edge.",
+      "motion_elements": "the narrow meltwater stream and the alpine grass",
+      "tags": {
+        "comp": "diagonal",
+        "anchor": "scree-stream",
+        "season": "late-snow",
+        "time": "overcast",
+        "palette": "gray green"
+      }
+    },
+    {
+      "id": "mv-m-17",
+      "subject": "A copper beech forest in autumn at the foot of a limestone cliff, the treetops lit by low warm light and thin cloud drifting through the canopy.",
+      "look": "golden",
+      "composition": "Looking down at about 45 degrees from the cliff top, the copper canopy filling the frame from edge to edge with a pale cliff edge along the bottom corner.",
+      "motion_elements": "the copper beech leaves and the thin drifting cloud",
+      "tags": {
+        "comp": "look-down",
+        "anchor": "beech-canopy",
+        "season": "autumn",
+        "time": "golden",
+        "palette": "muted gold"
+      }
+    },
+    {
+      "id": "mv-m-18",
+      "subject": "A steep couloir of grey scree climbing between rock walls to a ridge in early winter, first snow on its ledges and grey cloud streaming over the notch at its top.",
+      "lens": "35mm lens at f/8",
+      "look": "overcast",
+      "composition": "Camera low at the foot of the couloir looking up, the scree rising from the bottom edge, the rock walls closing in from the left and right, and the streaming cloud at the notch in the upper center.",
+      "motion_elements": "the cloud streaming over the notch",
+      "tags": {
+        "comp": "look-up",
+        "anchor": "couloir",
+        "season": "early-snow",
+        "time": "overcast",
+        "palette": "slate gray"
+      }
+    },
+    {
+      "id": "mv-m-19",
+      "subject": "A cluster of weathered granite tors on a valley shoulder at the edge of winter, frosted heather around them and thin mist rising from the hollow behind.",
+      "look": "dawn",
+      "composition": "Seen past a few frosted heather stalks out of focus in the lower left corner, the tors standing in the right half of the frame with the rising mist behind them.",
+      "motion_elements": "the rising mist and the frosted heather stalks",
+      "tags": {
+        "comp": "past-foreground",
+        "anchor": "granite-tors",
+        "season": "winter-edge",
+        "time": "dawn",
+        "palette": "cool blue"
+      }
+    },
+    {
+      "id": "mv-m-20",
+      "subject": "A steep valley slope of yellow birches in autumn below a dark cliff band, a patch of warm light moving across it and soft cloud shadow on one side.",
+      "lens": "105mm lens at f/8",
+      "look": "golden",
+      "composition": "Telephoto isolation of the slope filling the frame, the cliff band as a dark stripe across the upper quarter and the yellow birches below it.",
+      "motion_elements": "the yellow birch leaves and the moving cloud shadow",
+      "tags": {
+        "comp": "tele-isolate",
+        "anchor": "birch-slope",
+        "season": "autumn",
+        "time": "golden",
+        "palette": "muted gold"
+      }
+    },
+    {
+      "id": "mv-m-21",
+      "subject": "A small grey-green glacial pool beside a moraine ridge in late spring, snow patches on the dark cloud-hung mountainside behind and the ridge mirrored in the calm water.",
+      "lens": "35mm lens at f/8",
+      "look": "overcast",
+      "composition": "Symmetrical composition: the moraine ridge and the snowy mountainside mirrored with the waterline just below the middle, a few flat stones along the near shore.",
+      "motion_elements": "the faint ripples on the pool and the cloud on the mountainside",
+      "tags": {
+        "comp": "reflection",
+        "anchor": "moraine-pool",
+        "season": "late-snow",
+        "time": "overcast",
+        "palette": "gray green"
+      }
+    },
+    {
+      "id": "mv-m-22",
+      "subject": "A bend of a clear mountain river on the valley floor in summer, rounded grey cobbles on the inner bank, a dark spruce forest edge behind and morning haze over the water.",
+      "look": "dawn",
+      "composition": "Side view from a low bank, the river bend curving through the left third of the frame, the cobble bank in front of it, and the spruce edge across the background.",
+      "motion_elements": "the flowing river bend and the morning haze",
+      "tags": {
+        "comp": "side-anchor",
+        "anchor": "river-bend",
+        "season": "summer",
+        "time": "dawn",
+        "palette": "slate blue"
+      }
+    },
+    {
+      "id": "mv-m-23",
+      "subject": "A long moraine crest after autumn rain, covered in wet dwarf juniper and muted rust bilberry leaves, rain clouds breaking up over a dark valley side behind it.",
+      "lens": "70mm lens at f/8",
+      "look": "after-rain",
+      "composition": "The crest runs diagonally from the lower left corner to the upper right corner, its slope dropping toward the camera, with the breaking clouds and dark valley side above it.",
+      "motion_elements": "the breaking clouds and the bilberry leaves",
+      "tags": {
+        "comp": "diagonal",
+        "anchor": "moraine-crest",
+        "season": "autumn",
+        "time": "after-rain",
+        "palette": "moss green"
+      }
+    },
+    {
+      "id": "mv-m-24",
+      "subject": "A winding stream on a valley floor in autumn, partly veiled by low fog, dark spruce and yellow willow at its edges.",
+      "lens": "85mm lens at f/8",
+      "look": "misty",
+      "composition": "Looking down at about 35 degrees from a hillside, the stream winding through the frame from the bottom edge, the fog patches crossing it in the middle and upper parts, with no horizon.",
+      "motion_elements": "the low fog and the winding stream",
+      "tags": {
+        "comp": "look-down",
+        "anchor": "fog-stream",
+        "season": "autumn",
+        "time": "morning",
+        "palette": "gray mist"
+      }
+    },
+    {
+      "id": "mv-m-25",
+      "subject": "A tall dark rock wall at the edge of winter, thin snow on its ledges, a frozen stream fringe at its foot and mist streaming along its top edge.",
+      "lens": "35mm lens at f/8",
+      "look": "misty",
+      "composition": "Camera low near the foot of the wall looking up at about 30 degrees, the wall filling the left two thirds of the frame and the streaming mist against a pale sky on the right.",
+      "motion_elements": "the mist streaming along the top of the wall",
+      "tags": {
+        "comp": "look-up",
+        "anchor": "snow-ledged-wall",
+        "season": "winter-edge",
+        "time": "morning",
+        "palette": "gray mist"
+      }
+    },
+    {
+      "id": "mv-m-26",
+      "subject": "A lone larch on a rocky knoll in early winter after rain, wet golden needles, fresh snow dusting the slopes above and cloud lifting off the mountainside.",
+      "look": "after-rain",
+      "composition": "Seen through a gap between two wet lichen boulders that fill the left and right edges out of focus, the larch and knoll sharp in the center with the snowy slopes behind.",
+      "motion_elements": "the lifting cloud and the wet larch needles",
+      "tags": {
+        "comp": "past-foreground",
+        "anchor": "lone-larch",
+        "season": "early-snow",
+        "time": "after-rain",
+        "palette": "slate gray"
+      }
+    },
+    {
+      "id": "mv-m-27",
+      "subject": "A long grassy ridge crest in summer with a few scattered rocks, dark green slopes and the shadows of moving clouds sliding across them.",
+      "lens": "135mm lens at f/8",
+      "look": "day",
+      "composition": "Telephoto isolation of one stretch of the crest running across the upper third of the frame, the green slope filling the rest with cloud shadows crossing it.",
+      "motion_elements": "the cloud shadows sliding across the slope and the green grass",
+      "tags": {
+        "comp": "tele-isolate",
+        "anchor": "cloud-shadow-ridge",
+        "season": "summer",
+        "time": "day",
+        "palette": "deep green"
+      }
+    }
+  ]
+}

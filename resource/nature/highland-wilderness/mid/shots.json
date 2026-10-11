@@ -1,0 +1,424 @@
+{
+ "theme": "highland-wilderness/mid",
+ "target": 27,
+ "defaults": {
+  "lens": "50mm lens at f/8",
+  "look": "day",
+  "composition": "One clear anchor in the middle ground with readable surroundings",
+  "camera": "slide",
+  "seconds": 10,
+  "tags": {
+   "place": "outdoor",
+   "scale": "mid",
+   "category": "highland-wilderness",
+   "energy": "calm"
+  }
+ },
+ "shots": [
+  {
+   "id": "hw-m-01",
+   "subject": "A lone weathered larch turned gold on a grassy plateau knoll, frost on the grass around its base, a granite boulder beside it and pale fog lying in the valley behind",
+   "lens": "50mm lens at f/8",
+   "look": "dawn",
+   "composition": "Eye-level from the side, the larch standing on the right third of the frame on its knoll, frosted grass across the foreground and the fog valley filling the left behind",
+   "motion_elements": "the valley fog and the larch branches",
+   "tags": {
+    "time": "dawn",
+    "palette": "slate blue",
+    "comp": "side-anchor",
+    "anchor": "lone-tree",
+    "season": "autumn"
+   }
+  },
+  {
+   "id": "hw-m-02",
+   "subject": "A large lichen-covered granite tor rising from dry summer moor grass, a few rowan saplings at its foot",
+   "lens": "35mm lens at f/8",
+   "look": "golden",
+   "composition": "Camera low at the foot of the tor looking up, the stacked granite filling the center and rising against a warm sky with drifting clouds, grass tips along the bottom edge",
+   "motion_elements": "the moor grass and the drifting clouds",
+   "tags": {
+    "time": "golden",
+    "palette": "muted gold",
+    "comp": "look-up",
+    "anchor": "tor",
+    "season": "summer"
+   }
+  },
+  {
+   "id": "hw-m-03",
+   "subject": "A small dark tarn in a hollow of the moor in autumn, rust sedge along its edge, a flat schist slab on the near shore and a russet hillside on the far bank",
+   "lens": "50mm lens at f/8",
+   "look": "misty",
+   "composition": "Eye-level just above the water, the far bank and its mirror image meeting at the center line in near symmetry, the slab in the lower foreground and mist over the far bank",
+   "motion_elements": "the drifting mist and faint ripples on the tarn",
+   "tags": {
+    "time": "morning",
+    "palette": "gray mist",
+    "comp": "reflection",
+    "anchor": "plateau-tarn",
+    "season": "autumn"
+   }
+  },
+  {
+   "id": "hw-m-04",
+   "subject": "A clear upland stream over rounded gray cobbles, cushion dark olive moss and dry summer tussock grass leaning over its banks",
+   "lens": "70mm lens at f/8",
+   "look": "overcast",
+   "composition": "From the bank slightly above, the stream running diagonally from the lower left to the upper right corner, cobbles on the near bank and a grassy slope behind",
+   "motion_elements": "the flowing stream and the tussock grass",
+   "tags": {
+    "time": "overcast",
+    "palette": "deep green",
+    "comp": "diagonal",
+    "anchor": "upland-stream",
+    "season": "summer"
+   }
+  },
+  {
+   "id": "hw-m-05",
+   "subject": "A cluster of knee-high, wind-flattened dwarf mountain pines creeping low over a rocky rise dusted with first snow, their flat crowns combed one way by the wind, no tall trees anywhere",
+   "lens": "35mm lens at f/8",
+   "look": "overcast",
+   "composition": "Camera low below the rise looking up, the low dark pine mats along the crest against a pale grey sky with soft drifting cloud, snowy rocks across the lower third",
+   "motion_elements": "the pine needles and the drifting clouds",
+   "tags": {
+    "time": "day",
+    "palette": "slate blue",
+    "comp": "look-up",
+    "anchor": "krummholz",
+    "season": "early-snow"
+   }
+  },
+  {
+   "id": "hw-m-06",
+   "subject": "A wind-bent rowan with muted rust berries growing from a crack in a pale quartzite outcrop on an open hillside, soft rounded hills behind",
+   "lens": "50mm lens at f/8",
+   "look": "day",
+   "composition": "Seen past a soft out-of-focus clump of brown bracken at the lower left edge, the rowan and its outcrop in the middle ground right of center, the hills behind",
+   "motion_elements": "the rowan leaves and the bracken fronds",
+   "tags": {
+    "time": "day",
+    "palette": "muted gold",
+    "comp": "past-foreground",
+    "anchor": "rowan",
+    "season": "autumn"
+   }
+  },
+  {
+   "id": "hw-m-07",
+   "subject": "A shallow bog pool with clumps of white cotton grass, dark peat hummocks and a low mist line over the flat moor behind",
+   "lens": "70mm lens at f/8",
+   "look": "dawn",
+   "composition": "Eye-level from the side, the cotton grass clump and its pool on the left third, the flat moor and the mist line stretching across the right",
+   "motion_elements": "the cotton grass heads and the low mist line",
+   "tags": {
+    "time": "dawn",
+    "palette": "gray mist",
+    "comp": "side-anchor",
+    "anchor": "peat-bog",
+    "season": "summer"
+   }
+  },
+  {
+   "id": "hw-m-08",
+   "subject": "A solitary stone pine standing on the far edge of an alpine shelf, dry summer grass on the shelf and layered blue ridges in haze behind",
+   "lens": "135mm lens at f/8",
+   "look": "golden",
+   "composition": "Telephoto from across a valley with no foreground, the distant pine small on the shelf edge left of center and the ridges stacked behind it",
+   "motion_elements": "the pine branches and the drifting haze",
+   "tags": {
+    "time": "golden",
+    "palette": "muted gold",
+    "comp": "tele-isolate",
+    "anchor": "lone-tree",
+    "season": "summer"
+   }
+  },
+  {
+   "id": "hw-m-09",
+   "subject": "A moss-covered glacial erratic boulder on a heather slope with first snow lying on its top and the faint outline of spruces in the fog beyond",
+   "lens": "50mm lens at f/8",
+   "look": "misty",
+   "composition": "Seen past snow-dusted heather stems close along the bottom edge, the boulder in the middle ground on the left third, fog and faint spruces behind",
+   "motion_elements": "the drifting fog and the heather stems",
+   "tags": {
+    "time": "morning",
+    "palette": "gray mist",
+    "comp": "past-foreground",
+    "anchor": "erratic",
+    "season": "early-snow"
+   }
+  },
+  {
+   "id": "hw-m-10",
+   "subject": "A small step waterfall on a moorland brook spilling over a ledge of dark sandstone between banks of bronze autumn bracken",
+   "lens": "85mm lens at f/8",
+   "look": "overcast",
+   "composition": "Viewed from the side, the brook and its ledge running diagonally from the upper left to the lower right, bracken lining both banks",
+   "motion_elements": "the spilling water and the bracken fronds",
+   "tags": {
+    "time": "overcast",
+    "palette": "deep green",
+    "comp": "diagonal",
+    "anchor": "moor-brook",
+    "season": "autumn"
+   }
+  },
+  {
+   "id": "hw-m-11",
+   "subject": "A juniper shrub spreading over a flat granite slab with rain puddles in the rock hollows reflecting the sky",
+   "lens": "35mm lens at f/8",
+   "look": "after-rain",
+   "composition": "Looking down about 45 degrees from standing height on the slab, the juniper in the upper half, the puddles across the lower half and the slope edge at the top",
+   "motion_elements": "the rippling puddles and the juniper sprigs",
+   "tags": {
+    "time": "after-rain",
+    "palette": "slate blue",
+    "comp": "look-down",
+    "anchor": "juniper",
+    "season": "summer"
+   }
+  },
+  {
+   "id": "hw-m-12",
+   "subject": "A worn earth path crossing a rounded summit with old snowbanks lying beside it, short brown grass and gray cloud resting on the next summit",
+   "lens": "50mm lens at f/8",
+   "look": "overcast",
+   "composition": "Eye-level from beside the path, the path running horizontally across the lower middle, one snowbank on the left third and the cloud-capped summit behind",
+   "motion_elements": "the resting cloud and the short grass tufts",
+   "tags": {
+    "time": "overcast",
+    "palette": "gray mist",
+    "comp": "side-anchor",
+    "anchor": "ridge-trail",
+    "season": "late-snow"
+   }
+  },
+  {
+   "id": "hw-m-13",
+   "subject": "A thawing peat pool on a flat moor, the ice gone from its middle and a snowy rounded hill beyond under a pale dawn sky",
+   "lens": "35mm lens at f/8",
+   "look": "dawn",
+   "composition": "Low at the pool edge, the hill and its reflection in symmetry across the center of the frame, a thin ice rim along the lower edge",
+   "motion_elements": "the faint ripples in the open water and the thin high clouds",
+   "tags": {
+    "time": "dawn",
+    "palette": "slate blue",
+    "comp": "reflection",
+    "anchor": "peat-bog",
+    "season": "late-snow"
+   }
+  },
+  {
+   "id": "hw-m-14",
+   "subject": "A weathered limestone ledge on a green summer plateau with fresh green feather grass growing from its cracks and an old pine stump beside it, in midsummer with every tree and slope behind green",
+   "lens": "50mm lens at f/8",
+   "look": "day",
+   "composition": "Looking down about 40 degrees from the ledge top, the cracked pale stone and grass tufts filling the lower two thirds, the upland basin in warm haze across the top",
+   "motion_elements": "the feather grass tufts",
+   "tags": {
+    "time": "day",
+    "palette": "fresh green",
+    "comp": "look-down",
+    "anchor": "limestone-ledge",
+    "season": "summer"
+   }
+  },
+  {
+   "id": "hw-m-15",
+   "subject": "The dark edge of a pine stand on a high meadow of rust-colored autumn grass with mist streaming between the trunks",
+   "lens": "70mm lens at f/8",
+   "look": "misty",
+   "composition": "Seen past a few soft out-of-focus grass stems across the bottom foreground, the pine edge filling the middle right and the open misty meadow on the left",
+   "motion_elements": "the streaming mist and the meadow grass",
+   "tags": {
+    "time": "morning",
+    "palette": "deep green",
+    "comp": "past-foreground",
+    "anchor": "pine-edge",
+    "season": "autumn"
+   }
+  },
+  {
+   "id": "hw-m-16",
+   "subject": "A rocky ridge spur fading up into cloud, a few stunted spruces clinging to its side and new snow on its ledges",
+   "lens": "105mm lens at f/8",
+   "look": "overcast",
+   "composition": "Telephoto across a gap with no foreground, the spur rising from the lower right up into the cloud on the left",
+   "motion_elements": "the cloud wrapping around the spur",
+   "tags": {
+    "time": "overcast",
+    "palette": "gray mist",
+    "comp": "tele-isolate",
+    "anchor": "ridge-spur",
+    "season": "early-snow"
+   }
+  },
+  {
+   "id": "hw-m-17",
+   "subject": "A thin moorland stream braiding through dark-mossed stones in midsummer, bright green sphagnum and green heather on its banks and a green hill behind, no brown, orange or rust-colored plants anywhere",
+   "lens": "50mm lens at f/8",
+   "look": "after-rain",
+   "composition": "From slightly above on the bank, the rill crossing diagonally from the bottom right to the top left, moss banks on both sides and the hill behind",
+   "motion_elements": "the braiding stream",
+   "tags": {
+    "time": "after-rain",
+    "palette": "deep green",
+    "comp": "diagonal",
+    "anchor": "sphagnum-rill",
+    "season": "summer"
+   }
+  },
+  {
+   "id": "hw-m-18",
+   "subject": "A tall perched boulder standing on a ridge crest with late snow around its base and dry grass tufts on the crest",
+   "lens": "35mm lens at f/8",
+   "look": "golden",
+   "composition": "Camera low to one side of the base looking up, the boulder filling the center, lit from the side by the low evening sun so one face is warm and the other in soft natural shadow, a calm pale evening sky behind with a few streaked clouds, snow along the lower edge; the sun itself is outside the frame",
+   "motion_elements": "the dry grass tufts on the crest",
+   "tags": {
+    "time": "golden",
+    "palette": "muted gold",
+    "comp": "look-up",
+    "anchor": "perched-boulder",
+    "season": "late-snow"
+   }
+  },
+  {
+   "id": "hw-m-19",
+   "subject": "A clump of dwarf birch with wet burnt copper leaves on an open tundra slope, a shallow rain pool beside it and low ridges under clearing cloud",
+   "lens": "70mm lens at f/8",
+   "look": "after-rain",
+   "composition": "Eye-level from the side, the birch clump on the left third, the rain pool to its right and the ridges across the background",
+   "motion_elements": "the birch leaves and the clearing clouds",
+   "tags": {
+    "time": "after-rain",
+    "palette": "muted gold",
+    "comp": "side-anchor",
+    "anchor": "dwarf-birch",
+    "season": "autumn"
+   }
+  },
+  {
+   "id": "hw-m-20",
+   "subject": "A curving bank of muted rust bilberry and bronze heather on a hillside, a lichen-crusted boulder midway along it and shadowed slopes with sunlit ridges beyond",
+   "lens": "70mm lens at f/8",
+   "look": "golden",
+   "composition": "The bank sweeping diagonally from the lower left to the upper right, the boulder at the center of the line and the slopes beyond",
+   "motion_elements": "the heather and the bilberry leaves",
+   "tags": {
+    "time": "golden",
+    "palette": "muted gold",
+    "comp": "diagonal",
+    "anchor": "heather",
+    "season": "autumn"
+   }
+  },
+  {
+   "id": "hw-m-21",
+   "subject": "A gray scree slope with tongues of old snow reaching down through it and a small meltwater trickle between the stones",
+   "lens": "50mm lens at f/8",
+   "look": "misty",
+   "composition": "From the top of the slope looking down about 45 degrees, the scree and snow tongues filling the frame and mist lying below",
+   "motion_elements": "the meltwater trickle and the mist below",
+   "tags": {
+    "time": "morning",
+    "palette": "gray mist",
+    "comp": "look-down",
+    "anchor": "scree",
+    "season": "late-snow"
+   }
+  },
+  {
+   "id": "hw-m-22",
+   "subject": "A single distant rounded summit with autumn-brown flanks and a thin line of first snow near its top, a soft rain shower veil drifting past its shoulder",
+   "lens": "135mm lens at f/8",
+   "look": "dawn",
+   "composition": "Telephoto isolation of the one summit in the center of the frame, the rain veil to one side, no foreground",
+   "motion_elements": "the drifting rain veil and the cloud shadows on the flanks",
+   "tags": {
+    "time": "dawn",
+    "palette": "slate blue",
+    "comp": "tele-isolate",
+    "anchor": "rain-veil-summit",
+    "season": "autumn"
+   }
+  },
+  {
+   "id": "hw-m-23",
+   "subject": "A short granite cliff band above a grassy slope, a few mountain pines on its rim and fresh snow on its ledges",
+   "lens": "50mm lens at f/8",
+   "look": "misty",
+   "composition": "Camera low on the slope looking up, the cliff band across the upper half, the pines on the rim against mist and the grass across the lower third",
+   "motion_elements": "the mist over the rim and the slope grass",
+   "tags": {
+    "time": "morning",
+    "palette": "gray mist",
+    "comp": "look-up",
+    "anchor": "cliff-band",
+    "season": "early-snow"
+   }
+  },
+  {
+   "id": "hw-m-24",
+   "subject": "A flat basalt outcrop with rainwater pooled in a long hollow, tufts of tawny mat grass around it and a rust autumn hillside with white cumulus beyond",
+   "lens": "35mm lens at f/8",
+   "look": "day",
+   "composition": "Low at the pool, the hillside, the clouds and their reflection in near symmetry across the frame, the dark rock lip along the bottom edge",
+   "motion_elements": "the pool surface and the drifting clouds",
+   "tags": {
+    "time": "day",
+    "palette": "slate blue",
+    "comp": "reflection",
+    "anchor": "rock-pool",
+    "season": "autumn"
+   }
+  },
+  {
+   "id": "hw-m-25",
+   "subject": "A far granite tor on a snow-patched summit plateau, old snow drifts against its base and clean blue sky behind",
+   "lens": "105mm lens at f/8",
+   "look": "day",
+   "composition": "Telephoto from a neighbouring hill with no foreground, the tor on the right third of the frame on the plateau skyline, empty sky to its left",
+   "motion_elements": "the passing clouds",
+   "tags": {
+    "time": "day",
+    "palette": "slate blue",
+    "comp": "tele-isolate",
+    "anchor": "tor",
+    "season": "late-snow"
+   }
+  },
+  {
+   "id": "hw-m-26",
+   "subject": "A wet thawing plateau with meltwater pools and snow patches, seen through the dripping twisted branches of a krummholz pine",
+   "lens": "70mm lens at f/8",
+   "look": "after-rain",
+   "composition": "Seen past dark twisted pine branches close along the top and left edges, the plateau with its pools and snow patches in the middle ground",
+   "motion_elements": "the pine needles and the ripples on the meltwater pools",
+   "tags": {
+    "time": "after-rain",
+    "palette": "deep green",
+    "comp": "past-foreground",
+    "anchor": "krummholz",
+    "season": "late-snow"
+   }
+  },
+  {
+   "id": "hw-m-27",
+   "subject": "A few large golden tussocks emerging from a thin layer of first snow on a gentle slope, each long blade a separate loose strand bending in the wind, snow lying naturally between them",
+   "lens": "50mm lens at f/5.6",
+   "look": "overcast",
+   "composition": "Looking down about 45 degrees on the slope, the tussocks scattered across the snowy ground and the slope fading toward a gray skyline at the top",
+   "motion_elements": "the tussock blades",
+   "tags": {
+    "time": "overcast",
+    "palette": "gray mist",
+    "comp": "look-down",
+    "anchor": "tussock",
+    "season": "early-snow"
+   }
+  }
+ ]
+}

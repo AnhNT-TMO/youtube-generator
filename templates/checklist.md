@@ -17,7 +17,7 @@
 - [ ] 7. youtube.md (upload-youtube-publish, `publish.py check`) — <title>
 - [ ] 8. Video full (video.py album) — <độ dài = master>
 - [ ] 9. Short (video-shorts: short.json, ảnh dọc, video, youtube.md) — <albums/NNN-slug/short, bài>
-- [ ] 9b. Một zip S3 cho album + Short (video.py package <album>) — <S3 URI, checks>
+- [ ] 9b. Một zip trên Google Drive cho album + Short (video.py package <album>) — <link Drive, checks>
 
 ## Đăng + kết quả
 - [ ] 10. CEO upload cùng ngày (album → Short) — <ngày, Video URL đã điền, Related video>

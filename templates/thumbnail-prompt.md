@@ -1,6 +1,6 @@
 ---
-kind: <single | album | idea | short>
-source: <file bài gốc (single) / idea.yaml packaging.thumbnail_brief (idea) / album.md (album)>
+kind: <album | short>
+source: <album.md (album) / short.md (short)>
 title_text: "<chữ trên ảnh, nguyên văn>"
 setting: <bối cảnh, theo channel/<ch>/visual.md>
 time: <thời điểm>
@@ -9,9 +9,9 @@ wardrobe: <giá trị trục wardrobe trong visual.md>: <chi tiết>
 framing: <giá trị trục framing trong visual.md>
 light: <giá trị trục light trong visual.md>   # 1–2 giá trị
 palette: <giá trị trục palette trong visual.md>
-lettering: <kiểu chữ trong visual.md>   # theo album; single chép của album
-duration_line: "<chỉ album/idea, khi visual.md có mục Dòng thời lượng: vd. 1 HOUR OF PEACE; single: bỏ trống>"
-signature: <chỉ ảnh album: 2–3 trục làm chữ ký album, vd. "light rain + palette teal + tele"; single: chép chữ ký của album>
+lettering: <kiểu chữ trong visual.md>   # theo album
+duration_line: "<chỉ album, khi visual.md có mục Dòng thời lượng: vd. 1 HOUR OF PEACE; short: bỏ trống>"
+signature: <chỉ ảnh album: 2–3 trục làm chữ ký album, vd. "light rain + palette teal + tele">
 layout: <vd. text left-top, character centre-right>
 hero_object: <vật chính và vị trí>
 status: draft             # draft → generated → chosen (existing = ảnh làm trước skill, không có prompt)
@@ -28,7 +28,7 @@ Kiểm tra: `python3 .claude/skills/thumbnail-prompt/scripts/thumb.py check <th�
 - Từ bài/album: <hình ảnh/cảm xúc cụ thể lấy từ imagery, emotion, hook, lyric_keywords>
 - Chọn trục theo vibe bài: <wardrobe / framing / light / palette đã chọn và vì sao hợp bài>
 - Biến thể (kênh có thumb_pool.json): <tổ hợp `thumb.py variant` chọn; các trục còn lại chọn theo vibe cho hợp nó>
-- Chữ ký album: <giữ trục nào của album; single khác ảnh album ở điểm nào>
+- Chữ ký album: <các trục làm chữ ký album>
 
 ## Đính kèm
 
@@ -42,7 +42,7 @@ Kiểm tra: `python3 .claude/skills/thumbnail-prompt/scripts/thumb.py check <th�
 THIS IMAGE: "<title>"
 Title text: "<title_text>"
 Title style: <mẫu lettering trong visual.md, theo album>
-Duration line: "<duration_line; single hoặc kênh không dùng: xóa dòng này>"
+Duration line: "<duration_line; kênh không dùng: xóa dòng này>"
 <khối VARIANT in bởi `thumb.py variant <dir>`, nguyên văn; kênh không có thumb_pool.json: xóa dòng này>
 Look: <mẫu các trục trong visual.md "Biến thể hình ảnh", sửa cho hợp cảnh>
 Scene: <bối cảnh, thời điểm, thời tiết, 1–2 chi tiết lấy từ bài>

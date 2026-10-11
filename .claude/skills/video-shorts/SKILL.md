@@ -1,11 +1,11 @@
 ---
 name: video-shorts
-description: Make the one YouTube Short of a finished album (release package = 1 album video + 1 Short, Related video → the album) - cut from the song's `short` segment that audio-song-naming already chose in its song card (channel/<ch>/songs/<type>/<slug>.md, default song = album.md brief.short.song, else track 1), written as short.md + short.json in the exact format video-generator `video.py short` reads (audio, in/out, lyric lines timed from the Short's 0:00, hook, CTA), in the album's own `short/` folder (channel/<ch>/albums/NNN-slug/short/; the old channel/<ch>/shorts/NNN-slug/ is still read and `shorts.py migrate` moves it), then a NEW vertical 9:16 image (thumbnail-prompt on the Short folder), a Short-only 1080×1920 render on the GPU server (video-generator `video.py frame` / `short`), youtube.md (title, description, tags, pinned comment, Studio steps incl. Related video + AI = Yes) and `shorts.py check`; the Short is never zipped alone - the PM packages the album, which puts the Short in the album's one S3 zip (`video.py package <album>`). Use when the PM or the owner says "làm short", "shorts cho album NNN", "cắt short", "video dọc", "Shorts", or after an album video is delivered. Does NOT pick the segment (audio-song-naming does), upload (the owner does) or spend Suno credits.
+description: Make the one YouTube Short of a finished album (release package = 1 album video + 1 Short, Related video → the album) - cut from the song's `short` segment that audio-song-naming already chose in its song card (channel/<ch>/songs/<type>/<slug>.md, default song = album.md brief.short.song, else track 1), written as short.md + short.json in the exact format video-generator `video.py short` reads (audio, in/out, lyric lines timed from the Short's 0:00, hook, CTA), in the album's own `short/` folder (channel/<ch>/albums/NNN-slug/short/; the old channel/<ch>/shorts/NNN-slug/ is still read and `shorts.py migrate` moves it), then a NEW vertical 9:16 image (thumbnail-prompt on the Short folder), a Short-only 1080×1920 render on the GPU server (video-generator `video.py frame` / `short`), youtube.md (title, description, tags, pinned comment, Studio steps incl. Related video + AI = Yes) and `shorts.py check`; the Short is never zipped alone - the PM packages the album, which puts the Short in the album's one zip on Google Drive (`video.py package <album>`). Channels without lyrics make a countdown Short instead (clip montage + day count + ringing Subscribe bell, `scripts/countdown/`, channel kit `channel/<ch>/shorts_kit/`); it waits for the CEO's check and goes to Drive as its own zip after the album. Use when the PM or the owner says "làm short", "shorts cho album NNN", "cắt short", "video dọc", "Shorts", or after an album video is delivered. Does NOT pick the segment (audio-song-naming does), upload (the owner does) or spend Suno credits.
 ---
 
 # YouTube Short (một Short cho mỗi album)
 
-Gói đăng mỗi album = **1 video album + 1 Short** (không còn single). Short là một phần của album (CEO 2026-09-28): nằm
+Gói đăng mỗi album = **1 video album + 1 Short**. Short là một phần của album (CEO 2026-09-28): nằm
 trong thư mục của album, `albums/NNN-slug/short/`, mỗi album đúng một Short. Short cắt từ một bài đã có trong kho: không
 Suno, không ghép audio, không Whisper. Đoạn cắt (`short.start_s/end_s`, lời theo câu `short.lines`, câu `hook`) do skill
 **audio-song-naming** chọn và ghi trong song card; skill này chỉ đọc. Mỗi Short có ảnh dọc riêng và bản render riêng.
@@ -18,12 +18,12 @@ python3 $S new   <album> [--song <slug>] [--hook "…"] [--cta "…"] [--version
                                                  # → <album>/short/short.md + short.json (đã có: --force mới ghi lại)
 python3 $S spec  <short>                         # ghi lại short.json sau khi sửa hook_text / cta_text, đoạn của bài, hoặc bài đổi tên
 python3 $S check <short>                         # short.md, short.json, ảnh 9:16, video đã render, youtube.md
-python3 $S list  --channel <ch>                  # mọi Short: album, bài, đoạn, hook, ảnh, video, S3, URL
+python3 $S list  --channel <ch>                  # mọi Short: album, bài, đoạn, hook, ảnh, video, gói, URL
 python3 $S migrate --channel <ch> [--yes]        # bố cục cũ shorts/NNN-slug/ → albums/<album>/short/ (mặc định chỉ in)
 V=.claude/skills/video-generator/scripts/video.py
 python3 $V frame   <short> --at 5                # một khung 1080×1920 của hiệu ứng, để chỉnh <short>/video.json
 python3 $V short   <short>                       # chỉ render trên GPU server (~1–2 phút) → check_hook/mid/cta.png
-python3 $V package <album>                       # PM: MỘT zip cho album + Short (short/ trong zip) → S3; không zip Short riêng
+python3 $V package <album>                       # PM: MỘT zip cho album + Short (short/ trong zip) → Google Drive; không zip Short riêng
 ```
 
 `<short>` = `channel/<ch>/albums/NNN-slug/short`. Bố cục cũ `channel/<ch>/shorts/NNN-slug/` vẫn đọc được (`check` ⚠️ nhắc
@@ -91,6 +91,34 @@ trong `youtube.md` của Short nhắc tên cũ thì sửa tay (`spec` cảnh bá
 8. **Bàn giao.** Chủ kênh upload theo giờ đăng và gắn Related video. Sau upload: Video URL + ngày vào `youtube.md`. Sau 48 giờ
    và 7 ngày: dòng analytics (engaged views, viewed vs swiped away, avg % viewed, subs, click Related video); PM so trung vị
    theo `version`, mỗi lần một trục (CLAUDE.md §0).
+
+## Short đếm ngược (kênh nhạc không lời)
+
+Kênh không có lời để cắt thì làm Short **đếm ngược**: ghép clip dọc của bộ resource, đặt trên một đoạn nhạc của album,
+với số ngày, tên cảnh, badge Subscribe có chuông lắc + reng, và end card dẫn về album. Chi tiết của kênh (spec mẫu, badge,
+âm thanh, số đo) nằm ở `channel/<ch>/shorts_kit/README.md`. Thư mục Short: `albums/NNN-slug/shorts/countdown/`.
+
+```bash
+C=.claude/skills/video-shorts/scripts/countdown
+PY=.claude/skills/video-generator/.venv/bin/python               # PIL + numpy
+$PY $C/cd_text.py <short>/cd_spec.json <short>/text 1            # overlay 1080 (chạy từ gốc repo)
+$PY $C/cd_text.py <short>/cd_spec.json <short>/text4k 2          # overlay 4K + text4k/sfx_<badge>.json (giờ tiếng chuông)
+python3 $C/render_cd.py <short>/job4k.json --audio <file>.wav    # chỉ xuất tiếng, để nghe thử
+python3 $C/render_cd.py <short>/job4k.json                       # video 4K (trên GPU server, qua guard.sh run)
+```
+
+1. Chép `cd_spec.json` + `job4k.json` từ `channel/<ch>/shorts_kit/countdown/`, chép `channel/<ch>/branding/sfx/` vào
+   `<short>/sfx/`. Sửa số ngày theo ngày đăng, tên cảnh, các clip + điểm cắt, đoạn nhạc.
+2. `cd_text.py`: dòng chữ chạm dòng trên thì script tự đẩy xuống (`line_gap`) và in ra. Khối có `rings` thì vẽ chuông lắc
+   (tách quả chuông khỏi badge: `bell {image, pivot}`) và ghi giờ từng tiếng reng.
+3. `render_cd.py` trộn tiếng chuông theo giờ đó: `sfx.file` (một file, hoặc danh sách thì luân phiên), `accents` (tiếng
+   phụ ở đầu lượt lắc; `rings: [i]` chỉ đặt ở lượt thứ i; `offset` âm = vào trước), `reverb {ir, wet_db}`, nhạc tự lùi khi
+   chuông kêu (`audio.duck`). `audio.music_db` -91 = tắt nhạc, để nghe riêng tiếng chuông.
+4. Đổi âm thanh thì gửi bản `--audio` cho PM/CEO nghe trước, chốt rồi mới render video.
+5. Kiểm: độ dài tiếng = độ dài hình (`ffprobe`); frame 0 = thumbnail (sửa chữ thì làm lại thumbnail); soi frame lúc badge
+   hiện, lúc chuông lắc, lúc end card.
+6. Đóng gói: Short đếm ngược đợi CEO duyệt rồi mới lên Drive, thành một zip riêng (video 4K, thumbnail, `youtube.md`,
+   README thứ tự đăng) cạnh zip album trên Drive. Album đã lên Drive trước đó.
 
 ## Luật (chính sách, xem `docs/seo-youtube/09-shorts.md` §4)
 

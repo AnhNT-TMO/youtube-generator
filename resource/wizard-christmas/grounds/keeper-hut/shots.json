@@ -1,0 +1,357 @@
+{
+  "theme": "grounds/keeper-hut",
+  "target": 25,
+  "defaults": {
+    "lens": "35mm lens at f/5.6",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "mid",
+      "category": "keeper-hut"
+    }
+  },
+  "shots": [
+    {
+      "id": "kh-01",
+      "subject": "A small round stone hut at the edge of a dark snowy forest below the castle grounds: a cone-shaped roof heavy with snow, a crooked stone chimney with smoke, warm firelight in two small windows and around a big wooden door, a wreath on the door, a few huge pumpkins half-buried in snow in a garden patch, castle towers with lit windows far up on the hill behind",
+      "composition": "Eye-level view from the snowy garden path; the hut stands at the center left, the pumpkins in the lower right foreground, the distant castle on the hill in the upper right",
+      "look": "twilight",
+      "motion_elements": "the chimney smoke, the flickering firelight in the windows and the falling snow",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "kh-02",
+      "subject": "A small round stone hut with a snow-heavy cone-shaped roof standing alone at the edge of a dark snowy pine forest on a quiet Christmas afternoon: a thin line of smoke rising from its crooked chimney, warm light in its small windows, a wide sweep of untouched snow fields rolling up a long hill to an ancient castle school of magic with many towers and lit windows, snow gently falling",
+      "composition": "High wide view from a snowy rise; the hut sits small in the lower left at the forest edge, the snow fields lead the eye up to the castle in the upper right.",
+      "look": "snow-day",
+      "motion_elements": "the chimney smoke, the falling snow and the warm flicker in the hut windows",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling",
+        "scale": "vista"
+      }
+    },
+    {
+      "id": "kh-03",
+      "subject": "A small round stone hut at the edge of a snowy forest on Christmas night: a snow-heavy cone roof, chimney smoke, warm firelight glowing in two small windows and through the cracks of a big wooden door with a holly wreath, a trodden snowy path leading to it; two young people in long black wool cloaks stand still on the path looking at the glowing hut, seen from behind, one with a dark brown ponytail and a green-and-silver striped scarf, one in a knitted wool hat and a scarlet-and-gold striped scarf",
+      "composition": "Wide view from further back, further back on the path; the two students stand small in the middle distance, well under a quarter of the frame height, the hut glows ahead of them.",
+      "look": "snowy-night",
+      "motion_elements": "the chimney smoke, the firelight in the windows and the falling snow",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "kh-04",
+      "subject": "A garden patch beside a round stone hut on a snowy Christmas afternoon: enormous round pumpkins, some as big as cartwheels, half-buried under fresh snow among dry vines and a low wooden fence, the rough stone wall of the hut and a small window glowing warm behind them, smoke drifting from the chimney above, snow falling softly",
+      "composition": "Close view at pumpkin height from the edge of the patch; the giant pumpkins fill the lower half, the hut wall and glowing window rise behind, the chimney smoke at the top.",
+      "look": "snow-day",
+      "motion_elements": "the falling snow, the chimney smoke and the warm glow in the window",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling",
+        "scale": "close"
+      }
+    },
+    {
+      "id": "kh-05",
+      "subject": "A small round stone hut seen from just inside the edge of a snowy pine forest at blue-hour twilight on Christmas Eve: dark snow-laden pine trunks framing the view, beyond them the hut with its snow-heavy cone roof, chimney smoke curling up into the deep blue sky, warm golden firelight in its windows, the castle towers glowing faintly on the hill far behind",
+      "composition": "Wide view from among the trees; two dark pine trunks frame the left and right edges at a distance from the lens, the glowing hut sits at center in the middle distance.",
+      "look": "twilight",
+      "motion_elements": "the chimney smoke, the firelight in the windows and the falling snow",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "kh-06",
+      "subject": "The inside of a groundskeeper's round stone hut on Christmas night: one big room with rough stone walls, a wide hearth with a roaring fire and an enormous black iron kettle hanging over it, an enormous scrubbed wooden table with huge chairs, a vast armchair covered with a patchwork quilt, bunches of dried herbs and copper pans hanging from the rafters, a decorated Christmas tree in the corner",
+      "composition": "Wide view from just inside the door across the room; the hearth glows at center, the giant table at left, the tree at right, open flagstone floor in front.",
+      "look": "candle-night",
+      "motion_elements": "the roaring fire and the tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "place": "indoor"
+      }
+    },
+    {
+      "id": "kh-07",
+      "subject": "A huge carved wooden chair beside the hearth inside a round stone hut on a snowy Christmas afternoon: grey winter daylight through a small deep window with snow on the sill, a low fire in a wide stone hearth with a giant kettle beside it; one young person in a black wool robe and a knitted blue-and-bronze striped scarf sits in the oversized chair, feet far from the floor, looking into the fire, seen from behind, with short dark-brown hair",
+      "composition": "Wide view from further back, behind the chair a good distance back; the student sits small in the huge chair, the fire glows beyond, open floor in front.",
+      "look": "interior-day",
+      "motion_elements": "the fire in the hearth",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none",
+        "place": "indoor"
+      }
+    },
+    {
+      "id": "kh-08",
+      "subject": "The big wooden door of a round stone hut on Christmas night: heavy planks and iron hinges, a large holly wreath with a red ribbon, an old iron lantern with a candle flame hanging beside it, warm light glowing through the gap under the door, snow piled on the wide stone doorstep, snow falling past the light, the snowy cone roof edge above",
+      "composition": "Medium view of the door from a few steps back on the snowy path; the door and lantern at center, snow-covered ground in front.",
+      "look": "snowy-night",
+      "motion_elements": "the lantern candle flame, the falling snow and the warm light flickering under the door",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling",
+        "scale": "close"
+      }
+    },
+    {
+      "id": "kh-09",
+      "subject": "A small fire pit ringed with stones in the snowy yard of a round stone hut at blue-hour twilight on Christmas Eve: a big log bench in front of it, chimney smoke rising from the snow-heavy cone roof behind, warm light in the hut windows; two young people in long black wool cloaks sit on the log bench facing the fire pit and the hut, seen from behind, one with a dark braid and a yellow-and-black striped scarf, one with a light-brown bob and a green-and-silver striped scarf",
+      "composition": "Wide view from further back, behind the bench a good distance back; the two students sit small, the fire pit glows before them, the hut beyond.",
+      "look": "twilight",
+      "motion_elements": "the flames in the fire pit, the chimney smoke and the falling snow",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "kh-10",
+      "subject": "The back of a round stone hut at the edge of a snowy pine forest on a quiet Christmas afternoon: a tall stack of split logs under a little snow-covered lean-to roof, a huge wooden wheelbarrow and an axe-less chopping block, smoke curling from the crooked chimney, the snowy forest rising close behind, snow falling gently",
+      "composition": "Medium-wide view from the side of the hut; the woodpile and lean-to at left, the hut wall and chimney at center, the forest behind, open snow in front.",
+      "look": "snow-day",
+      "motion_elements": "the chimney smoke and the falling snow",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "kh-11",
+      "subject": "A wide stone hearth inside a round stone hut on Christmas night: an enormous black iron kettle hanging on a chain over a roaring fire with steam pouring from its spout, a giant copper pan and long iron tongs beside it, a plate of rock cakes and three huge mugs on a stool, a rough mantel with a holly garland and candles",
+      "composition": "Close view of the hearth from a few steps back; the fire and kettle at center, the mantel across the top, an open patch of flagstones in front.",
+      "look": "candle-night",
+      "motion_elements": "the roaring fire and the candle flames",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "place": "indoor",
+        "scale": "close"
+      }
+    },
+    {
+      "id": "kh-12",
+      "subject": "An enormous scrubbed wooden table inside a round stone hut at dusk on Christmas Eve: huge mugs of tea steaming, a fat candle in a holder, a small deep window beyond the table glowing deep blue with snow on the sill, the fire glowing in the hearth to the side; two young people in black wool robes sit at the giant table facing the window, seen from behind, one with short blonde hair and a scarlet-and-gold striped scarf, one in a knitted wool hat and a blue-and-bronze striped scarf. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "Wide view from further back, behind the two students across the room; they sit small at the huge table, the blue window glows ahead of them, open floor in front.",
+      "look": "candle-night",
+      "motion_elements": "the candle flame and the fire",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "none",
+        "place": "indoor"
+      }
+    },
+    {
+      "id": "kh-13",
+      "subject": "A small round stone hut on a snowy Christmas afternoon seen across its snowy pumpkin patch: a rickety wooden gate in a low fence, giant pumpkins under snow, smoke from the chimney of the snow-heavy cone roof, warm light in the windows, pines behind; one young person in a long black wool cloak and a knitted yellow-and-black striped scarf stands still at the gate looking at the hut, seen from behind, with an auburn bob",
+      "composition": "Wide view from far back behind the student, across an open stretch of floor or ground at a distance; the student stands small at the gate in the lower middle, the pumpkins and hut beyond.",
+      "look": "snow-day",
+      "motion_elements": "the chimney smoke, the falling snow and the warm glow in the windows",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "kh-14",
+      "subject": "A small round stone hut at the edge of a dark snowy forest on Christmas night under a heavy snowfall: its snow-heavy cone roof, the crooked chimney sending smoke into the night sky, every small window glowing golden, a wreath on the big door, a trodden path curving away toward an ancient castle school of magic whose lit towers rise on the hill far behind",
+      "composition": "Wide view from the curving path; the hut glows at center right, the path leads the eye in from the lower left, the castle lights at the top left.",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the chimney smoke and the firelight in the windows",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling",
+        "scale": "vista"
+      }
+    },
+    {
+      "id": "kh-15",
+      "subject": "A big Christmas tree inside a round stone hut on Christmas night: a fir cut from the forest nearly touching the rafters, decorated with large handmade wooden ornaments, pinecones, red ribbons and small warm candle-like lights, beside it an enormous bed covered with a patchwork quilt and a huge wooden chest, firelight from the hearth on the stone walls",
+      "composition": "Medium view from a low angle; the tree fills the center left, the giant bed and chest to the right, open flagstones in the foreground.",
+      "look": "candle-night",
+      "motion_elements": "the tree lights and the firelight flickering on the walls",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "place": "indoor"
+      }
+    },
+    {
+      "id": "kh-16",
+      "subject": "The inside of a round stone hut on a snowy Christmas afternoon: soft grey daylight through two small deep windows with snow on the sills, a fire burning low in the wide hearth with a stack of split logs beside it, huge wooden furniture, bunches of dried herbs, onions hanging from the rafters, a giant brown wool coat on a peg, a decorated tree glowing in the corner. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills. No teapots, kettles, pots, cups, mugs or jugs anywhere in the room. The windows show only a flat pale grey sky.",
+      "composition": "Wide view across the room from beside the windows; the hearth at center, the tree at right, open floor in front.",
+      "look": "interior-day",
+      "motion_elements": "the fire in the hearth and the tree lights",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none",
+        "place": "indoor"
+      }
+    },
+    {
+      "id": "kh-17",
+      "subject": "A long snowy path winding down a hillside from an ancient castle school of magic to a small round stone hut at the forest edge at blue-hour twilight on Christmas Eve: the castle's many towers lit golden at the top of the hill, the hut far below with chimney smoke and glowing windows, dark snowy pines along the forest edge, snow falling over the wide slope",
+      "composition": "High wide view from partway down the hill; the path curves from the lower right down to the hut at lower left, the castle rises in the upper right.",
+      "look": "twilight",
+      "motion_elements": "the falling snow, the chimney smoke and the glowing windows",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "falling",
+        "scale": "vista"
+      }
+    },
+    {
+      "id": "kh-18",
+      "subject": "A low snowy garden fence beside a round stone hut on Christmas night: snow piled on the fence posts, warm golden light spilling from a small window onto the snow, chimney smoke rising into the night, giant pumpkins under snow beyond; one young person in a long black wool cloak and a knitted green-and-silver striped scarf stands at the fence looking toward the glowing window, seen from behind, with short dark brown hair",
+      "composition": "Wide view from far back behind the student, across an open stretch of floor or ground at a distance; the student stands small at the fence on the left third, the glowing window and hut on the right.",
+      "look": "snowy-night",
+      "motion_elements": "the falling snow, the chimney smoke and the firelight in the window",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "kh-19",
+      "subject": "Beside the door of a round stone hut on a snowy Christmas afternoon: a huge wooden wheelbarrow heaped with snow-capped pumpkins, a giant pair of muddy boots on the stone step, an oversized broom leaning against the wall, a holly wreath on the big plank door, smoke drifting from the chimney above, snow falling softly",
+      "composition": "Medium view from a few steps away; the wheelbarrow in the left middle ground, the door and boots at right, open snow in front.",
+      "look": "snow-day",
+      "motion_elements": "the falling snow and the chimney smoke",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling",
+        "scale": "close"
+      }
+    },
+    {
+      "id": "kh-20",
+      "subject": "A thick rag rug before the wide stone hearth inside a round stone hut on Christmas night: a roaring fire, an iron hook with a bunch of dried herbs hanging from it, a huge armchair with a patchwork quilt to one side, a pine garland on the rough mantel; one student in a black wool robe and a knitted scarlet-and-gold striped scarf sits cross-legged on the rug sitting perfectly still facing the fire, hands hidden in the sleeves, seen from behind, with a long dark-brown low ponytail No teapots, kettles, pots, cups, mugs or jugs anywhere in the room.",
+      "composition": "Wide view from further back in the back of the room; the student sits small on the rug, the fire bright beyond, open floor in front.",
+      "look": "candle-night",
+      "motion_elements": "the roaring fire and the candle flames",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none",
+        "place": "indoor"
+      }
+    },
+    {
+      "id": "kh-21",
+      "subject": "A small round stone hut seen across a snowy clearing at blue-hour twilight on Christmas Eve: a little stream in front, mostly frozen at its edges, with dark water still trickling through the middle, snowy stones and reeds along its banks, the hut beyond with chimney smoke and warm windows, dark pines on either side",
+      "composition": "Wide view from the near bank; the stream runs across the lower third, the hut glows at center in the middle distance.",
+      "look": "twilight",
+      "motion_elements": "the trickling stream water, the chimney smoke and the falling snow",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "kh-22",
+      "subject": "A small frosted window in the rough stone wall of a round hut on Christmas night, seen from outside: snow piled on the deep sill and edging the little panes, inside a fat lit candle on the sill and a small decorated tree glowing beyond it, a sprig of holly tucked in the frame, the warm light glowing on old snow. The air is perfectly calm and no snow is falling; old snow only lies still on the rooftops and sills.",
+      "composition": "Close view of the window from a few steps away; the window glows at center, the snowy stone wall around it.",
+      "look": "snowy-night",
+      "motion_elements": "the candle flame, the tree lights and the falling snow",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling",
+        "scale": "close"
+      }
+    },
+    {
+      "id": "kh-23",
+      "subject": "The wide stone doorstep of a round stone hut on a snowy Christmas afternoon: the big plank door with a holly wreath, chimney smoke drifting from the snow-heavy cone roof, giant pumpkins under snow nearby; two young people in long black wool cloaks sit side by side on a huge wooden bench beside the door looking out across the snowy grounds, seen from behind at an angle, one in a knitted wool hat with a green-and-silver striped scarf, one with short curly brown hair and a yellow-and-black striped scarf",
+      "composition": "Wide view from further back, behind and to the side of the bench at a distance; the two students sit small at the left, the hut wall and door at right.",
+      "look": "snow-day",
+      "motion_elements": "the chimney smoke and the falling snow",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "falling"
+      }
+    },
+    {
+      "id": "kh-24",
+      "subject": "Looking from the back of a round stone hut toward its big plank door on Christmas night: an enormous armchair and a huge footstool in the foreground middle distance, the decorated Christmas tree glowing beside the door, a holly garland across the lintel, firelight from the hearth to the side dancing on the stone walls, candles on a shelf, a giant wicker basket of pine cones No teapots, kettles, pots, cups, mugs, tankards or jugs anywhere. Any fireplace mantel is plain stone with no carved emblem or shield; tapestries and banners are plain. The windows show only a flat, plain, calm night sky; absolutely no snow is falling outside.",
+      "composition": "Wide view across the room toward the door; the tree and door at center, the armchair to the left in the middle distance, open floor near the lens.",
+      "look": "candle-night",
+      "motion_elements": "the firelight on the walls, the tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "place": "indoor"
+      }
+    },
+    {
+      "id": "kh-25",
+      "subject": "A small round stone hut far below on the snowy grounds at the edge of a vast dark pine forest at blue-hour twilight on Christmas Eve: a long thin trail of chimney smoke drifting over the trees, its windows a tiny warm glow, the last pale light on the horizon above snowy hills and a frozen lake",
+      "composition": "High wide view from the hilltop; the hut sits small at center left against the forest, the forest and hills stretch away to the horizon.",
+      "look": "twilight",
+      "motion_elements": "the chimney smoke and the falling snow",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "falling",
+        "scale": "vista"
+      }
+    },
+    {
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling"
+      },
+      "id": "kh-26",
+      "subject": "A small round stone hut with a thatched roof deep in snow on a quiet overcast Christmas afternoon, a wreath on the shut wooden door, warm light in the small windows, white smoke from the stone chimney, a pumpkin patch buried under snow, a dark pine forest behind. Nobody is in the scene. No lanterns or candles in the snow.",
+      "composition": "Wide view from across the snowy garden, the hut in the middle ground",
+      "look": "snow-day",
+      "motion_elements": "the chimney smoke and the falling snow"
+    },
+    {
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "kh-27",
+      "subject": "A round stone hut at blue hour on Christmas Eve seen from the edge of a dark pine forest, warm golden windows, a wreath on the shut door, a thin line of smoke from the chimney, deep untouched snow, a frozen lake beyond under a calm sky. Nobody is in the scene. No lanterns or candles in the snow.",
+      "composition": "Wide view from among the trees at the forest edge, the hut small in the middle distance",
+      "look": "twilight",
+      "motion_elements": "the chimney smoke and the warm window glow"
+    }
+  ]
+}

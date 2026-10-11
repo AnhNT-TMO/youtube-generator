@@ -1,0 +1,21 @@
+{
+  "library": "spring",
+  "title": "Everstill spring: quiet renewal",
+  "shots": "*/*/shots.json",
+  "image": {
+    "rules": "CLAUDE.md",
+    "review_section": "Duyệt ảnh",
+    "min_width": 1600,
+    "ratio": [1.7, 1.85],
+    "codes": ["people", "text", "physics", "motion-missing", "off-brief", "not-photo", "format", "duplicate", "watermark"],
+    "card_fields": ["clip"]
+  },
+  "video": {
+    "rules": "CLAUDE.md",
+    "min_seconds_after_trim": 7,
+    "codes": ["camera-far", "camera-still", "morph", "people", "text", "scene-cut", "brightness", "watermark"],
+    "prompt": "video_prompt.json",
+    "motion_reject": 0.35,
+    "zoom_reject": 1.2
+  }
+}

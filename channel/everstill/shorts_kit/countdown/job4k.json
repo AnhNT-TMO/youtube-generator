@@ -1,0 +1,133 @@
+{
+ "cuts": [
+  0,
+  4.25,
+  8.63,
+  13.09,
+  17.44,
+  21.34,
+  25.36
+ ],
+ "xfade": 0.8,
+ "clips": [
+  {
+   "file": "up/frozen-lake-18.mp4",
+   "in": 0.3
+  },
+  {
+   "file": "up/christmas-market-02.mp4",
+   "in": 0.5
+  },
+  {
+   "file": "up/house-lights-08.mp4",
+   "in": 0.4
+  },
+  {
+   "file": "up/town-square-tree-01.mp4",
+   "in": 0.4
+  },
+  {
+   "file": "up/old-town-alleys-07.mp4",
+   "in": 0.3
+  },
+  {
+   "file": "up/hotel-lobby-17.mp4",
+   "in": 0.5
+  }
+ ],
+ "audio": {
+  "file": "audio/src.wav",
+  "start": 109.16,
+  "fade_in": 0.25,
+  "fade_out": 1.2,
+  "lufs": -12
+ },
+ "overlays": [
+  {
+   "file": "text4k/ov_count.png",
+   "seq": true,
+   "t0": 0.0,
+   "t1": 3.2,
+   "fade": 0.35,
+   "fade_in": 0
+  },
+  {
+   "file": "text4k/ov_sub.png",
+   "seq": true,
+   "t0": 2.0,
+   "t1": 5.9,
+   "fade": 0.4,
+   "fade_in": 0,
+   "sfx": {
+    "file": [
+     "sfx/bell_hb1.wav",
+     "sfx/bell_hb2.wav"
+    ],
+    "hits": "text4k/sfx_sub.json",
+    "gain_db": 1,
+    "accents": [
+     {
+      "file": "sfx/sweep_glock_tail.wav",
+      "offset": -0.88,
+      "gain_db": -5,
+      "rings": [
+       0
+      ]
+     }
+    ],
+    "reverb": {
+     "ir": "sfx/ir_hall.wav",
+     "wet_db": -8
+    }
+   }
+  },
+  {
+   "file": "text4k/ov_sub_arrow.png",
+   "t0": 2.3,
+   "t1": 5.9,
+   "fade": 0.4,
+   "fade_in": 0.2,
+   "bounce": {
+    "amp": 36,
+    "hz": 1.6
+   }
+  },
+  {
+   "file": "text4k/ov_brand.png",
+   "seq": true,
+   "t0": -4.4,
+   "t1": 0,
+   "fade_in": 0
+  },
+  {
+   "file": "text4k/ov_cta.png",
+   "seq": true,
+   "t0": -4.4,
+   "t1": 0,
+   "fade": 0.35,
+   "fade_in": 0
+  },
+  {
+   "file": "text4k/ov_cta_arrow.png",
+   "t0": -4.1,
+   "t1": 0,
+   "fade_in": 0.2,
+   "bounce": {
+    "amp": 36,
+    "hz": 1.6
+   }
+  }
+ ],
+ "out": "006-bell-piano-christmas-countdown-4k.mp4",
+ "size": [
+  2160,
+  3840
+ ],
+ "vcodec": "hevc_nvenc",
+ "vargs": [
+  "-tag:v",
+  "hvc1",
+  "-profile:v",
+  "main"
+ ]
+}

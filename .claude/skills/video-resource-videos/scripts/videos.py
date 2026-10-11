@@ -31,13 +31,14 @@ sys.path.insert(0, str(SCRIPTS.parents[1] / "pm-production" / "scripts"))
 import resq
 from resource_set import ResourceSet
 from cdp import websocket_module
-from muse import Blocked, MuseTab, NotSent, Uncertain, muse_tabs
+from muse import Blocked, FetchFailed, MuseTab, NotSent, Uncertain, muse_tabs
 
 LANE = "videos"
 MOTION_PYTHON = SCRIPTS.parent / ".venv" / "bin" / "python"
 MOTION_ACTOR = "auto-motion"
 GENERATION_TIMEOUT = 15 * 60
 UNDELIVERED_LIMIT = 6
+FETCH_RETRIES = 3
 EDGE_FRAMES = (0, 12, 24, 36, 48, 60, 72, 84, 192, 210, 228, 239)
 
 
@@ -124,10 +125,18 @@ def sentences(value):
     return [item.strip() if item.strip().endswith((".", "!", "?")) else item.strip() + "." for item in items if item.strip()]
 
 
+def spoken_list(value):
+    if not isinstance(value, list):
+        return value
+    items = [str(item) for item in value]
+    return ", ".join(items[:-1]) + " and " + items[-1] if len(items) > 1 else "".join(items)
+
+
 def compose(spec, card, move):
     clip = card["clip"]
     facts = {**clip, "indoor": (card.get("tags") or {}).get("place") == "indoor", "move": move}
     facts["outdoor"] = not facts["indoor"]
+    facts["close"] = str(clip.get("shot") or "").strip().lower() == "close"
     parts = []
     for block in spec["sequence"]:
         condition = block.get("if")
@@ -136,7 +145,7 @@ def compose(spec, card, move):
         if "field" in block:
             parts += sentences(clip.get(block["field"]))
         else:
-            parts.append(block["text"].format(**{key: value for key, value in facts.items() if value is not None}))
+            parts.append(block["text"].format(**{key: spoken_list(value) for key, value in facts.items() if value is not None}))
     prompt = " ".join(parts)
     for condition, words in spec.get("forbid", {}).items():
         if facts.get(condition):
@@ -417,7 +426,15 @@ class Slot:
         if not job.get("thread") and not state["url"].startswith("https://muse.ai/thread/new"):
             self.update(thread=state["url"])
         if state["video"]:
-            raw = self.tab.fetch(state["video"]["src"])
+            try:
+                raw = self.tab.fetch(state["video"]["src"])
+            except Exception as error:
+                failures = job.get("fetch_failures", 0) + 1
+                if failures >= FETCH_RETRIES:
+                    return self.to_stuck(f"video có trong thread nhưng {failures} lần tải lỗi: {str(error)[-300:]}")
+                self.update(fetch_failures=failures)
+                say(self.name(), f"! {job['id']}: tải video lỗi lần {failures}/{FETCH_RETRIES}, thử lại vòng sau: {str(error)[-200:]}")
+                return "fetch_failed"
             meta = save_clip(job, raw, state["url"], state["video"]["src"])
             meta["motion"] = camera_motion(resq.at(job["output"]))
             resq.submit(LANE, job["id"], self.worker, meta)
@@ -436,6 +453,8 @@ class Slot:
             say(self.name(), f"↺ {job['id']}: Delivery not confirmed → trả queue")
             self.clear()
             return "undelivered"
+        if state["reused"]:
+            return self.to_stuck("muse không tạo lại vì ảnh + prompt trùng lần trước và không trả file: PM đổi prompt (vd. đảo hướng máy) rồi requeue")
         if elapsed(job.get("sent")) > GENERATION_TIMEOUT:
             if job.get("timeouts"):
                 return self.to_stuck(f"lần thứ hai quá {GENERATION_TIMEOUT // 60} phút chưa có video: {state['tail'][-150:]}")
@@ -465,6 +484,8 @@ def cmd_work(args):
     by_page = {slot.page_id: slot for slot in slots}
     for port in args.port:
         for path, job in resq.mine(LANE, f"videos-{port}"):
+            if args.only and job.get("set") not in args.only:
+                continue
             slot = by_page.get(job.get("page")) or next((s for s in slots if s.port == port and not s.job), None)
             if not slot or slot.job:
                 sys.exit(f"{job['id']}: tab {job.get('page')} không còn; PM reconcile trước khi chạy")
@@ -488,7 +509,7 @@ def cmd_work(args):
                     if undelivered >= UNDELIVERED_LIMIT:
                         raise Blocked(f"muse: {undelivered} lần liên tiếp Delivery not confirmed, không có video nào; dừng để không dồn thêm yêu cầu")
                 if not slot.job and accepting and not empty:
-                    path, job = resq.claim(LANE, slot.worker)
+                    path, job = resq.claim(LANE, slot.worker, args.only)
                     if job:
                         slot.adopt(path, job)
                         slot.start()
@@ -627,6 +648,7 @@ def main():
     command.add_argument("--seconds", type=int, default=300)
     command.add_argument("--drain", type=int, default=900)
     command.add_argument("--exit-when-empty", action="store_true")
+    command.add_argument("--only", action="append", help="chỉ nhận / làm tiếp job của bộ này (lặp lại được); job bộ khác đang giữ để lần chạy sau")
     command = commands.add_parser("reconcile")
     command.add_argument("job")
     command.add_argument("--port", required=True)
@@ -639,7 +661,7 @@ def main():
     try:
         {"candidates": cmd_candidates, "clip": cmd_clip, "draft": cmd_draft, "redraft": cmd_redraft, "refix": cmd_refix, "add": cmd_add, "work": cmd_work, "reconcile": cmd_reconcile,
          "check": cmd_check}[args.command](args)
-    except (resq.QueueError, Blocked, Uncertain) as error:
+    except (resq.QueueError, Blocked, Uncertain, FetchFailed) as error:
         print(f"LỖI: {error}", file=sys.stderr)
         sys.exit(2)
 

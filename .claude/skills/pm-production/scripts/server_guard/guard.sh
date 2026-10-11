@@ -6,14 +6,14 @@ ENV="$REPO/.claude/skills/video-generator/remote.env"
 [ -f "$ENV" ] && source "$ENV"
 REMOTE="${GUARD_REMOTE:-${VG_REMOTE:?set VG_REMOTE in $ENV}}"
 KEY="${VG_KEY:-$HOME/.ssh/id_rsa}"
-SSH=(ssh -i "$KEY" -o BatchMode=yes -o ConnectTimeout=10 "$REMOTE")
+SSH=(ssh -i "$KEY" -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=4 "$REMOTE")
 START='systemctl --user is-active --quiet youtube-guard || systemd-run --user --unit=youtube-guard --collect -p MemoryMax=256M python3 ~/youtube-guard/guard.py >/dev/null 2>&1'
 SLICE='S=~/.config/systemd/user/youtube.slice; [ -f $S ] || { mkdir -p ${S%/*} && printf "[Unit]\nDescription=youtube project: every skill shares this cap (CLAUDE.md)\n[Slice]\nCPUQuota=%s%%\nMemoryHigh=60%%\nMemoryMax=70%%\n" $(( $(nproc) * 60 )) > $S && systemctl --user daemon-reload; }'
 
 case "${1:-status}" in
   install)
     "${SSH[@]}" "mkdir -p ~/youtube-guard"
-    rsync -a -e "ssh -i $KEY -o BatchMode=yes" "$HERE/guard.py" "$REMOTE:youtube-guard/guard.py"
+    rsync -a -e "ssh -i $KEY -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=4" "$HERE/guard.py" "$REMOTE:youtube-guard/guard.py"
     "${SSH[@]}" "systemctl --user stop youtube-guard 2>/dev/null; $START; sleep 1; systemctl --user is-active youtube-guard"
     ;;
   status)

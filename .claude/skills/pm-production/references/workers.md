@@ -15,7 +15,7 @@ before you tick the checklist.
 |---|---|---|---|---|---|---|
 
 ## Albums
-| Album | Tracks | Master | Picture | Loop | youtube.md | Video + S3 | Short | Note |
+| Album | Tracks | Master | Picture | Loop | youtube.md | Video + Drive | Short | Note |
 |---|---|---|---|---|---|---|---|---|
 
 ## Lanes (now)
@@ -116,8 +116,7 @@ are the tracklist in order; track 1 starts at 0.
 Skills `thumbnail-prompt`, then `video-generator` step 1, both used exactly as their SKILL.md says today.
 
 ```
-Job: album image + loop for <album dir>. The PM's picture brief is album.md → brief (there is no plan.yaml: where
-thumbnail-prompt's SKILL.md says plan.yaml brief.decisions.thumbnail_concept, use album.md brief.thumbnail_concept):
+Job: album image + loop for <album dir>. The PM's picture brief is album.md → brief.thumbnail_concept:
 - main text on the image = brief.thumbnail_text, letter for letter: "<text>"
 - concept = brief.thumbnail_concept: "<concept>"
 - bottom bar text (the channel's visual.md has a "Bar line") = brief.bar_line: "<bar line>". Write it as
@@ -162,19 +161,19 @@ PM checks: the title follows `title_direction` and carries no other channel's na
 Skill `video-generator` steps 2–3. One zip per album: the album video and its Short (`short/`), downloaded once by the CEO.
 
 ```
-Job: full video + the album's one S3 zip for <album dir>. video.py album <album dir> <album dir>/audio/master/<album>.wav
+Job: full video + the album's one Drive zip for <album dir>. video.py album <album dir> <album dir>/audio/master/<album>.wav
 (server, background). It packages by itself only when youtube.md AND the Short (rendered + short/youtube.md) are ready;
 otherwise it prints `video.py package <album dir>`: then stop after the render and report "rendered, zip waits for the
 Short". Package job (when the Short is ready): video.py package <album dir> (runs publish.py check + shorts.py check; any
 ❌ → BLOCKED with the check output, never --force on your own; --no-short only when the PM says so).
 Check video/video.mp4.json (duration = assembly.json duration_s, 3840×2160, one audio stream), check_5s.png,
 check_mid.png, s3-package.json (last entry: parts album + short, checks pass).
-Stop (BLOCKED): server down; AWS / S3 error → report "video on server, not packaged".
-Return: S3 URI, zip size, parts, checks, warnings.
+Stop (BLOCKED): server down; rclone / Drive error → report "video on server, not packaged".
+Return: Drive link, zip size, parts, checks, warnings.
 ```
 
 PM checks: video length = master; the last `s3-package.json` entry has `parts` album + short, `checks` pass, no warning;
-`board` shows the S3 date on the album and its Short.
+`board` shows the package date on the album and its Short.
 
 ## 7. short (lane text; holds lane chatgpt for its image, a server slot for its render)
 

@@ -1,0 +1,364 @@
+{
+  "theme": "wildflower-meadows/mid",
+  "target": 32,
+  "defaults": {
+    "lens": "50mm lens at f/8",
+    "look": "day",
+    "composition": "Mid-distance view of one anchor from the side: blurred grass blades in the near foreground, the main flower clump, tree or meadow strip in the middle ground, and a soft woodland edge or hillside in the background, with green dominating the frame.",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "mid",
+      "category": "wildflower-meadows",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "wm-m-01",
+      "subject": "A clump of meadow buttercups and red clover in fresh grass at the foot of a young oak, its pale new leaves lit from above",
+      "look": "day",
+      "motion_elements": "the swaying grass and the oak leaves",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "wm-m-02",
+      "subject": "A patch of Queen Anne's lace along a woodland margin, slender white-topped stems among fresh grass and pale birch trunks in new leaf behind",
+      "look": "soft-morning",
+      "motion_elements": "the Queen Anne's lace heads and the grass",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "35mm lens at f/8"
+    },
+    {
+      "id": "wm-m-03",
+      "subject": "A lone hawthorn shrub in white blossom standing in tall fresh grass on a gentle slope, low sun glowing through its petals",
+      "look": "golden",
+      "motion_elements": "the hawthorn branches and the tall grass",
+      "tags": {
+        "time": "golden",
+        "palette": "white blossom"
+      },
+      "lens": "70mm lens at f/8"
+    },
+    {
+      "id": "wm-m-04",
+      "subject": "A strip of ragged-robin and sedges along a damp meadow ditch, a pollarded willow in fresh leaf beside it and flat green fields beyond",
+      "look": "overcast",
+      "motion_elements": "the sedges and the willow leaves",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss"
+      },
+      "lens": "85mm lens at f/5.6"
+    },
+    {
+      "id": "wm-m-05",
+      "subject": "Rain-wet tufts of seed grass and scattered meadow cranesbill around a weathered wooden fence post, droplets on every blade and a gray-green field beyond",
+      "look": "after-rain",
+      "motion_elements": "the wet grass tufts",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      },
+      "lens": "60mm lens at f/8"
+    },
+    {
+      "id": "wm-m-06",
+      "subject": "A small brook edged by marsh marigolds in a meadow, yellow flowers on glossy leaves, clear water running past and alder trees behind",
+      "look": "day",
+      "motion_elements": "the running brook and the marsh marigold leaves",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "wm-m-07",
+      "subject": "A group of cowslips on a short-grass bank above a valley, nodding yellow heads among fresh grass and a soft hazy valley beyond",
+      "look": "soft-morning",
+      "motion_elements": "the nodding cowslips and the haze",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "35mm lens at f/8"
+    },
+    {
+      "id": "wm-m-08",
+      "subject": "A cluster of ox-eye daisies among tall fresh grasses at a forest edge, warm backlight on the stems and young beech leaves behind",
+      "look": "golden",
+      "motion_elements": "the daisies and the tall grasses",
+      "tags": {
+        "time": "golden",
+        "palette": "warm green"
+      },
+      "lens": "70mm lens at f/8"
+    },
+    {
+      "id": "wm-m-09",
+      "subject": "A patch of pale lilac cuckooflower in a wet meadow, fresh grass around the thin stems and a hawthorn hedge in bud softly behind",
+      "look": "overcast",
+      "motion_elements": "the cuckooflower stems and the grass",
+      "tags": {
+        "time": "overcast",
+        "palette": "soft lilac"
+      },
+      "lens": "85mm lens at f/5.6"
+    },
+    {
+      "id": "wm-m-10",
+      "subject": "A loose spread of bluebells at the edge of a beech wood clearing, wet leaves shining and mist between the trunks",
+      "look": "after-rain",
+      "motion_elements": "the mist between the trunks and the beech leaves",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      },
+      "lens": "60mm lens at f/8"
+    },
+    {
+      "id": "wm-m-11",
+      "subject": "A wild cherry branch in white blossom reaching over a sloping meadow, buttercups scattered in the grass below and green hills in the distance",
+      "look": "day",
+      "motion_elements": "the blossom branch and the grass",
+      "tags": {
+        "time": "day",
+        "palette": "soft pink"
+      }
+    },
+    {
+      "id": "wm-m-12",
+      "subject": "Dandelion seed heads standing in dewy grass beside a willow-lined bank, soft light on the silvery clocks and pale water glinting behind",
+      "look": "soft-morning",
+      "motion_elements": "the dandelion clocks and the willow leaves",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "35mm lens at f/8"
+    },
+    {
+      "id": "wm-m-13",
+      "subject": "Red campion stems leaning out of a grassy bank below a copse of silver birch, long warm light across the slope",
+      "look": "golden",
+      "motion_elements": "the campion stems and the birch leaves",
+      "tags": {
+        "time": "golden",
+        "palette": "warm green"
+      },
+      "lens": "70mm lens at f/8"
+    },
+    {
+      "id": "wm-m-14",
+      "subject": "A cluster of primroses on a shallow grassy bank under a young oak in new leaf, damp leaves and soft even light across the meadow",
+      "look": "overcast",
+      "motion_elements": "the grass and the oak leaves",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss"
+      },
+      "lens": "85mm lens at f/5.6"
+    },
+    {
+      "id": "wm-m-15",
+      "subject": "Yellow flag iris buds and fresh rushes at the edge of a small meadow pond, rain rings fading on the water and willows behind",
+      "look": "after-rain",
+      "motion_elements": "the fading ripples on the pond",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      },
+      "lens": "60mm lens at f/8"
+    },
+    {
+      "id": "wm-m-16",
+      "subject": "A young rowan in fresh leaf beside a mossy boulder in an open meadow, scattered blue speedwell in the grass and a wooded hill beyond",
+      "look": "day",
+      "motion_elements": "the rowan leaves and the grass",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "wm-m-17",
+      "subject": "White wood anemones under a young larch in soft green needles at the meadow edge, fresh grass around them and haze softening the trees behind",
+      "look": "soft-morning",
+      "motion_elements": "the anemone heads, the larch branches and the haze",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "35mm lens at f/8"
+    },
+    {
+      "id": "wm-m-18",
+      "subject": "An old apple tree in pale pink blossom standing alone in a meadow, warm side light and tufts of grass around the trunk",
+      "look": "golden",
+      "motion_elements": "the blossom branches and the grass tufts",
+      "tags": {
+        "time": "golden",
+        "palette": "soft pink"
+      },
+      "lens": "70mm lens at f/8"
+    },
+    {
+      "id": "wm-m-19",
+      "subject": "A narrow beck winding across the frame through a meadow, mossy stones and marsh marigolds on its bank and a birch copse beyond",
+      "look": "overcast",
+      "motion_elements": "the flowing beck",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss"
+      },
+      "lens": "85mm lens at f/5.6"
+    },
+    {
+      "id": "wm-m-20",
+      "subject": "The edge of a beech wood with wet grass and scattered buttercups in front, a band of mist clinging to the trunks",
+      "look": "after-rain",
+      "motion_elements": "the mist band and the wet grass",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      },
+      "lens": "60mm lens at f/8"
+    },
+    {
+      "id": "wm-m-21",
+      "subject": "A field maple in new leaf over a grassy slope dotted with wild violets, fresh grass around its trunk and white clouds drifting behind",
+      "look": "day",
+      "motion_elements": "the maple leaves and the clouds",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "wm-m-22",
+      "subject": "A small group of snake's-head fritillaries in dew-silvered floodplain grass, checkered bells nodding on thin stems and a row of poplars blurred behind",
+      "look": "soft-morning",
+      "motion_elements": "the nodding fritillaries and the grass",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "35mm lens at f/8"
+    },
+    {
+      "id": "wm-m-23",
+      "subject": "A hawthorn tree on a low ridge with sparse daisies in knee-high grass and warm haze on the hills behind",
+      "look": "golden",
+      "motion_elements": "the grass and the hawthorn leaves",
+      "tags": {
+        "time": "golden",
+        "palette": "warm green"
+      },
+      "lens": "70mm lens at f/8"
+    },
+    {
+      "id": "wm-m-24",
+      "subject": "A hazel bush with hanging yellow catkins beside a simple wooden rail fence, pale primroses in the grass below and a quiet meadow beyond",
+      "look": "overcast",
+      "motion_elements": "the hanging catkins",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss"
+      },
+      "lens": "85mm lens at f/5.6"
+    },
+    {
+      "id": "wm-m-25",
+      "subject": "A clear shallow stream below a grassy bank of red campion, wet alder leaves overhanging the water and smooth stones on the stream bed",
+      "look": "after-rain",
+      "motion_elements": "the stream water and the alder leaves",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      },
+      "lens": "60mm lens at f/8"
+    },
+    {
+      "id": "wm-m-26",
+      "subject": "A grassy hummock with sparse blue speedwell and daisies in an open meadow, a row of young lime trees in fresh leaf behind",
+      "look": "day",
+      "motion_elements": "the lime leaves and the grass",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "wm-m-27",
+      "subject": "A ring of young birches in a misty dell, cuckooflowers scattered in the fresh grass at their feet and pale light between the trunks",
+      "look": "soft-morning",
+      "motion_elements": "the birch leaves and the mist",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "35mm lens at f/8"
+    },
+    {
+      "id": "wm-m-28",
+      "subject": "A few bluebells under the first beech trunks at a meadow edge, low warm sun drifting through the young leaves",
+      "look": "golden",
+      "motion_elements": "the beech leaves and the drifting light",
+      "tags": {
+        "time": "golden",
+        "palette": "warm green"
+      },
+      "lens": "70mm lens at f/8"
+    },
+    {
+      "id": "wm-m-29",
+      "subject": "A gorse bush in yellow bloom on a grassy common, a young birch beside it and soft gray hills beyond",
+      "look": "overcast",
+      "motion_elements": "the birch leaves and the grass",
+      "tags": {
+        "time": "overcast",
+        "palette": "pale yellow"
+      },
+      "lens": "85mm lens at f/5.6"
+    },
+    {
+      "id": "wm-m-30",
+      "subject": "A shallow rain pool in the meadow grass reflecting a pale sky, daisies around its rim and a hawthorn hedge in bud behind",
+      "look": "after-rain",
+      "motion_elements": "the rippling rain pool",
+      "tags": {
+        "time": "after-rain",
+        "palette": "wet green"
+      },
+      "lens": "60mm lens at f/8"
+    },
+    {
+      "id": "wm-m-31",
+      "subject": "Early purple orchids and cowslips on a sunny terrace of short turf, a low mossy stone wall edge behind and green slopes beyond",
+      "look": "day",
+      "motion_elements": "the orchid spikes and the grass",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "wm-m-32",
+      "subject": "A wild pear branch in white blossom reaching over dewy meadow grass, a misty woodland edge and a pale sky softly behind",
+      "look": "soft-morning",
+      "motion_elements": "the blossom branch and the mist",
+      "tags": {
+        "time": "morning",
+        "palette": "white blossom"
+      },
+      "lens": "35mm lens at f/8"
+    }
+  ]
+}

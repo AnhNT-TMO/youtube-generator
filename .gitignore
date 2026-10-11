@@ -69,3 +69,15 @@ image_source/_gen.log
 image_source/_review.html
 image_source/_muse_status.md
 audio/
+
+# Bằng chứng PD (ảnh scan ≤1930 + ABC + compare) cho kháng Content ID: chỉ trên máy, không xoá; research/christmas-carols/pd-audit/_work là symlink tới đây
+pd-evidence/
+
+# Everstill nature/spring resource output: keep shot specs and prompt contracts; generated media/cards stay local
+resource/*/*/*/*.png
+resource/*/*/*/*.mp4
+resource/*/*/*/*.json
+!resource/*/*/*/shots.json
+
+# Mureka remix (audio-christmas-workflow mureka_remix.py): bản remix tải về, chỉ trên máy
+mureka/

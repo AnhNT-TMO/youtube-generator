@@ -16,6 +16,8 @@ channel/<tên>/
 ├── publish.md         # mẫu description, tags, title, Shorts, pinned comment, giờ đăng
 ├── translate.yaml     # ngôn ngữ dịch title + description
 ├── image_source/logo.png, model/          # logo, ảnh nhân vật cho ChatGPT
+├── branding/badges/, branding/sfx/       # badge dùng lại (SUBSCRIBE, FULL ALBUM…), âm thanh chuông Subscribe (chỉ trên máy)
+├── shorts_kit/        # Short đếm ngược: README chuẩn kênh, countdown/ spec + job mẫu, font, logo
 └── songs/<type>/ albums/NNN/(short/)    # kho bài theo loại, album + Short của nó (sinh ra khi làm, chỉ trên máy)
 ```
 
@@ -29,7 +31,7 @@ channel/<tên>/
 | Video | thumbnail-prompt | `visual.md`, `model/` |
 | Video | video-generator | `video.json`, `image_source/` |
 | Video | video-montage | `intro.json` (intro logo + tên kênh mở video dài) |
-| Video | video-shorts | `publish.md` → *Shorts*, `songs/<type>/<bài>.md` → `short` |
+| Video | video-shorts | `publish.md` → *Shorts*, `songs/<type>/<bài>.md` → `short`; Short đếm ngược: `shorts_kit/`, `branding/badges/`, `branding/sfx/` |
 | Upload | upload-youtube-publish | `publish.md` |
 | Upload | upload-youtube-translate | `translate.yaml` |
 

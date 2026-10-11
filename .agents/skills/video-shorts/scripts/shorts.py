@@ -9,7 +9,7 @@ USAGE = """video-shorts: một Short cho mỗi album, cắt từ đoạn `short`
                                   theo clip_id rồi sửa song/title/track trong short.md)
   shorts.py check <short dir>     short.md, short.json, thumbnail 9:16, video đã render (video/video.mp4.json),
                                   youtube.md (title, hashtags, link album); exit 1 khi có ❌
-  shorts.py list  --channel <ch>  mọi Short của kênh: album, bài, đoạn, ảnh, video, S3, URL
+  shorts.py list  --channel <ch>  mọi Short của kênh: album, bài, đoạn, ảnh, video, gói (Drive/S3), URL
   shorts.py migrate --channel <ch> [--yes]
                                   Short bố cục cũ channel/<ch>/shorts/NNN-slug/ → albums/<album trong short.md>/short/,
                                   sửa đường dẫn tương đối + chữ `shorts/NNN-slug` trong các file; mặc định chỉ in, --yes mới làm
@@ -564,7 +564,7 @@ def cmd_list(a):
     if not rows:
         print("chưa có Short nào")
         return
-    print("| Short | album | bài | đoạn | hook | ảnh | video | S3 | URL |\n|---|---|---|---|---|---|---|---|---|")
+    print("| Short | album | bài | đoạn | hook | ảnh | video | gói | URL |\n|---|---|---|---|---|---|---|---|---|")
     for d, fm, spec in rows:
         seg = f"{spec['in']:.2f}–{spec['out']:.2f}" if spec else "—"
         print(f"| {label(d)} | {fm.get('album') or '—'} | {fm.get('title') or fm.get('song') or '?'} | {seg} | "

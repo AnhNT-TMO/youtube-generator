@@ -17,12 +17,12 @@ USAGE = """Resource queue: một thư mục mỗi trạng thái, chuyển trạn
   resq.py no-output LANE JOB --worker W --note TEXT
   resq.py release LANE JOB --worker W --note TEXT       chứng minh chưa gửi: trả job, không tốn lượt
   resq.py stuck LANE JOB --worker W --note TEXT         không rõ đã gửi/đã tạo: PM xử lý
-  resq.py next-review LANE --reviewer R [--wait SECONDS] [--batch N]
+  resq.py next-review LANE --reviewer R [--wait SECONDS] [--batch N] [--set SET]
   resq.py verdict LANE JOB --reviewer R ok|redo --note TEXT [--codes a,b] [--trim-head S] [--trim-tail S] [--card JSON|@FILE]
   resq.py requeue LANE JOB --prompt-file FILE [--note TEXT]
   resq.py reprompt LANE JOB --prompt-file FILE [--note TEXT]   đổi prompt job còn ở input (không tốn lượt)
   resq.py fail LANE JOB --note TEXT
-  resq.py resolve LANE JOB --to input|regen|review|needs_fix|failed [--output FILE] [--note TEXT]
+  resq.py resolve LANE JOB --to input|regen|review|needs_fix|failed [--output FILE] [--note TEXT]   stuck → …; failed → review chỉ khi có --output (duyệt lại sau khi đổi luật)
   resq.py watch [--review N] [--needs-fix N] [--low LANE=N] [--started LANE] [--max-wait S]   PM chạy nền: thoát khi có việc cho PM
 """
 import argparse
@@ -189,11 +189,20 @@ def queued_order(path):
     return (job.get("queued", ""), str(path))
 
 
-def claim(lane, worker):
+def job_set(path):
+    try:
+        return read(path).get("set")
+    except (OSError, ValueError):
+        return None
+
+
+def claim(lane, worker, sets=None):
     target_dir = state_dir(lane, "working", worker)
     target_dir.mkdir(parents=True, exist_ok=True)
     for state in ("regen", "input"):
         for path in sorted(state_dir(lane, state).glob("*.json"), key=queued_order):
+            if sets and job_set(path) not in sets:
+                continue
             target = target_dir / path.name
             try:
                 os.rename(path, target)
@@ -261,7 +270,7 @@ def claimed_by(lane, reviewer):
     return sum(1 for row in events(lane) if row["by"] == reviewer and row["to"] == "reviewing")
 
 
-def next_review(lane, reviewer, wait=0, batch=0):
+def next_review(lane, reviewer, wait=0, batch=0, sets=None):
     deadline = time.time() + wait
     target_dir = state_dir(lane, "reviewing", reviewer)
     target_dir.mkdir(parents=True, exist_ok=True)
@@ -274,6 +283,8 @@ def next_review(lane, reviewer, wait=0, batch=0):
         candidates = sorted(state_dir(lane, "review").glob("*.json"),
                             key=lambda path: (read(path).get("submitted", ""), str(path)))
         for path in candidates:
+            if sets and job_set(path) not in sets:
+                continue
             target = target_dir / path.name
             try:
                 os.rename(path, target)
@@ -465,7 +476,8 @@ def fail(lane, job_id, note):
 
 
 def resolve(lane, job_id, target, output=None, note=None):
-    path, job = require(lane, job_id, "stuck")
+    revive = target == "review" and output and locate(lane, job_id)[0] == "failed"
+    path, job = require(lane, job_id, "failed" if revive else "stuck")
     if target == "review":
         if output and Path(output).resolve() != at(job["output"]).resolve():
             shutil.copy2(output, at(job["output"]))
@@ -538,22 +550,22 @@ def board(lanes):
             print("   mã lỗi: " + ", ".join(f"{code} {count}" for code, count in codes.most_common(8)))
 
 
-def reviewer_active(lane, seconds):
+def reviewer_active(lane, seconds, sets=()):
     since = (datetime.now() - timedelta(seconds=seconds)).isoformat(timespec="seconds")
-    return bool(jobs_in(lane, "reviewing")) or any("reviewing" in (row["from"], row["to"]) for row in events(lane, since))
+    return any(not sets or job.get("set") in sets for _, job in jobs_in(lane, "reviewing")) or any("reviewing" in (row["from"], row["to"]) for row in events(lane, since))
 
 
-def watch_reasons(review, needs_fix, low, idle_seconds, starting=()):
+def watch_reasons(review, needs_fix, low, idle_seconds, starting=(), sets=()):
     reasons = []
     busy = 0
     for lane in LANES:
-        counts = {state: len(jobs_in(lane, state)) for state in STATES}
+        counts = {state: sum(1 for _, job in jobs_in(lane, state) if not sets or job.get("set") in sets) for state in STATES}
         busy += sum(counts[state] for state in ("input", "regen", "working", "review", "reviewing"))
         if counts["stuck"]:
             reasons.append(f"STUCK {lane} {counts['stuck']}")
         if needs_fix and counts["needs_fix"] >= needs_fix:
             reasons.append(f"FIX {lane} {counts['needs_fix']}")
-        if review and counts["review"] >= review and lane not in starting and not reviewer_active(lane, idle_seconds):
+        if review and counts["review"] >= review and lane not in starting and not reviewer_active(lane, idle_seconds, sets):
             reasons.append(f"REVIEW {lane} {counts['review']}")
         if lane in low and counts["input"] + counts["regen"] < low[lane]:
             reasons.append(f"LOW {lane} {counts['input'] + counts['regen']}")
@@ -562,12 +574,12 @@ def watch_reasons(review, needs_fix, low, idle_seconds, starting=()):
     return reasons
 
 
-def watch(review, needs_fix, low, idle_seconds, max_wait, started=()):
+def watch(review, needs_fix, low, idle_seconds, max_wait, started=(), sets=()):
     began = time.time()
     deadline = began + max_wait
     while True:
         starting = started if time.time() - began < idle_seconds else ()
-        reasons = watch_reasons(review, needs_fix, low, idle_seconds, starting)
+        reasons = watch_reasons(review, needs_fix, low, idle_seconds, starting, sets)
         if reasons or time.time() >= deadline:
             return reasons or ["TIMEOUT"]
         time.sleep(20)
@@ -626,6 +638,7 @@ def main():
     command.add_argument("--reviewer", required=True)
     command.add_argument("--wait", type=float, default=0)
     command.add_argument("--batch", type=int, default=0, help="dừng khi tên reviewer này đã nhận đủ N job (tên mới mỗi lượt spawn)")
+    command.add_argument("--set", action="append", help="chỉ nhận job của bộ này (lặp lại được)")
     command = commands.add_parser("verdict")
     command.add_argument("lane")
     command.add_argument("job")
@@ -667,6 +680,7 @@ def main():
     command.add_argument("--idle", type=int, default=240, help="reviewer coi là đang chạy nếu có hoạt động trong N giây")
     command.add_argument("--max-wait", type=int, default=4 * 3600)
     command.add_argument("--started", action="append", default=[], help="LANE vừa spawn reviewer: không báo REVIEW lane đó trong --idle giây đầu")
+    command.add_argument("--set", action="append", default=[], help="chỉ đếm job của bộ này (lặp lại được)")
     args = parser.parse_args()
     try:
         if args.command == "board":
@@ -704,7 +718,7 @@ def main():
         elif args.command == "stuck":
             print(stuck(args.lane, args.job, args.worker, args.note))
         elif args.command == "next-review":
-            path, job = next_review(args.lane, args.reviewer, args.wait, args.batch)
+            path, job = next_review(args.lane, args.reviewer, args.wait, args.batch, args.set)
             if not job:
                 print("EMPTY")
                 sys.exit(1)
@@ -725,7 +739,7 @@ def main():
             print(resolve(args.lane, args.job, args.to, args.output, args.note))
         elif args.command == "watch":
             low = {lane: int(count) for lane, count in (item.split("=", 1) for item in args.low)}
-            print("\n".join(watch(args.review, args.needs_fix, low, args.idle, args.max_wait, tuple(args.started))))
+            print("\n".join(watch(args.review, args.needs_fix, low, args.idle, args.max_wait, tuple(args.started), tuple(args.set))))
     except (QueueError, OSError, ValueError, subprocess.CalledProcessError) as error:
         print(f"LỖI: {error}", file=sys.stderr)
         sys.exit(2)

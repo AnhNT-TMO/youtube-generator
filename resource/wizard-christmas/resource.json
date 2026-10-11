@@ -1,0 +1,46 @@
+{
+ "library": "christmas",
+ "title": "Wizard-school Christmas: ChatGPT stills → muse.ai 10 s clips",
+ "shots": "*/*/shots.json",
+ "image": {
+  "rules": "CLAUDE.md",
+  "review_section": "Duyệt ảnh",
+  "min_width": 1600,
+  "ratio": [
+   1.7,
+   1.85
+  ],
+  "codes": [
+   "face",
+   "people",
+   "brand",
+   "text",
+   "physics",
+   "motion-missing",
+   "off-brief",
+   "not-photo",
+   "format",
+   "duplicate",
+   "watermark"
+  ],
+  "card_fields": [
+   "clip"
+  ]
+ },
+ "video": {
+  "rules": "CLAUDE.md",
+  "min_seconds_after_trim": 7,
+  "codes": [
+   "face-turn",
+   "people",
+   "morph",
+   "particles",
+   "camera-still",
+   "lights",
+   "scene-cut",
+   "brightness",
+   "watermark"
+  ],
+  "prompt": "video_prompt.json"
+ }
+}

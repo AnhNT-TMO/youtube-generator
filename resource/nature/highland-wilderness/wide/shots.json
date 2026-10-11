@@ -1,0 +1,424 @@
+{
+  "theme": "highland-wilderness/wide",
+  "target": 27,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "day",
+    "composition": "A broad open highland view with clear foreground, middle ground and background",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "wide",
+      "category": "highland-wilderness",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "hw-w-01",
+      "subject": "A high granite plateau dusted with the first snow, a shallow dark tarn rimmed with thin ice, snow-capped tussocks and a low bank of cloud resting below the distant ridges",
+      "lens": "24mm lens at f/8",
+      "look": "dawn",
+      "composition": "Eye-level view straight across the flat plateau, the tarn lying as a long dark band across the lower third, snowy tussocks in front of it and the cloud bank with the ridges along the far horizon",
+      "motion_elements": "the low cloud bank and the open water of the tarn",
+      "tags": {
+        "time": "dawn",
+        "palette": "slate blue",
+        "comp": "across",
+        "anchor": "plateau-tarn",
+        "season": "early-snow"
+      }
+    },
+    {
+      "id": "hw-w-02",
+      "subject": "A rounded mountain shoulder of rust-muted rust autumn grass and bilberry, a few dwarf pines and a sea of clouds filling the valleys far below with blue ridge tops standing out of it",
+      "lens": "24mm lens at f/8",
+      "look": "golden",
+      "composition": "From high on the shoulder looking down about 40 degrees, the red slope filling the lower half, the cloud sea spreading across the middle and the ridge tops emerging along the top third",
+      "motion_elements": "the sea of clouds and the autumn grass",
+      "tags": {
+        "time": "golden",
+        "palette": "muted gold",
+        "comp": "overlook",
+        "anchor": "cloud-sea",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-w-03",
+      "subject": "A rolling heather moorland on a high saddle in autumn, dark peat banks, russet heather mounds and thin mist moving across the far slopes",
+      "lens": "20mm lens at f/8",
+      "look": "misty",
+      "composition": "Camera low among the heather, one russet heather mound filling the lower third of the frame, the saddle rolling away behind it and mist-veiled slopes in the background",
+      "motion_elements": "the drifting mist and the heather stems",
+      "tags": {
+        "time": "morning",
+        "palette": "gray mist",
+        "comp": "low-foreground",
+        "anchor": "heather",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-w-04",
+      "subject": "Five or six rounded highland ridges in receding layers, the nearest dark autumn-brown and the farthest pale blue, with valley fog lying between each layer",
+      "lens": "200mm lens at f/8",
+      "look": "dawn",
+      "composition": "Long telephoto view with no foreground, compressing the ridges into stacked horizontal bands from the dark near ridge to the palest far ridge, fog bands separating them",
+      "motion_elements": "the fog bands between the ridges",
+      "tags": {
+        "time": "dawn",
+        "palette": "slate blue",
+        "comp": "tele-layers",
+        "anchor": "ridge-layers",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-w-05",
+      "subject": "A dry late-summer upland of pale feather grass, a single gnarled pine on a low rise and tall cumulus clouds catching warm evening light",
+      "lens": "24mm lens at f/8",
+      "look": "golden",
+      "composition": "Horizon set low in the bottom third, the lone pine small on the right third of the horizon line, the sky with towering lit clouds filling the upper 60 percent of the frame",
+      "motion_elements": "the slow cumulus clouds and the feather grass",
+      "tags": {
+        "time": "golden",
+        "palette": "muted gold",
+        "comp": "big-sky",
+        "anchor": "lone-tree",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "hw-w-06",
+      "subject": "A snow-dusted plateau edge at the treeline, two low wind-twisted krummholz spruces, a pale snowy basin beyond and gray low cloud on the far hills",
+      "lens": "28mm lens at f/8",
+      "look": "overcast",
+      "composition": "The dark twisted spruces fill the left and right edges of the frame, the gap between them opening onto the snowy basin in the middle ground and the cloud-capped hills behind",
+      "motion_elements": "the low cloud and the spruce twigs",
+      "tags": {
+        "time": "overcast",
+        "palette": "slate blue",
+        "comp": "natural-frame",
+        "anchor": "krummholz",
+        "season": "early-snow"
+      }
+    },
+    {
+      "id": "hw-w-07",
+      "subject": "A worn natural footpath of bare earth and stones running along the crest of a long rounded grassy ridge in autumn, tawny grass on both flanks and far hills under scattered clouds",
+      "lens": "24mm lens at f/8",
+      "look": "day",
+      "composition": "Standing on the crest looking along the path as it runs away into the distance, slopes falling away to the left and right, distant hills and sky beyond the end of the ridge",
+      "motion_elements": "the cloud shadows on the far hills and the tawny grass",
+      "tags": {
+        "time": "day",
+        "palette": "muted gold",
+        "comp": "axis",
+        "anchor": "ridge-trail",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-w-08",
+      "subject": "A high moor with a cluster of stacked granite tors on a low summit, rain-darkened rock, sun-bleached summer grass and clouds lifting off a long far escarpment",
+      "lens": "35mm lens at f/8",
+      "look": "after-rain",
+      "composition": "Eye-level from the side across the moor, the tor cluster on the left third of the skyline, open grass across the middle ground and the escarpment along the right horizon",
+      "motion_elements": "the lifting clouds and the moor grass",
+      "tags": {
+        "time": "after-rain",
+        "palette": "slate blue",
+        "comp": "across",
+        "anchor": "tor",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "hw-w-09",
+      "subject": "A wide blanket bog on a flat upland, a maze of dark peat pools edged with white cotton grass, scattered erratic boulders and a wall of mist crossing the middle distance",
+      "lens": "28mm lens at f/8",
+      "look": "misty",
+      "composition": "From a low rise looking down about 30 degrees onto the pattern of dark pools, which fill the lower two thirds of the frame, the mist wall stretched across the top",
+      "motion_elements": "the crossing mist and the cotton grass heads",
+      "tags": {
+        "time": "morning",
+        "palette": "gray mist",
+        "comp": "overlook",
+        "anchor": "peat-bog",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "hw-w-10",
+      "subject": "A grey scree fan of loose angular stones with small meltwater trickles running between them, spreading below a broad, smoothly rounded grassy summit, old snow patches lying in the hollows, a broad empty corrie beyond and low cloud along its rounded rim",
+      "lens": "20mm lens at f/8",
+      "look": "overcast",
+      "composition": "Camera low on the scree, angular gray stones filling the lower third, the snow-patched corrie floor across the middle and the cloud-capped rim along the top",
+      "motion_elements": "the low cloud along the rim and thin meltwater trickles between the stones",
+      "tags": {
+        "time": "overcast",
+        "palette": "gray mist",
+        "comp": "low-foreground",
+        "anchor": "scree",
+        "season": "late-snow"
+      }
+    },
+    {
+      "id": "hw-w-11",
+      "subject": "Distant hillsides where dark pines thin out into open moor, rust bracken patches between the trees and mist banks lying in layers",
+      "lens": "135mm lens at f/8",
+      "look": "misty",
+      "composition": "Telephoto view across the valley with no foreground, the pine-dotted slopes stacked as overlapping planes and mist bands separating each plane",
+      "motion_elements": "the drifting mist bands",
+      "tags": {
+        "time": "morning",
+        "palette": "deep green",
+        "comp": "tele-layers",
+        "anchor": "pine-edge",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-w-12",
+      "subject": "A windswept tundra plateau with pale lichen fields, a small round lake and a distant dark massif under long streaks of thin high cloud",
+      "lens": "20mm lens at f/8",
+      "look": "day",
+      "composition": "Horizon low across the frame, the round lake a small bright oval left of center on the plateau, streaked clouds filling the upper 55 percent of the frame",
+      "motion_elements": "the wind-ruffled lake surface and the thin high clouds",
+      "tags": {
+        "time": "day",
+        "palette": "slate blue",
+        "comp": "big-sky",
+        "anchor": "plateau-tarn",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "hw-w-13",
+      "subject": "A narrow gap between two weathered granite tor stacks on a summit plateau, old snow lying in the gap and a wide brown moorland basin with a winding peat stream beyond",
+      "lens": "24mm lens at f/8",
+      "look": "dawn",
+      "composition": "Rough granite stacks fill the left and right edges of the frame, the snowy gap in the lower middle opening onto the moorland basin and its stream in the center",
+      "motion_elements": "the peat stream and thin drifting cloud over the basin",
+      "tags": {
+        "time": "dawn",
+        "palette": "slate blue",
+        "comp": "natural-frame",
+        "anchor": "tor",
+        "season": "late-snow"
+      }
+    },
+    {
+      "id": "hw-w-14",
+      "subject": "A high moorland basin in autumn with a peaty brook looping across the floor, purple-brown heather, gray boulders and pine-dotted hills beyond",
+      "lens": "35mm lens at f/8",
+      "look": "golden",
+      "composition": "Eye-level across the basin from its edge, the brook looping horizontally through the middle ground, a band of heather in front and the hills along the horizon",
+      "motion_elements": "the flowing brook and the heather",
+      "tags": {
+        "time": "golden",
+        "palette": "muted gold",
+        "comp": "across",
+        "anchor": "stream-meander",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-w-15",
+      "subject": "A faint grassy footpath winding down a rounded hill to a wide saddle, a thin uneven dusting of first snow lying in patches with plenty of golden grass showing through everywhere, in low golden sun",
+      "lens": "24mm lens at f/8",
+      "look": "golden",
+      "composition": "From the hilltop looking down about 35 degrees, the path curving from the lower left down to the saddle in the middle ground, rounded snowy hills beyond",
+      "motion_elements": "the high drifting clouds and the grass tips in the snow",
+      "tags": {
+        "time": "golden",
+        "palette": "muted gold",
+        "comp": "overlook",
+        "anchor": "ridge-trail",
+        "season": "early-snow"
+      }
+    },
+    {
+      "id": "hw-w-16",
+      "subject": "A dry summer plateau of pale golden tussock grass, a big tussock near the camera, a flat open expanse and a long escarpment under fair-weather cumulus",
+      "lens": "16mm lens at f/8",
+      "look": "day",
+      "composition": "Camera at ground level, the large tussock filling the lower left third, the flat plateau stretching behind it and the escarpment along the horizon",
+      "motion_elements": "the tussock blades and the cumulus clouds",
+      "tags": {
+        "time": "day",
+        "palette": "muted gold",
+        "comp": "low-foreground",
+        "anchor": "tussock",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "hw-w-17",
+      "subject": "A row of rounded summits capped with the first snow above brown autumn-worn slopes, the snow line sharp across the hills and low cloud drifting along it",
+      "lens": "85mm lens at f/8",
+      "look": "overcast",
+      "composition": "Medium telephoto view with no foreground, compressing the summits into overlapping domes, the snow line running horizontally across all of them",
+      "motion_elements": "the low cloud along the snow line",
+      "tags": {
+        "time": "overcast",
+        "palette": "slate blue",
+        "comp": "tele-layers",
+        "anchor": "rounded-summits",
+        "season": "early-snow"
+      }
+    },
+    {
+      "id": "hw-w-18",
+      "subject": "A broad plateau rim with patches of old snow under a huge pale dawn sky with long rows of high wave clouds, low rounded hills along the horizon",
+      "lens": "16mm lens at f/8",
+      "look": "dawn",
+      "composition": "The hill horizon low in the frame, a thin strip of snowy rim along the bottom, the rows of high clouds filling more than half the frame",
+      "motion_elements": "the rows of high clouds drifting across the sky",
+      "tags": {
+        "time": "dawn",
+        "palette": "slate blue",
+        "comp": "big-sky",
+        "anchor": "wave-clouds",
+        "season": "late-snow"
+      }
+    },
+    {
+      "id": "hw-w-19",
+      "subject": "Autumn larches in gold needles at the edge of a high plateau, tawny grass underfoot and a broad valley with hazy far ridges beyond",
+      "lens": "35mm lens at f/8",
+      "look": "golden",
+      "composition": "Golden larch trunks and hanging branches fill the left and right edges, the open valley and distant ridges seen through the gap in the center",
+      "motion_elements": "the larch branches and the tawny grass",
+      "tags": {
+        "time": "golden",
+        "palette": "muted gold",
+        "comp": "natural-frame",
+        "anchor": "larch-stand",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-w-20",
+      "subject": "A long open upland glen with a pale river winding along its floor between dry summer grass slopes and low cloud grazing the rounded tops",
+      "lens": "28mm lens at f/8",
+      "look": "overcast",
+      "composition": "Looking straight down the length of the glen from its head, the river leading from the bottom center toward the far end, slopes rising on both sides",
+      "motion_elements": "the river and the low cloud",
+      "tags": {
+        "time": "overcast",
+        "palette": "deep green",
+        "comp": "axis",
+        "anchor": "glen-floor",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "hw-w-21",
+      "subject": "A wet late-winter treeline shelf with a band of low wind-shaped krummholz pines, melting snow patches, meltwater puddles and clouds breaking over a far ridge",
+      "lens": "28mm lens at f/8",
+      "look": "after-rain",
+      "composition": "Eye-level across the shelf, the dark krummholz band along the middle ground, snow patches and puddles in front and the ridge beyond",
+      "motion_elements": "the breaking clouds and the ripples on the puddles",
+      "tags": {
+        "time": "after-rain",
+        "palette": "deep green",
+        "comp": "across",
+        "anchor": "krummholz",
+        "season": "late-snow"
+      }
+    },
+    {
+      "id": "hw-w-22",
+      "subject": "A chain of three small tarns on a stepped plateau in autumn, rust grass and dark rock between them and mist rising from the valley beyond",
+      "lens": "24mm lens at f/8",
+      "look": "after-rain",
+      "composition": "From a rocky knoll looking down about 40 degrees, the tarns stepping from the lower left toward the center, the misty valley filling the top of the frame",
+      "motion_elements": "the rising mist and the tarn surfaces",
+      "tags": {
+        "time": "after-rain",
+        "palette": "slate blue",
+        "comp": "overlook",
+        "anchor": "plateau-tarn",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-w-23",
+      "subject": "A frost-shattered boulder field on a high plateau, fresh snow in the cracks between the stones and the field fading away into fog",
+      "lens": "20mm lens at f/8",
+      "look": "misty",
+      "composition": "Camera low against a big lichen-covered boulder in the lower right third, the boulder field receding into fog across the middle and a faint ridge behind",
+      "motion_elements": "the drifting fog",
+      "tags": {
+        "time": "morning",
+        "palette": "gray mist",
+        "comp": "low-foreground",
+        "anchor": "boulder-field",
+        "season": "early-snow"
+      }
+    },
+    {
+      "id": "hw-w-24",
+      "subject": "Long rolling moorland hills in late summer, dry gold grass with sunlit and shadowed patches as rain clouds clear from the distance",
+      "lens": "135mm lens at f/8",
+      "look": "after-rain",
+      "composition": "Telephoto view with no foreground, compressing three rolling moor hills into overlapping curves banded with sun and cloud shadow",
+      "motion_elements": "the cloud shadows sliding over the hills",
+      "tags": {
+        "time": "after-rain",
+        "palette": "muted gold",
+        "comp": "tele-layers",
+        "anchor": "moorland",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "hw-w-25",
+      "subject": "A flat heather plateau in autumn bronze under a huge layered gray-blue overcast sky with one brighter band of light near the horizon",
+      "lens": "20mm lens at f/8",
+      "look": "overcast",
+      "composition": "Horizon very low, a thin band of bronze heather across the bottom quarter and the layered overcast clouds filling the rest of the frame",
+      "motion_elements": "the layered clouds and the heather",
+      "tags": {
+        "time": "overcast",
+        "palette": "gray mist",
+        "comp": "big-sky",
+        "anchor": "heather",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "hw-w-26",
+      "subject": "The rim of a long plateau escarpment dusted with new snow, the cliff edge curving away into the distance above a wide valley far below",
+      "lens": "20mm lens at f/8",
+      "look": "day",
+      "composition": "Standing near the rim looking along the escarpment edge as it curves away, the snowy plateau on the left and the drop with the valley on the right",
+      "motion_elements": "the drifting clouds over the valley",
+      "tags": {
+        "time": "day",
+        "palette": "slate blue",
+        "comp": "axis",
+        "anchor": "cliff-edge",
+        "season": "early-snow"
+      }
+    },
+    {
+      "id": "hw-w-27",
+      "subject": "A broad late-winter upland slope where snow patches are retreating, a low mat of dwarf willow twigs with silver buds near the camera, brown grass between the snow and a white rounded summit beyond",
+      "lens": "16mm lens at f/8",
+      "look": "day",
+      "composition": "Camera low beside the willow mat, which fills the lower left third of the frame, the patchy snow slope rising across the middle and the white summit on the horizon",
+      "motion_elements": "the willow twigs, the brown grass and the thin high clouds",
+      "tags": {
+        "time": "day",
+        "palette": "slate blue",
+        "comp": "low-foreground",
+        "anchor": "dwarf-willow",
+        "season": "late-snow"
+      }
+    }
+  ]
+}

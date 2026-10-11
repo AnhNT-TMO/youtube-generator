@@ -16,6 +16,7 @@ SETS = {
     'vla': 'Strings/Viola Section/susvib/*.wav',
     'vc': 'Strings/Cello Section/susvib/*.wav',
     'cb': 'Strings/Solo Contrabass/SusNV/*.wav',
+    'pizz': 'Strings/Solo Contrabass/Pizz/*.wav',
     'organ': 'Keys/Organ/Quiet/NT5_Man3*.wav',
     'pedal': 'Keys/Organ/Quiet/NT5_Pedal*.wav',
     'flute': 'Woodwinds/Flute/susNV/*.wav',
@@ -28,7 +29,7 @@ for name, pat in SETS.items():
     rows = []
     for f in sorted(glob.glob(f'{V}/{pat}')):
         y, sr = librosa.load(f, sr=44100, mono=True, duration=4.0)
-        f0, vflag, _ = librosa.pyin(y[int((0.05 if name in ('harp', 'glock') else 0.4) * sr):], fmin=30, fmax=4500 if name == 'glock' else 2100, sr=sr, frame_length=4096)
+        f0, vflag, _ = librosa.pyin(y[int((0.05 if name in ('harp', 'glock', 'pizz') else 0.4) * sr):], fmin=30, fmax=4500 if name == 'glock' else 2100, sr=sr, frame_length=4096)
         f0 = f0[vflag & np.isfinite(f0)]
         if len(f0) < 5:
             print('no pitch', f)

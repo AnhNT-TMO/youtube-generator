@@ -1,0 +1,408 @@
+{
+ "theme": "mountain-valleys/close",
+ "target": 26,
+ "defaults": {
+  "lens": "50mm lens at f/5.6",
+  "look": "day",
+  "camera": "slide",
+  "seconds": 10,
+  "tags": {
+   "place": "outdoor",
+   "scale": "close",
+   "category": "mountain-valleys",
+   "energy": "calm"
+  }
+ },
+ "shots": [
+  {
+   "id": "mv-c-01",
+   "subject": "Frost-tipped tussock grass on the rim of a mountain valley at the edge of winter, each blade edged in pale ice, about two meters from the camera.",
+   "look": "dawn",
+   "composition": "The camera tilts slightly down so the frosted grass fills the frame edge to edge, with only a thin band of the blue valley and a faint lit ridge at the very top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the frosted grass blades",
+   "tags": {
+    "comp": "texture-field",
+    "anchor": "frost-grass",
+    "season": "winter-edge",
+    "time": "dawn",
+    "palette": "cool blue"
+   },
+   "lens": "50mm lens at f/4"
+  },
+  {
+   "id": "mv-c-02",
+   "subject": "A single larch branch about two meters away on a mountain slope in autumn, its golden needles glowing in low sun from behind.",
+   "lens": "85mm lens at f/4",
+   "look": "golden",
+   "composition": "The backlit branch crosses the frame from the right edge, its needles rim-lit against the dark shaded valley slope behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the larch branch and its glowing needles",
+   "tags": {
+    "comp": "backlit",
+    "anchor": "larch-branch",
+    "season": "autumn",
+    "time": "golden",
+    "palette": "muted gold"
+   }
+  },
+  {
+   "id": "mv-c-03",
+   "subject": "A lone granite boulder covered in grey and deep olive-green lichen on a mountain shoulder in summer, short grass around it and mist drifting past.",
+   "lens": "35mm lens at f/4",
+   "look": "misty",
+   "composition": "The boulder sits in the left half of the frame about three meters away, with a slice of fir silhouettes dissolving into the drifting mist on the right. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the drifting mist and the short grass",
+   "tags": {
+    "comp": "hero-object",
+    "anchor": "lichen-boulder",
+    "season": "summer",
+    "time": "morning",
+    "palette": "gray mist"
+   }
+  },
+  {
+   "id": "mv-c-04",
+   "subject": "A shallow riffle of clear water sliding over smooth grey cobbles in a mountain stream in summer.",
+   "look": "overcast",
+   "composition": "Camera low at water level about two meters from the riffle, the water crossing the frame from left to right, the stony far bank and a slice of green slope at the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the sliding water",
+   "tags": {
+    "comp": "water-detail",
+    "anchor": "cobble-riffle",
+    "season": "summer",
+    "time": "overcast",
+    "palette": "slate gray"
+   },
+   "lens": "50mm lens at f/4"
+  },
+  {
+   "id": "mv-c-05b",
+   "subject": "A smooth rain-darkened grey boulder two meters away with a thin clear trickle of water running down a crack in its face into wet green heather at its foot, after summer rain; the stone surface is smooth and softly mottled with a few lichen patches, not grainy",
+   "lens": "85mm lens at f/2.8",
+   "look": "overcast",
+   "composition": "Looking at the boulder from about 30 degrees above, the wet rock face and its trickle filling most of the frame, wet heather along the bottom, a soft out-of-focus slice of a misty slope in the top edge. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the running rivulets",
+   "tags": {
+    "comp": "water-detail",
+    "anchor": "boulder-trickle",
+    "season": "summer",
+    "time": "after-rain",
+    "palette": "moss green"
+   }
+  },
+  {
+   "id": "mv-c-06",
+   "subject": "A stand of tall feathery wild grass seed heads on a sunny valley slope in summer, swaying in a light breeze.",
+   "look": "day",
+   "composition": "Eye-level view into the stand, the seed heads filling the frame at several distances from two to five meters, with a soft slice of a dark forested slope showing between them in the upper right. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the swaying grass seed heads",
+   "tags": {
+    "comp": "texture-field",
+    "anchor": "seed-grass",
+    "season": "summer",
+    "time": "day",
+    "palette": "deep green"
+   },
+   "lens": "85mm lens at f/2.8"
+  },
+  {
+   "id": "mv-c-07",
+   "subject": "The edge of a calm valley pool in early winter, sedge tufts dusted with first snow along the shore and thin mist sliding over the dark water.",
+   "look": "dawn",
+   "composition": "The shoreline runs diagonally from the lower left corner to the upper right, snowy sedge on one side and the dark misty water on the other. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the thin mist and the dark water surface",
+   "tags": {
+    "comp": "edge-line",
+    "anchor": "pool-sedge-edge",
+    "season": "early-snow",
+    "time": "dawn",
+    "palette": "slate blue"
+   },
+   "lens": "50mm lens at f/4"
+  },
+  {
+   "id": "mv-c-08",
+   "subject": "Wind-bent amber grass growing along the edge of a weathered schist slab on a valley flank on an autumn morning, lit from behind by the first low sun with pale mist in the valley beyond.",
+   "lens": "70mm lens at f/4",
+   "look": "dawn",
+   "composition": "Camera low behind the slab, the rim-lit grass tufts along its edge in the lower half of the frame against the pale misty valley beyond. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the wind-bent amber grass and the pale valley mist",
+   "tags": {
+    "comp": "backlit",
+    "anchor": "amber-grass",
+    "season": "autumn",
+    "time": "dawn",
+    "palette": "cool blue"
+   }
+  },
+  {
+   "id": "mv-c-09",
+   "subject": "A spruce branch beaded with water droplets at the edge of a mountain forest in autumn, a yellow birch behind it and cloud moving through the trees.",
+   "lens": "85mm lens at f/4",
+   "look": "misty",
+   "composition": "The branch reaches in from the left edge about two meters away, with a soft slice of the misty forest and yellow birch in the background. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the spruce branch and the moving cloud",
+   "tags": {
+    "comp": "hero-object",
+    "anchor": "spruce-branch",
+    "season": "autumn",
+    "time": "morning",
+    "palette": "gray mist"
+   }
+  },
+  {
+   "id": "mv-c-10",
+   "subject": "A small cascade slipping over a dark slate step covered in green moss, yellow birch leaves stuck on the wet stones around it in autumn.",
+   "look": "overcast",
+   "composition": "The cascade sits in the center of the frame about three meters away, its lip at eye level, with the stream bank and a grey slope soft behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the small cascade",
+   "tags": {
+    "comp": "water-detail",
+    "anchor": "moss-cascade",
+    "season": "autumn",
+    "time": "overcast",
+    "palette": "slate gray"
+   },
+   "lens": "50mm lens at f/4"
+  },
+  {
+   "id": "mv-c-11",
+   "subject": "The boundary between a thick carpet of wet dark olive moss and a smooth, dark, rain-wet slate slab with almost no surface texture, on a valley rim after summer rain, rainwater trickling along it.",
+   "lens": "85mm lens at f/2.8",
+   "look": "after-rain",
+   "composition": "The moss-rock line runs diagonally from the upper left corner to the lower right corner and fills the whole frame; only a small, completely blurred patch of green and cloud in the top corner hints at the valley. The main subject is one to three meters from the camera; anything behind it is only a soft, out-of-focus blur, never a sharp vista, river or horizon.",
+   "motion_elements": "the trickling rainwater and the cloud wisps",
+   "tags": {
+    "comp": "edge-line",
+    "anchor": "moss-rock-edge",
+    "season": "summer",
+    "time": "after-rain",
+    "palette": "moss green"
+   }
+  },
+  {
+   "id": "mv-c-12",
+   "subject": "A twisted dwarf pine on a rock ledge high above a valley in summer, its needles sunlit, with white clouds in the blue valley air.",
+   "lens": "70mm lens at f/4",
+   "look": "day",
+   "composition": "The pine sits in the right third of the frame about four meters away on its ledge, with the open valley air and clouds out of focus on the left. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the dwarf pine needles and the clouds",
+   "tags": {
+    "comp": "hero-object",
+    "anchor": "dwarf-pine",
+    "season": "summer",
+    "time": "day",
+    "palette": "slate blue"
+   }
+  },
+  {
+   "id": "mv-c-13",
+   "subject": "Russet heather and crowberry with cool dew around a lichen-spotted stone on a mountain shoulder in autumn.",
+   "lens": "35mm lens at f/5.6",
+   "look": "dawn",
+   "composition": "Looking down at about 70 degrees, the stone in the lower left and the heather filling the rest of the frame; no sky.",
+   "motion_elements": "the heather sprigs",
+   "tags": {
+    "comp": "top-down",
+    "anchor": "dew-heather",
+    "season": "autumn",
+    "time": "dawn",
+    "palette": "cool blue"
+   }
+  },
+  {
+   "id": "mv-c-14",
+   "subject": "Glacial meltwater rippling over pale gravel beside the melting edge of a snow patch in late spring, in low warm light.",
+   "look": "golden",
+   "composition": "Camera low beside the water, the ripples crossing the lower half of the frame, the snow edge in the right third and the grey moraine bank soft behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the rippling meltwater",
+   "tags": {
+    "comp": "water-detail",
+    "anchor": "meltwater-gravel",
+    "season": "late-snow",
+    "time": "golden",
+    "palette": "muted gold"
+   },
+   "lens": "50mm lens at f/4"
+  },
+  {
+   "id": "mv-c-15",
+   "subject": "A dark-mossed bank of dull olive fern fronds at the edge of a mountain forest in summer, mist drifting between the trunks behind.",
+   "look": "misty",
+   "composition": "The fern fronds fill the lower two thirds of the frame at eye level, with a soft slice of misty trunks in the upper third. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the fern fronds and the drifting mist",
+   "tags": {
+    "comp": "texture-field",
+    "anchor": "fern-bank",
+    "season": "summer",
+    "time": "morning",
+    "palette": "deep green"
+   },
+   "lens": "50mm lens at f/4"
+  },
+  {
+   "id": "mv-c-16",
+   "subject": "The edge of a melting snow patch on a grassy mountain slope in late spring, meltwater seeping out from under it into flattened grass.",
+   "lens": "35mm lens at f/4",
+   "look": "overcast",
+   "composition": "The snow edge runs diagonally across the frame from the left edge to the upper right, white snow above the line and wet green grass below it. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the seeping meltwater and the flattened grass",
+   "tags": {
+    "comp": "edge-line",
+    "anchor": "snow-patch-edge",
+    "season": "late-snow",
+    "time": "overcast",
+    "palette": "gray green"
+   }
+  },
+  {
+   "id": "mv-c-17",
+   "subject": "Frost-rimmed willow twigs at a stream edge at the start of winter, catching the first sun from behind, with mist rising off the water behind them.",
+   "lens": "70mm lens at f/4",
+   "look": "dawn",
+   "composition": "The backlit twigs fill the left half of the frame about two meters away, the rising mist glowing behind them on the right. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the rising mist and the willow twigs",
+   "tags": {
+    "comp": "backlit",
+    "anchor": "willow-twigs",
+    "season": "winter-edge",
+    "time": "dawn",
+    "palette": "cool blue"
+   }
+  },
+  {
+   "id": "mv-c-18",
+   "subject": "A shallow eddy at the edge of a mountain stream in autumn, a loose scatter of fallen larch needles and a few yellow birch leaves drifting unevenly on the dark clear water, the pebbles beneath softly blurred under the moving water, one smooth wet rounded boulder at the edge, its surface smooth and dark, not grainy",
+   "lens": "85mm lens at f/2.8",
+   "look": "golden",
+   "composition": "Looking down at about 70 degrees, the water and floating leaves fill most of the frame, the current passing along one side, the smooth wet boulder only in one corner; no sky.",
+   "motion_elements": "the circling leaves and the flowing water",
+   "tags": {
+    "comp": "top-down",
+    "anchor": "leaf-eddy",
+    "season": "autumn",
+    "time": "golden",
+    "palette": "muted gold"
+   }
+  },
+  {
+   "id": "mv-c-19",
+   "subject": "A silver weathered pine stump on a scree slope in late spring, old snow in a hollow beside it and grey cloud moving along the ridge behind.",
+   "look": "overcast",
+   "composition": "The stump stands in the center-left of the frame about three meters away, with a slice of the ridge and moving cloud in the background. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the moving cloud along the ridge",
+   "tags": {
+    "comp": "hero-object",
+    "anchor": "weathered-stump",
+    "season": "late-snow",
+    "time": "overcast",
+    "palette": "slate gray"
+   },
+   "lens": "50mm lens at f/4"
+  },
+  {
+   "id": "mv-c-20",
+   "subject": "A slope of grey scree lightly covered by the first snow, a few dark grass tufts poking through and low mist wisps sliding across it.",
+   "look": "misty",
+   "composition": "The snowy scree fills the frame from edge to edge at a slight downward angle, with the mist wisps crossing the upper half. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the mist wisps and the dark grass tufts",
+   "tags": {
+    "comp": "texture-field",
+    "anchor": "snowy-scree",
+    "season": "early-snow",
+    "time": "morning",
+    "palette": "gray mist"
+   },
+   "lens": "50mm lens at f/4"
+  },
+  {
+   "id": "mv-c-21",
+   "subject": "A dark mountain stream flowing between thin shelves of clear ice at the edge of winter, frosted stones on the bank.",
+   "look": "dawn",
+   "composition": "Camera low on the bank about two meters away, the open water running through the center of the frame between the ice shelves, a frosted slope soft behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the dark flowing water",
+   "tags": {
+    "comp": "water-detail",
+    "anchor": "ice-edged-stream",
+    "season": "winter-edge",
+    "time": "dawn",
+    "palette": "cool blue"
+   },
+   "lens": "50mm lens at f/4"
+  },
+  {
+   "id": "mv-c-22",
+   "subject": "Snow-dusted dwarf birch twigs with a few last yellow leaves on a valley slope in early winter, lit from behind by low sun.",
+   "lens": "85mm lens at f/4",
+   "look": "golden",
+   "composition": "The rim-lit twigs fill the lower half of the frame against a soft dark slope, the low sun just outside the top corner. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the dwarf birch twigs and their last leaves",
+   "tags": {
+    "comp": "backlit",
+    "anchor": "birch-twigs",
+    "season": "early-snow",
+    "time": "golden",
+    "palette": "muted gold"
+   }
+  },
+  {
+   "id": "mv-c-23",
+   "subject": "The calm edge where shallow, glass-clear slate-green river water meets a bank of smooth, matte, rounded pale pebbles in summer; the stones on the river bed are visible through the still clear water, the pebbles soft-detailed and dull, never shiny or crinkled",
+   "lens": "70mm lens at f/4",
+   "look": "day",
+   "composition": "The water-gravel line runs diagonally from the lower right corner to the upper left, the flowing water on one side and dry gravel on the other. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the flowing milky pale grey-green water",
+   "tags": {
+    "comp": "edge-line",
+    "anchor": "turquoise-gravel-edge",
+    "season": "summer",
+    "time": "day",
+    "palette": "slate blue"
+   }
+  },
+  {
+   "id": "mv-c-24",
+   "subject": "A twisted dwarf juniper growing from a wet moraine boulder after autumn rain, muted rust bilberry leaves around its base and torn cloud drifting along the dark slope behind.",
+   "look": "after-rain",
+   "composition": "The juniper and boulder fill the left half of the frame about three meters away, with a slice of the dark slope and drifting cloud on the right. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the drifting cloud and the bilberry leaves",
+   "tags": {
+    "comp": "hero-object",
+    "anchor": "moraine-juniper",
+    "season": "autumn",
+    "time": "after-rain",
+    "palette": "moss green"
+   },
+   "lens": "50mm lens at f/4"
+  },
+  {
+   "id": "mv-c-25",
+   "subject": "One small clear stream running between three or four rounded stones covered in dark wet moss on a valley floor in summer; the water is smooth and softly blurred by motion as in a quarter-second exposure, never crinkled or glossy",
+   "lens": "50mm lens at f/5.6",
+   "look": "overcast",
+   "composition": "Looking down at about 45 degrees from two meters away, the stream crossing the frame diagonally between the mossy stones; soft overcast light, gentle natural detail; no sky.",
+   "motion_elements": "the running water between the stones",
+   "tags": {
+    "comp": "top-down",
+    "anchor": "mossy-braid",
+    "season": "summer",
+    "time": "day",
+    "palette": "deep green"
+   }
+  },
+  {
+   "id": "mv-c-26",
+   "subject": "A field of purple heather in bloom on a valley slope after summer rain, droplets on the flowers and a low cloud lifting off the slope above.",
+   "look": "after-rain",
+   "composition": "Eye-level view across the heather, which fills the lower three quarters of the frame, with a slice of the lifting cloud along the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the heather sprigs and the lifting cloud",
+   "tags": {
+    "comp": "texture-field",
+    "anchor": "wet-heather",
+    "season": "summer",
+    "time": "after-rain",
+    "palette": "moss green"
+   },
+   "lens": "50mm lens at f/4"
+  }
+ ]
+}

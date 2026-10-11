@@ -73,7 +73,7 @@ def main():
     ap.add_argument("out")
     ap.add_argument("--preset", action="append",
                     help="config JSON layered over config.DEFAULTS; repeat for more layers "
-                         "(channel video.json, then the idea's)")
+                         "(channel video.json, then the album's)")
     ap.add_argument("--seconds", type=float, help="render only this much (not seamless)")
     ap.add_argument("--start", type=float, default=0.0, help="loop time to start at")
     ap.add_argument("--frame", type=float, help="write the single frame at this time as PNG")

@@ -114,7 +114,9 @@ to video are not allowed to monetize"*; spam policy cấm AI làm hàng loạt v
 
 ## 7. Đầu ra
 
-`montage.json` trong thư mục album:
+`montage.json` + `clips.txt` + `timeline.txt` trong thư mục album `channel/<ch>/albums/<tên>/` (`montage.py pick|preview|render <tên> --channel <ch>`). Mac giữ bản gốc; video 4K trên server dựng lại được bất cứ lúc nào từ các file này + kho 1080p + master audio của album.
+
+`montage.json`:
 - `mood`, `cast` (id), `hero` (id);
 - `sequence`: mỗi lượt `{clip, flip, start_s}`;
 - `checks`: kết quả từng luật ở §3–§4.

@@ -1,1 +1,3 @@
 Read `CLAUDE.md` for the repo's production rules. Codex project skills are in `.agents/skills/`; their source of truth is `.claude/skills/`. Run `.agents/sync-skills.sh` after changing a source skill.
+
+Read `.agents/knowledge/README.md` for shared production knowledge and the route to album/Short handoffs. Claude memory imported into `.claude/knowledge/memory/` is mirrored to `.agents/knowledge/memory/`; current channel contracts and approved album briefs take precedence over historical memory. Keep reusable knowledge in repo files, not only in an assistant's private memory. Run `.agents/sync-skills.sh --check` to detect drift.

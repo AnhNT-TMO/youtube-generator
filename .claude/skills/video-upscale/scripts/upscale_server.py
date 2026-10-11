@@ -15,6 +15,7 @@ import argparse
 import json
 import math
 import os
+import re
 import shutil
 import signal
 import subprocess
@@ -41,10 +42,25 @@ SHARED_MODELS = [os.path.expanduser("~/thumbnail-prompt/models/seedvr2")]
 TORCH = ["torch==2.11.0+cu128", "torchvision==0.26.0+cu128"]
 DEPS = ["safetensors", "numpy", "tqdm", "psutil", "einops", "omegaconf>=2.3.0", "diffusers>=0.33.1", "peft>=0.17.0",
         "rotary_embedding_torch>=0.5.3", "opencv-python-headless", "gguf", "matplotlib", "pillow"]
-W, H = 1920, 1080
-PREPEND, OVERLAP, MAX_BATCH = 4, 4, 113
-VAE_MAX_MEM_GB = 8
-GPU_MEM_NEED_GB = 90
+PREPEND, OVERLAP = 4, 4
+OFFLOAD_CPU = ["--dit_offload_device", "cpu", "--vae_offload_device", "cpu", "--tensor_offload_device", "cpu"]
+TILED = ["--vae_encode_tiled", "--vae_decode_tiled"]
+PROFILES = {
+    "shared": dict(s_clip=210, w=1920, h=1080, max_batch=77, vae_mem=0.5, vram_gb=29, guard_gb=40, library="video_sources",
+                   flags=OFFLOAD_CPU + TILED + ["--blocks_to_swap", "16"]),
+    "low": dict(s_clip=240, w=1920, h=1080, max_batch=45, vae_mem=0.5, vram_gb=24, guard_gb=40, library="video_sources",
+                flags=OFFLOAD_CPU + TILED),
+    "full": dict(s_clip=140, w=1920, h=1080, max_batch=113, vae_mem=8, vram_gb=74, guard_gb=90, library="video_sources",
+                 flags=["--dit_offload_device", "none", "--vae_offload_device", "none", "--tensor_offload_device", "none",
+                        "--compile_vae"]),
+    "2k": dict(s_clip=386, w=2560, h=1440, max_batch=41, vae_mem=0.5, vram_gb=27, guard_gb=40, library="video_sources_2k",
+               flags=OFFLOAD_CPU + TILED + ["--blocks_to_swap", "24"]),
+}
+DEFAULT_PROFILE = "shared"
+GUARD_GPU_MEM_GB = PROFILES[DEFAULT_PROFILE]["guard_gb"]
+P = PROFILES[DEFAULT_PROFILE]
+W, H, MAX_BATCH = P["w"], P["h"], P["max_batch"]
+
 TIER_BREAK = "---"
 GUARD_DIR = os.path.expanduser("~/youtube-guard")
 GUARD_DEFAULT_TEMP = 88
@@ -64,9 +80,14 @@ PATCHES = [
      "        if context_count > 0:\n            result = result[context_count:]\n"
      "        if chunk_idx == 1 and args.prepend_frames > 0 and not log_prefix:\n"
      "            result = result[args.prepend_frames:]\n"),
-    ("configs_3b/main.yaml", "conv_max_mem: 0.5", f"conv_max_mem: {VAE_MAX_MEM_GB}"),
-    ("configs_3b/main.yaml", "norm_max_mem: 0.5", f"norm_max_mem: {VAE_MAX_MEM_GB}"),
 ]
+
+
+def use_profile(name):
+    global P, W, H, MAX_BATCH, LIBRARY
+    P = PROFILES[name]
+    W, H, MAX_BATCH = P["w"], P["h"], P["max_batch"]
+    LIBRARY = os.path.expanduser("~/" + P["library"])
 
 
 def sh(cmd, **kw):
@@ -126,6 +147,12 @@ def apply_patches():
             sys.exit(f"bản vá không khớp {rel}: repo khác commit {REPO_COMMIT}?")
         open(p, "w").write(text.replace(old, new))
         print(f"vá {rel}", flush=True)
+    p = os.path.join(REPO, "configs_3b/main.yaml")
+    text = open(p).read()
+    fixed = re.sub(r"^(\s*(?:conv|norm)_max_mem): [0-9.]+$", lambda m: f"{m.group(1)}: {P['vae_mem']}", text, flags=re.M)
+    if fixed != text:
+        open(p, "w").write(fixed)
+        print(f"VAE conv/norm_max_mem → {P['vae_mem']} GB", flush=True)
 
 
 def cmd_setup(_):
@@ -161,11 +188,11 @@ def cmd_setup(_):
             download(HF + m, out)
     gp = os.path.join(GUARD_DIR, "guard.json")
     g = json.load(open(gp)) if os.path.exists(gp) else {}
-    if g.get("gpu_mem_gb", 60) < GPU_MEM_NEED_GB:
-        g["gpu_mem_gb"] = GPU_MEM_NEED_GB
+    if g.get("gpu_mem_gb", 60) != GUARD_GPU_MEM_GB:
+        g["gpu_mem_gb"] = GUARD_GPU_MEM_GB
         os.makedirs(GUARD_DIR, exist_ok=True)
         json.dump(g, open(gp, "w"))
-        print(f"youtube-guard: gpu_mem_gb → {GPU_MEM_NEED_GB} (job dùng ~74 GB VRAM)", flush=True)
+        print(f"youtube-guard: gpu_mem_gb → {GUARD_GPU_MEM_GB} (profile {DEFAULT_PROFILE} dùng ~{P['vram_gb']} GB VRAM)", flush=True)
     if g.get("gpu_temp_c", GUARD_DEFAULT_TEMP) < GUARD_TEMP_NEED_C:
         g["gpu_temp_c"] = GUARD_TEMP_NEED_C
         json.dump(g, open(gp, "w"))
@@ -292,13 +319,16 @@ class Run:
         self.say(f"trước cụm {n}: GPU chỉ trống {free:.0f} GB (< {self.a.need_free_gb} GB), người khác đang dùng: chờ")
         self.save(phase="waiting_gpu", free_gb=round(free, 1))
         t0, ok = time.time(), 0
-        while not self.stopping and ok < 2:
+        while not self.stopping and ok < 2 and not self.past_deadline():
             time.sleep(self.a.gpu_poll)
             free = gpu_free_gb()
             ok = ok + 1 if free >= self.a.need_free_gb else 0
         self.save(phase="running", free_gb=round(free, 1), waited_gpu_seconds=round(self.state.get("waited_gpu_seconds", 0) + time.time() - t0))
         if not self.stopping:
             self.say(f"GPU trống {free:.0f} GB sau {time.time() - t0:.0f} s chờ: chạy tiếp")
+
+    def past_deadline(self, extra=0):
+        return bool(self.a.until) and time.time() + extra > self.a.until
 
     def yield_to_unit(self, n):
         unit = self.a.yield_unit
@@ -346,14 +376,14 @@ class Run:
             lines.append(f"ffmpeg -nostdin -v error -y -threads 8 -i {sh_quote(os.path.join(SRC, rel))} -an -vf "
                          f"'scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{H}' "
                          f"-c:v libx264 -preset ultrafast -crf 0 -pix_fmt yuv420p {sh_quote(pre)}")
+        lines.append("export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True")
         lines.append(" ".join(sh_quote(x) for x in [
             PY, os.path.join(REPO, "inference_cli.py"), os.path.join(work, "in"), "--output", os.path.join(work, "out"),
             "--output_format", "mp4", "--video_backend", "ffmpeg", "--10bit", "--model_dir", MODEL_DIR,
             "--dit_model", DIT, "--resolution", str(H), "--max_resolution", str(W), "--batch_size", str(batch),
             "--uniform_batch_size", "--temporal_overlap", str(OVERLAP), "--prepend_frames", str(PREPEND),
             "--color_correction", "lab", "--input_noise_scale", "0", "--latent_noise_scale", "0",
-            "--dit_offload_device", "none", "--vae_offload_device", "none", "--tensor_offload_device", "none",
-            "--cache_dit", "--cache_vae", "--compile_vae"]))
+            "--cache_dit", "--cache_vae", *P["flags"]]))
         return "\n".join(lines)
 
     def run_chunk(self, n, items, batch):
@@ -402,15 +432,16 @@ class Run:
         if not os.path.exists(PY) or any(not os.path.exists(os.path.join(MODEL_DIR, m)) for m in MODELS):
             sys.exit("chưa setup: chạy `upscale.py setup`")
         g = guard_cfg()
-        if g["gpu_mem_gb"] < GPU_MEM_NEED_GB:
-            sys.exit(f"youtube-guard kill job > {g['gpu_mem_gb']} GB VRAM, cấu hình này dùng ~74 GB: "
-                     f"đặt \"gpu_mem_gb\": {GPU_MEM_NEED_GB} trong ~/youtube-guard/guard.json")
+        if g["gpu_mem_gb"] < P["guard_gb"]:
+            sys.exit(f"youtube-guard kill job > {g['gpu_mem_gb']} GB VRAM, profile {self.a.profile} dùng ~{P['vram_gb']} GB: "
+                     f"đặt \"gpu_mem_gb\": {P['guard_gb']} trong ~/youtube-guard/guard.json (CEO duyệt) hoặc dùng profile khác")
         self.pause_c = min(self.a.pause_c, g["gpu_temp_c"] - 2)
         self.resume_c = min(self.a.resume_c, self.pause_c - 5)
         self.start_c = min(self.a.start_c, self.resume_c)
         if self.pause_c < self.a.pause_c:
             self.say(f"youtube-guard kill ở {g['gpu_temp_c']} °C: hạ ngưỡng nghỉ xuống {self.pause_c} °C "
                      f"(chạy lại `upscale.py setup` để đặt guard {GUARD_TEMP_NEED_C} °C)")
+        apply_patches()
         signal.signal(signal.SIGTERM, self.stop)
         signal.signal(signal.SIGINT, self.stop)
         for d in (LIBRARY, WORK, LOG):
@@ -461,12 +492,21 @@ class Run:
             self.wait_for_free_gpu(n)
             if self.stopping:
                 break
+            spent = self.state.get("clip_seconds", 0)
+            per_clip = spent / self.state["done"] if self.state["done"] else self.a.est_clip_s
+            if self.past_deadline(per_clip * len(items)):
+                self.say(f"trước cụm {n}: không kịp xong trước {time.strftime('%Y-%m-%d %H:%M', time.localtime(self.a.until))} "
+                         f"(~{per_clip:.0f} s/clip × {len(items)}): dừng, lượt sau làm tiếp")
+                break
             if gpu_temp() > self.start_c:
                 self.say(f"trước cụm {n}: chờ GPU ≤ {self.start_c} °C")
                 rested = self.cool_down(self.start_c)
                 self.say(f"nghỉ {rested:.0f} s")
             self.save(chunk={"n": n, "of": len(chunks), "batch": batch, "clips": [r for r, _ in items]})
+            t_chunk = time.time()
             ok, bad, oom = self.run_chunk(n, items, batch)
+            if ok:
+                self.save(clip_seconds=round(self.state.get("clip_seconds", 0) + time.time() - t_chunk))
             if oom:
                 time.sleep(self.a.gpu_poll)
                 continue
@@ -478,7 +518,7 @@ class Run:
                 break
             if self.a.rest and queue:
                 time.sleep(self.a.rest)
-        self.save(phase="stopped" if self.stopping else "finished")
+        self.save(phase="stopped" if self.stopping else "deadline" if self.past_deadline() else "finished")
 
 
 def drop_source(rel):
@@ -496,10 +536,14 @@ def sh_quote(s):
 
 
 def cmd_run(a):
+    use_profile(a.profile)
+    a.need_free_gb = a.need_free_gb or P["vram_gb"] + 5
+    a.est_clip_s = a.est_clip_s or P["s_clip"]
     Run(a).main()
 
 
-def cmd_status(_):
+def cmd_status(a):
+    use_profile(a.profile)
     st = json.load(open(STATUS)) if os.path.exists(STATUS) else {}
     alive = st.get("pid") and os.path.exists(f"/proc/{st['pid']}")
     st["master_alive"] = bool(alive)
@@ -522,11 +566,15 @@ def main():
     r.add_argument("--per-run", type=int, default=10, help="số clip mỗi lần nạp model")
     r.add_argument("--pause-c", type=int, default=83, help="nhiệt độ GPU cho cụm nghỉ")
     r.add_argument("--resume-c", type=int, default=70, help="nhiệt độ GPU cho chạy lại")
-    r.add_argument("--start-c", type=int, default=60, help="cụm mới chỉ bắt đầu khi GPU ≤ mức này")
+    r.add_argument("--start-c", type=int, default=70, help="cụm mới chỉ bắt đầu khi GPU ≤ mức này")
     r.add_argument("--rest", type=int, default=0, help="giây nghỉ giữa hai cụm")
-    r.add_argument("--poll", type=float, default=3, help="giây giữa hai lần đọc nhiệt độ")
+    r.add_argument("--poll", type=float, default=1, help="giây giữa hai lần đọc nhiệt độ")
     r.add_argument("--list", help="file: một đường dẫn tương đối trong src/ mỗi dòng, theo thứ tự ưu tiên")
-    r.add_argument("--need-free-gb", type=float, default=80, help="cụm chỉ bắt đầu khi GPU trống ≥ mức này (GB); thiếu = người khác đang dùng, chờ")
+    r.add_argument("--until", type=float, default=0, help="epoch giây: không bắt đầu cụm nào không kịp xong trước mốc này (0 = không hạn)")
+    r.add_argument("--est-clip-s", type=float, default=0, help="ước tính giây/clip khi chưa có cụm nào xong (để so với --until; 0 = số đo của profile)")
+    r.add_argument("--profile", choices=PROFILES, default=DEFAULT_PROFILE,
+                   help="bộ config đã đo (references/benchmark.md): shared ≤30 GB 1080p, low ~24 GB, full 74 GB nhanh nhất, 2k 2560×1440 → ~/video_sources_2k")
+    r.add_argument("--need-free-gb", type=float, default=0, help="cụm chỉ bắt đầu khi GPU trống ≥ mức này (GB); thiếu = người khác đang dùng, chờ")
     r.add_argument("--gpu-poll", type=float, default=60, help="giây giữa hai lần kiểm VRAM trống khi chờ")
     r.add_argument("--yield-unit", default="montage-render",
                    help="sau khi xong clip tầng 1 (trước dòng --- trong --list), chờ unit này (render video album) xong rồi mới chạy tầng sau")
@@ -535,7 +583,9 @@ def main():
                    help="giữ bản gốc trong src/ sau khi upscale đạt (mặc định xóa)")
     r.add_argument("--cpu-quota", type=int, default=1600, help="CPUQuota của scope mỗi cụm (%%)")
     r.set_defaults(fn=cmd_run)
-    sub.add_parser("status").set_defaults(fn=cmd_status)
+    st = sub.add_parser("status")
+    st.add_argument("--profile", choices=PROFILES, default=DEFAULT_PROFILE)
+    st.set_defaults(fn=cmd_status)
     a = ap.parse_args()
     a.fn(a)
 

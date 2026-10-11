@@ -1,0 +1,138 @@
+{
+  "theme": "common-room/amber",
+  "target": 10,
+  "defaults": {
+    "lens": "35mm lens at f/5.6",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "indoor",
+      "scale": "mid",
+      "category": "amber"
+    }
+  },
+  "shots": [
+    {
+      "id": "cra-01",
+      "subject": "A cozy low sitting room under the eaves of an old stone castle near the kitchens on Christmas night: a low ceiling of honey-coloured wooden beams, round wooden windows at ground level with snow piled outside, squashy yellow armchairs and black-and-yellow cushions, a big brick fireplace with a fire, copper pans and lamps, trailing green plants hanging from the beams, a Christmas tree with gold baubles",
+      "composition": "Wide view across the low room; the fireplace glows at center, the round windows along the left wall, the tree at right, open floor and a plain mustard rug in front.",
+      "look": "candle-night",
+      "motion_elements": "the fire, the tree lights and the candle flames in the copper lamps",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cra-02",
+      "subject": "A big squashy yellow sofa facing a brick fireplace in a cozy low room under the eaves of an old castle on Christmas night: a crackling fire, a copper kettle on the hearth, an evergreen garland with dried orange slices and yellow ribbons on the mantel; two young people in long black wool cloaks and knitted yellow-and-black striped scarves sit on the sofa facing the fire, seen from behind, one with short curly brown hair, one with a blonde braid",
+      "composition": "Wide view from further back, behind the sofa a good distance back; the two students sit small in the middle, the fire is the bright center, open floor in the foreground.",
+      "look": "candle-night",
+      "motion_elements": "the crackling fire and the candle flames on the mantel",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cra-03",
+      "subject": "A round wooden window set low in the thick wall of a cozy earthy sitting room on a snowy Christmas afternoon: the window sits at ground level, soft grey daylight and fresh snow piled against the glass, potted herbs on the deep sill; one young person in a black wool robe and a knitted yellow-and-black striped scarf kneels on a cushioned bench looking out at the snow, seen from behind, with a chestnut ponytail; honey-coloured wood panelling and a small fire glowing to the left",
+      "composition": "Wide view from further back in the middle of the room toward the round window; the student is small at center, well under a quarter of the frame height, the fire at the left edge.",
+      "look": "interior-day",
+      "motion_elements": "the fire in the hearth and the candle flame on the sill",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cra-04",
+      "subject": "A brick hearth in a cozy low earthy sitting room on Christmas night: a large copper kettle steaming on an iron hook over a bright fire, copper pans hanging on the wall, a garland of evergreen, dried orange slices and cinnamon sticks along the wooden mantel, two lit beeswax candles in brass holders, a basket of logs and a plain yellow rug",
+      "composition": "Close view of the hearth from a few steps back; the fire and kettle at center, the garland across the top, the empty rug at the bottom.",
+      "look": "candle-night",
+      "motion_elements": "the fire and the candle flames",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "close"
+      }
+    },
+    {
+      "id": "cra-05",
+      "subject": "Looking through a round honey-coloured wooden doorway into a cozy low sitting room near the castle kitchens at dusk on Christmas Eve: the round door stands open, a wreath with a yellow ribbon hung on it, beyond it yellow armchairs, a fire glowing in a brick hearth, copper lamps with candle flames, a decorated tree, and small round windows glowing deep blue with twilight snow",
+      "composition": "Wide view from the earthy passage, the round doorway framing the warm room; the hearth sits at center beyond the door, the passage floor is open in front.",
+      "look": "candle-night",
+      "motion_elements": "the fire in the hearth and the candle flames in the copper lamps",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cra-06",
+      "subject": "A black-and-yellow striped armchair beneath hanging trailing plants in a cozy low sitting room under the eaves on Christmas night: a copper lamp with a candle flame on a little wooden side table, a teacup steaming beside it, shelves of potted plants on the honey-coloured wall; one young person in a black wool cloak and a knitted yellow-and-black striped scarf sits in the armchair reading, seen from behind, with short straight light-brown hair",
+      "composition": "Wide view from further back, behind and slightly to the side of the armchair, a good distance back; the reader's head shows small above the chair back, the plants and lamp around.",
+      "look": "candle-night",
+      "motion_elements": "the candle flame in the lamp",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cra-07",
+      "subject": "A corner of a cozy earthy sitting room on Christmas night: wooden shelves crowded with potted plants in terracotta pots, copper watering cans and jars of dried flowers, a little round table with a plate of mince pies and a teapot with steam rising, lit beeswax candles in brass holders, a small round window with snow on the sill and a sprig of holly",
+      "composition": "Medium view of the corner from a few steps away; the table and candles in the middle, the shelves rising behind, nothing close to the lens.",
+      "look": "candle-night",
+      "motion_elements": "the candle flames",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cra-08",
+      "subject": "A long honey-coloured wooden table in a cozy low room near the castle kitchens on Christmas night: a row of lit candles, a plate of gingerbread, a big teapot and mugs, a centrepiece of evergreen, pinecones and yellow ribbon; two young people in black wool robes and knitted yellow-and-black striped scarves sit at the far side of the table facing a brick fireplace, seen from behind, one in a knitted green wool hat, one with a dark bob",
+      "composition": "Wide view from far back behind the students, across an open stretch of floor or ground down the table; they sit small in the middle distance, the fire glows beyond them, open floor in front.",
+      "look": "candle-night",
+      "motion_elements": "the candle flames on the table and the fire in the hearth",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cra-09",
+      "subject": "A Christmas tree in a cozy low sitting room under wooden beams on Christmas night: decorated with yellow ribbons, gold baubles, dried orange slices, small bundles of dried flowers and small warm candle-like lights, gifts wrapped in plain brown paper with yellow string at its foot, trailing plants and copper lamps hanging from the beams around it, firelight from a brick hearth on the honey-coloured walls",
+      "composition": "Medium view from a low angle; the tree fills the center, the hearth glow at the left edge, open floor and a plain rug in the foreground.",
+      "look": "candle-night",
+      "motion_elements": "the tree lights, the candle flames in the copper lamps and the firelight",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "cra-10",
+      "subject": "A cozy low sitting room under the eaves of an old stone castle at blue-hour twilight on Christmas Eve: a row of small round windows at ground level glowing deep blue with snow piled against them, the room lit warm by copper lamps with candle flames and a fire in a brick hearth, yellow armchairs and black-and-yellow cushions, honey-coloured beams hung with plants and an evergreen garland",
+      "composition": "Low wide view from near the floor across the room; the blue round windows run across the back wall, the warm hearth to the right, open floor in front.",
+      "look": "candle-night",
+      "motion_elements": "the fire in the hearth and the candle flames in the copper lamps",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none",
+        "scale": "vista"
+      }
+    }
+  ]
+}

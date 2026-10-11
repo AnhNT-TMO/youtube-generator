@@ -14,6 +14,7 @@ REPO = SKILL.parents[2]
 GUARD = REPO / ".claude/skills/pm-production/scripts/server_guard/guard.sh"
 MEASURE_VERSION = 1
 SKIP_FAMILIES = {"cozy-loop"}
+LIBRARY_ROOT = "video_sources"
 
 
 def env():
@@ -31,9 +32,12 @@ def env():
     return cfg
 
 
+def ssh_args(cfg):
+    return ["ssh", "-i", cfg["VM_KEY"], "-o", "BatchMode=yes", "-o", "ConnectTimeout=10", cfg["VM_REMOTE"]]
+
+
 def ssh(cfg, cmd, check=True):
-    return subprocess.run(["ssh", "-i", cfg["VM_KEY"], "-o", "BatchMode=yes", "-o", "ConnectTimeout=10",
-                           cfg["VM_REMOTE"], cmd], check=check)
+    return subprocess.run([*ssh_args(cfg), cmd], check=check)
 
 
 def guarded(cfg, cmd):
@@ -71,9 +75,7 @@ def accepted(sdir):
         v = c.get("video") or {}
         if v.get("status") != "ok":
             continue
-        mp4 = card.with_name(v.get("file") or f"{card.stem}.mp4")
-        if mp4.exists():
-            yield card, c, mp4
+        yield card, c, card.with_name(v.get("file") or f"{card.stem}.mp4")
 
 
 def clip_id(card, sdir):
@@ -87,7 +89,28 @@ def src_stamp(mp4):
 
 def is_fresh(c, mp4):
     m = c.get("measure") or {}
-    return m.get("v") == MEASURE_VERSION and m.get("src") == src_stamp(mp4) and "luma" in m
+    if m.get("v") != MEASURE_VERSION or "luma" not in m:
+        return False
+    return not mp4.exists() or m.get("src") == src_stamp(mp4)
+
+
+def stage(cfg, set_name, sdir, ids):
+    rel = f"stage/{set_name}"
+    dest = f"{cfg['VM_DIR']}/{rel}"
+    lib = f"$HOME/{LIBRARY_ROOT}/{library(set_name)}"
+    script = (f'd={shlex.quote(dest)}; lib="{lib}"; mkdir -p "$d"; while IFS= read -r c; do [ -n "$c" ] || continue; '
+              f'if [ -f "$lib/$c.mp4" ]; then mkdir -p "$d/$(dirname "$c")" && ln -sfn "$lib/$c.mp4" "$d/$c.mp4"; '
+              f'else echo "$c"; fi; done')
+    out = subprocess.run([*ssh_args(cfg), script], input="\n".join(ids) + "\n", capture_output=True, text=True, check=True)
+    missing = out.stdout.split()
+    local = [c for c in missing if (sdir / f"{c}.mp4").exists()]
+    if local:
+        with tempfile.TemporaryDirectory() as tmp:
+            lst = Path(tmp) / "files.txt"
+            lst.write_text("\n".join(f"{c}.mp4" for c in local) + "\n")
+            rsync(cfg, ["-W", f"--files-from={lst}", f"{sdir}/", f"{cfg['VM_REMOTE']}:{dest}/"])
+    print(f"staged {len(ids) - len(missing)} clips from ~/{LIBRARY_ROOT}/{library(set_name)}, {len(local)} pushed from the Mac")
+    return rel, [c for c in missing if c not in local]
 
 
 def cmd_setup(a):
@@ -123,20 +146,20 @@ def cmd_measure(a):
         todo = todo[:a.limit]
     current = [clip_id(card, sdir) for card, _, _ in clips]
     print(f"{len(clips)} accepted clips, {len(todo)} to measure")
-    job = {"measure": [[clip_id(card, sdir), str(mp4.relative_to(sdir))] for card, _, mp4 in todo],
+    root, gone = stage(cfg, a.set, sdir, [clip_id(card, sdir) for card, _, _ in todo]) if todo else (f"stage/{a.set}", [])
+    if gone:
+        print(f"warning: {len(gone)} clips neither upscaled on the server nor on the Mac, not measured: {', '.join(gone[:10])}")
+    job = {"measure": [[cid, f"{cid}.mp4"] for cid in (clip_id(card, sdir) for card, _, _ in todo) if cid not in gone],
            "current": current}
     stamp = dt.datetime.now().strftime("%Y%m%d-%H%M%S")
+    safe = a.set.replace("/", "__")
     with tempfile.TemporaryDirectory() as tmp:
-        lst = Path(tmp) / "files.txt"
-        lst.write_text("\n".join(str(mp4.relative_to(sdir)) for _, _, mp4 in todo) + "\n")
         jf = Path(tmp) / f"job-{stamp}.json"
         jf.write_text(json.dumps(job))
-        if todo:
-            rsync(cfg, ["-W", f"--files-from={lst}", f"{sdir}/", f"{cfg['VM_REMOTE']}:{rdir}/clips/{a.set}/"])
         rsync(cfg, [str(jf), str(SKILL / "scripts/measure_server.py"), f"{cfg['VM_REMOTE']}:{rdir}/scripts/"])
-    out = f"out/measure-{a.set}-{stamp}.json"
+    out = f"out/measure-{safe}-{stamp}.json"
     run = (f"cd {rdir} && OMP_NUM_THREADS=2 MEASURE_TORCH_THREADS={a.torch_threads} .venv/bin/python scripts/measure_server.py "
-           f"--root clips/{shlex.quote(a.set)} --list scripts/job-{stamp}.json --store state/{shlex.quote(a.set)}-embed.npz "
+           f"--root {shlex.quote(root)} --list scripts/job-{stamp}.json --store state/{shlex.quote(safe)}-embed.npz "
            f"--out {out} --jobs {a.jobs}")
     if guarded(cfg, run) != 0:
         sys.exit("server measure failed; check `guard.sh kills` before re-running")
@@ -156,7 +179,8 @@ def write_cards(sdir, clips, res):
         cid = clip_id(card, sdir)
         m = dict(c.get("measure") or {})
         if cid in res["measured"]:
-            m = {"v": MEASURE_VERSION, "src": src_stamp(mp4), "at": now, **res["measured"][cid]}
+            m = {"v": MEASURE_VERSION, "src": src_stamp(mp4) if mp4.exists() else m.get("src"), "at": now,
+                 **res["measured"][cid]}
         if not m:
             continue
         nb = res["neighbours"].get(cid)
@@ -188,8 +212,8 @@ def cmd_pick(a):
     clips, stale = load_clips(sdir)
     if stale:
         print(f"warning: {len(stale)} accepted clips not measured yet (run `montage.py measure`), left out")
-    root = REPO / a.root
-    out = root / a.name
+    out = montage_dir(a)
+    root = out.parent
     cast, hero, seq, checks, pool_n = pick.build(clips, sdir, root, a)
     out.mkdir(parents=True, exist_ok=True)
     doc = {
@@ -206,24 +230,31 @@ def cmd_pick(a):
     print(f"wrote {out / 'montage.json'} and {out / 'clips.txt'} ({len(cast)} clips)")
 
 
+def montage_dir(a):
+    if a.root:
+        return REPO / a.root / a.name
+    if a.channel:
+        return REPO / "channel" / a.channel / "albums" / a.name
+    sys.exit("give --channel <ch> (montage lives in channel/<ch>/albums/<name>/) or --root")
+
+
 def cmd_preview(a):
     cfg = env()
     rdir = cfg["VM_DIR"]
-    mdir = REPO / a.root / a.name
+    mdir = montage_dir(a)
     mj = mdir / "montage.json"
     if not mj.exists():
         sys.exit(f"no {mj}; run `montage.py pick {a.name}` first")
     doc = json.loads(mj.read_text())
     sdir = set_dir(doc["set"])
-    with tempfile.TemporaryDirectory() as tmp:
-        lst = Path(tmp) / "files.txt"
-        lst.write_text("\n".join(f"{c}.mp4" for c in doc["cast"]) + "\n")
-        rsync(cfg, ["-W", f"--files-from={lst}", f"{sdir}/", f"{cfg['VM_REMOTE']}:{rdir}/clips/{doc['set']}/"])
+    root, gone = stage(cfg, doc["set"], sdir, doc["cast"])
+    if gone:
+        sys.exit(f"{len(gone)} cast clips neither upscaled on the server nor on the Mac: {', '.join(gone[:10])}")
     rsync(cfg, [str(mj), str(SKILL / "scripts/preview_server.py"), f"{cfg['VM_REMOTE']}:{rdir}/scripts/"])
     ssh(cfg, f"mkdir -p {rdir}/out/{shlex.quote(a.name)}")
     rel = f"out/{a.name}/preview-{'first' + str(a.first) + '-' if a.first else ''}{a.height}p.mp4"
     run = (f"cd {rdir} && OMP_NUM_THREADS=4 .venv/bin/python scripts/preview_server.py --montage scripts/montage.json "
-           f"--root clips/{shlex.quote(doc['set'])} --out {shlex.quote(rel)} --height {a.height} "
+           f"--root {shlex.quote(root)} --out {shlex.quote(rel)} --height {a.height} "
            f"--xfade {doc['params']['xfade']}" + (" --labels" if a.labels else "") + (f" --first {a.first}" if a.first else ""))
     if guarded(cfg, run) != 0:
         sys.exit("server preview render failed; check `guard.sh kills`")
@@ -244,7 +275,7 @@ START_GUARD = ("systemctl --user is-active --quiet youtube-guard || systemd-run 
 def cmd_render(a):
     cfg = env()
     rdir = cfg["VM_DIR"]
-    mj = REPO / a.root / a.name / "montage.json"
+    mj = montage_dir(a) / "montage.json"
     if not mj.exists():
         sys.exit(f"no {mj}; run `montage.py pick {a.name}` first")
     doc = json.loads(mj.read_text())
@@ -317,7 +348,8 @@ def main():
     p = sub.add_parser("pick", help="choose the cast + order of a long video (MONTAGE.md) -> montage.json, clips.txt")
     p.add_argument("name", help="montage folder name, e.g. 001-christmas-eve-home")
     p.add_argument("--set", default="image_source")
-    p.add_argument("--root", default="production/montage", help="repo-relative folder holding every montage")
+    p.add_argument("--channel", help="album folder channel/<ch>/albums/<name>/ holds montage.json + clips.txt")
+    p.add_argument("--root", help="repo-relative folder holding every montage, instead of the channel's albums/")
     p.add_argument("--lead", required=True, help="lead family, or two adjacent ones joined by + (e.g. nature+travel)")
     p.add_argument("--mood", default="eve", choices=["eve", "indoor", "town", "winter", "morning"])
     p.add_argument("--cast", type=int, default=200)
@@ -330,7 +362,8 @@ def main():
     p.set_defaults(fn=cmd_pick)
     p = sub.add_parser("preview", help="render a silent low-res review video of montage.json on the server + timeline.txt")
     p.add_argument("name")
-    p.add_argument("--root", default="production/montage")
+    p.add_argument("--channel", help="album folder channel/<ch>/albums/<name>/")
+    p.add_argument("--root")
     p.add_argument("--height", type=int, default=720)
     p.add_argument("--labels", action="store_true", help="burn clip id into the corner")
     p.add_argument("--first", type=int, help="render only the first N slots (e.g. the hero opening)")
@@ -338,12 +371,12 @@ def main():
     p = sub.add_parser("render", help="final video on the server from upscaled clips: waits until every cast clip is upscaled, compose 1080p, "
                                       "Lanczos to --size on the GPU, HEVC NVENC, optional --audio mux; stays on the server")
     p.add_argument("name")
-    p.add_argument("--root", default="production/montage")
+    p.add_argument("--root")
     p.add_argument("--clips-root", default="../video_sources", help="server folder (relative to the montage dir) holding <library>/<clip id>.mp4; library = \"library\" in <set>/resource.json")
     p.add_argument("--work-height", type=int, default=1080)
     p.add_argument("--size", default="3840x2160")
     p.add_argument("--cq", type=int, default=24)
-    p.add_argument("--channel", help="take the opening intro (logo, name, tagline, font) from channel/<ch>/intro.json")
+    p.add_argument("--channel", help="album folder channel/<ch>/albums/<name>/ + opening intro (logo, name, tagline, font) from channel/<ch>/intro.json")
     p.add_argument("--intro-logo", help="repo path of the channel's RGBA round logo: opening logo pop-up over clip 1")
     p.add_argument("--intro-title", default="", help="channel name drawn under the logo")
     p.add_argument("--intro-tagline", default="", help="small line under the name")

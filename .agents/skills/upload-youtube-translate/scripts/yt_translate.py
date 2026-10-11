@@ -569,7 +569,15 @@ def cmd_apply(a):
             continue
         from googleapiclient.errors import HttpError
         try:
-            yt.videos().update(part=",".join(parts), body=body).execute()
+            try:
+                yt.videos().update(part=",".join(parts), body=body).execute()
+            except HttpError as e:
+                if "defaultLanguageNotSet" not in api_error(e) or "snippet" in parts:
+                    raise
+                print(f"   ⚠️  YouTube đòi defaultLanguage trong request: gửi lại snippet y nguyên + defaultLanguage={dl}")
+                body["snippet"] = {k: s[k] for k in ("title", "description", "tags", "categoryId", "defaultAudioLanguage") if k in s}
+                body["snippet"]["defaultLanguage"] = dl
+                yt.videos().update(part="localizations,snippet", body=body).execute()
         except HttpError as e:
             print(f"   ❌ {api_error(e)}")
             failed = True

@@ -1,14 +1,15 @@
 set -e
 HERE="$(cd "$(dirname "$0")" && pwd)"
-ROOT="${1:?usage: ambient_batch.sh <root with <slug>/track-plan.json> [slug...]}"
+ROOT="${1:?usage: ambient_batch.sh <root with plans/<slug>/track-plan.json> [slug...]}"
 shift
-SLUGS="${*:-$(ls "$ROOT")}"
+SLUGS="${*:-$(ls "$ROOT/plans")}"
 for S in $SLUGS; do
-  D="$ROOT/$S"
-  [ -f "$D/track-plan.json" ] || continue
+  PLAN="$ROOT/plans/$S/track-plan.json"
+  [ -f "$PLAN" ] || continue
   for V in ${VIBES:-snowglobe church}; do
-    OUT="$D/$S-$V"
-    env -u DISPLAY ~/music-tools/venv/bin/python "$HERE/ambient_render.py" "$D/track-plan.json" "$V" "$OUT" 2>&1 | grep -v -E "DPF|assertion" > "$OUT.json"
+    mkdir -p "$ROOT/$V/$S"
+    OUT="$ROOT/$V/$S/$S"
+    env -u DISPLAY ~/music-tools/venv/bin/python "$HERE/ambient_render.py" "$PLAN" "$V" "$OUT" 2>&1 | grep -v -E "DPF|assertion" > "$OUT.json"
     M=$(ffmpeg -hide_banner -nostats -i "${OUT}_mix.wav" -af ebur128=peak=true -f null - 2>&1)
     I=$(echo "$M" | awk '/^ +I:/{print $2}' | tail -1)
     TP=$(echo "$M" | awk '/^ +Peak:/{print $2}' | tail -1)

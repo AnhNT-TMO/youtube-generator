@@ -1,0 +1,244 @@
+{
+  "theme": "grounds/viaduct-train",
+  "target": 15,
+  "defaults": {
+    "lens": "35mm lens at f/5.6",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "vista",
+      "category": "viaduct-train"
+    }
+  },
+  "shots": [
+    {
+      "id": "vt-01",
+      "subject": "A tall curved old stone railway viaduct with many arches across a deep snowy highland valley; a classic red steam locomotive with a black chimney pulls a line of red passenger carriages across it, white steam and smoke billow from the chimney, warm light glows in the carriage windows, snowy mountains and dark pine slopes around; the locomotive and carriages carry no numbers, plates or lettering",
+      "composition": "Wide view from a snowy hillside below and to the side of the viaduct; the viaduct curves across the frame through the middle third with the train on its left half, the valley drops away below",
+      "look": "snow-day",
+      "motion_elements": "the white steam and smoke billowing from the locomotive chimney",
+      "tags": {
+        "time": "day",
+        "people": "none"
+      },
+      "lens": "50mm lens at f/8"
+    },
+    {
+      "id": "vt-02",
+      "subject": "A tall curved old stone railway viaduct with many arches across a deep snowy highland valley; a classic red steam locomotive with a black chimney pulls a short line of red passenger carriages along it, running toward the right with a long trail of white steam and smoke streaming back over the carriages, warm light glows in the carriage windows, snowy mountains and dark pine slopes around; the locomotive and carriages carry no numbers, plates or lettering",
+      "composition": "Wide view from a snowy hillside below and to the side of the viaduct; the viaduct curves across the whole frame through the middle third, the train is on the left third heading right with a long empty stretch of track ahead of the locomotive, the valley drops away below",
+      "look": "twilight",
+      "motion_elements": "the running train and the trail of white steam streaming back from the chimney",
+      "tags": {
+        "time": "twilight",
+        "people": "none"
+      },
+      "lens": "50mm lens at f/8",
+      "lights": false
+    },
+    {
+      "id": "vt-03",
+      "subject": "A long low stone railway causeway with small arches running along the shore of a still grey highland lake on a quiet overcast winter afternoon; a classic red steam locomotive with a black chimney pulls a short line of red passenger carriages along it toward the right, a long trail of white steam streaming back over the carriages, warm light in the windows, snowy mountains mirrored softly in the lake; the locomotive and carriages carry no numbers, plates or lettering",
+      "composition": "Wide view from a snowy rise across a small bay; the causeway runs across the middle third, the train on its left half with a long empty stretch of track ahead of the locomotive, the lake fills the lower third.",
+      "look": "snow-day",
+      "motion_elements": "the running train, the white steam streaming back and the falling snow",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling"
+      },
+      "lens": "50mm lens at f/8",
+      "lights": false
+    },
+    {
+      "id": "vt-04",
+      "subject": "A single railway line cutting through a deep snowy pine forest at blue-hour twilight; a classic red steam locomotive with a black chimney pulls a short line of red passenger carriages along it, running toward the camera side at an angle, white steam and smoke streaming back over the roofs of the carriages and up between the snow-heavy pines, warm golden light glowing in every carriage window; the locomotive and carriages carry no numbers, plates or lettering",
+      "composition": "Medium-wide view from a snowy bank beside the line; the track curves in from the right background, the train is in the middle distance with a clear empty stretch of track ahead of it in the left foreground.",
+      "look": "twilight",
+      "motion_elements": "the running train, the trail of white steam and the falling snow",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "falling",
+        "scale": "mid"
+      },
+      "lights": false
+    },
+    {
+      "id": "vt-05",
+      "subject": "A small grey stone country station with a snowy roof and warm lamps on an overcast winter afternoon; two students stand still on the platform, seen strictly from behind, watching a classic red steam locomotive with a black chimney and red carriages approach along the curving line, steam streaming back; one has a blonde ponytail and a scarlet-and-gold scarf, one short brown hair and a blue-and-bronze scarf; both in plain black wool robes; no numbers or lettering on the train",
+      "composition": "Wide view from further back in the far end of the platform behind the two small figures; the station building is on the left, the empty track ahead of the train curves away through the center to the approaching locomotive.",
+      "look": "snow-day",
+      "motion_elements": "the approaching train, the white steam and the falling snow",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "falling",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "vt-06",
+      "subject": "A tall curved old stone railway viaduct with many arches over a deep snowy valley on a clear winter night under a bright moon and stars; a classic red steam locomotive with a black chimney pulls a short line of red passenger carriages across it toward the left, every carriage window glowing warm gold, the long trail of steam lit silver by the moon and streaming back over the train; the locomotive and carriages carry no numbers, plates or lettering",
+      "composition": "Wide view from a snowy slope across the valley; the viaduct spans the whole frame through the middle third, the train on its right half heading left with a long empty stretch of track ahead.",
+      "look": "snowy-night",
+      "motion_elements": "the running train, the moonlit steam streaming back and the glowing carriage windows",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "50mm lens at f/8",
+      "lights": false
+    },
+    {
+      "id": "vt-07",
+      "subject": "A railway line on a narrow ledge carved into the side of a snowy mountain on a quiet overcast winter afternoon, curving around a rocky shoulder with a low stone wall on the valley side; a classic red steam locomotive with a black chimney pulls a short line of red passenger carriages around the curve toward the right, white steam and smoke streaming back along the carriages, high snowy peaks and a deep misty valley beyond; the locomotive and carriages carry no numbers, plates or lettering",
+      "composition": "Wide view from across the bend; the line curves through the middle of the frame, the train rounds the left part of the curve with an empty stretch of track ahead on the right, the valley drops away below.",
+      "look": "snow-day",
+      "motion_elements": "the running train, the white steam streaming back and the mist in the valley",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "50mm lens at f/8",
+      "lights": false
+    },
+    {
+      "id": "vt-08",
+      "subject": "A railway line running along the edge of a calm dark lake at blue-hour twilight, snowy pines between the line and the mountains behind; a classic red steam locomotive with a black chimney pulls a short line of red passenger carriages along the shore toward the right, warm golden window light and the trail of white steam reflected in the still water, the last soft glow of the sky over the far ridge; the locomotive and carriages carry no numbers, plates or lettering",
+      "composition": "Wide view from the far side of a small inlet; the line and the train run across the middle third with a long empty stretch of track ahead, the mirror-like reflections fill the lower third.",
+      "look": "twilight",
+      "motion_elements": "the running train, the steam streaming back and its reflections rippling in the lake",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "50mm lens at f/8",
+      "lights": false
+    },
+    {
+      "id": "vt-09",
+      "subject": "Looking up from a snowy riverbank at a very tall old stone railway viaduct with high slender arches spanning a deep valley on a quiet overcast winter afternoon; a dark river flows between snowy rocks far below the arches; a classic red steam locomotive with a black chimney pulls a short line of red passenger carriages along the top toward the right, a long plume of white steam trailing back against the silver-grey sky; the locomotive and carriages carry no numbers, plates or lettering",
+      "composition": "Low-angle wide view from the riverbank; the arches rise through the frame and the train runs along the top of the viaduct with empty track ahead on the right, the river crosses the lower third.",
+      "look": "snow-day",
+      "motion_elements": "the running train, the white steam trailing back and the flowing river",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling"
+      },
+      "lens": "24mm lens at f/8",
+      "lights": false
+    },
+    {
+      "id": "vt-10",
+      "subject": "One student stands still on a snowy hillside on a winter night, seen strictly from behind, watching far below as a classic red steam locomotive with a black chimney pulls a short line of red passenger carriages across a long arched stone viaduct over a dark valley, every window glowing warm gold and the steam streaming back pale in the night; the student wears a dark green knitted wool hat, a yellow-and-black striped scarf and a plain black wool robe; no numbers or lettering on the train",
+      "composition": "Wide view from just behind the small figure in the lower left; the viaduct and the train cross the middle of the frame with a long empty stretch of track ahead of the locomotive.",
+      "look": "snowy-night",
+      "motion_elements": "the running train, the steam streaming back and the falling snow",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "falling"
+      },
+      "lens": "50mm lens at f/8",
+      "lights": false
+    },
+    {
+      "id": "vt-11",
+      "subject": "A small old single-arch stone railway bridge over a rushing mountain river in a snowy pine forest on a quiet overcast winter afternoon; a classic red steam locomotive with a black chimney pulls a short line of red passenger carriages across the bridge toward the left, white steam and smoke streaming back above the snowy treetops, the dark river tumbling over icy rocks below; the locomotive and carriages carry no numbers, plates or lettering",
+      "composition": "Medium-wide view from the riverbank downstream; the bridge crosses the upper middle of the frame with an empty stretch of track ahead of the locomotive on the left, the river fills the lower third.",
+      "look": "snow-day",
+      "motion_elements": "the running train, the white steam and the rushing river",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none",
+        "scale": "mid"
+      },
+      "lights": false
+    },
+    {
+      "id": "vt-12",
+      "subject": "A small old country railway station of grey stone on a snowy night, its platform lamps and a wreath-hung door glowing warm, snow piled on the roof and benches; a classic red steam locomotive with a black chimney pulls a short line of red passenger carriages past the end of the platform, carriage windows glowing gold, white steam lit warm by the lamps streaming back over the train; the locomotive and carriages carry no numbers, plates or lettering",
+      "composition": "Medium-wide view from the snowy end of the empty platform; the station is on the right, the train enters from the left background with empty track ahead of it toward the camera side.",
+      "look": "snowy-night",
+      "motion_elements": "the running train, the lamp-lit steam and the falling snow",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling",
+        "scale": "mid"
+      }
+    },
+    {
+      "id": "vt-13",
+      "subject": "A long snowy highland valley at blue-hour twilight: a distant arched stone viaduct crosses the valley floor, a classic red steam locomotive with a black chimney pulls a short line of red passenger carriages across it, small with lit windows and a long white trail of steam drifting back over the valley, and far beyond on a hill an ancient castle with many towers and warm golden windows; the locomotive and carriages carry no numbers, plates or lettering",
+      "composition": "Very wide view from high on the valley side; the viaduct and the small train cross the middle third with empty track ahead, the castle sits on the horizon in the upper right.",
+      "look": "twilight",
+      "motion_elements": "the running train, the long steam trail and the castle window lights",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      },
+      "lens": "85mm lens at f/8",
+      "lights": false
+    },
+    {
+      "id": "vt-14",
+      "subject": "Two students stand still far away by an old wooden fence at the edge of a snowy field on an overcast winter afternoon, seen strictly from behind, watching a classic red steam locomotive with a black chimney and red carriages run along the far side of the field, steam streaming back; one has short straight dark brown hair and a blue-and-bronze scarf, the other a grey knitted hat and a yellow-and-black scarf; both in plain black wool robes; the train is plain solid red with black details only, no gold crests, nameplates, gold panels, numbers or lettering",
+      "composition": "Very wide view from far back across the snowy field; the two tiny figures stand at the fence in the middle distance on the right, the train crosses the middle of the frame from the right with a long empty stretch of track ahead on the left.",
+      "look": "snow-day",
+      "motion_elements": "the running train, the white steam and the falling snow",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "falling"
+      },
+      "lights": false
+    },
+    {
+      "id": "vt-15",
+      "subject": "A railway line through a deep snowy pine forest on a winter night; a classic red steam locomotive with a black chimney pulls a short line of red passenger carriages between the tall snow-laden trunks, its warm golden windows lighting the snow on the branches, the white steam glowing gold above the train as it streams back between the trees; the locomotive and carriages carry no numbers, plates or lettering",
+      "composition": "Medium-wide view from among the trees beside the line; the train runs across the middle of the frame toward the right with a stretch of empty track ahead disappearing into the dark forest.",
+      "look": "snowy-night",
+      "motion_elements": "the running train, the glowing steam streaming back and the falling snow",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "falling",
+        "scale": "mid"
+      },
+      "lights": false
+    },
+    {
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "falling"
+      },
+      "id": "vt-16",
+      "subject": "A classic red steam locomotive with a black chimney and red carriages standing still at a small snowy stone country station on a quiet overcast winter afternoon, white steam drifting slowly from the engine, warm lamps on the platform, a wreath on the station door; no numbers or lettering on the train. Nobody is on the platform. The train is parked and does not move.",
+      "composition": "Wide view from the far end of the empty platform, the train along the left side",
+      "look": "snow-day",
+      "motion_elements": "the drifting steam from the parked engine and the falling snow"
+    },
+    {
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "vt-17",
+      "subject": "A long curved stone railway viaduct crossing a snowy valley at blue hour on Christmas Eve, the empty track on top, a tiny village with warm windows far below, dark pine slopes and calm mountains behind. No train is on the viaduct. Nobody is in the scene.",
+      "composition": "Wide view from a hillside, the viaduct sweeping across the middle of the frame",
+      "look": "twilight",
+      "motion_elements": "the thin mist in the valley and the warm village lights"
+    }
+  ]
+}

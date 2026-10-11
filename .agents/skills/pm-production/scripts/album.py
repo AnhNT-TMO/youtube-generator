@@ -466,7 +466,7 @@ def short_next(d, m):
 def short_cell(sh, sm):
     if not sh:
         return "–"
-    return ("shorts/" + sh["dir"].name[:3] + " (cũ)" if sh["legacy"] else "short/") + (" ✔ S3" if sm["s3"] else " …")
+    return ("shorts/" + sh["dir"].name[:3] + " (cũ)" if sh["legacy"] else "short/") + (" ✔ đã gói" if sm["s3"] else " …")
 
 
 def album_next(res, tracks, master, m, sh, sm):
@@ -504,7 +504,7 @@ def album_next(res, tracks, master, m, sh, sm):
 def cmd_board(a):
     ch = Channel(channel_dir(a.channel))
     print(f"# Board {ch.name}\n\n## Albums\n")
-    print("| album | bài | ước lượng | check | tracks | master | ảnh 4K | loop | video (server) | youtube.md | S3 | Short | "
+    print("| album | bài | ước lượng | check | tracks | master | ảnh 4K | loop | video (server) | youtube.md | gói | Short | "
           "đã đăng | việc tiếp theo |\n|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
     for name, al in ch.albums.items():
         res = check(ch, name)
@@ -521,7 +521,7 @@ def cmd_board(a):
               f"{yn(m['video'])} | {yn(m['yt'])} | {m['s3']['uploaded'] if m['s3'] else '–'} | {short} | {yn(m['url'])} | "
               f"{' · '.join(album_next(res, tracks, master, m, sh, sm)) or 'xong'} |")
     if ch.shorts:
-        print("\n## Shorts\n\n| short | album | bài | short.json | ảnh 9:16 | video | youtube.md | S3 | đã đăng | việc tiếp theo |\n"
+        print("\n## Shorts\n\n| short | album | bài | short.json | ảnh 9:16 | video | youtube.md | gói | đã đăng | việc tiếp theo |\n"
               "|---|---|---|---|---|---|---|---|---|---|")
         for s in ch.shorts:
             m = media(s["dir"], SHORT_SIZE)

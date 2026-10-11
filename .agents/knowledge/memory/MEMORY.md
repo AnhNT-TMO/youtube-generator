@@ -1,0 +1,71 @@
+- [Pool production flow](pool-production-flow.md) — CEO 09-28 refactor: skills <group>-<job>; Suno Simple v6 both clips → named pool; CEO+PM album.md; 1 album + 1 Short; phrase bank (common phrases verbatim OK); video group rename pending
+- [Suno automation constraints](suno-automation-constraints.md) — Sept-2026 Suno limits (v6, 20 downloads/mo) + chosen DevTools-MCP route
+- [Never use Suno Download](never-use-suno-download.md) — never click Suno Download/Unlock (burns 20/mo quota); always usesuno.com; Suno ToS risk ignored (CEO), never remind
+- [GPU server](gpu-render-server.md) — LAN GPU box: ssh, specs, CUDA 12.8 torch, ~/youtube-qc mirror for verify + assembly, video dirs
+- [Heavy work on server](heavy-work-on-server.md) — analysis/CPU-heavy scripts server-only; Mac only if unreachable + user yes; no subagent fan-out
+- [User: developer, no music ear](user-developer-no-music-ear.md) — wants measurable criteria, not taste questions
+- [Skills own their code](skills-own-their-code.md) — code/venv/cache live in .claude/skills/<name>/; tools/ retired
+- [No Suno behavior assumptions](no-suno-behavior-assumptions.md) — prompt = our target (no ~0.9 BPM offset etc.); measure during generation, fix with data
+- [No listening questions](no-listening-questions.md) — never ask the user to judge audio by ear; measure instead (decisions are fine)
+- [Skills run order-free](skills-order-free.md) — pool, album music and pictures run in batches, any order; skills talk only through files; album.py board = status
+- [Run the flow before improving](run-flow-before-improving.md) — run the next new album end-to-end first; fix only blockers, no polishing
+- [Sourced rules over invention](sourced-rules-over-invention.md) — Style/lyrics rules come from cited sources + our data (now in channel/<ch>/rules.md), not Claude's taste
+- [4K thumbnail upscale](upscale-lab.md) — SeedVR2 7B in thumb.py fit (server ~/thumbnail-prompt); video clip bench 10-04: VAE is the bottleneck, ~140 s/clip config; since 10-06 ≤30 GB VRAM config (b77+tile+swap16, ~210 s/clip), `night --until` continuous run, guard 40 GB; 1080p-only in ~/video_sources/<library>/
+- [Thumbnail variety by vibe](thumbnail-variety-by-vibe.md) — lamp + face default (experiments may drop); agent picks wardrobe/framing/light/palette by song vibe; no anti-dup tooling
+- [Translate titles + descriptions, no confirm](translate-titles-no-confirm.md) — youtube-translate: translate title + description of every video missing a language, write with --yes, no asking
+- [GPU first + resource cap](gpu-first-resource-cap.md) — heavy work on GPU when possible (NVENC, CUDA); all project tasks ≤ ~60 % CPU/RAM via youtube.slice
+- [Instruction files = rules only](instruction-files-rules-only.md) — CLAUDE.md / channel guides hold general rules; no per-video status, numbers or dated lessons (bias every session)
+- [Company model](company-model.md) — CEO + PM plan albums together; PM = source of truth, spawns sub-agents and QCs them; groups R&D/Audio/Video/Upload
+- [Still video, no lip-sync](video-static-no-lipsync.md) — CEO 2026-09-25: still images + loop; no open-source lip-sync; future: research Gemini (Veo)
+- [Character v2: elderly singer](character-v2-elderly.md) — CEO 09-25: original ~75-year-old silver-haired man, 9 angles in model/, old set archive-v1
+- [thumb-generation tool](thumb-generation-tool.md) — ~/Desktop/thumb-generation: low-res image → SeedVR2 4K → 5-min snow/spectrum video on server (engine copied from video-generator)
+- [Animated loop: text locked](animated-loop-text-locked.md) — CEO 09-26: Flow/Veo loops must keep thumbnail lettering identical; prompt + paste 4K text back + frame check; SeedVR2 upscale
+- [PM owns length + pictures](pm-owns-length-and-pictures.md) — PM adds pool songs when an album is short; 1 ChatGPT image/round, PM reviews and orders redraws
+- [Shelter Stone Gospel (MercyHarbor formula)](mercyharbor-clone-candidate.md) — CEO 09-28: main channel, pool reuse approved, Lamplight dropped; model v4 character; copy guard on names/branding
+- [Video cinema engine](video-cinema-engine.md) — CEO 09-28: video-generator cinema mode (2.5D camera, lights, particles, variant picker) for Shelter Stone; DA-V2 Small only; cq 24; album step untested
+- [Stone motion standard](stone-motion-standard.md) — CEO 09-28 approved ~0.65× Harbor speed, visible effects, ~10 GB/1-h video, 3.5 s intro; Lamplight to be dropped, go cinema
+- [Server guard](server-guard.md) — CEO 09-28: youtube-guard watchdog kills abnormal server jobs; ad-hoc server cmds only via guard.sh run; check kills after a job dies
+- [Stone thumbnail master + variants](stone-thumbnail-master.md) — CEO 09-28: fixed master form, per-video combo from thumb_pool.json via thumb.py variant
+- [CEO approves plan, PM approves output](ceo-approves-plan-pm-approves-output.md) — CEO OKs motion/effects in text; PM renders, QCs and ships without CEO preview; pictures still go to CEO
+- [Christmas music direction](christmas-music-direction.md) — CEO 10-05: ACE-Step dropped+deleted; MIDI → virtual instruments on server; piano solo + Interstellar vibe rejected (not Christmassy)
+- [Ambient: even passes](ambient-even-passes.md) — CEO 10-05: 3 passes balanced, pass 3 only slightly > pass 2, pass 1 not low; no climax/lead swap
+- [Christmas carol standard (old)](christmas-instrumental-brainstorm.md) — CEO 10-04 Deck r009 standard, superseded by [[christmas-ambient-standard]] (key lift dropped); tier/video-length notes only
+- [Christmas scene library](christmas-scene-library.md) — CEO 09-30: image_source/ 48 themes×20 + cozy-loop 50; 10-02: one ChatGPT chat per family, Sonnet agents generate, Opus QCs every image; muse 10 s clips
+- [Max 6 parallel](max-six-parallel.md) — CEO 09-30: ≤ 6 sub-agents at once, ChatGPT windows ≤ 4; Mac hangs otherwise
+- [Muse clip production](muse-clip-production.md) — CEO 10-02 clip rules (≥1 s head cut, zero indoor snow, slow visible camera, keep only final mp4); tooling now video-resource-videos
+- [Resource queue workflow](resource-queue-workflow.md) — CEO 10-04: images/videos queues; generators = background work (refill 60), Opus reviewer batches ≤12 write clip fields, videos.py draft, PM wakes on resq.py watch; notes image_source/OPTIMIZATION.md
+- [Clip camera rules](clip-camera-far-plan.md) — CEO 10-04: slide ≤35 %, zoom ≤1.2×, edge exits OK; top priority = no AI look (objects popping in/out); never static camera
+- [PM owns experiments](pm-owns-experiments.md) — CEO 10-04: PM tests/decides process experiments itself, logs + reports; no approval asks
+- [PM may reload ChatGPT](pm-may-reload-chatgpt.md) — CEO 10-04: PM reloads hung ChatGPT tabs itself (kill hung renderer + navigate), no asking
+- [Beauty over flawless](beauty-over-flawless.md) — CEO 10-04: no framing rules to dodge defects; beautiful scenes may keep 1–2 tiny flaws (tiny far people)
+- [Muse without proxy](muse-no-proxy.md) — CEO 10-05: muse Chrome 9224/9226 run MUSE_CHROME_PROXY=none (proxy caused stalls); 3 tabs/port max
+- [Album gentle intro](album-gentle-intro.md) — CEO 10-05: softest-intro song first + 12 s sin² fade-in on every album (assembly intro_fade_s)
+- [Shared GPU: yield to others](shared-gpu-yield.md) — CEO 10-06: other users on GPU → our jobs wait (free-VRAM check, OOM = retry), never kill theirs; guard unchanged
+- [Upscale album first](upscale-album-first.md) — CEO 10-06: night = album cast (tier 1) → 4K album render with audio → rest of library
+- [Piano always leads](piano-channel-lead.md) — CEO 10-06: Christmas ambient channel = piano; every vibe keeps piano on the melody, other instruments only support
+- [One vibe per album](one-vibe-per-album.md) — CEO 10-06: 3-h Christmas album = one vibe, carols picked by fit (VIBE_FIT.md), never force all carols into all vibes
+- [High-RPM markets](high-rpm-markets.md) — CEO 10-06: target well-paid views (US/UK/Nordics/DACH/Benelux/JP/KR); translations only into those languages
+- [Christmas ambient standard](christmas-ambient-standard.md) — CEO 10-06 option C: familiar hymnal keys only (allowed_keys.json), no in-song key lift, adjacent songs same/next key, tier I→II; STANDARD.md
+- [PD audit for Content ID](pd-audit-content-id.md) — CEO 10-07: claim on album 002; every Christmas melody needs PD-print audit (pd_audit.py), only clean songs in albums
+- [Sleigh bells sparse](sleigh-bells-sparse.md) — CEO 10-07: snowglobe sleigh = 8–12 sparse hits/song just after piano notes, never a per-bar pulse
+- [Unfamiliar cap](unfamiliar-cap.md) — CEO 10-07: PD melody unlike today's sung version = unfamiliar tag; max 2 per album (VIBES max_unfamiliar)
+- [PD tool verification](pd-tool-verification.md) — CEO 10-07: PD-exact = independent scan transcription + compare, evidence in _work/; Codex reads scans only with cropped system images attached (-i)
+- [Cleanup quarantine](cleanup-quarantine.md) — CEO 10-07: retired/ACE files moved (not deleted) to Mac ~/youtube-cleanup-20261007 (server copy deleted 10-07); never read them
+- [Codex delegation](codex-delegation.md) — CEO 10-07: Codex gpt-6.1-sol = PM staff for known flows on request; codex_task.py; calibrate, watch logs, machine-check, images only via --image
+- [Thin piano accompaniment](thin-piano-accompaniment.md) — CEO 10-09: Mureka prompts = CEO's v6 chamber-trio form (explicit no-drums/no-X list, names excluded ones; best so far, all songs), exactly 3 instruments, no song title, warm joyful mood, clear dry piano (no ambient/reverb words); tune 1 song first; web lane mureka_web.py + murekadownloader (Gold, not API); upload MP3, never WAV; CEO compares with <slug>/original.mp3
+- [Mureka: no choir](mureka-voice-accent.md) — CEO 10-09: choir dropped, all 3 styles instrumental, any voice = flag; We Wish You = CEO exception (≤1/album, not track 1/Short)
+- [Mureka: recognizable opening](mureka-recognizable-opening.md) — CEO 10-09: 'inspired' arrangement OK, must stay recognizable; gate = piano-led pass 1 fidelity vs control
+- [Nature clip standard](nature-clip-standard.md) — CEO 10-09: real-looking, no AI look; natural motion OK, first≠last OK; mid/wide camera moves (Christmas range), close static + server move
+- [Mureka album rules](mureka-album-rules.md) — CEO 10-09: 20–22-song loop ×3, bed rotation, no choir, no chapters, percussion takes flagged for CEO; MUREKA-ALBUM.json; tool + batch wait for CEO
+- [Mureka: flag, don't reject](mureka-flag-not-reject.md) — CEO 10-09: flagged takes listed for CEO to listen, delete only on CEO's word; later keep-one policy
+- [Mureka drums: open question](mureka-percussion-open.md) — CEO 10-09: find why Mureka adds drums unasked (so far Deck × pad_celesta 4/4 takes); Deck v4 accepted for now; mureka_web.py accept
+- [Mureka prompt v2 test](mureka-prompt-v2-test.md) — 10-09: short affirmative 'beatless' prompt no better (3/8 drums, 1/8 clean) → back to v1; drums cluster on style-1 pad bed
+- [Wizard Christmas set](wizard-christmas-set.md) — CEO 10-09: ~320-clip magic-school Christmas set for everstill, no HP brand/crests, back-view students 1/3, 11 categories
+- [Mureka detectors vs ear](mureka-detectors-vs-ear.md) — CEO 10-09: guitar stem unreliable (flag removed), drum stem missed soft drums (ALS V9 v3), V9 not cleaner, stem drum removal approved
+- [Muse stuck: restart now](muse-stuck-restart-now.md) — CEO 10-10: hung/refusing muse job → stop and rerun with changed prompt at once, never wait 2×15 min
+- [Muse crests allowed](muse-crests-allowed.md) — CEO 10-10: crests/text muse adds in clips are OK (no brand/text reject); ChatGPT images stay crest-free
+- [Clip review = breakage only](clip-review-breakage-only.md) — CEO 10-10: 0.5 s frame-pair check for AI pop-in/jumps + correct motion; no zoom/shift gates (wizard set)
+- [Piano in 162 + sfizz arrangement](piano162-sfizz-arrangement.md) — CEO 10-10: hand-arranged Silent Night test (phrase rubato, per-verse textures, LH not deep); sfizz_render built, p162-close-hot.sfz wrapper; scripts in research/christmas-carols/experiments/piano-arrange/
+- [Bell register + chime doubling](bell-register-doubling.md) — CEO 10-10: Christmas piano melody +12 (bell register), celesta/glock/chimes double an octave above, no mid-phrase string line, double at −8 dB; per-song arrangement
+- [Bell variants pipeline](bell-variants-pipeline.md) — CEO 10-10: per-song 3–4 variants (celesta+12 / vib 0,−12 / glock 0; bed strings|viola|pad sf2:89), grace ≤5, sleigh 8–10 quiet; audio/162_bell/<slug>/; first 5 of album 006 then tier I+II clean
+- [Countdown Short v2](countdown-short-v2.md) — CEO 10-11: title lines auto-clear (line_gap), glock sweep → then bell swing + hand-bell ring (no overlap), ducking; sidechain key apad (audio once cut at 7.4 s); sub arrow centred above YouTube UI (y≤0.82); kit = video-shorts scripts/countdown + shorts_kit/ + branding/badges,sfx; CEO checks Short, then own zip on Drive

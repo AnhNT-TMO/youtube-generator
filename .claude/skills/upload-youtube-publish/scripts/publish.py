@@ -400,7 +400,10 @@ def check_title(title, total, err):
         err.append(f"title ghi {m.group(0)} nhưng video dài {fmt(total)}")
 
 
-def check_description(desc, ch_text, chapters, err, warn, nochap=False):
+PD_ONLY_HEADING = "## Description: dòng chỉ cho nhạc public domain"
+
+
+def check_description(desc, ch_text, chapters, err, warn, nochap=False, music_source=None):
     if len(desc) > 5000:
         err.append(f"description {len(desc)} ký tự > 5000")
     if re.search(r"[<>]", desc):
@@ -413,8 +416,17 @@ def check_description(desc, ch_text, chapters, err, warn, nochap=False):
         if holes:
             err.append(f"mẫu description trong publish.md còn chỗ <…> ({len(holes)} dòng, vd. {holes[0][:50]}): "
                        "chờ CEO gửi mẫu của kênh, chưa đăng được")
+        pd_only = {l for l in (code_block(ch_text, PD_ONLY_HEADING) or "").splitlines() if l.strip()}
+        if pd_only and music_source not in ("pd", "suno"):
+            err.append("album.md thiếu `music_source: pd` (carol public domain) hoặc `music_source: suno` (nhạc gốc): "
+                       f"không biết có ghi các dòng của mục '{PD_ONLY_HEADING[3:]}' trong publish.md không")
         for line in tpl.splitlines():
             if not line.strip() or re.search(r"<[^>\n]+>", line):
+                continue
+            if line in pd_only and music_source != "pd":
+                if line in desc:
+                    err.append(f"description ghi dòng chỉ dành cho nhạc public domain, album này music_source={music_source}: "
+                               f"{line[:60]}")
                 continue
             if line.startswith("["):
                 if line.strip() in desc:
@@ -524,7 +536,8 @@ def cmd_check(a):
     ch_text = channel_text(album)
     nochap = without_chapters(ch_text)
     err, warn, info = [], [], []
-    brief = (front_matter(album / "album.md").get("brief") or {}) if (album / "album.md").exists() else {}
+    fm = front_matter(album / "album.md") if (album / "album.md").exists() else {}
+    brief = fm.get("brief") or {}
     if not (album / "album.md").exists():
         warn.append("không có album.md: không đối chiếu được brief của PM")
     elif not brief.get("title_direction") or str(brief.get("title_direction")).startswith("<"):
@@ -571,7 +584,7 @@ def cmd_check(a):
         err.append("thiếu khối description trong ## Description")
         desc = ""
     else:
-        got = check_description(desc, ch_text, chapters, err, warn, nochap)
+        got = check_description(desc, ch_text, chapters, err, warn, nochap, fm.get("music_source"))
     comment = code_block(y, "## Pinned comment")
     if not comment:
         err.append("thiếu khối comment trong ## Pinned comment")

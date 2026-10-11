@@ -1,0 +1,358 @@
+{
+  "theme": "castle/dormitory",
+  "target": 25,
+  "defaults": {
+    "lens": "35mm lens at f/5.6",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "indoor",
+      "scale": "mid",
+      "category": "dormitory"
+    }
+  },
+  "shots": [
+    {
+      "id": "dm-01",
+      "subject": "A round tower dormitory room at Christmas night: four-poster beds with heavy scarlet velvet curtains and gold-trimmed quilts, wooden trunks at the foot of the beds, a small stone fireplace with a fire, candles on the bedside tables, a tall arched window with a deep window seat and snow on the sill, snowy castle towers outside; one student in a scarlet-and-gold striped scarf sits on the window seat with their back to the camera, looking out at the snow",
+      "composition": "Wide view from further back in the middle of the room; the student sits small on the window seat at the center right, a four-poster bed frames the left side, the fireplace glows at the left edge",
+      "look": "candle-night",
+      "motion_elements": "the fire in the small fireplace and the candle flames on the bedside tables",
+      "tags": {
+        "time": "night",
+        "people": "students"
+      }
+    },
+    {
+      "id": "dm-02",
+      "subject": "A round tower dormitory high in an ancient stone castle on Christmas night, decorated in blue and bronze: four-poster beds with deep blue velvet curtains and bronze-trimmed quilts, a knitted stocking hanging from every bedpost, a small decorated fir by a stone fireplace with a fire, candles on the bedside tables, tall arched windows showing snowy towers",
+      "composition": "Medium-wide view from the doorway across the round room, the fireplace and tree at center, beds curving along the walls",
+      "look": "candle-night",
+      "motion_elements": "the fire, the candle flames and the small tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-03",
+      "subject": "A dormitory deep under an ancient stone castle on Christmas night, decorated in green and silver: low vaulted stone ceiling, four-poster beds with emerald silk curtains and silver-trimmed quilts, silver lamps with candles, a carved stone fireplace with a fire; one student with short dark brown hair and a green-and-silver striped scarf sits on the edge of a bed with their back to the camera, facing the fire",
+      "composition": "Wide view from far back behind the student, across an open stretch of floor or ground, who sits small at the lower left, the fireplace glowing at center",
+      "look": "candle-night",
+      "motion_elements": "the fire and the candle flames in the silver lamps",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-04",
+      "subject": "A cozy low-ceilinged dormitory at ground level of an ancient castle on a snowy winter afternoon, decorated in yellow and black: round deep-set windows looking onto a snowy garden, beds with honey-yellow patchwork quilts and black trim, copper lamps lit, a copper kettle steaming on a little stove, a small decorated fir",
+      "composition": "Medium-wide view across the room toward the round windows, the stove and tree on the right",
+      "look": "interior-day",
+      "motion_elements": "the candle flames in the copper lamps",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-05",
+      "subject": "A wide round tower dormitory of an ancient castle at blue hour, decorated in scarlet and gold: five four-poster beds with scarlet velvet curtains, red knitted stockings hanging from the bedposts, wrapped presents on the wooden trunks, a fire in the small stone hearth, tall windows showing a deep blue twilight over snowy mountains",
+      "composition": "Wide view from the edge of the room across the beds toward the windows",
+      "look": "candle-night",
+      "motion_elements": "the fire in the hearth and the candle flames on the bedside tables",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none",
+        "scale": "vista"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "dm-06",
+      "subject": "A round tower dormitory in an ancient castle on a snowy winter morning, decorated in blue and bronze: soft grey daylight through tall windows, blue velvet bed curtains tied back, candles still lit, a fire in the hearth; one student with a long dark braid and a blue-and-bronze striped scarf sits cross-legged on a bed with their back to the camera, facing the window and reading a letter",
+      "composition": "Wide view from far back behind the student, across an open stretch of floor or ground, who sits small near the center, the bright window ahead",
+      "look": "interior-day",
+      "motion_elements": "the fire in the hearth and the candle flames",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-07",
+      "subject": "A dormitory under an ancient stone castle at blue hour, decorated in green and silver: a tall narrow window looks out onto a frozen lake under a deep blue twilight sky, four-poster beds with emerald curtains, a small fir with silver baubles, candles in silver holders, a low fire in a stone hearth",
+      "composition": "Medium-wide view toward the window with the beds on both sides and the tree at right",
+      "look": "candle-night",
+      "motion_elements": "the candle flames, the fire and the small tree lights",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-08",
+      "subject": "A cozy round-walled dormitory in an ancient castle on Christmas night, decorated in yellow and black: two students sit on a woven rug before a round hearth with their backs to the camera, toasting bread on long forks over the fire, one with an auburn bob and one in a knitted wool hat, both in yellow-and-black striped scarves; patchwork quilts on the beds and candles on the shelves",
+      "composition": "Wide view from far back behind the students, across an open stretch of floor or ground, who sit small at the lower center, the hearth glowing ahead",
+      "look": "candle-night",
+      "motion_elements": "the fire in the hearth and the candle flames",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-09",
+      "subject": "A round tower dormitory in an ancient castle on a snowy Christmas morning, decorated in scarlet and gold: soft grey daylight through tall windows, rumpled scarlet quilts, opened presents and ribbons on the trunks, red stockings on the bedposts, candles and a fire still burning, the fire glowing in the small stone hearth and snowy towers visible through the glass",
+      "composition": "Medium-wide view from the middle of the room toward the windows, beds on both sides",
+      "look": "interior-day",
+      "motion_elements": "the fire and the candle flames",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-10",
+      "subject": "A bedside in a tower dormitory of an ancient castle on Christmas night, decorated in blue and bronze: a carved nightstand with a burning candle, a small pile of wrapped presents, a blue knitted stocking hanging on the bedpost, frost on the window panes behind, the room softly lit by a fireplace",
+      "composition": "Close medium view at bed height, the candle and presents on the left third, the window soft behind",
+      "look": "candle-night",
+      "motion_elements": "the candle flame and the flickering fireplace glow",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "close"
+      },
+      "lens": "50mm lens at f/2.8"
+    },
+    {
+      "id": "dm-11",
+      "subject": "A dormitory under an ancient stone castle on Christmas night, decorated in green and silver: two students stand still at a tall arched window with their backs to the camera, looking out at snow falling over a dark lake, one with a dark brown ponytail and one with short straight brown hair, both in green-and-silver striped scarves; emerald-curtained beds and silver candle lamps",
+      "composition": "Wide view from further back in the middle of the room; the students stand small at the window, beds framing both edges",
+      "look": "candle-night",
+      "motion_elements": "the candle flames in the silver lamps and the fire in the hearth",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-12",
+      "subject": "A cozy dormitory in an ancient castle at blue hour, decorated in yellow and black: wooden trunks at the foot of the beds, garlands of dried orange slices and evergreen across the beams, a small decorated fir, candles on the shelves, a round window showing deep blue twilight over snowy hills",
+      "composition": "Medium view from a corner of the room toward the round window and the tree",
+      "look": "candle-night",
+      "motion_elements": "the candle flames and the small tree lights",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-13",
+      "subject": "A round tower dormitory in an ancient castle on Christmas night, decorated in scarlet and gold: three students sit on a thick rug before the fire with their backs to the camera, opening presents, one with short straight brown hair, one with a blonde ponytail, one with a long dark braid, all in scarlet-and-gold striped scarves; a small decorated fir and candles nearby",
+      "composition": "Wide view from far back behind the students, across an open stretch of floor or ground, who sit small in the lower third, the fire and tree ahead",
+      "look": "candle-night",
+      "motion_elements": "the fire, the candle flames and the small tree lights",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-14",
+      "subject": "A tower dormitory window seat in an ancient castle at blue hour, decorated in blue and bronze: a deep cushioned seat in a tall arched window looking out over snowy towers under a deep blue twilight sky, candles on the sill; one student in a knitted wool hat and a blue-and-bronze striped scarf sits there with their back to the camera",
+      "composition": "Wide view from further back in the room; the student sits small in the window, blue-curtained beds framing the left",
+      "look": "candle-night",
+      "motion_elements": "the candle flames on the sill and the fireplace glow",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-15",
+      "subject": "A dormitory under an ancient stone castle on a calm grey December afternoon, decorated in green and silver: grey daylight falls from high windows near the vaulted ceiling with a little old snow lying still on the outer sills, emerald curtains, silver lamps still lit, a fire in the stone hearth, silver-grey quilts folded neatly at the foot of each four-poster bed and a small decorated fir with silver baubles. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "Medium-wide view across the room with the hearth at left and the beds receding to the right",
+      "look": "interior-day",
+      "motion_elements": "the fire and the candle flames in the silver lamps",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-16",
+      "subject": "A long dormitory under the eaves of an ancient castle on Christmas night, decorated in yellow and black: sloping dark timber beams, a row of beds with yellow-and-black quilts, candles on small shelves, a decorated fir at the far end under a dormer window with snow on it, the old floorboards glowing warm in the candlelight",
+      "composition": "Eye-level view down the length of the room toward the tree, beds lining both sides",
+      "look": "candle-night",
+      "motion_elements": "the candle flames and the small tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-17",
+      "subject": "A round tower dormitory of an ancient castle at blue hour, decorated in scarlet and gold, seen through an open oak door from the stone stair landing outside: scarlet-curtained four-poster beds, a fire in the hearth, candles glowing, a twilight window beyond, wrapped presents on the trunks and red knitted stockings hanging from every bedpost, the old stone glowing warm",
+      "composition": "Medium view from the landing through the doorway, the door frame at both edges and the room glowing inside",
+      "look": "candle-night",
+      "motion_elements": "the fire in the hearth and the candle flames",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-18",
+      "subject": "A tower dormitory of an ancient castle on Christmas night, decorated in blue and bronze: two students sit side by side on a wooden trunk at the foot of a bed with their backs to the camera, facing the fireplace, one with an auburn bob and one with short blonde hair, both in blue-and-bronze striped scarves; blue velvet curtains and candles",
+      "composition": "Wide view from far back behind the students, across an open stretch of floor or ground, small at the lower center, the fire glowing ahead",
+      "look": "candle-night",
+      "motion_elements": "the fire and the candle flames",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-19",
+      "subject": "A dormitory under an ancient stone castle on Christmas night, decorated in green and silver: a big stone hearth with a roaring fire, knitted green stockings hung along the mantel, a decorated fir with silver baubles, emerald-curtained beds around the vaulted room, thick silver-grey rugs on the flagstones and candles burning in tall silver holders on every nightstand",
+      "composition": "Medium-wide view centered on the hearth, the beds at both sides",
+      "look": "candle-night",
+      "motion_elements": "the fire in the hearth and the small tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-20",
+      "subject": "A cozy dormitory in an ancient castle on a calm grey December afternoon, decorated in yellow and black: one student with a long dark braid and a yellow-and-black striped scarf stands still in the middle distance before a round window with their back to the camera, looking out at the snow-covered towers; a copper kettle on a little stove and candles lit. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "Wide view from further back in the room; the student stands small at the round window, the stove on the left",
+      "look": "interior-day",
+      "motion_elements": "the candle flames",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-21",
+      "subject": "The topmost dormitory of a castle tower on Christmas night, decorated in scarlet and gold: a tall conical timber ceiling, beds with scarlet curtains in a ring, a fire in the hearth, candles on every nightstand, a small decorated fir, a round window showing a dark starry night sky, red knitted stockings hanging from the bedposts. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "Wide view from the edge of the room, the ceiling rising to the top of the frame",
+      "look": "candle-night",
+      "motion_elements": "the fire, the candle flames and the small tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "vista"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "dm-22",
+      "subject": "A tower dormitory of an ancient castle on Christmas night, decorated in blue and bronze: a brass telescope standing by a tall window with snow on the sill, a starry night sky outside, blue velvet bed curtains, candles burning and a fire in the hearth, wooden trunks at the foot of each bed and a small decorated fir in the corner. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "Medium-wide view across the room toward the window and telescope",
+      "look": "candle-night",
+      "motion_elements": "the candle flames and the fire",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-23",
+      "subject": "A dormitory under an ancient stone castle at blue hour, decorated in green and silver: one student with short straight brown hair and a green-and-silver striped scarf sits on a bed with their back to the camera, reading by a candle, the tall window showing a deep blue twilight over a frozen lake. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "Wide view from far back behind the student, across an open stretch of floor or ground, who sits small at the lower center",
+      "look": "candle-night",
+      "motion_elements": "the candle flame and the fire",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-24",
+      "subject": "A cozy dormitory in an ancient castle on Christmas night, decorated in yellow and black: a wooden tray of steaming mugs of cocoa on a low table, a small decorated fir, patchwork quilts and candles on the shelves, a stone fireplace burning beside them, knitted yellow stockings hanging from the bedposts, a round window showing a snowy night and the old beams glowing warm in the firelight. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "Medium view across the low table toward the tree and the beds",
+      "look": "candle-night",
+      "motion_elements": "the candle flames and the small tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "dm-25",
+      "subject": "A round tower dormitory in an ancient castle at blue hour, decorated in scarlet and gold: snow piled high on the outside of the tall windows, beds with drawn scarlet curtains, a low fire in the hearth, candles burning, wooden trunks with wrapped presents at the foot of each bed, red knitted stockings on the bedposts and a small decorated fir glowing beside the fireplace. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills. No teapots, kettles, pots, cups, mugs, tankards or jugs anywhere in the room. The tall windows are softly glowing frosted glass with no view through them. The banners are plain deep red cloth with no central motif.",
+      "composition": "Medium-wide view from the middle of the room toward the windows",
+      "look": "candle-night",
+      "motion_elements": "the fire in the hearth and the candle flames",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "dm-26",
+      "subject": "A row of carved oak four-poster beds with deep crimson curtains tied back in a round castle tower dormitory on Christmas night, each bed with a folded patchwork quilt and a knitted stocking hanging on the bedpost, a small decorated fir tree with warm candle-like lights between two beds, a fire burning in a stone hearth on the far wall. The windows are thick frosted leaded glass glowing softly; nothing outside is visible through them and no snow falls indoors. No teapots, kettles, pots, cups, mugs or jugs anywhere. No candles or lanterns stand on the floor. No banners, tapestries, crests or lettering anywhere.",
+      "composition": "Wide eye-level view along the row of beds toward the hearth, open wooden floor in front",
+      "look": "candle-night",
+      "motion_elements": "the fire in the hearth and the soft lights on the small tree"
+    },
+    {
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "dm-27",
+      "subject": "A deep stone window seat in a castle tower dormitory on Christmas Eve, piled with knitted cushions and a folded wool blanket, a few wrapped presents with ribbon bows on it, a garland of holly along the stone arch, a single lit candle in a brass holder on the sill. The windows are thick frosted leaded glass glowing softly; nothing outside is visible through them and no snow falls indoors. No teapots, kettles, pots, cups, mugs or jugs anywhere. No banners, tapestries, crests or lettering anywhere.",
+      "composition": "Medium view facing the window seat, the glowing frosted window filling the upper middle",
+      "look": "candle-night",
+      "motion_elements": "the candle flame and the soft glow of the frosted glass",
+      "lens": "35mm lens at f/4"
+    },
+    {
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "dm-28",
+      "subject": "Morning light in a castle tower dormitory on Christmas Day: wrapped presents heaped at the foot of a carved four-poster bed with blue-and-bronze curtains, a stocking full of sweets on the bedpost, a wooden trunk with a wreath on its lid, soft grey daylight through tall frosted windows, a warm fire in a small stone hearth. The windows are thick frosted leaded glass glowing softly; nothing outside is visible through them and no snow falls indoors. No teapots, kettles, pots, cups, mugs or jugs anywhere. No candles or lanterns stand on the floor. No banners, tapestries, crests or lettering anywhere.",
+      "composition": "Medium-wide view from the side of the room, the bed and presents in the middle ground, the hearth on the right",
+      "look": "interior-day",
+      "motion_elements": "the fire in the hearth"
+    }
+  ]
+}

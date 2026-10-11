@@ -1,0 +1,64 @@
+{
+  "moves": {
+    "default": [
+      "slide to the left",
+      "slide to the right",
+      "arc to the left",
+      "arc to the right"
+    ],
+    "deep": [
+      "slide to the left",
+      "slide to the right",
+      "arc to the left",
+      "arc to the right"
+    ]
+  },
+  "deep_field": "deep",
+  "sequence": [
+    {
+      "text": "Animate the exact same landscape from the attached image into a 10-second video."
+    },
+    {
+      "if": "close",
+      "text": "{shot} shot; static camera: the camera does not move at all for the whole clip, it never slides, pans, tilts, rises, travels or zooms, so every stone, plant and branch stays exactly where it is in the frame."
+    },
+    {
+      "if": "!close",
+      "text": "{shot} shot; the camera is almost still, with only a tiny, barely noticeable {move} over the whole clip: it moves less than a tenth of the way, never tilts and never zooms, so the last frame shows nearly the same view as the first frame, every mountain, rock and tree all in frame."
+    },
+    {
+      "field": "motion"
+    },
+    {
+      "if": "!close",
+      "text": "Apart from the slow camera move and the moving elements, everything else in the frame is perfectly still, like a photograph."
+    },
+    {
+      "text": "{lock} keep their exact shape and number for the whole clip. The moving elements described above may move naturally at real-time speed, but no new objects, people, animals, structures or text appear or vanish, and nothing morphs or melts."
+    },
+    {
+      "text": "The {light} keeps the same brightness, white balance and natural colors as the first frame throughout the clip, with no flicker."
+    },
+    {
+      "field": "extra"
+    },
+    {
+      "text": "No time passes: the sun stays at the same height and the light never fades toward sunset, dusk or night."
+    },
+    {
+      "text": "No branches, leaves, plants or rocks grow, appear out of nothing or vanish."
+    },
+    {
+      "text": "Sound: {sound}."
+    }
+  ],
+  "fields": {
+    "shot": "Wide | Medium | Close",
+    "deep": "true for a broad vista or a long receding valley/path; false otherwise",
+    "motion": "2-4 short English sentences, one sentence per thing that visibly moves in the source image: water, mist, cloud, grass, leaves or light",
+    "lock": "the main rocks, trees, ridges and other fixed subjects (never water, clouds, grass or mist; always snow and ice), in English and plural",
+    "light": "scene",
+    "sound": "a quiet natural ambience in English",
+    "extra": "0-2 optional English sentences for a special physical constraint; otherwise empty"
+  }
+}

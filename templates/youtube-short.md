@@ -7,7 +7,7 @@
 - **Video URL:**
 - **Ngày upload:**
 - **Giờ đăng dự kiến:** <theo channel/<ch>/publish.md → Giờ đăng>
-- **Video:** 1080×1920, <độ dài> s, đoạn <in>–<out> của bài `<song-slug>` (`short.json`); file trên GPU server, nằm trong zip S3 của album (`short/`, ghi ở `../s3-package.json`)
+- **Video:** 1080×1920, <độ dài> s, đoạn <in>–<out> của bài `<song-slug>` (`short.json`); file trên GPU server, nằm trong zip Google Drive của album (`short/`, ghi ở `../s3-package.json`)
 - **Video đích (Related video):** album `<NNN-slug>` · <Video URL của album, hoặc "chưa upload: đăng album trước">
 - **Version đóng gói:** <trục đang thử, hoặc "mặc định">
 - **Kho câu (phrase bank):** <id câu R&D mà title / hook dùng, hoặc "không">

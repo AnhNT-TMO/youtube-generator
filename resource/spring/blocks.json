@@ -1,0 +1,18 @@
+{
+  "image": {
+    "head": "Generate a still IMAGE (a single photograph, not a video). One single picture, not a collage, grid or split frame:",
+    "realism": "Realistic spring landscape photograph, looks like a real place shot on a full-frame camera with a {lens}, true-to-life materials and textures, accurate real-world scale and proportions, natural color grading.",
+    "look": {
+      "interior-bright": "Bright natural daylight with lifted shadows and clear detail, never murky or crushed.",
+      "day": "Soft fresh daylight under a natural sky, balanced exposure with clean highlights and gentle shadows.",
+      "soft-morning": "Quiet morning light through young leaves, pale warmth, soft contrast and a calm airy atmosphere.",
+      "golden": "Low warm golden-hour light with long soft shadows, fresh greens and restrained highlights.",
+      "overcast": "Bright spring overcast, soft shadow edges, moist natural surfaces and gentle true-to-life colors.",
+      "after-rain": "Fresh light after rain, damp leaves and stones, delicate reflections and clean air without a dramatic storm sky."
+    },
+    "lights": "Natural light only: believable daylight, soft sky light and restrained reflections; no artificial glow, fantasy beams or floating sparkles.",
+    "motion_ready": "Clear foreground, middle ground and background layers, with {motion_elements} clearly visible and physically plausible.",
+    "clean": "The place is unoccupied: no people, human figures or silhouettes, no animals, birds, vehicles, signs, text, numbers, logos or brand marks; leaves, flowers, water and branches have believable real-world geometry.",
+    "tail": "Sharp focus, a single 16:9 landscape photograph, clean edges and natural photographic depth."
+  }
+}

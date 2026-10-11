@@ -213,3 +213,10 @@ Hôm nay 9 lần "360 s chưa có ảnh → stuck". 2 lần PM reconcile thì �
 - 2026-10-05 13:25 — reviewer: máy tiến sâu vào cảnh (snowy-forest-16 bay qua cổng) mà số đo chỉ 4% / ×1.05 → cổng tự động bỏ sót kiểu drift-forward sâu; reviewer vẫn bắt bằng mắt. Ứng viên cải tiến đo sau lô.
 - 2026-10-05 13:09–13:39 — cả 2 cổng không proxy: 68 clip / 30 phút (~136/h, bằng sáng). 9226: 54, 9224: 14 (tab 899940CD chậm, 3 quá hạn) — theo dõi tiếp.
 - 2026-10-05 15:32–16:05 · Bỏ giữ ballroom + snow-globes (CEO duyệt), chạy 23 cảnh với khuôn prompt hiện tại (slide, fixed lens, cổng đo tự động, refix): đạt 20/23 (ballroom 9/10, snow-globes 11/13); lượt 1 đạt 14/23. Hỏng: ballroom-20 đẩy vào 3 lượt; snow-globes-09 tàu trong cầu đổi hình; snow-globes-15 ghế cáp treo mô hình mọc người 2 lượt. Tỉ lệ thấp cũ (2/12, 1/6) là của khuôn arc/drift cũ → luật giữ đề tài cần tính lại theo khuôn hiện tại, không cộng dồn lượt cũ.
+
+## 2026-10-06 — CEO: xong hết ảnh + clip trong sáng
+- Lane ảnh: 616 đạt, 0 tồn. Vẽ lại 7 cảnh nhóm 3 (thêm câu cấm watermark/logo góc khung) và 10 cảnh còn thiếu; countryside-day-20 vá watermark bằng PIL.
+- Lane clip: 775 đạt, 30 bỏ, 0 tồn. Làm lại các cảnh fail có giá trị bằng cách lưu job cũ vào archive/ + xóa video.status ở thẻ + draft lại.
+- Câu máy: "almost still" không ổn định (muse vẫn đẩy vào ×1.24–1.45 hoặc đứng im); câu pull-back lúc đầu đạt 2/2 rồi lùi quá 4/6 (×0.47–0.78) → bỏ. Dùng slide ngắn + "same distance, never closer, never back, never zooms, framing never tighter or wider"; lặp lỗi thì đảo hướng + câu khóa cỡ vật.
+- Cổng đo tự động bỏ sót máy tiến thẳng tâm, lùi xa và xoay (steam-train-12, christmas-market-10, ballroom-08, cafe-06, ornaments-macro-05); reviewer bắt bằng mắt (cỡ vật chính đầu/cuối). Ứng viên cải tiến: đo tỉ lệ cỡ vật/scale thay vì chỉ dời khung.
+- Fail sớm khi một lỗi lặp lần 3 (tính cả khuôn cũ). Lỗi muse không sửa được bằng prompt: người ở phố/quầy nhìn sâu (cafe, christmas-market, ice-rink), hạt tuyết trong tiệm có cửa mở ra phố (bookshop), chữ trên máy kéo/cabin, trời đổi hoàng hôn hồng (ski-village) → cần đổi ảnh nguồn, không sửa prompt tiếp.

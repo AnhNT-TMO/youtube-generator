@@ -1,0 +1,418 @@
+{
+  "theme": "alpine-lakes/wide",
+  "target": 27,
+  "defaults": {
+    "lens": "24mm lens at f/8",
+    "look": "day",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "wide",
+      "category": "alpine-lakes",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "al-w-01",
+      "subject": "A round cirque lake cupped in a bowl of grey granite cliffs, long fans of old snow on the back wall reaching down to the water and a thin band of mist lying on the surface",
+      "lens": "20mm lens at f/8",
+      "look": "dawn",
+      "composition": "Seen from a high rim about 40 degrees above the water, looking down into the bowl; dark rim rocks cut across the bottom edge, the round lake fills the lower centre of the frame and the snow-streaked cliff wall rises to the top with only a thin strip of pale sky",
+      "motion_elements": "the thin band of mist on the lake and the faint ripples on the water",
+      "tags": {
+        "time": "dawn",
+        "palette": "slate blue",
+        "comp": "overlook",
+        "anchor": "cirque-lake",
+        "season": "late-snow"
+      }
+    },
+    {
+      "id": "al-w-02",
+      "subject": "A long narrow lake filling a glacial trough between steep slopes of spruce and golden larch, low fog banks lying on the dark water",
+      "lens": "35mm lens at f/8",
+      "look": "misty",
+      "composition": "Standing at the head of the lake at eye level and looking straight down its length; a strip of gravel shore fills the bottom of the frame, the water narrows toward the centre and the overlapping valley walls close in from both sides into the fog",
+      "motion_elements": "the fog banks drifting slowly along the water and the larch crowns stirring on the slopes",
+      "tags": {
+        "time": "morning",
+        "palette": "gray mist",
+        "comp": "axis",
+        "anchor": "long-lake",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "al-w-03",
+      "subject": "A chain of three small tarns stepped down a granite bench, linked by short white outflow streams, deep olive-green turf between them and a jagged grey ridge behind",
+      "look": "day",
+      "composition": "From a high shoulder looking down about 35 degrees along the chain; the uppermost tarn sits in the lower left, the second and third tarns step diagonally toward the upper right, and the jagged ridge runs across the top third",
+      "motion_elements": "the short outflow streams between the tarns, the light ripples on the water and the cloud shadows sliding over the bench",
+      "tags": {
+        "time": "day",
+        "palette": "slate blue",
+        "comp": "overlook",
+        "anchor": "tarn-chain",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "al-w-04",
+      "subject": "A small shallow tarn on a bare stony plateau, rust-coloured grass around its rim, a low distant line of rounded summits and towering sunlit cumulus clouds",
+      "lens": "16mm lens at f/11",
+      "look": "golden",
+      "composition": "Camera at standing height with the horizon set low in the frame; the small tarn lies flat across the bottom centre mirroring the clouds, the distant summits form a thin band, and the cloud-filled sky takes about sixty percent of the frame",
+      "motion_elements": "the slowly billowing cumulus clouds and the rust-coloured grass swaying around the tarn",
+      "tags": {
+        "time": "golden",
+        "palette": "muted gold",
+        "comp": "big-sky",
+        "anchor": "plateau-tarn",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "al-w-05",
+      "subject": "A half-frozen mountain lake in spring melt, cracked white ice plates on the near side giving way to open dark water, with snow-covered peaks rising behind",
+      "lens": "16mm lens at f/11",
+      "look": "dawn",
+      "composition": "Camera low at the edge of the ice; broken ice plates and pools of meltwater fill the bottom third of the frame, the open water spreads across the middle and the snowy peaks fill the top under a pale sky",
+      "motion_elements": "the meltwater lapping between the ice plates, the ripples on the open water and a thin cloud near the peaks",
+      "tags": {
+        "time": "dawn",
+        "palette": "icy blue",
+        "comp": "low-foreground",
+        "anchor": "half-frozen-lake",
+        "season": "late-snow"
+      }
+    },
+    {
+      "id": "al-w-06",
+      "subject": "A milky milky jade-gray glacial lake below a hanging glacier, grey moraine walls on both sides and ridge after ridge of dark rock stacked behind",
+      "lens": "135mm lens at f/8",
+      "look": "overcast",
+      "composition": "Long telephoto view from far across the valley with no foreground; a band of milky pale grey-green water runs along the bottom, the grey moraine walls and the cracked glacier sit in the middle, and the compressed ridges stack up to the top edge",
+      "motion_elements": "the soft ripple bands on the milky water and the thin cloud sliding across the glacier",
+      "tags": {
+        "time": "overcast",
+        "palette": "glacier blue",
+        "comp": "tele-layers",
+        "anchor": "glacial-lake",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "al-w-07",
+      "subject": "A long quiet mountain lake in morning mist, a forested headland in the middle distance and a pale rounded summit fading into cloud",
+      "lens": "28mm lens at f/8",
+      "look": "misty",
+      "composition": "From inside the lakeside forest at eye level; two dark spruce trunks stand at the left and right edges with a low bough across the top, framing the misty lake, the headland and the faint summit in the opening",
+      "motion_elements": "the mist drifting over the lake and the spruce boughs at the frame edges moving slightly",
+      "tags": {
+        "time": "morning",
+        "palette": "deep green",
+        "comp": "natural-frame",
+        "anchor": "forest-shore",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "al-w-08",
+      "subject": "A clear blue high lake with a tiny rocky island holding three wind-bent pines, a jagged skyline of grey peaks and scattered white clouds",
+      "lens": "28mm lens at f/8",
+      "look": "day",
+      "composition": "Eye-level view across the lake from a low shore; a thin strip of shore stones at the bottom, the open water across the middle with the island on the right third, and the jagged peaks along the top third",
+      "motion_elements": "the wind ripples around the island, the pine boughs swaying and the slow clouds over the peaks",
+      "tags": {
+        "time": "day",
+        "palette": "slate blue",
+        "comp": "across",
+        "anchor": "rock-island",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "al-w-09",
+      "subject": "A long, narrow milky pale grey-green lake bending in a gentle curve around a low rocky point, dark wet grey rock slopes with dwarf spruce above it after rain, a pale gravel beach along the inside of the bend, clouds clearing off the slopes, no waterfalls on the slopes, only dry grass and grey stones in the foreground",
+      "lens": "28mm lens at f/8",
+      "look": "after-rain",
+      "composition": "From the top of a slope looking down about 40 degrees; the lake enters at lower left, bends around the rocky point in the middle and leaves at the right edge, the gravel beach tracing the inner bend, the dark slopes rising along the far side to a band of clearing cloud",
+      "motion_elements": "the clouds lifting off the limestone walls and the light ripples across the milky pale grey-green water",
+      "tags": {
+        "time": "after-rain",
+        "palette": "turquoise",
+        "comp": "overlook",
+        "anchor": "glacial-lake",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "al-w-10",
+      "subject": "A small round tarn on a deep olive-green alpine meadow ringed with white cottongrass, a rocky spur on one side and a distant row of blue peaks",
+      "lens": "20mm lens at f/8",
+      "look": "day",
+      "composition": "Camera low in the meadow grass; nodding cottongrass tufts fill the lower third of the frame, the round tarn sits in the middle with the rocky spur on the left, and the blue peaks line the horizon",
+      "motion_elements": "the cottongrass heads nodding in the breeze and the soft ripples on the tarn",
+      "tags": {
+        "time": "day",
+        "palette": "green blue",
+        "comp": "low-foreground",
+        "anchor": "meadow-tarn",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "al-w-11",
+      "subject": "A large lake stretching across the frame below a wall of dark basalt cliffs, slender meltwater falls on the cliffs and the first snow dusting their ledges",
+      "lens": "28mm lens at f/8",
+      "look": "overcast",
+      "composition": "Eye-level view straight across the lake from a low gravel shore; the grey water fills the lower half, the dark cliff wall with its white falls spans the whole middle band and a low grey sky closes the top",
+      "motion_elements": "the slender meltwater falls on the cliffs and the gentle ripples on the grey lake",
+      "tags": {
+        "time": "overcast",
+        "palette": "charcoal",
+        "comp": "across",
+        "anchor": "cliff-wall",
+        "season": "early-snow"
+      }
+    },
+    {
+      "id": "al-w-12",
+      "subject": "A slope of larches in soft muted ochre, only partly turned, mixed with dark green spruces above a dark lake shore, a shadowed grey rock ridge with soft natural texture behind it, and only the far summit touched by pale late light, natural unprocessed photo",
+      "lens": "200mm lens at f/8",
+      "look": "golden",
+      "composition": "Long telephoto compression with no foreground; a sliver of dark lake water along the bottom, the golden larch slope as the bright middle layer, the shadowed ridge above it and the glowing summit near the top",
+      "motion_elements": "the larch crowns trembling in the breeze and the faint shimmer on the sliver of lake",
+      "tags": {
+        "time": "golden",
+        "palette": "muted gold",
+        "comp": "tele-layers",
+        "anchor": "larch-shore",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "al-w-13",
+      "subject": "A broad high lake at the edge of winter, a white rim of shore ice and dark open water in the middle, a low snowy ridge and a vast layered cloud deck with pale breaks",
+      "lens": "20mm lens at f/8",
+      "look": "overcast",
+      "composition": "Horizon set in the lower third; the shore ice and open water form a thin band along the bottom, the low snowy ridge sits on the horizon, and the layered cloud deck fills nearly sixty percent of the frame",
+      "motion_elements": "the layered cloud deck drifting slowly and the dark open water rippling beyond the ice",
+      "tags": {
+        "time": "overcast",
+        "palette": "icy blue",
+        "comp": "big-sky",
+        "anchor": "half-frozen-lake",
+        "season": "winter-edge"
+      }
+    },
+    {
+      "id": "al-w-14",
+      "subject": "A cirque lake below a horseshoe of steep peaks, the water in cool shadow and the highest summits lit warm by the evening sun",
+      "look": "golden",
+      "composition": "Looking out through a narrow cleft between two large lichen-covered boulders; the dark boulder sides frame the left and right edges, and the lake and lit horseshoe of peaks fill the opening in the middle",
+      "motion_elements": "the soft ripples on the shaded lake and a thin cloud drifting past the lit summits",
+      "tags": {
+        "time": "golden",
+        "palette": "blue gold",
+        "comp": "natural-frame",
+        "anchor": "cirque-lake",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "al-w-15",
+      "subject": "A long lake seen from its outflow, water sliding smoothly over a low rock sill in front, snow-dusted ridges on both sides and a pale dawn sky at the far end",
+      "look": "dawn",
+      "composition": "Camera just above the rock sill at the lake's foot, looking along the length of the lake; the smooth sill and its sheet of water cross the bottom of the frame, the lake recedes to the centre and the snowy ridges converge toward the far end",
+      "motion_elements": "the sheet of water sliding over the rock sill and the faint mist on the far end of the lake",
+      "tags": {
+        "time": "dawn",
+        "palette": "pale blue",
+        "comp": "axis",
+        "anchor": "outflow-sill",
+        "season": "early-snow"
+      }
+    },
+    {
+      "id": "al-w-16",
+      "subject": "A milky pale grey-green lake fed by a braided inflow stream spreading across a pale pebble delta, wet grey limestone walls and clouds breaking above them",
+      "lens": "20mm lens at f/8",
+      "look": "after-rain",
+      "composition": "Camera low on the delta just above the stream; shallow braided channels over pale pebbles fill the bottom third, the milky pale grey-green lake opens across the middle and the wet limestone walls and breaking clouds fill the top",
+      "motion_elements": "the braided stream channels running over the pebbles and the clouds breaking over the walls",
+      "tags": {
+        "time": "after-rain",
+        "palette": "turquoise",
+        "comp": "low-foreground",
+        "anchor": "inflow-delta",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "al-w-17",
+      "subject": "A dark mountain lake dotted with several small rocky islets carrying spruces and larches, streamers of mist threading between them and autumn colour on the far shore",
+      "lens": "35mm lens at f/8",
+      "look": "misty",
+      "composition": "From a high bluff looking down about 35 degrees; the islets are scattered across the middle of the frame on dark water, the mist streamers run between them, and the far autumn shore forms a soft band at the top",
+      "motion_elements": "the mist streamers threading between the islets and the faint ripples on the dark water",
+      "tags": {
+        "time": "morning",
+        "palette": "gray mist",
+        "comp": "overlook",
+        "anchor": "rock-island",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "al-w-18",
+      "subject": "A lake held back by a long curving moraine ridge, old snow patches on the slopes above it and low warm sun skimming across the water",
+      "lens": "35mm lens at f/8",
+      "look": "golden",
+      "composition": "Eye-level view across the lake from its far shore; calm water in the lower half, the curving moraine ridge sweeping across the middle from left to right, and snow-patched slopes and sky above",
+      "motion_elements": "the light shimmer on the water and the slow high clouds over the slopes",
+      "tags": {
+        "time": "golden",
+        "palette": "amber slate",
+        "comp": "across",
+        "anchor": "moraine-dam",
+        "season": "late-snow"
+      }
+    },
+    {
+      "id": "al-w-19",
+      "subject": "Layered dark cliffs above a strip of black lake water, fresh snow on their ledges and bands of low cloud threading through the layers",
+      "lens": "100mm lens at f/8",
+      "look": "misty",
+      "composition": "Telephoto view with no foreground; a strip of black water along the bottom edge, then three or four compressed layers of snowy cliff separated by bands of low cloud up to the top of the frame",
+      "motion_elements": "the bands of low cloud threading slowly between the cliff layers and the faint ripples on the black water",
+      "tags": {
+        "time": "morning",
+        "palette": "slate",
+        "comp": "tele-layers",
+        "anchor": "cliff-wall",
+        "season": "winter-edge"
+      }
+    },
+    {
+      "id": "al-w-20",
+      "subject": "A calm high lake holding the reflection of a lone pyramid-shaped peak, low dawn clouds with pale colour spreading across a wide sky",
+      "lens": "16mm lens at f/11",
+      "look": "dawn",
+      "composition": "Horizon placed low; the lake and the reflected peak take the bottom third, the real peak stands small on the horizon slightly right of centre, and the wide dawn sky with long clouds fills the upper sixty percent",
+      "motion_elements": "the long dawn clouds drifting and the faint ripples softening the reflection",
+      "tags": {
+        "time": "dawn",
+        "palette": "pale blue",
+        "comp": "big-sky",
+        "anchor": "peak-reflection",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "al-w-21",
+      "subject": "A milky milky pale grey-green lake below a glacier snout, still partly covered by melting ice, with a few small ice floes resting near the far shore",
+      "look": "day",
+      "composition": "Looking out between snow-laden dwarf pine boughs that fill the left and right edges and part of the top; the milky pale grey-green lake, the floes and the glacier snout sit in the clear centre of the frame",
+      "motion_elements": "the dwarf pine boughs moving slightly in the breeze and the soft ripples in the open milky pale grey-green water",
+      "tags": {
+        "time": "day",
+        "palette": "glacier blue",
+        "comp": "natural-frame",
+        "anchor": "glacial-lake",
+        "season": "late-snow"
+      }
+    },
+    {
+      "id": "al-w-22",
+      "subject": "A cobalt mountain lake edged by smooth glacier-polished granite slabs with long striations, a line of stone pines on the far shore catching low warm light",
+      "lens": "16mm lens at f/11",
+      "look": "golden",
+      "composition": "Camera low on the slabs; the striated rock with a thin film of water at its lip fills the bottom third, the cobalt lake spreads across the middle and the lit stone pines and a craggy massif fill the top",
+      "motion_elements": "the thin film of water sliding at the lip of the slabs, the ripples on the lake and the stone pine branches moving",
+      "tags": {
+        "time": "golden",
+        "palette": "muted gold",
+        "comp": "low-foreground",
+        "anchor": "polished-slabs",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "al-w-23",
+      "subject": "A dark peaty lake on a boulder-strewn plateau, the first snow dusting the low crags beyond and a veil of drizzle lifting off the far end",
+      "look": "after-rain",
+      "composition": "Eye-level view across the plateau; scattered boulders and wet heather along the bottom, the dark lake spread wide across the middle and the snow-dusted crags with the lifting drizzle veil above",
+      "motion_elements": "the drizzle veil lifting slowly off the far end and the ruffled water near the shore",
+      "tags": {
+        "time": "after-rain",
+        "palette": "slate",
+        "comp": "across",
+        "anchor": "plateau-tarn",
+        "season": "early-snow"
+      }
+    },
+    {
+      "id": "al-w-24",
+      "subject": "A wide granite plateau scattered with dozens of small irregular tarns among rounded rock humps and rust-brown tundra, a far ridge under a soft grey sky",
+      "lens": "20mm lens at f/8",
+      "look": "overcast",
+      "composition": "From a high rock knob looking down about 30 degrees; the maze of small tarns and rock humps spreads across the lower two thirds of the frame and the far ridge with grey sky fills the top",
+      "motion_elements": "the light ripples on the many small tarns and the tundra grass swaying",
+      "tags": {
+        "time": "overcast",
+        "palette": "slate gray",
+        "comp": "overlook",
+        "anchor": "tarn-chain",
+        "season": "autumn"
+      }
+    },
+    {
+      "id": "al-w-25",
+      "subject": "A clear lake at the edge of winter, frosted stones visible under the shallow water in front and a snow-capped peak mirrored on the calm surface",
+      "lens": "20mm lens at f/8",
+      "look": "day",
+      "composition": "Camera just above the water at the shoreline; frosted stones under clear shallow water fill the bottom third, the calm open water with the peak's reflection fills the middle and the real snow-capped peak rises at the top",
+      "motion_elements": "the faint ripples over the frosted stones and the slow cloud near the peak",
+      "tags": {
+        "time": "day",
+        "palette": "icy blue",
+        "comp": "low-foreground",
+        "anchor": "peak-reflection",
+        "season": "winter-edge"
+      }
+    },
+    {
+      "id": "al-w-26",
+      "subject": "Successive spruce-covered ridges receding in fading tones above a pale strip of lake, wet mist rising from the forest after rain",
+      "lens": "85mm lens at f/8",
+      "look": "after-rain",
+      "composition": "Telephoto view with no foreground; the pale strip of lake runs along the bottom, then each spruce ridge sits behind the last in lighter tones up to a soft sky at the top",
+      "motion_elements": "the mist rising from the forested ridges and the faint ripples on the strip of lake",
+      "tags": {
+        "time": "after-rain",
+        "palette": "deep green",
+        "comp": "tele-layers",
+        "anchor": "spruce-ridges",
+        "season": "summer"
+      }
+    },
+    {
+      "id": "al-w-27",
+      "subject": "A long low shore of golden larches beside a mountain lake, a ridge above them freshly dusted with snow and a pale pink dawn sky",
+      "lens": "35mm lens at f/8",
+      "look": "dawn",
+      "composition": "Eye-level view across calm water from a pebbly shore; the water fills the lower half, the line of golden larches runs across the middle and the snow-dusted ridge and dawn sky sit above",
+      "motion_elements": "the larch crowns stirring, the soft ripples on the lake and the thin cloud over the ridge",
+      "tags": {
+        "time": "dawn",
+        "palette": "pale gold",
+        "comp": "across",
+        "anchor": "larch-shore",
+        "season": "early-snow"
+      }
+    }
+  ]
+}

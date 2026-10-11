@@ -1,0 +1,189 @@
+{
+  "theme": "spring-water/close",
+  "target": 16,
+  "defaults": {
+    "lens": "85mm lens at f/5.6",
+    "look": "day",
+    "composition": "One main waterside texture fills the foreground and middle ground at a natural standing distance, with the water and fresh green bank softly out of focus behind; the view looks slightly down and across",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "close",
+      "category": "spring-water",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "sw-c-01",
+      "subject": "Fresh moss on a stone at the edge of a brook, a thin film of water flowing past and soft morning light on the dewy tips",
+      "look": "soft-morning",
+      "motion_elements": "the thin film of water flowing past",
+      "tags": {
+        "time": "morning",
+        "palette": "moss green"
+      }
+    },
+    {
+      "id": "sw-c-02",
+      "subject": "Young beech leaves on a low branch hanging over clear stream water, pale translucent green with the water sparkling below",
+      "lens": "100mm lens at f/5.6",
+      "look": "day",
+      "motion_elements": "the beech leaves fluttering and the sparkling water",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "sw-c-03",
+      "subject": "A small spray of white blackthorn blossom on a dark twig over a slow stream, warm backlight on the petals and the water glowing softly behind",
+      "lens": "85mm lens at f/5.6",
+      "look": "golden",
+      "motion_elements": "the blossom stirring and the soft glow on the water",
+      "tags": {
+        "time": "golden",
+        "palette": "white gold"
+      }
+    },
+    {
+      "id": "sw-c-04",
+      "subject": "Clear water spilling over a rounded mossy stone in a small woodland cascade, with wet fern fronds on one side and a dark pool below",
+      "look": "overcast",
+      "motion_elements": "the water spilling over the stone",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss green"
+      }
+    },
+    {
+      "id": "sw-c-05",
+      "subject": "Raindrops falling from a hazel twig with fresh green leaves into a still pond, small rings spreading across the surface near the mossy bank",
+      "lens": "70mm lens at f/8",
+      "look": "after-rain",
+      "motion_elements": "the drops falling and the rings spreading",
+      "tags": {
+        "time": "after-rain",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "sw-c-06",
+      "subject": "A cluster of unfurling fern fiddleheads on a mossy stream bank, with clear water flowing over pebbles behind them and young leaves above",
+      "lens": "60mm lens at f/5.6",
+      "look": "soft-morning",
+      "motion_elements": "the fiddleheads stirring and the water flowing",
+      "tags": {
+        "time": "morning",
+        "palette": "pale green"
+      }
+    },
+    {
+      "id": "sw-c-07",
+      "subject": "Bright watercress leaves at the edge of a clear spring pool, with water welling up through pale gravel and a strip of mossy bank",
+      "look": "day",
+      "motion_elements": "the water welling up through the gravel",
+      "tags": {
+        "time": "day",
+        "palette": "clear green"
+      }
+    },
+    {
+      "id": "sw-c-08",
+      "subject": "Soft yellow willow catkins on a slender branch leaning over a stream, warm low light on the catkins and the water glinting behind",
+      "lens": "100mm lens at f/5.6",
+      "look": "golden",
+      "motion_elements": "the willow catkins swaying",
+      "tags": {
+        "time": "golden",
+        "palette": "soft gold"
+      }
+    },
+    {
+      "id": "sw-c-09",
+      "subject": "Glossy marsh marigold leaves and yellow blooms at the water's edge, young reed shoots beside them and the calm pond surface beyond",
+      "lens": "50mm lens at f/5.6",
+      "look": "overcast",
+      "motion_elements": "the leaves moving and the soft ripples on the pond",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss yellow"
+      }
+    },
+    {
+      "id": "sw-c-10",
+      "subject": "A clump of wet pale primroses on a mossy stream bank, with clear water rushing over brown stones just behind them",
+      "look": "after-rain",
+      "motion_elements": "the water rushing over the stones",
+      "tags": {
+        "time": "after-rain",
+        "palette": "primrose green"
+      }
+    },
+    {
+      "id": "sw-c-11",
+      "subject": "A tuft of young green sedges standing in shallow pond water, their reflections below and a thin morning mist on the surface behind",
+      "look": "soft-morning",
+      "motion_elements": "the sedges swaying and the thin mist",
+      "tags": {
+        "time": "morning",
+        "palette": "pale green"
+      }
+    },
+    {
+      "id": "sw-c-12",
+      "subject": "Clear water rippling over smooth brown and grey pebbles in a shallow stream, with fresh grass and a few buttercups along the edge",
+      "lens": "50mm lens at f/8",
+      "look": "day",
+      "motion_elements": "the water rippling over the pebbles",
+      "tags": {
+        "time": "day",
+        "palette": "clear green"
+      }
+    },
+    {
+      "id": "sw-c-13",
+      "subject": "Pale pink cherry blossom petals floating on a quiet stream eddy beside a mossy stone, warm light on the water and the grassy bank",
+      "look": "golden",
+      "motion_elements": "the petals drifting in the eddy",
+      "tags": {
+        "time": "golden",
+        "palette": "soft pink"
+      }
+    },
+    {
+      "id": "sw-c-14",
+      "subject": "A small trickle of water running down a mossy rock face into a woodland pool, with delicate wood sorrel leaves around it",
+      "lens": "85mm lens at f/8",
+      "look": "overcast",
+      "motion_elements": "the trickle running down the rock",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss green"
+      }
+    },
+    {
+      "id": "sw-c-15",
+      "subject": "Wet young hawthorn leaves and clusters of white blossom on a branch over a brook, drops on the petals and the water flowing beneath",
+      "lens": "70mm lens at f/5.6",
+      "look": "after-rain",
+      "motion_elements": "the blossom swaying and the flowing water",
+      "tags": {
+        "time": "after-rain",
+        "palette": "white blossom"
+      }
+    },
+    {
+      "id": "sw-c-16",
+      "subject": "Small round lily pads just opening on still pond water, dew beads on their edges and a few young reed shoots rising between them",
+      "lens": "60mm lens at f/8",
+      "look": "soft-morning",
+      "motion_elements": "the floating pads moving slightly on the water",
+      "tags": {
+        "time": "morning",
+        "palette": "pale green"
+      }
+    }
+  ]
+}

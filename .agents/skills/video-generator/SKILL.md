@@ -1,18 +1,17 @@
 ---
 name: video-generator
-description: Turn a channel's still thumbnail into its YouTube video, in three steps - (1) add the channel's effects to the image to make a seamless 5-minute loop video (breathing light, drifting dust/snow, channel logo top-right, like/subscribe clicks bottom-right, 4 s logo intro; or, for a channel with `cinema` on, a 2.5D moving picture: depth-map camera moves, window rays / halos / glow / sweeps, stars, dust, embers, bokeh, mist, one combination per video picked by `video.py variant` and checked by `video.py qa`), no music needed; (2) once the album audio has been mixed (by another skill), repeat that loop to the audio's exact length and add the audio-reactive spectrum bars, the full video staying on the GPU server; (3) pack the album video and its Short into ONE zip on the server (each with its thumbnails - YouTube JPG + full-resolution original -, youtube.md and paste-ready fields, the Short in `short/`, a README with the upload order) and upload it to S3 through presigned requests signed on this Mac ("zip lên S3", "đóng gói upload", "package"). Use when the user wants a loop/video made or re-rendered for an album or its Short, wants loops batch-rendered for many albums, wants to tune how the effects sit on an image ("chỉnh ánh sáng", "bụi bay hướng nào", "logo", "subscribe", "intro"), sets up the video look of a new channel, or says "tạo video 5 phút", "render loop", "ghép video với nhạc", "thêm sóng nhạc".
+description: Turn a channel's still thumbnail into its YouTube video, in three steps - (1) add the channel's effects to the image to make a seamless 5-minute loop video (breathing light, drifting dust/snow, channel logo top-right, like/subscribe clicks bottom-right, 4 s logo intro; or, for a channel with `cinema` on, a 2.5D moving picture: depth-map camera moves, window rays / halos / glow / sweeps, stars, dust, embers, bokeh, mist, one combination per video picked by `video.py variant` and checked by `video.py qa`), no music needed; (2) once the album audio has been mixed (by another skill), repeat that loop to the audio's exact length and add the audio-reactive spectrum bars, the full video staying on the GPU server; (3) pack the album video and its Short into ONE zip on the server (each with its thumbnails - YouTube JPG + full-resolution original -, youtube.md and paste-ready fields, the Short in `short/`, a README with the upload order) and the server uploads it to Google Drive with rclone (S3 as fallback) ("zip lên Drive", "zip lên S3", "đóng gói upload", "package"). Use when the user wants a loop/video made or re-rendered for an album or its Short, wants loops batch-rendered for many albums, wants to tune how the effects sit on an image ("chỉnh ánh sáng", "bụi bay hướng nào", "logo", "subscribe", "intro"), sets up the video look of a new channel, or says "tạo video 5 phút", "render loop", "ghép video với nhạc", "thêm sóng nhạc".
 ---
 
 # Video generator
 
-Three steps, run on an **album folder** `channel/<name>/albums/NNN-slug/` (older `ideas/` and `singles/` folders still
-work); the album's Short lives in its `short/` subfolder (*Short* below):
+Three steps, run on an **album folder** `channel/<name>/albums/NNN-slug/`; the album's Short lives in its `short/` subfolder (*Short* below):
 
 | Step | Input | Command | Output |
 |---|---|---|---|
 | 1. Image → 5-min video | `<dir>/thumbnail.png` + channel look | `video.py loop <dir>` | `<dir>/video/`: `loop.mp4` (seamless 5 min), `loop_intro.mp4` (4 s logo intro), `loop_seam.mp4` (check clip) |
 | 2. Loop → full video | step 1's loop + the **mixed album audio** | `video.py album <dir> <audio>` | full video **on the server** (intro, loop repeated to the audio's length, spectrum bars, audio); `<dir>/video/` gets only `video.mp4.json` (ffprobe), `check_5s.png`, `check_mid.png`, `remote.json` |
-| 3. Package → S3 | step 2's video + `<dir>/youtube.md` + thumbnail, and the Short's render + `short/youtube.md` | `video.py package <album>` (run by step 2 itself only when the Short is ready too) | **one zip per album** holding the album and its Short (`short/`): `s3://$VG_S3_BUCKET/$VG_S3_PREFIX<channel>/albums/<album>/<album>-<time>.zip` (`remote.env`; an old `singles/` folder: `single-<slug>-<time>.zip` in the album named by `album:` in its `single.md`), recorded in `<album>/s3-package.json` |
+| 3. Package → Drive | step 2's video + `<dir>/youtube.md` + thumbnail, and the Short's render + `short/youtube.md` | `video.py package <album>` (run by step 2 itself only when the Short is ready too) | **one zip per album** holding the album and its Short (`short/`): `$VG_DRIVE_REMOTE:$VG_DRIVE_PREFIX<channel>/albums/<album>/<album>-<time>.zip` (`remote.env`; S3 when `VG_DRIVE_REMOTE` is empty), recorded in `<album>/s3-package.json` |
 
 Step 1 needs no music, so loops can be made for many albums ahead of time (`video.py batch`), before their master
 is mixed. Step 2 runs whenever the album's master exists.
@@ -55,7 +54,7 @@ low-level commands are in `$SK/references/internals.md`.
    `--at 25` so the like/subscribe group is on screen. If the logo corner (top-right) or the
    subscribe corner (bottom-right) covers something important, tell the user; the layout is
    shared across the channel and should not move per image.
-3. **Render.** `$V loop <dir>`. For every album (and old idea / single folder) that has a thumbnail but no loop yet:
+3. **Render.** `$V loop <dir>`. For every album that has a thumbnail but no loop yet:
    `$V batch channel/<name>`.
 4. **Verify.** Read frames from `loop_intro.mp4` (≈0.5 s, 1.6 s, 3.3 s) and from `loop_seam.mp4`
    around 4 s, where the loop joins. Report anything odd. Never claim to have watched a video.
@@ -84,9 +83,7 @@ mist, all seamless in the 5-min loop. Keys: `references/config.md` → `cinema`.
 ## Step 2 — loop → full-length video with spectrum bars
 
 1. **Input audio** is the mixed album file from the `audio-album-assembly` skill (WAV preferred;
-   AAC `.m4a` is muxed without re-encoding): `channel/<name>/albums/<album>/audio/master/<album>.wav`. An old album
-   made from an idea (`plan.yaml sources.idea`) with no `thumbnail.png` / `video.json` / `video/loop.mp4` of its own
-   still uses the idea's.
+   AAC `.m4a` is muxed without re-encoding): `channel/<name>/albums/<album>/audio/master/<album>.wav`.
 2. **Render.** `$V album <dir> <audio>`. It re-renders the loop on the server (cheap),
    puts the intro first, repeats the loop to the audio's length and draws the bars from the
    audio. The full video **stays on the server** (`~/video-generator/out/<job>/video.mp4`); it is not downloaded
@@ -113,7 +110,7 @@ Layout (logo top-left, no subscribe, no intro, bars above the bottom 25 %, text 
 `package <album>/short` refuses and names that command; an old `shorts/NNN-slug`: `shorts.py migrate` first).
 `--local` / `--download` keep the Short as `<short>/video/<album>-short.mp4`.
 
-## Step 3 — package for YouTube → S3 (one zip per album: album + Short)
+## Step 3 — package for YouTube → Google Drive (one zip per album: album + Short)
 
 `$V package <album>` (again any time, e.g. after editing a youtube.md; each run uploads a new timestamped zip).
 Needs step 2's video on the server + `<album>/youtube.md` (`upload-youtube-publish`), and the Short: `short/` rendered
@@ -141,18 +138,25 @@ on the server (`video.py short`) + `short/youtube.md` (video-shorts). Chapters c
    ```
 4. **`--dry-run`:** stops here: prints the zip's files + sizes and the README, deletes the test zip on the server,
    uploads nothing, writes no record, leaves the videos on the server.
-5. **Upload:** this Mac signs, the server sends the bytes: always a multipart upload (4K albums pass 5 GB, the limit
-   of a single presigned POST), one presigned PUT per 256 MB part, each part retried 3×, completed (or aborted) here.
-   Credentials = this Mac's AWS default chain (or `VG_AWS_PROFILE`); bucket / region / prefix in `remote.env`.
-6. **Clean the server** once `head_object` confirms the size: the zip, the staging folder, both full videos (+ probes /
+5. **Upload:** the server runs `rclone copyto` (inside `youtube.slice`, 256 MB chunks, retries) to
+   `$VG_DRIVE_REMOTE:$VG_DRIVE_PREFIX<channel>/albums/<album>/`; the Mac sends nothing. The rclone remote lives in the
+   server's `~/.config/rclone/rclone.conf` (Google login = CEO; setup below). Fallback when `VG_DRIVE_REMOTE` is empty:
+   S3 multipart, this Mac signs one presigned PUT per 256 MB part with its AWS credentials (`VG_S3_*`), the server sends.
+6. **Clean the server** once the uploaded size matches the zip (`rclone lsjson --stat` / S3 `head_object`): the zip, the staging folder, both full videos (+ probes /
    check frames) and the pushed audio are deleted; loops, images and presets stay. `--keep-server` keeps everything.
    After cleaning, `package` again needs step 2 (and `video.py short`) again, so a Short made after a `--no-short`
    upload means re-rendering the album (or `--keep-server` on that upload).
-7. **Report** the S3 URI from `<album>/s3-package.json` (one entry per upload: key, size, sha256, `parts` album/short
+7. **Report** the Drive link (`url`, `https://drive.google.com/file/d/<id>/view`) or S3 URI from
+   `<album>/s3-package.json` (the package ledger, name kept; one entry per upload: `drive` + `url` or `s3`, size, sha256, `parts` album/short
    with each video probe, `checks`, files, warnings). A Short's old separate record (`short/s3-package.json`,
    `shorts/NNN-slug/s3-package.json`) is still read by `shorts.py list` and the PM board.
 
 ## Notes
+- Google Drive login (once per server, CEO): from the Mac
+  `ssh -L 53682:127.0.0.1:53682 <VG_REMOTE> 'rclone authorize drive --auth-no-open-browser'`, open the printed
+  `http://127.0.0.1:53682/auth?...` link in the Mac browser, log in, Allow; then on the server
+  `rclone config create gdrive drive scope=drive token '<json printed>' --non-interactive`. Token expired / revoked →
+  same again. Check: `rclone about gdrive:`.
 
 - The intro delays the first view of the photo by ~3 s; the music starts at 0 regardless.
   CLAUDE.md treats the first 10–15 s as critical, so point it out when retention is reviewed.

@@ -1,0 +1,190 @@
+{
+  "theme": "orchards-gardens/close",
+  "target": 16,
+  "defaults": {
+    "lens": "85mm lens at f/5.6",
+    "look": "day",
+    "composition": "A single branch, cluster or patch fills much of the frame at a moderate distance, with the orchard or garden softly blurred behind but still readable, viewed from the side",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "outdoor",
+      "scale": "close",
+      "category": "orchards-gardens",
+      "energy": "calm"
+    }
+  },
+  "shots": [
+    {
+      "id": "og-c-01",
+      "subject": "A twig of apple blossom with pink buds, open white flowers and a few young leaves, against a softly blurred orchard of trunks and grass",
+      "look": "soft-morning",
+      "motion_elements": "the apple blossom twig",
+      "tags": {
+        "time": "morning",
+        "palette": "soft pink"
+      }
+    },
+    {
+      "id": "og-c-02",
+      "subject": "A cluster of white cherry blossom on a dark branch with young bronze-green leaves, and blurred blossoming trees under a blue sky behind",
+      "look": "day",
+      "motion_elements": "the cherry blossom cluster",
+      "tags": {
+        "time": "day",
+        "palette": "white blossom"
+      },
+      "lens": "60mm lens at f/4"
+    },
+    {
+      "id": "og-c-03",
+      "subject": "Long grass and cowslips at the foot of an orchard tree, the stems swaying, with blurred trunks and a warm hedgerow behind",
+      "look": "golden",
+      "motion_elements": "the swaying grass and cowslips",
+      "tags": {
+        "time": "golden",
+        "palette": "pale yellow"
+      },
+      "lens": "100mm lens at f/8"
+    },
+    {
+      "id": "og-c-04",
+      "subject": "A branch of pear blossom with green-white flowers and fresh leaves, against a blurred row of orchard trees and a soft pale sky",
+      "look": "overcast",
+      "motion_elements": "the pear blossom branch",
+      "tags": {
+        "time": "overcast",
+        "palette": "white blossom"
+      },
+      "lens": "70mm lens at f/5.6"
+    },
+    {
+      "id": "og-c-05",
+      "subject": "Raindrops on young currant leaves in a kitchen garden, the leaves trembling, with blurred blossoming plum trees and wet soil behind",
+      "look": "after-rain",
+      "motion_elements": "the trembling currant leaves",
+      "tags": {
+        "time": "after-rain",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "og-c-06",
+      "subject": "Dewy tufts of new orchard grass with dandelions and fallen white petals, the blades stirring, with blurred tree trunks in soft haze behind",
+      "look": "soft-morning",
+      "motion_elements": "the stirring grass blades",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "100mm lens at f/8"
+    },
+    {
+      "id": "og-c-07",
+      "subject": "A few pale pink magnolia flowers on a branch at natural size, petals gently moving, with a blurred lawn and beech trees behind",
+      "look": "day",
+      "motion_elements": "the magnolia petals",
+      "tags": {
+        "time": "day",
+        "palette": "soft pink"
+      },
+      "lens": "70mm lens at f/5.6"
+    },
+    {
+      "id": "og-c-08",
+      "subject": "A sprig of hawthorn in white flower with fresh leaves on a hedge, gently moving, with a blurred meadow orchard behind",
+      "look": "golden",
+      "motion_elements": "the hawthorn sprig",
+      "tags": {
+        "time": "golden",
+        "palette": "white blossom"
+      }
+    },
+    {
+      "id": "og-c-09",
+      "subject": "Unfurling fern fronds and broad wild garlic leaves at a shady orchard edge, gently moving, with blurred mossy apple trunks behind",
+      "look": "overcast",
+      "motion_elements": "the fern fronds and the wild garlic leaves",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss"
+      },
+      "lens": "60mm lens at f/4"
+    },
+    {
+      "id": "og-c-10",
+      "subject": "A crab apple twig with pink buds and raindrops on the petals, against a blurred wet lawn and a dark hedge",
+      "look": "after-rain",
+      "motion_elements": "the crab apple twig",
+      "tags": {
+        "time": "after-rain",
+        "palette": "soft pink"
+      },
+      "lens": "100mm lens at f/8"
+    },
+    {
+      "id": "og-c-11",
+      "subject": "A clump of bluebells and young grass under an orchard tree, swaying slightly, with blurred blossoming branches above and behind",
+      "look": "soft-morning",
+      "motion_elements": "the bluebells and the grass",
+      "tags": {
+        "time": "morning",
+        "palette": "fresh green"
+      }
+    },
+    {
+      "id": "og-c-12",
+      "subject": "Young broad bean plants with their first black-and-white flowers in a garden bed, the leaves stirring, with a blurred plum tree behind",
+      "look": "day",
+      "motion_elements": "the broad bean leaves",
+      "tags": {
+        "time": "day",
+        "palette": "fresh green"
+      },
+      "lens": "60mm lens at f/4"
+    },
+    {
+      "id": "og-c-13",
+      "subject": "A plum branch with small white flowers and green buds crossing the frame, with blurred tall grass and orchard trees behind",
+      "look": "golden",
+      "motion_elements": "the plum branch",
+      "tags": {
+        "time": "golden",
+        "palette": "white blossom"
+      },
+      "lens": "100mm lens at f/8"
+    },
+    {
+      "id": "og-c-14",
+      "subject": "Moss and lichen on an old apple trunk with a small bunch of pink-white blossom on a low branch, and a blurred grassy orchard behind",
+      "look": "overcast",
+      "motion_elements": "the blossom bunch",
+      "tags": {
+        "time": "overcast",
+        "palette": "moss"
+      },
+      "lens": "70mm lens at f/5.6"
+    },
+    {
+      "id": "og-c-15",
+      "subject": "A trickle of rainwater along a shallow garden stone channel lined with moss and primroses, the water moving, with a blurred pond edge behind",
+      "look": "after-rain",
+      "motion_elements": "the moving rainwater",
+      "tags": {
+        "time": "after-rain",
+        "palette": "moss"
+      }
+    },
+    {
+      "id": "og-c-16",
+      "subject": "Willow catkins and new pale-green leaves on a garden willow twig, gently swaying, with a blurred pond and blossoming trees in soft haze",
+      "look": "soft-morning",
+      "motion_elements": "the willow twig",
+      "tags": {
+        "time": "morning",
+        "palette": "pale yellow"
+      },
+      "lens": "100mm lens at f/8"
+    }
+  ]
+}

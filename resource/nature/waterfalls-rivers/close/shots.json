@@ -1,0 +1,409 @@
+{
+ "theme": "waterfalls-rivers/close",
+ "target": 26,
+ "defaults": {
+  "lens": "50mm lens at f/4",
+  "look": "day",
+  "composition": "Close landscape view of one material, the wider setting still readable behind.",
+  "camera": "slide",
+  "seconds": 10,
+  "tags": {
+   "place": "outdoor",
+   "scale": "close",
+   "category": "waterfalls-rivers",
+   "energy": "calm"
+  }
+ },
+ "shots": [
+  {
+   "id": "wr-c-01",
+   "subject": "A shallow riffle over amber and gray pebbles in a mountain stream, glints of low sun on the small ripples and a soft alder bank behind",
+   "lens": "70mm lens at f/4",
+   "look": "golden",
+   "composition": "Camera at knee height angled down about 30 degrees: the riffle and pebbles fill most of the frame, a thin soft strip of alder bank along the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the small ripples over the pebbles",
+   "tags": {
+    "comp": "texture-field",
+    "anchor": "riffle",
+    "season": "summer",
+    "time": "golden",
+    "palette": "muted gold"
+   }
+  },
+  {
+   "id": "wr-c-02",
+   "subject": "A thin sheet of water sliding down a granite slab with fallen yellow birch leaves stuck to the rock and the misty edge of a pool beyond",
+   "lens": "50mm lens at f/4",
+   "look": "dawn",
+   "composition": "Close view along the slab: the sliding water film and leaves fill the frame, the misty pool edge as a soft band at the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the thin sliding sheet of water",
+   "tags": {
+    "comp": "texture-field",
+    "anchor": "slide",
+    "season": "autumn",
+    "time": "dawn",
+    "palette": "slate blue"
+   }
+  },
+  {
+   "id": "wr-c-03",
+   "subject": "A dark-mossed rock wall weeping thin threads of water over cushions of dark olive moss, small dull olive ferns at its edges",
+   "lens": "50mm lens at f/4",
+   "look": "misty",
+   "composition": "Face-on view of the wall about two meters away: the dripping moss fills the frame, a narrow slice of misty forest at the right edge. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the thin threads of water running down the moss",
+   "tags": {
+    "comp": "texture-field",
+    "anchor": "seep",
+    "season": "summer",
+    "time": "morning",
+    "palette": "deep green"
+   }
+  },
+  {
+   "id": "wr-c-04",
+   "subject": "Clear water rolling over a stair of small dark grey limestone steps, tiny bubbles in the flow and a dark spruce bank behind.",
+   "lens": "60mm lens at f/4",
+   "look": "overcast",
+   "composition": "Camera at a low side angle: the little steps and rolling water fill the frame, the forested bank soft along the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the water rolling over each small step",
+   "tags": {
+    "comp": "texture-field",
+    "anchor": "cascade",
+    "season": "summer",
+    "time": "overcast",
+    "palette": "slate gray"
+   }
+  },
+  {
+   "id": "wr-c-05",
+   "subject": "Fast dark water racing between shelves of clear ice, rime on the stones and snowy bank behind",
+   "lens": "60mm lens at f/4",
+   "look": "overcast",
+   "composition": "Close view from the bank: ice shelves and racing water fill the frame, a slice of snowy bank at the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the dark water racing between the ice shelves",
+   "tags": {
+    "comp": "texture-field",
+    "anchor": "ice-edge",
+    "season": "winter-edge",
+    "time": "overcast",
+    "palette": "slate gray"
+   }
+  },
+  {
+   "id": "wr-c-06",
+   "subject": "Wet dark olive moss on a large rounded granite boulder beside a cascade, mist drifting past the stone and white water softly blurred behind",
+   "lens": "50mm lens at f/4",
+   "look": "misty",
+   "composition": "The mossy boulder fills the left half of the frame about two meters away, the cascade soft in the right background. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the drifting mist and the cascade behind",
+   "tags": {
+    "comp": "hero-object",
+    "anchor": "cascade",
+    "season": "summer",
+    "time": "morning",
+    "palette": "gray mist"
+   }
+  },
+  {
+   "id": "wr-c-07",
+   "subject": "A rain-and-snowmelt-swollen stream foaming over a fallen mossy log, wet bark, old snow on the bank and a dark spruce slope behind",
+   "lens": "50mm lens at f/4",
+   "look": "after-rain",
+   "composition": "The fallen log crosses the lower middle of the frame about three meters away, water pouring over it toward the camera, the spruce slope soft behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the water foaming over the log",
+   "tags": {
+    "comp": "hero-object",
+    "anchor": "pour-over",
+    "season": "late-snow",
+    "time": "after-rain",
+    "palette": "wet green"
+   }
+  },
+  {
+   "id": "wr-c-08",
+   "subject": "A large lichen-covered boulder in a river pool, a slow eddy turning yellow leaves on the dark green water beside it",
+   "lens": "50mm lens at f/4",
+   "look": "day",
+   "composition": "The boulder sits in the right third about three meters away, the eddy and leaves turning in the left half, a rock wall soft behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the slow eddy and the turning leaves",
+   "tags": {
+    "comp": "hero-object",
+    "anchor": "eddy",
+    "season": "autumn",
+    "time": "day",
+    "palette": "deep green"
+   }
+  },
+  {
+   "id": "wr-c-09",
+   "subject": "A round stone capped with fresh snow in a shallow stream, water riffling softly around it with a natural gentle sheen, soft low pale-gold light, dull brown leaves on the bank",
+   "lens": "85mm lens at f/4",
+   "look": "golden",
+   "composition": "The snow-capped stone is centered slightly low about two meters away, the riffle around it, the warm bank softly behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the riffling water around the stone",
+   "tags": {
+    "comp": "hero-object",
+    "anchor": "riffle",
+    "season": "early-snow",
+    "time": "golden",
+    "palette": "muted gold"
+   }
+  },
+  {
+   "id": "wr-c-10",
+   "subject": "The white edge of a small waterfall pouring off a dark-mossed rock lip into a dark pool, droplets catching daylight",
+   "lens": "85mm lens at f/4",
+   "look": "day",
+   "composition": "Side view at lip height about three meters away: the pouring edge in the left third, the dark pool below, mossy rocks soft behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the pouring water at the lip",
+   "tags": {
+    "comp": "water-detail",
+    "anchor": "mini-fall",
+    "season": "summer",
+    "time": "day",
+    "palette": "deep green"
+   }
+  },
+  {
+   "id": "wr-c-11",
+   "subject": "A smooth glassy curl of water pouring over a dark rock edge, warm light inside the curl and burnt copper leaves on the wet stones below",
+   "lens": "70mm lens at f/4",
+   "look": "golden",
+   "composition": "Low side view: the glassy curl across the middle of the frame, the wet stones below, dark forest soft behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the glassy curl of water",
+   "tags": {
+    "comp": "water-detail",
+    "anchor": "curl",
+    "season": "autumn",
+    "time": "golden",
+    "palette": "muted gold"
+   }
+  },
+  {
+   "id": "wr-c-12",
+   "subject": "A narrow chute of white water squeezing between two dark slate stones into a small pool",
+   "lens": "60mm lens at f/4",
+   "look": "overcast",
+   "composition": "Facing the chute about two meters away: the slate stones on either side, the white chute through the center, the pool at the bottom. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the white water in the chute",
+   "tags": {
+    "comp": "water-detail",
+    "anchor": "chute",
+    "season": "summer",
+    "time": "overcast",
+    "palette": "slate gray"
+   }
+  },
+  {
+   "id": "wr-c-13",
+   "subject": "A knee-high fall between icicle-fringed rocks, open dark water pouring through and snow on the banks",
+   "lens": "50mm lens at f/4",
+   "look": "dawn",
+   "composition": "Low front view about three meters away: icicled rocks on both sides, the fall pouring through the center, snowy bank soft behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the water pouring between the icy rocks",
+   "tags": {
+    "comp": "water-detail",
+    "anchor": "mini-fall",
+    "season": "winter-edge",
+    "time": "dawn",
+    "palette": "slate blue"
+   }
+  },
+  {
+   "id": "wr-c-14",
+   "subject": "A spring bubbling up through clean pale sand at the edge of a small clear pool, fresh snow on the surrounding moss",
+   "lens": "60mm lens at f/4",
+   "look": "after-rain",
+   "composition": "Low angled view about two meters away: the bubbling spot in the lower center, the clear pool around it, snowy moss along the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the spring water bubbling through the sand and the gentle ripples",
+   "tags": {
+    "comp": "water-detail",
+    "anchor": "spring",
+    "season": "early-snow",
+    "time": "after-rain",
+    "palette": "wet green"
+   }
+  },
+  {
+   "id": "wr-c-15",
+   "subject": "Looking down into a clear stream pool, the bottom softly blurred under moving water with rounded stones of different sizes and colors, and three or four curled autumn leaves floating on the surface",
+   "lens": "50mm lens at f/2.8",
+   "look": "overcast",
+   "composition": "Looking down at about 60 degrees from a rock above: the pool fills the frame, a strip of mossy rock along one edge; the stones on the bottom are irregular, wet and slightly blurred by the ripples.",
+   "motion_elements": "the drifting leaves and the slow current",
+   "tags": {
+    "comp": "top-down",
+    "anchor": "pool",
+    "season": "autumn",
+    "time": "overcast",
+    "palette": "slate gray"
+   }
+  },
+  {
+   "id": "wr-c-16",
+   "subject": "A clear shallow pool where a small mountain stream enters over a low lip, the water surface gently rippling, smooth rounded pebbles under the water softly blurred by the moving water, a few green ferns at the edge",
+   "lens": "85mm lens at f/2.8",
+   "look": "day",
+   "composition": "Looking down at about 60 degrees, the rippling pool and the entering current fill most of the frame, ferns only along one edge; no sky.",
+   "motion_elements": "the stream entering the pool and the soft ripples spreading across it",
+   "tags": {
+    "comp": "top-down",
+    "anchor": "pool",
+    "season": "summer",
+    "time": "day",
+    "palette": "deep green"
+   }
+  },
+  {
+   "id": "wr-c-17",
+   "subject": "A dark channel of moving water between melting snow banks and thin ice plates",
+   "lens": "35mm lens at f/4",
+   "look": "dawn",
+   "composition": "Looking down at about 70 degrees: the channel runs across the frame between the snow and ice edges.",
+   "motion_elements": "the moving water in the channel",
+   "tags": {
+    "comp": "top-down",
+    "anchor": "ice-edge",
+    "season": "late-snow",
+    "time": "dawn",
+    "palette": "slate blue"
+   }
+  },
+  {
+   "id": "wr-c-18",
+   "subject": "Two or three shallow meltwater rivulets about one meter wide braiding between grey gravel two meters from the camera, a small patch of old snow at one edge",
+   "lens": "85mm lens at f/2.8",
+   "look": "after-rain",
+   "composition": "Looking down at about 45 degrees from close beside the rivulets: the water and nearby pebbles fill most of the frame, everything beyond three meters is a soft out-of-focus blur.",
+   "motion_elements": "the shallow braided rivulets",
+   "tags": {
+    "comp": "top-down",
+    "anchor": "braided",
+    "season": "late-snow",
+    "time": "after-rain",
+    "palette": "glacier gray"
+   }
+  },
+  {
+   "id": "wr-c-19",
+   "subject": "Tufts of sedge on a riverbank edge, cold smooth current gliding just beyond and pale mist over the far bank",
+   "lens": "50mm lens at f/4",
+   "look": "dawn",
+   "composition": "The bank edge runs diagonally from lower left to upper right, sedge on one side and gliding water on the other, the misty far bank soft at the top. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the gliding current and the swaying sedge",
+   "tags": {
+    "comp": "edge-line",
+    "anchor": "glide",
+    "season": "summer",
+    "time": "dawn",
+    "palette": "slate blue"
+   }
+  },
+  {
+   "id": "wr-c-20",
+   "subject": "A line of thin new ice along the edge of a stream, open dark water flowing beside it and snow-dusted grass",
+   "lens": "50mm lens at f/4",
+   "look": "overcast",
+   "composition": "The ice edge runs diagonally across the frame, flowing water on one side and snowy grass on the other. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the dark water flowing beside the ice",
+   "tags": {
+    "comp": "edge-line",
+    "anchor": "ice-edge",
+    "season": "early-snow",
+    "time": "overcast",
+    "palette": "slate gray"
+   }
+  },
+  {
+   "id": "wr-c-21",
+   "subject": "Thick green moss and copper bracken fronds covering most of a stream bank, a thin sheet of water sliding over one narrow strip of dark rock at their edge; the rock is soft and slightly out of focus, matte with only a thin wet glint",
+   "lens": "85mm lens at f/2.8",
+   "look": "misty",
+   "composition": "Moss and ferns fill about seventy percent of the frame, the narrow wet rock strip and its water film running diagonally through it, misty forest softly behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the thin sheet of water sliding along the rock",
+   "tags": {
+    "comp": "edge-line",
+    "anchor": "slide",
+    "season": "autumn",
+    "time": "morning",
+    "palette": "gray mist"
+   }
+  },
+  {
+   "id": "wr-c-22",
+   "subject": "Flat slate stones at the edge of a waterfall pool, gentle ripples lapping at the stones and the white falls softly blurred in the background",
+   "lens": "70mm lens at f/4",
+   "look": "overcast",
+   "composition": "The pool edge runs diagonally from lower right to upper left, flat stones on one side and rippling water on the other, the falls soft behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the gentle ripples and the distant falling water",
+   "tags": {
+    "comp": "edge-line",
+    "anchor": "pool",
+    "season": "summer",
+    "time": "overcast",
+    "palette": "slate gray"
+   }
+  },
+  {
+   "id": "wr-c-23",
+   "subject": "Spray rising from the base of a waterfall, warm backlight on the drifting droplets and wet black rocks in front",
+   "lens": "85mm lens at f/4",
+   "look": "golden",
+   "composition": "Facing into the low sun: the glowing spray fills the upper half, dark wet rocks along the bottom. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the drifting spray",
+   "tags": {
+    "comp": "backlit",
+    "anchor": "spray",
+    "season": "summer",
+    "time": "golden",
+    "palette": "muted gold"
+   }
+  },
+  {
+   "id": "wr-c-24",
+   "subject": "White water spraying over a few boulders in a small rapid, early sun behind lighting the splashes and burnt copper bank leaves",
+   "lens": "70mm lens at f/4",
+   "look": "dawn",
+   "composition": "Facing into the dawn sun: the backlit splashes in the middle of the frame, dark boulders below, the bright bank behind. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the splashing white water",
+   "tags": {
+    "comp": "backlit",
+    "anchor": "rapids",
+    "season": "autumn",
+    "time": "dawn",
+    "palette": "slate blue"
+   }
+  },
+  {
+   "id": "wr-c-25",
+   "subject": "Rain-beaded tawny tussock grass leaning over a rushing brook, sun behind the grass and clear water racing over dark stones",
+   "lens": "70mm lens at f/4",
+   "look": "after-rain",
+   "composition": "Facing into the light: the backlit grass blades in the upper left, the brook running across the lower part of the frame. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the racing brook water and the swaying grass",
+   "tags": {
+    "comp": "backlit",
+    "anchor": "riffle",
+    "season": "autumn",
+    "time": "after-rain",
+    "palette": "wet green"
+   }
+  },
+  {
+   "id": "wr-c-26",
+   "subject": "A small waterfall with icicles on its rock lip, low winter sun behind glowing through the water threads",
+   "lens": "60mm lens at f/4",
+   "look": "day",
+   "composition": "Facing into the low sun: the glowing water threads and icicles in the center, dark rocks on both sides. The main subject is one to five meters from the camera and fills most of the frame; anything behind it is only a soft, out-of-focus slice, never a sharp open vista or horizon.",
+   "motion_elements": "the glowing falling water threads",
+   "tags": {
+    "comp": "backlit",
+    "anchor": "mini-fall",
+    "season": "winter-edge",
+    "time": "day",
+    "palette": "slate blue"
+   }
+  }
+ ]
+}

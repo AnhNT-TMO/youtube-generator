@@ -46,19 +46,27 @@ def sentence(text):
 
 def image_prompt(blocks, shot):
     block = blocks["image"]
-    parts = [block["head"], sentence(shot["subject"])]
+    lead = block.get("lead", {}).get(shot.get("tags", {}).get("people"))
+    parts = [block["head"]] + ([lead] if lead else []) + [sentence(shot["subject"])]
     if shot.get("composition"):
         parts.append(sentence(shot["composition"]))
     parts += [block["realism"].format(lens=shot.get("lens") or "24mm lens at f/8"), block["look"][shot.get("look") or "interior-bright"]]
     tags = shot.get("tags", {})
+    if tags.get("season") in block.get("season", {}):
+        parts.append(block["season"][tags["season"]])
     snowing = tags.get("snow") == "falling" and tags.get("place") == "outdoor" and "snowing" in block
     if shot.get("lights") is not False:
         parts.append(block["lights_snowing" if snowing else "lights"])
+    elif "wild" in block:
+        parts.append(block["wild"])
     if snowing:
         parts.append(block["snowing"])
     if shot.get("motion_elements"):
         parts.append(block["motion_ready"].format(motion_elements=shot["motion_elements"]))
-    parts += [block["clean"], block["tail"]]
+    clean = block["clean"]
+    if isinstance(clean, dict):
+        clean = clean[tags.get("people", "none")]
+    parts += [clean, block["tail"]]
     return " ".join(parts)
 
 

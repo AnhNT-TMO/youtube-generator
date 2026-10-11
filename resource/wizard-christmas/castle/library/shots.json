@@ -1,0 +1,411 @@
+{
+  "theme": "castle/library",
+  "target": 30,
+  "defaults": {
+    "lens": "35mm lens at f/5.6",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "indoor",
+      "scale": "mid",
+      "category": "library"
+    }
+  },
+  "shots": [
+    {
+      "id": "lb-01",
+      "subject": "An enormous ancient castle library at night: towering dark carved wooden bookshelves three storeys high with rolling ladders and carved balconies, long reading tables with brass candle lamps and open old books, a small decorated Christmas tree beside a stone pillar, evergreen garlands on the balcony rails, tall arched windows with snow on the sills; two students sit side by side at a reading table with their backs to the camera, heads bent over open books, one in a blue-and-bronze striped scarf, one in a yellow-and-black striped scarf",
+      "composition": "Wide view from further back, behind and slightly above the students, who sit in the lower left third and fill no more than a quarter of the frame height; the bookshelves rise behind the table toward the tall arched window",
+      "look": "candle-night",
+      "motion_elements": "the candle flames in the brass table lamps and the small lights on the Christmas tree",
+      "tags": {
+        "time": "night",
+        "people": "students"
+      }
+    },
+    {
+      "id": "lb-02",
+      "subject": "An endless central aisle of an enormous ancient castle library on Christmas night: dark carved oak bookshelves rise four storeys on both sides with plain leather book spines, carved balconies wound with evergreen garlands and red ribbons, dozens of lit white candles float motionless high above the aisle, and at the far end stands a tall decorated Christmas fir with gold and red baubles and small warm lights in front of a great arched window",
+      "composition": "Low eye-level view straight down the middle of the empty aisle, the shelves converging toward the glowing tree at the far end, the floating candles across the upper third",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames and the small lights on the Christmas tree",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "vista"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "lb-03",
+      "subject": "A deep stone window alcove in an ancient castle library on a snowy winter afternoon: soft grey daylight pours through tall leaded panes onto a cushioned window seat, snowy towers and grey sky beyond, a brass candlestick burning on the stone ledge and a small evergreen wreath hung in the window; one student with a dark brown ponytail and a green-and-silver striped scarf sits on the seat with their back to the camera, reading an open book",
+      "composition": "Wide view from further back in the aisle between two bookshelves into the alcove; the student sits small in the center of the bright window, the shelves frame both edges",
+      "look": "interior-day",
+      "motion_elements": "the candle flame on the window ledge and the snow drifting past the window panes",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-04",
+      "subject": "A quiet back corner of an ancient castle library at night: tall iron-bound bookcases holding very old leather volumes on short iron chains, a wrought-iron gate standing half open, an oil lamp burning on a hook beside it, a heavy oak lectern with a closed book, a single evergreen garland with red ribbon draped over the gate, warm candlelight reaching every corner of the old stone vault",
+      "composition": "Medium view looking through the half-open iron gate into the corner, the oil lamp on the right, the lectern centered in the warm light",
+      "look": "candle-night",
+      "motion_elements": "the oil lamp flame and the candle flames on the shelves",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-05",
+      "subject": "The high upper gallery of a huge castle library at blue hour: a carved wooden balcony with an evergreen garland runs around the room, below it the main floor of long reading tables with rows of lit candle lamps, a tall decorated Christmas tree glowing in the middle, and three tall arched windows showing a deep blue twilight sky over snowy mountains",
+      "composition": "High view from the upper gallery rail looking across and down over the whole room toward the twilight windows; the railing runs along the lower edge without blocking the view",
+      "look": "candle-night",
+      "motion_elements": "the candle lamp flames on the tables and the lights on the Christmas tree",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none",
+        "scale": "vista"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "lb-06",
+      "subject": "A large stone fireplace set into the bookshelves of an ancient castle library on Christmas night: a roaring log fire, a mantel hung with an evergreen garland and red ribbons, two deep worn leather armchairs facing the hearth, tall shelves rising on both sides; two students sit still deep in the armchairs with their backs to the camera, gazing into the fire, a closed book resting on a small side table, one with a dark braid and a scarlet-and-gold striped scarf, one with short straight brown hair and a blue-and-bronze striped scarf",
+      "composition": "Wide view from further back, behind the armchairs, the students small at the lower center, the fire glowing between them and the shelves rising to the top of the frame",
+      "look": "candle-night",
+      "motion_elements": "the log fire, the candle flames on the mantel",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-07",
+      "subject": "A long reading room of an ancient castle library on a snowy winter day: soft grey light falls through a row of tall leaded windows across long oak tables set with brass candlesticks still burning, a china teapot steaming beside piles of old books, evergreen garlands along the window frames and a small decorated fir between two windows, snowy courtyard visible outside",
+      "composition": "Medium-wide diagonal view along the tables toward the windows, the nearest table starting at mid-left with open space in the foreground",
+      "look": "interior-day",
+      "motion_elements": "the candle flames on the tables and the steam rising from the teapot",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-08",
+      "subject": "A carved wooden spiral staircase winding up from the floor of a vast castle library to its upper gallery on Christmas night: the handrail wrapped in an evergreen garland with red ribbons, tall candelabras with burning candles at its foot, shelves packed with plain leather books rising behind it, a warm glow from a fireplace off to one side",
+      "composition": "Medium view from a few steps away looking slightly up at the spiral staircase, which rises through the center of the frame to the gallery above",
+      "look": "candle-night",
+      "motion_elements": "the candelabra flames and the flickering fireplace glow",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-09",
+      "subject": "A narrow aisle between towering dark bookshelves in an ancient castle library at night, small brass candle lamps burning on the shelf ends and an evergreen garland running along the top of the shelves; one student in a grey knitted wool hat and a yellow-and-black striped scarf stands still near the far end facing the shelves, holding up a lit candle in a brass holder to read the plain book spines",
+      "composition": "Wide view from further back straight down the aisle; the student stands small in the far middle, the candlelit shelves receding on both sides",
+      "look": "candle-night",
+      "motion_elements": "the candle flame in the student's holder and the brass lamp flames on the shelves",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-10",
+      "subject": "A circular domed reading room in an ancient castle library at twilight: curved bookshelves line the round walls, a ring of round oak tables with candle lamps, a tall decorated Christmas fir in the very center under the dome, and a round glass oculus at the top showing the deep blue twilight sky, snow resting on its rim",
+      "composition": "Wide eye-level view from the edge of the room across the tables to the glowing tree, the curve of the dome and the oculus at the top of the frame",
+      "look": "candle-night",
+      "motion_elements": "the candle lamp flames and the small lights on the Christmas tree",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none",
+        "scale": "vista"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "lb-11",
+      "subject": "A long oak table beside tall leaded windows in an ancient castle library on a snowy winter afternoon: grey daylight, steaming mugs, brass candlesticks still lit, open books and rolled parchment; three students sit along the table with their backs to the camera, one with short dark brown hair in a green-and-silver striped scarf, one with a dark brown bun in a yellow-and-black striped scarf, one with an auburn bob in a blue-and-bronze striped scarf",
+      "composition": "Wide view from far back behind the students, across an open stretch of floor or ground toward the windows, the three seated small along the lower third with space between them",
+      "look": "interior-day",
+      "motion_elements": "the candle flames on the table",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-12",
+      "subject": "A librarian's carved oak desk in an ancient castle library on Christmas night: stacks of parchment, feather quills in an inkwell, a cup of tea steaming on a saucer, a thick candle burning in a pewter holder, a small evergreen wreath with a red bow propped against the books, tall shelves softly glowing with candlelight behind",
+      "composition": "Close medium view across the front of the desk at table height, the candle and tea on the right third, the shelves soft in the background",
+      "look": "candle-night",
+      "motion_elements": "the candle flame and the steam rising from the tea",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "close"
+      },
+      "lens": "50mm lens at f/2.8"
+    },
+    {
+      "id": "lb-13",
+      "subject": "A map and globe room inside an ancient castle library at night: large antique globes on wooden stands, old plain parchment maps unrolled on a wide table, a stone fireplace burning brightly under a mantel with an evergreen garland, shelves of rolled charts, a small decorated fir in the corner",
+      "composition": "Medium-wide view across the map table toward the fireplace, the globes standing to the left and right with open floor in front",
+      "look": "candle-night",
+      "motion_elements": "the fire in the hearth and the lights on the small fir tree",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-14",
+      "subject": "A deep bay window inside an ancient castle library at blue hour: cushioned window seat, leaded panes showing snowy grounds and a frozen lake under a deep blue twilight sky, two candles burning on the sill, a distant fireplace glowing among the shelves behind; one student with a long dark braid and a green-and-silver striped scarf sits on the window seat with their back to the camera, looking out",
+      "composition": "Wide view from further back, inside the library; the student sits small in the middle of the bay window, the shelves framing the left and right edges",
+      "look": "candle-night",
+      "motion_elements": "the candle flames on the sill and the distant fireplace glow",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-15",
+      "subject": "A long vaulted stone corridor lined with bookshelves in an ancient castle library on Christmas night: black iron chandeliers with burning candles hang motionless from the ribbed vault, an evergreen garland with red ribbons runs along the tops of the shelves, small brass lamps glow on reading ledges, the corridor ends in a pointed arched window",
+      "composition": "Eye-level view down the middle of the corridor, symmetrical, the chandeliers receding toward the arched window",
+      "look": "candle-night",
+      "motion_elements": "the candle flames on the iron chandeliers and the brass lamps",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-16",
+      "subject": "The carved upper gallery of an ancient castle library on a snowy winter morning: a long wooden balcony walkway with an evergreen garland on its railing, shelves on one side, open space on the other looking over the hall, soft grey daylight from high leaded windows, candle chandeliers still lit and hanging still",
+      "composition": "Medium-wide view along the gallery walkway from one end, the railing and the open hall on the right, shelves on the left",
+      "look": "interior-day",
+      "motion_elements": "the candle flames on the chandeliers and a thin curl of smoke from a snuffed candle",
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-17",
+      "subject": "A tall aisle of ancient dark bookshelves in a castle library on Christmas night, a carved wooden rolling ladder leaning against the shelves, lit white candles floating motionless above, a decorated Christmas tree glowing at the aisle's end; two students stand side by side facing the shelves with their backs to the camera, one with short straight brown hair in a scarlet-and-gold striped scarf, one with a blonde bob in a yellow-and-black striped scarf",
+      "composition": "Wide view from further back in the aisle entrance; the students stand small in the middle distance, the floating candles above them and the tree glow behind",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames and the lights on the Christmas tree",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-18",
+      "subject": "The grand entrance of an ancient castle library on Christmas night: two tall carved oak doors stand wide open, each hung with a large evergreen wreath and red bow, and through them a tall decorated Christmas fir rises in a candlelit hall of towering bookshelves; iron candle sconces burn on the stone door frame",
+      "composition": "Medium-wide view from the stone corridor outside looking through the open doors into the library, the tree centered in the doorway",
+      "look": "candle-night",
+      "motion_elements": "the candle flames in the sconces and the lights on the Christmas tree",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-19",
+      "subject": "A snug reading nook in a corner of an ancient castle library at twilight: a small stone hearth with a low fire, a copper kettle steaming on its hob, two empty patchwork armchairs, a knitted blanket over one arm, shelves curving around the nook and a small leaded window showing the deep blue twilight over snowy rooftops. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "Medium view into the nook from the open floor, the hearth at center, the window upper right",
+      "look": "candle-night",
+      "motion_elements": "the fire in the hearth",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-20",
+      "subject": "A vast ancient castle library on a snowy winter afternoon seen from high above: rows of long reading tables with burning candle lamps, dark shelves rising on every side, a tall decorated Christmas tree near the windows, soft grey daylight through enormous leaded windows; one student with a long dark braid and a scarlet-and-gold striped scarf sits alone at a table in the middle, back to the camera, reading. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "High wide view from an upper balcony; the student sits very small near the center of the floor, the tables and shelves spreading around them",
+      "look": "interior-day",
+      "motion_elements": "the candle lamp flames on the tables and the lights on the Christmas tree",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none",
+        "scale": "vista"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "lb-21",
+      "subject": "A single long oak reading table in an ancient castle library on Christmas night, set with dozens of lit candles in brass candlesticks between stacks of old books and an evergreen table garland, leading to a great arched window that shows moonlit snowy castle towers, every candle burning steadily on a clear still night. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills.",
+      "composition": "Low view straight along the length of the table toward the window, the candles receding in two lines, nothing close to the lens",
+      "look": "candle-night",
+      "motion_elements": "the many candle flames along the table",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-22",
+      "subject": "A cozy hearth corner of an ancient castle library at night: a crackling fire in a carved stone fireplace, a thick red woven rug, low shelves of old books, candles on the mantel beside an evergreen garland; one student in a cream knitted wool hat and a blue-and-bronze striped scarf sits cross-legged on the rug with their back to the camera, reading a large book by the fire",
+      "composition": "Wide view from far back behind the student, across an open stretch of floor or ground, who sits small at the lower center before the fire, the shelves rising on both sides",
+      "look": "candle-night",
+      "motion_elements": "the fire in the fireplace and the candle flames on the mantel",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-23",
+      "subject": "A small stone fountain in a quiet inner court of an ancient castle library on Christmas night: water trickles from a carved stone spout into a round basin, bookshelves and arched cloister openings surround it under a timber roof, candle lamps burn on the basin rim and an evergreen garland with red ribbons hangs over the arches",
+      "composition": "Medium-wide eye-level view with the fountain at center and the shelved arches behind",
+      "look": "candle-night",
+      "motion_elements": "the trickling water in the basin and the candle lamp flames",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-24",
+      "subject": "Two students stand at the carved railing of a high gallery in an ancient castle library on Christmas night, their backs to the camera, looking down at the candlelit reading floor and a tall glowing Christmas tree below; one has an auburn bob and a green-and-silver striped scarf, one has short straight brown hair and a yellow-and-black striped scarf; floating candles hang motionless at their eye level",
+      "composition": "Wide view from further back, behind on the gallery, the students small at the lower left, the hall and tree filling the frame beyond the railing",
+      "look": "candle-night",
+      "motion_elements": "the floating candle flames and the lights on the Christmas tree",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-25",
+      "subject": "A tall arched window between two towering bookshelves in an ancient castle library at blue hour, showing only a flat, plain deep blue twilight sky with nothing in it, iron candle sconces burning on the shelves and a wreath hanging in the window; one student with a long black ponytail and a scarlet-and-gold striped scarf stands still a few steps back from the window, arms down and hands hidden in the robe sleeves with their back to the camera. Outside the windows the air is perfectly calm and no snow is falling; old snow only lies still on the distant rooftops and window sills. Any fireplace mantel is plain stone with no carved emblem or shield; tapestries and banners are plain. The lower part of the window shows only plain sky too; no towers or spires anywhere in the glass.",
+      "composition": "Wide view from further back down a short aisle to the window; the student stands small and centered against the bright twilight panes",
+      "look": "candle-night",
+      "motion_elements": "the candle flames in the sconces",
+      "tags": {
+        "time": "twilight",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-26",
+      "subject": "A row of small arched reading alcoves along the stone wall of an ancient castle library on Christmas night, each with a little desk and a single brass candle lamp burning, a sprig of holly on every desk, an evergreen garland running along the arches and tall shelves above, warm light pooling on the old stone floor",
+      "composition": "Medium-wide diagonal view along the row of alcoves, the warm lamps receding into the distance",
+      "look": "candle-night",
+      "motion_elements": "the candle lamp flames in the alcoves",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-27",
+      "subject": "A window table in an ancient castle library on a snowy winter afternoon: soft grey daylight through leaded panes, a stack of closed books and a lit candle on the table; two students sit side by side with their backs to the camera, one with a long dark braid and a blue-and-bronze striped scarf, one in a knitted wool hat with a green-and-silver striped scarf. The windows show only a flat, plain, calm sky: no towers, battlements, buildings, hills or trees are visible through them, and no snow is falling.",
+      "composition": "Wide view from further back, behind the students toward the window, both small in the lower center with space above",
+      "look": "interior-day",
+      "motion_elements": "the candle flame",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-28",
+      "subject": "The lowest floor of an enormous ancient castle library on Christmas night seen from a low angle: a great stone hearth with a roaring fire, a tall decorated Christmas tree beside it, shelves climbing into a high dark vault, and hundreds of lit white candles floating motionless in the air under the vault",
+      "composition": "Low wide view from the floor looking up and across toward the hearth and tree, the floating candles across the upper half",
+      "look": "candle-night",
+      "motion_elements": "the fire in the hearth, the floating candle flames and the tree lights",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "vista"
+      },
+      "lens": "24mm lens at f/5.6"
+    },
+    {
+      "id": "lb-29",
+      "subject": "A round library room at the top of a castle tower at twilight: books stacked from floor to the beamed conical ceiling, a narrow ladder, an iron brazier with a small fire, candles burning on the window sill, and a round window showing only a plain deep blue twilight sky. The windows show only a flat, plain, calm sky: no towers, battlements, buildings, hills or trees are visible through them, and no snow is falling.",
+      "composition": "Medium-wide view from the doorway across the round room toward the window, the brazier left of center",
+      "look": "candle-night",
+      "motion_elements": "the fire in the brazier and the candle flames on the sill",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "lb-30",
+      "subject": "A long carved oak counter where books are returned in an ancient castle library at blue hour: neat stacks of old leather volumes tied with string, a brass bell, a row of thick candles burning cleanly in pewter holders, with no smoke, an evergreen garland with red ribbons and pine cones along the counter front, tall shelves rising behind and a great arched window glowing deep twilight blue. The windows show only a flat, plain, calm sky: no towers, battlements, buildings, hills or trees are visible through them, and no snow is falling. Every candle on the counter is lit and burns cleanly; no smoke rises from any wick.",
+      "composition": "Medium-wide view across the open floor toward the counter, the window rising behind it at the upper right",
+      "look": "candle-night",
+      "motion_elements": "the candle flames along the counter",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "lb-31",
+      "subject": "A long aisle of towering dark wooden bookshelves in an ancient castle library on Christmas night, plain leather books without titles, evergreen garlands with red bows along the top of each shelf, brass reading lamps glowing on a long oak table, a small decorated tree at the end of the aisle. No teapots, kettles, pots, cups, mugs or jugs anywhere. No candles or lanterns stand on the floor. No banners, tapestries, crests or lettering anywhere.",
+      "composition": "Eye-level view straight down the aisle, the tree at the far end",
+      "look": "candle-night",
+      "motion_elements": "the warm reading lamps and the tree lights"
+    },
+    {
+      "tags": {
+        "time": "day",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "lb-32",
+      "subject": "A reading nook in an ancient castle library on a snowy Christmas afternoon: a worn leather armchair with a wool blanket, a stack of plain leather books on a small table, a brass lamp glowing, a tall frosted leaded window, a garland on the bookshelf beside it. The windows are thick frosted leaded glass glowing softly; nothing outside is visible through them and no snow falls indoors. No teapots, kettles, pots, cups, mugs or jugs anywhere. No candles or lanterns stand on the floor. No banners, tapestries, crests or lettering anywhere.",
+      "composition": "Medium view, the armchair and table in the centre, shelves on both sides",
+      "look": "interior-day",
+      "motion_elements": "the warm lamp glow"
+    }
+  ]
+}

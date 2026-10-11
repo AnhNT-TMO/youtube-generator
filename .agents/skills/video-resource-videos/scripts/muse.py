@@ -10,6 +10,9 @@ NEW_THREAD = f"{ORIGIN}/thread/new"
 COMPOSER = 'textarea[placeholder="Message"]'
 SERVICE_RE = re.compile(r"rate limit|limit reached|quota|captcha|verify you are human|try again later", re.I)
 UNDELIVERED_RE = re.compile(r"Delivery not confirmed", re.I)
+REUSED_RE = re.compile(r"no-regeneration rule|Serving the existing delivery|existing delivery, as-is", re.I)
+FETCH_METHODS = ("fetch", "xhr")
+FETCH_TIMEOUT_MS = 45000
 WRAPPER = ('Image-to-video, attached image = first frame, exactly ONE generation. Pass this prompt to the video tool word '
            'for word, then paste back the exact prompt you sent: "{prompt}"')
 STATE = f"""(() => {{ const box = document.querySelector({json.dumps(COMPOSER)}); const rect = box && box.getBoundingClientRect();
@@ -31,6 +34,10 @@ class NotSent(RuntimeError):
 
 
 class Uncertain(RuntimeError):
+    pass
+
+
+class FetchFailed(RuntimeError):
     pass
 
 
@@ -127,7 +134,7 @@ class MuseTab:
             raise Blocked(f"muse báo: {tail[-300:]}")
         video = state["video"]
         ready = bool(video and video["src"] and video["ready_state"] >= 2 and video["width"] > 0)
-        return {"url": state["url"], "video": video if ready else None, "undelivered": bool(UNDELIVERED_RE.search(tail)),
+        return {"url": state["url"], "video": video if ready else None, "undelivered": bool(UNDELIVERED_RE.search(tail)), "reused": bool(REUSED_RE.search(tail)),
                 "tail": tail[-300:]}
 
     def open(self, url):
@@ -136,13 +143,60 @@ class MuseTab:
             time.sleep(3)
             self.ready()
 
-    def fetch(self, src):
-        payload = self.page.js(f"""(async () => {{ const response = await fetch({json.dumps(src)});
-          if (!response.ok) throw new Error('tải video lỗi ' + response.status);
-          const blob = await response.blob(); const bytes = new Uint8Array(await blob.arrayBuffer()); let text = '';
+    def read_blob(self, src, method):
+        return self.page.js(f"""(async () => {{ const src = {json.dumps(src)}; const limit = {FETCH_TIMEOUT_MS};
+          const timed = (promise) => Promise.race([promise, new Promise((_, reject) => setTimeout(() => reject(new Error('quá hạn')), limit))]);
+          const viaXhr = () => new Promise((resolve, reject) => {{ const request = new XMLHttpRequest(); request.open('GET', src);
+            request.responseType = 'blob'; request.timeout = limit; request.onload = () => request.status === 200 ? resolve(request.response)
+              : reject(new Error('xhr ' + request.status)); request.onerror = () => reject(new Error('xhr lỗi'));
+            request.ontimeout = () => reject(new Error('xhr quá hạn')); request.send(); }});
+          const viaFetch = async () => {{ const response = await fetch(src); if (!response.ok) throw new Error('fetch ' + response.status);
+            return await response.blob(); }};
+          const blob = await timed({{fetch: viaFetch, xhr: viaXhr}}[{json.dumps(method)}]());
+          const bytes = new Uint8Array(await blob.arrayBuffer()); let text = '';
           for (let i = 0; i < bytes.length; i += 32768) text += String.fromCharCode.apply(null, bytes.subarray(i, i + 32768));
           return {{type: blob.type, size: blob.size, b64: btoa(text)}}; }})()""")
-        raw = base64.b64decode(payload["b64"], validate=True)
-        if not payload["type"].startswith("video/") or len(raw) != payload["size"]:
-            raise Uncertain(f"blob tải về không phải video ({payload['type']}, {len(raw)} byte)")
-        return raw
+
+    def current_src(self):
+        video = self.state()["video"]
+        if video and video["src"] and video["ready_state"] >= 2 and video["width"] > 0:
+            return video["src"]
+        return None
+
+    def fetch_once(self, src, errors):
+        for method in FETCH_METHODS:
+            try:
+                payload = self.read_blob(src, method)
+            except Exception as error:
+                errors.append(f"{method}: {str(error)[:120]}")
+                continue
+            raw = base64.b64decode(payload["b64"], validate=True)
+            if payload["type"].startswith("video/") and len(raw) == payload["size"] and len(raw) > 0:
+                return raw
+            errors.append(f"{method}: không phải video ({payload['type']}, {len(raw)} byte)")
+        return None
+
+    def fetch(self, src):
+        errors = []
+        raw = self.fetch_once(src, errors)
+        if raw is not None:
+            return raw
+        fresh = self.current_src()
+        if fresh and fresh != src:
+            raw = self.fetch_once(fresh, errors)
+            if raw is not None:
+                return raw
+        self.page.navigate(self.page.url())
+        deadline = time.time() + 60
+        fresh = None
+        while time.time() < deadline and not fresh:
+            time.sleep(2)
+            self.page.repaint()
+            fresh = self.current_src()
+        if fresh:
+            raw = self.fetch_once(fresh, errors)
+            if raw is not None:
+                return raw
+        else:
+            errors.append("tải lại thread: 60 s chưa thấy video")
+        raise FetchFailed("không tải được video từ tab: " + "; ".join(errors)[-600:])

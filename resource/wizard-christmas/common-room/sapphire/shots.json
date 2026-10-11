@@ -1,0 +1,149 @@
+{
+  "theme": "common-room/sapphire",
+  "target": 10,
+  "defaults": {
+    "lens": "35mm lens at f/5.6",
+    "camera": "slide",
+    "seconds": 10,
+    "tags": {
+      "place": "indoor",
+      "scale": "mid",
+      "category": "sapphire"
+    }
+  },
+  "shots": [
+    {
+      "id": "crp-01",
+      "subject": "An airy round sitting room high in a castle tower on Christmas night: a high domed ceiling painted deep midnight blue with small gold stars, tall arched windows all around showing moonlit snowy mountains, curved wooden bookshelves between the windows, blue velvet armchairs and bronze lamps with candle flames, a stone fireplace with a bright fire, a Christmas tree with blue and bronze baubles",
+      "composition": "Wide view across the round room; the tall windows and the dome fill the upper half, the fireplace glows at left, the tree at right, open floor and a plain blue rug in the foreground.",
+      "look": "candle-night",
+      "motion_elements": "the fire in the fireplace, the tree lights and the candle flames in the bronze lamps",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "crp-02",
+      "subject": "A tall arched window in an airy round tower sitting room on a snowy Christmas afternoon: beyond the glass, white snow-covered mountains and a frozen valley under a silver sky; plain blue velvet curtains tied back with bronze cords, a bronze candlestick with a lit candle on the deep sill; one young person in a black wool cloak and a knitted blue-and-bronze striped scarf stands at the window looking out at the mountains, seen from behind, with long straight dark-blonde hair tied low",
+      "composition": "Wide view from further back in the middle of the room; the student stands small before the bright window, well under a quarter of the frame height, a bookshelf and an armchair to either side.",
+      "look": "interior-day",
+      "motion_elements": "the candle flame on the sill and the snow drifting past outside the window",
+      "tags": {
+        "time": "day",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "crp-03",
+      "subject": "A round wooden table under a bronze ring chandelier of lit candles in an airy tower sitting room on Christmas night: open plain leather books, a brass globe and a steaming teapot on the table, tall arched windows with dark blue night and snowy peaks beyond; two young people in black wool robes and knitted blue-and-bronze striped scarves sit at the table reading, seen from behind, one with a short auburn bob, one with short cropped brown hair",
+      "composition": "Wide view from far back behind the students, across an open stretch of floor or ground across the room; they sit small in the middle distance under the chandelier, the windows glow blue behind, the floor in front is open.",
+      "look": "candle-night",
+      "motion_elements": "the candle flames on the chandelier",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "crp-04",
+      "subject": "A curved window bench beneath tall arched windows in an airy round tower room at blue-hour twilight on Christmas Eve: deep blue snowy mountains with a last pale glow on the peaks, plain blue velvet cushions along the bench, a row of lit candles in bronze holders along the sill, an evergreen garland with bronze ribbons, a knitted blue blanket folded on the seat",
+      "composition": "Medium view straight toward the windows from a few steps back; the bench and candles run across the lower third, the blue mountains fill the windows above.",
+      "look": "candle-night",
+      "motion_elements": "the candle flames on the sill and the snow falling past outside the glass",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "crp-05",
+      "subject": "Tall curved bookshelves of dark wood reaching up toward a domed ceiling in an airy round tower sitting room on Christmas night: rows of plain leather books without titles, a wooden library ladder, bronze candelabra with lit candles on a reading table, a blue velvet armchair, a small decorated tree with bronze baubles, and a fire glowing in a stone hearth at the side",
+      "composition": "Medium-wide view at an angle along the curved shelves; the shelves sweep toward the hearth, the reading table and candles in the middle ground, open floor in front.",
+      "look": "candle-night",
+      "motion_elements": "the candle flames on the candelabra and the fire in the hearth",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "crp-06",
+      "subject": "A stone fireplace with a bright log fire in an airy round tower sitting room on Christmas night: a bronze fire screen, an evergreen garland with blue ribbons and bronze bells on the mantel, two blue velvet armchairs angled toward the fire; one young person in a black wool cloak and a knitted blue-and-bronze striped scarf stands before the fire looking into it, seen from behind, wearing a knitted cream wool hat; tall windows with snowy peaks on either side",
+      "composition": "Wide view from further back in the back of the room; the student stands small at center facing the fire, well under a quarter of the frame height, the armchairs to either side, open rug in front.",
+      "look": "candle-night",
+      "motion_elements": "the log fire and the candle flames on the mantel",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "crp-07",
+      "subject": "An airy round sitting room high in a castle tower at blue-hour twilight on Christmas Eve: every tall arched window glows deep blue over snowy mountains, the room inside lit warm by many candles in bronze holders and a fire, blue velvet sofas around a low table, a tall Christmas tree with blue and bronze baubles reflected in the dark glass, a domed ceiling above",
+      "composition": "Low wide view from near the floor across the whole room; the ring of blue windows fills the upper half, the warm furniture and tree glow in the lower half.",
+      "look": "candle-night",
+      "motion_elements": "the tree lights, the candle flames and the fire",
+      "tags": {
+        "time": "twilight",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "crp-08",
+      "subject": "A bronze telescope on a wooden tripod standing before a tall arched window in a round tower room on Christmas night: beyond the glass, snowy mountains under a starry sky with snow gently falling, a small round table with a lit candle, a brass star chart instrument and an open plain notebook beside it, blue velvet curtains with bronze tassels",
+      "composition": "Medium view from a few steps back; the telescope stands at center left against the window, the candle table to the right, open floor in front.",
+      "look": "candle-night",
+      "motion_elements": "the candle flame and the snow falling outside the window",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none",
+        "scale": "close"
+      }
+    },
+    {
+      "id": "crp-09",
+      "subject": "A long blue velvet sofa set before a wide arched window in an airy tower sitting room on Christmas night: moonlit snowy peaks and dark sky beyond the glass, bronze lamps with candle flames on either side, a fire glowing off to the side; two young people in black wool robes and knitted blue-and-bronze striped scarves sit on the sofa looking out at the mountains, seen from behind, one with a blonde ponytail, one with a dark braid",
+      "composition": "Wide view from further back, behind the sofa a good distance back; the two students sit small against the moonlit window, open floor in the foreground.",
+      "look": "candle-night",
+      "motion_elements": "the candle flames in the lamps and the firelight flickering on the walls",
+      "tags": {
+        "time": "night",
+        "people": "students",
+        "snow": "none"
+      }
+    },
+    {
+      "id": "crp-10",
+      "subject": "The hearth of an airy round tower sitting room on Christmas night: a bronze kettle steaming on an iron hook over a low fire, two blue velvet armchairs and a footstool with a plain bronze-coloured cushion, a basket of pinecones, an evergreen garland with blue ribbons on the mantel, a tall arched window to the right with snow on the panes",
+      "composition": "Medium view of the hearth from across a short stretch of rug; the fire and kettle at center, armchairs to either side, nothing close to the lens.",
+      "look": "candle-night",
+      "motion_elements": "the fire",
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      }
+    },
+    {
+      "tags": {
+        "time": "night",
+        "people": "none",
+        "snow": "none"
+      },
+      "id": "crp-11",
+      "subject": "An airy round tower sitting room on Christmas night decorated in blue and bronze: blue velvet armchairs around a low table with a bowl of pine cones, a decorated fir tree with bronze baubles, a fire in a stone hearth, a starry painted dome ceiling. The windows are thick frosted leaded glass glowing softly; nothing outside is visible through them and no snow falls indoors. No teapots, kettles, pots, cups, mugs or jugs anywhere. No candles or lanterns stand on the floor. No banners, tapestries, crests or lettering anywhere.",
+      "composition": "Medium-wide view across the room toward the hearth and tree",
+      "look": "candle-night",
+      "motion_elements": "the fire and the tree lights"
+    }
+  ]
+}

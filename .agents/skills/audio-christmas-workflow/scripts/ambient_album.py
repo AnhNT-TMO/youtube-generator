@@ -18,7 +18,7 @@ ROOT, OUT = Path(a.root), a.out
 rows = json.load(open(a.order))
 files = []
 for r in rows:
-    f = ROOT / r['slug'] / f"{r['slug']}-{r['vibe']}.mp3"
+    f = ROOT / r['vibe'] / r['slug'] / f"{r['slug']}.mp3"
     if not f.exists():
         raise SystemExit(f'missing {f}')
     files.append(f)
